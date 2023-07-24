@@ -34,8 +34,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. Read mask is used for a more granular control over what the API returns.
-   *  If the mask is not present all fields will be returned except
+   *  Optional. Read mask is used for a more granular control over what the API
+   *  returns. If the mask is not present all fields will be returned except
    *  Queue.stats. Queue.stats will be returned only if it was  explicitly
    *  specified in the mask.
    */

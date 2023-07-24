@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import "google/api/resource.proto";
 import "google/cloud/dialogflow/v2beta1/audio_config.proto";
 import "google/cloud/dialogflow/v2beta1/participant.proto";
 import "google/longrunning/operations.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
@@ -294,6 +295,13 @@ message AutomatedAgentConfig {
       type: "dialogflow.googleapis.com/Agent"
     }
   ];
+
+  // Optional. Sets Dialogflow CX session life time.
+  // By default, a Dialogflow CX session remains active and its data is stored
+  // for 30 minutes after the last request is sent for the session. This value
+  // should be no longer than 1 day.
+  google.protobuf.Duration session_ttl = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Defines the Human Agent Assistant to connect to a conversation.
@@ -316,7 +324,8 @@ message HumanAgentAssistantConfig {
     // Automatically iterates all participants and tries to compile
     // suggestions.
     //
-    // Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST.
+    // Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST,
+    // ENTITY_EXTRACTION.
     bool enable_event_based_suggestion = 3;
 
     // Settings of suggestion trigger.
@@ -390,10 +399,24 @@ message HumanAgentAssistantConfig {
 
     // Dialogflow source setting.
     //
-    // Supported feature: DIALOGFLOW_ASSIST.
+    // Supported feature: DIALOGFLOW_ASSIST, ENTITY_EXTRACTION.
     message DialogflowQuerySource {
+      // The configuration used for human agent side Dialogflow assist
+      // suggestion.
+      message HumanAgentSideConfig {
+        // Optional. The name of a dialogflow virtual agent used for intent
+        // detection and suggestion triggered by human agent.
+        // Format: `projects/<Project ID>/locations/<Location ID>/agent`.
+        string agent = 1 [
+          (google.api.field_behavior) = OPTIONAL,
+          (google.api.resource_reference) = {
+            type: "dialogflow.googleapis.com/Agent"
+          }
+        ];
+      }
+
       // Required. The name of a dialogflow virtual agent used for end user side
-      // intent detection and suggestion. Format: `projects/<Project Number /
+      // intent detection and suggestion. Format: `projects/<Project
       // ID>/locations/<Location ID>/agent`. When multiple agents are allowed in
       // the same Dialogflow project.
       string agent = 1 [
@@ -402,6 +425,9 @@ message HumanAgentAssistantConfig {
           type: "dialogflow.googleapis.com/Agent"
         }
       ];
+
+      // The Dialogflow assist configuration for human agent.
+      HumanAgentSideConfig human_agent_side_config = 3;
     }
 
     // Settings that determine how to filter recent conversation context when
@@ -428,7 +454,8 @@ message HumanAgentAssistantConfig {
       // SMART_REPLY, SMART_COMPOSE.
       DocumentQuerySource document_query_source = 2;
 
-      // Query from Dialogflow agent. It is used by DIALOGFLOW_ASSIST.
+      // Query from Dialogflow agent. It is used by DIALOGFLOW_ASSIST,
+      // ENTITY_EXTRACTION.
       DialogflowQuerySource dialogflow_query_source = 3;
     }
 
@@ -454,7 +481,8 @@ message HumanAgentAssistantConfig {
     // If this field is not set, it is default to 0.0, which means that all
     // suggestions are returned.
     //
-    // Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE.
+    // Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE,
+    // KNOWLEDGE_SEARCH, KNOWLEDGE_ASSIST, ENTITY_EXTRACTION.
     float confidence_threshold = 5;
 
     // Determines how recent conversation context is filtered when generating
@@ -472,6 +500,16 @@ message HumanAgentAssistantConfig {
     string model = 1 [(google.api.resource_reference) = {
       type: "dialogflow.googleapis.com/ConversationModel"
     }];
+
+    // Version of current baseline model. It will be ignored if
+    // [model][google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.ConversationModelConfig.model]
+    // is set. Valid versions are:
+    //   Article Suggestion baseline model:
+    //     - 0.9
+    //     - 1.0 (default)
+    //   Summarization baseline model:
+    //     - 1.0
+    string baseline_model_version = 8;
   }
 
   // Config to process conversation.

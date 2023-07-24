@@ -55,6 +55,7 @@
   * [Dataplex_service.list_tasks](#dataplex_service.list_tasks)
   * [Dataplex_service.list_zone_actions](#dataplex_service.list_zone_actions)
   * [Dataplex_service.list_zones](#dataplex_service.list_zones)
+  * [Dataplex_service.run_task](#dataplex_service.run_task)
   * [Dataplex_service.update_asset](#dataplex_service.update_asset)
   * [Dataplex_service.update_environment](#dataplex_service.update_environment)
   * [Dataplex_service.update_lake](#dataplex_service.update_lake)
@@ -811,6 +812,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.list_zones.js`
+
+
+-----
+
+
+
+
+### Dataplex_service.run_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.run_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.run_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/dataplex_service.run_task.js`
 
 
 -----

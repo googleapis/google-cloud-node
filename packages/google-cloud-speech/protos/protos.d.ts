@@ -11947,6 +11947,12 @@ export namespace google {
                     /** RecognitionConfig explicitDecodingConfig */
                     explicitDecodingConfig?: (google.cloud.speech.v2.IExplicitDecodingConfig|null);
 
+                    /** RecognitionConfig model */
+                    model?: (string|null);
+
+                    /** RecognitionConfig languageCodes */
+                    languageCodes?: (string[]|null);
+
                     /** RecognitionConfig features */
                     features?: (google.cloud.speech.v2.IRecognitionFeatures|null);
 
@@ -11968,6 +11974,12 @@ export namespace google {
 
                     /** RecognitionConfig explicitDecodingConfig. */
                     public explicitDecodingConfig?: (google.cloud.speech.v2.IExplicitDecodingConfig|null);
+
+                    /** RecognitionConfig model. */
+                    public model: string;
+
+                    /** RecognitionConfig languageCodes. */
+                    public languageCodes: string[];
 
                     /** RecognitionConfig features. */
                     public features?: (google.cloud.speech.v2.IRecognitionFeatures|null);
@@ -13178,6 +13190,9 @@ export namespace google {
 
                     /** BatchRecognizeRequest recognitionOutputConfig */
                     recognitionOutputConfig?: (google.cloud.speech.v2.IRecognitionOutputConfig|null);
+
+                    /** BatchRecognizeRequest processingStrategy */
+                    processingStrategy?: (google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy|keyof typeof google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy|null);
                 }
 
                 /** Represents a BatchRecognizeRequest. */
@@ -13203,6 +13218,9 @@ export namespace google {
 
                     /** BatchRecognizeRequest recognitionOutputConfig. */
                     public recognitionOutputConfig?: (google.cloud.speech.v2.IRecognitionOutputConfig|null);
+
+                    /** BatchRecognizeRequest processingStrategy. */
+                    public processingStrategy: (google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy|keyof typeof google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy);
 
                     /**
                      * Creates a new BatchRecognizeRequest instance using the specified properties.
@@ -13280,6 +13298,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BatchRecognizeRequest {
+
+                    /** ProcessingStrategy enum. */
+                    enum ProcessingStrategy {
+                        PROCESSING_STRATEGY_UNSPECIFIED = 0,
+                        DYNAMIC_BATCHING = 1
+                    }
                 }
 
                 /** Properties of a GcsOutputConfig. */

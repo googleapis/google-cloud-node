@@ -50,14 +50,15 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Whether Human Review feature should be skipped for this request. Default to
-   *  false.
+   *  Whether human review should be skipped for this request. Default to
+   *  `false`.
    */
   // const skipHumanReview = true
   /**
-   *  Specifies which fields to include in ProcessResponse's document.
-   *  Only supports top level document and pages field so it must be in the form
-   *  of `{document_field_name}` or `pages.{page_field_name}`.
+   *  Specifies which fields to include in the
+   *  ProcessResponse.document google.cloud.documentai.v1.ProcessResponse.document 
+   *  output. Only supports top-level document and pages field, so it must be in
+   *  the form of `{document_field_name}` or `pages.{page_field_name}`.
    */
   // const fieldMask = {}
 

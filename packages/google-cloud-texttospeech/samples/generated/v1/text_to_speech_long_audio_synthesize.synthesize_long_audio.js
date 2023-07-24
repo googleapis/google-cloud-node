@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(input, audioConfig) {
+function main(input, audioConfig, outputGcsUri, voice) {
   // [START texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -30,11 +30,12 @@ function main(input, audioConfig) {
    */
   /**
    *  The resource states of the request in the form of
-   *  `projects/* /locations/* /voices/*`.
+   *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The Synthesizer requires either plain text or SSML as input.
+   *  While Long Audio is in preview, SSML is temporarily unsupported.
    */
   // const input = {}
   /**
@@ -42,13 +43,13 @@ function main(input, audioConfig) {
    */
   // const audioConfig = {}
   /**
-   *  Specifies a Cloud Storage URI for the synthesis results. Must be
+   *  Required. Specifies a Cloud Storage URI for the synthesis results. Must be
    *  specified in the format: `gs://bucket_name/object_name`, and the bucket
    *  must already exist.
    */
   // const outputGcsUri = 'abc123'
   /**
-   *  The desired voice of the synthesized audio.
+   *  Required. The desired voice of the synthesized audio.
    */
   // const voice = {}
 
@@ -63,6 +64,8 @@ function main(input, audioConfig) {
     const request = {
       input,
       audioConfig,
+      outputGcsUri,
+      voice,
     };
 
     // Run request

@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.7.0...channel-v2.8.0) (2023-06-28)
+
+
+### Features
+
+* [channel] Add support for ListSkuGroups and ListSkuGroupBillableSkus APIs in Cloud Channel APIs ([#4348](https://github.com/googleapis/google-cloud-node/issues/4348)) ([926d727](https://github.com/googleapis/google-cloud-node/commit/926d727f25951f9199e3f02d419a41dbb8e1c824))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.6.0...channel-v2.7.0) (2023-05-20)
+
+
+### Features
+
+* [channel] added partition_keys field to filter results from FetchReportResults ([#4279](https://github.com/googleapis/google-cloud-node/issues/4279)) ([3defaa1](https://github.com/googleapis/google-cloud-node/commit/3defaa1caaa70a9384eddc0281645a9bf6c860cb))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.5.1...channel-v2.6.0) (2023-05-09)
+
+
+### Features
+
+* [channel] Add billing account to entitlement definitions for Cloud Channel API ([#4250](https://github.com/googleapis/google-cloud-node/issues/4250)) ([0d4c47e](https://github.com/googleapis/google-cloud-node/commit/0d4c47eb5d884e3cb760941e616e03769a1e8733))
+
 ## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/channel-v2.5.0...channel-v2.5.1) (2023-04-13)
 
 

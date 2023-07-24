@@ -29,20 +29,20 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The full resource name of a resource for which you want to list existing
-   *  TagBindings.
-   *  E.g. "//cloudresourcemanager.googleapis.com/projects/123"
+   *  Required. The full resource name of a resource for which you want to list
+   *  existing TagBindings. E.g.
+   *  "//cloudresourcemanager.googleapis.com/projects/123"
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of TagBindings to return in the response. The server
-   *  allows a maximum of 300 TagBindings to return. If unspecified, the server
-   *  will use 100 as the default.
+   *  Optional. The maximum number of TagBindings to return in the response. The
+   *  server allows a maximum of 300 TagBindings to return. If unspecified, the
+   *  server will use 100 as the default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A pagination token returned from a previous call to `ListTagBindings`
-   *  that indicates where this listing should continue from.
+   *  Optional. A pagination token returned from a previous call to
+   *  `ListTagBindings` that indicates where this listing should continue from.
    */
   // const pageToken = 'abc123'
 

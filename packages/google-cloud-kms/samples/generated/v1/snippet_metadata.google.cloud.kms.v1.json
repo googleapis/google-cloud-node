@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-kms",
-        "version": "3.5.0",
+        "version": "3.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -276,6 +276,46 @@
                 "method": {
                     "shortName": "UpdateEkmConfig",
                     "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
+                    "service": {
+                        "shortName": "EkmService",
+                        "fullName": "google.cloud.kms.v1.EkmService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudkms_v1_generated_EkmService_VerifyConnectivity_async",
+            "title": "EkmService verifyConnectivity Sample",
+            "origin": "API_DEFINITION",
+            "description": " Verifies that Cloud KMS can successfully connect to the external key manager specified by an [EkmConnection][google.cloud.kms.v1.EkmConnection]. If there is an error connecting to the EKM, this method returns a FAILED_PRECONDITION status containing structured information as described at https://cloud.google.com/kms/docs/reference/ekm_errors.",
+            "canonical": true,
+            "file": "ekm_service.verify_connectivity.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "VerifyConnectivity",
+                "fullName": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.kms.v1.VerifyConnectivityResponse",
+                "client": {
+                    "shortName": "EkmServiceClient",
+                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
+                },
+                "method": {
+                    "shortName": "VerifyConnectivity",
+                    "fullName": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
                     "service": {
                         "shortName": "EkmService",
                         "fullName": "google.cloud.kms.v1.EkmService"
@@ -1284,6 +1324,138 @@
                 "method": {
                     "shortName": "Decrypt",
                     "fullName": "google.cloud.kms.v1.KeyManagementService.Decrypt",
+                    "service": {
+                        "shortName": "KeyManagementService",
+                        "fullName": "google.cloud.kms.v1.KeyManagementService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudkms_v1_generated_KeyManagementService_RawEncrypt_async",
+            "title": "EkmService rawEncrypt Sample",
+            "origin": "API_DEFINITION",
+            "description": " Encrypts data using portable cryptographic primitives. Most users should choose [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt] and [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt] rather than their raw counterparts. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].",
+            "canonical": true,
+            "file": "key_management_service.raw_encrypt.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 146,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RawEncrypt",
+                "fullName": "google.cloud.kms.v1.KeyManagementService.RawEncrypt",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "plaintext",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "additional_authenticated_data",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "plaintext_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    },
+                    {
+                        "name": "additional_authenticated_data_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    },
+                    {
+                        "name": "initialization_vector",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "initialization_vector_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    }
+                ],
+                "resultType": ".google.cloud.kms.v1.RawEncryptResponse",
+                "client": {
+                    "shortName": "KeyManagementServiceClient",
+                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+                },
+                "method": {
+                    "shortName": "RawEncrypt",
+                    "fullName": "google.cloud.kms.v1.KeyManagementService.RawEncrypt",
+                    "service": {
+                        "shortName": "KeyManagementService",
+                        "fullName": "google.cloud.kms.v1.KeyManagementService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudkms_v1_generated_KeyManagementService_RawDecrypt_async",
+            "title": "EkmService rawDecrypt Sample",
+            "origin": "API_DEFINITION",
+            "description": " Decrypts data that was originally encrypted using a raw cryptographic mechanism. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].",
+            "canonical": true,
+            "file": "key_management_service.raw_decrypt.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 134,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RawDecrypt",
+                "fullName": "google.cloud.kms.v1.KeyManagementService.RawDecrypt",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ciphertext",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "additional_authenticated_data",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "initialization_vector",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "tag_length",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "ciphertext_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    },
+                    {
+                        "name": "additional_authenticated_data_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    },
+                    {
+                        "name": "initialization_vector_crc32c",
+                        "type": ".google.protobuf.Int64Value"
+                    }
+                ],
+                "resultType": ".google.cloud.kms.v1.RawDecryptResponse",
+                "client": {
+                    "shortName": "KeyManagementServiceClient",
+                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+                },
+                "method": {
+                    "shortName": "RawDecrypt",
+                    "fullName": "google.cloud.kms.v1.KeyManagementService.RawDecrypt",
                     "service": {
                         "shortName": "KeyManagementService",
                         "fullName": "google.cloud.kms.v1.KeyManagementService"

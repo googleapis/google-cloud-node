@@ -217,9 +217,6 @@ export class JobServiceClient {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
-      endpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpoints/{endpoint}'
-      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -271,6 +268,16 @@ export class JobServiceClient {
       ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
+      ),
+      projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/endpoints/{endpoint}'
+      ),
+      projectLocationPublisherModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+        ),
+      publisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'publishers/{publisher}/models/{model}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -385,6 +392,12 @@ export class JobServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -408,6 +421,14 @@ export class JobServiceClient {
               post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -425,6 +446,12 @@ export class JobServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
           ],
         },
@@ -594,6 +621,9 @@ export class JobServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -829,6 +859,10 @@ export class JobServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -997,6 +1031,7 @@ export class JobServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1153,6 +1188,7 @@ export class JobServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1336,6 +1372,9 @@ export class JobServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -7784,55 +7823,6 @@ export class JobServiceClient {
   }
 
   /**
-   * Return a fully-qualified endpoint resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} endpoint
-   * @returns {string} Resource name string.
-   */
-  endpointPath(project: string, location: string, endpoint: string) {
-    return this.pathTemplates.endpointPathTemplate.render({
-      project: project,
-      location: location,
-      endpoint: endpoint,
-    });
-  }
-
-  /**
-   * Parse the project from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
-  }
-
-  /**
-   * Parse the location from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
-  }
-
-  /**
-   * Parse the endpoint from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the endpoint.
-   */
-  matchEndpointFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
-  }
-
-  /**
    * Return a fully-qualified entityType resource name string.
    *
    * @param {string} project
@@ -8894,6 +8884,194 @@ export class JobServiceClient {
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
     return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
       .pipeline_job;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationEndpointPath(
+    project: string,
+    location: string,
+    endpoint: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      endpoint: endpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).location;
+  }
+
+  /**
+   * Parse the endpoint from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the endpoint.
+   */
+  matchEndpointFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPublisherModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  projectLocationPublisherModelPath(
+    project: string,
+    location: string,
+    publisher: string,
+    model: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
+      project: project,
+      location: location,
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).location;
+  }
+
+  /**
+   * Parse the publisher from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).model;
+  }
+
+  /**
+   * Return a fully-qualified publisherModel resource name string.
+   *
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  publisherModelPath(publisher: string, model: string) {
+    return this.pathTemplates.publisherModelPathTemplate.render({
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the publisher from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).model;
   }
 
   /**

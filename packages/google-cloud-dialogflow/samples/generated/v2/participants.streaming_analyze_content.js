@@ -92,6 +92,11 @@ function main(participant) {
    *  partial responses.
    */
   // const enablePartialAutomatedAgentReply = true
+  /**
+   *  If true, `StreamingAnalyzeContentResponse.debugging_info` will get
+   *  populated.
+   */
+  // const enableDebuggingInfo = true
 
   // Imports the Dialogflow library
   const {ParticipantsClient} = require('@google-cloud/dialogflow').v2;

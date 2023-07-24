@@ -786,6 +786,136 @@ describe('v2.RepositoryManagerClient', () => {
     });
   });
 
+  describe('fetchGitRefs', () => {
+    it('invokes fetchGitRefs without error', async () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
+        ['repository']
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
+      );
+      client.innerApiCalls.fetchGitRefs = stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchGitRefs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRefs without error using callback', async () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
+        ['repository']
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
+      );
+      client.innerApiCalls.fetchGitRefs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchGitRefs(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRefs with error', async () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
+        ['repository']
+      );
+      request.repository = defaultValue1;
+      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchGitRefs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.fetchGitRefs(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.fetchGitRefs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitRefs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchGitRefs with closed client', async () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v2.FetchGitRefsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v2.FetchGitRefsRequest',
+        ['repository']
+      );
+      request.repository = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.fetchGitRefs(request), expectedError);
+    });
+  });
+
   describe('createConnection', () => {
     it('invokes createConnection without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({

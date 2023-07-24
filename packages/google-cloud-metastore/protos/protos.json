@@ -13,8 +13,8 @@
                     "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1",
                     "php_namespace": "Google\\Cloud\\Metastore\\V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Subnetwork",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/subnetworks/{subnetwork}"
+                    "(google.api.resource_definition).type": "dataplex.googleapis.com/Lake",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/lakes/{lake}"
                   },
                   "nested": {
                     "DataprocMetastore": {
@@ -374,6 +374,78 @@
                               }
                             }
                           ]
+                        },
+                        "QueryMetadata": {
+                          "requestType": "QueryMetadataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{service=projects/*/locations/*/services/*}:queryMetadata",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "QueryMetadataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{service=projects/*/locations/*/services/*}:queryMetadata",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "QueryMetadataResponse",
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "MoveTableToDatabase": {
+                          "requestType": "MoveTableToDatabaseRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{service=projects/*/locations/*/services/*}:moveTableToDatabase",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "MoveTableToDatabaseResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{service=projects/*/locations/*/services/*}:moveTableToDatabase",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MoveTableToDatabaseResponse",
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "AlterMetadataResourceLocation": {
+                          "requestType": "AlterMetadataResourceLocationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{service=projects/*/locations/*/services/*}:alterLocation",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "AlterMetadataResourceLocationResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{service=projects/*/locations/*/services/*}:alterLocation",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AlterMetadataResourceLocationResponse",
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -510,6 +582,10 @@
                         "telemetryConfig": {
                           "type": "TelemetryConfig",
                           "id": 23
+                        },
+                        "scalingConfig": {
+                          "type": "ScalingConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -577,6 +653,24 @@
                         "kerberosConfig": {
                           "type": "KerberosConfig",
                           "id": 3
+                        },
+                        "endpointProtocol": {
+                          "type": "EndpointProtocol",
+                          "id": 4
+                        },
+                        "auxiliaryVersions": {
+                          "keyType": "string",
+                          "type": "AuxiliaryVersionConfig",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "EndpointProtocol": {
+                          "values": {
+                            "ENDPOINT_PROTOCOL_UNSPECIFIED": 0,
+                            "THRIFT": 1,
+                            "GRPC": 2
+                          }
                         }
                       }
                     },
@@ -616,6 +710,26 @@
                         "kmsKey": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "AuxiliaryVersionConfig": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "configOverrides": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -769,6 +883,13 @@
                             "gcsUri": {
                               "type": "string",
                               "id": 2
+                            },
+                            "sourceDatabase": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "type": {
                               "type": "DatabaseDumpSpec.Type",
@@ -983,6 +1104,38 @@
                             "RESTORE_TYPE_UNSPECIFIED": 0,
                             "FULL": 1,
                             "METADATA_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "oneofs": {
+                        "scalingModel": {
+                          "oneof": [
+                            "instanceSize",
+                            "scalingFactor"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceSize": {
+                          "type": "InstanceSize",
+                          "id": 1
+                        },
+                        "scalingFactor": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InstanceSize": {
+                          "values": {
+                            "INSTANCE_SIZE_UNSPECIFIED": 0,
+                            "EXTRA_SMALL": 1,
+                            "SMALL": 2,
+                            "MEDIUM": 3,
+                            "LARGE": 4,
+                            "EXTRA_LARGE": 5
                           }
                         }
                       }
@@ -1543,6 +1696,107 @@
                         }
                       }
                     },
+                    "QueryMetadataRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "QueryMetadataResponse": {
+                      "fields": {
+                        "resultManifestUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ErrorDetails": {
+                      "fields": {
+                        "details": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MoveTableToDatabaseRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "tableName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dbName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destinationDbName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MoveTableToDatabaseResponse": {
+                      "fields": {}
+                    },
+                    "AlterMetadataResourceLocationRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "locationUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AlterMetadataResourceLocationResponse": {
+                      "fields": {}
+                    },
                     "DataprocMetastoreFederation": {
                       "options": {
                         "(google.api.default_host)": "metastore.googleapis.com",
@@ -1770,6 +2024,7 @@
                         "MetastoreType": {
                           "values": {
                             "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "BIGQUERY": 2,
                             "DATAPROC_METASTORE": 3
                           }
                         }
@@ -2520,6 +2775,10 @@
                         "telemetryConfig": {
                           "type": "TelemetryConfig",
                           "id": 23
+                        },
+                        "scalingConfig": {
+                          "type": "ScalingConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -2716,6 +2975,10 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "customRoutesEnabled": {
+                          "type": "bool",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -3078,6 +3341,38 @@
                             "RESTORE_TYPE_UNSPECIFIED": 0,
                             "FULL": 1,
                             "METADATA_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "oneofs": {
+                        "scalingModel": {
+                          "oneof": [
+                            "instanceSize",
+                            "scalingFactor"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceSize": {
+                          "type": "InstanceSize",
+                          "id": 1
+                        },
+                        "scalingFactor": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InstanceSize": {
+                          "values": {
+                            "INSTANCE_SIZE_UNSPECIFIED": 0,
+                            "EXTRA_SMALL": 1,
+                            "SMALL": 2,
+                            "MEDIUM": 3,
+                            "LARGE": 4,
+                            "EXTRA_LARGE": 5
                           }
                         }
                       }
@@ -3692,6 +3987,15 @@
                         }
                       }
                     },
+                    "ErrorDetails": {
+                      "fields": {
+                        "details": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "MoveTableToDatabaseRequest": {
                       "fields": {
                         "service": {
@@ -3984,6 +4288,7 @@
                         "MetastoreType": {
                           "values": {
                             "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "DATAPLEX": 1,
                             "BIGQUERY": 2,
                             "DATAPROC_METASTORE": 3
                           }
@@ -4735,6 +5040,10 @@
                         "telemetryConfig": {
                           "type": "TelemetryConfig",
                           "id": 23
+                        },
+                        "scalingConfig": {
+                          "type": "ScalingConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -4931,6 +5240,10 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "customRoutesEnabled": {
+                          "type": "bool",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -5293,6 +5606,38 @@
                             "RESTORE_TYPE_UNSPECIFIED": 0,
                             "FULL": 1,
                             "METADATA_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "oneofs": {
+                        "scalingModel": {
+                          "oneof": [
+                            "instanceSize",
+                            "scalingFactor"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceSize": {
+                          "type": "InstanceSize",
+                          "id": 1
+                        },
+                        "scalingFactor": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InstanceSize": {
+                          "values": {
+                            "INSTANCE_SIZE_UNSPECIFIED": 0,
+                            "EXTRA_SMALL": 1,
+                            "SMALL": 2,
+                            "MEDIUM": 3,
+                            "LARGE": 4,
+                            "EXTRA_LARGE": 5
                           }
                         }
                       }
@@ -5907,6 +6252,15 @@
                         }
                       }
                     },
+                    "ErrorDetails": {
+                      "fields": {
+                        "details": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "MoveTableToDatabaseRequest": {
                       "fields": {
                         "service": {
@@ -6199,6 +6553,7 @@
                         "MetastoreType": {
                           "values": {
                             "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "DATAPLEX": 1,
                             "BIGQUERY": 2,
                             "DATAPROC_METASTORE": 3
                           }

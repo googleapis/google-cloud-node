@@ -1114,6 +1114,10 @@ export class AgentsClient {
    *   Optional. Environment name. If not set, draft environment is assumed.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
+   * @param {google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination} [request.gitDestination]
+   *   Optional. The Git branch to export the agent to.
+   * @param {boolean} [request.includeBigqueryExportSettings]
+   *   Optional. Whether to include BigQuery Export setting.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1281,6 +1285,8 @@ export class AgentsClient {
    *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {Buffer} request.agentContent
    *   Uncompressed raw byte content for agent.
+   * @param {google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource} request.gitSource
+   *   Setting for restoring from a git branch
    * @param {google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption} request.restoreOption
    *   Agent restore mode. If not specified, `KEEP` is assumed.
    * @param {object} [options]

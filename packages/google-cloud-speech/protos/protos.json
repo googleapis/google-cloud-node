@@ -3219,7 +3219,8 @@
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "languageCodes": {
@@ -3227,7 +3228,8 @@
                           "type": "string",
                           "id": 17,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "defaultRecognitionConfig": {
@@ -3470,6 +3472,21 @@
                           "type": "ExplicitDecodingConfig",
                           "id": 8
                         },
+                        "model": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "features": {
                           "type": "RecognitionFeatures",
                           "id": 2
@@ -3705,6 +3722,18 @@
                         "recognitionOutputConfig": {
                           "type": "RecognitionOutputConfig",
                           "id": 6
+                        },
+                        "processingStrategy": {
+                          "type": "ProcessingStrategy",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "ProcessingStrategy": {
+                          "values": {
+                            "PROCESSING_STRATEGY_UNSPECIFIED": 0,
+                            "DYNAMIC_BATCHING": 1
+                          }
                         }
                       }
                     },

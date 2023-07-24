@@ -45,6 +45,8 @@
   * [Cloud_channel_service.list_products](#cloud_channel_service.list_products)
   * [Cloud_channel_service.list_purchasable_offers](#cloud_channel_service.list_purchasable_offers)
   * [Cloud_channel_service.list_purchasable_skus](#cloud_channel_service.list_purchasable_skus)
+  * [Cloud_channel_service.list_sku_group_billable_skus](#cloud_channel_service.list_sku_group_billable_skus)
+  * [Cloud_channel_service.list_sku_groups](#cloud_channel_service.list_sku_groups)
   * [Cloud_channel_service.list_skus](#cloud_channel_service.list_skus)
   * [Cloud_channel_service.list_subscribers](#cloud_channel_service.list_subscribers)
   * [Cloud_channel_service.list_transferable_offers](#cloud_channel_service.list_transferable_offers)
@@ -61,7 +63,6 @@
   * [Cloud_channel_service.update_channel_partner_repricing_config](#cloud_channel_service.update_channel_partner_repricing_config)
   * [Cloud_channel_service.update_customer](#cloud_channel_service.update_customer)
   * [Cloud_channel_service.update_customer_repricing_config](#cloud_channel_service.update_customer_repricing_config)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -640,6 +641,40 @@ __Usage:__
 
 
 
+### Cloud_channel_service.list_sku_group_billable_skus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js`
+
+
+-----
+
+
+
+
+### Cloud_channel_service.list_sku_groups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_groups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_groups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_groups.js`
+
+
+-----
+
+
+
+
 ### Cloud_channel_service.list_skus
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_skus.js).
@@ -922,23 +957,6 @@ __Usage:__
 
 
 `node packages/google-cloud-channel/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-channel/samples/test/quickstart.js`
 
 
 

@@ -20,6 +20,11 @@
                 "getCluster"
               ]
             },
+            "GetSubnet": {
+              "methods": [
+                "getSubnet"
+              ]
+            },
             "GetNodeType": {
               "methods": [
                 "getNodeType"
@@ -48,6 +53,11 @@
             "GetVmwareEngineNetwork": {
               "methods": [
                 "getVmwareEngineNetwork"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "getPrivateConnection"
               ]
             },
             "CreatePrivateCloud": {
@@ -83,6 +93,11 @@
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
+              ]
+            },
+            "UpdateSubnet": {
+              "methods": [
+                "updateSubnet"
               ]
             },
             "ResetNsxCredentials": {
@@ -128,6 +143,21 @@
             "DeleteVmwareEngineNetwork": {
               "methods": [
                 "deleteVmwareEngineNetwork"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "createPrivateConnection"
+              ]
+            },
+            "UpdatePrivateConnection": {
+              "methods": [
+                "updatePrivateConnection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "deletePrivateConnection"
               ]
             },
             "ListPrivateClouds": {
@@ -177,6 +207,20 @@
                 "listVmwareEngineNetworks",
                 "listVmwareEngineNetworksStream",
                 "listVmwareEngineNetworksAsync"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "listPrivateConnections",
+                "listPrivateConnectionsStream",
+                "listPrivateConnectionsAsync"
+              ]
+            },
+            "ListPrivateConnectionPeeringRoutes": {
+              "methods": [
+                "listPrivateConnectionPeeringRoutes",
+                "listPrivateConnectionPeeringRoutesStream",
+                "listPrivateConnectionPeeringRoutesAsync"
               ]
             }
           }
@@ -194,6 +238,11 @@
                 "getCluster"
               ]
             },
+            "GetSubnet": {
+              "methods": [
+                "getSubnet"
+              ]
+            },
             "GetNodeType": {
               "methods": [
                 "getNodeType"
@@ -222,6 +271,11 @@
             "GetVmwareEngineNetwork": {
               "methods": [
                 "getVmwareEngineNetwork"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "getPrivateConnection"
               ]
             },
             "CreatePrivateCloud": {
@@ -257,6 +311,11 @@
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
+              ]
+            },
+            "UpdateSubnet": {
+              "methods": [
+                "updateSubnet"
               ]
             },
             "ResetNsxCredentials": {
@@ -302,6 +361,21 @@
             "DeleteVmwareEngineNetwork": {
               "methods": [
                 "deleteVmwareEngineNetwork"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "createPrivateConnection"
+              ]
+            },
+            "UpdatePrivateConnection": {
+              "methods": [
+                "updatePrivateConnection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "deletePrivateConnection"
               ]
             },
             "ListPrivateClouds": {
@@ -351,6 +425,20 @@
                 "listVmwareEngineNetworks",
                 "listVmwareEngineNetworksStream",
                 "listVmwareEngineNetworksAsync"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "listPrivateConnections",
+                "listPrivateConnectionsStream",
+                "listPrivateConnectionsAsync"
+              ]
+            },
+            "ListPrivateConnectionPeeringRoutes": {
+              "methods": [
+                "listPrivateConnectionPeeringRoutes",
+                "listPrivateConnectionPeeringRoutesStream",
+                "listPrivateConnectionPeeringRoutesAsync"
               ]
             }
           }

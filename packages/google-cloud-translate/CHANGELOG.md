@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.2.2](https://github.com/googleapis/google-cloud-node/compare/translate-v7.2.1...translate-v7.2.2) (2023-06-28)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency yargs to v17 ([#4351](https://github.com/googleapis/google-cloud-node/issues/4351)) ([4fb5285](https://github.com/googleapis/google-cloud-node/commit/4fb528559c204cee33329c4e55021aa1fd0e4974))
+
 ## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/translate-v7.2.0...translate-v7.2.1) (2023-04-13)
 
 

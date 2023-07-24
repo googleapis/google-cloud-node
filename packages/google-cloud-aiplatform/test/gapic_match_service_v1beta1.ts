@@ -1715,70 +1715,6 @@ describe('v1beta1.MatchServiceClient', () => {
       });
     });
 
-    describe('endpoint', () => {
-      const fakePath = '/rendered/path/endpoint';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        endpoint: 'endpointValue',
-      };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.endpointPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.endpointPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('endpointPath', () => {
-        const result = client.endpointPath(
-          'projectValue',
-          'locationValue',
-          'endpointValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.endpointPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEndpointName', () => {
-        const result = client.matchProjectFromEndpointName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEndpointName', () => {
-        const result = client.matchLocationFromEndpointName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEndpointFromEndpointName', () => {
-        const result = client.matchEndpointFromEndpointName(fakePath);
-        assert.strictEqual(result, 'endpointValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('entityType', () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
@@ -2903,6 +2839,83 @@ describe('v1beta1.MatchServiceClient', () => {
       });
     });
 
+    describe('persistentResource', () => {
+      const fakePath = '/rendered/path/persistentResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        persistent_resource: 'persistentResourceValue',
+      };
+      const client = new matchserviceModule.v1beta1.MatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.persistentResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.persistentResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('persistentResourcePath', () => {
+        const result = client.persistentResourcePath(
+          'projectValue',
+          'locationValue',
+          'persistentResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPersistentResourceName', () => {
+        const result = client.matchProjectFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPersistentResourceName', () => {
+        const result = client.matchLocationFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPersistentResourceFromPersistentResourceName', () => {
+        const result =
+          client.matchPersistentResourceFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'persistentResourceValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('pipelineJob', () => {
       const fakePath = '/rendered/path/pipelineJob';
       const expectedParameters = {
@@ -2961,6 +2974,230 @@ describe('v1beta1.MatchServiceClient', () => {
         assert.strictEqual(result, 'pipelineJobValue');
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationEndpoint', () => {
+      const fakePath = '/rendered/path/projectLocationEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        endpoint: 'endpointValue',
+      };
+      const client = new matchserviceModule.v1beta1.MatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationEndpointPath', () => {
+        const result = client.projectLocationEndpointPath(
+          'projectValue',
+          'locationValue',
+          'endpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationEndpointName', () => {
+        const result =
+          client.matchProjectFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationEndpointName', () => {
+        const result =
+          client.matchLocationFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEndpointFromProjectLocationEndpointName', () => {
+        const result =
+          client.matchEndpointFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'endpointValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationPublisherModel', () => {
+      const fakePath = '/rendered/path/projectLocationPublisherModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client = new matchserviceModule.v1beta1.MatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationPublisherModelPath', () => {
+        const result = client.projectLocationPublisherModelPath(
+          'projectValue',
+          'locationValue',
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPublisherFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchPublisherFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchModelFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('publisherModel', () => {
+      const fakePath = '/rendered/path/publisherModel';
+      const expectedParameters = {
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client = new matchserviceModule.v1beta1.MatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.publisherModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.publisherModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('publisherModelPath', () => {
+        const result = client.publisherModelPath(
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPublisherFromPublisherModelName', () => {
+        const result = client.matchPublisherFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromPublisherModelName', () => {
+        const result = client.matchModelFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -1323,7 +1323,9 @@ export class DataCatalogClient {
    *   [Lexical structure in Standard SQL]
    *   (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
    * @param {string} request.fullyQualifiedName
-   *   Fully qualified name (FQN) of the resource.
+   *   [Fully Qualified Name
+   *   (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+   *   of the resource.
    *
    *   FQNs take two forms:
    *
@@ -1338,6 +1340,14 @@ export class DataCatalogClient {
    *   Example for a DPMS table:
    *
    *   `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+   * @param {string} request.project
+   *   Project where the lookup should be performed. Required to lookup
+   *   entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+   *   using its `fully_qualified_name`. Ignored in other cases.
+   * @param {string} request.location
+   *   Location where the lookup should be performed. Required to lookup
+   *   entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+   *   using its `fully_qualified_name`. Ignored in other cases.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3551,6 +3561,9 @@ export class DataCatalogClient {
    *   Required. Target entry group for ingested entries.
    * @param {string} request.gcsBucketPath
    *   Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+   * @param {string} [request.jobId]
+   *   Optional. (Optional) Dataplex task job id, if specified will be used as
+   *   part of ImportEntries LRO ID
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3721,7 +3734,7 @@ export class DataCatalogClient {
    *   * `column:y`
    *   * `description:z`
    * @param {number} request.pageSize
-   *   Number of results to return in a single search page.
+   *   Upper bound on the number of results you can get in a single response.
    *
    *   Can't be negative or 0, defaults to 10 in this case.
    *   The maximum number is 1000. If exceeded, throws an "invalid argument"
@@ -3743,6 +3756,13 @@ export class DataCatalogClient {
    *   * `relevance` that can only be descending
    *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
    *   * `default` that can only be descending
+   *
+   *   Search queries don't guarantee full recall. Results that match your query
+   *   might not be returned, even in subsequent result pages. Additionally,
+   *   returned (and not returned) results can vary if you repeat search queries.
+   *   If you are experiencing recall issues and you don't have to fetch the
+   *   results in any specific order, consider setting this parameter to
+   *   `default`.
    *
    *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
@@ -3853,7 +3873,7 @@ export class DataCatalogClient {
    *   * `column:y`
    *   * `description:z`
    * @param {number} request.pageSize
-   *   Number of results to return in a single search page.
+   *   Upper bound on the number of results you can get in a single response.
    *
    *   Can't be negative or 0, defaults to 10 in this case.
    *   The maximum number is 1000. If exceeded, throws an "invalid argument"
@@ -3875,6 +3895,13 @@ export class DataCatalogClient {
    *   * `relevance` that can only be descending
    *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
    *   * `default` that can only be descending
+   *
+   *   Search queries don't guarantee full recall. Results that match your query
+   *   might not be returned, even in subsequent result pages. Additionally,
+   *   returned (and not returned) results can vary if you repeat search queries.
+   *   If you are experiencing recall issues and you don't have to fetch the
+   *   results in any specific order, consider setting this parameter to
+   *   `default`.
    *
    *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
@@ -3933,7 +3960,7 @@ export class DataCatalogClient {
    *   * `column:y`
    *   * `description:z`
    * @param {number} request.pageSize
-   *   Number of results to return in a single search page.
+   *   Upper bound on the number of results you can get in a single response.
    *
    *   Can't be negative or 0, defaults to 10 in this case.
    *   The maximum number is 1000. If exceeded, throws an "invalid argument"
@@ -3955,6 +3982,13 @@ export class DataCatalogClient {
    *   * `relevance` that can only be descending
    *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
    *   * `default` that can only be descending
+   *
+   *   Search queries don't guarantee full recall. Results that match your query
+   *   might not be returned, even in subsequent result pages. Additionally,
+   *   returned (and not returned) results can vary if you repeat search queries.
+   *   If you are experiencing recall issues and you don't have to fetch the
+   *   results in any specific order, consider setting this parameter to
+   *   `default`.
    *
    *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]

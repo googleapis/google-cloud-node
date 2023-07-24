@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v0.1.2...vmwareengine-v0.2.0) (2023-06-14)
+
+
+### Features
+
+* [vmwareengine] Adding private connection CRUD, updating management subnets and time-limited PC features ([#4328](https://github.com/googleapis/google-cloud-node/issues/4328)) ([f12063c](https://github.com/googleapis/google-cloud-node/commit/f12063c60a4c8ea05e6269babe2eaa6775974c6f))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v0.1.1...vmwareengine-v0.1.2) (2023-04-13)
 
 

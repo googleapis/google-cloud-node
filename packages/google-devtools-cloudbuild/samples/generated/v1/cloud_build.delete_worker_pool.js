@@ -31,12 +31,12 @@ function main(name) {
   /**
    *  Required. The name of the `WorkerPool` to delete.
    *  Format:
-   *  `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+   *  `projects/{project}/locations/{location}/workerPools/{workerPool}`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. If this is provided, it must match the server's etag on the
-   *  workerpool for the request to be processed.
+   *  Optional. If provided, it must match the server's etag on the workerpool
+   *  for the request to be processed.
    */
   // const etag = 'abc123'
   /**

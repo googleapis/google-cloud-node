@@ -34,23 +34,24 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The response_view specifies which subset of the Task google.cloud.tasks.v2beta3.Task  will be
-   *  returned.
-   *  By default response_view is BASIC google.cloud.tasks.v2beta3.Task.View.BASIC; not all
-   *  information is retrieved by default because some data, such as
-   *  payloads, might be desirable to return only when needed because
-   *  of its large size or because of the sensitivity of data that it
-   *  contains.
-   *  Authorization for FULL google.cloud.tasks.v2beta3.Task.View.FULL  requires
-   *  `cloudtasks.tasks.fullView` Google IAM (https://cloud.google.com/iam/)
-   *  permission on the Task google.cloud.tasks.v2beta3.Task  resource.
+   *  The response_view specifies which subset of the
+   *  Task google.cloud.tasks.v2beta3.Task  will be returned.
+   *  By default response_view is
+   *  BASIC google.cloud.tasks.v2beta3.Task.View.BASIC; not all information is
+   *  retrieved by default because some data, such as payloads, might be
+   *  desirable to return only when needed because of its large size or because
+   *  of the sensitivity of data that it contains.
+   *  Authorization for FULL google.cloud.tasks.v2beta3.Task.View.FULL 
+   *  requires `cloudtasks.tasks.fullView` Google
+   *  IAM (https://cloud.google.com/iam/) permission on the
+   *  Task google.cloud.tasks.v2beta3.Task  resource.
    */
   // const responseView = {}
   /**
    *  Maximum page size.
    *  Fewer tasks than requested might be returned, even if more tasks exist; use
-   *  next_page_token google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token  in the response to
-   *  determine if more tasks exist.
+   *  next_page_token google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token 
+   *  in the response to determine if more tasks exist.
    *  The maximum page size is 1000. If unspecified, the page size will be the
    *  maximum.
    */
@@ -59,9 +60,9 @@ function main(parent) {
    *  A token identifying the page of results to return.
    *  To request the first page results, page_token must be empty. To
    *  request the next page of results, page_token must be the value of
-   *  next_page_token google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token  returned
-   *  from the previous call to ListTasks google.cloud.tasks.v2beta3.CloudTasks.ListTasks 
-   *  method.
+   *  next_page_token google.cloud.tasks.v2beta3.ListTasksResponse.next_page_token 
+   *  returned from the previous call to
+   *  ListTasks google.cloud.tasks.v2beta3.CloudTasks.ListTasks  method.
    *  The page token is valid for only 2 hours.
    */
   // const pageToken = 'abc123'

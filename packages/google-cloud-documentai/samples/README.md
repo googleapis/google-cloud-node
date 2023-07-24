@@ -60,8 +60,10 @@
   * [Document_processor_service.set_default_processor_version](#document_processor_service.set_default_processor_version)
   * [Document_processor_service.train_processor_version](#document_processor_service.train_processor_version)
   * [Document_processor_service.undeploy_processor_version](#document_processor_service.undeploy_processor_version)
+  * [Document_service.get_dataset_schema](#document_service.get_dataset_schema)
+  * [Document_service.update_dataset](#document_service.update_dataset)
+  * [Document_service.update_dataset_schema](#document_service.update_dataset_schema)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -894,6 +896,57 @@ __Usage:__
 
 
 
+### Document_service.get_dataset_schema
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_dataset_schema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_dataset_schema.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_dataset_schema.js`
+
+
+-----
+
+
+
+
+### Document_service.update_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset.js`
+
+
+-----
+
+
+
+
+### Document_service.update_dataset_schema
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset_schema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset_schema.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset_schema.js`
+
+
+-----
+
+
+
+
 ### Quickstart
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/quickstart.js).
@@ -904,23 +957,6 @@ __Usage:__
 
 
 `node packages/google-cloud-documentai/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-documentai/samples/test/quickstart.test.js`
 
 
 

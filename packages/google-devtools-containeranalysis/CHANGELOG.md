@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.6.1...containeranalysis-v4.7.0) (2023-04-24)
+
+
+### Features
+
+* [containeranalysis] add enum for grafeas v1 cvss to support both cvss v2 and v3 ([#4163](https://github.com/googleapis/google-cloud-node/issues/4163)) ([0904936](https://github.com/googleapis/google-cloud-node/commit/090493643ae86992c44e31963e1ba774d97b79d4))
+
+
+### Bug Fixes
+
+* [containeranalysis] scope GeneratePackagesSummary method to v1beta1 http path ([#4196](https://github.com/googleapis/google-cloud-node/issues/4196)) ([e1841e7](https://github.com/googleapis/google-cloud-node/commit/e1841e71f1be28ec607fa6f00c6f624909bd7981))
+
 ## [4.6.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.6.0...containeranalysis-v4.6.1) (2023-04-13)
 
 

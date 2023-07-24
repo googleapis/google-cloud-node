@@ -231,6 +231,9 @@ export class CloudChannelServiceClient {
       skuPathTemplate: new this._gaxModule.PathTemplate(
         'products/{product}/skus/{sku}'
       ),
+      skuGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/skuGroups/{sku_group}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -271,6 +274,16 @@ export class CloudChannelServiceClient {
         'pageToken',
         'nextPageToken',
         'channelPartnerRepricingConfigs'
+      ),
+      listSkuGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'skuGroups'
+      ),
+      listSkuGroupBillableSkus: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'billableSkus'
       ),
       listProducts: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -563,6 +576,8 @@ export class CloudChannelServiceClient {
       'createChannelPartnerRepricingConfig',
       'updateChannelPartnerRepricingConfig',
       'deleteChannelPartnerRepricingConfig',
+      'listSkuGroups',
+      'listSkuGroupBillableSkus',
       'lookupOffer',
       'listProducts',
       'listSkus',
@@ -6360,7 +6375,8 @@ export class CloudChannelServiceClient {
    * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * resources. The data for each resource is displayed in the ascending order
    * of:
-   * * customer ID
+   *
+   * * Customer ID
    * * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
    * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * * {@link google.cloud.channel.v1.CustomerRepricingConfig.update_time|CustomerRepricingConfig.update_time}
@@ -6630,7 +6646,8 @@ export class CloudChannelServiceClient {
    * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * resources. The data for each resource is displayed in the ascending order
    * of:
-   * * channel partner ID
+   *
+   * * Channel Partner ID
    * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time|ChannelPartnerRepricingConfig.update_time}
    *
@@ -6893,6 +6910,463 @@ export class CloudChannelServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig>;
+  }
+  /**
+   * Lists the Rebilling supported SKU groups the account is authorized to
+   * sell.
+   * Reference: https://cloud.google.com/skus/sku-groups
+   *
+   * Possible Error Codes:
+   *
+   * * PERMISSION_DENIED: If the account making the request and the account
+   * being queried are different, or the account doesn't exist.
+   * * INTERNAL: Any non-user error related to technical issues in the
+   * backend. In this case, contact Cloud Channel support.
+   *
+   * Return Value:
+   * If successful, the {@link google.cloud.channel.v1.SkuGroup|SkuGroup} resources.
+   * The data for each resource is displayed in the alphabetical order of SKU
+   * group display name.
+   * The data for each resource is displayed in the ascending order of
+   * {@link google.cloud.channel.v1.SkuGroup.display_name|SkuGroup.display_name}
+   *
+   * If unsuccessful, returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the account from which to list SKU groups.
+   *   Parent uses the format: accounts/{account}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of SKU groups to return. The service may
+   *   return fewer than this value. If unspecified, returns a maximum of 1000 SKU
+   *   groups. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link |ListSkuGroups.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.channel.v1.SkuGroup | SkuGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSkuGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSkuGroups(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ISkuGroup[],
+      protos.google.cloud.channel.v1.IListSkuGroupsRequest | null,
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse
+    ]
+  >;
+  listSkuGroups(
+    request: protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse | null | undefined,
+      protos.google.cloud.channel.v1.ISkuGroup
+    >
+  ): void;
+  listSkuGroups(
+    request: protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse | null | undefined,
+      protos.google.cloud.channel.v1.ISkuGroup
+    >
+  ): void;
+  listSkuGroups(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+          | protos.google.cloud.channel.v1.IListSkuGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ISkuGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse | null | undefined,
+      protos.google.cloud.channel.v1.ISkuGroup
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ISkuGroup[],
+      protos.google.cloud.channel.v1.IListSkuGroupsRequest | null,
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSkuGroups(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the account from which to list SKU groups.
+   *   Parent uses the format: accounts/{account}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of SKU groups to return. The service may
+   *   return fewer than this value. If unspecified, returns a maximum of 1000 SKU
+   *   groups. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link |ListSkuGroups.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.channel.v1.SkuGroup | SkuGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSkuGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSkuGroupsStream(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSkuGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSkuGroups.createStream(
+      this.innerApiCalls.listSkuGroups as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSkuGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the account from which to list SKU groups.
+   *   Parent uses the format: accounts/{account}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of SKU groups to return. The service may
+   *   return fewer than this value. If unspecified, returns a maximum of 1000 SKU
+   *   groups. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link |ListSkuGroups.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.channel.v1.SkuGroup | SkuGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_sku_groups.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSkuGroups_async
+   */
+  listSkuGroupsAsync(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.channel.v1.ISkuGroup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSkuGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSkuGroups.asyncIterate(
+      this.innerApiCalls['listSkuGroups'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.channel.v1.ISkuGroup>;
+  }
+  /**
+   * Lists the Billable SKUs in a given SKU group.
+   *
+   * Possible error codes:
+   * PERMISSION_DENIED: If the account making the request and the account
+   * being queried for are different, or the account doesn't exist.
+   * INVALID_ARGUMENT: Missing or invalid required parameters in the
+   * request.
+   * INTERNAL: Any non-user error related to technical issue in the
+   * backend. In this case, contact cloud channel support.
+   *
+   * Return Value:
+   * If successful, the {@link google.cloud.channel.v1.BillableSku|BillableSku}
+   * resources. The data for each resource is displayed in the ascending order
+   * of:
+   *
+   * * {@link google.cloud.channel.v1.BillableSku.service_display_name|BillableSku.service_display_name}
+   * * {@link google.cloud.channel.v1.BillableSku.sku_display_name|BillableSku.sku_display_name}
+   *
+   * If unsuccessful, returns an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the SKU group.
+   *   Format: accounts/{account}/skuGroups/{sku_group}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of SKUs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 100000 SKUs.
+   *   The maximum value is 100000; values above 100000 will be coerced to 100000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link |ListSkuGroupBillableSkus.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.channel.v1.BillableSku | BillableSku}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSkuGroupBillableSkusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSkuGroupBillableSkus(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IBillableSku[],
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest | null,
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+    ]
+  >;
+  listSkuGroupBillableSkus(
+    request: protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+      | protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IBillableSku
+    >
+  ): void;
+  listSkuGroupBillableSkus(
+    request: protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+      | protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IBillableSku
+    >
+  ): void;
+  listSkuGroupBillableSkus(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+          | protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IBillableSku
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+      | protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IBillableSku
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IBillableSku[],
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest | null,
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSkuGroupBillableSkus(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the SKU group.
+   *   Format: accounts/{account}/skuGroups/{sku_group}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of SKUs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 100000 SKUs.
+   *   The maximum value is 100000; values above 100000 will be coerced to 100000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link |ListSkuGroupBillableSkus.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.channel.v1.BillableSku | BillableSku} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSkuGroupBillableSkusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSkuGroupBillableSkusStream(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSkuGroupBillableSkus'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSkuGroupBillableSkus.createStream(
+      this.innerApiCalls.listSkuGroupBillableSkus as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSkuGroupBillableSkus`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the SKU group.
+   *   Format: accounts/{account}/skuGroups/{sku_group}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of SKUs to return. The service may return
+   *   fewer than this value. If unspecified, returns a maximum of 100000 SKUs.
+   *   The maximum value is 100000; values above 100000 will be coerced to 100000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results beyond the first page.
+   *   Obtained through
+   *   {@link |ListSkuGroupBillableSkus.next_page_token} of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.channel.v1.BillableSku | BillableSku}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSkuGroupBillableSkus_async
+   */
+  listSkuGroupBillableSkusAsync(
+    request?: protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.channel.v1.IBillableSku> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSkuGroupBillableSkus'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSkuGroupBillableSkus.asyncIterate(
+      this.innerApiCalls['listSkuGroupBillableSkus'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.channel.v1.IBillableSku>;
   }
   /**
    * Lists the Products the reseller is authorized to sell.
@@ -9098,6 +9572,43 @@ export class CloudChannelServiceClient {
    */
   matchSkuFromSkuName(skuName: string) {
     return this.pathTemplates.skuPathTemplate.match(skuName).sku;
+  }
+
+  /**
+   * Return a fully-qualified skuGroup resource name string.
+   *
+   * @param {string} account
+   * @param {string} sku_group
+   * @returns {string} Resource name string.
+   */
+  skuGroupPath(account: string, skuGroup: string) {
+    return this.pathTemplates.skuGroupPathTemplate.render({
+      account: account,
+      sku_group: skuGroup,
+    });
+  }
+
+  /**
+   * Parse the account from SkuGroup resource.
+   *
+   * @param {string} skuGroupName
+   *   A fully-qualified path representing SkuGroup resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromSkuGroupName(skuGroupName: string) {
+    return this.pathTemplates.skuGroupPathTemplate.match(skuGroupName).account;
+  }
+
+  /**
+   * Parse the sku_group from SkuGroup resource.
+   *
+   * @param {string} skuGroupName
+   *   A fully-qualified path representing SkuGroup resource.
+   * @returns {string} A string representing the sku_group.
+   */
+  matchSkuGroupFromSkuGroupName(skuGroupName: string) {
+    return this.pathTemplates.skuGroupPathTemplate.match(skuGroupName)
+      .sku_group;
   }
 
   /**

@@ -600,8 +600,8 @@ export class StorageTransferServiceClient {
    * Updates a transfer job. Updating a job's transfer spec does not affect
    * transfer operations that are running already.
    *
-   * **Note:** The job's {@link google.storagetransfer.v1.TransferJob.status|status} field can be modified
-   * using this RPC (for example, to set a job's status to
+   * **Note:** The job's {@link google.storagetransfer.v1.TransferJob.status|status}
+   * field can be modified using this RPC (for example, to set a job's status to
    * {@link google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED},
    * {@link google.storagetransfer.v1.TransferJob.Status.DISABLED|DISABLED}, or
    * {@link google.storagetransfer.v1.TransferJob.Status.ENABLED|ENABLED}).
@@ -614,15 +614,17 @@ export class StorageTransferServiceClient {
    *   Required. The ID of the Google Cloud project that owns the
    *   job.
    * @param {google.storagetransfer.v1.TransferJob} request.transferJob
-   *   Required. The job to update. `transferJob` is expected to specify one or more of
-   *   five fields: {@link google.storagetransfer.v1.TransferJob.description|description},
+   *   Required. The job to update. `transferJob` is expected to specify one or
+   *   more of five fields:
+   *   {@link google.storagetransfer.v1.TransferJob.description|description},
    *   {@link google.storagetransfer.v1.TransferJob.transfer_spec|transfer_spec},
    *   {@link google.storagetransfer.v1.TransferJob.notification_config|notification_config},
    *   {@link google.storagetransfer.v1.TransferJob.logging_config|logging_config}, and
-   *   {@link google.storagetransfer.v1.TransferJob.status|status}.  An `UpdateTransferJobRequest` that specifies
-   *   other fields are rejected with the error
-   *   {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}. Updating a job status
-   *   to {@link google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED} requires
+   *   {@link google.storagetransfer.v1.TransferJob.status|status}.  An
+   *   `UpdateTransferJobRequest` that specifies other fields are rejected with
+   *   the error {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}. Updating a
+   *   job status to
+   *   {@link google.storagetransfer.v1.TransferJob.Status.DELETED|DELETED} requires
    *   `storagetransfer.jobs.delete` permission.
    * @param {google.protobuf.FieldMask} request.updateTransferJobFieldMask
    *   The field mask of the fields in `transferJob` that are to be updated in
@@ -631,9 +633,10 @@ export class StorageTransferServiceClient {
    *   {@link google.storagetransfer.v1.TransferJob.transfer_spec|transfer_spec},
    *   {@link google.storagetransfer.v1.TransferJob.notification_config|notification_config},
    *   {@link google.storagetransfer.v1.TransferJob.logging_config|logging_config}, and
-   *   {@link google.storagetransfer.v1.TransferJob.status|status}.  To update the `transfer_spec` of the job, a
-   *   complete transfer specification must be provided. An incomplete
-   *   specification missing any required fields is rejected with the error
+   *   {@link google.storagetransfer.v1.TransferJob.status|status}.  To update the
+   *   `transfer_spec` of the job, a complete transfer specification must be
+   *   provided. An incomplete specification missing any required fields is
+   *   rejected with the error
    *   {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1224,8 +1227,8 @@ export class StorageTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.storagetransfer.v1.AgentPool} request.agentPool
-   *   Required. The agent pool to update. `agent_pool` is expected to specify following
-   *   fields:
+   *   Required. The agent pool to update. `agent_pool` is expected to specify
+   *   following fields:
    *
    *   *  {@link google.storagetransfer.v1.AgentPool.name|name}
    *
@@ -1505,9 +1508,10 @@ export class StorageTransferServiceClient {
   }
 
   /**
-   * Attempts to start a new TransferOperation for the current TransferJob. A
-   * TransferJob has a maximum of one active TransferOperation. If this method
-   * is called while a TransferOperation is active, an error will be returned.
+   * Starts a new operation for the specified transfer job.
+   * A `TransferJob` has a maximum of one active `TransferOperation`. If this
+   * method is called while a `TransferOperation` is active, an error is
+   * returned.
    *
    * @param {Object} request
    *   The request object that will be sent.

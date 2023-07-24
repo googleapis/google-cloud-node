@@ -296,6 +296,7 @@ service SecurityCenter {
   // Filters an organization's assets and  groups them by their specified
   // properties.
   rpc GroupAssets(GroupAssetsRequest) returns (GroupAssetsResponse) {
+    option deprecated = true;
     option (google.api.http) = {
       post: "/v1/{parent=organizations/*}/assets:group"
       body: "*"
@@ -335,6 +336,7 @@ service SecurityCenter {
 
   // Lists an organization's assets.
   rpc ListAssets(ListAssetsRequest) returns (ListAssetsResponse) {
+    option deprecated = true;
     option (google.api.http) = {
       get: "/v1/{parent=organizations/*}/assets"
       additional_bindings { get: "/v1/{parent=folders/*}/assets" }
@@ -447,6 +449,7 @@ service SecurityCenter {
   // error.
   rpc RunAssetDiscovery(RunAssetDiscoveryRequest)
       returns (google.longrunning.Operation) {
+    option deprecated = true;
     option (google.api.http) = {
       post: "/v1/{parent=organizations/*}/assets:runDiscovery"
       body: "*"
@@ -599,7 +602,7 @@ service SecurityCenter {
   // Updates the SecurityHealthAnalyticsCustomModule under the given name based
   // on the given update mask. Updating the enablement state is supported on
   // both resident and inherited modules (though resident modules cannot have an
-  // enablement state of “inherited”). Updating the display name and custom
+  // enablement state of "inherited"). Updating the display name and custom
   // config of a module is supported on resident modules only.
   rpc UpdateSecurityHealthAnalyticsCustomModule(
       UpdateSecurityHealthAnalyticsCustomModuleRequest)
@@ -804,9 +807,9 @@ message CreateMuteConfigRequest {
   MuteConfig mute_config = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Unique identifier provided by the client within the parent scope.
-  // It must consist of lower case letters, numbers, and hyphen, with the first
-  // character a letter, the last a letter or a number, and a 63 character
-  // maximum.
+  // It must consist of only lowercase letters, numbers, and hyphens, must start
+  // with a letter, must end with either a letter or a number, and must be 63
+  // characters or less.
   string mute_config_id = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
@@ -835,7 +838,7 @@ message CreateNotificationConfigRequest {
       [(google.api.field_behavior) = REQUIRED];
 }
 
-// Request message for creating security health analytics custom modules.
+// Request message for creating Security Health Analytics custom modules.
 message CreateSecurityHealthAnalyticsCustomModuleRequest {
   // Required. Resource name of the new custom module's parent. Its format is
   // "organizations/{organization}/securityHealthAnalyticsSettings",
@@ -899,7 +902,7 @@ message DeleteNotificationConfigRequest {
   ];
 }
 
-// Request message for deleting security health analytics custom modules.
+// Request message for deleting Security Health Analytics custom modules.
 message DeleteSecurityHealthAnalyticsCustomModuleRequest {
   // Required. Name of the custom module to delete. Its format is
   // "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
@@ -968,7 +971,7 @@ message GetOrganizationSettingsRequest {
   ];
 }
 
-// Request message for getting effective security health analytics custom
+// Request message for getting effective Security Health Analytics custom
 // modules.
 message GetEffectiveSecurityHealthAnalyticsCustomModuleRequest {
   // Required. Name of the effective custom module to get. Its format is
@@ -984,7 +987,7 @@ message GetEffectiveSecurityHealthAnalyticsCustomModuleRequest {
   ];
 }
 
-// Request message for getting security health analytics custom modules.
+// Request message for getting Security Health Analytics custom modules.
 message GetSecurityHealthAnalyticsCustomModuleRequest {
   // Required. Name of the custom module to get. Its format is
   // "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
@@ -1341,7 +1344,7 @@ message GroupResult {
   int64 count = 2;
 }
 
-// Request message for listing descendant security health analytics custom
+// Request message for listing descendant Security Health Analytics custom
 // modules.
 message ListDescendantSecurityHealthAnalyticsCustomModulesRequest {
   // Required. Name of parent to list descendant custom modules. Its format is
@@ -1363,7 +1366,7 @@ message ListDescendantSecurityHealthAnalyticsCustomModulesRequest {
   string page_token = 3;
 }
 
-// Response message for listing descendant security health analytics custom
+// Response message for listing descendant Security Health Analytics custom
 // modules.
 message ListDescendantSecurityHealthAnalyticsCustomModulesResponse {
   // Custom modules belonging to the requested parent and its descendants.
@@ -1444,7 +1447,7 @@ message ListNotificationConfigsResponse {
   string next_page_token = 2;
 }
 
-// Request message for listing effective security health analytics custom
+// Request message for listing effective Security Health Analytics custom
 // modules.
 message ListEffectiveSecurityHealthAnalyticsCustomModulesRequest {
   // Required. Name of parent to list effective custom modules. Its format is
@@ -1466,7 +1469,7 @@ message ListEffectiveSecurityHealthAnalyticsCustomModulesRequest {
   string page_token = 3;
 }
 
-// Response message for listing effective security health analytics custom
+// Response message for listing effective Security Health Analytics custom
 // modules.
 message ListEffectiveSecurityHealthAnalyticsCustomModulesResponse {
   // Effective custom modules belonging to the requested parent.
@@ -1478,7 +1481,7 @@ message ListEffectiveSecurityHealthAnalyticsCustomModulesResponse {
   string next_page_token = 2;
 }
 
-// Request message for listing security health analytics custom modules.
+// Request message for listing Security Health Analytics custom modules.
 message ListSecurityHealthAnalyticsCustomModulesRequest {
   // Required. Name of parent to list custom modules. Its format is
   // "organizations/{organization}/securityHealthAnalyticsSettings",
@@ -1499,7 +1502,7 @@ message ListSecurityHealthAnalyticsCustomModulesRequest {
   string page_token = 3;
 }
 
-// Response message for listing security health analytics custom modules.
+// Response message for listing Security Health Analytics custom modules.
 message ListSecurityHealthAnalyticsCustomModulesResponse {
   // Custom modules belonging to the requested parent.
   repeated SecurityHealthAnalyticsCustomModule
@@ -2092,7 +2095,7 @@ message UpdateOrganizationSettingsRequest {
   google.protobuf.FieldMask update_mask = 2;
 }
 
-// Request message for updating security health analytics custom modules.
+// Request message for updating Security Health Analytics custom modules.
 message UpdateSecurityHealthAnalyticsCustomModuleRequest {
   // Required. The SecurityHealthAnalytics custom module to update.
   SecurityHealthAnalyticsCustomModule security_health_analytics_custom_module =
@@ -2148,9 +2151,9 @@ message CreateBigQueryExportRequest {
   BigQueryExport big_query_export = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Unique identifier provided by the client within the parent scope.
-  // It must consist of lower case letters, numbers, and hyphen, with the first
-  // character a letter, the last a letter or a number, and a 63 character
-  // maximum.
+  // It must consist of only lowercase letters, numbers, and hyphens, must start
+  // with a letter, must end with either a letter or a number, and must be 63
+  // characters or less.
   string big_query_export_id = 3 [(google.api.field_behavior) = REQUIRED];
 }
 

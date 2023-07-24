@@ -4,6 +4,72 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.16.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.15.0...container-v4.16.0) (2023-07-24)
+
+
+### Features
+
+* [container] add advanced_datapath_observability_config to monitoring_config ([#4414](https://github.com/googleapis/google-cloud-node/issues/4414)) ([cb92854](https://github.com/googleapis/google-cloud-node/commit/cb9285425846480beb111a5a13fd0dbfe215b6f5))
+* [container] Add Multi-networking API ([#4426](https://github.com/googleapis/google-cloud-node/issues/4426)) ([bf2e891](https://github.com/googleapis/google-cloud-node/commit/bf2e891dfecafc8c1c145b2a2fd86997a314b535))
+* [container] add policy_name to PlacementPolicy message within a node pool ([#4440](https://github.com/googleapis/google-cloud-node/issues/4440)) ([b3eabc8](https://github.com/googleapis/google-cloud-node/commit/b3eabc8b6cf0bd7086f814d5fd3c5f200b5bec04))
+
+## [4.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.14.0...container-v4.15.0) (2023-07-11)
+
+
+### Features
+
+* [container] add a flag to toggle the Kubelet read only port ([#4387](https://github.com/googleapis/google-cloud-node/issues/4387)) ([1c86e27](https://github.com/googleapis/google-cloud-node/commit/1c86e278233c71b93d2478003f45c6d09e7f3344))
+
+## [4.14.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.13.0...container-v4.14.0) (2023-07-04)
+
+
+### Features
+
+* [container] Add `KUBE_DNS` option to `DNSConfig.cluster_dns` ([#4383](https://github.com/googleapis/google-cloud-node/issues/4383)) ([833a1ae](https://github.com/googleapis/google-cloud-node/commit/833a1ae44bab92fbfef8a225947b6d1f482cf099))
+
+## [4.13.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.12.0...container-v4.13.0) (2023-06-14)
+
+
+### Features
+
+* [container] add API for GPU driver installation config ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+* [container] add API for GPU driver installation config ([#4330](https://github.com/googleapis/google-cloud-node/issues/4330)) ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+* Add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+* Add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters ([f5b1533](https://github.com/googleapis/google-cloud-node/commit/f5b153353788f4df4fee6d19a6cd013fe6bb29f5))
+
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.11.0...container-v4.12.0) (2023-06-06)
+
+
+### Features
+
+* [container] add a API field to enable FQDN Network Policy on clusters ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+* [container] add a API field to enable FQDN Network Policy on clusters ([#4319](https://github.com/googleapis/google-cloud-node/issues/4319)) ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+* [container] add SoleTenantConfig API ([12cc0d9](https://github.com/googleapis/google-cloud-node/commit/12cc0d9c6d17614b5e1a9b5eb189258279f4cee2))
+* [container] add SoleTenantConfig API ([#4306](https://github.com/googleapis/google-cloud-node/issues/4306)) ([12cc0d9](https://github.com/googleapis/google-cloud-node/commit/12cc0d9c6d17614b5e1a9b5eb189258279f4cee2))
+* Add CheckAutopilotCompatibility API to get autopilot compatibility issues for a given standard cluster ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+* Add CheckAutopilotCompatibility API to get autopilot compatibility issues for a given standard cluster ([d266f18](https://github.com/googleapis/google-cloud-node/commit/d266f1863a1fe9c58032e44cbc03aa51441442c5))
+
+## [4.11.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.10.0...container-v4.11.0) (2023-05-06)
+
+
+### Features
+
+* [container] add a new feature for fleet registration via cluster update in v1alpha1, v1beta1, v1 ([#4244](https://github.com/googleapis/google-cloud-node/issues/4244)) ([b0fee2b](https://github.com/googleapis/google-cloud-node/commit/b0fee2bb364c671cb70b62a81567cf3544587eed))
+
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.9.0...container-v4.10.0) (2023-05-04)
+
+
+### Features
+
+* [container] support fleet registration via cluster update ([#4235](https://github.com/googleapis/google-cloud-node/issues/4235)) ([869218f](https://github.com/googleapis/google-cloud-node/commit/869218ffb438d90c3d6cb5e4566d7ad2d201020e))
+
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.8.0...container-v4.9.0) (2023-04-24)
+
+
+### Features
+
+* [container] Add support for updating additional pod IPv4 ranges for Standard and Autopilot clusters ([#4177](https://github.com/googleapis/google-cloud-node/issues/4177)) ([2beee25](https://github.com/googleapis/google-cloud-node/commit/2beee255de109032828ffd5f9f8fb9d62574787b))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.7.1...container-v4.8.0) (2023-04-13)
 
 

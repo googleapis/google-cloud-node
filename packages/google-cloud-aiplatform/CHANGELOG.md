@@ -1,5 +1,73 @@
 # Changelog
 
+## [2.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.16.0...aiplatform-v2.17.0) (2023-07-24)
+
+
+### Features
+
+* Add data_item_count to Dataset ([#4411](https://github.com/googleapis/google-cloud-node/issues/4411)) ([3f99064](https://github.com/googleapis/google-cloud-node/commit/3f99064cfc29afce6cd7f8b72b881ae7ceb8a394))
+
+## [2.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.15.0...aiplatform-v2.16.0) (2023-06-28)
+
+
+### Features
+
+* Add bias_configs to ModelEvaluation ([#4349](https://github.com/googleapis/google-cloud-node/issues/4349)) ([4c047d4](https://github.com/googleapis/google-cloud-node/commit/4c047d4a9cdbc08dfb70e3843a54ca73ad1f4e79))
+* Add UpdateExplanationDataset to aiplatform ([#4359](https://github.com/googleapis/google-cloud-node/issues/4359)) ([c0a3d8a](https://github.com/googleapis/google-cloud-node/commit/c0a3d8a1df6b319e555955dfef8a56ceef54a6e2))
+
+## [2.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.14.0...aiplatform-v2.15.0) (2023-06-06)
+
+
+### Features
+
+* [ai-platform] add blocking_operation_ids to ImportFeatureValuesOperationMetadata ([#4284](https://github.com/googleapis/google-cloud-node/issues/4284)) ([99736a9](https://github.com/googleapis/google-cloud-node/commit/99736a9b9ac01b9673280eddc2f57a8722646ecd))
+
+
+### Bug Fixes
+
+* [ai-platform] update typings for helpers, updated docstrings; removed stale comment ([#4312](https://github.com/googleapis/google-cloud-node/issues/4312)) ([b2c4f46](https://github.com/googleapis/google-cloud-node/commit/b2c4f4670643d8e5a727c80fb668d5b8ab0cf2b1))
+
+## [2.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.13.0...aiplatform-v2.14.0) (2023-05-20)
+
+
+### Features
+
+* Add updateSchedule method to ScheduleService ([#4280](https://github.com/googleapis/google-cloud-node/issues/4280)) ([d1e67be](https://github.com/googleapis/google-cloud-node/commit/d1e67beadf1910378989cd1bd3c19cbe000973d7))
+
+## [2.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.12.0...aiplatform-v2.13.0) (2023-05-09)
+
+
+### Features
+
+* Add example_gcs_source to Examples in aiplatform v1beta1 explanation.proto ([#4249](https://github.com/googleapis/google-cloud-node/issues/4249)) ([4af8ae2](https://github.com/googleapis/google-cloud-node/commit/4af8ae27af952194885939a3e8014089bf7fc01e))
+
+## [2.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.11.0...aiplatform-v2.12.0) (2023-05-04)
+
+
+### Features
+
+* Add model_garden_service.proto and publisher_model.proto to BUILD.bazel ([#4225](https://github.com/googleapis/google-cloud-node/issues/4225)) ([5367d25](https://github.com/googleapis/google-cloud-node/commit/5367d25cdaa4e935e5c1e345622bf4cbd7131e1a))
+
+## [2.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.10.0...aiplatform-v2.11.0) (2023-05-02)
+
+
+### Features
+
+* Add experiment and experiment_run to CustomJobSpec ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add GENIE to ModelSourceType ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add MutateDeployedModel RPC to endpoint_service ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add NVIDIA_L4 to AcceleratorType ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add NVIDIA_L4 to AcceleratorType ([#4216](https://github.com/googleapis/google-cloud-node/issues/4216)) ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add offline_storage_ttl_days to EntityType ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add online_storage_ttl_days to FeatureStore ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+
+## [2.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.9.0...aiplatform-v2.10.0) (2023-04-24)
+
+
+### Features
+
+* Add is_default to Tensorboard in aiplatform v1 tensorboard.proto and v1beta1 tensorboard.proto ([#4179](https://github.com/googleapis/google-cloud-node/issues/4179)) ([3c46888](https://github.com/googleapis/google-cloud-node/commit/3c46888d8b5b7568eaeac913fed55829a63f58df))
+
 ## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.8.1...aiplatform-v2.9.0) (2023-04-13)
 
 

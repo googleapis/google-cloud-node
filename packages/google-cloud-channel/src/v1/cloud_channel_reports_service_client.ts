@@ -42,8 +42,7 @@ const version = require('../../../package.json').version;
 /**
  *  CloudChannelReportsService lets Google Cloud resellers and
  *  distributors retrieve and combine a variety of data in Cloud Channel for
- *  multiple products (Google Cloud Platform (GCP), Google Voice, and
- *  Google Workspace.)
+ *  multiple products (Google Cloud, Google Voice, and Google Workspace.)
  * @class
  * @memberof v1
  */
@@ -215,6 +214,9 @@ export class CloudChannelReportsServiceClient {
       ),
       skuPathTemplate: new this._gaxModule.PathTemplate(
         'products/{product}/skus/{sku}'
+      ),
+      skuGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/skuGroups/{sku_group}'
       ),
     };
 
@@ -632,6 +634,9 @@ export class CloudChannelReportsServiceClient {
    *   of the previous
    *   {@link google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults|CloudChannelReportsService.FetchReportResults}
    *   call.
+   * @param {string[]} [request.partitionKeys]
+   *   Optional. List of keys specifying which report partitions to return.
+   *   If empty, returns all partitions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -743,6 +748,9 @@ export class CloudChannelReportsServiceClient {
    *   of the previous
    *   {@link google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults|CloudChannelReportsService.FetchReportResults}
    *   call.
+   * @param {string[]} [request.partitionKeys]
+   *   Optional. List of keys specifying which report partitions to return.
+   *   If empty, returns all partitions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -802,6 +810,9 @@ export class CloudChannelReportsServiceClient {
    *   of the previous
    *   {@link google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults|CloudChannelReportsService.FetchReportResults}
    *   call.
+   * @param {string[]} [request.partitionKeys]
+   *   Optional. List of keys specifying which report partitions to return.
+   *   If empty, returns all partitions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1665,6 +1676,43 @@ export class CloudChannelReportsServiceClient {
    */
   matchSkuFromSkuName(skuName: string) {
     return this.pathTemplates.skuPathTemplate.match(skuName).sku;
+  }
+
+  /**
+   * Return a fully-qualified skuGroup resource name string.
+   *
+   * @param {string} account
+   * @param {string} sku_group
+   * @returns {string} Resource name string.
+   */
+  skuGroupPath(account: string, skuGroup: string) {
+    return this.pathTemplates.skuGroupPathTemplate.render({
+      account: account,
+      sku_group: skuGroup,
+    });
+  }
+
+  /**
+   * Parse the account from SkuGroup resource.
+   *
+   * @param {string} skuGroupName
+   *   A fully-qualified path representing SkuGroup resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromSkuGroupName(skuGroupName: string) {
+    return this.pathTemplates.skuGroupPathTemplate.match(skuGroupName).account;
+  }
+
+  /**
+   * Parse the sku_group from SkuGroup resource.
+   *
+   * @param {string} skuGroupName
+   *   A fully-qualified path representing SkuGroup resource.
+   * @returns {string} A string representing the sku_group.
+   */
+  matchSkuGroupFromSkuGroupName(skuGroupName: string) {
+    return this.pathTemplates.skuGroupPathTemplate.match(skuGroupName)
+      .sku_group;
   }
 
   /**

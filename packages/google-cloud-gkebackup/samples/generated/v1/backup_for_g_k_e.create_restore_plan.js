@@ -30,7 +30,7 @@ function main(parent, restorePlan, restorePlanId) {
    */
   /**
    *  Required. The location within which to create the RestorePlan.
-   *  Format: projects/* /locations/*
+   *  Format: `projects/* /locations/*`
    */
   // const parent = 'abc123'
   /**

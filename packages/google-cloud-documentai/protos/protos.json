@@ -433,6 +433,10 @@
                                   "options": {
                                     "deprecated": true
                                   }
+                                },
+                                "styleInfo": {
+                                  "type": "StyleInfo",
+                                  "id": 5
                                 }
                               },
                               "nested": {
@@ -451,6 +455,70 @@
                                         "WIDE_SPACE": 2,
                                         "HYPHEN": 3
                                       }
+                                    }
+                                  }
+                                },
+                                "StyleInfo": {
+                                  "fields": {
+                                    "fontSize": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "pixelFontSize": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "letterSpacing": {
+                                      "type": "double",
+                                      "id": 3
+                                    },
+                                    "fontType": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "bold": {
+                                      "type": "bool",
+                                      "id": 5
+                                    },
+                                    "italic": {
+                                      "type": "bool",
+                                      "id": 6
+                                    },
+                                    "underlined": {
+                                      "type": "bool",
+                                      "id": 7
+                                    },
+                                    "strikeout": {
+                                      "type": "bool",
+                                      "id": 8
+                                    },
+                                    "subscript": {
+                                      "type": "bool",
+                                      "id": 9
+                                    },
+                                    "superscript": {
+                                      "type": "bool",
+                                      "id": 10
+                                    },
+                                    "smallcaps": {
+                                      "type": "bool",
+                                      "id": 11
+                                    },
+                                    "fontWeight": {
+                                      "type": "int32",
+                                      "id": 12
+                                    },
+                                    "handwritten": {
+                                      "type": "bool",
+                                      "id": 13
+                                    },
+                                    "textColor": {
+                                      "type": "google.type.Color",
+                                      "id": 14
+                                    },
+                                    "backgroundColor": {
+                                      "type": "google.type.Color",
+                                      "id": 15
                                     }
                                   }
                                 }
@@ -509,7 +577,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 5
+                                  "id": 5,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               },
                               "nested": {
@@ -2858,7 +2929,8 @@
                             "UNDEPLOYING": 4,
                             "CREATING": 5,
                             "DELETING": 6,
-                            "FAILED": 7
+                            "FAILED": 7,
+                            "IMPORTING": 8
                           }
                         }
                       }
@@ -4803,7 +4875,7 @@
                     "csharp_namespace": "Google.Cloud.DocumentAI.V1Beta3",
                     "go_package": "cloud.google.com/go/documentai/apiv1beta3/documentaipb;documentaipb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "DocumentAiProcessorType",
+                    "java_outer_classname": "DocumentAiDocumentService",
                     "java_package": "com.google.cloud.documentai.v1beta3",
                     "php_namespace": "Google\\Cloud\\DocumentAI\\V1beta3",
                     "ruby_package": "Google::Cloud::DocumentAI::V1beta3",
@@ -4824,6 +4896,418 @@
                         "rawValue": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "Dataset": {
+                      "options": {
+                        "(google.api.resource).type": "documentai.googleapis.com/Dataset",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/processors/{processor}/dataset"
+                      },
+                      "oneofs": {
+                        "storageSource": {
+                          "oneof": [
+                            "gcsManagedConfig",
+                            "documentWarehouseConfig",
+                            "unmanagedDatasetConfig"
+                          ]
+                        },
+                        "indexingSource": {
+                          "oneof": [
+                            "spannerIndexingConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsManagedConfig": {
+                          "type": "GCSManagedConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "documentWarehouseConfig": {
+                          "type": "DocumentWarehouseConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unmanagedDatasetConfig": {
+                          "type": "UnmanagedDatasetConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "spannerIndexingConfig": {
+                          "type": "SpannerIndexingConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GCSManagedConfig": {
+                          "fields": {
+                            "gcsPrefix": {
+                              "type": "GcsPrefix",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DocumentWarehouseConfig": {
+                          "fields": {
+                            "collection": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "schema": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "contentwarehouse.googleapis.com/Schema"
+                              }
+                            }
+                          }
+                        },
+                        "UnmanagedDatasetConfig": {
+                          "fields": {}
+                        },
+                        "SpannerIndexingConfig": {
+                          "fields": {}
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "UNINITIALIZED": 1,
+                            "INITIALIZING": 2,
+                            "INITIALIZED": 3
+                          }
+                        }
+                      }
+                    },
+                    "DatasetSchema": {
+                      "options": {
+                        "(google.api.resource).type": "documentai.googleapis.com/DatasetSchema",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/processors/{processor}/dataset/datasetSchema"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "documentSchema": {
+                          "type": "DocumentSchema",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RawDocument": {
+                      "fields": {
+                        "content": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsDocument": {
+                      "fields": {
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsDocuments": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "GcsDocument",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsPrefix": {
+                      "fields": {
+                        "gcsUriPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchDocumentsInputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsPrefix",
+                            "gcsDocuments"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsPrefix": {
+                          "type": "GcsPrefix",
+                          "id": 1
+                        },
+                        "gcsDocuments": {
+                          "type": "GcsDocuments",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DocumentOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsOutputConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsOutputConfig": {
+                          "type": "GcsOutputConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "GcsOutputConfig": {
+                          "fields": {
+                            "gcsUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "fieldMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2
+                            },
+                            "shardingConfig": {
+                              "type": "ShardingConfig",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ShardingConfig": {
+                              "fields": {
+                                "pagesPerShard": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "pagesOverlap": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OcrConfig": {
+                      "fields": {
+                        "hints": {
+                          "type": "Hints",
+                          "id": 2
+                        },
+                        "enableNativePdfParsing": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "enableImageQualityScores": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "enableSymbol": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "computeStyleInfo": {
+                          "type": "bool",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "Hints": {
+                          "fields": {
+                            "languageHints": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "PropertyMetadata": {
+                      "fields": {
+                        "inactive": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "EntityTypeMetadata": {
+                      "fields": {
+                        "inactive": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DocumentSchema": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "entityTypes": {
+                          "rule": "repeated",
+                          "type": "EntityType",
+                          "id": 3
+                        },
+                        "metadata": {
+                          "type": "Metadata",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "EntityType": {
+                          "oneofs": {
+                            "valueSource": {
+                              "oneof": [
+                                "enumValues"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "enumValues": {
+                              "type": "EnumValues",
+                              "id": 14
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 13
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "baseTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "properties": {
+                              "rule": "repeated",
+                              "type": "Property",
+                              "id": 6
+                            },
+                            "entityTypeMetadata": {
+                              "type": "EntityTypeMetadata",
+                              "id": 11
+                            }
+                          },
+                          "nested": {
+                            "EnumValues": {
+                              "fields": {
+                                "values": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "Property": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "valueType": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "occurrenceType": {
+                                  "type": "OccurrenceType",
+                                  "id": 3
+                                },
+                                "propertyMetadata": {
+                                  "type": "PropertyMetadata",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "OccurrenceType": {
+                                  "values": {
+                                    "OCCURRENCE_TYPE_UNSPECIFIED": 0,
+                                    "OPTIONAL_ONCE": 1,
+                                    "OPTIONAL_MULTIPLE": 2,
+                                    "REQUIRED_ONCE": 3,
+                                    "REQUIRED_MULTIPLE": 4
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Metadata": {
+                          "fields": {
+                            "documentSplitter": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "documentAllowMultipleLabels": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "prefixedNamingOnProperties": {
+                              "type": "bool",
+                              "id": 6
+                            },
+                            "skipNamingValidation": {
+                              "type": "bool",
+                              "id": 7
+                            }
+                          }
                         }
                       }
                     },
@@ -5225,6 +5709,10 @@
                                   "options": {
                                     "deprecated": true
                                   }
+                                },
+                                "styleInfo": {
+                                  "type": "StyleInfo",
+                                  "id": 5
                                 }
                               },
                               "nested": {
@@ -5243,6 +5731,70 @@
                                         "WIDE_SPACE": 2,
                                         "HYPHEN": 3
                                       }
+                                    }
+                                  }
+                                },
+                                "StyleInfo": {
+                                  "fields": {
+                                    "fontSize": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "pixelFontSize": {
+                                      "type": "double",
+                                      "id": 2
+                                    },
+                                    "letterSpacing": {
+                                      "type": "double",
+                                      "id": 3
+                                    },
+                                    "fontType": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "bold": {
+                                      "type": "bool",
+                                      "id": 5
+                                    },
+                                    "italic": {
+                                      "type": "bool",
+                                      "id": 6
+                                    },
+                                    "underlined": {
+                                      "type": "bool",
+                                      "id": 7
+                                    },
+                                    "strikeout": {
+                                      "type": "bool",
+                                      "id": 8
+                                    },
+                                    "subscript": {
+                                      "type": "bool",
+                                      "id": 9
+                                    },
+                                    "superscript": {
+                                      "type": "bool",
+                                      "id": 10
+                                    },
+                                    "smallcaps": {
+                                      "type": "bool",
+                                      "id": 11
+                                    },
+                                    "fontWeight": {
+                                      "type": "int32",
+                                      "id": 12
+                                    },
+                                    "handwritten": {
+                                      "type": "bool",
+                                      "id": 13
+                                    },
+                                    "textColor": {
+                                      "type": "google.type.Color",
+                                      "id": 14
+                                    },
+                                    "backgroundColor": {
+                                      "type": "google.type.Color",
+                                      "id": 15
                                     }
                                   }
                                 }
@@ -5301,7 +5853,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 5
+                                  "id": 5,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               },
                               "nested": {
@@ -5720,9 +6275,6 @@
                             },
                             "OperationType": {
                               "valuesOptions": {
-                                "REPLACE": {
-                                  "deprecated": true
-                                },
                                 "EVAL_REQUESTED": {
                                   "deprecated": true
                                 },
@@ -5862,150 +6414,6 @@
                           "rule": "repeated",
                           "type": "NormalizedVertex",
                           "id": 2
-                        }
-                      }
-                    },
-                    "RawDocument": {
-                      "fields": {
-                        "content": {
-                          "type": "bytes",
-                          "id": 1
-                        },
-                        "mimeType": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsDocument": {
-                      "fields": {
-                        "gcsUri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "mimeType": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsDocuments": {
-                      "fields": {
-                        "documents": {
-                          "rule": "repeated",
-                          "type": "GcsDocument",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GcsPrefix": {
-                      "fields": {
-                        "gcsUriPrefix": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "BatchDocumentsInputConfig": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "gcsPrefix",
-                            "gcsDocuments"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsPrefix": {
-                          "type": "GcsPrefix",
-                          "id": 1
-                        },
-                        "gcsDocuments": {
-                          "type": "GcsDocuments",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DocumentOutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsOutputConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsOutputConfig": {
-                          "type": "GcsOutputConfig",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "GcsOutputConfig": {
-                          "fields": {
-                            "gcsUri": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "fieldMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2
-                            },
-                            "shardingConfig": {
-                              "type": "ShardingConfig",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "ShardingConfig": {
-                              "fields": {
-                                "pagesPerShard": {
-                                  "type": "int32",
-                                  "id": 1
-                                },
-                                "pagesOverlap": {
-                                  "type": "int32",
-                                  "id": 2
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "OcrConfig": {
-                      "fields": {
-                        "hints": {
-                          "type": "Hints",
-                          "id": 2
-                        },
-                        "enableNativePdfParsing": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "enableImageQualityScores": {
-                          "type": "bool",
-                          "id": 4
-                        },
-                        "advancedOcrOptions": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        },
-                        "enableSymbol": {
-                          "type": "bool",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "Hints": {
-                          "fields": {
-                            "languageHints": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
                         }
                       }
                     },
@@ -7130,7 +7538,18 @@
                       }
                     },
                     "TrainProcessorVersionRequest": {
+                      "oneofs": {
+                        "processorFlags": {
+                          "oneof": [
+                            "customDocumentExtractionOptions"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "customDocumentExtractionOptions": {
+                          "type": "CustomDocumentExtractionOptions",
+                          "id": 5
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
@@ -7178,6 +7597,23 @@
                             "testDocuments": {
                               "type": "BatchDocumentsInputConfig",
                               "id": 4
+                            }
+                          }
+                        },
+                        "CustomDocumentExtractionOptions": {
+                          "fields": {
+                            "trainingMethod": {
+                              "type": "TrainingMethod",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "TrainingMethod": {
+                              "values": {
+                                "TRAINING_METHOD_UNSPECIFIED": 0,
+                                "MODEL_BASED": 1,
+                                "TEMPLATE_BASED": 2
+                              }
                             }
                           }
                         }
@@ -7468,120 +7904,6 @@
                         "commonMetadata": {
                           "type": "CommonOperationMetadata",
                           "id": 1
-                        }
-                      }
-                    },
-                    "DocumentSchema": {
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "entityTypes": {
-                          "rule": "repeated",
-                          "type": "EntityType",
-                          "id": 3
-                        },
-                        "metadata": {
-                          "type": "Metadata",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "EntityType": {
-                          "oneofs": {
-                            "valueSource": {
-                              "oneof": [
-                                "enumValues"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "enumValues": {
-                              "type": "EnumValues",
-                              "id": 14
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 13
-                            },
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "baseTypes": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "properties": {
-                              "rule": "repeated",
-                              "type": "Property",
-                              "id": 6
-                            }
-                          },
-                          "nested": {
-                            "EnumValues": {
-                              "fields": {
-                                "values": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 1
-                                }
-                              }
-                            },
-                            "Property": {
-                              "fields": {
-                                "name": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "valueType": {
-                                  "type": "string",
-                                  "id": 2
-                                },
-                                "occurrenceType": {
-                                  "type": "OccurrenceType",
-                                  "id": 3
-                                }
-                              },
-                              "nested": {
-                                "OccurrenceType": {
-                                  "values": {
-                                    "OCCURRENCE_TYPE_UNSPECIFIED": 0,
-                                    "OPTIONAL_ONCE": 1,
-                                    "OPTIONAL_MULTIPLE": 2,
-                                    "REQUIRED_ONCE": 3,
-                                    "REQUIRED_MULTIPLE": 4
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "Metadata": {
-                          "fields": {
-                            "documentSplitter": {
-                              "type": "bool",
-                              "id": 1
-                            },
-                            "documentAllowMultipleLabels": {
-                              "type": "bool",
-                              "id": 2
-                            },
-                            "prefixedNamingOnProperties": {
-                              "type": "bool",
-                              "id": 6
-                            },
-                            "skipNamingValidation": {
-                              "type": "bool",
-                              "id": 7
-                            }
-                          }
                         }
                       }
                     },
@@ -7877,7 +8199,8 @@
                             "UNDEPLOYING": 4,
                             "CREATING": 5,
                             "DELETING": 6,
-                            "FAILED": 7
+                            "FAILED": 7,
+                            "IMPORTING": 8
                           }
                         }
                       }
@@ -7993,6 +8316,134 @@
                               "id": 1
                             }
                           }
+                        }
+                      }
+                    },
+                    "DocumentService": {
+                      "options": {
+                        "(google.api.default_host)": "documentai.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "UpdateDataset": {
+                          "requestType": "UpdateDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta3/{dataset.name=projects/*/locations/*/processors/*/dataset}",
+                            "(google.api.http).body": "dataset",
+                            "(google.api.method_signature)": "dataset,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Dataset",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateDatasetOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta3/{dataset.name=projects/*/locations/*/processors/*/dataset}",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Dataset",
+                                "metadata_type": "UpdateDatasetOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDatasetSchema": {
+                          "requestType": "GetDatasetSchemaRequest",
+                          "responseType": "DatasetSchema",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{name=projects/*/locations/*/processors/*/dataset/datasetSchema}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{name=projects/*/locations/*/processors/*/dataset/datasetSchema}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDatasetSchema": {
+                          "requestType": "UpdateDatasetSchemaRequest",
+                          "responseType": "DatasetSchema",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta3/{dataset_schema.name=projects/*/locations/*/processors/*/dataset/datasetSchema}",
+                            "(google.api.http).body": "dataset_schema",
+                            "(google.api.method_signature)": "dataset_schema,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta3/{dataset_schema.name=projects/*/locations/*/processors/*/dataset/datasetSchema}",
+                                "body": "dataset_schema"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset_schema,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UpdateDatasetRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "Dataset",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateDatasetOperationMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetDatasetSchemaRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/DatasetSchema"
+                          }
+                        },
+                        "visibleFieldsOnly": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateDatasetSchemaRequest": {
+                      "fields": {
+                        "datasetSchema": {
+                          "type": "DatasetSchema",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     }

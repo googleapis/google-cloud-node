@@ -400,6 +400,7 @@ export class ConversationsClient {
       'completeConversation',
       'listMessages',
       'suggestConversationSummary',
+      'generateStatelessSummary',
     ];
     for (const methodName of conversationsStubMethods) {
       const callPromise = this.conversationsStub.then(
@@ -827,7 +828,7 @@ export class ConversationsClient {
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 500 and at most 1000.
    * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
-   *   Parameters for a human assist query.
+   *   Parameters for a human assist query. Only used for POC/demo purpose.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -917,6 +918,123 @@ export class ConversationsClient {
       });
     this.initialize();
     return this.innerApiCalls.suggestConversationSummary(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Generates and returns a summary for a conversation that does not have a
+   * resource created for it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest.MinimalConversation} request.statelessConversation
+   *   Required. The conversation to suggest a summary for.
+   * @param {google.cloud.dialogflow.v2.ConversationProfile} request.conversationProfile
+   *   Required. A ConversationProfile containing information required for Summary
+   *   generation.
+   *   Required fields: {language_code, security_settings}
+   *   Optional fields: {agent_assistant_config}
+   * @param {string} request.latestMessage
+   *   The name of the latest conversation message used as context for
+   *   generating a Summary. If empty, the latest message of the conversation will
+   *   be used. The format is specific to the user and the names of the messages
+   *   provided.
+   * @param {number} request.maxContextSize
+   *   Max number of messages prior to and including
+   *   [latest_message] to use as context when compiling the
+   *   suggestion. By default 500 and at most 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse | GenerateStatelessSummaryResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversations.generate_stateless_summary.js</caption>
+   * region_tag:dialogflow_v2_generated_Conversations_GenerateStatelessSummary_async
+   */
+  generateStatelessSummary(
+    request?: protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryResponse,
+      (
+        | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  generateStatelessSummary(
+    request: protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryResponse,
+      | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateStatelessSummary(
+    request: protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryResponse,
+      | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateStatelessSummary(
+    request?: protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryResponse,
+          | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryResponse,
+      | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryResponse,
+      (
+        | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'stateless_conversation.parent':
+          request.statelessConversation!.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateStatelessSummary(
       request,
       options,
       callback

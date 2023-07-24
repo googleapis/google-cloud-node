@@ -1,5 +1,41 @@
 # Changelog
 
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.9.0...cloudbuild-v3.10.0) (2023-07-24)
+
+
+### Features
+
+* [cloudbuild] add git_file_source and git_repo_source to build_trigger ([#4434](https://github.com/googleapis/google-cloud-node/issues/4434)) ([5dcb3c2](https://github.com/googleapis/google-cloud-node/commit/5dcb3c28ad2cf68485fe535d83d281b0d95cba38))
+* [cloudbuild] Add routing information in Cloud Build GRPC clients ([#4410](https://github.com/googleapis/google-cloud-node/issues/4410)) ([58a5209](https://github.com/googleapis/google-cloud-node/commit/58a520990dab3fdc00f5838a9b875a4fc72cf158))
+
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.8.0...cloudbuild-v3.9.0) (2023-07-11)
+
+
+### Features
+
+* [cloudbuild] added e2-medium machine type ([#4402](https://github.com/googleapis/google-cloud-node/issues/4402)) ([f3e866e](https://github.com/googleapis/google-cloud-node/commit/f3e866e2c16ba430d7fb3bf0abc723b04ea9e994))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.7.0...cloudbuild-v3.8.0) (2023-07-04)
+
+
+### Features
+
+* [cloudbuild] Add GitLabConfig and fetchGitRefs for Cloud Build Repositories ([#4380](https://github.com/googleapis/google-cloud-node/issues/4380)) ([a425fe2](https://github.com/googleapis/google-cloud-node/commit/a425fe255c2e1c002cb58e3c2c074366d7724de9))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.6.0...cloudbuild-v3.7.0) (2023-06-28)
+
+
+### Features
+
+* [cloudbuild] add repositoryevent to buildtrigger ([#4378](https://github.com/googleapis/google-cloud-node/issues/4378)) ([5ce2484](https://github.com/googleapis/google-cloud-node/commit/5ce24848470ada481a42e7739fdef41928266623))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.5.2...cloudbuild-v3.6.0) (2023-04-24)
+
+
+### Features
+
+* [cloudbuild] Add PeeredNetworkIpRange to NetworkConfigs message ([#4181](https://github.com/googleapis/google-cloud-node/issues/4181)) ([01fa5eb](https://github.com/googleapis/google-cloud-node/commit/01fa5eb8e96fd8c8c0dd689b5da1ab57c4b66c98))
+
 ## [3.5.2](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.5.1...cloudbuild-v3.5.2) (2023-04-13)
 
 

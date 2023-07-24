@@ -242,14 +242,24 @@
                       }
                     },
                     "ProjectBillingInfo": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbilling.googleapis.com/ProjectBillingInfo",
+                        "(google.api.resource).pattern": "projects/{project}/billingInfo"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "projectId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "billingAccountName": {
                           "type": "string",
@@ -257,7 +267,10 @@
                         },
                         "billingEnabled": {
                           "type": "bool",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -375,7 +388,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbilling.googleapis.com/ProjectBillingInfo"
                           }
                         }
                       }

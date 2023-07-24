@@ -129,6 +129,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateEkmConfig(request: google.cloud.kms.v1.IUpdateEkmConfigRequest): Promise<google.cloud.kms.v1.EkmConfig>;
+
+                    /**
+                     * Calls VerifyConnectivity.
+                     * @param request VerifyConnectivityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VerifyConnectivityResponse
+                     */
+                    public verifyConnectivity(request: google.cloud.kms.v1.IVerifyConnectivityRequest, callback: google.cloud.kms.v1.EkmService.VerifyConnectivityCallback): void;
+
+                    /**
+                     * Calls VerifyConnectivity.
+                     * @param request VerifyConnectivityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public verifyConnectivity(request: google.cloud.kms.v1.IVerifyConnectivityRequest): Promise<google.cloud.kms.v1.VerifyConnectivityResponse>;
                 }
 
                 namespace EkmService {
@@ -174,6 +188,13 @@ export namespace google {
                      * @param [response] EkmConfig
                      */
                     type UpdateEkmConfigCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService|verifyConnectivity}.
+                     * @param error Error, if any
+                     * @param [response] VerifyConnectivityResponse
+                     */
+                    type VerifyConnectivityCallback = (error: (Error|null), response?: google.cloud.kms.v1.VerifyConnectivityResponse) => void;
                 }
 
                 /** Properties of a ListEkmConnectionsRequest. */
@@ -1415,6 +1436,194 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a VerifyConnectivityRequest. */
+                interface IVerifyConnectivityRequest {
+
+                    /** VerifyConnectivityRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a VerifyConnectivityRequest. */
+                class VerifyConnectivityRequest implements IVerifyConnectivityRequest {
+
+                    /**
+                     * Constructs a new VerifyConnectivityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IVerifyConnectivityRequest);
+
+                    /** VerifyConnectivityRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new VerifyConnectivityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyConnectivityRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IVerifyConnectivityRequest): google.cloud.kms.v1.VerifyConnectivityRequest;
+
+                    /**
+                     * Encodes the specified VerifyConnectivityRequest message. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityRequest.verify|verify} messages.
+                     * @param message VerifyConnectivityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IVerifyConnectivityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyConnectivityRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityRequest.verify|verify} messages.
+                     * @param message VerifyConnectivityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IVerifyConnectivityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyConnectivityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyConnectivityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.VerifyConnectivityRequest;
+
+                    /**
+                     * Decodes a VerifyConnectivityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyConnectivityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.VerifyConnectivityRequest;
+
+                    /**
+                     * Verifies a VerifyConnectivityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyConnectivityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyConnectivityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.VerifyConnectivityRequest;
+
+                    /**
+                     * Creates a plain object from a VerifyConnectivityRequest message. Also converts values to other types if specified.
+                     * @param message VerifyConnectivityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.VerifyConnectivityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyConnectivityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyConnectivityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyConnectivityResponse. */
+                interface IVerifyConnectivityResponse {
+                }
+
+                /** Represents a VerifyConnectivityResponse. */
+                class VerifyConnectivityResponse implements IVerifyConnectivityResponse {
+
+                    /**
+                     * Constructs a new VerifyConnectivityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IVerifyConnectivityResponse);
+
+                    /**
+                     * Creates a new VerifyConnectivityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyConnectivityResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IVerifyConnectivityResponse): google.cloud.kms.v1.VerifyConnectivityResponse;
+
+                    /**
+                     * Encodes the specified VerifyConnectivityResponse message. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityResponse.verify|verify} messages.
+                     * @param message VerifyConnectivityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IVerifyConnectivityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyConnectivityResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityResponse.verify|verify} messages.
+                     * @param message VerifyConnectivityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IVerifyConnectivityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyConnectivityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyConnectivityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.VerifyConnectivityResponse;
+
+                    /**
+                     * Decodes a VerifyConnectivityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyConnectivityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.VerifyConnectivityResponse;
+
+                    /**
+                     * Verifies a VerifyConnectivityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyConnectivityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyConnectivityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.VerifyConnectivityResponse;
+
+                    /**
+                     * Creates a plain object from a VerifyConnectivityResponse message. Also converts values to other types if specified.
+                     * @param message VerifyConnectivityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.VerifyConnectivityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyConnectivityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyConnectivityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a KeyRing. */
                 interface IKeyRing {
 
@@ -1686,6 +1895,7 @@ export namespace google {
                         ENCRYPT_DECRYPT = 1,
                         ASYMMETRIC_SIGN = 5,
                         ASYMMETRIC_DECRYPT = 6,
+                        RAW_ENCRYPT_DECRYPT = 7,
                         MAC = 9
                     }
                 }
@@ -2214,6 +2424,12 @@ export namespace google {
                     enum CryptoKeyVersionAlgorithm {
                         CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED = 0,
                         GOOGLE_SYMMETRIC_ENCRYPTION = 1,
+                        AES_128_GCM = 41,
+                        AES_256_GCM = 19,
+                        AES_128_CBC = 42,
+                        AES_256_CBC = 43,
+                        AES_128_CTR = 44,
+                        AES_256_CTR = 45,
                         RSA_SIGN_PSS_2048_SHA256 = 2,
                         RSA_SIGN_PSS_3072_SHA256 = 3,
                         RSA_SIGN_PSS_4096_SHA256 = 4,
@@ -3083,6 +3299,34 @@ export namespace google {
                     public decrypt(request: google.cloud.kms.v1.IDecryptRequest): Promise<google.cloud.kms.v1.DecryptResponse>;
 
                     /**
+                     * Calls RawEncrypt.
+                     * @param request RawEncryptRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RawEncryptResponse
+                     */
+                    public rawEncrypt(request: google.cloud.kms.v1.IRawEncryptRequest, callback: google.cloud.kms.v1.KeyManagementService.RawEncryptCallback): void;
+
+                    /**
+                     * Calls RawEncrypt.
+                     * @param request RawEncryptRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rawEncrypt(request: google.cloud.kms.v1.IRawEncryptRequest): Promise<google.cloud.kms.v1.RawEncryptResponse>;
+
+                    /**
+                     * Calls RawDecrypt.
+                     * @param request RawDecryptRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RawDecryptResponse
+                     */
+                    public rawDecrypt(request: google.cloud.kms.v1.IRawDecryptRequest, callback: google.cloud.kms.v1.KeyManagementService.RawDecryptCallback): void;
+
+                    /**
+                     * Calls RawDecrypt.
+                     * @param request RawDecryptRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rawDecrypt(request: google.cloud.kms.v1.IRawDecryptRequest): Promise<google.cloud.kms.v1.RawDecryptResponse>;
+
+                    /**
                      * Calls AsymmetricSign.
                      * @param request AsymmetricSignRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and AsymmetricSignResponse
@@ -3301,6 +3545,20 @@ export namespace google {
                      * @param [response] DecryptResponse
                      */
                     type DecryptCallback = (error: (Error|null), response?: google.cloud.kms.v1.DecryptResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|rawEncrypt}.
+                     * @param error Error, if any
+                     * @param [response] RawEncryptResponse
+                     */
+                    type RawEncryptCallback = (error: (Error|null), response?: google.cloud.kms.v1.RawEncryptResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|rawDecrypt}.
+                     * @param error Error, if any
+                     * @param [response] RawDecryptResponse
+                     */
+                    type RawDecryptCallback = (error: (Error|null), response?: google.cloud.kms.v1.RawDecryptResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|asymmetricSign}.
@@ -6066,6 +6324,278 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RawEncryptRequest. */
+                interface IRawEncryptRequest {
+
+                    /** RawEncryptRequest name */
+                    name?: (string|null);
+
+                    /** RawEncryptRequest plaintext */
+                    plaintext?: (Uint8Array|string|null);
+
+                    /** RawEncryptRequest additionalAuthenticatedData */
+                    additionalAuthenticatedData?: (Uint8Array|string|null);
+
+                    /** RawEncryptRequest plaintextCrc32c */
+                    plaintextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptRequest additionalAuthenticatedDataCrc32c */
+                    additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptRequest initializationVector */
+                    initializationVector?: (Uint8Array|string|null);
+
+                    /** RawEncryptRequest initializationVectorCrc32c */
+                    initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
+                }
+
+                /** Represents a RawEncryptRequest. */
+                class RawEncryptRequest implements IRawEncryptRequest {
+
+                    /**
+                     * Constructs a new RawEncryptRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRawEncryptRequest);
+
+                    /** RawEncryptRequest name. */
+                    public name: string;
+
+                    /** RawEncryptRequest plaintext. */
+                    public plaintext: (Uint8Array|string);
+
+                    /** RawEncryptRequest additionalAuthenticatedData. */
+                    public additionalAuthenticatedData: (Uint8Array|string);
+
+                    /** RawEncryptRequest plaintextCrc32c. */
+                    public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptRequest additionalAuthenticatedDataCrc32c. */
+                    public additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptRequest initializationVector. */
+                    public initializationVector: (Uint8Array|string);
+
+                    /** RawEncryptRequest initializationVectorCrc32c. */
+                    public initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /**
+                     * Creates a new RawEncryptRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RawEncryptRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRawEncryptRequest): google.cloud.kms.v1.RawEncryptRequest;
+
+                    /**
+                     * Encodes the specified RawEncryptRequest message. Does not implicitly {@link google.cloud.kms.v1.RawEncryptRequest.verify|verify} messages.
+                     * @param message RawEncryptRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRawEncryptRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RawEncryptRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawEncryptRequest.verify|verify} messages.
+                     * @param message RawEncryptRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRawEncryptRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RawEncryptRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RawEncryptRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RawEncryptRequest;
+
+                    /**
+                     * Decodes a RawEncryptRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RawEncryptRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RawEncryptRequest;
+
+                    /**
+                     * Verifies a RawEncryptRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RawEncryptRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RawEncryptRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RawEncryptRequest;
+
+                    /**
+                     * Creates a plain object from a RawEncryptRequest message. Also converts values to other types if specified.
+                     * @param message RawEncryptRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RawEncryptRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RawEncryptRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RawEncryptRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RawDecryptRequest. */
+                interface IRawDecryptRequest {
+
+                    /** RawDecryptRequest name */
+                    name?: (string|null);
+
+                    /** RawDecryptRequest ciphertext */
+                    ciphertext?: (Uint8Array|string|null);
+
+                    /** RawDecryptRequest additionalAuthenticatedData */
+                    additionalAuthenticatedData?: (Uint8Array|string|null);
+
+                    /** RawDecryptRequest initializationVector */
+                    initializationVector?: (Uint8Array|string|null);
+
+                    /** RawDecryptRequest tagLength */
+                    tagLength?: (number|null);
+
+                    /** RawDecryptRequest ciphertextCrc32c */
+                    ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawDecryptRequest additionalAuthenticatedDataCrc32c */
+                    additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawDecryptRequest initializationVectorCrc32c */
+                    initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
+                }
+
+                /** Represents a RawDecryptRequest. */
+                class RawDecryptRequest implements IRawDecryptRequest {
+
+                    /**
+                     * Constructs a new RawDecryptRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRawDecryptRequest);
+
+                    /** RawDecryptRequest name. */
+                    public name: string;
+
+                    /** RawDecryptRequest ciphertext. */
+                    public ciphertext: (Uint8Array|string);
+
+                    /** RawDecryptRequest additionalAuthenticatedData. */
+                    public additionalAuthenticatedData: (Uint8Array|string);
+
+                    /** RawDecryptRequest initializationVector. */
+                    public initializationVector: (Uint8Array|string);
+
+                    /** RawDecryptRequest tagLength. */
+                    public tagLength: number;
+
+                    /** RawDecryptRequest ciphertextCrc32c. */
+                    public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawDecryptRequest additionalAuthenticatedDataCrc32c. */
+                    public additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawDecryptRequest initializationVectorCrc32c. */
+                    public initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /**
+                     * Creates a new RawDecryptRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RawDecryptRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRawDecryptRequest): google.cloud.kms.v1.RawDecryptRequest;
+
+                    /**
+                     * Encodes the specified RawDecryptRequest message. Does not implicitly {@link google.cloud.kms.v1.RawDecryptRequest.verify|verify} messages.
+                     * @param message RawDecryptRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRawDecryptRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RawDecryptRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawDecryptRequest.verify|verify} messages.
+                     * @param message RawDecryptRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRawDecryptRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RawDecryptRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RawDecryptRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RawDecryptRequest;
+
+                    /**
+                     * Decodes a RawDecryptRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RawDecryptRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RawDecryptRequest;
+
+                    /**
+                     * Verifies a RawDecryptRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RawDecryptRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RawDecryptRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RawDecryptRequest;
+
+                    /**
+                     * Creates a plain object from a RawDecryptRequest message. Also converts values to other types if specified.
+                     * @param message RawDecryptRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RawDecryptRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RawDecryptRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RawDecryptRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AsymmetricSignRequest. */
                 interface IAsymmetricSignRequest {
 
@@ -6871,6 +7401,284 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DecryptResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RawEncryptResponse. */
+                interface IRawEncryptResponse {
+
+                    /** RawEncryptResponse ciphertext */
+                    ciphertext?: (Uint8Array|string|null);
+
+                    /** RawEncryptResponse initializationVector */
+                    initializationVector?: (Uint8Array|string|null);
+
+                    /** RawEncryptResponse tagLength */
+                    tagLength?: (number|null);
+
+                    /** RawEncryptResponse ciphertextCrc32c */
+                    ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptResponse initializationVectorCrc32c */
+                    initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptResponse verifiedPlaintextCrc32c */
+                    verifiedPlaintextCrc32c?: (boolean|null);
+
+                    /** RawEncryptResponse verifiedAdditionalAuthenticatedDataCrc32c */
+                    verifiedAdditionalAuthenticatedDataCrc32c?: (boolean|null);
+
+                    /** RawEncryptResponse verifiedInitializationVectorCrc32c */
+                    verifiedInitializationVectorCrc32c?: (boolean|null);
+
+                    /** RawEncryptResponse name */
+                    name?: (string|null);
+
+                    /** RawEncryptResponse protectionLevel */
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
+                }
+
+                /** Represents a RawEncryptResponse. */
+                class RawEncryptResponse implements IRawEncryptResponse {
+
+                    /**
+                     * Constructs a new RawEncryptResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRawEncryptResponse);
+
+                    /** RawEncryptResponse ciphertext. */
+                    public ciphertext: (Uint8Array|string);
+
+                    /** RawEncryptResponse initializationVector. */
+                    public initializationVector: (Uint8Array|string);
+
+                    /** RawEncryptResponse tagLength. */
+                    public tagLength: number;
+
+                    /** RawEncryptResponse ciphertextCrc32c. */
+                    public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptResponse initializationVectorCrc32c. */
+                    public initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawEncryptResponse verifiedPlaintextCrc32c. */
+                    public verifiedPlaintextCrc32c: boolean;
+
+                    /** RawEncryptResponse verifiedAdditionalAuthenticatedDataCrc32c. */
+                    public verifiedAdditionalAuthenticatedDataCrc32c: boolean;
+
+                    /** RawEncryptResponse verifiedInitializationVectorCrc32c. */
+                    public verifiedInitializationVectorCrc32c: boolean;
+
+                    /** RawEncryptResponse name. */
+                    public name: string;
+
+                    /** RawEncryptResponse protectionLevel. */
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
+
+                    /**
+                     * Creates a new RawEncryptResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RawEncryptResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRawEncryptResponse): google.cloud.kms.v1.RawEncryptResponse;
+
+                    /**
+                     * Encodes the specified RawEncryptResponse message. Does not implicitly {@link google.cloud.kms.v1.RawEncryptResponse.verify|verify} messages.
+                     * @param message RawEncryptResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRawEncryptResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RawEncryptResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawEncryptResponse.verify|verify} messages.
+                     * @param message RawEncryptResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRawEncryptResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RawEncryptResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RawEncryptResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RawEncryptResponse;
+
+                    /**
+                     * Decodes a RawEncryptResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RawEncryptResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RawEncryptResponse;
+
+                    /**
+                     * Verifies a RawEncryptResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RawEncryptResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RawEncryptResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RawEncryptResponse;
+
+                    /**
+                     * Creates a plain object from a RawEncryptResponse message. Also converts values to other types if specified.
+                     * @param message RawEncryptResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RawEncryptResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RawEncryptResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RawEncryptResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RawDecryptResponse. */
+                interface IRawDecryptResponse {
+
+                    /** RawDecryptResponse plaintext */
+                    plaintext?: (Uint8Array|string|null);
+
+                    /** RawDecryptResponse plaintextCrc32c */
+                    plaintextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawDecryptResponse protectionLevel */
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
+
+                    /** RawDecryptResponse verifiedCiphertextCrc32c */
+                    verifiedCiphertextCrc32c?: (boolean|null);
+
+                    /** RawDecryptResponse verifiedAdditionalAuthenticatedDataCrc32c */
+                    verifiedAdditionalAuthenticatedDataCrc32c?: (boolean|null);
+
+                    /** RawDecryptResponse verifiedInitializationVectorCrc32c */
+                    verifiedInitializationVectorCrc32c?: (boolean|null);
+                }
+
+                /** Represents a RawDecryptResponse. */
+                class RawDecryptResponse implements IRawDecryptResponse {
+
+                    /**
+                     * Constructs a new RawDecryptResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRawDecryptResponse);
+
+                    /** RawDecryptResponse plaintext. */
+                    public plaintext: (Uint8Array|string);
+
+                    /** RawDecryptResponse plaintextCrc32c. */
+                    public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** RawDecryptResponse protectionLevel. */
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
+
+                    /** RawDecryptResponse verifiedCiphertextCrc32c. */
+                    public verifiedCiphertextCrc32c: boolean;
+
+                    /** RawDecryptResponse verifiedAdditionalAuthenticatedDataCrc32c. */
+                    public verifiedAdditionalAuthenticatedDataCrc32c: boolean;
+
+                    /** RawDecryptResponse verifiedInitializationVectorCrc32c. */
+                    public verifiedInitializationVectorCrc32c: boolean;
+
+                    /**
+                     * Creates a new RawDecryptResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RawDecryptResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRawDecryptResponse): google.cloud.kms.v1.RawDecryptResponse;
+
+                    /**
+                     * Encodes the specified RawDecryptResponse message. Does not implicitly {@link google.cloud.kms.v1.RawDecryptResponse.verify|verify} messages.
+                     * @param message RawDecryptResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRawDecryptResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RawDecryptResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawDecryptResponse.verify|verify} messages.
+                     * @param message RawDecryptResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRawDecryptResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RawDecryptResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RawDecryptResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RawDecryptResponse;
+
+                    /**
+                     * Decodes a RawDecryptResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RawDecryptResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RawDecryptResponse;
+
+                    /**
+                     * Verifies a RawDecryptResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RawDecryptResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RawDecryptResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RawDecryptResponse;
+
+                    /**
+                     * Creates a plain object from a RawDecryptResponse message. Also converts values to other types if specified.
+                     * @param message RawDecryptResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RawDecryptResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RawDecryptResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RawDecryptResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

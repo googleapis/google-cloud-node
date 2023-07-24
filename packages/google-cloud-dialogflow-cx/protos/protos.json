@@ -333,9 +333,57 @@
                               "type": "AdvancedSettings",
                               "id": 22
                             },
+                            "gitIntegrationSettings": {
+                              "type": "GitIntegrationSettings",
+                              "id": 30
+                            },
                             "textToSpeechSettings": {
                               "type": "TextToSpeechSettings",
                               "id": 31
+                            }
+                          },
+                          "nested": {
+                            "GitIntegrationSettings": {
+                              "oneofs": {
+                                "gitSettings": {
+                                  "oneof": [
+                                    "githubSettings"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "githubSettings": {
+                                  "type": "GithubSettings",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "GithubSettings": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "repositoryUri": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "trackingBranch": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "accessToken": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "branches": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -461,6 +509,20 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
                               }
+                            },
+                            "gitDestination": {
+                              "type": "GitDestination",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "includeBigqueryExportSettings": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -470,6 +532,18 @@
                                 "BLOB": 1,
                                 "JSON_PACKAGE": 4
                               }
+                            },
+                            "GitDestination": {
+                              "fields": {
+                                "trackingBranch": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "commitMessage": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -478,7 +552,8 @@
                             "agent": {
                               "oneof": [
                                 "agentUri",
-                                "agentContent"
+                                "agentContent",
+                                "commitSha"
                               ]
                             }
                           },
@@ -490,6 +565,10 @@
                             "agentContent": {
                               "type": "bytes",
                               "id": 2
+                            },
+                            "commitSha": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -498,7 +577,8 @@
                             "agent": {
                               "oneof": [
                                 "agentUri",
-                                "agentContent"
+                                "agentContent",
+                                "gitSource"
                               ]
                             }
                           },
@@ -519,12 +599,24 @@
                               "type": "bytes",
                               "id": 3
                             },
+                            "gitSource": {
+                              "type": "GitSource",
+                              "id": 6
+                            },
                             "restoreOption": {
                               "type": "RestoreOption",
                               "id": 5
                             }
                           },
                           "nested": {
+                            "GitSource": {
+                              "fields": {
+                                "trackingBranch": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
                             "RestoreOption": {
                               "values": {
                                 "RESTORE_OPTION_UNSPECIFIED": 0,
@@ -3681,7 +3773,8 @@
                                 "INTENT": 1,
                                 "PAGE": 2,
                                 "PARAMETERS": 3,
-                                "UTTERANCE": 4
+                                "UTTERANCE": 4,
+                                "FLOW": 5
                               }
                             }
                           }
@@ -4790,6 +4883,86 @@
                             "enablePartialResponse": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "enableDebuggingInfo": {
+                              "type": "bool",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "CloudConversationDebuggingInfo": {
+                          "fields": {
+                            "audioDataChunks": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "resultEndTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "firstAudioDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3
+                            },
+                            "singleUtterance": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "speechPartialResultsEndTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 6
+                            },
+                            "speechFinalResultsEndTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 7
+                            },
+                            "partialResponses": {
+                              "type": "int32",
+                              "id": 8
+                            },
+                            "speakerIdPassiveLatencyMsOffset": {
+                              "type": "int32",
+                              "id": 9
+                            },
+                            "bargeinEventTriggered": {
+                              "type": "bool",
+                              "id": 10
+                            },
+                            "speechSingleUtterance": {
+                              "type": "bool",
+                              "id": 11
+                            },
+                            "dtmfPartialResultsTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 12
+                            },
+                            "dtmfFinalResultsTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 13
+                            },
+                            "singleUtteranceEndTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 14
+                            },
+                            "noSpeechTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 15
+                            },
+                            "isInputText": {
+                              "type": "bool",
+                              "id": 16
+                            },
+                            "clientHalfCloseTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 17
+                            },
+                            "clientHalfCloseStreamingTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 18
                             }
                           }
                         },
@@ -4810,6 +4983,10 @@
                             "detectIntentResponse": {
                               "type": "DetectIntentResponse",
                               "id": 2
+                            },
+                            "debuggingInfo": {
+                              "type": "CloudConversationDebuggingInfo",
+                              "id": 4
                             }
                           }
                         },
@@ -4913,6 +5090,13 @@
                             "channel": {
                               "type": "string",
                               "id": 15
+                            },
+                            "sessionTtl": {
+                              "type": "google.protobuf.Duration",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -5938,6 +6122,56 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "webhookType": {
+                                  "type": "WebhookType",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "httpMethod": {
+                                  "type": "HttpMethod",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "requestBody": {
+                                  "type": "string",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "parameterMapping": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "WebhookType": {
+                                  "values": {
+                                    "WEBHOOK_TYPE_UNSPECIFIED": 0,
+                                    "STANDARD": 1,
+                                    "FLEXIBLE": 2
+                                  }
+                                },
+                                "HttpMethod": {
+                                  "values": {
+                                    "HTTP_METHOD_UNSPECIFIED": 0,
+                                    "POST": 1,
+                                    "GET": 2,
+                                    "HEAD": 3,
+                                    "PUT": 4,
+                                    "DELETE": 5,
+                                    "PATCH": 6,
+                                    "OPTIONS": 7
+                                  }
                                 }
                               }
                             },
@@ -6061,7 +6295,8 @@
                                 "text",
                                 "triggerIntent",
                                 "transcript",
-                                "triggerEvent"
+                                "triggerEvent",
+                                "dtmfDigits"
                               ]
                             }
                           },
@@ -6088,6 +6323,10 @@
                             "triggerEvent": {
                               "type": "string",
                               "id": 14
+                            },
+                            "dtmfDigits": {
+                              "type": "string",
+                              "id": 17
                             },
                             "languageCode": {
                               "type": "string",
@@ -7915,9 +8154,57 @@
                               "type": "AdvancedSettings",
                               "id": 22
                             },
+                            "gitIntegrationSettings": {
+                              "type": "GitIntegrationSettings",
+                              "id": 30
+                            },
                             "textToSpeechSettings": {
                               "type": "TextToSpeechSettings",
                               "id": 31
+                            }
+                          },
+                          "nested": {
+                            "GitIntegrationSettings": {
+                              "oneofs": {
+                                "gitSettings": {
+                                  "oneof": [
+                                    "githubSettings"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "githubSettings": {
+                                  "type": "GithubSettings",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "GithubSettings": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "repositoryUri": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "trackingBranch": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "accessToken": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "branches": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -8043,6 +8330,20 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
                               }
+                            },
+                            "gitDestination": {
+                              "type": "GitDestination",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "includeBigqueryExportSettings": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -8052,6 +8353,18 @@
                                 "BLOB": 1,
                                 "JSON_PACKAGE": 4
                               }
+                            },
+                            "GitDestination": {
+                              "fields": {
+                                "trackingBranch": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "commitMessage": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -8060,7 +8373,8 @@
                             "agent": {
                               "oneof": [
                                 "agentUri",
-                                "agentContent"
+                                "agentContent",
+                                "commitSha"
                               ]
                             }
                           },
@@ -8072,6 +8386,10 @@
                             "agentContent": {
                               "type": "bytes",
                               "id": 2
+                            },
+                            "commitSha": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -8080,7 +8398,8 @@
                             "agent": {
                               "oneof": [
                                 "agentUri",
-                                "agentContent"
+                                "agentContent",
+                                "gitSource"
                               ]
                             }
                           },
@@ -8101,12 +8420,24 @@
                               "type": "bytes",
                               "id": 3
                             },
+                            "gitSource": {
+                              "type": "GitSource",
+                              "id": 6
+                            },
                             "restoreOption": {
                               "type": "RestoreOption",
                               "id": 5
                             }
                           },
                           "nested": {
+                            "GitSource": {
+                              "fields": {
+                                "trackingBranch": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
                             "RestoreOption": {
                               "values": {
                                 "RESTORE_OPTION_UNSPECIFIED": 0,
@@ -11263,7 +11594,8 @@
                                 "INTENT": 1,
                                 "PAGE": 2,
                                 "PARAMETERS": 3,
-                                "UTTERANCE": 4
+                                "UTTERANCE": 4,
+                                "FLOW": 5
                               }
                             }
                           }
@@ -12372,6 +12704,86 @@
                             "enablePartialResponse": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "enableDebuggingInfo": {
+                              "type": "bool",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "CloudConversationDebuggingInfo": {
+                          "fields": {
+                            "audioDataChunks": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "resultEndTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "firstAudioDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3
+                            },
+                            "singleUtterance": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "speechPartialResultsEndTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 6
+                            },
+                            "speechFinalResultsEndTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 7
+                            },
+                            "partialResponses": {
+                              "type": "int32",
+                              "id": 8
+                            },
+                            "speakerIdPassiveLatencyMsOffset": {
+                              "type": "int32",
+                              "id": 9
+                            },
+                            "bargeinEventTriggered": {
+                              "type": "bool",
+                              "id": 10
+                            },
+                            "speechSingleUtterance": {
+                              "type": "bool",
+                              "id": 11
+                            },
+                            "dtmfPartialResultsTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 12
+                            },
+                            "dtmfFinalResultsTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 13
+                            },
+                            "singleUtteranceEndTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 14
+                            },
+                            "noSpeechTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 15
+                            },
+                            "isInputText": {
+                              "type": "bool",
+                              "id": 16
+                            },
+                            "clientHalfCloseTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 17
+                            },
+                            "clientHalfCloseStreamingTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 18
                             }
                           }
                         },
@@ -12392,6 +12804,10 @@
                             "detectIntentResponse": {
                               "type": "DetectIntentResponse",
                               "id": 2
+                            },
+                            "debuggingInfo": {
+                              "type": "CloudConversationDebuggingInfo",
+                              "id": 4
                             }
                           }
                         },
@@ -12495,6 +12911,13 @@
                             "channel": {
                               "type": "string",
                               "id": 15
+                            },
+                            "sessionTtl": {
+                              "type": "google.protobuf.Duration",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -13520,6 +13943,56 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "webhookType": {
+                                  "type": "WebhookType",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "httpMethod": {
+                                  "type": "HttpMethod",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "requestBody": {
+                                  "type": "string",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "parameterMapping": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "WebhookType": {
+                                  "values": {
+                                    "WEBHOOK_TYPE_UNSPECIFIED": 0,
+                                    "STANDARD": 1,
+                                    "FLEXIBLE": 2
+                                  }
+                                },
+                                "HttpMethod": {
+                                  "values": {
+                                    "HTTP_METHOD_UNSPECIFIED": 0,
+                                    "POST": 1,
+                                    "GET": 2,
+                                    "HEAD": 3,
+                                    "PUT": 4,
+                                    "DELETE": 5,
+                                    "PATCH": 6,
+                                    "OPTIONS": 7
+                                  }
                                 }
                               }
                             },
@@ -13643,7 +14116,8 @@
                                 "text",
                                 "triggerIntent",
                                 "transcript",
-                                "triggerEvent"
+                                "triggerEvent",
+                                "dtmfDigits"
                               ]
                             }
                           },
@@ -13670,6 +14144,10 @@
                             "triggerEvent": {
                               "type": "string",
                               "id": 14
+                            },
+                            "dtmfDigits": {
+                              "type": "string",
+                              "id": 17
                             },
                             "languageCode": {
                               "type": "string",

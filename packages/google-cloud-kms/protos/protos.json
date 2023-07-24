@@ -138,6 +138,24 @@
                               "(google.api.method_signature)": "ekm_config,update_mask"
                             }
                           ]
+                        },
+                        "VerifyConnectivity": {
+                          "requestType": "VerifyConnectivityRequest",
+                          "responseType": "VerifyConnectivityResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/ekmConnections/*}:verifyConnectivity",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/ekmConnections/*}:verifyConnectivity"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -466,6 +484,21 @@
                         }
                       }
                     },
+                    "VerifyConnectivityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/EkmConnection"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyConnectivityResponse": {
+                      "fields": {}
+                    },
                     "KeyRing": {
                       "options": {
                         "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
@@ -576,6 +609,7 @@
                             "ENCRYPT_DECRYPT": 1,
                             "ASYMMETRIC_SIGN": 5,
                             "ASYMMETRIC_DECRYPT": 6,
+                            "RAW_ENCRYPT_DECRYPT": 7,
                             "MAC": 9
                           }
                         }
@@ -767,6 +801,12 @@
                           "values": {
                             "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED": 0,
                             "GOOGLE_SYMMETRIC_ENCRYPTION": 1,
+                            "AES_128_GCM": 41,
+                            "AES_256_GCM": 19,
+                            "AES_128_CBC": 42,
+                            "AES_256_CBC": 43,
+                            "AES_128_CTR": 44,
+                            "AES_256_CTR": 45,
                             "RSA_SIGN_PSS_2048_SHA256": 2,
                             "RSA_SIGN_PSS_3072_SHA256": 3,
                             "RSA_SIGN_PSS_4096_SHA256": 4,
@@ -1376,6 +1416,38 @@
                             },
                             {
                               "(google.api.method_signature)": "name,ciphertext"
+                            }
+                          ]
+                        },
+                        "RawEncrypt": {
+                          "requestType": "RawEncryptRequest",
+                          "responseType": "RawEncryptResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:rawEncrypt",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:rawEncrypt",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "RawDecrypt": {
+                          "requestType": "RawDecryptRequest",
+                          "responseType": "RawDecryptResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:rawDecrypt",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:rawDecrypt",
+                                "body": "*"
+                              }
                             }
                           ]
                         },
@@ -2092,6 +2164,116 @@
                         }
                       }
                     },
+                    "RawEncryptRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "plaintext": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "additionalAuthenticatedData": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "plaintextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalAuthenticatedDataCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "initializationVector": {
+                          "type": "bytes",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "initializationVectorCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RawDecryptRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ciphertext": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "additionalAuthenticatedData": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "initializationVector": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagLength": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "ciphertextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "additionalAuthenticatedDataCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "initializationVectorCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "AsymmetricSignRequest": {
                       "fields": {
                         "name": {
@@ -2285,6 +2467,78 @@
                         "protectionLevel": {
                           "type": "ProtectionLevel",
                           "id": 4
+                        }
+                      }
+                    },
+                    "RawEncryptResponse": {
+                      "fields": {
+                        "ciphertext": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "initializationVector": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "tagLength": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "ciphertextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 4
+                        },
+                        "initializationVectorCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 5
+                        },
+                        "verifiedPlaintextCrc32c": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "verifiedAdditionalAuthenticatedDataCrc32c": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "verifiedInitializationVectorCrc32c": {
+                          "type": "bool",
+                          "id": 10
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "protectionLevel": {
+                          "type": "ProtectionLevel",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "RawDecryptResponse": {
+                      "fields": {
+                        "plaintext": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "plaintextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
+                        },
+                        "protectionLevel": {
+                          "type": "ProtectionLevel",
+                          "id": 3
+                        },
+                        "verifiedCiphertextCrc32c": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "verifiedAdditionalAuthenticatedDataCrc32c": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "verifiedInitializationVectorCrc32c": {
+                          "type": "bool",
+                          "id": 6
                         }
                       }
                     },

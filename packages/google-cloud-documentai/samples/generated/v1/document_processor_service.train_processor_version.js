@@ -43,7 +43,8 @@ function main(parent, processorVersion) {
    */
   // const documentSchema = {}
   /**
-   *  Optional. The input data used to train the `ProcessorVersion`.
+   *  Optional. The input data used to train the
+   *  ProcessorVersion google.cloud.documentai.v1.ProcessorVersion.
    */
   // const inputData = {}
   /**

@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.8.0...contact-center-insights-v2.9.0) (2023-07-11)
+
+
+### Features
+
+* [contactcenterinsights] Support topic model type V2 ([#4397](https://github.com/googleapis/google-cloud-node/issues/4397)) ([8af0377](https://github.com/googleapis/google-cloud-node/commit/8af03771ca5c239cf234ac4b9ee59f290eb5071c))
+
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.7.0...contact-center-insights-v2.8.0) (2023-06-06)
+
+
+### Features
+
+* [contactcenterinsights] Add the resource definition of a STT recognizer ([#4310](https://github.com/googleapis/google-cloud-node/issues/4310)) ([02f2346](https://github.com/googleapis/google-cloud-node/commit/02f2346643a61ebed9c25a60e6229a1996be727c))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.6.0...contact-center-insights-v2.7.0) (2023-05-02)
+
+
+### Features
+
+* [contactcenterinsights] support for generating summaries during conversation analysis ([#4215](https://github.com/googleapis/google-cloud-node/issues/4215)) ([f12c277](https://github.com/googleapis/google-cloud-node/commit/f12c277d7f7566ead6128076c1c9ba81a856256a))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.5.0...contact-center-insights-v2.6.0) (2023-04-13)
 
 

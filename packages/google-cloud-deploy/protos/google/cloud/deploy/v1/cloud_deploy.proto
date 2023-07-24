@@ -326,7 +326,7 @@ service CloudDeploy {
   }
 }
 
-// A `DeliveryPipeline` resource in the Google Cloud Deploy API.
+// A `DeliveryPipeline` resource in the Cloud Deploy API.
 //
 // A `DeliveryPipeline` defines a pipeline through which a Skaffold
 // configuration can progress.
@@ -347,12 +347,11 @@ message DeliveryPipeline {
   string description = 3;
 
   // User annotations. These attributes can only be set and used by the
-  // user, and not by Google Cloud Deploy.
+  // user, and not by Cloud Deploy.
   map<string, string> annotations = 4;
 
   // Labels are attributes that can be set and used by both the
-  // user and by Google Cloud Deploy. Labels must meet the following
-  // constraints:
+  // user and by Cloud Deploy. Labels must meet the following constraints:
   //
   // * Keys and values can contain only lowercase letters, numeric characters,
   // underscores, and dashes.
@@ -415,6 +414,22 @@ message Stage {
 
   // Optional. The strategy to use for a `Rollout` to this stage.
   Strategy strategy = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The deploy parameters to use for the target in this stage.
+  repeated DeployParameters deploy_parameters = 6
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// DeployParameters contains deploy parameters information.
+message DeployParameters {
+  // Required. Values are deploy parameters in key-value pairs.
+  map<string, string> values = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Deploy parameters are applied to targets with match labels.
+  // If unspecified, deploy parameters are applied to all targets (including
+  // child targets of a multi-target).
+  map<string, string> match_target_labels = 2
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Strategy contains deployment strategy information.
@@ -511,6 +526,12 @@ message KubernetesConfig {
     // Required. Name of the Kubernetes Deployment whose traffic is managed by
     // the specified HTTPRoute and Service.
     string deployment = 3 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. The time to wait for route updates to propagate. The maximum
+    // configurable time is 3 hours, in seconds format. If unspecified, there is
+    // no wait time.
+    google.protobuf.Duration route_update_wait_time = 4
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Information about the Kubernetes Service networking configuration.
@@ -521,6 +542,13 @@ message KubernetesConfig {
     // Required. Name of the Kubernetes Deployment whose traffic is managed by
     // the specified Service.
     string deployment = 2 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. Whether to disable Pod overprovisioning. If Pod
+    // overprovisioning is disabled then Cloud Deploy will limit the number of
+    // total Pods used for the deployment strategy to the number of Pods the
+    // Deployment has on the cluster.
+    bool disable_pod_overprovisioning = 3
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // The service definition configuration.
@@ -787,7 +815,7 @@ message DeleteDeliveryPipelineRequest {
   string etag = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// A `Target` resource in the Google Cloud Deploy API.
+// A `Target` resource in the Cloud Deploy API.
 //
 // A `Target` defines a location to which a Skaffold configuration
 // can be deployed.
@@ -811,14 +839,13 @@ message Target {
   string description = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. User annotations. These attributes can only be set and used by
-  // the user, and not by Google Cloud Deploy. See
+  // the user, and not by Cloud Deploy. See
   // https://google.aip.dev/128#annotations for more details such as format and
   // size limitations.
   map<string, string> annotations = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Labels are attributes that can be set and used by both the
-  // user and by Google Cloud Deploy. Labels must meet the following
-  // constraints:
+  // user and by Cloud Deploy. Labels must meet the following constraints:
   //
   // * Keys and values can contain only lowercase letters, numeric characters,
   // underscores, and dashes.
@@ -844,17 +871,17 @@ message Target {
   // Destination to which the Skaffold configuration is applied during a
   // rollout.
   oneof deployment_target {
-    // Information specifying a GKE Cluster.
-    GkeCluster gke = 15;
+    // Optional. Information specifying a GKE Cluster.
+    GkeCluster gke = 15 [(google.api.field_behavior) = OPTIONAL];
 
-    // Information specifying an Anthos Cluster.
-    AnthosCluster anthos_cluster = 17;
+    // Optional. Information specifying an Anthos Cluster.
+    AnthosCluster anthos_cluster = 17 [(google.api.field_behavior) = OPTIONAL];
 
-    // Information specifying a Cloud Run deployment target.
-    CloudRunLocation run = 18;
+    // Optional. Information specifying a Cloud Run deployment target.
+    CloudRunLocation run = 18 [(google.api.field_behavior) = OPTIONAL];
 
-    // Information specifying a multiTarget.
-    MultiTarget multi_target = 19;
+    // Optional. Information specifying a multiTarget.
+    MultiTarget multi_target = 19 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Optional. This checksum is computed by the server based on the value of
@@ -870,6 +897,10 @@ message Target {
   // When no configurations are specified, execution will use the default
   // specified in `DefaultPool`.
   repeated ExecutionConfig execution_configs = 16;
+
+  // Optional. The deploy parameters to use for this target.
+  map<string, string> deploy_parameters = 20
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration of the environment to use when calling Skaffold.
@@ -1175,7 +1206,7 @@ message DeleteTargetRequest {
   string request_id = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. If set to true, then deleting an already deleted or non-existing
-  // DeliveryPipeline will succeed.
+  // `Target` will succeed.
   bool allow_missing = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. If set, validate the request and preview the review, but do not
@@ -1188,7 +1219,7 @@ message DeleteTargetRequest {
   string etag = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// A `Release` resource in the Google Cloud Deploy API.
+// A `Release` resource in the Cloud Deploy API.
 //
 // A `Release` defines a specific Skaffold configuration instance
 // that can be deployed.
@@ -1236,7 +1267,7 @@ message Release {
       FAILURE_CAUSE_UNSPECIFIED = 0;
 
       // Cloud Build is not available, either because it is not enabled or
-      // because Google Cloud Deploy has insufficient permissions. See [required
+      // because Cloud Deploy has insufficient permissions. See [required
       // permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
       CLOUD_BUILD_UNAVAILABLE = 1;
 
@@ -1244,7 +1275,7 @@ message Release {
       // logs.
       EXECUTION_FAILED = 2;
 
-      // Cloud Build failed to fulfill Google Cloud Deploy's request. See
+      // Cloud Build failed to fulfill Cloud Deploy's request. See
       // failure_message for additional details.
       CLOUD_BUILD_REQUEST_FAILED = 3;
     }
@@ -1326,14 +1357,12 @@ message Release {
   string description = 3;
 
   // User annotations. These attributes can only be set and used by the
-  // user, and not by Google Cloud Deploy. See
-  // https://google.aip.dev/128#annotations for more details such as format and
-  // size limitations.
+  // user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
+  // for more details such as format and size limitations.
   map<string, string> annotations = 4;
 
   // Labels are attributes that can be set and used by both the
-  // user and by Google Cloud Deploy. Labels must meet the following
-  // constraints:
+  // user and by Cloud Deploy. Labels must meet the following constraints:
   //
   // * Keys and values can contain only lowercase letters, numeric characters,
   // underscores, and dashes.
@@ -1387,8 +1416,8 @@ message Release {
   string etag = 16;
 
   // The Skaffold version to use when operating on this release, such as
-  // "1.20.0". Not all versions are valid; Google Cloud Deploy supports a
-  // specific set of versions.
+  // "1.20.0". Not all versions are valid; Cloud Deploy supports a specific set
+  // of versions.
   //
   // If unset, the most recent supported Skaffold version will be used.
   string skaffold_version = 19;
@@ -1405,6 +1434,10 @@ message Release {
 
   // Output only. Information around the state of the Release.
   ReleaseCondition condition = 24 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The deploy parameters to use for all targets in this release.
+  map<string, string> deploy_parameters = 25
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Description of an a image to use during Skaffold rendering.
@@ -1428,6 +1461,10 @@ message TargetArtifact {
 
     // Output only. File path of the rendered manifest relative to the URI.
     string manifest_path = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. File path of the directory of rendered job manifests
+    // relative to the URI. This is only set if it is applicable.
+    string job_manifests_path = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   oneof uri {
@@ -1446,6 +1483,18 @@ message TargetArtifact {
 
   // Output only. Map from the phase ID to the phase artifacts for the `Target`.
   map<string, PhaseArtifact> phase_artifacts = 5
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// The artifacts produced by a deploy operation.
+message DeployArtifact {
+  // Output only. URI of a directory containing the artifacts. All paths are
+  // relative to this location.
+  string artifact_uri = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. File paths of the manifests applied during the deploy
+  // operation relative to the URI.
+  repeated string manifest_paths = 2
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
@@ -1563,7 +1612,7 @@ message CreateReleaseRequest {
   bool validate_only = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// A `Rollout` resource in the Google Cloud Deploy API.
+// A `Rollout` resource in the Cloud Deploy API.
 //
 // A `Rollout` contains information around a specific deployment to a `Target`.
 message Rollout {
@@ -1653,8 +1702,8 @@ message Rollout {
     // No skaffold verify configuration was found.
     VERIFICATION_CONFIG_NOT_FOUND = 6;
 
-    // Cloud Build failed to fulfill Google Cloud Deploy's request. See
-    // failure_message for additional details.
+    // Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+    // for additional details.
     CLOUD_BUILD_REQUEST_FAILED = 7;
   }
 
@@ -1671,14 +1720,12 @@ message Rollout {
   string description = 3;
 
   // User annotations. These attributes can only be set and used by the
-  // user, and not by Google Cloud Deploy. See
-  // https://google.aip.dev/128#annotations for more details such as format and
-  // size limitations.
+  // user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
+  // for more details such as format and size limitations.
   map<string, string> annotations = 4;
 
   // Labels are attributes that can be set and used by both the
-  // user and by Google Cloud Deploy. Labels must meet the following
-  // constraints:
+  // user and by Cloud Deploy. Labels must meet the following constraints:
   //
   // * Keys and values can contain only lowercase letters, numeric characters,
   // underscores, and dashes.
@@ -1839,7 +1886,7 @@ message Phase {
 
 // Deployment job composition.
 message DeploymentJobs {
-  // Output only. The deploy Job. This is the first job run in the phase.
+  // Output only. The deploy Job. This is the deploy job in the phase.
   Job deploy_job = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The verify Job. Runs after a deploy if the deploy succeeds.
@@ -2181,7 +2228,7 @@ message AbandonReleaseRequest {
 // The response object for `AbandonRelease`.
 message AbandonReleaseResponse {}
 
-// A `JobRun` resource in the Google Cloud Deploy API.
+// A `JobRun` resource in the Cloud Deploy API.
 //
 // A `JobRun` contains information of a single `Rollout` job evaluation.
 message JobRun {
@@ -2273,7 +2320,7 @@ message DeployJobRun {
     FAILURE_CAUSE_UNSPECIFIED = 0;
 
     // Cloud Build is not available, either because it is not enabled or because
-    // Google Cloud Deploy has insufficient permissions. See [Required
+    // Cloud Deploy has insufficient permissions. See [Required
     // permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
     CLOUD_BUILD_UNAVAILABLE = 1;
 
@@ -2288,8 +2335,8 @@ message DeployJobRun {
     // canary deployment. Check the Cloud Build logs for more information.
     MISSING_RESOURCES_FOR_CANARY = 4;
 
-    // Cloud Build failed to fulfill Google Cloud Deploy's request. See
-    // failure_message for additional details.
+    // Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+    // for additional details.
     CLOUD_BUILD_REQUEST_FAILED = 5;
   }
 
@@ -2312,6 +2359,9 @@ message DeployJobRun {
 
   // Output only. Metadata containing information about the deploy job run.
   DeployJobRunMetadata metadata = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The artifact of a deploy job run, if available.
+  DeployArtifact artifact = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // VerifyJobRun contains information specific to a verify `JobRun`.
@@ -2322,7 +2372,7 @@ message VerifyJobRun {
     FAILURE_CAUSE_UNSPECIFIED = 0;
 
     // Cloud Build is not available, either because it is not enabled or because
-    // Google Cloud Deploy has insufficient permissions. See [required
+    // Cloud Deploy has insufficient permissions. See [required
     // permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
     CLOUD_BUILD_UNAVAILABLE = 1;
 
@@ -2336,8 +2386,8 @@ message VerifyJobRun {
     // No Skaffold verify configuration was found.
     VERIFICATION_CONFIG_NOT_FOUND = 4;
 
-    // Cloud Build failed to fulfill Google Cloud Deploy's request. See
-    // failure_message for additional details.
+    // Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+    // for additional details.
     CLOUD_BUILD_REQUEST_FAILED = 5;
   }
 

@@ -495,6 +495,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|getSubnet}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef GetSubnetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.vmwareengine.v1.Subnet} [response] Subnet
+                         */
+    
+                        /**
+                         * Calls GetSubnet.
+                         * @function getSubnet
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IGetSubnetRequest} request GetSubnetRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.GetSubnetCallback} callback Node-style callback called with the error, if any, and Subnet
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.getSubnet = function getSubnet(request, callback) {
+                            return this.rpcCall(getSubnet, $root.google.cloud.vmwareengine.v1.GetSubnetRequest, $root.google.cloud.vmwareengine.v1.Subnet, request, callback);
+                        }, "name", { value: "GetSubnet" });
+    
+                        /**
+                         * Calls GetSubnet.
+                         * @function getSubnet
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IGetSubnetRequest} request GetSubnetRequest message or plain object
+                         * @returns {Promise<google.cloud.vmwareengine.v1.Subnet>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|updateSubnet}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef UpdateSubnetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateSubnet.
+                         * @function updateSubnet
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IUpdateSubnetRequest} request UpdateSubnetRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.UpdateSubnetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.updateSubnet = function updateSubnet(request, callback) {
+                            return this.rpcCall(updateSubnet, $root.google.cloud.vmwareengine.v1.UpdateSubnetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateSubnet" });
+    
+                        /**
+                         * Calls UpdateSubnet.
+                         * @function updateSubnet
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IUpdateSubnetRequest} request UpdateSubnetRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|listNodeTypes}.
                          * @memberof google.cloud.vmwareengine.v1.VmwareEngine
                          * @typedef ListNodeTypesCallback
@@ -1118,6 +1184,204 @@
                          * @instance
                          * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest} request ListVmwareEngineNetworksRequest message or plain object
                          * @returns {Promise<google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|createPrivateConnection}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef CreatePrivateConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreatePrivateConnection.
+                         * @function createPrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest} request CreatePrivateConnectionRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.CreatePrivateConnectionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.createPrivateConnection = function createPrivateConnection(request, callback) {
+                            return this.rpcCall(createPrivateConnection, $root.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreatePrivateConnection" });
+    
+                        /**
+                         * Calls CreatePrivateConnection.
+                         * @function createPrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest} request CreatePrivateConnectionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|getPrivateConnection}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef GetPrivateConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.vmwareengine.v1.PrivateConnection} [response] PrivateConnection
+                         */
+    
+                        /**
+                         * Calls GetPrivateConnection.
+                         * @function getPrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest} request GetPrivateConnectionRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.GetPrivateConnectionCallback} callback Node-style callback called with the error, if any, and PrivateConnection
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.getPrivateConnection = function getPrivateConnection(request, callback) {
+                            return this.rpcCall(getPrivateConnection, $root.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest, $root.google.cloud.vmwareengine.v1.PrivateConnection, request, callback);
+                        }, "name", { value: "GetPrivateConnection" });
+    
+                        /**
+                         * Calls GetPrivateConnection.
+                         * @function getPrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest} request GetPrivateConnectionRequest message or plain object
+                         * @returns {Promise<google.cloud.vmwareengine.v1.PrivateConnection>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|listPrivateConnections}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef ListPrivateConnectionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse} [response] ListPrivateConnectionsResponse
+                         */
+    
+                        /**
+                         * Calls ListPrivateConnections.
+                         * @function listPrivateConnections
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest} request ListPrivateConnectionsRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateConnectionsCallback} callback Node-style callback called with the error, if any, and ListPrivateConnectionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.listPrivateConnections = function listPrivateConnections(request, callback) {
+                            return this.rpcCall(listPrivateConnections, $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest, $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse, request, callback);
+                        }, "name", { value: "ListPrivateConnections" });
+    
+                        /**
+                         * Calls ListPrivateConnections.
+                         * @function listPrivateConnections
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest} request ListPrivateConnectionsRequest message or plain object
+                         * @returns {Promise<google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|updatePrivateConnection}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef UpdatePrivateConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdatePrivateConnection.
+                         * @function updatePrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest} request UpdatePrivateConnectionRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.UpdatePrivateConnectionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.updatePrivateConnection = function updatePrivateConnection(request, callback) {
+                            return this.rpcCall(updatePrivateConnection, $root.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdatePrivateConnection" });
+    
+                        /**
+                         * Calls UpdatePrivateConnection.
+                         * @function updatePrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest} request UpdatePrivateConnectionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|deletePrivateConnection}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef DeletePrivateConnectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeletePrivateConnection.
+                         * @function deletePrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest} request DeletePrivateConnectionRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.DeletePrivateConnectionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.deletePrivateConnection = function deletePrivateConnection(request, callback) {
+                            return this.rpcCall(deletePrivateConnection, $root.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeletePrivateConnection" });
+    
+                        /**
+                         * Calls DeletePrivateConnection.
+                         * @function deletePrivateConnection
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest} request DeletePrivateConnectionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmwareengine.v1.VmwareEngine|listPrivateConnectionPeeringRoutes}.
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @typedef ListPrivateConnectionPeeringRoutesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse} [response] ListPrivateConnectionPeeringRoutesResponse
+                         */
+    
+                        /**
+                         * Calls ListPrivateConnectionPeeringRoutes.
+                         * @function listPrivateConnectionPeeringRoutes
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest} request ListPrivateConnectionPeeringRoutesRequest message or plain object
+                         * @param {google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateConnectionPeeringRoutesCallback} callback Node-style callback called with the error, if any, and ListPrivateConnectionPeeringRoutesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmwareEngine.prototype.listPrivateConnectionPeeringRoutes = function listPrivateConnectionPeeringRoutes(request, callback) {
+                            return this.rpcCall(listPrivateConnectionPeeringRoutes, $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest, $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse, request, callback);
+                        }, "name", { value: "ListPrivateConnectionPeeringRoutes" });
+    
+                        /**
+                         * Calls ListPrivateConnectionPeeringRoutes.
+                         * @function listPrivateConnectionPeeringRoutes
+                         * @memberof google.cloud.vmwareengine.v1.VmwareEngine
+                         * @instance
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest} request ListPrivateConnectionPeeringRoutesRequest message or plain object
+                         * @returns {Promise<google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse>} Promise
                          * @variation 2
                          */
     
@@ -4847,6 +5111,7 @@
                          * @interface IListSubnetsResponse
                          * @property {Array.<google.cloud.vmwareengine.v1.ISubnet>|null} [subnets] ListSubnetsResponse subnets
                          * @property {string|null} [nextPageToken] ListSubnetsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListSubnetsResponse unreachable
                          */
     
                         /**
@@ -4859,6 +5124,7 @@
                          */
                         function ListSubnetsResponse(properties) {
                             this.subnets = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4880,6 +5146,14 @@
                          * @instance
                          */
                         ListSubnetsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSubnetsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.vmwareengine.v1.ListSubnetsResponse
+                         * @instance
+                         */
+                        ListSubnetsResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListSubnetsResponse instance using the specified properties.
@@ -4910,6 +5184,9 @@
                                     $root.google.cloud.vmwareengine.v1.Subnet.encode(message.subnets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -4952,6 +5229,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -5001,6 +5284,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -5028,6 +5318,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListSubnetsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -5044,8 +5341,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.subnets = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.subnets && message.subnets.length) {
@@ -5055,6 +5354,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     
@@ -5085,6 +5389,446 @@
                         };
     
                         return ListSubnetsResponse;
+                    })();
+    
+                    v1.GetSubnetRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSubnetRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IGetSubnetRequest
+                         * @property {string|null} [name] GetSubnetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSubnetRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a GetSubnetRequest.
+                         * @implements IGetSubnetRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IGetSubnetRequest=} [properties] Properties to set
+                         */
+                        function GetSubnetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSubnetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @instance
+                         */
+                        GetSubnetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSubnetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetSubnetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.GetSubnetRequest} GetSubnetRequest instance
+                         */
+                        GetSubnetRequest.create = function create(properties) {
+                            return new GetSubnetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSubnetRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetSubnetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetSubnetRequest} message GetSubnetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSubnetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetSubnetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetSubnetRequest} message GetSubnetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSubnetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSubnetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.GetSubnetRequest} GetSubnetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSubnetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.GetSubnetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSubnetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.GetSubnetRequest} GetSubnetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSubnetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSubnetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSubnetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.GetSubnetRequest} GetSubnetRequest
+                         */
+                        GetSubnetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.GetSubnetRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.GetSubnetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSubnetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.GetSubnetRequest} message GetSubnetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSubnetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSubnetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSubnetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSubnetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.GetSubnetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSubnetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.GetSubnetRequest";
+                        };
+    
+                        return GetSubnetRequest;
+                    })();
+    
+                    v1.UpdateSubnetRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSubnetRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IUpdateSubnetRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSubnetRequest updateMask
+                         * @property {google.cloud.vmwareengine.v1.ISubnet|null} [subnet] UpdateSubnetRequest subnet
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSubnetRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents an UpdateSubnetRequest.
+                         * @implements IUpdateSubnetRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IUpdateSubnetRequest=} [properties] Properties to set
+                         */
+                        function UpdateSubnetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSubnetRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @instance
+                         */
+                        UpdateSubnetRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateSubnetRequest subnet.
+                         * @member {google.cloud.vmwareengine.v1.ISubnet|null|undefined} subnet
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @instance
+                         */
+                        UpdateSubnetRequest.prototype.subnet = null;
+    
+                        /**
+                         * Creates a new UpdateSubnetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateSubnetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.UpdateSubnetRequest} UpdateSubnetRequest instance
+                         */
+                        UpdateSubnetRequest.create = function create(properties) {
+                            return new UpdateSubnetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubnetRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateSubnetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateSubnetRequest} message UpdateSubnetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubnetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.subnet != null && Object.hasOwnProperty.call(message, "subnet"))
+                                $root.google.cloud.vmwareengine.v1.Subnet.encode(message.subnet, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateSubnetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateSubnetRequest} message UpdateSubnetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubnetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubnetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.UpdateSubnetRequest} UpdateSubnetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubnetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.UpdateSubnetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.subnet = $root.google.cloud.vmwareengine.v1.Subnet.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubnetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.UpdateSubnetRequest} UpdateSubnetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubnetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSubnetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSubnetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                var error = $root.google.cloud.vmwareengine.v1.Subnet.verify(message.subnet);
+                                if (error)
+                                    return "subnet." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.UpdateSubnetRequest} UpdateSubnetRequest
+                         */
+                        UpdateSubnetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.UpdateSubnetRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.UpdateSubnetRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateSubnetRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.subnet != null) {
+                                if (typeof object.subnet !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateSubnetRequest.subnet: object expected");
+                                message.subnet = $root.google.cloud.vmwareengine.v1.Subnet.fromObject(object.subnet);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSubnetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.UpdateSubnetRequest} message UpdateSubnetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSubnetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.subnet = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.subnet != null && message.hasOwnProperty("subnet"))
+                                object.subnet = $root.google.cloud.vmwareengine.v1.Subnet.toObject(message.subnet, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSubnetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSubnetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSubnetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.UpdateSubnetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSubnetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.UpdateSubnetRequest";
+                        };
+    
+                        return UpdateSubnetRequest;
                     })();
     
                     v1.OperationMetadata = (function() {
@@ -11209,6 +11953,2056 @@
                         return ListVmwareEngineNetworksResponse;
                     })();
     
+                    v1.CreatePrivateConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreatePrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface ICreatePrivateConnectionRequest
+                         * @property {string|null} [parent] CreatePrivateConnectionRequest parent
+                         * @property {string|null} [privateConnectionId] CreatePrivateConnectionRequest privateConnectionId
+                         * @property {google.cloud.vmwareengine.v1.IPrivateConnection|null} [privateConnection] CreatePrivateConnectionRequest privateConnection
+                         * @property {string|null} [requestId] CreatePrivateConnectionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreatePrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a CreatePrivateConnectionRequest.
+                         * @implements ICreatePrivateConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest=} [properties] Properties to set
+                         */
+                        function CreatePrivateConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreatePrivateConnectionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreatePrivateConnectionRequest privateConnectionId.
+                         * @member {string} privateConnectionId
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.privateConnectionId = "";
+    
+                        /**
+                         * CreatePrivateConnectionRequest privateConnection.
+                         * @member {google.cloud.vmwareengine.v1.IPrivateConnection|null|undefined} privateConnection
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.privateConnection = null;
+    
+                        /**
+                         * CreatePrivateConnectionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest} CreatePrivateConnectionRequest instance
+                         */
+                        CreatePrivateConnectionRequest.create = function create(properties) {
+                            return new CreatePrivateConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest} message CreatePrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePrivateConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.privateConnectionId != null && Object.hasOwnProperty.call(message, "privateConnectionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.privateConnectionId);
+                            if (message.privateConnection != null && Object.hasOwnProperty.call(message, "privateConnection"))
+                                $root.google.cloud.vmwareengine.v1.PrivateConnection.encode(message.privateConnection, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreatePrivateConnectionRequest} message CreatePrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePrivateConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreatePrivateConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest} CreatePrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePrivateConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.privateConnectionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.privateConnection = $root.google.cloud.vmwareengine.v1.PrivateConnection.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreatePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest} CreatePrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePrivateConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreatePrivateConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreatePrivateConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.privateConnectionId != null && message.hasOwnProperty("privateConnectionId"))
+                                if (!$util.isString(message.privateConnectionId))
+                                    return "privateConnectionId: string expected";
+                            if (message.privateConnection != null && message.hasOwnProperty("privateConnection")) {
+                                var error = $root.google.cloud.vmwareengine.v1.PrivateConnection.verify(message.privateConnection);
+                                if (error)
+                                    return "privateConnection." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreatePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest} CreatePrivateConnectionRequest
+                         */
+                        CreatePrivateConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.privateConnectionId != null)
+                                message.privateConnectionId = String(object.privateConnectionId);
+                            if (object.privateConnection != null) {
+                                if (typeof object.privateConnection !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest.privateConnection: object expected");
+                                message.privateConnection = $root.google.cloud.vmwareengine.v1.PrivateConnection.fromObject(object.privateConnection);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreatePrivateConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest} message CreatePrivateConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreatePrivateConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.privateConnectionId = "";
+                                object.privateConnection = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.privateConnectionId != null && message.hasOwnProperty("privateConnectionId"))
+                                object.privateConnectionId = message.privateConnectionId;
+                            if (message.privateConnection != null && message.hasOwnProperty("privateConnection"))
+                                object.privateConnection = $root.google.cloud.vmwareengine.v1.PrivateConnection.toObject(message.privateConnection, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreatePrivateConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreatePrivateConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreatePrivateConnectionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreatePrivateConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest";
+                        };
+    
+                        return CreatePrivateConnectionRequest;
+                    })();
+    
+                    v1.GetPrivateConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IGetPrivateConnectionRequest
+                         * @property {string|null} [name] GetPrivateConnectionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a GetPrivateConnectionRequest.
+                         * @implements IGetPrivateConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest=} [properties] Properties to set
+                         */
+                        function GetPrivateConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPrivateConnectionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @instance
+                         */
+                        GetPrivateConnectionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPrivateConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.GetPrivateConnectionRequest} GetPrivateConnectionRequest instance
+                         */
+                        GetPrivateConnectionRequest.create = function create(properties) {
+                            return new GetPrivateConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetPrivateConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest} message GetPrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPrivateConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetPrivateConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest} message GetPrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPrivateConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPrivateConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.GetPrivateConnectionRequest} GetPrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPrivateConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.GetPrivateConnectionRequest} GetPrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPrivateConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPrivateConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPrivateConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.GetPrivateConnectionRequest} GetPrivateConnectionRequest
+                         */
+                        GetPrivateConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPrivateConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.GetPrivateConnectionRequest} message GetPrivateConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPrivateConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPrivateConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPrivateConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPrivateConnectionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.GetPrivateConnectionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPrivateConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.GetPrivateConnectionRequest";
+                        };
+    
+                        return GetPrivateConnectionRequest;
+                    })();
+    
+                    v1.ListPrivateConnectionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPrivateConnectionsRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListPrivateConnectionsRequest
+                         * @property {string|null} [parent] ListPrivateConnectionsRequest parent
+                         * @property {number|null} [pageSize] ListPrivateConnectionsRequest pageSize
+                         * @property {string|null} [pageToken] ListPrivateConnectionsRequest pageToken
+                         * @property {string|null} [filter] ListPrivateConnectionsRequest filter
+                         * @property {string|null} [orderBy] ListPrivateConnectionsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListPrivateConnectionsRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListPrivateConnectionsRequest.
+                         * @implements IListPrivateConnectionsRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest=} [properties] Properties to set
+                         */
+                        function ListPrivateConnectionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPrivateConnectionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPrivateConnectionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPrivateConnectionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListPrivateConnectionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListPrivateConnectionsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListPrivateConnectionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest} ListPrivateConnectionsRequest instance
+                         */
+                        ListPrivateConnectionsRequest.create = function create(properties) {
+                            return new ListPrivateConnectionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionsRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest} message ListPrivateConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest} message ListPrivateConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest} ListPrivateConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest} ListPrivateConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPrivateConnectionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPrivateConnectionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPrivateConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest} ListPrivateConnectionsRequest
+                         */
+                        ListPrivateConnectionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPrivateConnectionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest} message ListPrivateConnectionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPrivateConnectionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPrivateConnectionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPrivateConnectionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPrivateConnectionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPrivateConnectionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest";
+                        };
+    
+                        return ListPrivateConnectionsRequest;
+                    })();
+    
+                    v1.ListPrivateConnectionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPrivateConnectionsResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListPrivateConnectionsResponse
+                         * @property {Array.<google.cloud.vmwareengine.v1.IPrivateConnection>|null} [privateConnections] ListPrivateConnectionsResponse privateConnections
+                         * @property {string|null} [nextPageToken] ListPrivateConnectionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListPrivateConnectionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListPrivateConnectionsResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListPrivateConnectionsResponse.
+                         * @implements IListPrivateConnectionsResponse
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse=} [properties] Properties to set
+                         */
+                        function ListPrivateConnectionsResponse(properties) {
+                            this.privateConnections = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPrivateConnectionsResponse privateConnections.
+                         * @member {Array.<google.cloud.vmwareengine.v1.IPrivateConnection>} privateConnections
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @instance
+                         */
+                        ListPrivateConnectionsResponse.prototype.privateConnections = $util.emptyArray;
+    
+                        /**
+                         * ListPrivateConnectionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @instance
+                         */
+                        ListPrivateConnectionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListPrivateConnectionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @instance
+                         */
+                        ListPrivateConnectionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListPrivateConnectionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse} ListPrivateConnectionsResponse instance
+                         */
+                        ListPrivateConnectionsResponse.create = function create(properties) {
+                            return new ListPrivateConnectionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionsResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse} message ListPrivateConnectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.privateConnections != null && message.privateConnections.length)
+                                for (var i = 0; i < message.privateConnections.length; ++i)
+                                    $root.google.cloud.vmwareengine.v1.PrivateConnection.encode(message.privateConnections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse} message ListPrivateConnectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse} ListPrivateConnectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.privateConnections && message.privateConnections.length))
+                                            message.privateConnections = [];
+                                        message.privateConnections.push($root.google.cloud.vmwareengine.v1.PrivateConnection.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse} ListPrivateConnectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPrivateConnectionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPrivateConnectionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.privateConnections != null && message.hasOwnProperty("privateConnections")) {
+                                if (!Array.isArray(message.privateConnections))
+                                    return "privateConnections: array expected";
+                                for (var i = 0; i < message.privateConnections.length; ++i) {
+                                    var error = $root.google.cloud.vmwareengine.v1.PrivateConnection.verify(message.privateConnections[i]);
+                                    if (error)
+                                        return "privateConnections." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPrivateConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse} ListPrivateConnectionsResponse
+                         */
+                        ListPrivateConnectionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse();
+                            if (object.privateConnections) {
+                                if (!Array.isArray(object.privateConnections))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.privateConnections: array expected");
+                                message.privateConnections = [];
+                                for (var i = 0; i < object.privateConnections.length; ++i) {
+                                    if (typeof object.privateConnections[i] !== "object")
+                                        throw TypeError(".google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.privateConnections: object expected");
+                                    message.privateConnections[i] = $root.google.cloud.vmwareengine.v1.PrivateConnection.fromObject(object.privateConnections[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPrivateConnectionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse} message ListPrivateConnectionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPrivateConnectionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.privateConnections = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.privateConnections && message.privateConnections.length) {
+                                object.privateConnections = [];
+                                for (var j = 0; j < message.privateConnections.length; ++j)
+                                    object.privateConnections[j] = $root.google.cloud.vmwareengine.v1.PrivateConnection.toObject(message.privateConnections[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPrivateConnectionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPrivateConnectionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPrivateConnectionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPrivateConnectionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListPrivateConnectionsResponse";
+                        };
+    
+                        return ListPrivateConnectionsResponse;
+                    })();
+    
+                    v1.UpdatePrivateConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IUpdatePrivateConnectionRequest
+                         * @property {google.cloud.vmwareengine.v1.IPrivateConnection|null} [privateConnection] UpdatePrivateConnectionRequest privateConnection
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePrivateConnectionRequest updateMask
+                         * @property {string|null} [requestId] UpdatePrivateConnectionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents an UpdatePrivateConnectionRequest.
+                         * @implements IUpdatePrivateConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest=} [properties] Properties to set
+                         */
+                        function UpdatePrivateConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePrivateConnectionRequest privateConnection.
+                         * @member {google.cloud.vmwareengine.v1.IPrivateConnection|null|undefined} privateConnection
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @instance
+                         */
+                        UpdatePrivateConnectionRequest.prototype.privateConnection = null;
+    
+                        /**
+                         * UpdatePrivateConnectionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @instance
+                         */
+                        UpdatePrivateConnectionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdatePrivateConnectionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @instance
+                         */
+                        UpdatePrivateConnectionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdatePrivateConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest} UpdatePrivateConnectionRequest instance
+                         */
+                        UpdatePrivateConnectionRequest.create = function create(properties) {
+                            return new UpdatePrivateConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest} message UpdatePrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePrivateConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.privateConnection != null && Object.hasOwnProperty.call(message, "privateConnection"))
+                                $root.google.cloud.vmwareengine.v1.PrivateConnection.encode(message.privateConnection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdatePrivateConnectionRequest} message UpdatePrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePrivateConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePrivateConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest} UpdatePrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePrivateConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.privateConnection = $root.google.cloud.vmwareengine.v1.PrivateConnection.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest} UpdatePrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePrivateConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePrivateConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePrivateConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.privateConnection != null && message.hasOwnProperty("privateConnection")) {
+                                var error = $root.google.cloud.vmwareengine.v1.PrivateConnection.verify(message.privateConnection);
+                                if (error)
+                                    return "privateConnection." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest} UpdatePrivateConnectionRequest
+                         */
+                        UpdatePrivateConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest();
+                            if (object.privateConnection != null) {
+                                if (typeof object.privateConnection !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest.privateConnection: object expected");
+                                message.privateConnection = $root.google.cloud.vmwareengine.v1.PrivateConnection.fromObject(object.privateConnection);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePrivateConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest} message UpdatePrivateConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePrivateConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.privateConnection = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.privateConnection != null && message.hasOwnProperty("privateConnection"))
+                                object.privateConnection = $root.google.cloud.vmwareengine.v1.PrivateConnection.toObject(message.privateConnection, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePrivateConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePrivateConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdatePrivateConnectionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdatePrivateConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest";
+                        };
+    
+                        return UpdatePrivateConnectionRequest;
+                    })();
+    
+                    v1.DeletePrivateConnectionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IDeletePrivateConnectionRequest
+                         * @property {string|null} [name] DeletePrivateConnectionRequest name
+                         * @property {string|null} [requestId] DeletePrivateConnectionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeletePrivateConnectionRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a DeletePrivateConnectionRequest.
+                         * @implements IDeletePrivateConnectionRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest=} [properties] Properties to set
+                         */
+                        function DeletePrivateConnectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePrivateConnectionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @instance
+                         */
+                        DeletePrivateConnectionRequest.prototype.name = "";
+    
+                        /**
+                         * DeletePrivateConnectionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @instance
+                         */
+                        DeletePrivateConnectionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeletePrivateConnectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest} DeletePrivateConnectionRequest instance
+                         */
+                        DeletePrivateConnectionRequest.create = function create(properties) {
+                            return new DeletePrivateConnectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePrivateConnectionRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest} message DeletePrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePrivateConnectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeletePrivateConnectionRequest} message DeletePrivateConnectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePrivateConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePrivateConnectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest} DeletePrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePrivateConnectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest} DeletePrivateConnectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePrivateConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePrivateConnectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePrivateConnectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest} DeletePrivateConnectionRequest
+                         */
+                        DeletePrivateConnectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePrivateConnectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest} message DeletePrivateConnectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePrivateConnectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePrivateConnectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePrivateConnectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeletePrivateConnectionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeletePrivateConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest";
+                        };
+    
+                        return DeletePrivateConnectionRequest;
+                    })();
+    
+                    v1.ListPrivateConnectionPeeringRoutesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPrivateConnectionPeeringRoutesRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListPrivateConnectionPeeringRoutesRequest
+                         * @property {string|null} [parent] ListPrivateConnectionPeeringRoutesRequest parent
+                         * @property {number|null} [pageSize] ListPrivateConnectionPeeringRoutesRequest pageSize
+                         * @property {string|null} [pageToken] ListPrivateConnectionPeeringRoutesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPrivateConnectionPeeringRoutesRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListPrivateConnectionPeeringRoutesRequest.
+                         * @implements IListPrivateConnectionPeeringRoutesRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest=} [properties] Properties to set
+                         */
+                        function ListPrivateConnectionPeeringRoutesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPrivateConnectionPeeringRoutesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPrivateConnectionPeeringRoutesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPrivateConnectionPeeringRoutesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @instance
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListPrivateConnectionPeeringRoutesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest} ListPrivateConnectionPeeringRoutesRequest instance
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.create = function create(properties) {
+                            return new ListPrivateConnectionPeeringRoutesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionPeeringRoutesRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest} message ListPrivateConnectionPeeringRoutesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionPeeringRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest} message ListPrivateConnectionPeeringRoutesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionPeeringRoutesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest} ListPrivateConnectionPeeringRoutesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionPeeringRoutesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest} ListPrivateConnectionPeeringRoutesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPrivateConnectionPeeringRoutesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPrivateConnectionPeeringRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest} ListPrivateConnectionPeeringRoutesRequest
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPrivateConnectionPeeringRoutesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest} message ListPrivateConnectionPeeringRoutesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPrivateConnectionPeeringRoutesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPrivateConnectionPeeringRoutesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPrivateConnectionPeeringRoutesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest";
+                        };
+    
+                        return ListPrivateConnectionPeeringRoutesRequest;
+                    })();
+    
+                    v1.ListPrivateConnectionPeeringRoutesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPrivateConnectionPeeringRoutesResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListPrivateConnectionPeeringRoutesResponse
+                         * @property {Array.<google.cloud.vmwareengine.v1.IPeeringRoute>|null} [peeringRoutes] ListPrivateConnectionPeeringRoutesResponse peeringRoutes
+                         * @property {string|null} [nextPageToken] ListPrivateConnectionPeeringRoutesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPrivateConnectionPeeringRoutesResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListPrivateConnectionPeeringRoutesResponse.
+                         * @implements IListPrivateConnectionPeeringRoutesResponse
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse=} [properties] Properties to set
+                         */
+                        function ListPrivateConnectionPeeringRoutesResponse(properties) {
+                            this.peeringRoutes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPrivateConnectionPeeringRoutesResponse peeringRoutes.
+                         * @member {Array.<google.cloud.vmwareengine.v1.IPeeringRoute>} peeringRoutes
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @instance
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.prototype.peeringRoutes = $util.emptyArray;
+    
+                        /**
+                         * ListPrivateConnectionPeeringRoutesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @instance
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListPrivateConnectionPeeringRoutesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse} ListPrivateConnectionPeeringRoutesResponse instance
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.create = function create(properties) {
+                            return new ListPrivateConnectionPeeringRoutesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionPeeringRoutesResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse} message ListPrivateConnectionPeeringRoutesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.peeringRoutes != null && message.peeringRoutes.length)
+                                for (var i = 0; i < message.peeringRoutes.length; ++i)
+                                    $root.google.cloud.vmwareengine.v1.PeeringRoute.encode(message.peeringRoutes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPrivateConnectionPeeringRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse} message ListPrivateConnectionPeeringRoutesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionPeeringRoutesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse} ListPrivateConnectionPeeringRoutesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.peeringRoutes && message.peeringRoutes.length))
+                                            message.peeringRoutes = [];
+                                        message.peeringRoutes.push($root.google.cloud.vmwareengine.v1.PeeringRoute.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPrivateConnectionPeeringRoutesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse} ListPrivateConnectionPeeringRoutesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPrivateConnectionPeeringRoutesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.peeringRoutes != null && message.hasOwnProperty("peeringRoutes")) {
+                                if (!Array.isArray(message.peeringRoutes))
+                                    return "peeringRoutes: array expected";
+                                for (var i = 0; i < message.peeringRoutes.length; ++i) {
+                                    var error = $root.google.cloud.vmwareengine.v1.PeeringRoute.verify(message.peeringRoutes[i]);
+                                    if (error)
+                                        return "peeringRoutes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPrivateConnectionPeeringRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse} ListPrivateConnectionPeeringRoutesResponse
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse();
+                            if (object.peeringRoutes) {
+                                if (!Array.isArray(object.peeringRoutes))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse.peeringRoutes: array expected");
+                                message.peeringRoutes = [];
+                                for (var i = 0; i < object.peeringRoutes.length; ++i) {
+                                    if (typeof object.peeringRoutes[i] !== "object")
+                                        throw TypeError(".google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse.peeringRoutes: object expected");
+                                    message.peeringRoutes[i] = $root.google.cloud.vmwareengine.v1.PeeringRoute.fromObject(object.peeringRoutes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPrivateConnectionPeeringRoutesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse} message ListPrivateConnectionPeeringRoutesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.peeringRoutes = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.peeringRoutes && message.peeringRoutes.length) {
+                                object.peeringRoutes = [];
+                                for (var j = 0; j < message.peeringRoutes.length; ++j)
+                                    object.peeringRoutes[j] = $root.google.cloud.vmwareengine.v1.PeeringRoute.toObject(message.peeringRoutes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPrivateConnectionPeeringRoutesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPrivateConnectionPeeringRoutesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPrivateConnectionPeeringRoutesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesResponse";
+                        };
+    
+                        return ListPrivateConnectionPeeringRoutesResponse;
+                    })();
+    
                     v1.NetworkConfig = (function() {
     
                         /**
@@ -11728,6 +14522,7 @@
                          * @property {google.cloud.vmwareengine.v1.INsx|null} [nsx] PrivateCloud nsx
                          * @property {google.cloud.vmwareengine.v1.IVcenter|null} [vcenter] PrivateCloud vcenter
                          * @property {string|null} [uid] PrivateCloud uid
+                         * @property {google.cloud.vmwareengine.v1.PrivateCloud.Type|null} [type] PrivateCloud type
                          */
     
                         /**
@@ -11850,6 +14645,14 @@
                         PrivateCloud.prototype.uid = "";
     
                         /**
+                         * PrivateCloud type.
+                         * @member {google.cloud.vmwareengine.v1.PrivateCloud.Type} type
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.type = 0;
+    
+                        /**
                          * Creates a new PrivateCloud instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmwareengine.v1.PrivateCloud
@@ -11899,6 +14702,8 @@
                                 $root.google.cloud.vmwareengine.v1.Vcenter.encode(message.vcenter, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.uid);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).int32(message.type);
                             return writer;
                         };
     
@@ -11983,6 +14788,10 @@
                                     }
                                 case 20: {
                                         message.uid = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.type = reader.int32();
                                         break;
                                     }
                                 default:
@@ -12087,6 +14896,14 @@
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 if (!$util.isString(message.uid))
                                     return "uid: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -12189,6 +15006,22 @@
                             }
                             if (object.uid != null)
                                 message.uid = String(object.uid);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "STANDARD":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "TIME_LIMITED":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -12219,6 +15052,7 @@
                                 object.nsx = null;
                                 object.vcenter = null;
                                 object.uid = "";
+                                object.type = options.enums === String ? "STANDARD" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12246,6 +15080,8 @@
                                 object.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.toObject(message.vcenter, options);
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 object.uid = message.uid;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateCloud.Type[message.type] === undefined ? message.type : $root.google.cloud.vmwareengine.v1.PrivateCloud.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -12566,6 +15402,20 @@
                             };
     
                             return ManagementCluster;
+                        })();
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.vmwareengine.v1.PrivateCloud.Type
+                         * @enum {number}
+                         * @property {number} STANDARD=0 STANDARD value
+                         * @property {number} TIME_LIMITED=1 TIME_LIMITED value
+                         */
+                        PrivateCloud.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STANDARD"] = 0;
+                            values[valuesById[1] = "TIME_LIMITED"] = 1;
+                            return values;
                         })();
     
                         return PrivateCloud;
@@ -13239,6 +16089,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -13290,6 +16142,14 @@
                             case "DELETING":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "RECONCILING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "FAILED":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             return message;
@@ -13363,6 +16223,8 @@
                          * @property {number} CREATING=2 CREATING value
                          * @property {number} UPDATING=3 UPDATING value
                          * @property {number} DELETING=4 DELETING value
+                         * @property {number} RECONCILING=5 RECONCILING value
+                         * @property {number} FAILED=6 FAILED value
                          */
                         Subnet.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -13371,6 +16233,8 @@
                             values[valuesById[2] = "CREATING"] = 2;
                             values[valuesById[3] = "UPDATING"] = 3;
                             values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "RECONCILING"] = 5;
+                            values[valuesById[6] = "FAILED"] = 6;
                             return values;
                         })();
     
@@ -15281,6 +18145,426 @@
                         return Vcenter;
                     })();
     
+                    v1.PeeringRoute = (function() {
+    
+                        /**
+                         * Properties of a PeeringRoute.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IPeeringRoute
+                         * @property {string|null} [destRange] PeeringRoute destRange
+                         * @property {google.cloud.vmwareengine.v1.PeeringRoute.Type|null} [type] PeeringRoute type
+                         * @property {string|null} [nextHopRegion] PeeringRoute nextHopRegion
+                         * @property {number|Long|null} [priority] PeeringRoute priority
+                         * @property {boolean|null} [imported] PeeringRoute imported
+                         * @property {google.cloud.vmwareengine.v1.PeeringRoute.Direction|null} [direction] PeeringRoute direction
+                         */
+    
+                        /**
+                         * Constructs a new PeeringRoute.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a PeeringRoute.
+                         * @implements IPeeringRoute
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IPeeringRoute=} [properties] Properties to set
+                         */
+                        function PeeringRoute(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PeeringRoute destRange.
+                         * @member {string} destRange
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         */
+                        PeeringRoute.prototype.destRange = "";
+    
+                        /**
+                         * PeeringRoute type.
+                         * @member {google.cloud.vmwareengine.v1.PeeringRoute.Type} type
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         */
+                        PeeringRoute.prototype.type = 0;
+    
+                        /**
+                         * PeeringRoute nextHopRegion.
+                         * @member {string} nextHopRegion
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         */
+                        PeeringRoute.prototype.nextHopRegion = "";
+    
+                        /**
+                         * PeeringRoute priority.
+                         * @member {number|Long} priority
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         */
+                        PeeringRoute.prototype.priority = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PeeringRoute imported.
+                         * @member {boolean} imported
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         */
+                        PeeringRoute.prototype.imported = false;
+    
+                        /**
+                         * PeeringRoute direction.
+                         * @member {google.cloud.vmwareengine.v1.PeeringRoute.Direction} direction
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         */
+                        PeeringRoute.prototype.direction = 0;
+    
+                        /**
+                         * Creates a new PeeringRoute instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPeeringRoute=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.PeeringRoute} PeeringRoute instance
+                         */
+                        PeeringRoute.create = function create(properties) {
+                            return new PeeringRoute(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PeeringRoute message. Does not implicitly {@link google.cloud.vmwareengine.v1.PeeringRoute.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPeeringRoute} message PeeringRoute message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PeeringRoute.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.destRange != null && Object.hasOwnProperty.call(message, "destRange"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.destRange);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                            if (message.nextHopRegion != null && Object.hasOwnProperty.call(message, "nextHopRegion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nextHopRegion);
+                            if (message.priority != null && Object.hasOwnProperty.call(message, "priority"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.priority);
+                            if (message.imported != null && Object.hasOwnProperty.call(message, "imported"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.imported);
+                            if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.direction);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PeeringRoute message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PeeringRoute.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPeeringRoute} message PeeringRoute message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PeeringRoute.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PeeringRoute message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.PeeringRoute} PeeringRoute
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PeeringRoute.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.PeeringRoute();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.destRange = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.nextHopRegion = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.priority = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.imported = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.direction = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PeeringRoute message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.PeeringRoute} PeeringRoute
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PeeringRoute.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PeeringRoute message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PeeringRoute.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.destRange != null && message.hasOwnProperty("destRange"))
+                                if (!$util.isString(message.destRange))
+                                    return "destRange: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.nextHopRegion != null && message.hasOwnProperty("nextHopRegion"))
+                                if (!$util.isString(message.nextHopRegion))
+                                    return "nextHopRegion: string expected";
+                            if (message.priority != null && message.hasOwnProperty("priority"))
+                                if (!$util.isInteger(message.priority) && !(message.priority && $util.isInteger(message.priority.low) && $util.isInteger(message.priority.high)))
+                                    return "priority: integer|Long expected";
+                            if (message.imported != null && message.hasOwnProperty("imported"))
+                                if (typeof message.imported !== "boolean")
+                                    return "imported: boolean expected";
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                switch (message.direction) {
+                                default:
+                                    return "direction: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PeeringRoute message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.PeeringRoute} PeeringRoute
+                         */
+                        PeeringRoute.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.PeeringRoute)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.PeeringRoute();
+                            if (object.destRange != null)
+                                message.destRange = String(object.destRange);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "DYNAMIC_PEERING_ROUTE":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "STATIC_PEERING_ROUTE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "SUBNET_PEERING_ROUTE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            }
+                            if (object.nextHopRegion != null)
+                                message.nextHopRegion = String(object.nextHopRegion);
+                            if (object.priority != null)
+                                if ($util.Long)
+                                    (message.priority = $util.Long.fromValue(object.priority)).unsigned = false;
+                                else if (typeof object.priority === "string")
+                                    message.priority = parseInt(object.priority, 10);
+                                else if (typeof object.priority === "number")
+                                    message.priority = object.priority;
+                                else if (typeof object.priority === "object")
+                                    message.priority = new $util.LongBits(object.priority.low >>> 0, object.priority.high >>> 0).toNumber();
+                            if (object.imported != null)
+                                message.imported = Boolean(object.imported);
+                            switch (object.direction) {
+                            default:
+                                if (typeof object.direction === "number") {
+                                    message.direction = object.direction;
+                                    break;
+                                }
+                                break;
+                            case "DIRECTION_UNSPECIFIED":
+                            case 0:
+                                message.direction = 0;
+                                break;
+                            case "INCOMING":
+                            case 1:
+                                message.direction = 1;
+                                break;
+                            case "OUTGOING":
+                            case 2:
+                                message.direction = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PeeringRoute message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.PeeringRoute} message PeeringRoute
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PeeringRoute.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.destRange = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.nextHopRegion = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.priority = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.priority = options.longs === String ? "0" : 0;
+                                object.imported = false;
+                                object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
+                            }
+                            if (message.destRange != null && message.hasOwnProperty("destRange"))
+                                object.destRange = message.destRange;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.vmwareengine.v1.PeeringRoute.Type[message.type] === undefined ? message.type : $root.google.cloud.vmwareengine.v1.PeeringRoute.Type[message.type] : message.type;
+                            if (message.nextHopRegion != null && message.hasOwnProperty("nextHopRegion"))
+                                object.nextHopRegion = message.nextHopRegion;
+                            if (message.priority != null && message.hasOwnProperty("priority"))
+                                if (typeof message.priority === "number")
+                                    object.priority = options.longs === String ? String(message.priority) : message.priority;
+                                else
+                                    object.priority = options.longs === String ? $util.Long.prototype.toString.call(message.priority) : options.longs === Number ? new $util.LongBits(message.priority.low >>> 0, message.priority.high >>> 0).toNumber() : message.priority;
+                            if (message.imported != null && message.hasOwnProperty("imported"))
+                                object.imported = message.imported;
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                object.direction = options.enums === String ? $root.google.cloud.vmwareengine.v1.PeeringRoute.Direction[message.direction] === undefined ? message.direction : $root.google.cloud.vmwareengine.v1.PeeringRoute.Direction[message.direction] : message.direction;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PeeringRoute to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PeeringRoute.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PeeringRoute
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.PeeringRoute
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PeeringRoute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.PeeringRoute";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.vmwareengine.v1.PeeringRoute.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} DYNAMIC_PEERING_ROUTE=1 DYNAMIC_PEERING_ROUTE value
+                         * @property {number} STATIC_PEERING_ROUTE=2 STATIC_PEERING_ROUTE value
+                         * @property {number} SUBNET_PEERING_ROUTE=3 SUBNET_PEERING_ROUTE value
+                         */
+                        PeeringRoute.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DYNAMIC_PEERING_ROUTE"] = 1;
+                            values[valuesById[2] = "STATIC_PEERING_ROUTE"] = 2;
+                            values[valuesById[3] = "SUBNET_PEERING_ROUTE"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * Direction enum.
+                         * @name google.cloud.vmwareengine.v1.PeeringRoute.Direction
+                         * @enum {number}
+                         * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
+                         * @property {number} INCOMING=1 INCOMING value
+                         * @property {number} OUTGOING=2 OUTGOING value
+                         */
+                        PeeringRoute.Direction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INCOMING"] = 1;
+                            values[valuesById[2] = "OUTGOING"] = 2;
+                            return values;
+                        })();
+    
+                        return PeeringRoute;
+                    })();
+    
                     v1.NetworkPolicy = (function() {
     
                         /**
@@ -16765,6 +20049,698 @@
                         })();
     
                         return VmwareEngineNetwork;
+                    })();
+    
+                    v1.PrivateConnection = (function() {
+    
+                        /**
+                         * Properties of a PrivateConnection.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IPrivateConnection
+                         * @property {string|null} [name] PrivateConnection name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] PrivateConnection createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] PrivateConnection updateTime
+                         * @property {string|null} [description] PrivateConnection description
+                         * @property {google.cloud.vmwareengine.v1.PrivateConnection.State|null} [state] PrivateConnection state
+                         * @property {string|null} [vmwareEngineNetwork] PrivateConnection vmwareEngineNetwork
+                         * @property {string|null} [vmwareEngineNetworkCanonical] PrivateConnection vmwareEngineNetworkCanonical
+                         * @property {google.cloud.vmwareengine.v1.PrivateConnection.Type|null} [type] PrivateConnection type
+                         * @property {string|null} [peeringId] PrivateConnection peeringId
+                         * @property {google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode|null} [routingMode] PrivateConnection routingMode
+                         * @property {string|null} [uid] PrivateConnection uid
+                         * @property {string|null} [serviceNetwork] PrivateConnection serviceNetwork
+                         * @property {google.cloud.vmwareengine.v1.PrivateConnection.PeeringState|null} [peeringState] PrivateConnection peeringState
+                         */
+    
+                        /**
+                         * Constructs a new PrivateConnection.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a PrivateConnection.
+                         * @implements IPrivateConnection
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IPrivateConnection=} [properties] Properties to set
+                         */
+                        function PrivateConnection(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PrivateConnection name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.name = "";
+    
+                        /**
+                         * PrivateConnection createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.createTime = null;
+    
+                        /**
+                         * PrivateConnection updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.updateTime = null;
+    
+                        /**
+                         * PrivateConnection description.
+                         * @member {string} description
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.description = "";
+    
+                        /**
+                         * PrivateConnection state.
+                         * @member {google.cloud.vmwareengine.v1.PrivateConnection.State} state
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.state = 0;
+    
+                        /**
+                         * PrivateConnection vmwareEngineNetwork.
+                         * @member {string} vmwareEngineNetwork
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.vmwareEngineNetwork = "";
+    
+                        /**
+                         * PrivateConnection vmwareEngineNetworkCanonical.
+                         * @member {string} vmwareEngineNetworkCanonical
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.vmwareEngineNetworkCanonical = "";
+    
+                        /**
+                         * PrivateConnection type.
+                         * @member {google.cloud.vmwareengine.v1.PrivateConnection.Type} type
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.type = 0;
+    
+                        /**
+                         * PrivateConnection peeringId.
+                         * @member {string} peeringId
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.peeringId = "";
+    
+                        /**
+                         * PrivateConnection routingMode.
+                         * @member {google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode} routingMode
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.routingMode = 0;
+    
+                        /**
+                         * PrivateConnection uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.uid = "";
+    
+                        /**
+                         * PrivateConnection serviceNetwork.
+                         * @member {string} serviceNetwork
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.serviceNetwork = "";
+    
+                        /**
+                         * PrivateConnection peeringState.
+                         * @member {google.cloud.vmwareengine.v1.PrivateConnection.PeeringState} peeringState
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.peeringState = 0;
+    
+                        /**
+                         * Creates a new PrivateConnection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPrivateConnection=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.PrivateConnection} PrivateConnection instance
+                         */
+                        PrivateConnection.create = function create(properties) {
+                            return new PrivateConnection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PrivateConnection message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateConnection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPrivateConnection} message PrivateConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivateConnection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.vmwareEngineNetwork);
+                            if (message.vmwareEngineNetworkCanonical != null && Object.hasOwnProperty.call(message, "vmwareEngineNetworkCanonical"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.vmwareEngineNetworkCanonical);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.type);
+                            if (message.peeringId != null && Object.hasOwnProperty.call(message, "peeringId"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.peeringId);
+                            if (message.routingMode != null && Object.hasOwnProperty.call(message, "routingMode"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.routingMode);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.uid);
+                            if (message.serviceNetwork != null && Object.hasOwnProperty.call(message, "serviceNetwork"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.serviceNetwork);
+                            if (message.peeringState != null && Object.hasOwnProperty.call(message, "peeringState"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.peeringState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PrivateConnection message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateConnection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPrivateConnection} message PrivateConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivateConnection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PrivateConnection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.PrivateConnection} PrivateConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivateConnection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.PrivateConnection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.vmwareEngineNetwork = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.vmwareEngineNetworkCanonical = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.peeringId = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.routingMode = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.serviceNetwork = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.peeringState = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PrivateConnection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.PrivateConnection} PrivateConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivateConnection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PrivateConnection message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PrivateConnection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
+                                if (!$util.isString(message.vmwareEngineNetwork))
+                                    return "vmwareEngineNetwork: string expected";
+                            if (message.vmwareEngineNetworkCanonical != null && message.hasOwnProperty("vmwareEngineNetworkCanonical"))
+                                if (!$util.isString(message.vmwareEngineNetworkCanonical))
+                                    return "vmwareEngineNetworkCanonical: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.peeringId != null && message.hasOwnProperty("peeringId"))
+                                if (!$util.isString(message.peeringId))
+                                    return "peeringId: string expected";
+                            if (message.routingMode != null && message.hasOwnProperty("routingMode"))
+                                switch (message.routingMode) {
+                                default:
+                                    return "routingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.serviceNetwork != null && message.hasOwnProperty("serviceNetwork"))
+                                if (!$util.isString(message.serviceNetwork))
+                                    return "serviceNetwork: string expected";
+                            if (message.peeringState != null && message.hasOwnProperty("peeringState"))
+                                switch (message.peeringState) {
+                                default:
+                                    return "peeringState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PrivateConnection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.PrivateConnection} PrivateConnection
+                         */
+                        PrivateConnection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.PrivateConnection)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.PrivateConnection();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateConnection.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateConnection.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "UNPROVISIONED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "FAILED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            }
+                            if (object.vmwareEngineNetwork != null)
+                                message.vmwareEngineNetwork = String(object.vmwareEngineNetwork);
+                            if (object.vmwareEngineNetworkCanonical != null)
+                                message.vmwareEngineNetworkCanonical = String(object.vmwareEngineNetworkCanonical);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "PRIVATE_SERVICE_ACCESS":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "NETAPP_CLOUD_VOLUMES":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "DELL_POWERSCALE":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "THIRD_PARTY_SERVICE":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.peeringId != null)
+                                message.peeringId = String(object.peeringId);
+                            switch (object.routingMode) {
+                            default:
+                                if (typeof object.routingMode === "number") {
+                                    message.routingMode = object.routingMode;
+                                    break;
+                                }
+                                break;
+                            case "ROUTING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.routingMode = 0;
+                                break;
+                            case "GLOBAL":
+                            case 1:
+                                message.routingMode = 1;
+                                break;
+                            case "REGIONAL":
+                            case 2:
+                                message.routingMode = 2;
+                                break;
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.serviceNetwork != null)
+                                message.serviceNetwork = String(object.serviceNetwork);
+                            switch (object.peeringState) {
+                            default:
+                                if (typeof object.peeringState === "number") {
+                                    message.peeringState = object.peeringState;
+                                    break;
+                                }
+                                break;
+                            case "PEERING_STATE_UNSPECIFIED":
+                            case 0:
+                                message.peeringState = 0;
+                                break;
+                            case "PEERING_ACTIVE":
+                            case 1:
+                                message.peeringState = 1;
+                                break;
+                            case "PEERING_INACTIVE":
+                            case 2:
+                                message.peeringState = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PrivateConnection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.PrivateConnection} message PrivateConnection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PrivateConnection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.vmwareEngineNetwork = "";
+                                object.vmwareEngineNetworkCanonical = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.peeringId = "";
+                                object.routingMode = options.enums === String ? "ROUTING_MODE_UNSPECIFIED" : 0;
+                                object.uid = "";
+                                object.serviceNetwork = "";
+                                object.peeringState = options.enums === String ? "PEERING_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateConnection.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.PrivateConnection.State[message.state] : message.state;
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
+                                object.vmwareEngineNetwork = message.vmwareEngineNetwork;
+                            if (message.vmwareEngineNetworkCanonical != null && message.hasOwnProperty("vmwareEngineNetworkCanonical"))
+                                object.vmwareEngineNetworkCanonical = message.vmwareEngineNetworkCanonical;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateConnection.Type[message.type] === undefined ? message.type : $root.google.cloud.vmwareengine.v1.PrivateConnection.Type[message.type] : message.type;
+                            if (message.peeringId != null && message.hasOwnProperty("peeringId"))
+                                object.peeringId = message.peeringId;
+                            if (message.routingMode != null && message.hasOwnProperty("routingMode"))
+                                object.routingMode = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode[message.routingMode] === undefined ? message.routingMode : $root.google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode[message.routingMode] : message.routingMode;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.serviceNetwork != null && message.hasOwnProperty("serviceNetwork"))
+                                object.serviceNetwork = message.serviceNetwork;
+                            if (message.peeringState != null && message.hasOwnProperty("peeringState"))
+                                object.peeringState = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateConnection.PeeringState[message.peeringState] === undefined ? message.peeringState : $root.google.cloud.vmwareengine.v1.PrivateConnection.PeeringState[message.peeringState] : message.peeringState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PrivateConnection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PrivateConnection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PrivateConnection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.PrivateConnection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PrivateConnection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.PrivateConnection";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmwareengine.v1.PrivateConnection.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} UNPROVISIONED=5 UNPROVISIONED value
+                         * @property {number} FAILED=6 FAILED value
+                         */
+                        PrivateConnection.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "UNPROVISIONED"] = 5;
+                            values[valuesById[6] = "FAILED"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.vmwareengine.v1.PrivateConnection.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} PRIVATE_SERVICE_ACCESS=1 PRIVATE_SERVICE_ACCESS value
+                         * @property {number} NETAPP_CLOUD_VOLUMES=2 NETAPP_CLOUD_VOLUMES value
+                         * @property {number} DELL_POWERSCALE=3 DELL_POWERSCALE value
+                         * @property {number} THIRD_PARTY_SERVICE=4 THIRD_PARTY_SERVICE value
+                         */
+                        PrivateConnection.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRIVATE_SERVICE_ACCESS"] = 1;
+                            values[valuesById[2] = "NETAPP_CLOUD_VOLUMES"] = 2;
+                            values[valuesById[3] = "DELL_POWERSCALE"] = 3;
+                            values[valuesById[4] = "THIRD_PARTY_SERVICE"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * RoutingMode enum.
+                         * @name google.cloud.vmwareengine.v1.PrivateConnection.RoutingMode
+                         * @enum {number}
+                         * @property {number} ROUTING_MODE_UNSPECIFIED=0 ROUTING_MODE_UNSPECIFIED value
+                         * @property {number} GLOBAL=1 GLOBAL value
+                         * @property {number} REGIONAL=2 REGIONAL value
+                         */
+                        PrivateConnection.RoutingMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROUTING_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GLOBAL"] = 1;
+                            values[valuesById[2] = "REGIONAL"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * PeeringState enum.
+                         * @name google.cloud.vmwareengine.v1.PrivateConnection.PeeringState
+                         * @enum {number}
+                         * @property {number} PEERING_STATE_UNSPECIFIED=0 PEERING_STATE_UNSPECIFIED value
+                         * @property {number} PEERING_ACTIVE=1 PEERING_ACTIVE value
+                         * @property {number} PEERING_INACTIVE=2 PEERING_INACTIVE value
+                         */
+                        PrivateConnection.PeeringState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PEERING_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PEERING_ACTIVE"] = 1;
+                            values[valuesById[2] = "PEERING_INACTIVE"] = 2;
+                            return values;
+                        })();
+    
+                        return PrivateConnection;
                     })();
     
                     return v1;

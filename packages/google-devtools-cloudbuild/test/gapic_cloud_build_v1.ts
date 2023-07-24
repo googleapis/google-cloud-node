@@ -267,22 +267,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -308,22 +295,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -365,22 +339,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBuild(request), expectedError);
@@ -403,21 +364,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBuild(request), expectedError);
@@ -434,22 +382,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -475,22 +410,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -532,22 +454,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelBuild = stubSimpleCall(
         undefined,
@@ -573,21 +482,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelBuild(request), expectedError);
@@ -604,17 +500,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -641,17 +529,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -693,17 +573,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuildTrigger = stubSimpleCall(
         undefined,
@@ -729,16 +601,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createBuildTrigger(request), expectedError);
@@ -755,22 +619,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -796,22 +647,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -853,22 +691,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuildTrigger = stubSimpleCall(
         undefined,
@@ -894,21 +719,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBuildTrigger(request), expectedError);
@@ -925,22 +737,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -967,22 +766,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1024,22 +810,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(
         undefined,
@@ -1065,21 +838,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteBuildTrigger(request), expectedError);
@@ -1096,23 +856,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['trigger', 'resourceName']
-      );
-      request.trigger.resourceName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
+      request.trigger = {};
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.trigger.resourceName =
+        'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -1139,23 +887,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['trigger', 'resourceName']
-      );
-      request.trigger.resourceName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
+      request.trigger = {};
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.trigger.resourceName =
+        'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -1197,23 +933,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['trigger', 'resourceName']
-      );
-      request.trigger.resourceName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
+      request.trigger = {};
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.trigger.resourceName =
+        'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBuildTrigger = stubSimpleCall(
         undefined,
@@ -1239,22 +963,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
-        ['trigger', 'resourceName']
-      );
-      request.trigger.resourceName = defaultValue3;
+      request.trigger = {};
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.trigger.resourceName =
+        'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBuildTrigger(request), expectedError);
@@ -1448,12 +1160,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
@@ -1479,12 +1188,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
@@ -1526,12 +1232,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkerPool = stubSimpleCall(
         undefined,
@@ -1557,11 +1260,8 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkerPool(request), expectedError);
@@ -1578,17 +1278,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1615,17 +1307,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1674,17 +1358,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuild = stubLongRunningCall(
         undefined,
@@ -1710,17 +1386,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuild = stubLongRunningCall(
         undefined,
@@ -1788,22 +1456,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1830,22 +1485,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1894,22 +1536,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.retryBuild = stubLongRunningCall(
         undefined,
@@ -1935,22 +1564,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['id']
-      );
-      request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.retryBuild = stubLongRunningCall(
         undefined,
@@ -2018,12 +1634,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2050,12 +1663,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2104,12 +1714,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.approveBuild = stubLongRunningCall(
         undefined,
@@ -2135,12 +1742,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/builds/*
+      request.name = 'projects/value/locations/value/builds/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.approveBuild = stubLongRunningCall(
         undefined,
@@ -2208,22 +1812,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2251,22 +1842,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2315,22 +1893,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
         undefined,
@@ -2356,22 +1921,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['triggerId']
-      );
-      request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
-        ['name']
-      );
-      request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
+      // path template: projects/*/locations/{location=*}/triggers/*
+      request.name = 'projects/value/locations/value/triggers/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
         undefined,
@@ -2442,12 +1994,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2475,12 +2024,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2529,12 +2075,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkerPool = stubLongRunningCall(
         undefined,
@@ -2560,12 +2103,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkerPool = stubLongRunningCall(
         undefined,
@@ -2636,12 +2176,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2669,12 +2206,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2723,12 +2257,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
         undefined,
@@ -2754,12 +2285,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.name = 'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
         undefined,
@@ -2830,13 +2358,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
-        ['workerPool', 'name']
-      );
-      request.workerPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
+      request.workerPool = {};
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.workerPool.name =
+        'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2864,13 +2390,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
-        ['workerPool', 'name']
-      );
-      request.workerPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
+      request.workerPool = {};
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.workerPool.name =
+        'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2919,13 +2443,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
-        ['workerPool', 'name']
-      );
-      request.workerPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
+      request.workerPool = {};
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.workerPool.name =
+        'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
         undefined,
@@ -2951,13 +2473,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
-        ['workerPool', 'name']
-      );
-      request.workerPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
+      request.workerPool = {};
+      // path template: projects/*/locations/{location=*}/workerPools/*
+      request.workerPool.name =
+        'projects/value/locations/value/workerPools/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
         undefined,
@@ -3028,17 +2548,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -3066,17 +2578,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -3120,17 +2624,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuilds = stubSimpleCall(
         undefined,
@@ -3156,17 +2652,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -3215,17 +2703,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(
         undefined,
@@ -3271,17 +2751,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -3319,17 +2791,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3368,17 +2832,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3412,17 +2868,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3472,17 +2920,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuildTriggers = stubSimpleCall(
         undefined,
@@ -3508,17 +2948,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3574,17 +3006,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuildTriggers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3629,17 +3053,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3684,17 +3100,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['projectId']
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listBuildTriggers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3732,12 +3140,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3771,12 +3176,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3826,12 +3228,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkerPools = stubSimpleCall(
         undefined,
@@ -3857,12 +3256,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3917,12 +3313,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkerPools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3966,12 +3359,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -4015,12 +3405,9 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      // path template: projects/*/locations/{location=*}
+      request.parent = 'projects/value/locations/value';
+      const expectedHeaderRequestParams = 'location=value';
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkerPools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4174,6 +3561,55 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
+    describe('network', () => {
+      const fakePath = '/rendered/path/network';
+      const expectedParameters = {
+        project: 'projectValue',
+        network: 'networkValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.networkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.networkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('networkPath', () => {
+        const result = client.networkPath('projectValue', 'networkValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.networkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNetworkName', () => {
+        const result = client.matchProjectFromNetworkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.networkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNetworkFromNetworkName', () => {
+        const result = client.matchNetworkFromNetworkName(fakePath);
+        assert.strictEqual(result, 'networkValue');
+        assert(
+          (client.pathTemplates.networkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -4261,6 +3697,55 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
+    describe('projectConfig', () => {
+      const fakePath = '/rendered/path/projectConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        config: 'configValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectConfigPath', () => {
+        const result = client.projectConfigPath('projectValue', 'configValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConfigName', () => {
+        const result = client.matchProjectFromProjectConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConfigFromProjectConfigName', () => {
+        const result = client.matchConfigFromProjectConfigName(fakePath);
+        assert.strictEqual(result, 'configValue');
+        assert(
+          (client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationBuild', () => {
       const fakePath = '/rendered/path/projectLocationBuild';
       const expectedParameters = {
@@ -4331,6 +3816,85 @@ describe('v1.CloudBuildClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationBuildPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConfig', () => {
+      const fakePath = '/rendered/path/projectLocationConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        config: 'configValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationConfigPath', () => {
+        const result = client.projectLocationConfigPath(
+          'projectValue',
+          'locationValue',
+          'configValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConfigFromProjectLocationConfigName', () => {
+        const result =
+          client.matchConfigFromProjectLocationConfigName(fakePath);
+        assert.strictEqual(result, 'configValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4464,6 +4028,82 @@ describe('v1.CloudBuildClient', () => {
         assert.strictEqual(result, 'triggerValue');
         assert(
           (client.pathTemplates.projectTriggerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('repository', () => {
+      const fakePath = '/rendered/path/repository';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        connection: 'connectionValue',
+        repository: 'repositoryValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.repositoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.repositoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('repositoryPath', () => {
+        const result = client.repositoryPath(
+          'projectValue',
+          'locationValue',
+          'connectionValue',
+          'repositoryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRepositoryName', () => {
+        const result = client.matchProjectFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRepositoryName', () => {
+        const result = client.matchLocationFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectionFromRepositoryName', () => {
+        const result = client.matchConnectionFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'connectionValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromRepositoryName', () => {
+        const result = client.matchRepositoryFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

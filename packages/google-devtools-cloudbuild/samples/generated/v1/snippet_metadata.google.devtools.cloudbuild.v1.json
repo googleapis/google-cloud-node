@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cloudbuild",
-        "version": "3.5.1",
+        "version": "3.10.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -215,7 +215,7 @@
             "regionTag": "cloudbuild_v1_generated_CloudBuild_RetryBuild_async",
             "title": "CloudBuild retryBuild Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new build based on the specified build. This method creates a new build using the original build request, which may or may not result in an identical build. For triggered builds: * Triggered builds resolve to a precise revision; therefore a retry of a triggered build will result in a build that uses the same revision. For non-triggered builds that specify `RepoSource`: * If the original build built from the tip of a branch, the retried build will build from the tip of that branch, which may not be the same revision as the original build. * If the original build specified a commit sha or revision ID, the retried build will use the identical source. For builds that specify `StorageSource`: * If the original build pulled source from Google Cloud Storage without specifying the generation of the object, the new build will use the current object, which may be different from the original build source. * If the original build pulled source from Cloud Storage and specified the generation of the object, the new build will attempt to use the same object, which may or may not be available depending on the bucket's lifecycle management settings.",
+            "description": " Creates a new build based on the specified build. This method creates a new build using the original build request, which may or may not result in an identical build. For triggered builds: * Triggered builds resolve to a precise revision; therefore a retry of a triggered build will result in a build that uses the same revision. For non-triggered builds that specify `RepoSource`: * If the original build built from the tip of a branch, the retried build will build from the tip of that branch, which may not be the same revision as the original build. * If the original build specified a commit sha or revision ID, the retried build will use the identical source. For builds that specify `StorageSource`: * If the original build pulled source from Cloud Storage without specifying the generation of the object, the new build will use the current object, which may be different from the original build source. * If the original build pulled source from Cloud Storage and specified the generation of the object, the new build will attempt to use the same object, which may or may not be available depending on the bucket's lifecycle management settings.",
             "canonical": true,
             "file": "cloud_build.retry_build.js",
             "language": "JAVASCRIPT",
@@ -551,14 +551,14 @@
             "regionTag": "cloudbuild_v1_generated_CloudBuild_RunBuildTrigger_async",
             "title": "CloudBuild runBuildTrigger Sample",
             "origin": "API_DEFINITION",
-            "description": " Runs a `BuildTrigger` at a particular source revision.",
+            "description": " Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.",
             "canonical": true,
             "file": "cloud_build.run_build_trigger.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],

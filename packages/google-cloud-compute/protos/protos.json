@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Compute.V1",
-                    "go_package": "cloud.google.com/go/compute/apiv1/computepb",
+                    "go_package": "cloud.google.com/go/compute/apiv1/computepb;computepb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.compute.v1",
                     "php_namespace": "Google\\Cloud\\Compute\\V1",
@@ -1505,6 +1505,11 @@
                             "kind"
                           ]
                         },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -1607,6 +1612,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
                         },
                         "name": {
                           "type": "string",
@@ -5966,6 +5983,11 @@
                             "mode"
                           ]
                         },
+                        "_savedState": {
+                          "oneof": [
+                            "savedState"
+                          ]
+                        },
                         "_shieldedInstanceInitialState": {
                           "oneof": [
                             "shieldedInstanceInitialState"
@@ -6077,6 +6099,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "savedState": {
+                          "type": "string",
+                          "id": 411587801,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "shieldedInstanceInitialState": {
                           "type": "InitialStateConfig",
                           "id": 192356867,
@@ -6120,6 +6149,13 @@
                             "UNDEFINED_MODE": 0,
                             "READ_ONLY": 91950261,
                             "READ_WRITE": 173607894
+                          }
+                        },
+                        "SavedState": {
+                          "values": {
+                            "UNDEFINED_SAVED_STATE": 0,
+                            "DISK_SAVED_STATE_UNSPECIFIED": 391290831,
+                            "PRESERVED": 254159736
                           }
                         },
                         "Type": {
@@ -6166,6 +6202,11 @@
                         "_provisionedIops": {
                           "oneof": [
                             "provisionedIops"
+                          ]
+                        },
+                        "_provisionedThroughput": {
+                          "oneof": [
+                            "provisionedThroughput"
                           ]
                         },
                         "_sourceImage": {
@@ -6248,6 +6289,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "provisionedThroughput": {
+                          "type": "int64",
+                          "id": 526524181,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "replicaZones": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 48438272
                         },
                         "resourceManagerTags": {
                           "keyType": "string",
@@ -8080,6 +8133,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "metadatas": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8514340
+                        },
                         "name": {
                           "type": "string",
                           "id": 3373707,
@@ -9439,6 +9497,65 @@
                         }
                       }
                     },
+                    "BulkInsertDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bulkInsertDiskResourceResource": {
+                          "type": "BulkInsertDiskResource",
+                          "id": 289799382,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "BulkInsertDiskResource": {
+                      "oneofs": {
+                        "_sourceConsistencyGroupPolicy": {
+                          "oneof": [
+                            "sourceConsistencyGroupPolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceConsistencyGroupPolicy": {
+                          "type": "string",
+                          "id": 19616093,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "BulkInsertInstanceRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -9575,6 +9692,47 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "BulkInsertRegionDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bulkInsertDiskResourceResource": {
+                          "type": "BulkInsertDiskResource",
+                          "id": 289799382,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
                           "options": {
                             "proto3_optional": true
                           }
@@ -10178,6 +10336,7 @@
                             "GENERAL_PURPOSE_N2": 301912156,
                             "GENERAL_PURPOSE_N2D": 232471400,
                             "GENERAL_PURPOSE_T2D": 232477166,
+                            "GRAPHICS_OPTIMIZED": 68500563,
                             "MEMORY_OPTIMIZED": 281753417,
                             "MEMORY_OPTIMIZED_M3": 276301372,
                             "TYPE_UNSPECIFIED": 437714322
@@ -14430,6 +14589,11 @@
                             "architecture"
                           ]
                         },
+                        "_asyncPrimaryDisk": {
+                          "oneof": [
+                            "asyncPrimaryDisk"
+                          ]
+                        },
                         "_creationTimestamp": {
                           "oneof": [
                             "creationTimestamp"
@@ -14500,9 +14664,19 @@
                             "provisionedIops"
                           ]
                         },
+                        "_provisionedThroughput": {
+                          "oneof": [
+                            "provisionedThroughput"
+                          ]
+                        },
                         "_region": {
                           "oneof": [
                             "region"
+                          ]
+                        },
+                        "_resourceStatus": {
+                          "oneof": [
+                            "resourceStatus"
                           ]
                         },
                         "_satisfiesPzs": {
@@ -14518,6 +14692,16 @@
                         "_sizeGb": {
                           "oneof": [
                             "sizeGb"
+                          ]
+                        },
+                        "_sourceConsistencyGroupPolicy": {
+                          "oneof": [
+                            "sourceConsistencyGroupPolicy"
+                          ]
+                        },
+                        "_sourceConsistencyGroupPolicyId": {
+                          "oneof": [
+                            "sourceConsistencyGroupPolicyId"
                           ]
                         },
                         "_sourceDisk": {
@@ -14588,6 +14772,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "asyncPrimaryDisk": {
+                          "type": "DiskAsyncReplication",
+                          "id": 180517533,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "asyncSecondaryDisks": {
+                          "keyType": "string",
+                          "type": "DiskAsyncReplicationList",
+                          "id": 322925608
                         },
                         "creationTimestamp": {
                           "type": "string",
@@ -14707,6 +14903,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "provisionedThroughput": {
+                          "type": "int64",
+                          "id": 526524181,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "region": {
                           "type": "string",
                           "id": 138946292,
@@ -14723,6 +14926,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 22220385
+                        },
+                        "resourceStatus": {
+                          "type": "DiskResourceStatus",
+                          "id": 249429315,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "satisfiesPzs": {
                           "type": "bool",
@@ -14741,6 +14951,20 @@
                         "sizeGb": {
                           "type": "int64",
                           "id": 494929369,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceConsistencyGroupPolicy": {
+                          "type": "string",
+                          "id": 19616093,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceConsistencyGroupPolicyId": {
+                          "type": "string",
+                          "id": 267568957,
                           "options": {
                             "proto3_optional": true
                           }
@@ -14932,6 +15156,78 @@
                         }
                       }
                     },
+                    "DiskAsyncReplication": {
+                      "oneofs": {
+                        "_consistencyGroupPolicy": {
+                          "oneof": [
+                            "consistencyGroupPolicy"
+                          ]
+                        },
+                        "_consistencyGroupPolicyId": {
+                          "oneof": [
+                            "consistencyGroupPolicyId"
+                          ]
+                        },
+                        "_disk": {
+                          "oneof": [
+                            "disk"
+                          ]
+                        },
+                        "_diskId": {
+                          "oneof": [
+                            "diskId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "consistencyGroupPolicy": {
+                          "type": "string",
+                          "id": 1991097,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "consistencyGroupPolicyId": {
+                          "type": "string",
+                          "id": 261065057,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "disk": {
+                          "type": "string",
+                          "id": 3083677,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "diskId": {
+                          "type": "string",
+                          "id": 60990205,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DiskAsyncReplicationList": {
+                      "oneofs": {
+                        "_asyncReplicationDisk": {
+                          "oneof": [
+                            "asyncReplicationDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "asyncReplicationDisk": {
+                          "type": "DiskAsyncReplication",
+                          "id": 231794067,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "DiskInstantiationConfig": {
                       "oneofs": {
                         "_autoDelete": {
@@ -15107,6 +15403,60 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 377671164
+                        }
+                      }
+                    },
+                    "DiskResourceStatus": {
+                      "oneofs": {
+                        "_asyncPrimaryDisk": {
+                          "oneof": [
+                            "asyncPrimaryDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "asyncPrimaryDisk": {
+                          "type": "DiskResourceStatusAsyncReplicationStatus",
+                          "id": 180517533,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "asyncSecondaryDisks": {
+                          "keyType": "string",
+                          "type": "DiskResourceStatusAsyncReplicationStatus",
+                          "id": 322925608
+                        }
+                      }
+                    },
+                    "DiskResourceStatusAsyncReplicationStatus": {
+                      "oneofs": {
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "ACTIVE": 314733318,
+                            "CREATED": 135924424,
+                            "STARTING": 488820800,
+                            "STATE_UNSPECIFIED": 470755401,
+                            "STOPPED": 444276141,
+                            "STOPPING": 350791796
+                          }
                         }
                       }
                     },
@@ -15471,6 +15821,42 @@
                         "warning": {
                           "type": "Warning",
                           "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DisksStartAsyncReplicationRequest": {
+                      "oneofs": {
+                        "_asyncSecondaryDisk": {
+                          "oneof": [
+                            "asyncSecondaryDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "asyncSecondaryDisk": {
+                          "type": "string",
+                          "id": 131645867,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DisksStopGroupAsyncReplicationResource": {
+                      "oneofs": {
+                        "_resourcePolicy": {
+                          "oneof": [
+                            "resourcePolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "resourcePolicy": {
+                          "type": "string",
+                          "id": 159240835,
                           "options": {
                             "proto3_optional": true
                           }
@@ -17073,25 +17459,65 @@
                     },
                     "FirewallPolicyRuleMatcher": {
                       "fields": {
+                        "destAddressGroups": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 468760508
+                        },
+                        "destFqdns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 370712737
+                        },
                         "destIpRanges": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 337357713
+                        },
+                        "destRegionCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 199120280
+                        },
+                        "destThreatIntelligences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 119896492
                         },
                         "layer4Configs": {
                           "rule": "repeated",
                           "type": "FirewallPolicyRuleMatcherLayer4Config",
                           "id": 373534261
                         },
+                        "srcAddressGroups": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 436423738
+                        },
+                        "srcFqdns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 435906147
+                        },
                         "srcIpRanges": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 432128083
                         },
+                        "srcRegionCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 99086742
+                        },
                         "srcSecureTags": {
                           "rule": "repeated",
                           "type": "FirewallPolicyRuleSecureTag",
                           "id": 508791302
+                        },
+                        "srcThreatIntelligences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 323631018
                         }
                       }
                     },
@@ -17219,6 +17645,11 @@
                         "_allowGlobalAccess": {
                           "oneof": [
                             "allowGlobalAccess"
+                          ]
+                        },
+                        "_allowPscGlobalAccess": {
+                          "oneof": [
+                            "allowPscGlobalAccess"
                           ]
                         },
                         "_backendService": {
@@ -17367,6 +17798,13 @@
                         "allowGlobalAccess": {
                           "type": "bool",
                           "id": 499409674,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowPscGlobalAccess": {
+                          "type": "bool",
+                          "id": 263471819,
                           "options": {
                             "proto3_optional": true
                           }
@@ -19524,6 +19962,24 @@
                         }
                       }
                     },
+                    "GetInterconnectRemoteLocationRequest": {
+                      "fields": {
+                        "interconnectRemoteLocation": {
+                          "type": "string",
+                          "id": 290153949,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetInterconnectRequest": {
                       "fields": {
                         "interconnect": {
@@ -19633,6 +20089,11 @@
                             "maxResults"
                           ]
                         },
+                        "_natName": {
+                          "oneof": [
+                            "natName"
+                          ]
+                        },
                         "_orderBy": {
                           "oneof": [
                             "orderBy"
@@ -19660,6 +20121,13 @@
                         "maxResults": {
                           "type": "uint32",
                           "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "natName": {
+                          "type": "string",
+                          "id": 425596649,
                           "options": {
                             "proto3_optional": true
                           }
@@ -21368,6 +21836,36 @@
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GlobalAddressesMoveRequest": {
+                      "oneofs": {
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_destinationAddress": {
+                          "oneof": [
+                            "destinationAddress"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationAddress": {
+                          "type": "string",
+                          "id": 371693763,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -23552,6 +24050,11 @@
                             "ignoreCase"
                           ]
                         },
+                        "_pathTemplateMatch": {
+                          "oneof": [
+                            "pathTemplateMatch"
+                          ]
+                        },
                         "_prefixMatch": {
                           "oneof": [
                             "prefixMatch"
@@ -23587,6 +24090,13 @@
                           "rule": "repeated",
                           "type": "MetadataFilter",
                           "id": 464725739
+                        },
+                        "pathTemplateMatch": {
+                          "type": "string",
+                          "id": 292348186,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "prefixMatch": {
                           "type": "string",
@@ -27015,6 +27525,11 @@
                             "id"
                           ]
                         },
+                        "_instanceEncryptionKey": {
+                          "oneof": [
+                            "instanceEncryptionKey"
+                          ]
+                        },
                         "_keyRevocationActionType": {
                           "oneof": [
                             "keyRevocationActionType"
@@ -27235,6 +27750,13 @@
                         "id": {
                           "type": "uint64",
                           "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceEncryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 64741517,
                           "options": {
                             "proto3_optional": true
                           }
@@ -27987,6 +28509,11 @@
                             "instanceGroup"
                           ]
                         },
+                        "_instanceLifecyclePolicy": {
+                          "oneof": [
+                            "instanceLifecyclePolicy"
+                          ]
+                        },
                         "_instanceTemplate": {
                           "oneof": [
                             "instanceTemplate"
@@ -28101,6 +28628,13 @@
                         "instanceGroup": {
                           "type": "string",
                           "id": 81095253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceLifecyclePolicy": {
+                          "type": "InstanceGroupManagerInstanceLifecyclePolicy",
+                          "id": 447961617,
                           "options": {
                             "proto3_optional": true
                           }
@@ -28472,6 +29006,33 @@
                           "id": 263207002,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupManagerInstanceLifecyclePolicy": {
+                      "oneofs": {
+                        "_forceUpdateOnRepair": {
+                          "oneof": [
+                            "forceUpdateOnRepair"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "forceUpdateOnRepair": {
+                          "type": "string",
+                          "id": 356302027,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ForceUpdateOnRepair": {
+                          "values": {
+                            "UNDEFINED_FORCE_UPDATE_ON_REPAIR": 0,
+                            "NO": 2497,
+                            "YES": 87751
                           }
                         }
                       }
@@ -30507,6 +31068,11 @@
                             "kind"
                           ]
                         },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
                         "_linkType": {
                           "oneof": [
                             "linkType"
@@ -30540,6 +31106,11 @@
                         "_provisionedLinkCount": {
                           "oneof": [
                             "provisionedLinkCount"
+                          ]
+                        },
+                        "_remoteLocation": {
+                          "oneof": [
+                            "remoteLocation"
                           ]
                         },
                         "_requestedLinkCount": {
@@ -30642,6 +31213,18 @@
                             "proto3_optional": true
                           }
                         },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
+                        },
                         "linkType": {
                           "type": "string",
                           "id": 523207775,
@@ -30687,6 +31270,13 @@
                         "provisionedLinkCount": {
                           "type": "int32",
                           "id": 410888565,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "remoteLocation": {
+                          "type": "string",
+                          "id": 324388750,
                           "options": {
                             "proto3_optional": true
                           }
@@ -30779,6 +31369,11 @@
                             "cloudRouterIpv6InterfaceId"
                           ]
                         },
+                        "_configurationConstraints": {
+                          "oneof": [
+                            "configurationConstraints"
+                          ]
+                        },
                         "_creationTimestamp": {
                           "oneof": [
                             "creationTimestamp"
@@ -30839,6 +31434,11 @@
                             "kind"
                           ]
                         },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
                         "_mtu": {
                           "oneof": [
                             "mtu"
@@ -30879,6 +31479,11 @@
                             "region"
                           ]
                         },
+                        "_remoteService": {
+                          "oneof": [
+                            "remoteService"
+                          ]
+                        },
                         "_router": {
                           "oneof": [
                             "router"
@@ -30902,6 +31507,11 @@
                         "_state": {
                           "oneof": [
                             "state"
+                          ]
+                        },
+                        "_subnetLength": {
+                          "oneof": [
+                            "subnetLength"
                           ]
                         },
                         "_type": {
@@ -30957,6 +31567,13 @@
                         "cloudRouterIpv6InterfaceId": {
                           "type": "string",
                           "id": 521282701,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "configurationConstraints": {
+                          "type": "InterconnectAttachmentConfigurationConstraints",
+                          "id": 179681389,
                           "options": {
                             "proto3_optional": true
                           }
@@ -31050,6 +31667,18 @@
                             "proto3_optional": true
                           }
                         },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
+                        },
                         "mtu": {
                           "type": "int32",
                           "id": 108462,
@@ -31106,6 +31735,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "remoteService": {
+                          "type": "string",
+                          "id": 391954364,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "router": {
                           "type": "string",
                           "id": 148608841,
@@ -31137,6 +31773,13 @@
                         "state": {
                           "type": "string",
                           "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subnetLength": {
+                          "type": "int32",
+                          "id": 279831048,
                           "options": {
                             "proto3_optional": true
                           }
@@ -31295,6 +31938,69 @@
                         "warning": {
                           "type": "Warning",
                           "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectAttachmentConfigurationConstraints": {
+                      "oneofs": {
+                        "_bgpMd5": {
+                          "oneof": [
+                            "bgpMd5"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bgpMd5": {
+                          "type": "string",
+                          "id": 373093386,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "bgpPeerAsnRanges": {
+                          "rule": "repeated",
+                          "type": "InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange",
+                          "id": 475946370
+                        }
+                      },
+                      "nested": {
+                        "BgpMd5": {
+                          "values": {
+                            "UNDEFINED_BGP_MD5": 0,
+                            "MD5_OPTIONAL": 532156673,
+                            "MD5_REQUIRED": 218034496,
+                            "MD5_UNSUPPORTED": 86962388
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange": {
+                      "oneofs": {
+                        "_max": {
+                          "oneof": [
+                            "max"
+                          ]
+                        },
+                        "_min": {
+                          "oneof": [
+                            "min"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "max": {
+                          "type": "uint32",
+                          "id": 107876,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "min": {
+                          "type": "uint32",
+                          "id": 108114,
                           "options": {
                             "proto3_optional": true
                           }
@@ -32309,6 +33015,448 @@
                             "COMPLETED": 309921323,
                             "NS_ACTIVE": 252563136,
                             "NS_CANCELED": 506579411
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectRemoteLocation": {
+                      "oneofs": {
+                        "_address": {
+                          "oneof": [
+                            "address"
+                          ]
+                        },
+                        "_attachmentConfigurationConstraints": {
+                          "oneof": [
+                            "attachmentConfigurationConstraints"
+                          ]
+                        },
+                        "_city": {
+                          "oneof": [
+                            "city"
+                          ]
+                        },
+                        "_constraints": {
+                          "oneof": [
+                            "constraints"
+                          ]
+                        },
+                        "_continent": {
+                          "oneof": [
+                            "continent"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_facilityProvider": {
+                          "oneof": [
+                            "facilityProvider"
+                          ]
+                        },
+                        "_facilityProviderFacilityId": {
+                          "oneof": [
+                            "facilityProviderFacilityId"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_lacp": {
+                          "oneof": [
+                            "lacp"
+                          ]
+                        },
+                        "_maxLagSize100Gbps": {
+                          "oneof": [
+                            "maxLagSize100Gbps"
+                          ]
+                        },
+                        "_maxLagSize10Gbps": {
+                          "oneof": [
+                            "maxLagSize10Gbps"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_peeringdbFacilityId": {
+                          "oneof": [
+                            "peeringdbFacilityId"
+                          ]
+                        },
+                        "_remoteService": {
+                          "oneof": [
+                            "remoteService"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "address": {
+                          "type": "string",
+                          "id": 462920692,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "attachmentConfigurationConstraints": {
+                          "type": "InterconnectAttachmentConfigurationConstraints",
+                          "id": 326825041,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "id": 3053931,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "constraints": {
+                          "type": "InterconnectRemoteLocationConstraints",
+                          "id": 3909174,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "continent": {
+                          "type": "string",
+                          "id": 133442996,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "facilityProvider": {
+                          "type": "string",
+                          "id": 533303309,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "facilityProviderFacilityId": {
+                          "type": "string",
+                          "id": 87269125,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "lacp": {
+                          "type": "string",
+                          "id": 3313826,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxLagSize100Gbps": {
+                          "type": "int32",
+                          "id": 245219253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxLagSize10Gbps": {
+                          "type": "int32",
+                          "id": 294007573,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "peeringdbFacilityId": {
+                          "type": "string",
+                          "id": 536567094,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "permittedConnections": {
+                          "rule": "repeated",
+                          "type": "InterconnectRemoteLocationPermittedConnections",
+                          "id": 442063278
+                        },
+                        "remoteService": {
+                          "type": "string",
+                          "id": 391954364,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Continent": {
+                          "values": {
+                            "UNDEFINED_CONTINENT": 0,
+                            "AFRICA": 317443706,
+                            "ASIA_PAC": 119782269,
+                            "EUROPE": 445819298,
+                            "NORTH_AMERICA": 448015508,
+                            "SOUTH_AMERICA": 32597340
+                          }
+                        },
+                        "Lacp": {
+                          "values": {
+                            "UNDEFINED_LACP": 0,
+                            "LACP_SUPPORTED": 339576113,
+                            "LACP_UNSUPPORTED": 203930104
+                          }
+                        },
+                        "Status": {
+                          "values": {
+                            "UNDEFINED_STATUS": 0,
+                            "AVAILABLE": 442079913,
+                            "CLOSED": 380163436
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectRemoteLocationConstraints": {
+                      "oneofs": {
+                        "_portPairRemoteLocation": {
+                          "oneof": [
+                            "portPairRemoteLocation"
+                          ]
+                        },
+                        "_portPairVlan": {
+                          "oneof": [
+                            "portPairVlan"
+                          ]
+                        },
+                        "_subnetLengthRange": {
+                          "oneof": [
+                            "subnetLengthRange"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "portPairRemoteLocation": {
+                          "type": "string",
+                          "id": 495917351,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "portPairVlan": {
+                          "type": "string",
+                          "id": 478214506,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subnetLengthRange": {
+                          "type": "InterconnectRemoteLocationConstraintsSubnetLengthRange",
+                          "id": 184473670,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PortPairRemoteLocation": {
+                          "values": {
+                            "UNDEFINED_PORT_PAIR_REMOTE_LOCATION": 0,
+                            "PORT_PAIR_MATCHING_REMOTE_LOCATION": 207291859,
+                            "PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION": 60609829
+                          }
+                        },
+                        "PortPairVlan": {
+                          "values": {
+                            "UNDEFINED_PORT_PAIR_VLAN": 0,
+                            "PORT_PAIR_MATCHING_VLAN": 250295358,
+                            "PORT_PAIR_UNCONSTRAINED_VLAN": 175227948
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectRemoteLocationConstraintsSubnetLengthRange": {
+                      "oneofs": {
+                        "_max": {
+                          "oneof": [
+                            "max"
+                          ]
+                        },
+                        "_min": {
+                          "oneof": [
+                            "min"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "max": {
+                          "type": "int32",
+                          "id": 107876,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "min": {
+                          "type": "int32",
+                          "id": 108114,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectRemoteLocationList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "InterconnectRemoteLocation",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectRemoteLocationPermittedConnections": {
+                      "oneofs": {
+                        "_interconnectLocation": {
+                          "oneof": [
+                            "interconnectLocation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "interconnectLocation": {
+                          "type": "string",
+                          "id": 492235846,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -35173,6 +36321,79 @@
                       }
                     },
                     "ListInterconnectLocationsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListInterconnectRemoteLocationsRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -42170,6 +43391,54 @@
                         }
                       }
                     },
+                    "MoveAddressRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "address": {
+                          "type": "string",
+                          "id": 462920692,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionAddressesMoveRequestResource": {
+                          "type": "RegionAddressesMoveRequest",
+                          "id": 409081924,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "MoveDiskProjectRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -42225,6 +43494,46 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.cloud.operation_request_field)": "parent_id"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MoveGlobalAddressRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "address": {
+                          "type": "string",
+                          "id": 462920692,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "globalAddressesMoveRequestResource": {
+                          "type": "GlobalAddressesMoveRequest",
+                          "id": 302807283,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
                           }
                         },
                         "requestId": {
@@ -51091,6 +52400,7 @@
                             "COMMITTED_NVIDIA_A100_80GB_GPUS": 464326565,
                             "COMMITTED_NVIDIA_A100_GPUS": 375799445,
                             "COMMITTED_NVIDIA_K80_GPUS": 3857188,
+                            "COMMITTED_NVIDIA_L4_GPUS": 19163645,
                             "COMMITTED_NVIDIA_P100_GPUS": 107528100,
                             "COMMITTED_NVIDIA_P4_GPUS": 347952897,
                             "COMMITTED_NVIDIA_T4_GPUS": 139871237,
@@ -51142,11 +52452,15 @@
                             "NETWORK_ATTACHMENTS": 149028575,
                             "NETWORK_ENDPOINT_GROUPS": 102144909,
                             "NETWORK_FIREWALL_POLICIES": 101117374,
+                            "NET_LB_SECURITY_POLICIES_PER_REGION": 157892269,
+                            "NET_LB_SECURITY_POLICY_RULES_PER_REGION": 356090931,
+                            "NET_LB_SECURITY_POLICY_RULE_ATTRIBUTES_PER_REGION": 311243888,
                             "NODE_GROUPS": 24624817,
                             "NODE_TEMPLATES": 474896668,
                             "NVIDIA_A100_80GB_GPUS": 286389320,
                             "NVIDIA_A100_GPUS": 504872978,
                             "NVIDIA_K80_GPUS": 163886599,
+                            "NVIDIA_L4_GPUS": 491923130,
                             "NVIDIA_P100_GPUS": 236601633,
                             "NVIDIA_P100_VWS_GPUS": 213970574,
                             "NVIDIA_P4_GPUS": 283841470,
@@ -51161,6 +52475,7 @@
                             "PREEMPTIBLE_NVIDIA_A100_80GB_GPUS": 151942410,
                             "PREEMPTIBLE_NVIDIA_A100_GPUS": 68832784,
                             "PREEMPTIBLE_NVIDIA_K80_GPUS": 374960201,
+                            "PREEMPTIBLE_NVIDIA_L4_GPUS": 100408376,
                             "PREEMPTIBLE_NVIDIA_P100_GPUS": 337432351,
                             "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS": 313544076,
                             "PREEMPTIBLE_NVIDIA_P4_GPUS": 429197628,
@@ -51184,6 +52499,7 @@
                             "ROUTES": 275680074,
                             "SECURITY_POLICIES": 189518703,
                             "SECURITY_POLICIES_PER_REGION": 249041734,
+                            "SECURITY_POLICY_ADVANCED_RULES_PER_REGION": 371815341,
                             "SECURITY_POLICY_CEVAL_RULES": 470815689,
                             "SECURITY_POLICY_RULES": 203549225,
                             "SECURITY_POLICY_RULES_PER_REGION": 126510156,
@@ -51592,6 +52908,36 @@
                         }
                       }
                     },
+                    "RegionAddressesMoveRequest": {
+                      "oneofs": {
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_destinationAddress": {
+                          "oneof": [
+                            "destinationAddress"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationAddress": {
+                          "type": "string",
+                          "id": 371693763,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "RegionAutoscalerList": {
                       "oneofs": {
                         "_id": {
@@ -51764,6 +53110,24 @@
                         "sizeGb": {
                           "type": "int64",
                           "id": 494929369,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RegionDisksStartAsyncReplicationRequest": {
+                      "oneofs": {
+                        "_asyncSecondaryDisk": {
+                          "oneof": [
+                            "asyncSecondaryDisk"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "asyncSecondaryDisk": {
+                          "type": "string",
+                          "id": 131645867,
                           "options": {
                             "proto3_optional": true
                           }
@@ -53993,6 +55357,11 @@
                             "description"
                           ]
                         },
+                        "_diskConsistencyGroupPolicy": {
+                          "oneof": [
+                            "diskConsistencyGroupPolicy"
+                          ]
+                        },
                         "_groupPlacementPolicy": {
                           "oneof": [
                             "groupPlacementPolicy"
@@ -54055,6 +55424,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "diskConsistencyGroupPolicy": {
+                          "type": "ResourcePolicyDiskConsistencyGroupPolicy",
+                          "id": 473727515,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54272,6 +55648,9 @@
                           }
                         }
                       }
+                    },
+                    "ResourcePolicyDiskConsistencyGroupPolicy": {
+                      "fields": {}
                     },
                     "ResourcePolicyGroupPlacementPolicy": {
                       "oneofs": {
@@ -54912,6 +56291,11 @@
                             "nextHopGateway"
                           ]
                         },
+                        "_nextHopHub": {
+                          "oneof": [
+                            "nextHopHub"
+                          ]
+                        },
                         "_nextHopIlb": {
                           "oneof": [
                             "nextHopIlb"
@@ -55021,6 +56405,13 @@
                         "nextHopGateway": {
                           "type": "string",
                           "id": 377175298,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextHopHub": {
+                          "type": "string",
+                          "id": 198679219,
                           "options": {
                             "proto3_optional": true
                           }
@@ -55568,6 +56959,11 @@
                             "bfd"
                           ]
                         },
+                        "_customLearnedRoutePriority": {
+                          "oneof": [
+                            "customLearnedRoutePriority"
+                          ]
+                        },
                         "_enable": {
                           "oneof": [
                             "enable"
@@ -55657,6 +57053,18 @@
                         "bfd": {
                           "type": "RouterBgpPeerBfd",
                           "id": 97440,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "customLearnedIpRanges": {
+                          "rule": "repeated",
+                          "type": "RouterBgpPeerCustomLearnedIpRange",
+                          "id": 481363012
+                        },
+                        "customLearnedRoutePriority": {
+                          "type": "int32",
+                          "id": 330412356,
                           "options": {
                             "proto3_optional": true
                           }
@@ -55836,6 +57244,24 @@
                             "ACTIVE": 314733318,
                             "DISABLED": 516696700,
                             "PASSIVE": 462813959
+                          }
+                        }
+                      }
+                    },
+                    "RouterBgpPeerCustomLearnedIpRange": {
+                      "oneofs": {
+                        "_range": {
+                          "oneof": [
+                            "range"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "range": {
+                          "type": "string",
+                          "id": 108280125,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -56054,6 +57480,11 @@
                     },
                     "RouterNat": {
                       "oneofs": {
+                        "_autoNetworkTier": {
+                          "oneof": [
+                            "autoNetworkTier"
+                          ]
+                        },
                         "_enableDynamicPortAllocation": {
                           "oneof": [
                             "enableDynamicPortAllocation"
@@ -56121,6 +57552,13 @@
                         }
                       },
                       "fields": {
+                        "autoNetworkTier": {
+                          "type": "string",
+                          "id": 269770211,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "drainNatIps": {
                           "rule": "repeated",
                           "type": "string",
@@ -56239,6 +57677,15 @@
                         }
                       },
                       "nested": {
+                        "AutoNetworkTier": {
+                          "values": {
+                            "UNDEFINED_AUTO_NETWORK_TIER": 0,
+                            "FIXED_STANDARD": 310464328,
+                            "PREMIUM": 399530551,
+                            "STANDARD": 484642493,
+                            "STANDARD_OVERRIDES_FIXED_STANDARD": 465847234
+                          }
+                        },
                         "EndpointTypes": {
                           "values": {
                             "UNDEFINED_ENDPOINT_TYPES": 0,
@@ -57776,6 +59223,11 @@
                             "kind"
                           ]
                         },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -57858,6 +59310,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
                         },
                         "name": {
                           "type": "string",
@@ -58547,6 +60011,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "enforceOnKeyConfigs": {
+                          "rule": "repeated",
+                          "type": "SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig",
+                          "id": 33906478
+                        },
                         "enforceOnKeyName": {
                           "type": "string",
                           "id": 132555246,
@@ -58580,6 +60049,51 @@
                         "EnforceOnKey": {
                           "values": {
                             "UNDEFINED_ENFORCE_ON_KEY": 0,
+                            "ALL": 64897,
+                            "HTTP_COOKIE": 494981627,
+                            "HTTP_HEADER": 91597348,
+                            "HTTP_PATH": 311503228,
+                            "IP": 2343,
+                            "REGION_CODE": 79559768,
+                            "SNI": 82254,
+                            "XFF_IP": 438707118
+                          }
+                        }
+                      }
+                    },
+                    "SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig": {
+                      "oneofs": {
+                        "_enforceOnKeyName": {
+                          "oneof": [
+                            "enforceOnKeyName"
+                          ]
+                        },
+                        "_enforceOnKeyType": {
+                          "oneof": [
+                            "enforceOnKeyType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enforceOnKeyName": {
+                          "type": "string",
+                          "id": 132555246,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enforceOnKeyType": {
+                          "type": "string",
+                          "id": 132757149,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EnforceOnKeyType": {
+                          "values": {
+                            "UNDEFINED_ENFORCE_ON_KEY_TYPE": 0,
                             "ALL": 64897,
                             "HTTP_COOKIE": 494981627,
                             "HTTP_HEADER": 91597348,
@@ -58881,6 +60395,11 @@
                             "pscServiceAttachmentId"
                           ]
                         },
+                        "_reconcileConnections": {
+                          "oneof": [
+                            "reconcileConnections"
+                          ]
+                        },
                         "_region": {
                           "oneof": [
                             "region"
@@ -58989,6 +60508,13 @@
                         "pscServiceAttachmentId": {
                           "type": "Uint128",
                           "id": 527695214,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reconcileConnections": {
+                          "type": "bool",
+                          "id": 125493732,
                           "options": {
                             "proto3_optional": true
                           }
@@ -62654,6 +64180,13 @@
                       }
                     },
                     "SimulateMaintenanceEventInstanceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
                       "fields": {
                         "instance": {
                           "type": "string",
@@ -62668,6 +64201,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
                           }
                         },
                         "zone": {
@@ -64134,6 +65674,102 @@
                         }
                       }
                     },
+                    "StartAsyncReplicationDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disk": {
+                          "type": "string",
+                          "id": 3083677,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "disksStartAsyncReplicationRequestResource": {
+                          "type": "DisksStartAsyncReplicationRequest",
+                          "id": 470814554,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "StartAsyncReplicationRegionDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disk": {
+                          "type": "string",
+                          "id": 3083677,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionDisksStartAsyncReplicationRequestResource": {
+                          "type": "RegionDisksStartAsyncReplicationRequest",
+                          "id": 474326021,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "StartInstanceRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -64273,6 +65909,170 @@
                             "UNDEFINED_AUTO_DELETE": 0,
                             "NEVER": 74175084,
                             "ON_PERMANENT_INSTANCE_DELETION": 95727719
+                          }
+                        }
+                      }
+                    },
+                    "StopAsyncReplicationDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disk": {
+                          "type": "string",
+                          "id": 3083677,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "StopAsyncReplicationRegionDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disk": {
+                          "type": "string",
+                          "id": 3083677,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "StopGroupAsyncReplicationDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disksStopGroupAsyncReplicationResourceResource": {
+                          "type": "DisksStopGroupAsyncReplicationResource",
+                          "id": 346815509,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "StopGroupAsyncReplicationRegionDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disksStopGroupAsyncReplicationResourceResource": {
+                          "type": "DisksStopGroupAsyncReplicationResource",
+                          "id": 346815509,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -65463,6 +67263,11 @@
                             "fingerprint"
                           ]
                         },
+                        "_httpKeepAliveTimeoutSec": {
+                          "oneof": [
+                            "httpKeepAliveTimeoutSec"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -65517,6 +67322,13 @@
                         "fingerprint": {
                           "type": "string",
                           "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "httpKeepAliveTimeoutSec": {
+                          "type": "int32",
+                          "id": 447326046,
                           "options": {
                             "proto3_optional": true
                           }
@@ -65812,6 +67624,11 @@
                             "fingerprint"
                           ]
                         },
+                        "_httpKeepAliveTimeoutSec": {
+                          "oneof": [
+                            "httpKeepAliveTimeoutSec"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -65895,6 +67712,13 @@
                         "fingerprint": {
                           "type": "string",
                           "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "httpKeepAliveTimeoutSec": {
+                          "type": "int32",
+                          "id": 447326046,
                           "options": {
                             "proto3_optional": true
                           }
@@ -67490,6 +69314,11 @@
                             "kind"
                           ]
                         },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -67549,6 +69378,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
                         },
                         "name": {
                           "type": "string",
@@ -70374,6 +72215,11 @@
                           "oneof": [
                             "pathPrefixRewrite"
                           ]
+                        },
+                        "_pathTemplateRewrite": {
+                          "oneof": [
+                            "pathTemplateRewrite"
+                          ]
                         }
                       },
                       "fields": {
@@ -70387,6 +72233,13 @@
                         "pathPrefixRewrite": {
                           "type": "string",
                           "id": 41186361,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pathTemplateRewrite": {
+                          "type": "string",
+                          "id": 423409569,
                           "options": {
                             "proto3_optional": true
                           }
@@ -71498,6 +73351,11 @@
                             "kind"
                           ]
                         },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -71611,6 +73469,18 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
                         },
                         "localTrafficSelector": {
                           "rule": "repeated",
@@ -72086,6 +73956,7 @@
                             "INJECTED_KERNELS_DEPRECATED": 417377419,
                             "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB": 401542606,
                             "LARGE_DEPLOYMENT_WARNING": 481440678,
+                            "LIST_OVERHEAD_QUOTA_EXCEED": 47618117,
                             "MISSING_TYPE_DEPENDENCY": 344505463,
                             "NEXT_HOP_ADDRESS_NOT_ASSIGNED": 324964999,
                             "NEXT_HOP_CANNOT_IP_FORWARD": 383382887,
@@ -72155,6 +74026,7 @@
                             "INJECTED_KERNELS_DEPRECATED": 417377419,
                             "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB": 401542606,
                             "LARGE_DEPLOYMENT_WARNING": 481440678,
+                            "LIST_OVERHEAD_QUOTA_EXCEED": 47618117,
                             "MISSING_TYPE_DEPENDENCY": 344505463,
                             "NEXT_HOP_ADDRESS_NOT_ASSIGNED": 324964999,
                             "NEXT_HOP_CANNOT_IP_FORWARD": 383382887,
@@ -72762,6 +74634,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Move": {
+                          "requestType": "MoveAddressRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_addresses_move_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/addresses/{address}/move",
+                            "(google.api.method_signature)": "project,region,address,region_addresses_move_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_addresses_move_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/addresses/{address}/move"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,address,region_addresses_move_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
                             }
                           ]
                         },
@@ -73573,6 +75469,30 @@
                             }
                           ]
                         },
+                        "BulkInsert": {
+                          "requestType": "BulkInsertDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "bulk_insert_disk_resource_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/disks/bulkInsert",
+                            "(google.api.method_signature)": "project,zone,bulk_insert_disk_resource_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "bulk_insert_disk_resource_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/disks/bulkInsert"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,bulk_insert_disk_resource_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
                         "CreateSnapshot": {
                           "requestType": "CreateSnapshotDiskRequest",
                           "responseType": "Operation",
@@ -73783,6 +75703,76 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,resource,zone_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "StartAsyncReplication": {
+                          "requestType": "StartAsyncReplicationDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "disks_start_async_replication_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/disks/{disk}/startAsyncReplication",
+                            "(google.api.method_signature)": "project,zone,disk,disks_start_async_replication_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "disks_start_async_replication_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/disks/{disk}/startAsyncReplication"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,disk,disks_start_async_replication_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "StopAsyncReplication": {
+                          "requestType": "StopAsyncReplicationDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/disks/{disk}/stopAsyncReplication",
+                            "(google.api.method_signature)": "project,zone,disk",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/disks/{disk}/stopAsyncReplication"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,disk"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "StopGroupAsyncReplication": {
+                          "requestType": "StopGroupAsyncReplicationDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "disks_stop_group_async_replication_resource_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/disks/stopGroupAsyncReplication",
+                            "(google.api.method_signature)": "project,zone,disks_stop_group_async_replication_resource_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "disks_stop_group_async_replication_resource_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/disks/stopGroupAsyncReplication"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,disks_stop_group_async_replication_resource_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "ZoneOperations"
@@ -74758,6 +76748,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Move": {
+                          "requestType": "MoveGlobalAddressRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_addresses_move_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/addresses/{address}/move",
+                            "(google.api.method_signature)": "project,address,global_addresses_move_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_addresses_move_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/addresses/{address}/move"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,address,global_addresses_move_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
                         },
@@ -77828,6 +79842,50 @@
                             {
                               "(google.api.http)": {
                                 "get": "/compute/v1/projects/{project}/global/interconnectLocations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "InterconnectRemoteLocations": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetInterconnectRemoteLocationRequest",
+                          "responseType": "InterconnectRemoteLocation",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/interconnectRemoteLocations/{interconnect_remote_location}",
+                            "(google.api.method_signature)": "project,interconnect_remote_location"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/interconnectRemoteLocations/{interconnect_remote_location}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,interconnect_remote_location"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListInterconnectRemoteLocationsRequest",
+                          "responseType": "InterconnectRemoteLocationList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/interconnectRemoteLocations",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/interconnectRemoteLocations"
                               }
                             },
                             {
@@ -81205,6 +83263,30 @@
                             }
                           ]
                         },
+                        "BulkInsert": {
+                          "requestType": "BulkInsertRegionDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "bulk_insert_disk_resource_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/disks/bulkInsert",
+                            "(google.api.method_signature)": "project,region,bulk_insert_disk_resource_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "bulk_insert_disk_resource_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/disks/bulkInsert"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,bulk_insert_disk_resource_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
                         "CreateSnapshot": {
                           "requestType": "CreateSnapshotRegionDiskRequest",
                           "responseType": "Operation",
@@ -81415,6 +83497,76 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "StartAsyncReplication": {
+                          "requestType": "StartAsyncReplicationRegionDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_disks_start_async_replication_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/disks/{disk}/startAsyncReplication",
+                            "(google.api.method_signature)": "project,region,disk,region_disks_start_async_replication_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_disks_start_async_replication_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/disks/{disk}/startAsyncReplication"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,disk,region_disks_start_async_replication_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "StopAsyncReplication": {
+                          "requestType": "StopAsyncReplicationRegionDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/disks/{disk}/stopAsyncReplication",
+                            "(google.api.method_signature)": "project,region,disk",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/projects/{project}/regions/{region}/disks/{disk}/stopAsyncReplication"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,disk"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "StopGroupAsyncReplication": {
+                          "requestType": "StopGroupAsyncReplicationRegionDiskRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "disks_stop_group_async_replication_resource_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/disks/stopGroupAsyncReplication",
+                            "(google.api.method_signature)": "project,region,disks_stop_group_async_replication_resource_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "disks_stop_group_async_replication_resource_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/disks/stopGroupAsyncReplication"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,disks_stop_group_async_replication_resource_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"

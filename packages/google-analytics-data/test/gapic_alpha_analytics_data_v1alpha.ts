@@ -23,7 +23,9 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as alphaanalyticsdataModule from '../src';
 
-import {protobuf} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -62,6 +64,99 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1alpha.AlphaAnalyticsDataClient', () => {
@@ -303,6 +398,904 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runFunnelReport(request), expectedError);
+    });
+  });
+
+  describe('queryAudienceList', () => {
+    it('invokes queryAudienceList without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryAudienceListResponse()
+      );
+      client.innerApiCalls.queryAudienceList = stubSimpleCall(expectedResponse);
+      const [response] = await client.queryAudienceList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryAudienceList without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryAudienceListResponse()
+      );
+      client.innerApiCalls.queryAudienceList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryAudienceList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IQueryAudienceListResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryAudienceList with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryAudienceList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.queryAudienceList(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryAudienceList with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.queryAudienceList(request), expectedError);
+    });
+  });
+
+  describe('getAudienceList', () => {
+    it('invokes getAudienceList without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.AudienceList()
+      );
+      client.innerApiCalls.getAudienceList = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAudienceList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAudienceList without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.AudienceList()
+      );
+      client.innerApiCalls.getAudienceList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAudienceList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IAudienceList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAudienceList with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAudienceList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAudienceList(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAudienceList with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAudienceList(request), expectedError);
+    });
+  });
+
+  describe('createAudienceList', () => {
+    it('invokes createAudienceList without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAudienceList =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAudienceList(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAudienceList without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createAudienceList =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAudienceList(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.analytics.data.v1alpha.IAudienceList,
+              protos.google.analytics.data.v1alpha.IAudienceListMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.analytics.data.v1alpha.IAudienceList,
+        protos.google.analytics.data.v1alpha.IAudienceListMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAudienceList with call error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAudienceList = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAudienceList(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAudienceList with LRO error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAudienceList = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createAudienceList(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAudienceListProgress without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateAudienceListProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAudienceListProgress with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateAudienceListProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listAudienceLists', () => {
+    it('invokes listAudienceLists without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+      ];
+      client.innerApiCalls.listAudienceLists = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAudienceLists(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAudienceLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAudienceLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAudienceLists without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+      ];
+      client.innerApiCalls.listAudienceLists =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAudienceLists(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IAudienceList[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAudienceLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAudienceLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAudienceLists with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAudienceLists = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAudienceLists(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAudienceLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAudienceLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAudienceListsStream without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+      ];
+      client.descriptors.page.listAudienceLists.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAudienceListsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.data.v1alpha.AudienceList[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.data.v1alpha.AudienceList) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAudienceLists.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAudienceLists, request)
+      );
+      assert(
+        (client.descriptors.page.listAudienceLists.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAudienceListsStream with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAudienceLists.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAudienceListsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.data.v1alpha.AudienceList[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.data.v1alpha.AudienceList) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAudienceLists.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAudienceLists, request)
+      );
+      assert(
+        (client.descriptors.page.listAudienceLists.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAudienceLists without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.AudienceList()
+        ),
+      ];
+      client.descriptors.page.listAudienceLists.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.data.v1alpha.IAudienceList[] =
+        [];
+      const iterable = client.listAudienceListsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAudienceLists.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAudienceLists with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAudienceLists.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAudienceListsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.data.v1alpha.IAudienceList[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAudienceLists.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('audienceList', () => {
+      const fakePath = '/rendered/path/audienceList';
+      const expectedParameters = {
+        propertyId: 'propertyIdValue',
+        audienceListId: 'audienceListIdValue',
+      };
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.audienceListPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.audienceListPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('audienceListPath', () => {
+        const result = client.audienceListPath(
+          'propertyIdValue',
+          'audienceListIdValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.audienceListPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyIdFromAudienceListName', () => {
+        const result = client.matchPropertyIdFromAudienceListName(fakePath);
+        assert.strictEqual(result, 'propertyIdValue');
+        assert(
+          (client.pathTemplates.audienceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAudienceListIdFromAudienceListName', () => {
+        const result = client.matchAudienceListIdFromAudienceListName(fakePath);
+        assert.strictEqual(result, 'audienceListIdValue');
+        assert(
+          (client.pathTemplates.audienceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('property', () => {
+      const fakePath = '/rendered/path/property';
+      const expectedParameters = {
+        propertyId: 'propertyIdValue',
+      };
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.propertyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.propertyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('propertyPath', () => {
+        const result = client.propertyPath('propertyIdValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.propertyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyIdFromPropertyName', () => {
+        const result = client.matchPropertyIdFromPropertyName(fakePath);
+        assert.strictEqual(result, 'propertyIdValue');
+        assert(
+          (client.pathTemplates.propertyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
   });
 });

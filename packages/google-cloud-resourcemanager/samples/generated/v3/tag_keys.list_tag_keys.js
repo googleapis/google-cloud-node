@@ -29,14 +29,15 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the new TagKey's parent.
-   *  Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *  Required. The resource name of the TagKey's parent.
+   *  Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+   *  `projects/{project_number}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of TagKeys to return in the response. The server allows
-   *  a maximum of 300 TagKeys to return. If unspecified, the server will use 100
-   *  as the default.
+   *  Optional. The maximum number of TagKeys to return in the response. The
+   *  server allows a maximum of 300 TagKeys to return. If unspecified, the
+   *  server will use 100 as the default.
    */
   // const pageSize = 1234
   /**

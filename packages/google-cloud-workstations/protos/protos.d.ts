@@ -509,6 +509,9 @@ export namespace google {
                     /** WorkstationCluster subnetwork */
                     subnetwork?: (string|null);
 
+                    /** WorkstationCluster controlPlaneIp */
+                    controlPlaneIp?: (string|null);
+
                     /** WorkstationCluster privateClusterConfig */
                     privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
 
@@ -563,6 +566,9 @@ export namespace google {
 
                     /** WorkstationCluster subnetwork. */
                     public subnetwork: string;
+
+                    /** WorkstationCluster controlPlaneIp. */
+                    public controlPlaneIp: string;
 
                     /** WorkstationCluster privateClusterConfig. */
                     public privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
@@ -1087,6 +1093,9 @@ export namespace google {
                             /** GceInstance poolSize */
                             poolSize?: (number|null);
 
+                            /** GceInstance pooledInstances */
+                            pooledInstances?: (number|null);
+
                             /** GceInstance disablePublicIpAddresses */
                             disablePublicIpAddresses?: (boolean|null);
 
@@ -1123,6 +1132,9 @@ export namespace google {
 
                             /** GceInstance poolSize. */
                             public poolSize: number;
+
+                            /** GceInstance pooledInstances. */
+                            public pooledInstances: number;
 
                             /** GceInstance disablePublicIpAddresses. */
                             public disablePublicIpAddresses: boolean;
@@ -5536,6 +5548,9 @@ export namespace google {
                     /** WorkstationCluster subnetwork */
                     subnetwork?: (string|null);
 
+                    /** WorkstationCluster controlPlaneIp */
+                    controlPlaneIp?: (string|null);
+
                     /** WorkstationCluster privateClusterConfig */
                     privateClusterConfig?: (google.cloud.workstations.v1beta.WorkstationCluster.IPrivateClusterConfig|null);
 
@@ -5590,6 +5605,9 @@ export namespace google {
 
                     /** WorkstationCluster subnetwork. */
                     public subnetwork: string;
+
+                    /** WorkstationCluster controlPlaneIp. */
+                    public controlPlaneIp: string;
 
                     /** WorkstationCluster privateClusterConfig. */
                     public privateClusterConfig?: (google.cloud.workstations.v1beta.WorkstationCluster.IPrivateClusterConfig|null);
@@ -5847,11 +5865,17 @@ export namespace google {
                     /** WorkstationConfig encryptionKey */
                     encryptionKey?: (google.cloud.workstations.v1beta.WorkstationConfig.ICustomerEncryptionKey|null);
 
+                    /** WorkstationConfig readinessChecks */
+                    readinessChecks?: (google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck[]|null);
+
                     /** WorkstationConfig degraded */
                     degraded?: (boolean|null);
 
                     /** WorkstationConfig conditions */
                     conditions?: (google.rpc.IStatus[]|null);
+
+                    /** WorkstationConfig enableAuditAgent */
+                    enableAuditAgent?: (boolean|null);
                 }
 
                 /** Represents a WorkstationConfig. */
@@ -5911,11 +5935,17 @@ export namespace google {
                     /** WorkstationConfig encryptionKey. */
                     public encryptionKey?: (google.cloud.workstations.v1beta.WorkstationConfig.ICustomerEncryptionKey|null);
 
+                    /** WorkstationConfig readinessChecks. */
+                    public readinessChecks: google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck[];
+
                     /** WorkstationConfig degraded. */
                     public degraded: boolean;
 
                     /** WorkstationConfig conditions. */
                     public conditions: google.rpc.IStatus[];
+
+                    /** WorkstationConfig enableAuditAgent. */
+                    public enableAuditAgent: boolean;
 
                     /**
                      * Creates a new WorkstationConfig instance using the specified properties.
@@ -6114,6 +6144,9 @@ export namespace google {
                             /** GceInstance poolSize */
                             poolSize?: (number|null);
 
+                            /** GceInstance pooledInstances */
+                            pooledInstances?: (number|null);
+
                             /** GceInstance disablePublicIpAddresses */
                             disablePublicIpAddresses?: (boolean|null);
 
@@ -6125,6 +6158,9 @@ export namespace google {
 
                             /** GceInstance bootDiskSizeGb */
                             bootDiskSizeGb?: (number|null);
+
+                            /** GceInstance accelerators */
+                            accelerators?: (google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator[]|null);
                         }
 
                         /** Represents a GceInstance. */
@@ -6148,6 +6184,9 @@ export namespace google {
                             /** GceInstance poolSize. */
                             public poolSize: number;
 
+                            /** GceInstance pooledInstances. */
+                            public pooledInstances: number;
+
                             /** GceInstance disablePublicIpAddresses. */
                             public disablePublicIpAddresses: boolean;
 
@@ -6159,6 +6198,9 @@ export namespace google {
 
                             /** GceInstance bootDiskSizeGb. */
                             public bootDiskSizeGb: number;
+
+                            /** GceInstance accelerators. */
+                            public accelerators: google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator[];
 
                             /**
                              * Creates a new GceInstance instance using the specified properties.
@@ -6440,6 +6482,109 @@ export namespace google {
 
                                 /**
                                  * Gets the default type url for GceConfidentialInstanceConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an Accelerator. */
+                            interface IAccelerator {
+
+                                /** Accelerator type */
+                                type?: (string|null);
+
+                                /** Accelerator count */
+                                count?: (number|null);
+                            }
+
+                            /** Represents an Accelerator. */
+                            class Accelerator implements IAccelerator {
+
+                                /**
+                                 * Constructs a new Accelerator.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator);
+
+                                /** Accelerator type. */
+                                public type: string;
+
+                                /** Accelerator count. */
+                                public count: number;
+
+                                /**
+                                 * Creates a new Accelerator instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Accelerator instance
+                                 */
+                                public static create(properties?: google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator): google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Encodes the specified Accelerator message. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.verify|verify} messages.
+                                 * @param message Accelerator message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Accelerator message, length delimited. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.verify|verify} messages.
+                                 * @param message Accelerator message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an Accelerator message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Accelerator
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Decodes an Accelerator message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Accelerator
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Verifies an Accelerator message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an Accelerator message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Accelerator
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator;
+
+                                /**
+                                 * Creates a plain object from an Accelerator message. Also converts values to other types if specified.
+                                 * @param message Accelerator
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Accelerator to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Accelerator
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */
@@ -6917,6 +7062,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a ReadinessCheck. */
+                    interface IReadinessCheck {
+
+                        /** ReadinessCheck path */
+                        path?: (string|null);
+
+                        /** ReadinessCheck port */
+                        port?: (number|null);
+                    }
+
+                    /** Represents a ReadinessCheck. */
+                    class ReadinessCheck implements IReadinessCheck {
+
+                        /**
+                         * Constructs a new ReadinessCheck.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck);
+
+                        /** ReadinessCheck path. */
+                        public path: string;
+
+                        /** ReadinessCheck port. */
+                        public port: number;
+
+                        /**
+                         * Creates a new ReadinessCheck instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReadinessCheck instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck): google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Encodes the specified ReadinessCheck message. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                         * @param message ReadinessCheck message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReadinessCheck message, length delimited. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                         * @param message ReadinessCheck message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReadinessCheck message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReadinessCheck
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Decodes a ReadinessCheck message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReadinessCheck
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Verifies a ReadinessCheck message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReadinessCheck message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReadinessCheck
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Creates a plain object from a ReadinessCheck message. Also converts values to other types if specified.
+                         * @param message ReadinessCheck
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReadinessCheck to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReadinessCheck
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Workstation. */
@@ -6957,6 +7205,9 @@ export namespace google {
 
                     /** Workstation host */
                     host?: (string|null);
+
+                    /** Workstation env */
+                    env?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Workstation. */
@@ -7003,6 +7254,9 @@ export namespace google {
 
                     /** Workstation host. */
                     public host: string;
+
+                    /** Workstation env. */
+                    public env: { [k: string]: string };
 
                     /**
                      * Creates a new Workstation instance using the specified properties.

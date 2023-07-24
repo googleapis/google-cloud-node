@@ -29,9 +29,17 @@ option java_package = "com.google.cloud.contactcenterinsights.v1";
 option php_namespace = "Google\\Cloud\\ContactCenterInsights\\V1";
 option ruby_package = "Google::Cloud::ContactCenterInsights::V1";
 option (google.api.resource_definition) = {
+  type: "dialogflow.googleapis.com/ConversationProfile"
+  pattern: "projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}"
+};
+option (google.api.resource_definition) = {
   type: "dialogflow.googleapis.com/Participant"
   pattern: "projects/{project}/conversations/{conversation}/participants/{participant}"
   pattern: "projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
+};
+option (google.api.resource_definition) = {
+  type: "speech.googleapis.com/Recognizer"
+  pattern: "projects/{project}/locations/{location}/recognizers/{recognizer}"
 };
 
 // The conversation resource.
@@ -196,6 +204,10 @@ message Conversation {
 
   // Output only. The conversation's latest analysis, if one exists.
   Analysis latest_analysis = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Latest summary of the conversation.
+  ConversationSummarizationSuggestionData latest_summary = 20
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The annotations that were generated during the customer and
   // agent interaction.
@@ -642,6 +654,18 @@ message IssueModel {
     DELETING = 5;
   }
 
+  // Type of the model.
+  enum ModelType {
+    // Unspecified model type.
+    MODEL_TYPE_UNSPECIFIED = 0;
+
+    // Type V1.
+    TYPE_V1 = 1;
+
+    // Type V2.
+    TYPE_V2 = 2;
+  }
+
   // Immutable. The resource name of the issue model.
   // Format:
   // projects/{project}/locations/{location}/issueModels/{issue_model}
@@ -673,6 +697,12 @@ message IssueModel {
     (google.api.field_behavior) = OUTPUT_ONLY,
     (google.api.field_behavior) = IMMUTABLE
   ];
+
+  // Type of the model.
+  ModelType model_type = 9;
+
+  // Language of the model.
+  string language_code = 10;
 }
 
 // The issue resource.
@@ -819,7 +849,7 @@ message PhraseMatchRuleGroup {
   // Required. The type of this phrase match rule group.
   PhraseMatchRuleGroupType type = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // A list of phase match rules that are included in this group.
+  // A list of phrase match rules that are included in this group.
   repeated PhraseMatchRule phrase_match_rules = 2;
 }
 
@@ -932,7 +962,7 @@ message RedactionConfig {
 
   // The fully-qualified DLP inspect template resource name.
   // Format:
-  // `projects/{project}/inspectTemplates/{template}`
+  // `projects/{project}/locations/{location}/inspectTemplates/{template}`
   string inspect_template = 2;
 }
 
@@ -954,6 +984,10 @@ message RuntimeAnnotation {
 
     // Dialogflow interaction data.
     DialogflowInteractionData dialogflow_interaction = 10;
+
+    // Conversation summarization suggestion data.
+    ConversationSummarizationSuggestionData
+        conversation_summarization_suggestion = 12;
   }
 
   // The unique identifier of the annotation.
@@ -1110,6 +1144,34 @@ message DialogflowInteractionData {
   float confidence = 2;
 }
 
+// Conversation summarization suggestion data.
+message ConversationSummarizationSuggestionData {
+  // The summarization content that is concatenated into one string.
+  string text = 1;
+
+  // The summarization content that is divided into sections. The key is the
+  // section's name and the value is the section's content. There is no
+  // specific format for the key or value.
+  map<string, string> text_sections = 5;
+
+  // The confidence score of the summarization.
+  float confidence = 2;
+
+  // A map that contains metadata about the summarization and the document
+  // from which it originates.
+  map<string, string> metadata = 3;
+
+  // The name of the answer record.
+  // Format:
+  // projects/{project}/locations/{location}/answerRecords/{answer_record}
+  string answer_record = 4;
+
+  // The name of the model that generates this summary.
+  // Format:
+  // projects/{project}/locations/{location}/conversationModels/{conversation_model}
+  string conversation_model = 6;
+}
+
 // The call participant speaking for a given utterance.
 message ConversationParticipant {
   // The role of the participant.
@@ -1182,6 +1244,32 @@ message View {
 
 // Selector of all available annotators and phrase matchers to run.
 message AnnotatorSelector {
+  // Configuration for summarization.
+  message SummarizationConfig {
+    // Summarization model to use, if `conversation_profile` is not used.
+    enum SummarizationModel {
+      // Unspecified summarization model.
+      SUMMARIZATION_MODEL_UNSPECIFIED = 0;
+
+      // The Insights baseline model.
+      BASELINE_MODEL = 1;
+    }
+
+    // Summarization must use either a preexisting conversation profile or one
+    // of the supported default models.
+    oneof model_source {
+      // Resource name of the Dialogflow conversation profile.
+      // Format:
+      // projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}
+      string conversation_profile = 1 [(google.api.resource_reference) = {
+        type: "dialogflow.googleapis.com/ConversationProfile"
+      }];
+
+      // Default summarization model to be used.
+      SummarizationModel summarization_model = 2;
+    }
+  }
+
   // Whether to run the interruption annotator.
   bool run_interruption_annotator = 1;
 
@@ -1221,4 +1309,10 @@ message AnnotatorSelector {
   repeated string issue_models = 10 [(google.api.resource_reference) = {
     type: "contactcenterinsights.googleapis.com/IssueModel"
   }];
+
+  // Whether to run the summarization annotator.
+  bool run_summarization_annotator = 9;
+
+  // Configuration for the summarization annotator.
+  SummarizationConfig summarization_config = 11;
 }

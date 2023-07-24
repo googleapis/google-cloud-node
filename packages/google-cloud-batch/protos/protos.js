@@ -4974,6 +4974,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 return null;
@@ -5078,6 +5079,10 @@
                                 case 5:
                                     message.newTaskState = 5;
                                     break;
+                                case "UNEXECUTED":
+                                case 6:
+                                    message.newTaskState = 6;
+                                    break;
                                 }
                                 return message;
                             };
@@ -5168,6 +5173,7 @@
                          * @property {google.cloud.batch.v1.IServiceAccount|null} [serviceAccount] AllocationPolicy serviceAccount
                          * @property {Object.<string,string>|null} [labels] AllocationPolicy labels
                          * @property {google.cloud.batch.v1.AllocationPolicy.INetworkPolicy|null} [network] AllocationPolicy network
+                         * @property {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy|null} [placement] AllocationPolicy placement
                          */
     
                         /**
@@ -5228,6 +5234,14 @@
                         AllocationPolicy.prototype.network = null;
     
                         /**
+                         * AllocationPolicy placement.
+                         * @member {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy|null|undefined} placement
+                         * @memberof google.cloud.batch.v1.AllocationPolicy
+                         * @instance
+                         */
+                        AllocationPolicy.prototype.placement = null;
+    
+                        /**
                          * Creates a new AllocationPolicy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1.AllocationPolicy
@@ -5263,6 +5277,8 @@
                                     $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate.encode(message.instances[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 $root.google.cloud.batch.v1.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.placement != null && Object.hasOwnProperty.call(message, "placement"))
+                                $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.encode(message.placement, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -5338,6 +5354,10 @@
                                         message.network = $root.google.cloud.batch.v1.AllocationPolicy.NetworkPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 10: {
+                                        message.placement = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5405,6 +5425,11 @@
                                 if (error)
                                     return "network." + error;
                             }
+                            if (message.placement != null && message.hasOwnProperty("placement")) {
+                                var error = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.verify(message.placement);
+                                if (error)
+                                    return "placement." + error;
+                            }
                             return null;
                         };
     
@@ -5452,6 +5477,11 @@
                                     throw TypeError(".google.cloud.batch.v1.AllocationPolicy.network: object expected");
                                 message.network = $root.google.cloud.batch.v1.AllocationPolicy.NetworkPolicy.fromObject(object.network);
                             }
+                            if (object.placement != null) {
+                                if (typeof object.placement !== "object")
+                                    throw TypeError(".google.cloud.batch.v1.AllocationPolicy.placement: object expected");
+                                message.placement = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.fromObject(object.placement);
+                            }
                             return message;
                         };
     
@@ -5476,6 +5506,7 @@
                                 object.location = null;
                                 object.network = null;
                                 object.serviceAccount = null;
+                                object.placement = null;
                             }
                             if (message.location != null && message.hasOwnProperty("location"))
                                 object.location = $root.google.cloud.batch.v1.AllocationPolicy.LocationPolicy.toObject(message.location, options);
@@ -5494,6 +5525,8 @@
                             }
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = $root.google.cloud.batch.v1.ServiceAccount.toObject(message.serviceAccount, options);
+                            if (message.placement != null && message.hasOwnProperty("placement"))
+                                object.placement = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.toObject(message.placement, options);
                             return object;
                         };
     
@@ -7772,6 +7805,247 @@
                             return NetworkPolicy;
                         })();
     
+                        AllocationPolicy.PlacementPolicy = (function() {
+    
+                            /**
+                             * Properties of a PlacementPolicy.
+                             * @memberof google.cloud.batch.v1.AllocationPolicy
+                             * @interface IPlacementPolicy
+                             * @property {string|null} [collocation] PlacementPolicy collocation
+                             * @property {number|Long|null} [maxDistance] PlacementPolicy maxDistance
+                             */
+    
+                            /**
+                             * Constructs a new PlacementPolicy.
+                             * @memberof google.cloud.batch.v1.AllocationPolicy
+                             * @classdesc Represents a PlacementPolicy.
+                             * @implements IPlacementPolicy
+                             * @constructor
+                             * @param {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy=} [properties] Properties to set
+                             */
+                            function PlacementPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlacementPolicy collocation.
+                             * @member {string} collocation
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @instance
+                             */
+                            PlacementPolicy.prototype.collocation = "";
+    
+                            /**
+                             * PlacementPolicy maxDistance.
+                             * @member {number|Long} maxDistance
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @instance
+                             */
+                            PlacementPolicy.prototype.maxDistance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new PlacementPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.batch.v1.AllocationPolicy.PlacementPolicy} PlacementPolicy instance
+                             */
+                            PlacementPolicy.create = function create(properties) {
+                                return new PlacementPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlacementPolicy message. Does not implicitly {@link google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy} message PlacementPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlacementPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.collocation != null && Object.hasOwnProperty.call(message, "collocation"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.collocation);
+                                if (message.maxDistance != null && Object.hasOwnProperty.call(message, "maxDistance"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.maxDistance);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlacementPolicy message, length delimited. Does not implicitly {@link google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy} message PlacementPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlacementPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlacementPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.batch.v1.AllocationPolicy.PlacementPolicy} PlacementPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlacementPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.collocation = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxDistance = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlacementPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.batch.v1.AllocationPolicy.PlacementPolicy} PlacementPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlacementPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlacementPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlacementPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.collocation != null && message.hasOwnProperty("collocation"))
+                                    if (!$util.isString(message.collocation))
+                                        return "collocation: string expected";
+                                if (message.maxDistance != null && message.hasOwnProperty("maxDistance"))
+                                    if (!$util.isInteger(message.maxDistance) && !(message.maxDistance && $util.isInteger(message.maxDistance.low) && $util.isInteger(message.maxDistance.high)))
+                                        return "maxDistance: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlacementPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.batch.v1.AllocationPolicy.PlacementPolicy} PlacementPolicy
+                             */
+                            PlacementPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy();
+                                if (object.collocation != null)
+                                    message.collocation = String(object.collocation);
+                                if (object.maxDistance != null)
+                                    if ($util.Long)
+                                        (message.maxDistance = $util.Long.fromValue(object.maxDistance)).unsigned = false;
+                                    else if (typeof object.maxDistance === "string")
+                                        message.maxDistance = parseInt(object.maxDistance, 10);
+                                    else if (typeof object.maxDistance === "number")
+                                        message.maxDistance = object.maxDistance;
+                                    else if (typeof object.maxDistance === "object")
+                                        message.maxDistance = new $util.LongBits(object.maxDistance.low >>> 0, object.maxDistance.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlacementPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1.AllocationPolicy.PlacementPolicy} message PlacementPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlacementPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.collocation = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.maxDistance = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.maxDistance = options.longs === String ? "0" : 0;
+                                }
+                                if (message.collocation != null && message.hasOwnProperty("collocation"))
+                                    object.collocation = message.collocation;
+                                if (message.maxDistance != null && message.hasOwnProperty("maxDistance"))
+                                    if (typeof message.maxDistance === "number")
+                                        object.maxDistance = options.longs === String ? String(message.maxDistance) : message.maxDistance;
+                                    else
+                                        object.maxDistance = options.longs === String ? $util.Long.prototype.toString.call(message.maxDistance) : options.longs === Number ? new $util.LongBits(message.maxDistance.low >>> 0, message.maxDistance.high >>> 0).toNumber() : message.maxDistance;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlacementPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlacementPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlacementPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlacementPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.batch.v1.AllocationPolicy.PlacementPolicy";
+                            };
+    
+                            return PlacementPolicy;
+                        })();
+    
                         /**
                          * ProvisioningModel enum.
                          * @name google.cloud.batch.v1.AllocationPolicy.ProvisioningModel
@@ -7803,6 +8077,7 @@
                          * @property {google.cloud.batch.v1.ITaskSpec|null} [taskSpec] TaskGroup taskSpec
                          * @property {number|Long|null} [taskCount] TaskGroup taskCount
                          * @property {number|Long|null} [parallelism] TaskGroup parallelism
+                         * @property {google.cloud.batch.v1.TaskGroup.SchedulingPolicy|null} [schedulingPolicy] TaskGroup schedulingPolicy
                          * @property {Array.<google.cloud.batch.v1.IEnvironment>|null} [taskEnvironments] TaskGroup taskEnvironments
                          * @property {number|Long|null} [taskCountPerNode] TaskGroup taskCountPerNode
                          * @property {boolean|null} [requireHostsFile] TaskGroup requireHostsFile
@@ -7856,6 +8131,14 @@
                          * @instance
                          */
                         TaskGroup.prototype.parallelism = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * TaskGroup schedulingPolicy.
+                         * @member {google.cloud.batch.v1.TaskGroup.SchedulingPolicy} schedulingPolicy
+                         * @memberof google.cloud.batch.v1.TaskGroup
+                         * @instance
+                         */
+                        TaskGroup.prototype.schedulingPolicy = 0;
     
                         /**
                          * TaskGroup taskEnvironments.
@@ -7921,6 +8204,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.taskCount);
                             if (message.parallelism != null && Object.hasOwnProperty.call(message, "parallelism"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.parallelism);
+                            if (message.schedulingPolicy != null && Object.hasOwnProperty.call(message, "schedulingPolicy"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.schedulingPolicy);
                             if (message.taskEnvironments != null && message.taskEnvironments.length)
                                 for (var i = 0; i < message.taskEnvironments.length; ++i)
                                     $root.google.cloud.batch.v1.Environment.encode(message.taskEnvironments[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
@@ -7978,6 +8263,10 @@
                                     }
                                 case 5: {
                                         message.parallelism = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.schedulingPolicy = reader.int32();
                                         break;
                                     }
                                 case 9: {
@@ -8047,6 +8336,15 @@
                             if (message.parallelism != null && message.hasOwnProperty("parallelism"))
                                 if (!$util.isInteger(message.parallelism) && !(message.parallelism && $util.isInteger(message.parallelism.low) && $util.isInteger(message.parallelism.high)))
                                     return "parallelism: integer|Long expected";
+                            if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
+                                switch (message.schedulingPolicy) {
+                                default:
+                                    return "schedulingPolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.taskEnvironments != null && message.hasOwnProperty("taskEnvironments")) {
                                 if (!Array.isArray(message.taskEnvironments))
                                     return "taskEnvironments: array expected";
@@ -8105,6 +8403,26 @@
                                     message.parallelism = object.parallelism;
                                 else if (typeof object.parallelism === "object")
                                     message.parallelism = new $util.LongBits(object.parallelism.low >>> 0, object.parallelism.high >>> 0).toNumber();
+                            switch (object.schedulingPolicy) {
+                            default:
+                                if (typeof object.schedulingPolicy === "number") {
+                                    message.schedulingPolicy = object.schedulingPolicy;
+                                    break;
+                                }
+                                break;
+                            case "SCHEDULING_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.schedulingPolicy = 0;
+                                break;
+                            case "AS_SOON_AS_POSSIBLE":
+                            case 1:
+                                message.schedulingPolicy = 1;
+                                break;
+                            case "IN_ORDER":
+                            case 2:
+                                message.schedulingPolicy = 2;
+                                break;
+                            }
                             if (object.taskEnvironments) {
                                 if (!Array.isArray(object.taskEnvironments))
                                     throw TypeError(".google.cloud.batch.v1.TaskGroup.taskEnvironments: array expected");
@@ -8159,6 +8477,7 @@
                                     object.parallelism = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.parallelism = options.longs === String ? "0" : 0;
+                                object.schedulingPolicy = options.enums === String ? "SCHEDULING_POLICY_UNSPECIFIED" : 0;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
                                     object.taskCountPerNode = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -8181,6 +8500,8 @@
                                     object.parallelism = options.longs === String ? String(message.parallelism) : message.parallelism;
                                 else
                                     object.parallelism = options.longs === String ? $util.Long.prototype.toString.call(message.parallelism) : options.longs === Number ? new $util.LongBits(message.parallelism.low >>> 0, message.parallelism.high >>> 0).toNumber() : message.parallelism;
+                            if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
+                                object.schedulingPolicy = options.enums === String ? $root.google.cloud.batch.v1.TaskGroup.SchedulingPolicy[message.schedulingPolicy] === undefined ? message.schedulingPolicy : $root.google.cloud.batch.v1.TaskGroup.SchedulingPolicy[message.schedulingPolicy] : message.schedulingPolicy;
                             if (message.taskEnvironments && message.taskEnvironments.length) {
                                 object.taskEnvironments = [];
                                 for (var j = 0; j < message.taskEnvironments.length; ++j)
@@ -8223,6 +8544,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.batch.v1.TaskGroup";
                         };
+    
+                        /**
+                         * SchedulingPolicy enum.
+                         * @name google.cloud.batch.v1.TaskGroup.SchedulingPolicy
+                         * @enum {number}
+                         * @property {number} SCHEDULING_POLICY_UNSPECIFIED=0 SCHEDULING_POLICY_UNSPECIFIED value
+                         * @property {number} AS_SOON_AS_POSSIBLE=1 AS_SOON_AS_POSSIBLE value
+                         * @property {number} IN_ORDER=2 IN_ORDER value
+                         */
+                        TaskGroup.SchedulingPolicy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCHEDULING_POLICY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AS_SOON_AS_POSSIBLE"] = 1;
+                            values[valuesById[2] = "IN_ORDER"] = 2;
+                            return values;
+                        })();
     
                         return TaskGroup;
                     })();
@@ -8979,6 +9316,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -9040,6 +9378,10 @@
                             case "SUCCEEDED":
                             case 5:
                                 message.taskState = 5;
+                                break;
+                            case "UNEXECUTED":
+                            case 6:
+                                message.taskState = 6;
                                 break;
                             }
                             return message;
@@ -9470,6 +9812,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.statusEvents != null && message.hasOwnProperty("statusEvents")) {
@@ -9526,6 +9869,10 @@
                             case "SUCCEEDED":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "UNEXECUTED":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             if (object.statusEvents) {
@@ -9604,6 +9951,7 @@
                          * @property {number} RUNNING=3 RUNNING value
                          * @property {number} FAILED=4 FAILED value
                          * @property {number} SUCCEEDED=5 SUCCEEDED value
+                         * @property {number} UNEXECUTED=6 UNEXECUTED value
                          */
                         TaskStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9613,6 +9961,7 @@
                             values[valuesById[3] = "RUNNING"] = 3;
                             values[valuesById[4] = "FAILED"] = 4;
                             values[valuesById[5] = "SUCCEEDED"] = 5;
+                            values[valuesById[6] = "UNEXECUTED"] = 6;
                             return values;
                         })();
     
@@ -9633,6 +9982,7 @@
                          * @property {boolean|null} [alwaysRun] Runnable alwaysRun
                          * @property {google.cloud.batch.v1.IEnvironment|null} [environment] Runnable environment
                          * @property {google.protobuf.IDuration|null} [timeout] Runnable timeout
+                         * @property {Object.<string,string>|null} [labels] Runnable labels
                          */
     
                         /**
@@ -9644,6 +9994,7 @@
                          * @param {google.cloud.batch.v1.IRunnable=} [properties] Properties to set
                          */
                         function Runnable(properties) {
+                            this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -9714,6 +10065,14 @@
                          */
                         Runnable.prototype.timeout = null;
     
+                        /**
+                         * Runnable labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.batch.v1.Runnable
+                         * @instance
+                         */
+                        Runnable.prototype.labels = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -9768,6 +10127,9 @@
                                 $root.google.cloud.batch.v1.Environment.encode(message.environment, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
                                 $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -9798,7 +10160,7 @@
                         Runnable.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.Runnable();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.Runnable(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -9832,6 +10194,29 @@
                                     }
                                 case 8: {
                                         message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
                                         break;
                                     }
                                 default:
@@ -9917,6 +10302,14 @@
                                 if (error)
                                     return "timeout." + error;
                             }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -9963,6 +10356,13 @@
                                     throw TypeError(".google.cloud.batch.v1.Runnable.timeout: object expected");
                                 message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
                             }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.batch.v1.Runnable.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -9979,6 +10379,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.ignoreExitStatus = false;
                                 object.background = false;
@@ -10011,6 +10413,12 @@
                                 object.environment = $root.google.cloud.batch.v1.Environment.toObject(message.environment, options);
                             if (message.timeout != null && message.hasOwnProperty("timeout"))
                                 object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -14428,6 +14836,7 @@
                          * @interface IListJobsRequest
                          * @property {string|null} [parent] ListJobsRequest parent
                          * @property {string|null} [filter] ListJobsRequest filter
+                         * @property {string|null} [orderBy] ListJobsRequest orderBy
                          * @property {number|null} [pageSize] ListJobsRequest pageSize
                          * @property {string|null} [pageToken] ListJobsRequest pageToken
                          */
@@ -14462,6 +14871,14 @@
                          * @instance
                          */
                         ListJobsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListJobsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.batch.v1alpha.ListJobsRequest
+                         * @instance
+                         */
+                        ListJobsRequest.prototype.orderBy = "";
     
                         /**
                          * ListJobsRequest pageSize.
@@ -14511,6 +14928,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
                             return writer;
                         };
     
@@ -14551,6 +14970,10 @@
                                     }
                                 case 4: {
                                         message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -14602,6 +15025,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
@@ -14627,6 +15053,8 @@
                                 message.parent = String(object.parent);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
                             if (object.pageSize != null)
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
@@ -14652,6 +15080,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.filter = "";
+                                object.orderBy = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -14661,6 +15090,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
                             return object;
                         };
     
@@ -14989,6 +15420,7 @@
                          * @interface IListTasksRequest
                          * @property {string|null} [parent] ListTasksRequest parent
                          * @property {string|null} [filter] ListTasksRequest filter
+                         * @property {string|null} [orderBy] ListTasksRequest orderBy
                          * @property {number|null} [pageSize] ListTasksRequest pageSize
                          * @property {string|null} [pageToken] ListTasksRequest pageToken
                          */
@@ -15023,6 +15455,14 @@
                          * @instance
                          */
                         ListTasksRequest.prototype.filter = "";
+    
+                        /**
+                         * ListTasksRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.batch.v1alpha.ListTasksRequest
+                         * @instance
+                         */
+                        ListTasksRequest.prototype.orderBy = "";
     
                         /**
                          * ListTasksRequest pageSize.
@@ -15072,6 +15512,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
                             return writer;
                         };
     
@@ -15112,6 +15554,10 @@
                                     }
                                 case 2: {
                                         message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -15163,6 +15609,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
@@ -15188,6 +15637,8 @@
                                 message.parent = String(object.parent);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
                             if (object.pageSize != null)
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
@@ -15213,6 +15664,7 @@
                                 object.filter = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.orderBy = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -15222,6 +15674,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
                             return object;
                         };
     
@@ -19009,6 +19463,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 return null;
@@ -19113,6 +19568,10 @@
                                 case 5:
                                     message.newTaskState = 5;
                                     break;
+                                case "UNEXECUTED":
+                                case 6:
+                                    message.newTaskState = 6;
+                                    break;
                                 }
                                 return message;
                             };
@@ -19207,6 +19666,7 @@
                          * @property {google.cloud.batch.v1alpha.IServiceAccount|null} [serviceAccount] AllocationPolicy serviceAccount
                          * @property {Object.<string,string>|null} [labels] AllocationPolicy labels
                          * @property {google.cloud.batch.v1alpha.AllocationPolicy.INetworkPolicy|null} [network] AllocationPolicy network
+                         * @property {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null} [placement] AllocationPolicy placement
                          */
     
                         /**
@@ -19301,6 +19761,14 @@
                         AllocationPolicy.prototype.network = null;
     
                         /**
+                         * AllocationPolicy placement.
+                         * @member {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null|undefined} placement
+                         * @memberof google.cloud.batch.v1alpha.AllocationPolicy
+                         * @instance
+                         */
+                        AllocationPolicy.prototype.placement = null;
+    
+                        /**
                          * Creates a new AllocationPolicy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.AllocationPolicy
@@ -19349,6 +19817,8 @@
                                     $root.google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicyOrTemplate.encode(message.instances[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 $root.google.cloud.batch.v1alpha.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.placement != null && Object.hasOwnProperty.call(message, "placement"))
+                                $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.encode(message.placement, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -19449,6 +19919,10 @@
                                         message.network = $root.google.cloud.batch.v1alpha.AllocationPolicy.NetworkPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 10: {
+                                        message.placement = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19545,6 +20019,11 @@
                                 if (error)
                                     return "network." + error;
                             }
+                            if (message.placement != null && message.hasOwnProperty("placement")) {
+                                var error = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.verify(message.placement);
+                                if (error)
+                                    return "placement." + error;
+                            }
                             return null;
                         };
     
@@ -19635,6 +20114,11 @@
                                     throw TypeError(".google.cloud.batch.v1alpha.AllocationPolicy.network: object expected");
                                 message.network = $root.google.cloud.batch.v1alpha.AllocationPolicy.NetworkPolicy.fromObject(object.network);
                             }
+                            if (object.placement != null) {
+                                if (typeof object.placement !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.AllocationPolicy.placement: object expected");
+                                message.placement = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.fromObject(object.placement);
+                            }
                             return message;
                         };
     
@@ -19664,6 +20148,7 @@
                                 object.serviceAccountEmail = "";
                                 object.network = null;
                                 object.serviceAccount = null;
+                                object.placement = null;
                             }
                             if (message.location != null && message.hasOwnProperty("location"))
                                 object.location = $root.google.cloud.batch.v1alpha.AllocationPolicy.LocationPolicy.toObject(message.location, options);
@@ -19696,6 +20181,8 @@
                             }
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = $root.google.cloud.batch.v1alpha.ServiceAccount.toObject(message.serviceAccount, options);
+                            if (message.placement != null && message.hasOwnProperty("placement"))
+                                object.placement = $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.toObject(message.placement, options);
                             return object;
                         };
     
@@ -20608,6 +21095,7 @@
                              * @property {string|null} [type] Accelerator type
                              * @property {number|Long|null} [count] Accelerator count
                              * @property {boolean|null} [installGpuDrivers] Accelerator installGpuDrivers
+                             * @property {string|null} [driverVersion] Accelerator driverVersion
                              */
     
                             /**
@@ -20650,6 +21138,14 @@
                             Accelerator.prototype.installGpuDrivers = false;
     
                             /**
+                             * Accelerator driverVersion.
+                             * @member {string} driverVersion
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.Accelerator
+                             * @instance
+                             */
+                            Accelerator.prototype.driverVersion = "";
+    
+                            /**
                              * Creates a new Accelerator instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.batch.v1alpha.AllocationPolicy.Accelerator
@@ -20679,6 +21175,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
                                 if (message.installGpuDrivers != null && Object.hasOwnProperty.call(message, "installGpuDrivers"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.installGpuDrivers);
+                                if (message.driverVersion != null && Object.hasOwnProperty.call(message, "driverVersion"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.driverVersion);
                                 return writer;
                             };
     
@@ -20725,6 +21223,10 @@
                                             message.installGpuDrivers = reader.bool();
                                             break;
                                         }
+                                    case 4: {
+                                            message.driverVersion = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -20769,6 +21271,9 @@
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     if (typeof message.installGpuDrivers !== "boolean")
                                         return "installGpuDrivers: boolean expected";
+                                if (message.driverVersion != null && message.hasOwnProperty("driverVersion"))
+                                    if (!$util.isString(message.driverVersion))
+                                        return "driverVersion: string expected";
                                 return null;
                             };
     
@@ -20797,6 +21302,8 @@
                                         message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
                                 if (object.installGpuDrivers != null)
                                     message.installGpuDrivers = Boolean(object.installGpuDrivers);
+                                if (object.driverVersion != null)
+                                    message.driverVersion = String(object.driverVersion);
                                 return message;
                             };
     
@@ -20821,6 +21328,7 @@
                                     } else
                                         object.count = options.longs === String ? "0" : 0;
                                     object.installGpuDrivers = false;
+                                    object.driverVersion = "";
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     object.type = message.type;
@@ -20831,6 +21339,8 @@
                                         object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     object.installGpuDrivers = message.installGpuDrivers;
+                                if (message.driverVersion != null && message.hasOwnProperty("driverVersion"))
+                                    object.driverVersion = message.driverVersion;
                                 return object;
                             };
     
@@ -22076,6 +22586,247 @@
                             return NetworkPolicy;
                         })();
     
+                        AllocationPolicy.PlacementPolicy = (function() {
+    
+                            /**
+                             * Properties of a PlacementPolicy.
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy
+                             * @interface IPlacementPolicy
+                             * @property {string|null} [collocation] PlacementPolicy collocation
+                             * @property {number|Long|null} [maxDistance] PlacementPolicy maxDistance
+                             */
+    
+                            /**
+                             * Constructs a new PlacementPolicy.
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy
+                             * @classdesc Represents a PlacementPolicy.
+                             * @implements IPlacementPolicy
+                             * @constructor
+                             * @param {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy=} [properties] Properties to set
+                             */
+                            function PlacementPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PlacementPolicy collocation.
+                             * @member {string} collocation
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @instance
+                             */
+                            PlacementPolicy.prototype.collocation = "";
+    
+                            /**
+                             * PlacementPolicy maxDistance.
+                             * @member {number|Long} maxDistance
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @instance
+                             */
+                            PlacementPolicy.prototype.maxDistance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new PlacementPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy} PlacementPolicy instance
+                             */
+                            PlacementPolicy.create = function create(properties) {
+                                return new PlacementPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PlacementPolicy message. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy} message PlacementPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlacementPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.collocation != null && Object.hasOwnProperty.call(message, "collocation"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.collocation);
+                                if (message.maxDistance != null && Object.hasOwnProperty.call(message, "maxDistance"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.maxDistance);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PlacementPolicy message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy} message PlacementPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PlacementPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PlacementPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy} PlacementPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlacementPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.collocation = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxDistance = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PlacementPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy} PlacementPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PlacementPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PlacementPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PlacementPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.collocation != null && message.hasOwnProperty("collocation"))
+                                    if (!$util.isString(message.collocation))
+                                        return "collocation: string expected";
+                                if (message.maxDistance != null && message.hasOwnProperty("maxDistance"))
+                                    if (!$util.isInteger(message.maxDistance) && !(message.maxDistance && $util.isInteger(message.maxDistance.low) && $util.isInteger(message.maxDistance.high)))
+                                        return "maxDistance: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PlacementPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy} PlacementPolicy
+                             */
+                            PlacementPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy();
+                                if (object.collocation != null)
+                                    message.collocation = String(object.collocation);
+                                if (object.maxDistance != null)
+                                    if ($util.Long)
+                                        (message.maxDistance = $util.Long.fromValue(object.maxDistance)).unsigned = false;
+                                    else if (typeof object.maxDistance === "string")
+                                        message.maxDistance = parseInt(object.maxDistance, 10);
+                                    else if (typeof object.maxDistance === "number")
+                                        message.maxDistance = object.maxDistance;
+                                    else if (typeof object.maxDistance === "object")
+                                        message.maxDistance = new $util.LongBits(object.maxDistance.low >>> 0, object.maxDistance.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PlacementPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy} message PlacementPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PlacementPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.collocation = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.maxDistance = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.maxDistance = options.longs === String ? "0" : 0;
+                                }
+                                if (message.collocation != null && message.hasOwnProperty("collocation"))
+                                    object.collocation = message.collocation;
+                                if (message.maxDistance != null && message.hasOwnProperty("maxDistance"))
+                                    if (typeof message.maxDistance === "number")
+                                        object.maxDistance = options.longs === String ? String(message.maxDistance) : message.maxDistance;
+                                    else
+                                        object.maxDistance = options.longs === String ? $util.Long.prototype.toString.call(message.maxDistance) : options.longs === Number ? new $util.LongBits(message.maxDistance.low >>> 0, message.maxDistance.high >>> 0).toNumber() : message.maxDistance;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PlacementPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PlacementPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PlacementPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PlacementPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy";
+                            };
+    
+                            return PlacementPolicy;
+                        })();
+    
                         /**
                          * ProvisioningModel enum.
                          * @name google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel
@@ -22423,6 +23174,7 @@
                                     return "schedulingPolicy: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.allocationPolicy != null && message.hasOwnProperty("allocationPolicy")) {
@@ -22510,6 +23262,10 @@
                             case "AS_SOON_AS_POSSIBLE":
                             case 1:
                                 message.schedulingPolicy = 1;
+                                break;
+                            case "IN_ORDER":
+                            case 2:
+                                message.schedulingPolicy = 2;
                                 break;
                             }
                             if (object.allocationPolicy != null) {
@@ -22663,11 +23419,13 @@
                          * @enum {number}
                          * @property {number} SCHEDULING_POLICY_UNSPECIFIED=0 SCHEDULING_POLICY_UNSPECIFIED value
                          * @property {number} AS_SOON_AS_POSSIBLE=1 AS_SOON_AS_POSSIBLE value
+                         * @property {number} IN_ORDER=2 IN_ORDER value
                          */
                         TaskGroup.SchedulingPolicy = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SCHEDULING_POLICY_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "AS_SOON_AS_POSSIBLE"] = 1;
+                            values[valuesById[2] = "IN_ORDER"] = 2;
                             return values;
                         })();
     
@@ -23463,6 +24221,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -23524,6 +24283,10 @@
                             case "SUCCEEDED":
                             case 5:
                                 message.taskState = 5;
+                                break;
+                            case "UNEXECUTED":
+                            case 6:
+                                message.taskState = 6;
                                 break;
                             }
                             return message;
@@ -23969,6 +24732,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.statusEvents != null && message.hasOwnProperty("statusEvents")) {
@@ -24030,6 +24794,10 @@
                             case "SUCCEEDED":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "UNEXECUTED":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             if (object.statusEvents) {
@@ -24117,6 +24885,7 @@
                          * @property {number} RUNNING=3 RUNNING value
                          * @property {number} FAILED=4 FAILED value
                          * @property {number} SUCCEEDED=5 SUCCEEDED value
+                         * @property {number} UNEXECUTED=6 UNEXECUTED value
                          */
                         TaskStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -24126,6 +24895,7 @@
                             values[valuesById[3] = "RUNNING"] = 3;
                             values[valuesById[4] = "FAILED"] = 4;
                             values[valuesById[5] = "SUCCEEDED"] = 5;
+                            values[valuesById[6] = "UNEXECUTED"] = 6;
                             return values;
                         })();
     

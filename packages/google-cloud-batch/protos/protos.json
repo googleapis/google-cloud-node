@@ -576,6 +576,10 @@
                         "network": {
                           "type": "NetworkPolicy",
                           "id": 7
+                        },
+                        "placement": {
+                          "type": "PlacementPolicy",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -742,6 +746,18 @@
                             }
                           }
                         },
+                        "PlacementPolicy": {
+                          "fields": {
+                            "collocation": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxDistance": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
                         "ProvisioningModel": {
                           "values": {
                             "PROVISIONING_MODEL_UNSPECIFIED": 0,
@@ -780,6 +796,10 @@
                           "type": "int64",
                           "id": 5
                         },
+                        "schedulingPolicy": {
+                          "type": "SchedulingPolicy",
+                          "id": 6
+                        },
                         "taskEnvironments": {
                           "rule": "repeated",
                           "type": "Environment",
@@ -796,6 +816,15 @@
                         "permissiveSsh": {
                           "type": "bool",
                           "id": 12
+                        }
+                      },
+                      "nested": {
+                        "SchedulingPolicy": {
+                          "values": {
+                            "SCHEDULING_POLICY_UNSPECIFIED": 0,
+                            "AS_SOON_AS_POSSIBLE": 1,
+                            "IN_ORDER": 2
+                          }
                         }
                       }
                     },
@@ -880,7 +909,8 @@
                             "ASSIGNED": 2,
                             "RUNNING": 3,
                             "FAILED": 4,
-                            "SUCCEEDED": 5
+                            "SUCCEEDED": 5,
+                            "UNEXECUTED": 6
                           }
                         }
                       }
@@ -927,6 +957,11 @@
                         "timeout": {
                           "type": "google.protobuf.Duration",
                           "id": 8
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -1387,6 +1422,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "pageSize": {
                           "type": "int32",
                           "id": 2
@@ -1428,6 +1467,10 @@
                         "filter": {
                           "type": "string",
                           "id": 2
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1830,6 +1873,10 @@
                         "network": {
                           "type": "NetworkPolicy",
                           "id": 7
+                        },
+                        "placement": {
+                          "type": "PlacementPolicy",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -1919,6 +1966,10 @@
                               "options": {
                                 "deprecated": true
                               }
+                            },
+                            "driverVersion": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -2013,6 +2064,18 @@
                             }
                           }
                         },
+                        "PlacementPolicy": {
+                          "fields": {
+                            "collocation": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxDistance": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
                         "ProvisioningModel": {
                           "values": {
                             "PROVISIONING_MODEL_UNSPECIFIED": 0,
@@ -2086,7 +2149,8 @@
                         "SchedulingPolicy": {
                           "values": {
                             "SCHEDULING_POLICY_UNSPECIFIED": 0,
-                            "AS_SOON_AS_POSSIBLE": 1
+                            "AS_SOON_AS_POSSIBLE": 1,
+                            "IN_ORDER": 2
                           }
                         }
                       }
@@ -2180,7 +2244,8 @@
                             "ASSIGNED": 2,
                             "RUNNING": 3,
                             "FAILED": 4,
-                            "SUCCEEDED": 5
+                            "SUCCEEDED": 5,
+                            "UNEXECUTED": 6
                           }
                         }
                       }

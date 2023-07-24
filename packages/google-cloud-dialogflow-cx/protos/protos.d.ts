@@ -690,6 +690,9 @@ export namespace google {
                         /** Agent advancedSettings */
                         advancedSettings?: (google.cloud.dialogflow.cx.v3.IAdvancedSettings|null);
 
+                        /** Agent gitIntegrationSettings */
+                        gitIntegrationSettings?: (google.cloud.dialogflow.cx.v3.Agent.IGitIntegrationSettings|null);
+
                         /** Agent textToSpeechSettings */
                         textToSpeechSettings?: (google.cloud.dialogflow.cx.v3.ITextToSpeechSettings|null);
                     }
@@ -744,6 +747,9 @@ export namespace google {
 
                         /** Agent advancedSettings. */
                         public advancedSettings?: (google.cloud.dialogflow.cx.v3.IAdvancedSettings|null);
+
+                        /** Agent gitIntegrationSettings. */
+                        public gitIntegrationSettings?: (google.cloud.dialogflow.cx.v3.Agent.IGitIntegrationSettings|null);
 
                         /** Agent textToSpeechSettings. */
                         public textToSpeechSettings?: (google.cloud.dialogflow.cx.v3.ITextToSpeechSettings|null);
@@ -824,6 +830,233 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Agent {
+
+                        /** Properties of a GitIntegrationSettings. */
+                        interface IGitIntegrationSettings {
+
+                            /** GitIntegrationSettings githubSettings */
+                            githubSettings?: (google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.IGithubSettings|null);
+                        }
+
+                        /** Represents a GitIntegrationSettings. */
+                        class GitIntegrationSettings implements IGitIntegrationSettings {
+
+                            /**
+                             * Constructs a new GitIntegrationSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Agent.IGitIntegrationSettings);
+
+                            /** GitIntegrationSettings githubSettings. */
+                            public githubSettings?: (google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.IGithubSettings|null);
+
+                            /** GitIntegrationSettings gitSettings. */
+                            public gitSettings?: "githubSettings";
+
+                            /**
+                             * Creates a new GitIntegrationSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitIntegrationSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Agent.IGitIntegrationSettings): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Encodes the specified GitIntegrationSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.verify|verify} messages.
+                             * @param message GitIntegrationSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Agent.IGitIntegrationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitIntegrationSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.verify|verify} messages.
+                             * @param message GitIntegrationSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Agent.IGitIntegrationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitIntegrationSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitIntegrationSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Decodes a GitIntegrationSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitIntegrationSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Verifies a GitIntegrationSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitIntegrationSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitIntegrationSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Creates a plain object from a GitIntegrationSettings message. Also converts values to other types if specified.
+                             * @param message GitIntegrationSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitIntegrationSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitIntegrationSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GitIntegrationSettings {
+
+                            /** Properties of a GithubSettings. */
+                            interface IGithubSettings {
+
+                                /** GithubSettings displayName */
+                                displayName?: (string|null);
+
+                                /** GithubSettings repositoryUri */
+                                repositoryUri?: (string|null);
+
+                                /** GithubSettings trackingBranch */
+                                trackingBranch?: (string|null);
+
+                                /** GithubSettings accessToken */
+                                accessToken?: (string|null);
+
+                                /** GithubSettings branches */
+                                branches?: (string[]|null);
+                            }
+
+                            /** Represents a GithubSettings. */
+                            class GithubSettings implements IGithubSettings {
+
+                                /**
+                                 * Constructs a new GithubSettings.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.IGithubSettings);
+
+                                /** GithubSettings displayName. */
+                                public displayName: string;
+
+                                /** GithubSettings repositoryUri. */
+                                public repositoryUri: string;
+
+                                /** GithubSettings trackingBranch. */
+                                public trackingBranch: string;
+
+                                /** GithubSettings accessToken. */
+                                public accessToken: string;
+
+                                /** GithubSettings branches. */
+                                public branches: string[];
+
+                                /**
+                                 * Creates a new GithubSettings instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GithubSettings instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.IGithubSettings): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Encodes the specified GithubSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings.verify|verify} messages.
+                                 * @param message GithubSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.IGithubSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GithubSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings.verify|verify} messages.
+                                 * @param message GithubSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.IGithubSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GithubSettings message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GithubSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Decodes a GithubSettings message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GithubSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Verifies a GithubSettings message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GithubSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GithubSettings
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Creates a plain object from a GithubSettings message. Also converts values to other types if specified.
+                                 * @param message GithubSettings
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Agent.GitIntegrationSettings.GithubSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GithubSettings to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GithubSettings
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of a ListAgentsRequest. */
@@ -1452,6 +1685,12 @@ export namespace google {
 
                         /** ExportAgentRequest environment */
                         environment?: (string|null);
+
+                        /** ExportAgentRequest gitDestination */
+                        gitDestination?: (google.cloud.dialogflow.cx.v3.ExportAgentRequest.IGitDestination|null);
+
+                        /** ExportAgentRequest includeBigqueryExportSettings */
+                        includeBigqueryExportSettings?: (boolean|null);
                     }
 
                     /** Represents an ExportAgentRequest. */
@@ -1474,6 +1713,12 @@ export namespace google {
 
                         /** ExportAgentRequest environment. */
                         public environment: string;
+
+                        /** ExportAgentRequest gitDestination. */
+                        public gitDestination?: (google.cloud.dialogflow.cx.v3.ExportAgentRequest.IGitDestination|null);
+
+                        /** ExportAgentRequest includeBigqueryExportSettings. */
+                        public includeBigqueryExportSettings: boolean;
 
                         /**
                          * Creates a new ExportAgentRequest instance using the specified properties.
@@ -1561,6 +1806,109 @@ export namespace google {
                             BLOB = 1,
                             JSON_PACKAGE = 4
                         }
+
+                        /** Properties of a GitDestination. */
+                        interface IGitDestination {
+
+                            /** GitDestination trackingBranch */
+                            trackingBranch?: (string|null);
+
+                            /** GitDestination commitMessage */
+                            commitMessage?: (string|null);
+                        }
+
+                        /** Represents a GitDestination. */
+                        class GitDestination implements IGitDestination {
+
+                            /**
+                             * Constructs a new GitDestination.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.ExportAgentRequest.IGitDestination);
+
+                            /** GitDestination trackingBranch. */
+                            public trackingBranch: string;
+
+                            /** GitDestination commitMessage. */
+                            public commitMessage: string;
+
+                            /**
+                             * Creates a new GitDestination instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitDestination instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.ExportAgentRequest.IGitDestination): google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Encodes the specified GitDestination message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination.verify|verify} messages.
+                             * @param message GitDestination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.ExportAgentRequest.IGitDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitDestination message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination.verify|verify} messages.
+                             * @param message GitDestination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ExportAgentRequest.IGitDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitDestination message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Decodes a GitDestination message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Verifies a GitDestination message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitDestination message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitDestination
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Creates a plain object from a GitDestination message. Also converts values to other types if specified.
+                             * @param message GitDestination
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitDestination to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitDestination
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of an ExportAgentResponse. */
@@ -1571,6 +1919,9 @@ export namespace google {
 
                         /** ExportAgentResponse agentContent */
                         agentContent?: (Uint8Array|string|null);
+
+                        /** ExportAgentResponse commitSha */
+                        commitSha?: (string|null);
                     }
 
                     /** Represents an ExportAgentResponse. */
@@ -1588,8 +1939,11 @@ export namespace google {
                         /** ExportAgentResponse agentContent. */
                         public agentContent?: (Uint8Array|string|null);
 
+                        /** ExportAgentResponse commitSha. */
+                        public commitSha?: (string|null);
+
                         /** ExportAgentResponse agent. */
-                        public agent?: ("agentUri"|"agentContent");
+                        public agent?: ("agentUri"|"agentContent"|"commitSha");
 
                         /**
                          * Creates a new ExportAgentResponse instance using the specified properties.
@@ -1681,6 +2035,9 @@ export namespace google {
                         /** RestoreAgentRequest agentContent */
                         agentContent?: (Uint8Array|string|null);
 
+                        /** RestoreAgentRequest gitSource */
+                        gitSource?: (google.cloud.dialogflow.cx.v3.RestoreAgentRequest.IGitSource|null);
+
                         /** RestoreAgentRequest restoreOption */
                         restoreOption?: (google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption|keyof typeof google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption|null);
                     }
@@ -1703,11 +2060,14 @@ export namespace google {
                         /** RestoreAgentRequest agentContent. */
                         public agentContent?: (Uint8Array|string|null);
 
+                        /** RestoreAgentRequest gitSource. */
+                        public gitSource?: (google.cloud.dialogflow.cx.v3.RestoreAgentRequest.IGitSource|null);
+
                         /** RestoreAgentRequest restoreOption. */
                         public restoreOption: (google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption|keyof typeof google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption);
 
                         /** RestoreAgentRequest agent. */
-                        public agent?: ("agentUri"|"agentContent");
+                        public agent?: ("agentUri"|"agentContent"|"gitSource");
 
                         /**
                          * Creates a new RestoreAgentRequest instance using the specified properties.
@@ -1788,6 +2148,103 @@ export namespace google {
                     }
 
                     namespace RestoreAgentRequest {
+
+                        /** Properties of a GitSource. */
+                        interface IGitSource {
+
+                            /** GitSource trackingBranch */
+                            trackingBranch?: (string|null);
+                        }
+
+                        /** Represents a GitSource. */
+                        class GitSource implements IGitSource {
+
+                            /**
+                             * Constructs a new GitSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.RestoreAgentRequest.IGitSource);
+
+                            /** GitSource trackingBranch. */
+                            public trackingBranch: string;
+
+                            /**
+                             * Creates a new GitSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitSource instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.RestoreAgentRequest.IGitSource): google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Encodes the specified GitSource message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.RestoreAgentRequest.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.RestoreAgentRequest.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Verifies a GitSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                             * @param message GitSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
 
                         /** RestoreOption enum. */
                         enum RestoreOption {
@@ -13950,7 +14407,8 @@ export namespace google {
                             INTENT = 1,
                             PAGE = 2,
                             PARAMETERS = 3,
-                            UTTERANCE = 4
+                            UTTERANCE = 4,
+                            FLOW = 5
                         }
                     }
 
@@ -19078,6 +19536,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enablePartialResponse */
                         enablePartialResponse?: (boolean|null);
+
+                        /** StreamingDetectIntentRequest enableDebuggingInfo */
+                        enableDebuggingInfo?: (boolean|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -19103,6 +19564,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enablePartialResponse. */
                         public enablePartialResponse: boolean;
+
+                        /** StreamingDetectIntentRequest enableDebuggingInfo. */
+                        public enableDebuggingInfo: boolean;
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -19182,6 +19646,199 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CloudConversationDebuggingInfo. */
+                    interface ICloudConversationDebuggingInfo {
+
+                        /** CloudConversationDebuggingInfo audioDataChunks */
+                        audioDataChunks?: (number|null);
+
+                        /** CloudConversationDebuggingInfo resultEndTimeOffset */
+                        resultEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo firstAudioDuration */
+                        firstAudioDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo singleUtterance */
+                        singleUtterance?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo speechPartialResultsEndTimes */
+                        speechPartialResultsEndTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo speechFinalResultsEndTimes */
+                        speechFinalResultsEndTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo partialResponses */
+                        partialResponses?: (number|null);
+
+                        /** CloudConversationDebuggingInfo speakerIdPassiveLatencyMsOffset */
+                        speakerIdPassiveLatencyMsOffset?: (number|null);
+
+                        /** CloudConversationDebuggingInfo bargeinEventTriggered */
+                        bargeinEventTriggered?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo speechSingleUtterance */
+                        speechSingleUtterance?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo dtmfPartialResultsTimes */
+                        dtmfPartialResultsTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo dtmfFinalResultsTimes */
+                        dtmfFinalResultsTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo singleUtteranceEndTimeOffset */
+                        singleUtteranceEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo noSpeechTimeout */
+                        noSpeechTimeout?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo isInputText */
+                        isInputText?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseTimeOffset */
+                        clientHalfCloseTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseStreamingTimeOffset */
+                        clientHalfCloseStreamingTimeOffset?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a CloudConversationDebuggingInfo. */
+                    class CloudConversationDebuggingInfo implements ICloudConversationDebuggingInfo {
+
+                        /**
+                         * Constructs a new CloudConversationDebuggingInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo);
+
+                        /** CloudConversationDebuggingInfo audioDataChunks. */
+                        public audioDataChunks: number;
+
+                        /** CloudConversationDebuggingInfo resultEndTimeOffset. */
+                        public resultEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo firstAudioDuration. */
+                        public firstAudioDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo singleUtterance. */
+                        public singleUtterance: boolean;
+
+                        /** CloudConversationDebuggingInfo speechPartialResultsEndTimes. */
+                        public speechPartialResultsEndTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo speechFinalResultsEndTimes. */
+                        public speechFinalResultsEndTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo partialResponses. */
+                        public partialResponses: number;
+
+                        /** CloudConversationDebuggingInfo speakerIdPassiveLatencyMsOffset. */
+                        public speakerIdPassiveLatencyMsOffset: number;
+
+                        /** CloudConversationDebuggingInfo bargeinEventTriggered. */
+                        public bargeinEventTriggered: boolean;
+
+                        /** CloudConversationDebuggingInfo speechSingleUtterance. */
+                        public speechSingleUtterance: boolean;
+
+                        /** CloudConversationDebuggingInfo dtmfPartialResultsTimes. */
+                        public dtmfPartialResultsTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo dtmfFinalResultsTimes. */
+                        public dtmfFinalResultsTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo singleUtteranceEndTimeOffset. */
+                        public singleUtteranceEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo noSpeechTimeout. */
+                        public noSpeechTimeout?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo isInputText. */
+                        public isInputText: boolean;
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseTimeOffset. */
+                        public clientHalfCloseTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseStreamingTimeOffset. */
+                        public clientHalfCloseStreamingTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new CloudConversationDebuggingInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudConversationDebuggingInfo instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Encodes the specified CloudConversationDebuggingInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo.verify|verify} messages.
+                         * @param message CloudConversationDebuggingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudConversationDebuggingInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo.verify|verify} messages.
+                         * @param message CloudConversationDebuggingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudConversationDebuggingInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudConversationDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Decodes a CloudConversationDebuggingInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudConversationDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Verifies a CloudConversationDebuggingInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudConversationDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudConversationDebuggingInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Creates a plain object from a CloudConversationDebuggingInfo message. Also converts values to other types if specified.
+                         * @param message CloudConversationDebuggingInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudConversationDebuggingInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudConversationDebuggingInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a StreamingDetectIntentResponse. */
                     interface IStreamingDetectIntentResponse {
 
@@ -19190,6 +19847,9 @@ export namespace google {
 
                         /** StreamingDetectIntentResponse detectIntentResponse */
                         detectIntentResponse?: (google.cloud.dialogflow.cx.v3.IDetectIntentResponse|null);
+
+                        /** StreamingDetectIntentResponse debuggingInfo */
+                        debuggingInfo?: (google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo|null);
                     }
 
                     /** Represents a StreamingDetectIntentResponse. */
@@ -19206,6 +19866,9 @@ export namespace google {
 
                         /** StreamingDetectIntentResponse detectIntentResponse. */
                         public detectIntentResponse?: (google.cloud.dialogflow.cx.v3.IDetectIntentResponse|null);
+
+                        /** StreamingDetectIntentResponse debuggingInfo. */
+                        public debuggingInfo?: (google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo|null);
 
                         /** StreamingDetectIntentResponse response. */
                         public response?: ("recognitionResult"|"detectIntentResponse");
@@ -19472,6 +20135,9 @@ export namespace google {
 
                         /** QueryParameters channel */
                         channel?: (string|null);
+
+                        /** QueryParameters sessionTtl */
+                        sessionTtl?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -19515,6 +20181,9 @@ export namespace google {
 
                         /** QueryParameters channel. */
                         public channel: string;
+
+                        /** QueryParameters sessionTtl. */
+                        public sessionTtl?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.
@@ -23142,6 +23811,18 @@ export namespace google {
 
                             /** GenericWebService allowedCaCerts */
                             allowedCaCerts?: (Uint8Array[]|null);
+
+                            /** GenericWebService webhookType */
+                            webhookType?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|null);
+
+                            /** GenericWebService httpMethod */
+                            httpMethod?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod|null);
+
+                            /** GenericWebService requestBody */
+                            requestBody?: (string|null);
+
+                            /** GenericWebService parameterMapping */
+                            parameterMapping?: ({ [k: string]: string }|null);
                         }
 
                         /** Represents a GenericWebService. */
@@ -23167,6 +23848,18 @@ export namespace google {
 
                             /** GenericWebService allowedCaCerts. */
                             public allowedCaCerts: Uint8Array[];
+
+                            /** GenericWebService webhookType. */
+                            public webhookType: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType);
+
+                            /** GenericWebService httpMethod. */
+                            public httpMethod: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.HttpMethod);
+
+                            /** GenericWebService requestBody. */
+                            public requestBody: string;
+
+                            /** GenericWebService parameterMapping. */
+                            public parameterMapping: { [k: string]: string };
 
                             /**
                              * Creates a new GenericWebService instance using the specified properties.
@@ -23244,6 +23937,28 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GenericWebService {
+
+                            /** WebhookType enum. */
+                            enum WebhookType {
+                                WEBHOOK_TYPE_UNSPECIFIED = 0,
+                                STANDARD = 1,
+                                FLEXIBLE = 2
+                            }
+
+                            /** HttpMethod enum. */
+                            enum HttpMethod {
+                                HTTP_METHOD_UNSPECIFIED = 0,
+                                POST = 1,
+                                GET = 2,
+                                HEAD = 3,
+                                PUT = 4,
+                                DELETE = 5,
+                                PATCH = 6,
+                                OPTIONS = 7
+                            }
                         }
 
                         /** Properties of a ServiceDirectoryConfig. */
@@ -23986,6 +24701,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent */
                         triggerEvent?: (string|null);
 
+                        /** WebhookRequest dtmfDigits */
+                        dtmfDigits?: (string|null);
+
                         /** WebhookRequest languageCode */
                         languageCode?: (string|null);
 
@@ -24035,6 +24753,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent. */
                         public triggerEvent?: (string|null);
 
+                        /** WebhookRequest dtmfDigits. */
+                        public dtmfDigits?: (string|null);
+
                         /** WebhookRequest languageCode. */
                         public languageCode: string;
 
@@ -24060,7 +24781,7 @@ export namespace google {
                         public sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
 
                         /** WebhookRequest query. */
-                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent");
+                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent"|"dtmfDigits");
 
                         /**
                          * Creates a new WebhookRequest instance using the specified properties.
@@ -30793,6 +31514,9 @@ export namespace google {
                         /** Agent advancedSettings */
                         advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
 
+                        /** Agent gitIntegrationSettings */
+                        gitIntegrationSettings?: (google.cloud.dialogflow.cx.v3beta1.Agent.IGitIntegrationSettings|null);
+
                         /** Agent textToSpeechSettings */
                         textToSpeechSettings?: (google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings|null);
                     }
@@ -30847,6 +31571,9 @@ export namespace google {
 
                         /** Agent advancedSettings. */
                         public advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
+
+                        /** Agent gitIntegrationSettings. */
+                        public gitIntegrationSettings?: (google.cloud.dialogflow.cx.v3beta1.Agent.IGitIntegrationSettings|null);
 
                         /** Agent textToSpeechSettings. */
                         public textToSpeechSettings?: (google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings|null);
@@ -30927,6 +31654,233 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Agent {
+
+                        /** Properties of a GitIntegrationSettings. */
+                        interface IGitIntegrationSettings {
+
+                            /** GitIntegrationSettings githubSettings */
+                            githubSettings?: (google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.IGithubSettings|null);
+                        }
+
+                        /** Represents a GitIntegrationSettings. */
+                        class GitIntegrationSettings implements IGitIntegrationSettings {
+
+                            /**
+                             * Constructs a new GitIntegrationSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Agent.IGitIntegrationSettings);
+
+                            /** GitIntegrationSettings githubSettings. */
+                            public githubSettings?: (google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.IGithubSettings|null);
+
+                            /** GitIntegrationSettings gitSettings. */
+                            public gitSettings?: "githubSettings";
+
+                            /**
+                             * Creates a new GitIntegrationSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitIntegrationSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Agent.IGitIntegrationSettings): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Encodes the specified GitIntegrationSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.verify|verify} messages.
+                             * @param message GitIntegrationSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.Agent.IGitIntegrationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitIntegrationSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.verify|verify} messages.
+                             * @param message GitIntegrationSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Agent.IGitIntegrationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitIntegrationSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitIntegrationSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Decodes a GitIntegrationSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitIntegrationSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Verifies a GitIntegrationSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitIntegrationSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitIntegrationSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings;
+
+                            /**
+                             * Creates a plain object from a GitIntegrationSettings message. Also converts values to other types if specified.
+                             * @param message GitIntegrationSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitIntegrationSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitIntegrationSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GitIntegrationSettings {
+
+                            /** Properties of a GithubSettings. */
+                            interface IGithubSettings {
+
+                                /** GithubSettings displayName */
+                                displayName?: (string|null);
+
+                                /** GithubSettings repositoryUri */
+                                repositoryUri?: (string|null);
+
+                                /** GithubSettings trackingBranch */
+                                trackingBranch?: (string|null);
+
+                                /** GithubSettings accessToken */
+                                accessToken?: (string|null);
+
+                                /** GithubSettings branches */
+                                branches?: (string[]|null);
+                            }
+
+                            /** Represents a GithubSettings. */
+                            class GithubSettings implements IGithubSettings {
+
+                                /**
+                                 * Constructs a new GithubSettings.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.IGithubSettings);
+
+                                /** GithubSettings displayName. */
+                                public displayName: string;
+
+                                /** GithubSettings repositoryUri. */
+                                public repositoryUri: string;
+
+                                /** GithubSettings trackingBranch. */
+                                public trackingBranch: string;
+
+                                /** GithubSettings accessToken. */
+                                public accessToken: string;
+
+                                /** GithubSettings branches. */
+                                public branches: string[];
+
+                                /**
+                                 * Creates a new GithubSettings instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GithubSettings instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.IGithubSettings): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Encodes the specified GithubSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings.verify|verify} messages.
+                                 * @param message GithubSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.IGithubSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GithubSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings.verify|verify} messages.
+                                 * @param message GithubSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.IGithubSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GithubSettings message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GithubSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Decodes a GithubSettings message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GithubSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Verifies a GithubSettings message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GithubSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GithubSettings
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings;
+
+                                /**
+                                 * Creates a plain object from a GithubSettings message. Also converts values to other types if specified.
+                                 * @param message GithubSettings
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Agent.GitIntegrationSettings.GithubSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GithubSettings to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GithubSettings
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of a ListAgentsRequest. */
@@ -31555,6 +32509,12 @@ export namespace google {
 
                         /** ExportAgentRequest environment */
                         environment?: (string|null);
+
+                        /** ExportAgentRequest gitDestination */
+                        gitDestination?: (google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.IGitDestination|null);
+
+                        /** ExportAgentRequest includeBigqueryExportSettings */
+                        includeBigqueryExportSettings?: (boolean|null);
                     }
 
                     /** Represents an ExportAgentRequest. */
@@ -31577,6 +32537,12 @@ export namespace google {
 
                         /** ExportAgentRequest environment. */
                         public environment: string;
+
+                        /** ExportAgentRequest gitDestination. */
+                        public gitDestination?: (google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.IGitDestination|null);
+
+                        /** ExportAgentRequest includeBigqueryExportSettings. */
+                        public includeBigqueryExportSettings: boolean;
 
                         /**
                          * Creates a new ExportAgentRequest instance using the specified properties.
@@ -31664,6 +32630,109 @@ export namespace google {
                             BLOB = 1,
                             JSON_PACKAGE = 4
                         }
+
+                        /** Properties of a GitDestination. */
+                        interface IGitDestination {
+
+                            /** GitDestination trackingBranch */
+                            trackingBranch?: (string|null);
+
+                            /** GitDestination commitMessage */
+                            commitMessage?: (string|null);
+                        }
+
+                        /** Represents a GitDestination. */
+                        class GitDestination implements IGitDestination {
+
+                            /**
+                             * Constructs a new GitDestination.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.IGitDestination);
+
+                            /** GitDestination trackingBranch. */
+                            public trackingBranch: string;
+
+                            /** GitDestination commitMessage. */
+                            public commitMessage: string;
+
+                            /**
+                             * Creates a new GitDestination instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitDestination instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.IGitDestination): google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Encodes the specified GitDestination message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination.verify|verify} messages.
+                             * @param message GitDestination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.IGitDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitDestination message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination.verify|verify} messages.
+                             * @param message GitDestination message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.IGitDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitDestination message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Decodes a GitDestination message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Verifies a GitDestination message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitDestination message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitDestination
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination;
+
+                            /**
+                             * Creates a plain object from a GitDestination message. Also converts values to other types if specified.
+                             * @param message GitDestination
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ExportAgentRequest.GitDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitDestination to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitDestination
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of an ExportAgentResponse. */
@@ -31674,6 +32743,9 @@ export namespace google {
 
                         /** ExportAgentResponse agentContent */
                         agentContent?: (Uint8Array|string|null);
+
+                        /** ExportAgentResponse commitSha */
+                        commitSha?: (string|null);
                     }
 
                     /** Represents an ExportAgentResponse. */
@@ -31691,8 +32763,11 @@ export namespace google {
                         /** ExportAgentResponse agentContent. */
                         public agentContent?: (Uint8Array|string|null);
 
+                        /** ExportAgentResponse commitSha. */
+                        public commitSha?: (string|null);
+
                         /** ExportAgentResponse agent. */
-                        public agent?: ("agentUri"|"agentContent");
+                        public agent?: ("agentUri"|"agentContent"|"commitSha");
 
                         /**
                          * Creates a new ExportAgentResponse instance using the specified properties.
@@ -31784,6 +32859,9 @@ export namespace google {
                         /** RestoreAgentRequest agentContent */
                         agentContent?: (Uint8Array|string|null);
 
+                        /** RestoreAgentRequest gitSource */
+                        gitSource?: (google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.IGitSource|null);
+
                         /** RestoreAgentRequest restoreOption */
                         restoreOption?: (google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption|null);
                     }
@@ -31806,11 +32884,14 @@ export namespace google {
                         /** RestoreAgentRequest agentContent. */
                         public agentContent?: (Uint8Array|string|null);
 
+                        /** RestoreAgentRequest gitSource. */
+                        public gitSource?: (google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.IGitSource|null);
+
                         /** RestoreAgentRequest restoreOption. */
                         public restoreOption: (google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption);
 
                         /** RestoreAgentRequest agent. */
-                        public agent?: ("agentUri"|"agentContent");
+                        public agent?: ("agentUri"|"agentContent"|"gitSource");
 
                         /**
                          * Creates a new RestoreAgentRequest instance using the specified properties.
@@ -31891,6 +32972,103 @@ export namespace google {
                     }
 
                     namespace RestoreAgentRequest {
+
+                        /** Properties of a GitSource. */
+                        interface IGitSource {
+
+                            /** GitSource trackingBranch */
+                            trackingBranch?: (string|null);
+                        }
+
+                        /** Represents a GitSource. */
+                        class GitSource implements IGitSource {
+
+                            /**
+                             * Constructs a new GitSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.IGitSource);
+
+                            /** GitSource trackingBranch. */
+                            public trackingBranch: string;
+
+                            /**
+                             * Creates a new GitSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GitSource instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.IGitSource): google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Encodes the specified GitSource message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource.verify|verify} messages.
+                             * @param message GitSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GitSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Verifies a GitSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GitSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource;
+
+                            /**
+                             * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                             * @param message GitSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.GitSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GitSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GitSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
 
                         /** RestoreOption enum. */
                         enum RestoreOption {
@@ -44053,7 +45231,8 @@ export namespace google {
                             INTENT = 1,
                             PAGE = 2,
                             PARAMETERS = 3,
-                            UTTERANCE = 4
+                            UTTERANCE = 4,
+                            FLOW = 5
                         }
                     }
 
@@ -49181,6 +50360,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enablePartialResponse */
                         enablePartialResponse?: (boolean|null);
+
+                        /** StreamingDetectIntentRequest enableDebuggingInfo */
+                        enableDebuggingInfo?: (boolean|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -49206,6 +50388,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enablePartialResponse. */
                         public enablePartialResponse: boolean;
+
+                        /** StreamingDetectIntentRequest enableDebuggingInfo. */
+                        public enableDebuggingInfo: boolean;
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -49285,6 +50470,199 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CloudConversationDebuggingInfo. */
+                    interface ICloudConversationDebuggingInfo {
+
+                        /** CloudConversationDebuggingInfo audioDataChunks */
+                        audioDataChunks?: (number|null);
+
+                        /** CloudConversationDebuggingInfo resultEndTimeOffset */
+                        resultEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo firstAudioDuration */
+                        firstAudioDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo singleUtterance */
+                        singleUtterance?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo speechPartialResultsEndTimes */
+                        speechPartialResultsEndTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo speechFinalResultsEndTimes */
+                        speechFinalResultsEndTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo partialResponses */
+                        partialResponses?: (number|null);
+
+                        /** CloudConversationDebuggingInfo speakerIdPassiveLatencyMsOffset */
+                        speakerIdPassiveLatencyMsOffset?: (number|null);
+
+                        /** CloudConversationDebuggingInfo bargeinEventTriggered */
+                        bargeinEventTriggered?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo speechSingleUtterance */
+                        speechSingleUtterance?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo dtmfPartialResultsTimes */
+                        dtmfPartialResultsTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo dtmfFinalResultsTimes */
+                        dtmfFinalResultsTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo singleUtteranceEndTimeOffset */
+                        singleUtteranceEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo noSpeechTimeout */
+                        noSpeechTimeout?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo isInputText */
+                        isInputText?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseTimeOffset */
+                        clientHalfCloseTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseStreamingTimeOffset */
+                        clientHalfCloseStreamingTimeOffset?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a CloudConversationDebuggingInfo. */
+                    class CloudConversationDebuggingInfo implements ICloudConversationDebuggingInfo {
+
+                        /**
+                         * Constructs a new CloudConversationDebuggingInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ICloudConversationDebuggingInfo);
+
+                        /** CloudConversationDebuggingInfo audioDataChunks. */
+                        public audioDataChunks: number;
+
+                        /** CloudConversationDebuggingInfo resultEndTimeOffset. */
+                        public resultEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo firstAudioDuration. */
+                        public firstAudioDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo singleUtterance. */
+                        public singleUtterance: boolean;
+
+                        /** CloudConversationDebuggingInfo speechPartialResultsEndTimes. */
+                        public speechPartialResultsEndTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo speechFinalResultsEndTimes. */
+                        public speechFinalResultsEndTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo partialResponses. */
+                        public partialResponses: number;
+
+                        /** CloudConversationDebuggingInfo speakerIdPassiveLatencyMsOffset. */
+                        public speakerIdPassiveLatencyMsOffset: number;
+
+                        /** CloudConversationDebuggingInfo bargeinEventTriggered. */
+                        public bargeinEventTriggered: boolean;
+
+                        /** CloudConversationDebuggingInfo speechSingleUtterance. */
+                        public speechSingleUtterance: boolean;
+
+                        /** CloudConversationDebuggingInfo dtmfPartialResultsTimes. */
+                        public dtmfPartialResultsTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo dtmfFinalResultsTimes. */
+                        public dtmfFinalResultsTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo singleUtteranceEndTimeOffset. */
+                        public singleUtteranceEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo noSpeechTimeout. */
+                        public noSpeechTimeout?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo isInputText. */
+                        public isInputText: boolean;
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseTimeOffset. */
+                        public clientHalfCloseTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseStreamingTimeOffset. */
+                        public clientHalfCloseStreamingTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new CloudConversationDebuggingInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudConversationDebuggingInfo instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ICloudConversationDebuggingInfo): google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Encodes the specified CloudConversationDebuggingInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo.verify|verify} messages.
+                         * @param message CloudConversationDebuggingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ICloudConversationDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudConversationDebuggingInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo.verify|verify} messages.
+                         * @param message CloudConversationDebuggingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ICloudConversationDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudConversationDebuggingInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudConversationDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Decodes a CloudConversationDebuggingInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudConversationDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Verifies a CloudConversationDebuggingInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudConversationDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudConversationDebuggingInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Creates a plain object from a CloudConversationDebuggingInfo message. Also converts values to other types if specified.
+                         * @param message CloudConversationDebuggingInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.CloudConversationDebuggingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudConversationDebuggingInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudConversationDebuggingInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a StreamingDetectIntentResponse. */
                     interface IStreamingDetectIntentResponse {
 
@@ -49293,6 +50671,9 @@ export namespace google {
 
                         /** StreamingDetectIntentResponse detectIntentResponse */
                         detectIntentResponse?: (google.cloud.dialogflow.cx.v3beta1.IDetectIntentResponse|null);
+
+                        /** StreamingDetectIntentResponse debuggingInfo */
+                        debuggingInfo?: (google.cloud.dialogflow.cx.v3beta1.ICloudConversationDebuggingInfo|null);
                     }
 
                     /** Represents a StreamingDetectIntentResponse. */
@@ -49309,6 +50690,9 @@ export namespace google {
 
                         /** StreamingDetectIntentResponse detectIntentResponse. */
                         public detectIntentResponse?: (google.cloud.dialogflow.cx.v3beta1.IDetectIntentResponse|null);
+
+                        /** StreamingDetectIntentResponse debuggingInfo. */
+                        public debuggingInfo?: (google.cloud.dialogflow.cx.v3beta1.ICloudConversationDebuggingInfo|null);
 
                         /** StreamingDetectIntentResponse response. */
                         public response?: ("recognitionResult"|"detectIntentResponse");
@@ -49575,6 +50959,9 @@ export namespace google {
 
                         /** QueryParameters channel */
                         channel?: (string|null);
+
+                        /** QueryParameters sessionTtl */
+                        sessionTtl?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -49618,6 +51005,9 @@ export namespace google {
 
                         /** QueryParameters channel. */
                         public channel: string;
+
+                        /** QueryParameters sessionTtl. */
+                        public sessionTtl?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.
@@ -53245,6 +54635,18 @@ export namespace google {
 
                             /** GenericWebService allowedCaCerts */
                             allowedCaCerts?: (Uint8Array[]|null);
+
+                            /** GenericWebService webhookType */
+                            webhookType?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|null);
+
+                            /** GenericWebService httpMethod */
+                            httpMethod?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.HttpMethod|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.HttpMethod|null);
+
+                            /** GenericWebService requestBody */
+                            requestBody?: (string|null);
+
+                            /** GenericWebService parameterMapping */
+                            parameterMapping?: ({ [k: string]: string }|null);
                         }
 
                         /** Represents a GenericWebService. */
@@ -53270,6 +54672,18 @@ export namespace google {
 
                             /** GenericWebService allowedCaCerts. */
                             public allowedCaCerts: Uint8Array[];
+
+                            /** GenericWebService webhookType. */
+                            public webhookType: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType);
+
+                            /** GenericWebService httpMethod. */
+                            public httpMethod: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.HttpMethod|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.HttpMethod);
+
+                            /** GenericWebService requestBody. */
+                            public requestBody: string;
+
+                            /** GenericWebService parameterMapping. */
+                            public parameterMapping: { [k: string]: string };
 
                             /**
                              * Creates a new GenericWebService instance using the specified properties.
@@ -53347,6 +54761,28 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GenericWebService {
+
+                            /** WebhookType enum. */
+                            enum WebhookType {
+                                WEBHOOK_TYPE_UNSPECIFIED = 0,
+                                STANDARD = 1,
+                                FLEXIBLE = 2
+                            }
+
+                            /** HttpMethod enum. */
+                            enum HttpMethod {
+                                HTTP_METHOD_UNSPECIFIED = 0,
+                                POST = 1,
+                                GET = 2,
+                                HEAD = 3,
+                                PUT = 4,
+                                DELETE = 5,
+                                PATCH = 6,
+                                OPTIONS = 7
+                            }
                         }
 
                         /** Properties of a ServiceDirectoryConfig. */
@@ -54089,6 +55525,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent */
                         triggerEvent?: (string|null);
 
+                        /** WebhookRequest dtmfDigits */
+                        dtmfDigits?: (string|null);
+
                         /** WebhookRequest languageCode */
                         languageCode?: (string|null);
 
@@ -54138,6 +55577,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent. */
                         public triggerEvent?: (string|null);
 
+                        /** WebhookRequest dtmfDigits. */
+                        public dtmfDigits?: (string|null);
+
                         /** WebhookRequest languageCode. */
                         public languageCode: string;
 
@@ -54163,7 +55605,7 @@ export namespace google {
                         public sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3beta1.WebhookRequest.ISentimentAnalysisResult|null);
 
                         /** WebhookRequest query. */
-                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent");
+                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent"|"dtmfDigits");
 
                         /**
                          * Creates a new WebhookRequest instance using the specified properties.

@@ -29,19 +29,19 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the location that contains the entry groups, which can be
-   *  provided in URL format. Example:
+   *  Required. The name of the location that contains the entry groups, which
+   *  can be provided in URL format. Example:
    *  * projects/{project_id}/locations/{location}
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *  Throws an invalid argument for `page_size > 1000`.
+   *  Optional. The maximum number of items to return. Default is 10. Max limit
+   *  is 1000. Throws an invalid argument for `page_size > 1000`.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Token that specifies which page is requested. If empty, the first page is
-   *  returned.
+   *  Optional. Token that specifies which page is requested. If empty, the first
+   *  page is returned.
    */
   // const pageToken = 'abc123'
 

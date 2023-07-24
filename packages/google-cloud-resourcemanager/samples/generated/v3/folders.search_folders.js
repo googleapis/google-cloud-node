@@ -29,13 +29,14 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. The maximum number of folders to return in the response.
-   *  If unspecified, server picks an appropriate default.
+   *  Optional. The maximum number of folders to return in the response. The
+   *  server can return fewer folders than requested. If unspecified, server
+   *  picks an appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A pagination token returned from a previous call to `SearchFolders`
-   *  that indicates from where search should continue.
+   *  Optional. A pagination token returned from a previous call to
+   *  `SearchFolders` that indicates from where search should continue.
    */
   // const pageToken = 'abc123'
   /**

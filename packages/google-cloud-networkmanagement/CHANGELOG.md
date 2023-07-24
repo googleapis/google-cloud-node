@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v2.4.2...network-management-v2.5.0) (2023-06-28)
+
+
+### Features
+
+* [networkmanagement] add forwarding_rule field to Connectivity Test Endpoint proto ([#4371](https://github.com/googleapis/google-cloud-node/issues/4371)) ([eca0623](https://github.com/googleapis/google-cloud-node/commit/eca06233d65148c564133150c1fa13522988a9af))
+
 ## [2.4.2](https://github.com/googleapis/google-cloud-node/compare/network-management-v2.4.1...network-management-v2.4.2) (2023-04-13)
 
 

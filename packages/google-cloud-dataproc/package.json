@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dataproc",
   "description": "Google Cloud Dataproc API client for Node.js",
-  "version": "4.4.1",
+  "version": "4.5.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -32,20 +32,20 @@
     "Google Cloud Dataproc API"
   ],
   "scripts": {
-    "test": "c8 mocha build/test",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "lint": "gts check",
-    "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "fix": "gts fix",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
-    "precompile": "gts clean"
+    "docs": "jsdoc -c .jsdoc.js",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs",
+    "fix": "gts fix",
+    "lint": "gts check",
+    "prepare": "npm run compile-protos && npm run compile",
+    "prelint": "cd samples; npm link ../; npm i",
+    "postpack": "minifyProtoJson",
+    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "c8 mocha build/system-test",
+    "test": "c8 mocha build/test"
   },
   "dependencies": {
     "google-gax": "^3.5.8"
@@ -60,7 +60,8 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
-    "linkinator": "^4.0.0",
+    "linkinator": "4.1.2",
+    "long": "^5.2.3",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
@@ -72,4 +73,3 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataproc"
 }
-

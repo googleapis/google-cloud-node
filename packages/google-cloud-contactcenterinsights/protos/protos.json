@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.contactcenterinsights.v1",
                     "php_namespace": "Google\\Cloud\\ContactCenterInsights\\V1",
                     "ruby_package": "Google::Cloud::ContactCenterInsights::V1",
-                    "(google.api.resource_definition).type": "dialogflow.googleapis.com/Participant",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
+                    "(google.api.resource_definition).type": "speech.googleapis.com/Recognizer",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/recognizers/{recognizer}"
                   },
                   "nested": {
                     "ContactCenterInsights": {
@@ -2116,6 +2116,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "latestSummary": {
+                          "type": "ConversationSummarizationSuggestionData",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "runtimeAnnotations": {
                           "rule": "repeated",
                           "type": "RuntimeAnnotation",
@@ -2706,6 +2713,14 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "modelType": {
+                          "type": "ModelType",
+                          "id": 9
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2739,6 +2754,13 @@
                             "DEPLOYED": 3,
                             "UNDEPLOYING": 4,
                             "DELETING": 5
+                          }
+                        },
+                        "ModelType": {
+                          "values": {
+                            "MODEL_TYPE_UNSPECIFIED": 0,
+                            "TYPE_V1": 1,
+                            "TYPE_V2": 2
                           }
                         }
                       }
@@ -3051,7 +3073,8 @@
                             "faqAnswer",
                             "smartReply",
                             "smartComposeSuggestion",
-                            "dialogflowInteraction"
+                            "dialogflowInteraction",
+                            "conversationSummarizationSuggestion"
                           ]
                         }
                       },
@@ -3075,6 +3098,10 @@
                         "dialogflowInteraction": {
                           "type": "DialogflowInteractionData",
                           "id": 10
+                        },
+                        "conversationSummarizationSuggestion": {
+                          "type": "ConversationSummarizationSuggestionData",
+                          "id": 12
                         },
                         "annotationId": {
                           "type": "string",
@@ -3236,6 +3263,36 @@
                         }
                       }
                     },
+                    "ConversationSummarizationSuggestionData": {
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "textSections": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "answerRecord": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "conversationModel": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
                     "ConversationParticipant": {
                       "oneofs": {
                         "participant": {
@@ -3366,6 +3423,47 @@
                           "id": 10,
                           "options": {
                             "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
+                        },
+                        "runSummarizationAnnotator": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "summarizationConfig": {
+                          "type": "SummarizationConfig",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "SummarizationConfig": {
+                          "oneofs": {
+                            "modelSource": {
+                              "oneof": [
+                                "conversationProfile",
+                                "summarizationModel"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "conversationProfile": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationProfile"
+                              }
+                            },
+                            "summarizationModel": {
+                              "type": "SummarizationModel",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SummarizationModel": {
+                              "values": {
+                                "SUMMARIZATION_MODEL_UNSPECIFIED": 0,
+                                "BASELINE_MODEL": 1
+                              }
+                            }
                           }
                         }
                       }

@@ -7507,6 +7507,181 @@
                         return GetServiceRolloutRequest;
                     })();
     
+                    v1.EnableServiceResponse = (function() {
+    
+                        /**
+                         * Properties of an EnableServiceResponse.
+                         * @memberof google.api.servicemanagement.v1
+                         * @interface IEnableServiceResponse
+                         */
+    
+                        /**
+                         * Constructs a new EnableServiceResponse.
+                         * @memberof google.api.servicemanagement.v1
+                         * @classdesc Represents an EnableServiceResponse.
+                         * @implements IEnableServiceResponse
+                         * @constructor
+                         * @param {google.api.servicemanagement.v1.IEnableServiceResponse=} [properties] Properties to set
+                         */
+                        function EnableServiceResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new EnableServiceResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {google.api.servicemanagement.v1.IEnableServiceResponse=} [properties] Properties to set
+                         * @returns {google.api.servicemanagement.v1.EnableServiceResponse} EnableServiceResponse instance
+                         */
+                        EnableServiceResponse.create = function create(properties) {
+                            return new EnableServiceResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EnableServiceResponse message. Does not implicitly {@link google.api.servicemanagement.v1.EnableServiceResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {google.api.servicemanagement.v1.IEnableServiceResponse} message EnableServiceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnableServiceResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EnableServiceResponse message, length delimited. Does not implicitly {@link google.api.servicemanagement.v1.EnableServiceResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {google.api.servicemanagement.v1.IEnableServiceResponse} message EnableServiceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnableServiceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EnableServiceResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicemanagement.v1.EnableServiceResponse} EnableServiceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnableServiceResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicemanagement.v1.EnableServiceResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EnableServiceResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicemanagement.v1.EnableServiceResponse} EnableServiceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnableServiceResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EnableServiceResponse message.
+                         * @function verify
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EnableServiceResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EnableServiceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicemanagement.v1.EnableServiceResponse} EnableServiceResponse
+                         */
+                        EnableServiceResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicemanagement.v1.EnableServiceResponse)
+                                return object;
+                            return new $root.google.api.servicemanagement.v1.EnableServiceResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an EnableServiceResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {google.api.servicemanagement.v1.EnableServiceResponse} message EnableServiceResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EnableServiceResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this EnableServiceResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EnableServiceResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EnableServiceResponse
+                         * @function getTypeUrl
+                         * @memberof google.api.servicemanagement.v1.EnableServiceResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EnableServiceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicemanagement.v1.EnableServiceResponse";
+                        };
+    
+                        return EnableServiceResponse;
+                    })();
+    
                     v1.GenerateConfigReportRequest = (function() {
     
                         /**

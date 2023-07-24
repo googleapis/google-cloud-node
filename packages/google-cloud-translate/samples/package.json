@@ -16,9 +16,9 @@
   "dependencies": {
     "@google-cloud/automl": "^3.0.0",
     "@google-cloud/text-to-speech": "^4.0.0",
-    "@google-cloud/translate": "^7.2.1",
+    "@google-cloud/translate": "^7.2.2",
     "@google-cloud/vision": "^3.0.0",
-    "yargs": "^16.0.0"
+    "yargs": "^17.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^6.0.0",

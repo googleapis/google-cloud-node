@@ -33,7 +33,8 @@ function main(uri, threatTypes) {
    */
   // const uri = 'abc123'
   /**
-   *  Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
+   *  Required. The ThreatLists to search in. Multiple ThreatLists may be
+   *  specified.
    */
   // const threatTypes = 1234
 

@@ -264,6 +264,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.language.v1.LanguageService|moderateText}.
+                         * @memberof google.cloud.language.v1.LanguageService
+                         * @typedef ModerateTextCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.language.v1.ModerateTextResponse} [response] ModerateTextResponse
+                         */
+    
+                        /**
+                         * Calls ModerateText.
+                         * @function moderateText
+                         * @memberof google.cloud.language.v1.LanguageService
+                         * @instance
+                         * @param {google.cloud.language.v1.IModerateTextRequest} request ModerateTextRequest message or plain object
+                         * @param {google.cloud.language.v1.LanguageService.ModerateTextCallback} callback Node-style callback called with the error, if any, and ModerateTextResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(LanguageService.prototype.moderateText = function moderateText(request, callback) {
+                            return this.rpcCall(moderateText, $root.google.cloud.language.v1.ModerateTextRequest, $root.google.cloud.language.v1.ModerateTextResponse, request, callback);
+                        }, "name", { value: "ModerateText" });
+    
+                        /**
+                         * Calls ModerateText.
+                         * @function moderateText
+                         * @memberof google.cloud.language.v1.LanguageService
+                         * @instance
+                         * @param {google.cloud.language.v1.IModerateTextRequest} request ModerateTextRequest message or plain object
+                         * @returns {Promise<google.cloud.language.v1.ModerateTextResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.language.v1.LanguageService|annotateText}.
                          * @memberof google.cloud.language.v1.LanguageService
                          * @typedef AnnotateTextCallback
@@ -7990,6 +8023,438 @@
                         return ClassifyTextResponse;
                     })();
     
+                    v1.ModerateTextRequest = (function() {
+    
+                        /**
+                         * Properties of a ModerateTextRequest.
+                         * @memberof google.cloud.language.v1
+                         * @interface IModerateTextRequest
+                         * @property {google.cloud.language.v1.IDocument|null} [document] ModerateTextRequest document
+                         */
+    
+                        /**
+                         * Constructs a new ModerateTextRequest.
+                         * @memberof google.cloud.language.v1
+                         * @classdesc Represents a ModerateTextRequest.
+                         * @implements IModerateTextRequest
+                         * @constructor
+                         * @param {google.cloud.language.v1.IModerateTextRequest=} [properties] Properties to set
+                         */
+                        function ModerateTextRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModerateTextRequest document.
+                         * @member {google.cloud.language.v1.IDocument|null|undefined} document
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @instance
+                         */
+                        ModerateTextRequest.prototype.document = null;
+    
+                        /**
+                         * Creates a new ModerateTextRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1.IModerateTextRequest=} [properties] Properties to set
+                         * @returns {google.cloud.language.v1.ModerateTextRequest} ModerateTextRequest instance
+                         */
+                        ModerateTextRequest.create = function create(properties) {
+                            return new ModerateTextRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextRequest message. Does not implicitly {@link google.cloud.language.v1.ModerateTextRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1.IModerateTextRequest} message ModerateTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.document != null && Object.hasOwnProperty.call(message, "document"))
+                                $root.google.cloud.language.v1.Document.encode(message.document, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextRequest message, length delimited. Does not implicitly {@link google.cloud.language.v1.ModerateTextRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1.IModerateTextRequest} message ModerateTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.language.v1.ModerateTextRequest} ModerateTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1.ModerateTextRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.document = $root.google.cloud.language.v1.Document.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.language.v1.ModerateTextRequest} ModerateTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModerateTextRequest message.
+                         * @function verify
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModerateTextRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.document != null && message.hasOwnProperty("document")) {
+                                var error = $root.google.cloud.language.v1.Document.verify(message.document);
+                                if (error)
+                                    return "document." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModerateTextRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.language.v1.ModerateTextRequest} ModerateTextRequest
+                         */
+                        ModerateTextRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.language.v1.ModerateTextRequest)
+                                return object;
+                            var message = new $root.google.cloud.language.v1.ModerateTextRequest();
+                            if (object.document != null) {
+                                if (typeof object.document !== "object")
+                                    throw TypeError(".google.cloud.language.v1.ModerateTextRequest.document: object expected");
+                                message.document = $root.google.cloud.language.v1.Document.fromObject(object.document);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModerateTextRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1.ModerateTextRequest} message ModerateTextRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModerateTextRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.document = null;
+                            if (message.document != null && message.hasOwnProperty("document"))
+                                object.document = $root.google.cloud.language.v1.Document.toObject(message.document, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModerateTextRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModerateTextRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModerateTextRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.language.v1.ModerateTextRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModerateTextRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.language.v1.ModerateTextRequest";
+                        };
+    
+                        return ModerateTextRequest;
+                    })();
+    
+                    v1.ModerateTextResponse = (function() {
+    
+                        /**
+                         * Properties of a ModerateTextResponse.
+                         * @memberof google.cloud.language.v1
+                         * @interface IModerateTextResponse
+                         * @property {Array.<google.cloud.language.v1.IClassificationCategory>|null} [moderationCategories] ModerateTextResponse moderationCategories
+                         */
+    
+                        /**
+                         * Constructs a new ModerateTextResponse.
+                         * @memberof google.cloud.language.v1
+                         * @classdesc Represents a ModerateTextResponse.
+                         * @implements IModerateTextResponse
+                         * @constructor
+                         * @param {google.cloud.language.v1.IModerateTextResponse=} [properties] Properties to set
+                         */
+                        function ModerateTextResponse(properties) {
+                            this.moderationCategories = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModerateTextResponse moderationCategories.
+                         * @member {Array.<google.cloud.language.v1.IClassificationCategory>} moderationCategories
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @instance
+                         */
+                        ModerateTextResponse.prototype.moderationCategories = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ModerateTextResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1.IModerateTextResponse=} [properties] Properties to set
+                         * @returns {google.cloud.language.v1.ModerateTextResponse} ModerateTextResponse instance
+                         */
+                        ModerateTextResponse.create = function create(properties) {
+                            return new ModerateTextResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextResponse message. Does not implicitly {@link google.cloud.language.v1.ModerateTextResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1.IModerateTextResponse} message ModerateTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.moderationCategories != null && message.moderationCategories.length)
+                                for (var i = 0; i < message.moderationCategories.length; ++i)
+                                    $root.google.cloud.language.v1.ClassificationCategory.encode(message.moderationCategories[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextResponse message, length delimited. Does not implicitly {@link google.cloud.language.v1.ModerateTextResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1.IModerateTextResponse} message ModerateTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.language.v1.ModerateTextResponse} ModerateTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1.ModerateTextResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.moderationCategories && message.moderationCategories.length))
+                                            message.moderationCategories = [];
+                                        message.moderationCategories.push($root.google.cloud.language.v1.ClassificationCategory.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.language.v1.ModerateTextResponse} ModerateTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModerateTextResponse message.
+                         * @function verify
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModerateTextResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.moderationCategories != null && message.hasOwnProperty("moderationCategories")) {
+                                if (!Array.isArray(message.moderationCategories))
+                                    return "moderationCategories: array expected";
+                                for (var i = 0; i < message.moderationCategories.length; ++i) {
+                                    var error = $root.google.cloud.language.v1.ClassificationCategory.verify(message.moderationCategories[i]);
+                                    if (error)
+                                        return "moderationCategories." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModerateTextResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.language.v1.ModerateTextResponse} ModerateTextResponse
+                         */
+                        ModerateTextResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.language.v1.ModerateTextResponse)
+                                return object;
+                            var message = new $root.google.cloud.language.v1.ModerateTextResponse();
+                            if (object.moderationCategories) {
+                                if (!Array.isArray(object.moderationCategories))
+                                    throw TypeError(".google.cloud.language.v1.ModerateTextResponse.moderationCategories: array expected");
+                                message.moderationCategories = [];
+                                for (var i = 0; i < object.moderationCategories.length; ++i) {
+                                    if (typeof object.moderationCategories[i] !== "object")
+                                        throw TypeError(".google.cloud.language.v1.ModerateTextResponse.moderationCategories: object expected");
+                                    message.moderationCategories[i] = $root.google.cloud.language.v1.ClassificationCategory.fromObject(object.moderationCategories[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModerateTextResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1.ModerateTextResponse} message ModerateTextResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModerateTextResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.moderationCategories = [];
+                            if (message.moderationCategories && message.moderationCategories.length) {
+                                object.moderationCategories = [];
+                                for (var j = 0; j < message.moderationCategories.length; ++j)
+                                    object.moderationCategories[j] = $root.google.cloud.language.v1.ClassificationCategory.toObject(message.moderationCategories[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModerateTextResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModerateTextResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModerateTextResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.language.v1.ModerateTextResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModerateTextResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.language.v1.ModerateTextResponse";
+                        };
+    
+                        return ModerateTextResponse;
+                    })();
+    
                     v1.AnnotateTextRequest = (function() {
     
                         /**
@@ -8287,6 +8752,7 @@
                              * @property {boolean|null} [extractDocumentSentiment] Features extractDocumentSentiment
                              * @property {boolean|null} [extractEntitySentiment] Features extractEntitySentiment
                              * @property {boolean|null} [classifyText] Features classifyText
+                             * @property {boolean|null} [moderateText] Features moderateText
                              * @property {google.cloud.language.v1.IClassificationModelOptions|null} [classificationModelOptions] Features classificationModelOptions
                              */
     
@@ -8346,6 +8812,14 @@
                             Features.prototype.classifyText = false;
     
                             /**
+                             * Features moderateText.
+                             * @member {boolean} moderateText
+                             * @memberof google.cloud.language.v1.AnnotateTextRequest.Features
+                             * @instance
+                             */
+                            Features.prototype.moderateText = false;
+    
+                            /**
                              * Features classificationModelOptions.
                              * @member {google.cloud.language.v1.IClassificationModelOptions|null|undefined} classificationModelOptions
                              * @memberof google.cloud.language.v1.AnnotateTextRequest.Features
@@ -8389,6 +8863,8 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.classifyText);
                                 if (message.classificationModelOptions != null && Object.hasOwnProperty.call(message, "classificationModelOptions"))
                                     $root.google.cloud.language.v1.ClassificationModelOptions.encode(message.classificationModelOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.moderateText != null && Object.hasOwnProperty.call(message, "moderateText"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.moderateText);
                                 return writer;
                             };
     
@@ -8441,6 +8917,10 @@
                                         }
                                     case 6: {
                                             message.classifyText = reader.bool();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.moderateText = reader.bool();
                                             break;
                                         }
                                     case 10: {
@@ -8497,6 +8977,9 @@
                                 if (message.classifyText != null && message.hasOwnProperty("classifyText"))
                                     if (typeof message.classifyText !== "boolean")
                                         return "classifyText: boolean expected";
+                                if (message.moderateText != null && message.hasOwnProperty("moderateText"))
+                                    if (typeof message.moderateText !== "boolean")
+                                        return "moderateText: boolean expected";
                                 if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions")) {
                                     var error = $root.google.cloud.language.v1.ClassificationModelOptions.verify(message.classificationModelOptions);
                                     if (error)
@@ -8527,6 +9010,8 @@
                                     message.extractEntitySentiment = Boolean(object.extractEntitySentiment);
                                 if (object.classifyText != null)
                                     message.classifyText = Boolean(object.classifyText);
+                                if (object.moderateText != null)
+                                    message.moderateText = Boolean(object.moderateText);
                                 if (object.classificationModelOptions != null) {
                                     if (typeof object.classificationModelOptions !== "object")
                                         throw TypeError(".google.cloud.language.v1.AnnotateTextRequest.Features.classificationModelOptions: object expected");
@@ -8555,6 +9040,7 @@
                                     object.extractEntitySentiment = false;
                                     object.classifyText = false;
                                     object.classificationModelOptions = null;
+                                    object.moderateText = false;
                                 }
                                 if (message.extractSyntax != null && message.hasOwnProperty("extractSyntax"))
                                     object.extractSyntax = message.extractSyntax;
@@ -8568,6 +9054,8 @@
                                     object.classifyText = message.classifyText;
                                 if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions"))
                                     object.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.toObject(message.classificationModelOptions, options);
+                                if (message.moderateText != null && message.hasOwnProperty("moderateText"))
+                                    object.moderateText = message.moderateText;
                                 return object;
                             };
     
@@ -8615,6 +9103,7 @@
                          * @property {google.cloud.language.v1.ISentiment|null} [documentSentiment] AnnotateTextResponse documentSentiment
                          * @property {string|null} [language] AnnotateTextResponse language
                          * @property {Array.<google.cloud.language.v1.IClassificationCategory>|null} [categories] AnnotateTextResponse categories
+                         * @property {Array.<google.cloud.language.v1.IClassificationCategory>|null} [moderationCategories] AnnotateTextResponse moderationCategories
                          */
     
                         /**
@@ -8630,6 +9119,7 @@
                             this.tokens = [];
                             this.entities = [];
                             this.categories = [];
+                            this.moderationCategories = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8685,6 +9175,14 @@
                         AnnotateTextResponse.prototype.categories = $util.emptyArray;
     
                         /**
+                         * AnnotateTextResponse moderationCategories.
+                         * @member {Array.<google.cloud.language.v1.IClassificationCategory>} moderationCategories
+                         * @memberof google.cloud.language.v1.AnnotateTextResponse
+                         * @instance
+                         */
+                        AnnotateTextResponse.prototype.moderationCategories = $util.emptyArray;
+    
+                        /**
                          * Creates a new AnnotateTextResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.language.v1.AnnotateTextResponse
@@ -8724,6 +9222,9 @@
                             if (message.categories != null && message.categories.length)
                                 for (var i = 0; i < message.categories.length; ++i)
                                     $root.google.cloud.language.v1.ClassificationCategory.encode(message.categories[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.moderationCategories != null && message.moderationCategories.length)
+                                for (var i = 0; i < message.moderationCategories.length; ++i)
+                                    $root.google.cloud.language.v1.ClassificationCategory.encode(message.moderationCategories[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -8788,6 +9289,12 @@
                                         if (!(message.categories && message.categories.length))
                                             message.categories = [];
                                         message.categories.push($root.google.cloud.language.v1.ClassificationCategory.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.moderationCategories && message.moderationCategories.length))
+                                            message.moderationCategories = [];
+                                        message.moderationCategories.push($root.google.cloud.language.v1.ClassificationCategory.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -8869,6 +9376,15 @@
                                         return "categories." + error;
                                 }
                             }
+                            if (message.moderationCategories != null && message.hasOwnProperty("moderationCategories")) {
+                                if (!Array.isArray(message.moderationCategories))
+                                    return "moderationCategories: array expected";
+                                for (var i = 0; i < message.moderationCategories.length; ++i) {
+                                    var error = $root.google.cloud.language.v1.ClassificationCategory.verify(message.moderationCategories[i]);
+                                    if (error)
+                                        return "moderationCategories." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -8931,6 +9447,16 @@
                                     message.categories[i] = $root.google.cloud.language.v1.ClassificationCategory.fromObject(object.categories[i]);
                                 }
                             }
+                            if (object.moderationCategories) {
+                                if (!Array.isArray(object.moderationCategories))
+                                    throw TypeError(".google.cloud.language.v1.AnnotateTextResponse.moderationCategories: array expected");
+                                message.moderationCategories = [];
+                                for (var i = 0; i < object.moderationCategories.length; ++i) {
+                                    if (typeof object.moderationCategories[i] !== "object")
+                                        throw TypeError(".google.cloud.language.v1.AnnotateTextResponse.moderationCategories: object expected");
+                                    message.moderationCategories[i] = $root.google.cloud.language.v1.ClassificationCategory.fromObject(object.moderationCategories[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -8952,6 +9478,7 @@
                                 object.tokens = [];
                                 object.entities = [];
                                 object.categories = [];
+                                object.moderationCategories = [];
                             }
                             if (options.defaults) {
                                 object.documentSentiment = null;
@@ -8980,6 +9507,11 @@
                                 object.categories = [];
                                 for (var j = 0; j < message.categories.length; ++j)
                                     object.categories[j] = $root.google.cloud.language.v1.ClassificationCategory.toObject(message.categories[j], options);
+                            }
+                            if (message.moderationCategories && message.moderationCategories.length) {
+                                object.moderationCategories = [];
+                                for (var j = 0; j < message.moderationCategories.length; ++j)
+                                    object.moderationCategories[j] = $root.google.cloud.language.v1.ClassificationCategory.toObject(message.moderationCategories[j], options);
                             }
                             return object;
                         };
@@ -9219,6 +9751,39 @@
                          * @instance
                          * @param {google.cloud.language.v1beta2.IClassifyTextRequest} request ClassifyTextRequest message or plain object
                          * @returns {Promise<google.cloud.language.v1beta2.ClassifyTextResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.language.v1beta2.LanguageService|moderateText}.
+                         * @memberof google.cloud.language.v1beta2.LanguageService
+                         * @typedef ModerateTextCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.language.v1beta2.ModerateTextResponse} [response] ModerateTextResponse
+                         */
+    
+                        /**
+                         * Calls ModerateText.
+                         * @function moderateText
+                         * @memberof google.cloud.language.v1beta2.LanguageService
+                         * @instance
+                         * @param {google.cloud.language.v1beta2.IModerateTextRequest} request ModerateTextRequest message or plain object
+                         * @param {google.cloud.language.v1beta2.LanguageService.ModerateTextCallback} callback Node-style callback called with the error, if any, and ModerateTextResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(LanguageService.prototype.moderateText = function moderateText(request, callback) {
+                            return this.rpcCall(moderateText, $root.google.cloud.language.v1beta2.ModerateTextRequest, $root.google.cloud.language.v1beta2.ModerateTextResponse, request, callback);
+                        }, "name", { value: "ModerateText" });
+    
+                        /**
+                         * Calls ModerateText.
+                         * @function moderateText
+                         * @memberof google.cloud.language.v1beta2.LanguageService
+                         * @instance
+                         * @param {google.cloud.language.v1beta2.IModerateTextRequest} request ModerateTextRequest message or plain object
+                         * @returns {Promise<google.cloud.language.v1beta2.ModerateTextResponse>} Promise
                          * @variation 2
                          */
     
@@ -17035,6 +17600,438 @@
                         return ClassifyTextResponse;
                     })();
     
+                    v1beta2.ModerateTextRequest = (function() {
+    
+                        /**
+                         * Properties of a ModerateTextRequest.
+                         * @memberof google.cloud.language.v1beta2
+                         * @interface IModerateTextRequest
+                         * @property {google.cloud.language.v1beta2.IDocument|null} [document] ModerateTextRequest document
+                         */
+    
+                        /**
+                         * Constructs a new ModerateTextRequest.
+                         * @memberof google.cloud.language.v1beta2
+                         * @classdesc Represents a ModerateTextRequest.
+                         * @implements IModerateTextRequest
+                         * @constructor
+                         * @param {google.cloud.language.v1beta2.IModerateTextRequest=} [properties] Properties to set
+                         */
+                        function ModerateTextRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModerateTextRequest document.
+                         * @member {google.cloud.language.v1beta2.IDocument|null|undefined} document
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @instance
+                         */
+                        ModerateTextRequest.prototype.document = null;
+    
+                        /**
+                         * Creates a new ModerateTextRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IModerateTextRequest=} [properties] Properties to set
+                         * @returns {google.cloud.language.v1beta2.ModerateTextRequest} ModerateTextRequest instance
+                         */
+                        ModerateTextRequest.create = function create(properties) {
+                            return new ModerateTextRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextRequest message. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IModerateTextRequest} message ModerateTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.document != null && Object.hasOwnProperty.call(message, "document"))
+                                $root.google.cloud.language.v1beta2.Document.encode(message.document, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextRequest message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IModerateTextRequest} message ModerateTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.language.v1beta2.ModerateTextRequest} ModerateTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1beta2.ModerateTextRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.document = $root.google.cloud.language.v1beta2.Document.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.language.v1beta2.ModerateTextRequest} ModerateTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModerateTextRequest message.
+                         * @function verify
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModerateTextRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.document != null && message.hasOwnProperty("document")) {
+                                var error = $root.google.cloud.language.v1beta2.Document.verify(message.document);
+                                if (error)
+                                    return "document." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModerateTextRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.language.v1beta2.ModerateTextRequest} ModerateTextRequest
+                         */
+                        ModerateTextRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.language.v1beta2.ModerateTextRequest)
+                                return object;
+                            var message = new $root.google.cloud.language.v1beta2.ModerateTextRequest();
+                            if (object.document != null) {
+                                if (typeof object.document !== "object")
+                                    throw TypeError(".google.cloud.language.v1beta2.ModerateTextRequest.document: object expected");
+                                message.document = $root.google.cloud.language.v1beta2.Document.fromObject(object.document);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModerateTextRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {google.cloud.language.v1beta2.ModerateTextRequest} message ModerateTextRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModerateTextRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.document = null;
+                            if (message.document != null && message.hasOwnProperty("document"))
+                                object.document = $root.google.cloud.language.v1beta2.Document.toObject(message.document, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModerateTextRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModerateTextRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModerateTextRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.language.v1beta2.ModerateTextRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModerateTextRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.language.v1beta2.ModerateTextRequest";
+                        };
+    
+                        return ModerateTextRequest;
+                    })();
+    
+                    v1beta2.ModerateTextResponse = (function() {
+    
+                        /**
+                         * Properties of a ModerateTextResponse.
+                         * @memberof google.cloud.language.v1beta2
+                         * @interface IModerateTextResponse
+                         * @property {Array.<google.cloud.language.v1beta2.IClassificationCategory>|null} [moderationCategories] ModerateTextResponse moderationCategories
+                         */
+    
+                        /**
+                         * Constructs a new ModerateTextResponse.
+                         * @memberof google.cloud.language.v1beta2
+                         * @classdesc Represents a ModerateTextResponse.
+                         * @implements IModerateTextResponse
+                         * @constructor
+                         * @param {google.cloud.language.v1beta2.IModerateTextResponse=} [properties] Properties to set
+                         */
+                        function ModerateTextResponse(properties) {
+                            this.moderationCategories = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModerateTextResponse moderationCategories.
+                         * @member {Array.<google.cloud.language.v1beta2.IClassificationCategory>} moderationCategories
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @instance
+                         */
+                        ModerateTextResponse.prototype.moderationCategories = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ModerateTextResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IModerateTextResponse=} [properties] Properties to set
+                         * @returns {google.cloud.language.v1beta2.ModerateTextResponse} ModerateTextResponse instance
+                         */
+                        ModerateTextResponse.create = function create(properties) {
+                            return new ModerateTextResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextResponse message. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IModerateTextResponse} message ModerateTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.moderationCategories != null && message.moderationCategories.length)
+                                for (var i = 0; i < message.moderationCategories.length; ++i)
+                                    $root.google.cloud.language.v1beta2.ClassificationCategory.encode(message.moderationCategories[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModerateTextResponse message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ModerateTextResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IModerateTextResponse} message ModerateTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModerateTextResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.language.v1beta2.ModerateTextResponse} ModerateTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1beta2.ModerateTextResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.moderationCategories && message.moderationCategories.length))
+                                            message.moderationCategories = [];
+                                        message.moderationCategories.push($root.google.cloud.language.v1beta2.ClassificationCategory.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModerateTextResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.language.v1beta2.ModerateTextResponse} ModerateTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModerateTextResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModerateTextResponse message.
+                         * @function verify
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModerateTextResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.moderationCategories != null && message.hasOwnProperty("moderationCategories")) {
+                                if (!Array.isArray(message.moderationCategories))
+                                    return "moderationCategories: array expected";
+                                for (var i = 0; i < message.moderationCategories.length; ++i) {
+                                    var error = $root.google.cloud.language.v1beta2.ClassificationCategory.verify(message.moderationCategories[i]);
+                                    if (error)
+                                        return "moderationCategories." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModerateTextResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.language.v1beta2.ModerateTextResponse} ModerateTextResponse
+                         */
+                        ModerateTextResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.language.v1beta2.ModerateTextResponse)
+                                return object;
+                            var message = new $root.google.cloud.language.v1beta2.ModerateTextResponse();
+                            if (object.moderationCategories) {
+                                if (!Array.isArray(object.moderationCategories))
+                                    throw TypeError(".google.cloud.language.v1beta2.ModerateTextResponse.moderationCategories: array expected");
+                                message.moderationCategories = [];
+                                for (var i = 0; i < object.moderationCategories.length; ++i) {
+                                    if (typeof object.moderationCategories[i] !== "object")
+                                        throw TypeError(".google.cloud.language.v1beta2.ModerateTextResponse.moderationCategories: object expected");
+                                    message.moderationCategories[i] = $root.google.cloud.language.v1beta2.ClassificationCategory.fromObject(object.moderationCategories[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModerateTextResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {google.cloud.language.v1beta2.ModerateTextResponse} message ModerateTextResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModerateTextResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.moderationCategories = [];
+                            if (message.moderationCategories && message.moderationCategories.length) {
+                                object.moderationCategories = [];
+                                for (var j = 0; j < message.moderationCategories.length; ++j)
+                                    object.moderationCategories[j] = $root.google.cloud.language.v1beta2.ClassificationCategory.toObject(message.moderationCategories[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModerateTextResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModerateTextResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModerateTextResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.language.v1beta2.ModerateTextResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModerateTextResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.language.v1beta2.ModerateTextResponse";
+                        };
+    
+                        return ModerateTextResponse;
+                    })();
+    
                     v1beta2.AnnotateTextRequest = (function() {
     
                         /**
@@ -17332,6 +18329,7 @@
                              * @property {boolean|null} [extractDocumentSentiment] Features extractDocumentSentiment
                              * @property {boolean|null} [extractEntitySentiment] Features extractEntitySentiment
                              * @property {boolean|null} [classifyText] Features classifyText
+                             * @property {boolean|null} [moderateText] Features moderateText
                              * @property {google.cloud.language.v1beta2.IClassificationModelOptions|null} [classificationModelOptions] Features classificationModelOptions
                              */
     
@@ -17391,6 +18389,14 @@
                             Features.prototype.classifyText = false;
     
                             /**
+                             * Features moderateText.
+                             * @member {boolean} moderateText
+                             * @memberof google.cloud.language.v1beta2.AnnotateTextRequest.Features
+                             * @instance
+                             */
+                            Features.prototype.moderateText = false;
+    
+                            /**
                              * Features classificationModelOptions.
                              * @member {google.cloud.language.v1beta2.IClassificationModelOptions|null|undefined} classificationModelOptions
                              * @memberof google.cloud.language.v1beta2.AnnotateTextRequest.Features
@@ -17434,6 +18440,8 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.classifyText);
                                 if (message.classificationModelOptions != null && Object.hasOwnProperty.call(message, "classificationModelOptions"))
                                     $root.google.cloud.language.v1beta2.ClassificationModelOptions.encode(message.classificationModelOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.moderateText != null && Object.hasOwnProperty.call(message, "moderateText"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.moderateText);
                                 return writer;
                             };
     
@@ -17486,6 +18494,10 @@
                                         }
                                     case 6: {
                                             message.classifyText = reader.bool();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.moderateText = reader.bool();
                                             break;
                                         }
                                     case 10: {
@@ -17542,6 +18554,9 @@
                                 if (message.classifyText != null && message.hasOwnProperty("classifyText"))
                                     if (typeof message.classifyText !== "boolean")
                                         return "classifyText: boolean expected";
+                                if (message.moderateText != null && message.hasOwnProperty("moderateText"))
+                                    if (typeof message.moderateText !== "boolean")
+                                        return "moderateText: boolean expected";
                                 if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions")) {
                                     var error = $root.google.cloud.language.v1beta2.ClassificationModelOptions.verify(message.classificationModelOptions);
                                     if (error)
@@ -17572,6 +18587,8 @@
                                     message.extractEntitySentiment = Boolean(object.extractEntitySentiment);
                                 if (object.classifyText != null)
                                     message.classifyText = Boolean(object.classifyText);
+                                if (object.moderateText != null)
+                                    message.moderateText = Boolean(object.moderateText);
                                 if (object.classificationModelOptions != null) {
                                     if (typeof object.classificationModelOptions !== "object")
                                         throw TypeError(".google.cloud.language.v1beta2.AnnotateTextRequest.Features.classificationModelOptions: object expected");
@@ -17600,6 +18617,7 @@
                                     object.extractEntitySentiment = false;
                                     object.classifyText = false;
                                     object.classificationModelOptions = null;
+                                    object.moderateText = false;
                                 }
                                 if (message.extractSyntax != null && message.hasOwnProperty("extractSyntax"))
                                     object.extractSyntax = message.extractSyntax;
@@ -17613,6 +18631,8 @@
                                     object.classifyText = message.classifyText;
                                 if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions"))
                                     object.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.toObject(message.classificationModelOptions, options);
+                                if (message.moderateText != null && message.hasOwnProperty("moderateText"))
+                                    object.moderateText = message.moderateText;
                                 return object;
                             };
     
@@ -17660,6 +18680,7 @@
                          * @property {google.cloud.language.v1beta2.ISentiment|null} [documentSentiment] AnnotateTextResponse documentSentiment
                          * @property {string|null} [language] AnnotateTextResponse language
                          * @property {Array.<google.cloud.language.v1beta2.IClassificationCategory>|null} [categories] AnnotateTextResponse categories
+                         * @property {Array.<google.cloud.language.v1beta2.IClassificationCategory>|null} [moderationCategories] AnnotateTextResponse moderationCategories
                          */
     
                         /**
@@ -17675,6 +18696,7 @@
                             this.tokens = [];
                             this.entities = [];
                             this.categories = [];
+                            this.moderationCategories = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17730,6 +18752,14 @@
                         AnnotateTextResponse.prototype.categories = $util.emptyArray;
     
                         /**
+                         * AnnotateTextResponse moderationCategories.
+                         * @member {Array.<google.cloud.language.v1beta2.IClassificationCategory>} moderationCategories
+                         * @memberof google.cloud.language.v1beta2.AnnotateTextResponse
+                         * @instance
+                         */
+                        AnnotateTextResponse.prototype.moderationCategories = $util.emptyArray;
+    
+                        /**
                          * Creates a new AnnotateTextResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.language.v1beta2.AnnotateTextResponse
@@ -17769,6 +18799,9 @@
                             if (message.categories != null && message.categories.length)
                                 for (var i = 0; i < message.categories.length; ++i)
                                     $root.google.cloud.language.v1beta2.ClassificationCategory.encode(message.categories[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.moderationCategories != null && message.moderationCategories.length)
+                                for (var i = 0; i < message.moderationCategories.length; ++i)
+                                    $root.google.cloud.language.v1beta2.ClassificationCategory.encode(message.moderationCategories[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -17833,6 +18866,12 @@
                                         if (!(message.categories && message.categories.length))
                                             message.categories = [];
                                         message.categories.push($root.google.cloud.language.v1beta2.ClassificationCategory.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.moderationCategories && message.moderationCategories.length))
+                                            message.moderationCategories = [];
+                                        message.moderationCategories.push($root.google.cloud.language.v1beta2.ClassificationCategory.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -17914,6 +18953,15 @@
                                         return "categories." + error;
                                 }
                             }
+                            if (message.moderationCategories != null && message.hasOwnProperty("moderationCategories")) {
+                                if (!Array.isArray(message.moderationCategories))
+                                    return "moderationCategories: array expected";
+                                for (var i = 0; i < message.moderationCategories.length; ++i) {
+                                    var error = $root.google.cloud.language.v1beta2.ClassificationCategory.verify(message.moderationCategories[i]);
+                                    if (error)
+                                        return "moderationCategories." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -17976,6 +19024,16 @@
                                     message.categories[i] = $root.google.cloud.language.v1beta2.ClassificationCategory.fromObject(object.categories[i]);
                                 }
                             }
+                            if (object.moderationCategories) {
+                                if (!Array.isArray(object.moderationCategories))
+                                    throw TypeError(".google.cloud.language.v1beta2.AnnotateTextResponse.moderationCategories: array expected");
+                                message.moderationCategories = [];
+                                for (var i = 0; i < object.moderationCategories.length; ++i) {
+                                    if (typeof object.moderationCategories[i] !== "object")
+                                        throw TypeError(".google.cloud.language.v1beta2.AnnotateTextResponse.moderationCategories: object expected");
+                                    message.moderationCategories[i] = $root.google.cloud.language.v1beta2.ClassificationCategory.fromObject(object.moderationCategories[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -17997,6 +19055,7 @@
                                 object.tokens = [];
                                 object.entities = [];
                                 object.categories = [];
+                                object.moderationCategories = [];
                             }
                             if (options.defaults) {
                                 object.documentSentiment = null;
@@ -18025,6 +19084,11 @@
                                 object.categories = [];
                                 for (var j = 0; j < message.categories.length; ++j)
                                     object.categories[j] = $root.google.cloud.language.v1beta2.ClassificationCategory.toObject(message.categories[j], options);
+                            }
+                            if (message.moderationCategories && message.moderationCategories.length) {
+                                object.moderationCategories = [];
+                                for (var j = 0; j < message.moderationCategories.length; ++j)
+                                    object.moderationCategories[j] = $root.google.cloud.language.v1beta2.ClassificationCategory.toObject(message.moderationCategories[j], options);
                             }
                             return object;
                         };

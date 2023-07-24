@@ -35,6 +35,7 @@
   * [Repository_manager.create_repository](#repository_manager.create_repository)
   * [Repository_manager.delete_connection](#repository_manager.delete_connection)
   * [Repository_manager.delete_repository](#repository_manager.delete_repository)
+  * [Repository_manager.fetch_git_refs](#repository_manager.fetch_git_refs)
   * [Repository_manager.fetch_linkable_repositories](#repository_manager.fetch_linkable_repositories)
   * [Repository_manager.fetch_read_token](#repository_manager.fetch_read_token)
   * [Repository_manager.fetch_read_write_token](#repository_manager.fetch_read_write_token)
@@ -44,7 +45,6 @@
   * [Repository_manager.list_repositories](#repository_manager.list_repositories)
   * [Repository_manager.update_connection](#repository_manager.update_connection)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -452,6 +452,23 @@ __Usage:__
 
 
 
+### Repository_manager.fetch_git_refs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_git_refs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_git_refs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_git_refs.js`
+
+
+-----
+
+
+
+
 ### Repository_manager.fetch_linkable_repositories
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_linkable_repositories.js).
@@ -598,23 +615,6 @@ __Usage:__
 
 
 `node packages/google-devtools-cloudbuild/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-devtools-cloudbuild/samples/test/quickstart.test.js`
 
 
 

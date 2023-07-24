@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,15 +31,33 @@ option ruby_package = "Google::Cloud::GkeBackup::V1";
 
 // The configuration of a potential series of Restore operations to be performed
 // against Backups belong to a particular BackupPlan.
-// Next id: 11
+// Next id: 13
 message RestorePlan {
   option (google.api.resource) = {
     type: "gkebackup.googleapis.com/RestorePlan"
     pattern: "projects/{project}/locations/{location}/restorePlans/{restore_plan}"
   };
 
+  // State
+  enum State {
+    // Default first value for Enums.
+    STATE_UNSPECIFIED = 0;
+
+    // Waiting for cluster state to be RUNNING.
+    CLUSTER_PENDING = 1;
+
+    // The RestorePlan has successfully been created and is ready for Restores.
+    READY = 2;
+
+    // RestorePlan creation has failed.
+    FAILED = 3;
+
+    // The RestorePlan is in the process of being deleted.
+    DELETING = 4;
+  }
+
   // Output only. The full name of the RestorePlan resource.
-  // Format: projects/*/locations/*/restorePlans/*.
+  // Format: `projects/*/locations/*/restorePlans/*`.
   string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Server generated global unique identifier of
@@ -48,18 +66,21 @@ message RestorePlan {
 
   // Output only. The timestamp when this RestorePlan resource was
   // created.
-  google.protobuf.Timestamp create_time = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp create_time = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The timestamp when this RestorePlan resource was last
   // updated.
-  google.protobuf.Timestamp update_time = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp update_time = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // User specified descriptive string for this RestorePlan.
   string description = 5;
 
-  // Required. Immutable. A reference to the [BackupPlan][google.cloud.gkebackup.v1.BackupPlan] from which Backups may be used as the
-  // source for Restores created via this RestorePlan.
-  // Format: projects/*/locations/*/backupPlans/*.
+  // Required. Immutable. A reference to the
+  // [BackupPlan][google.cloud.gkebackup.v1.BackupPlan] from which Backups may
+  // be used as the source for Restores created via this RestorePlan. Format:
+  // `projects/*/locations/*/backupPlans/*`.
   string backup_plan = 6 [
     (google.api.field_behavior) = IMMUTABLE,
     (google.api.field_behavior) = REQUIRED,
@@ -68,13 +89,12 @@ message RestorePlan {
     }
   ];
 
-  // Required. Immutable. The target cluster into which Restores created via this RestorePlan
-  // will restore data. NOTE: the cluster's region must be the same as the
-  // RestorePlan.
-  // Valid formats:
+  // Required. Immutable. The target cluster into which Restores created via
+  // this RestorePlan will restore data. NOTE: the cluster's region must be the
+  // same as the RestorePlan. Valid formats:
   //
-  //   - projects/*/locations/*/clusters/*
-  //   - projects/*/zones/*/clusters/*
+  //   - `projects/*/locations/*/clusters/*`
+  //   - `projects/*/zones/*/clusters/*`
   string cluster = 7 [
     (google.api.field_behavior) = IMMUTABLE,
     (google.api.field_behavior) = REQUIRED,
@@ -89,8 +109,8 @@ message RestorePlan {
   // A set of custom labels supplied by user.
   map<string, string> labels = 9;
 
-  // Output only. `etag` is used for optimistic concurrency control as a way to help
-  // prevent simultaneous updates of a restore from overwriting each other.
+  // Output only. `etag` is used for optimistic concurrency control as a way to
+  // help prevent simultaneous updates of a restore from overwriting each other.
   // It is strongly suggested that systems make use of the `etag` in the
   // read-modify-write cycle to perform restore updates in order to avoid
   // race conditions: An `etag` is returned in the response to `GetRestorePlan`,
@@ -98,4 +118,13 @@ message RestorePlan {
   // `UpdateRestorePlan` or `DeleteRestorePlan` to ensure that their change
   // will be applied to the same version of the resource.
   string etag = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. State of the RestorePlan. This State field reflects the
+  // various stages a RestorePlan can be in
+  // during the Create operation.
+  State state = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Human-readable description of why RestorePlan is in the
+  // current `state`
+  string state_reason = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

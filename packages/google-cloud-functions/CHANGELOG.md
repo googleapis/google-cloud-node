@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/functions-v2.4.1...functions-v2.5.0) (2023-06-06)
+
+
+### Features
+
+* [functions] ListFunctions now include metadata which indicates whether a function is a GEN_1 or GEN_2 function ([#4262](https://github.com/googleapis/google-cloud-node/issues/4262)) ([b6d8778](https://github.com/googleapis/google-cloud-node/commit/b6d8778f06458c3f701c8c0099de71dfb3b0b59d))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/functions-v2.4.0...functions-v2.4.1) (2023-04-13)
 
 

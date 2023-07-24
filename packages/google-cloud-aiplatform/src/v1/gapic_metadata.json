@@ -45,6 +45,11 @@
                 "exportData"
               ]
             },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
             "ListDatasets": {
               "methods": [
                 "listDatasets",
@@ -118,6 +123,11 @@
             "ExportData": {
               "methods": [
                 "exportData"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
               ]
             },
             "ListDatasets": {
@@ -194,6 +204,11 @@
                 "undeployModel"
               ]
             },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
+              ]
+            },
             "ListEndpoints": {
               "methods": [
                 "listEndpoints",
@@ -234,6 +249,11 @@
             "UndeployModel": {
               "methods": [
                 "undeployModel"
+              ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
               ]
             },
             "ListEndpoints": {
@@ -1108,6 +1128,40 @@
         }
       }
     },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MatchServiceClient",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "findNeighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "readIndexDatapoints"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MatchServiceClient",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "findNeighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "readIndexDatapoints"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
@@ -1500,6 +1554,30 @@
         }
       }
     },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -1548,6 +1626,11 @@
             "UploadModel": {
               "methods": [
                 "uploadModel"
+              ]
+            },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "updateExplanationDataset"
               ]
             },
             "DeleteModel": {
@@ -1646,6 +1729,11 @@
             "UploadModel": {
               "methods": [
                 "uploadModel"
+              ]
+            },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "updateExplanationDataset"
               ]
             },
             "DeleteModel": {

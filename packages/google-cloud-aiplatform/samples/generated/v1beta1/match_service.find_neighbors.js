@@ -35,7 +35,7 @@ function main(indexEndpoint) {
    */
   // const indexEndpoint = 'abc123'
   /**
-   *  The ID of the DeploydIndex that will serve the request. This request is
+   *  The ID of the DeployedIndex that will serve the request. This request is
    *  sent to a specific IndexEndpoint, as per the IndexEndpoint.network. That
    *  IndexEndpoint also has IndexEndpoint.deployed_indexes, and each such index
    *  has a DeployedIndex.id field.

@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The RestorePlan that contains the Restores to list.
-   *  Format: projects/* /locations/* /restorePlans/*
+   *  Format: `projects/* /locations/* /restorePlans/*`
    */
   // const parent = 'abc123'
   /**

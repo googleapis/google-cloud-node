@@ -1,13 +1,13 @@
 {
-  "name": "@google-cloud/clientconnectorservices",
+  "name": "@google-cloud/clientgateways",
   "version": "0.3.2",
   "description": "BeyondCorp API client for Node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
-    "directory": "packages/google-cloud-beyondcorp-clientconnectorservices"
+    "directory": "packages/google-cloud-beyondcorp-clientgateways"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -25,13 +25,13 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google clientconnectorservices",
-    "clientconnectorservices",
+    "google clientgateways",
+    "clientgateways",
     ""
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
@@ -39,10 +39,11 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm i",
+    "postpack": "minifyProtoJson",
+    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "c8 mocha build/system-test",
+    "test": "c8 mocha build/test"
   },
   "dependencies": {
     "google-gax": "^3.5.8"
@@ -56,7 +57,8 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
-    "linkinator": "^4.0.0",
+    "linkinator": "4.1.2",
+    "long": "^5.2.3",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.1",
     "pack-n-play": "^1.0.0-2",
@@ -70,4 +72,3 @@
     "node": ">=12.0.0"
   }
 }
-

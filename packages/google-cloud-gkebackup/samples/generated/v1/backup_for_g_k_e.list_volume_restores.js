@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The Restore that contains the VolumeRestores to list.
-   *  Format: projects/* /locations/* /restorePlans/* /restores/*
+   *  Format: `projects/* /locations/* /restorePlans/* /restores/*`
    */
   // const parent = 'abc123'
   /**

@@ -17696,6 +17696,7 @@
                          * @property {google.protobuf.IDuration|null} [duration] Conversation duration
                          * @property {number|null} [turnCount] Conversation turnCount
                          * @property {google.cloud.contactcenterinsights.v1.IAnalysis|null} [latestAnalysis] Conversation latestAnalysis
+                         * @property {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null} [latestSummary] Conversation latestSummary
                          * @property {Array.<google.cloud.contactcenterinsights.v1.IRuntimeAnnotation>|null} [runtimeAnnotations] Conversation runtimeAnnotations
                          * @property {Object.<string,google.cloud.contactcenterinsights.v1.IDialogflowIntent>|null} [dialogflowIntents] Conversation dialogflowIntents
                          * @property {string|null} [obfuscatedUserId] Conversation obfuscatedUserId
@@ -17848,6 +17849,14 @@
                         Conversation.prototype.latestAnalysis = null;
     
                         /**
+                         * Conversation latestSummary.
+                         * @member {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null|undefined} latestSummary
+                         * @memberof google.cloud.contactcenterinsights.v1.Conversation
+                         * @instance
+                         */
+                        Conversation.prototype.latestSummary = null;
+    
+                        /**
                          * Conversation runtimeAnnotations.
                          * @member {Array.<google.cloud.contactcenterinsights.v1.IRuntimeAnnotation>} runtimeAnnotations
                          * @memberof google.cloud.contactcenterinsights.v1.Conversation
@@ -17961,6 +17970,8 @@
                                     writer.uint32(/* id 18, wireType 2 =*/146).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.contactcenterinsights.v1.DialogflowIntent.encode(message.dialogflowIntents[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.latestSummary != null && Object.hasOwnProperty.call(message, "latestSummary"))
+                                $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.encode(message.latestSummary, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.obfuscatedUserId != null && Object.hasOwnProperty.call(message, "obfuscatedUserId"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.obfuscatedUserId);
                             return writer;
@@ -18078,6 +18089,10 @@
                                     }
                                 case 12: {
                                         message.latestAnalysis = $root.google.cloud.contactcenterinsights.v1.Analysis.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.latestSummary = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 13: {
@@ -18239,6 +18254,11 @@
                                 if (error)
                                     return "latestAnalysis." + error;
                             }
+                            if (message.latestSummary != null && message.hasOwnProperty("latestSummary")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.verify(message.latestSummary);
+                                if (error)
+                                    return "latestSummary." + error;
+                            }
                             if (message.runtimeAnnotations != null && message.hasOwnProperty("runtimeAnnotations")) {
                                 if (!Array.isArray(message.runtimeAnnotations))
                                     return "runtimeAnnotations: array expected";
@@ -18361,6 +18381,11 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.latestAnalysis: object expected");
                                 message.latestAnalysis = $root.google.cloud.contactcenterinsights.v1.Analysis.fromObject(object.latestAnalysis);
                             }
+                            if (object.latestSummary != null) {
+                                if (typeof object.latestSummary !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.latestSummary: object expected");
+                                message.latestSummary = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.fromObject(object.latestSummary);
+                            }
                             if (object.runtimeAnnotations) {
                                 if (!Array.isArray(object.runtimeAnnotations))
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.runtimeAnnotations: array expected");
@@ -18418,6 +18443,7 @@
                                 object.latestAnalysis = null;
                                 object.languageCode = "";
                                 object.startTime = null;
+                                object.latestSummary = null;
                                 object.obfuscatedUserId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -18475,6 +18501,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.dialogflowIntents[keys2[j]] = $root.google.cloud.contactcenterinsights.v1.DialogflowIntent.toObject(message.dialogflowIntents[keys2[j]], options);
                             }
+                            if (message.latestSummary != null && message.hasOwnProperty("latestSummary"))
+                                object.latestSummary = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.toObject(message.latestSummary, options);
                             if (message.obfuscatedUserId != null && message.hasOwnProperty("obfuscatedUserId"))
                                 object.obfuscatedUserId = message.obfuscatedUserId;
                             return object;
@@ -25777,6 +25805,8 @@
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.State|null} [state] IssueModel state
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig|null} [inputDataConfig] IssueModel inputDataConfig
                          * @property {google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null} [trainingStats] IssueModel trainingStats
+                         * @property {google.cloud.contactcenterinsights.v1.IssueModel.ModelType|null} [modelType] IssueModel modelType
+                         * @property {string|null} [languageCode] IssueModel languageCode
                          */
     
                         /**
@@ -25859,6 +25889,22 @@
                         IssueModel.prototype.trainingStats = null;
     
                         /**
+                         * IssueModel modelType.
+                         * @member {google.cloud.contactcenterinsights.v1.IssueModel.ModelType} modelType
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                         * @instance
+                         */
+                        IssueModel.prototype.modelType = 0;
+    
+                        /**
+                         * IssueModel languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                         * @instance
+                         */
+                        IssueModel.prototype.languageCode = "";
+    
+                        /**
                          * Creates a new IssueModel instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.IssueModel
@@ -25898,6 +25944,10 @@
                                 $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.encode(message.trainingStats, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.issueCount != null && Object.hasOwnProperty.call(message, "issueCount"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int64(message.issueCount);
+                            if (message.modelType != null && Object.hasOwnProperty.call(message, "modelType"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.modelType);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.languageCode);
                             return writer;
                         };
     
@@ -25962,6 +26012,14 @@
                                     }
                                 case 7: {
                                         message.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.modelType = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.languageCode = reader.string();
                                         break;
                                     }
                                 default:
@@ -26040,6 +26098,18 @@
                                 if (error)
                                     return "trainingStats." + error;
                             }
+                            if (message.modelType != null && message.hasOwnProperty("modelType"))
+                                switch (message.modelType) {
+                                default:
+                                    return "modelType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
                             return null;
                         };
     
@@ -26120,6 +26190,28 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.IssueModel.trainingStats: object expected");
                                 message.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.fromObject(object.trainingStats);
                             }
+                            switch (object.modelType) {
+                            default:
+                                if (typeof object.modelType === "number") {
+                                    message.modelType = object.modelType;
+                                    break;
+                                }
+                                break;
+                            case "MODEL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.modelType = 0;
+                                break;
+                            case "TYPE_V1":
+                            case 1:
+                                message.modelType = 1;
+                                break;
+                            case "TYPE_V2":
+                            case 2:
+                                message.modelType = 2;
+                                break;
+                            }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
                             return message;
                         };
     
@@ -26149,6 +26241,8 @@
                                     object.issueCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.issueCount = options.longs === String ? "0" : 0;
+                                object.modelType = options.enums === String ? "MODEL_TYPE_UNSPECIFIED" : 0;
+                                object.languageCode = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -26169,6 +26263,10 @@
                                     object.issueCount = options.longs === String ? String(message.issueCount) : message.issueCount;
                                 else
                                     object.issueCount = options.longs === String ? $util.Long.prototype.toString.call(message.issueCount) : options.longs === Number ? new $util.LongBits(message.issueCount.low >>> 0, message.issueCount.high >>> 0).toNumber() : message.issueCount;
+                            if (message.modelType != null && message.hasOwnProperty("modelType"))
+                                object.modelType = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IssueModel.ModelType[message.modelType] === undefined ? message.modelType : $root.google.cloud.contactcenterinsights.v1.IssueModel.ModelType[message.modelType] : message.modelType;
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
                             return object;
                         };
     
@@ -26505,6 +26603,22 @@
                             values[valuesById[3] = "DEPLOYED"] = 3;
                             values[valuesById[4] = "UNDEPLOYING"] = 4;
                             values[valuesById[5] = "DELETING"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * ModelType enum.
+                         * @name google.cloud.contactcenterinsights.v1.IssueModel.ModelType
+                         * @enum {number}
+                         * @property {number} MODEL_TYPE_UNSPECIFIED=0 MODEL_TYPE_UNSPECIFIED value
+                         * @property {number} TYPE_V1=1 TYPE_V1 value
+                         * @property {number} TYPE_V2=2 TYPE_V2 value
+                         */
+                        IssueModel.ModelType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODEL_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TYPE_V1"] = 1;
+                            values[valuesById[2] = "TYPE_V2"] = 2;
                             return values;
                         })();
     
@@ -29856,6 +29970,7 @@
                          * @property {google.cloud.contactcenterinsights.v1.ISmartReplyData|null} [smartReply] RuntimeAnnotation smartReply
                          * @property {google.cloud.contactcenterinsights.v1.ISmartComposeSuggestionData|null} [smartComposeSuggestion] RuntimeAnnotation smartComposeSuggestion
                          * @property {google.cloud.contactcenterinsights.v1.IDialogflowInteractionData|null} [dialogflowInteraction] RuntimeAnnotation dialogflowInteraction
+                         * @property {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null} [conversationSummarizationSuggestion] RuntimeAnnotation conversationSummarizationSuggestion
                          * @property {string|null} [annotationId] RuntimeAnnotation annotationId
                          * @property {google.protobuf.ITimestamp|null} [createTime] RuntimeAnnotation createTime
                          * @property {google.cloud.contactcenterinsights.v1.IAnnotationBoundary|null} [startBoundary] RuntimeAnnotation startBoundary
@@ -29919,6 +30034,14 @@
                         RuntimeAnnotation.prototype.dialogflowInteraction = null;
     
                         /**
+                         * RuntimeAnnotation conversationSummarizationSuggestion.
+                         * @member {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null|undefined} conversationSummarizationSuggestion
+                         * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation
+                         * @instance
+                         */
+                        RuntimeAnnotation.prototype.conversationSummarizationSuggestion = null;
+    
+                        /**
                          * RuntimeAnnotation annotationId.
                          * @member {string} annotationId
                          * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation
@@ -29963,12 +30086,12 @@
     
                         /**
                          * RuntimeAnnotation data.
-                         * @member {"articleSuggestion"|"faqAnswer"|"smartReply"|"smartComposeSuggestion"|"dialogflowInteraction"|undefined} data
+                         * @member {"articleSuggestion"|"faqAnswer"|"smartReply"|"smartComposeSuggestion"|"dialogflowInteraction"|"conversationSummarizationSuggestion"|undefined} data
                          * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation
                          * @instance
                          */
                         Object.defineProperty(RuntimeAnnotation.prototype, "data", {
-                            get: $util.oneOfGetter($oneOfFields = ["articleSuggestion", "faqAnswer", "smartReply", "smartComposeSuggestion", "dialogflowInteraction"]),
+                            get: $util.oneOfGetter($oneOfFields = ["articleSuggestion", "faqAnswer", "smartReply", "smartComposeSuggestion", "dialogflowInteraction", "conversationSummarizationSuggestion"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -30016,6 +30139,8 @@
                                 $root.google.cloud.contactcenterinsights.v1.SmartComposeSuggestionData.encode(message.smartComposeSuggestion, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.dialogflowInteraction != null && Object.hasOwnProperty.call(message, "dialogflowInteraction"))
                                 $root.google.cloud.contactcenterinsights.v1.DialogflowInteractionData.encode(message.dialogflowInteraction, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.conversationSummarizationSuggestion != null && Object.hasOwnProperty.call(message, "conversationSummarizationSuggestion"))
+                                $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.encode(message.conversationSummarizationSuggestion, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -30068,6 +30193,10 @@
                                     }
                                 case 10: {
                                         message.dialogflowInteraction = $root.google.cloud.contactcenterinsights.v1.DialogflowInteractionData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.conversationSummarizationSuggestion = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -30174,6 +30303,16 @@
                                         return "dialogflowInteraction." + error;
                                 }
                             }
+                            if (message.conversationSummarizationSuggestion != null && message.hasOwnProperty("conversationSummarizationSuggestion")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.verify(message.conversationSummarizationSuggestion);
+                                    if (error)
+                                        return "conversationSummarizationSuggestion." + error;
+                                }
+                            }
                             if (message.annotationId != null && message.hasOwnProperty("annotationId"))
                                 if (!$util.isString(message.annotationId))
                                     return "annotationId: string expected";
@@ -30236,6 +30375,11 @@
                                 if (typeof object.dialogflowInteraction !== "object")
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.RuntimeAnnotation.dialogflowInteraction: object expected");
                                 message.dialogflowInteraction = $root.google.cloud.contactcenterinsights.v1.DialogflowInteractionData.fromObject(object.dialogflowInteraction);
+                            }
+                            if (object.conversationSummarizationSuggestion != null) {
+                                if (typeof object.conversationSummarizationSuggestion !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.RuntimeAnnotation.conversationSummarizationSuggestion: object expected");
+                                message.conversationSummarizationSuggestion = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.fromObject(object.conversationSummarizationSuggestion);
                             }
                             if (object.annotationId != null)
                                 message.annotationId = String(object.annotationId);
@@ -30316,6 +30460,11 @@
                                 object.dialogflowInteraction = $root.google.cloud.contactcenterinsights.v1.DialogflowInteractionData.toObject(message.dialogflowInteraction, options);
                                 if (options.oneofs)
                                     object.data = "dialogflowInteraction";
+                            }
+                            if (message.conversationSummarizationSuggestion != null && message.hasOwnProperty("conversationSummarizationSuggestion")) {
+                                object.conversationSummarizationSuggestion = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.toObject(message.conversationSummarizationSuggestion, options);
+                                if (options.oneofs)
+                                    object.data = "conversationSummarizationSuggestion";
                             }
                             return object;
                         };
@@ -32201,6 +32350,396 @@
                         return DialogflowInteractionData;
                     })();
     
+                    v1.ConversationSummarizationSuggestionData = (function() {
+    
+                        /**
+                         * Properties of a ConversationSummarizationSuggestionData.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IConversationSummarizationSuggestionData
+                         * @property {string|null} [text] ConversationSummarizationSuggestionData text
+                         * @property {Object.<string,string>|null} [textSections] ConversationSummarizationSuggestionData textSections
+                         * @property {number|null} [confidence] ConversationSummarizationSuggestionData confidence
+                         * @property {Object.<string,string>|null} [metadata] ConversationSummarizationSuggestionData metadata
+                         * @property {string|null} [answerRecord] ConversationSummarizationSuggestionData answerRecord
+                         * @property {string|null} [conversationModel] ConversationSummarizationSuggestionData conversationModel
+                         */
+    
+                        /**
+                         * Constructs a new ConversationSummarizationSuggestionData.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a ConversationSummarizationSuggestionData.
+                         * @implements IConversationSummarizationSuggestionData
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData=} [properties] Properties to set
+                         */
+                        function ConversationSummarizationSuggestionData(properties) {
+                            this.textSections = {};
+                            this.metadata = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationSummarizationSuggestionData text.
+                         * @member {string} text
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         */
+                        ConversationSummarizationSuggestionData.prototype.text = "";
+    
+                        /**
+                         * ConversationSummarizationSuggestionData textSections.
+                         * @member {Object.<string,string>} textSections
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         */
+                        ConversationSummarizationSuggestionData.prototype.textSections = $util.emptyObject;
+    
+                        /**
+                         * ConversationSummarizationSuggestionData confidence.
+                         * @member {number} confidence
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         */
+                        ConversationSummarizationSuggestionData.prototype.confidence = 0;
+    
+                        /**
+                         * ConversationSummarizationSuggestionData metadata.
+                         * @member {Object.<string,string>} metadata
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         */
+                        ConversationSummarizationSuggestionData.prototype.metadata = $util.emptyObject;
+    
+                        /**
+                         * ConversationSummarizationSuggestionData answerRecord.
+                         * @member {string} answerRecord
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         */
+                        ConversationSummarizationSuggestionData.prototype.answerRecord = "";
+    
+                        /**
+                         * ConversationSummarizationSuggestionData conversationModel.
+                         * @member {string} conversationModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         */
+                        ConversationSummarizationSuggestionData.prototype.conversationModel = "";
+    
+                        /**
+                         * Creates a new ConversationSummarizationSuggestionData instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData} ConversationSummarizationSuggestionData instance
+                         */
+                        ConversationSummarizationSuggestionData.create = function create(properties) {
+                            return new ConversationSummarizationSuggestionData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationSummarizationSuggestionData message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData} message ConversationSummarizationSuggestionData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationSummarizationSuggestionData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                            if (message.confidence != null && Object.hasOwnProperty.call(message, "confidence"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.confidence);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                for (var keys = Object.keys(message.metadata), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.metadata[keys[i]]).ldelim();
+                            if (message.answerRecord != null && Object.hasOwnProperty.call(message, "answerRecord"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.answerRecord);
+                            if (message.textSections != null && Object.hasOwnProperty.call(message, "textSections"))
+                                for (var keys = Object.keys(message.textSections), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.textSections[keys[i]]).ldelim();
+                            if (message.conversationModel != null && Object.hasOwnProperty.call(message, "conversationModel"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.conversationModel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationSummarizationSuggestionData message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData} message ConversationSummarizationSuggestionData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationSummarizationSuggestionData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationSummarizationSuggestionData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData} ConversationSummarizationSuggestionData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationSummarizationSuggestionData.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.text = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.textSections === $util.emptyObject)
+                                            message.textSections = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.textSections[key] = value;
+                                        break;
+                                    }
+                                case 2: {
+                                        message.confidence = reader.float();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.metadata === $util.emptyObject)
+                                            message.metadata = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.metadata[key] = value;
+                                        break;
+                                    }
+                                case 4: {
+                                        message.answerRecord = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.conversationModel = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationSummarizationSuggestionData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData} ConversationSummarizationSuggestionData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationSummarizationSuggestionData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationSummarizationSuggestionData message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationSummarizationSuggestionData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                if (!$util.isString(message.text))
+                                    return "text: string expected";
+                            if (message.textSections != null && message.hasOwnProperty("textSections")) {
+                                if (!$util.isObject(message.textSections))
+                                    return "textSections: object expected";
+                                var key = Object.keys(message.textSections);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.textSections[key[i]]))
+                                        return "textSections: string{k:string} expected";
+                            }
+                            if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                if (typeof message.confidence !== "number")
+                                    return "confidence: number expected";
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                if (!$util.isObject(message.metadata))
+                                    return "metadata: object expected";
+                                var key = Object.keys(message.metadata);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.metadata[key[i]]))
+                                        return "metadata: string{k:string} expected";
+                            }
+                            if (message.answerRecord != null && message.hasOwnProperty("answerRecord"))
+                                if (!$util.isString(message.answerRecord))
+                                    return "answerRecord: string expected";
+                            if (message.conversationModel != null && message.hasOwnProperty("conversationModel"))
+                                if (!$util.isString(message.conversationModel))
+                                    return "conversationModel: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationSummarizationSuggestionData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData} ConversationSummarizationSuggestionData
+                         */
+                        ConversationSummarizationSuggestionData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData();
+                            if (object.text != null)
+                                message.text = String(object.text);
+                            if (object.textSections) {
+                                if (typeof object.textSections !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.textSections: object expected");
+                                message.textSections = {};
+                                for (var keys = Object.keys(object.textSections), i = 0; i < keys.length; ++i)
+                                    message.textSections[keys[i]] = String(object.textSections[keys[i]]);
+                            }
+                            if (object.confidence != null)
+                                message.confidence = Number(object.confidence);
+                            if (object.metadata) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.metadata: object expected");
+                                message.metadata = {};
+                                for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i)
+                                    message.metadata[keys[i]] = String(object.metadata[keys[i]]);
+                            }
+                            if (object.answerRecord != null)
+                                message.answerRecord = String(object.answerRecord);
+                            if (object.conversationModel != null)
+                                message.conversationModel = String(object.conversationModel);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationSummarizationSuggestionData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData} message ConversationSummarizationSuggestionData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationSummarizationSuggestionData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.metadata = {};
+                                object.textSections = {};
+                            }
+                            if (options.defaults) {
+                                object.text = "";
+                                object.confidence = 0;
+                                object.answerRecord = "";
+                                object.conversationModel = "";
+                            }
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                object.text = message.text;
+                            if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                            var keys2;
+                            if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
+                                object.metadata = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.metadata[keys2[j]] = message.metadata[keys2[j]];
+                            }
+                            if (message.answerRecord != null && message.hasOwnProperty("answerRecord"))
+                                object.answerRecord = message.answerRecord;
+                            if (message.textSections && (keys2 = Object.keys(message.textSections)).length) {
+                                object.textSections = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.textSections[keys2[j]] = message.textSections[keys2[j]];
+                            }
+                            if (message.conversationModel != null && message.hasOwnProperty("conversationModel"))
+                                object.conversationModel = message.conversationModel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationSummarizationSuggestionData to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationSummarizationSuggestionData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConversationSummarizationSuggestionData
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConversationSummarizationSuggestionData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData";
+                        };
+    
+                        return ConversationSummarizationSuggestionData;
+                    })();
+    
                     v1.ConversationParticipant = (function() {
     
                         /**
@@ -32897,6 +33436,8 @@
                          * @property {boolean|null} [runIntentAnnotator] AnnotatorSelector runIntentAnnotator
                          * @property {boolean|null} [runIssueModelAnnotator] AnnotatorSelector runIssueModelAnnotator
                          * @property {Array.<string>|null} [issueModels] AnnotatorSelector issueModels
+                         * @property {boolean|null} [runSummarizationAnnotator] AnnotatorSelector runSummarizationAnnotator
+                         * @property {google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig|null} [summarizationConfig] AnnotatorSelector summarizationConfig
                          */
     
                         /**
@@ -32989,6 +33530,22 @@
                         AnnotatorSelector.prototype.issueModels = $util.emptyArray;
     
                         /**
+                         * AnnotatorSelector runSummarizationAnnotator.
+                         * @member {boolean} runSummarizationAnnotator
+                         * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector
+                         * @instance
+                         */
+                        AnnotatorSelector.prototype.runSummarizationAnnotator = false;
+    
+                        /**
+                         * AnnotatorSelector summarizationConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig|null|undefined} summarizationConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector
+                         * @instance
+                         */
+                        AnnotatorSelector.prototype.summarizationConfig = null;
+    
+                        /**
                          * Creates a new AnnotatorSelector instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector
@@ -33029,9 +33586,13 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.runIntentAnnotator);
                             if (message.runIssueModelAnnotator != null && Object.hasOwnProperty.call(message, "runIssueModelAnnotator"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.runIssueModelAnnotator);
+                            if (message.runSummarizationAnnotator != null && Object.hasOwnProperty.call(message, "runSummarizationAnnotator"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.runSummarizationAnnotator);
                             if (message.issueModels != null && message.issueModels.length)
                                 for (var i = 0; i < message.issueModels.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.issueModels[i]);
+                            if (message.summarizationConfig != null && Object.hasOwnProperty.call(message, "summarizationConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.encode(message.summarizationConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -33106,6 +33667,14 @@
                                         message.issueModels.push(reader.string());
                                         break;
                                     }
+                                case 9: {
+                                        message.runSummarizationAnnotator = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.summarizationConfig = $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -33176,6 +33745,14 @@
                                     if (!$util.isString(message.issueModels[i]))
                                         return "issueModels: string[] expected";
                             }
+                            if (message.runSummarizationAnnotator != null && message.hasOwnProperty("runSummarizationAnnotator"))
+                                if (typeof message.runSummarizationAnnotator !== "boolean")
+                                    return "runSummarizationAnnotator: boolean expected";
+                            if (message.summarizationConfig != null && message.hasOwnProperty("summarizationConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.verify(message.summarizationConfig);
+                                if (error)
+                                    return "summarizationConfig." + error;
+                            }
                             return null;
                         };
     
@@ -33219,6 +33796,13 @@
                                 for (var i = 0; i < object.issueModels.length; ++i)
                                     message.issueModels[i] = String(object.issueModels[i]);
                             }
+                            if (object.runSummarizationAnnotator != null)
+                                message.runSummarizationAnnotator = Boolean(object.runSummarizationAnnotator);
+                            if (object.summarizationConfig != null) {
+                                if (typeof object.summarizationConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.AnnotatorSelector.summarizationConfig: object expected");
+                                message.summarizationConfig = $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.fromObject(object.summarizationConfig);
+                            }
                             return message;
                         };
     
@@ -33247,6 +33831,8 @@
                                 object.runEntityAnnotator = false;
                                 object.runIntentAnnotator = false;
                                 object.runIssueModelAnnotator = false;
+                                object.runSummarizationAnnotator = false;
+                                object.summarizationConfig = null;
                             }
                             if (message.runInterruptionAnnotator != null && message.hasOwnProperty("runInterruptionAnnotator"))
                                 object.runInterruptionAnnotator = message.runInterruptionAnnotator;
@@ -33267,11 +33853,15 @@
                                 object.runIntentAnnotator = message.runIntentAnnotator;
                             if (message.runIssueModelAnnotator != null && message.hasOwnProperty("runIssueModelAnnotator"))
                                 object.runIssueModelAnnotator = message.runIssueModelAnnotator;
+                            if (message.runSummarizationAnnotator != null && message.hasOwnProperty("runSummarizationAnnotator"))
+                                object.runSummarizationAnnotator = message.runSummarizationAnnotator;
                             if (message.issueModels && message.issueModels.length) {
                                 object.issueModels = [];
                                 for (var j = 0; j < message.issueModels.length; ++j)
                                     object.issueModels[j] = message.issueModels[j];
                             }
+                            if (message.summarizationConfig != null && message.hasOwnProperty("summarizationConfig"))
+                                object.summarizationConfig = $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.toObject(message.summarizationConfig, options);
                             return object;
                         };
     
@@ -33300,6 +33890,289 @@
                             }
                             return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.AnnotatorSelector";
                         };
+    
+                        AnnotatorSelector.SummarizationConfig = (function() {
+    
+                            /**
+                             * Properties of a SummarizationConfig.
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector
+                             * @interface ISummarizationConfig
+                             * @property {string|null} [conversationProfile] SummarizationConfig conversationProfile
+                             * @property {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel|null} [summarizationModel] SummarizationConfig summarizationModel
+                             */
+    
+                            /**
+                             * Constructs a new SummarizationConfig.
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector
+                             * @classdesc Represents a SummarizationConfig.
+                             * @implements ISummarizationConfig
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig=} [properties] Properties to set
+                             */
+                            function SummarizationConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SummarizationConfig conversationProfile.
+                             * @member {string|null|undefined} conversationProfile
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @instance
+                             */
+                            SummarizationConfig.prototype.conversationProfile = null;
+    
+                            /**
+                             * SummarizationConfig summarizationModel.
+                             * @member {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel|null|undefined} summarizationModel
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @instance
+                             */
+                            SummarizationConfig.prototype.summarizationModel = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SummarizationConfig modelSource.
+                             * @member {"conversationProfile"|"summarizationModel"|undefined} modelSource
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @instance
+                             */
+                            Object.defineProperty(SummarizationConfig.prototype, "modelSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["conversationProfile", "summarizationModel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SummarizationConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig} SummarizationConfig instance
+                             */
+                            SummarizationConfig.create = function create(properties) {
+                                return new SummarizationConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SummarizationConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig} message SummarizationConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummarizationConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.conversationProfile != null && Object.hasOwnProperty.call(message, "conversationProfile"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.conversationProfile);
+                                if (message.summarizationModel != null && Object.hasOwnProperty.call(message, "summarizationModel"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.summarizationModel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SummarizationConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig} message SummarizationConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SummarizationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SummarizationConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig} SummarizationConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummarizationConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.conversationProfile = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.summarizationModel = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SummarizationConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig} SummarizationConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SummarizationConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SummarizationConfig message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SummarizationConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.conversationProfile != null && message.hasOwnProperty("conversationProfile")) {
+                                    properties.modelSource = 1;
+                                    if (!$util.isString(message.conversationProfile))
+                                        return "conversationProfile: string expected";
+                                }
+                                if (message.summarizationModel != null && message.hasOwnProperty("summarizationModel")) {
+                                    if (properties.modelSource === 1)
+                                        return "modelSource: multiple values";
+                                    properties.modelSource = 1;
+                                    switch (message.summarizationModel) {
+                                    default:
+                                        return "summarizationModel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SummarizationConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig} SummarizationConfig
+                             */
+                            SummarizationConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig();
+                                if (object.conversationProfile != null)
+                                    message.conversationProfile = String(object.conversationProfile);
+                                switch (object.summarizationModel) {
+                                default:
+                                    if (typeof object.summarizationModel === "number") {
+                                        message.summarizationModel = object.summarizationModel;
+                                        break;
+                                    }
+                                    break;
+                                case "SUMMARIZATION_MODEL_UNSPECIFIED":
+                                case 0:
+                                    message.summarizationModel = 0;
+                                    break;
+                                case "BASELINE_MODEL":
+                                case 1:
+                                    message.summarizationModel = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SummarizationConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig} message SummarizationConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SummarizationConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.conversationProfile != null && message.hasOwnProperty("conversationProfile")) {
+                                    object.conversationProfile = message.conversationProfile;
+                                    if (options.oneofs)
+                                        object.modelSource = "conversationProfile";
+                                }
+                                if (message.summarizationModel != null && message.hasOwnProperty("summarizationModel")) {
+                                    object.summarizationModel = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel[message.summarizationModel] === undefined ? message.summarizationModel : $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel[message.summarizationModel] : message.summarizationModel;
+                                    if (options.oneofs)
+                                        object.modelSource = "summarizationModel";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SummarizationConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SummarizationConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SummarizationConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SummarizationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig";
+                            };
+    
+                            /**
+                             * SummarizationModel enum.
+                             * @name google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel
+                             * @enum {number}
+                             * @property {number} SUMMARIZATION_MODEL_UNSPECIFIED=0 SUMMARIZATION_MODEL_UNSPECIFIED value
+                             * @property {number} BASELINE_MODEL=1 BASELINE_MODEL value
+                             */
+                            SummarizationConfig.SummarizationModel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SUMMARIZATION_MODEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "BASELINE_MODEL"] = 1;
+                                return values;
+                            })();
+    
+                            return SummarizationConfig;
+                        })();
     
                         return AnnotatorSelector;
                     })();

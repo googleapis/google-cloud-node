@@ -141,6 +141,7 @@ message JobStatus {
 
   // Valid Job states.
   enum State {
+    // Job state unspecified.
     STATE_UNSPECIFIED = 0;
 
     // Job is admitted (validated and persisted) and waiting for resources.
@@ -225,12 +226,14 @@ message JobNotification {
 message AllocationPolicy {
   message LocationPolicy {
     // A list of allowed location names represented by internal URLs.
+    //
     // Each location can be a region or a zone.
     // Only one region or multiple zones in one region is supported now.
     // For example,
     // ["regions/us-central1"] allow VMs in any zones in region us-central1.
     // ["zones/us-central1-a", "zones/us-central1-c"] only allow VMs
     // in zones us-central1-a and us-central1-c.
+    //
     // All locations end up in different regions would cause errors.
     // For example,
     // ["regions/us-central1", "zones/us-central1-a", "zones/us-central1-b",
@@ -241,25 +244,30 @@ message AllocationPolicy {
 
   // A new persistent disk or a local ssd.
   // A VM can only have one local SSD setting but multiple local SSD partitions.
-  // https://cloud.google.com/compute/docs/disks#pdspecs.
+  // See https://cloud.google.com/compute/docs/disks#pdspecs and
   // https://cloud.google.com/compute/docs/disks#localssds.
   message Disk {
     // A data source from which a PD will be created.
     oneof data_source {
       // Name of a public or custom image used as the data source.
       // For example, the following are all valid URLs:
-      // (1) Specify the image by its family name:
+      //
+      // * Specify the image by its family name:
       // projects/{project}/global/images/family/{image_family}
-      // (2) Specify the image version:
+      // * Specify the image version:
       // projects/{project}/global/images/{image_version}
+      //
       // You can also use Batch customized image in short names.
       // The following image values are supported for a boot disk:
-      // "batch-debian": use Batch Debian images.
-      // "batch-centos": use Batch CentOS images.
-      // "batch-cos": use Batch Container-Optimized images.
+      //
+      // * "batch-debian": use Batch Debian images.
+      // * "batch-centos": use Batch CentOS images.
+      // * "batch-cos": use Batch Container-Optimized images.
+      // * "batch-hpc-centos": use Batch HPC CentOS images.
       string image = 4;
 
       // Name of a snapshot used as the data source.
+      // Snapshot is not supported as boot disk now.
       string snapshot = 5;
     }
 
@@ -270,6 +278,7 @@ message AllocationPolicy {
     string type = 1;
 
     // Disk size in GB.
+    //
     // For persistent disk, this field is ignored if `data_source` is `image` or
     // `snapshot`.
     // For local SSD, size_gb should be a multiple of 375GB,
@@ -324,8 +333,7 @@ message AllocationPolicy {
 
     // The minimum CPU platform.
     // See
-    // `https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform`.
-    // Not yet implemented.
+    // https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform.
     string min_cpu_platform = 3;
 
     // The provisioning model.
@@ -334,8 +342,9 @@ message AllocationPolicy {
     // The accelerators attached to each VM instance.
     repeated Accelerator accelerators = 5;
 
-    // Book disk to be created and attached to each VM by this InstancePolicy.
+    // Boot disk to be created and attached to each VM by this InstancePolicy.
     // Boot disk will be deleted when the VM is deleted.
+    // Batch API now only supports booting from image.
     Disk boot_disk = 8;
 
     // Non-boot disks to be attached for each VM created by this InstancePolicy.
@@ -366,18 +375,22 @@ message AllocationPolicy {
   message NetworkInterface {
     // The URL of an existing network resource.
     // You can specify the network as a full or partial URL.
+    //
     // For example, the following are all valid URLs:
-    // https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
-    // projects/{project}/global/networks/{network}
-    // global/networks/{network}
+    //
+    // * https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
+    // * projects/{project}/global/networks/{network}
+    // * global/networks/{network}
     string network = 1;
 
     // The URL of an existing subnetwork resource in the network.
     // You can specify the subnetwork as a full or partial URL.
+    //
     // For example, the following are all valid URLs:
-    // https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}
-    // projects/{project}/regions/{region}/subnetworks/{subnetwork}
-    // regions/{region}/subnetworks/{subnetwork}
+    //
+    // * https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}
+    // * projects/{project}/regions/{region}/subnetworks/{subnetwork}
+    // * regions/{region}/subnetworks/{subnetwork}
     string subnetwork = 2;
 
     // Default is false (with an external IP address). Required if
@@ -394,6 +407,23 @@ message AllocationPolicy {
   message NetworkPolicy {
     // Network configurations.
     repeated NetworkInterface network_interfaces = 1;
+  }
+
+  // PlacementPolicy describes a group placement policy for the VMs controlled
+  // by this AllocationPolicy.
+  message PlacementPolicy {
+    // UNSPECIFIED vs. COLLOCATED (default UNSPECIFIED). Use COLLOCATED when you
+    // want VMs to be located close to each other for low network latency
+    // between the VMs. No placement policy will be generated when collocation
+    // is UNSPECIFIED.
+    string collocation = 1;
+
+    // When specified, causes the job to fail if more than max_distance logical
+    // switches are required between VMs. Batch uses the most compact possible
+    // placement of VMs even when max_distance is not specified. An explicit
+    // max_distance makes that level of compactness a strict requirement.
+    // Not yet implemented
+    int64 max_distance = 2;
   }
 
   // Compute Engine VM instance provisioning model.
@@ -437,15 +467,32 @@ message AllocationPolicy {
 
   // The network policy.
   NetworkPolicy network = 7;
+
+  // The placement policy.
+  PlacementPolicy placement = 10;
 }
 
-// A TaskGroup contains one or multiple Tasks that share the same
-// Runnable but with different runtime parameters.
+// A TaskGroup defines one or more Tasks that all share the same TaskSpec.
 message TaskGroup {
   option (google.api.resource) = {
     type: "batch.googleapis.com/TaskGroup"
     pattern: "projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}"
   };
+
+  // How Tasks in the TaskGroup should be scheduled relative to each other.
+  enum SchedulingPolicy {
+    // Unspecified.
+    SCHEDULING_POLICY_UNSPECIFIED = 0;
+
+    // Run Tasks as soon as resources are available.
+    //
+    // Tasks might be executed in parallel depending on parallelism and
+    // task_count values.
+    AS_SOON_AS_POSSIBLE = 1;
+
+    // Run Tasks sequentially with increased task index.
+    IN_ORDER = 2;
+  }
 
   // Output only. TaskGroup name.
   // The system generates this field based on parent Job name.
@@ -457,12 +504,17 @@ message TaskGroup {
   TaskSpec task_spec = 3 [(google.api.field_behavior) = REQUIRED];
 
   // Number of Tasks in the TaskGroup.
-  // default is 1
+  // Default is 1.
   int64 task_count = 4;
 
   // Max number of tasks that can run in parallel.
   // Default to min(task_count, 1000).
+  // Field parallelism must be 1 if the scheduling_policy is IN_ORDER.
   int64 parallelism = 5;
+
+  // Scheduling policy for Tasks in the TaskGroup.
+  // The default value is AS_SOON_AS_POSSIBLE.
+  SchedulingPolicy scheduling_policy = 6;
 
   // An array of environment variable mappings, which are passed to Tasks with
   // matching indices. If task_environments is used then task_count should
@@ -473,8 +525,6 @@ message TaskGroup {
   // addition to any environment variables set in task_environments, specifying
   // the number of Tasks in the Task's parent TaskGroup, and the specific Task's
   // index in the TaskGroup (0 through BATCH_TASK_COUNT - 1).
-  //
-  // task_environments supports up to 200 entries.
   repeated Environment task_environments = 9;
 
   // Max number of tasks that can be run on a VM at the same time.

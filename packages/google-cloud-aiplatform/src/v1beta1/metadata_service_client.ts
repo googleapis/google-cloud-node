@@ -220,9 +220,6 @@ export class MetadataServiceClient {
       deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
-      endpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpoints/{endpoint}'
-      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -272,11 +269,24 @@ export class MetadataServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/endpoints/{endpoint}'
+      ),
+      projectLocationPublisherModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+        ),
+      publisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'publishers/{publisher}/models/{model}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -376,6 +386,12 @@ export class MetadataServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -383,6 +399,12 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
           ],
         },
@@ -400,6 +422,14 @@ export class MetadataServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -409,6 +439,14 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -425,6 +463,12 @@ export class MetadataServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -432,6 +476,12 @@ export class MetadataServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
           ],
         },
@@ -849,6 +899,10 @@ export class MetadataServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -886,6 +940,14 @@ export class MetadataServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
         },
@@ -1045,6 +1107,9 @@ export class MetadataServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1073,6 +1138,12 @@ export class MetadataServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
         },
@@ -1223,6 +1294,9 @@ export class MetadataServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1251,6 +1325,12 @@ export class MetadataServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
             },
           ],
         },
@@ -1447,6 +1527,12 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
             },
           ],
         },
@@ -2024,7 +2110,6 @@ export class MetadataServiceClient {
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A FieldMask indicating which fields should be updated.
-   *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
    *   {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is not found, a new
@@ -2321,7 +2406,6 @@ export class MetadataServiceClient {
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A FieldMask indicating which fields should be updated.
-   *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
    *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Context|Context}
    *   is not found, a new {@link google.cloud.aiplatform.v1beta1.Context|Context} is
@@ -3062,7 +3146,6 @@ export class MetadataServiceClient {
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A FieldMask indicating which fields should be updated.
-   *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
    *   {@link google.cloud.aiplatform.v1beta1.Execution|Execution} is not found, a new
@@ -3613,6 +3696,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`.
    *      For example: `metadata.field_1.number_value = 10.0`
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *
    *   Each of the above supported filter types can be combined together using
    *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
@@ -5140,6 +5226,9 @@ export class MetadataServiceClient {
    *       To filter on metadata fields use traversal operation as follows:
    *       `metadata.<field_name>.<type_value>`.
    *       For example: `metadata.field_1.number_value = 10.0`
+   *       In case the field name contains special characters (such as colon), one
+   *       can embed it inside double quote.
+   *       For example: `metadata."field:1".number_value = 10.0`
    *   *   **Context based filtering**:
    *       To filter Artifacts based on the contexts to which they belong, use the
    *       function operator with the full resource name
@@ -5283,6 +5372,9 @@ export class MetadataServiceClient {
    *       To filter on metadata fields use traversal operation as follows:
    *       `metadata.<field_name>.<type_value>`.
    *       For example: `metadata.field_1.number_value = 10.0`
+   *       In case the field name contains special characters (such as colon), one
+   *       can embed it inside double quote.
+   *       For example: `metadata."field:1".number_value = 10.0`
    *   *   **Context based filtering**:
    *       To filter Artifacts based on the contexts to which they belong, use the
    *       function operator with the full resource name
@@ -5374,6 +5466,9 @@ export class MetadataServiceClient {
    *       To filter on metadata fields use traversal operation as follows:
    *       `metadata.<field_name>.<type_value>`.
    *       For example: `metadata.field_1.number_value = 10.0`
+   *       In case the field name contains special characters (such as colon), one
+   *       can embed it inside double quote.
+   *       For example: `metadata."field:1".number_value = 10.0`
    *   *   **Context based filtering**:
    *       To filter Artifacts based on the contexts to which they belong, use the
    *       function operator with the full resource name
@@ -5464,6 +5559,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`.
    *      For example: `metadata.field_1.number_value = 10.0`.
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *   *  **Parent Child filtering**:
    *      To filter Contexts based on parent-child relationship use the HAS
    *      operator as follows:
@@ -5611,6 +5709,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`.
    *      For example: `metadata.field_1.number_value = 10.0`.
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *   *  **Parent Child filtering**:
    *      To filter Contexts based on parent-child relationship use the HAS
    *      operator as follows:
@@ -5706,6 +5807,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`.
    *      For example: `metadata.field_1.number_value = 10.0`.
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *   *  **Parent Child filtering**:
    *      To filter Contexts based on parent-child relationship use the HAS
    *      operator as follows:
@@ -5800,6 +5904,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`
    *      For example: `metadata.field_1.number_value = 10.0`
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *   *  **Context based filtering**:
    *      To filter Executions based on the contexts to which they belong use
    *      the function operator with the full resource name:
@@ -5943,6 +6050,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`
    *      For example: `metadata.field_1.number_value = 10.0`
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *   *  **Context based filtering**:
    *      To filter Executions based on the contexts to which they belong use
    *      the function operator with the full resource name:
@@ -6034,6 +6144,9 @@ export class MetadataServiceClient {
    *      To filter on metadata fields use traversal operation as follows:
    *      `metadata.<field_name>.<type_value>`
    *      For example: `metadata.field_1.number_value = 10.0`
+   *      In case the field name contains special characters (such as colon), one
+   *      can embed it inside double quote.
+   *      For example: `metadata."field:1".number_value = 10.0`
    *   *  **Context based filtering**:
    *      To filter Executions based on the contexts to which they belong use
    *      the function operator with the full resource name:
@@ -7363,55 +7476,6 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Return a fully-qualified endpoint resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} endpoint
-   * @returns {string} Resource name string.
-   */
-  endpointPath(project: string, location: string, endpoint: string) {
-    return this.pathTemplates.endpointPathTemplate.render({
-      project: project,
-      location: location,
-      endpoint: endpoint,
-    });
-  }
-
-  /**
-   * Parse the project from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
-  }
-
-  /**
-   * Parse the location from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
-  }
-
-  /**
-   * Parse the endpoint from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the endpoint.
-   */
-  matchEndpointFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
-  }
-
-  /**
    * Return a fully-qualified entityType resource name string.
    *
    * @param {string} project
@@ -8424,6 +8488,67 @@ export class MetadataServiceClient {
   }
 
   /**
+   * Return a fully-qualified persistentResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} persistent_resource
+   * @returns {string} Resource name string.
+   */
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.render({
+      project: project,
+      location: location,
+      persistent_resource: persistentResource,
+    });
+  }
+
+  /**
+   * Parse the project from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the persistent_resource from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the persistent_resource.
+   */
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
+  }
+
+  /**
    * Return a fully-qualified pipelineJob resource name string.
    *
    * @param {string} project
@@ -8496,6 +8621,194 @@ export class MetadataServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationEndpointPath(
+    project: string,
+    location: string,
+    endpoint: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      endpoint: endpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).location;
+  }
+
+  /**
+   * Parse the endpoint from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the endpoint.
+   */
+  matchEndpointFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPublisherModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  projectLocationPublisherModelPath(
+    project: string,
+    location: string,
+    publisher: string,
+    model: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
+      project: project,
+      location: location,
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).location;
+  }
+
+  /**
+   * Parse the publisher from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).model;
+  }
+
+  /**
+   * Return a fully-qualified publisherModel resource name string.
+   *
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  publisherModelPath(publisher: string, model: string) {
+    return this.pathTemplates.publisherModelPathTemplate.render({
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the publisher from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).model;
   }
 
   /**

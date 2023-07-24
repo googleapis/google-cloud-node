@@ -505,6 +505,15 @@ service ClusterManager {
       get: "/v1/{parent=projects/*}/aggregated/usableSubnetworks"
     };
   }
+
+  // Checks the cluster compatibility with Autopilot mode, and returns a list of
+  // compatibility issues.
+  rpc CheckAutopilotCompatibility(CheckAutopilotCompatibilityRequest)
+      returns (CheckAutopilotCompatibilityResponse) {
+    option (google.api.http) = {
+      get: "/v1/{name=projects/*/locations/*/clusters/*}:checkAutopilotCompatibility"
+    };
+  }
 }
 
 // Parameters that can be configured on Linux nodes.
@@ -606,6 +615,9 @@ message NodeKubeletConfig {
   // Controls the maximum number of processes allowed to run in a pod. The value
   // must be greater than or equal to 1024 and less than 4194304.
   int64 pod_pids_limit = 4;
+
+  // Enable or disable Kubelet read only port.
+  optional bool insecure_kubelet_readonly_port_enabled = 7;
 }
 
 // Parameters that describe the nodes in a cluster.
@@ -816,6 +828,9 @@ message NodeConfig {
   // Parameters for the node ephemeral storage using Local SSDs.
   // If unspecified, ephemeral storage is backed by the boot disk.
   EphemeralStorageLocalSsdConfig ephemeral_storage_local_ssd_config = 41;
+
+  // Parameters for node pools to be backed by shared sole tenant node groups.
+  SoleTenantConfig sole_tenant_config = 42;
 }
 
 // Specifies options for controlling advanced machine features.
@@ -905,6 +920,44 @@ message NodeNetworkConfig {
   // Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
   // overprovisioning is disabled.
   PodCIDROverprovisionConfig pod_cidr_overprovision_config = 13;
+
+  // We specify the additional node networks for this node pool using this list.
+  // Each node network corresponds to an additional interface
+  repeated AdditionalNodeNetworkConfig additional_node_network_configs = 14;
+
+  // We specify the additional pod networks for this node pool using this list.
+  // Each pod network corresponds to an additional alias IP range for the node
+  repeated AdditionalPodNetworkConfig additional_pod_network_configs = 15;
+
+  // Output only. [Output only] The utilization of the IPv4 range for the pod.
+  // The ratio is Usage/[Total number of IPs in the secondary range],
+  // Usage=numNodes*numZones*podIPsPerNode.
+  double pod_ipv4_range_utilization = 16
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// AdditionalNodeNetworkConfig is the configuration for additional node networks
+// within the NodeNetworkConfig message
+message AdditionalNodeNetworkConfig {
+  // Name of the VPC where the additional interface belongs
+  string network = 1;
+
+  // Name of the subnetwork where the additional interface belongs
+  string subnetwork = 2;
+}
+
+// AdditionalPodNetworkConfig is the configuration for additional pod networks
+// within the NodeNetworkConfig message
+message AdditionalPodNetworkConfig {
+  // Name of the subnetwork where the additional pod network belongs
+  string subnetwork = 1;
+
+  // The name of the secondary range on the subnet which provides IP address for
+  // this pod range
+  string secondary_pod_range = 2;
+
+  // The maximum number of pods per node which use this pod network
+  optional MaxPodsConstraint max_pods_per_node = 3;
 }
 
 // A set of Shielded Instance options.
@@ -978,6 +1031,40 @@ message ReservationAffinity {
 
   // Corresponds to the label value(s) of reservation resource(s).
   repeated string values = 3;
+}
+
+// SoleTenantConfig contains the NodeAffinities to specify what shared sole
+// tenant node groups should back the node pool.
+message SoleTenantConfig {
+  // Specifies the NodeAffinity key, values, and affinity operator according to
+  // [shared sole tenant node group
+  // affinities](https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes#node_affinity_and_anti-affinity).
+  message NodeAffinity {
+    // Operator allows user to specify affinity or anti-affinity for the
+    // given key values.
+    enum Operator {
+      // Invalid or unspecified affinity operator.
+      OPERATOR_UNSPECIFIED = 0;
+
+      // Affinity operator.
+      IN = 1;
+
+      // Anti-affinity operator.
+      NOT_IN = 2;
+    }
+
+    // Key for NodeAffinity.
+    string key = 1;
+
+    // Operator for NodeAffinity.
+    Operator operator = 2;
+
+    // Values for NodeAffinity.
+    repeated string values = 3;
+  }
+
+  // NodeAffinities used to match to a shared sole tenant node group.
+  repeated NodeAffinity node_affinities = 1;
 }
 
 // Kubernetes taint is composed of three fields: key, value, and effect. Effect
@@ -1132,6 +1219,9 @@ message AddonsConfig {
 
   // Configuration for the Backup for GKE agent addon.
   GkeBackupAgentConfig gke_backup_agent_config = 16;
+
+  // Configuration for the Cloud Storage Fuse CSI driver.
+  GcsFuseCsiDriverConfig gcs_fuse_csi_driver_config = 17;
 }
 
 // Configuration options for the HTTP (L7) load balancing controller addon,
@@ -1259,6 +1349,12 @@ message GcePersistentDiskCsiDriverConfig {
 // Configuration for the GCP Filestore CSI driver.
 message GcpFilestoreCsiDriverConfig {
   // Whether the GCP Filestore CSI driver is enabled for this cluster.
+  bool enabled = 1;
+}
+
+// Configuration for the Cloud Storage Fuse CSI driver.
+message GcsFuseCsiDriverConfig {
+  // Whether the Cloud Storage Fuse CSI driver is enabled for this cluster.
   bool enabled = 1;
 }
 
@@ -1509,6 +1605,12 @@ message IPAllocationPolicy {
   // IPAllocationPolicy.
   AdditionalPodRangesConfig additional_pod_ranges_config = 24
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. [Output only] The utilization of the cluster default IPv4
+  // range for the pod. The ratio is Usage/[Total number of IPs in the secondary
+  // range], Usage=numNodes*numZones*podIPsPerNode.
+  double default_pod_ipv4_range_utilization = 25
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A Google Kubernetes Engine cluster.
@@ -1713,7 +1815,12 @@ message Cluster {
   // Shielded Nodes configuration.
   ShieldedNodes shielded_nodes = 40;
 
-  // Release channel configuration.
+  // Release channel configuration. If left unspecified on cluster creation and
+  // a version is specified, the cluster is enrolled in the most mature release
+  // channel where the version is available (first checking STABLE, then
+  // REGULAR, and finally RAPID). Otherwise, if no release channel
+  // configuration and no version is specified, the cluster is enrolled in the
+  // REGULAR channel with its default version.
   ReleaseChannel release_channel = 41;
 
   // Configuration for the use of Kubernetes Service Accounts in GCP IAM
@@ -1859,6 +1966,52 @@ message Cluster {
 
   // Fleet information for the cluster.
   Fleet fleet = 140;
+
+  // Enable/Disable Security Posture API features for the cluster.
+  SecurityPostureConfig security_posture_config = 145;
+
+  // Beta APIs Config
+  K8sBetaAPIConfig enable_k8s_beta_apis = 143;
+}
+
+// K8sBetaAPIConfig , configuration for beta APIs
+message K8sBetaAPIConfig {
+  // Enabled k8s beta APIs.
+  repeated string enabled_apis = 1;
+}
+
+// SecurityPostureConfig defines the flags needed to enable/disable features for
+// the Security Posture API.
+message SecurityPostureConfig {
+  // Mode defines enablement mode for GKE Security posture features.
+  enum Mode {
+    // Default value not specified.
+    MODE_UNSPECIFIED = 0;
+
+    // Disables Security Posture features on the cluster.
+    DISABLED = 1;
+
+    // Applies Security Posture features on the cluster.
+    BASIC = 2;
+  }
+
+  // VulnerabilityMode defines enablement mode for vulnerability scanning.
+  enum VulnerabilityMode {
+    // Default value not specified.
+    VULNERABILITY_MODE_UNSPECIFIED = 0;
+
+    // Disables vulnerability scanning on the cluster.
+    VULNERABILITY_DISABLED = 1;
+
+    // Applies basic vulnerability scanning on the cluster.
+    VULNERABILITY_BASIC = 2;
+  }
+
+  // Sets which mode to use for Security Posture features.
+  optional Mode mode = 1;
+
+  // Sets which mode to use for vulnerability scanning.
+  optional VulnerabilityMode vulnerability_mode = 2;
 }
 
 // Node pool configs that apply to all auto-provisioned node pools
@@ -2065,6 +2218,9 @@ message ClusterUpdate {
   // The desired node pool logging configuration defaults for the cluster.
   NodePoolLoggingConfig desired_node_pool_logging_config = 116;
 
+  // The desired fleet configuration for the cluster.
+  Fleet desired_fleet = 117;
+
   // The desired stack type of the cluster.
   // If a stack type is provided and does not match the current stack type of
   // the cluster, update will attempt to change the stack type to the new type.
@@ -2078,11 +2234,46 @@ message ClusterUpdate {
   // The pod ranges specified here must have been specified earlier in the
   // 'additional_pod_ranges_config' argument.
   AdditionalPodRangesConfig removed_additional_pod_ranges_config = 121;
+
+  // Kubernetes open source beta apis enabled on the cluster. Only beta apis
+  K8sBetaAPIConfig enable_k8s_beta_apis = 122;
+
+  // Enable/Disable Security Posture API features for the cluster.
+  SecurityPostureConfig desired_security_posture_config = 124;
+
+  // The desired network performance config.
+  NetworkConfig.ClusterNetworkPerformanceConfig
+      desired_network_performance_config = 125;
+
+  // Enable/Disable FQDN Network Policy for the cluster.
+  optional bool desired_enable_fqdn_network_policy = 126;
+
+  // The desired workload policy configuration for the autopilot cluster.
+  WorkloadPolicyConfig desired_autopilot_workload_policy_config = 128;
+
+  // Desired Beta APIs to be enabled for cluster.
+  K8sBetaAPIConfig desired_k8s_beta_apis = 131;
 }
 
 // AdditionalPodRangesConfig is the configuration for additional pod secondary
 // ranges supporting the ClusterUpdate message.
-message AdditionalPodRangesConfig {}
+message AdditionalPodRangesConfig {
+  // Name for pod secondary ipv4 range which has the actual range defined ahead.
+  repeated string pod_range_names = 1;
+
+  // Output only. [Output only] Information for additional pod range.
+  repeated RangeInfo pod_range_info = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// RangeInfo contains the range name and the range utilization by this cluster.
+message RangeInfo {
+  // Output only. [Output only] Name of a range.
+  string range_name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. [Output only] The utilization of the range.
+  double utilization = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
 
 // This operation resource represents operations that may have happened or are
 // happening on the cluster. All fields are output only.
@@ -2105,58 +2296,125 @@ message Operation {
     ABORTING = 4;
   }
 
-  // Operation type.
+  // Operation type categorizes the operation.
   enum Type {
     // Not set.
     TYPE_UNSPECIFIED = 0;
 
-    // Cluster create.
+    // The cluster is being created. The cluster should be assumed to be
+    // unusable until the operation finishes.
+    //
+    // In the event of the operation failing, the cluster will enter the [ERROR
+    // state][Cluster.Status.ERROR] and eventually be deleted.
     CREATE_CLUSTER = 1;
 
-    // Cluster delete.
+    // The cluster is being deleted. The cluster should be assumed to be
+    // unusable as soon as this operation starts.
+    //
+    // In the event of the operation failing, the cluster will enter the [ERROR
+    // state][Cluster.Status.ERROR] and the deletion will be automatically
+    // retried until completed.
     DELETE_CLUSTER = 2;
 
-    // A master upgrade.
+    // The [cluster
+    // version][google.container.v1.ClusterUpdate.desired_master_version] is
+    // being updated. Note that this includes "upgrades" to the same version,
+    // which are simply a recreation. This also includes
+    // [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#upgrading_automatically).
+    // For more details, see [documentation on cluster
+    // upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#cluster_upgrades).
     UPGRADE_MASTER = 3;
 
-    // A node upgrade.
+    // A node pool is being updated. Despite calling this an "upgrade", this
+    // includes most forms of updates to node pools. This also includes
+    // [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades).
+    //
+    // This operation sets the
+    // [progress][google.container.v1.Operation.progress] field and may be
+    // [canceled][google.container.v1.ClusterManager.CancelOperation].
+    //
+    // The upgrade strategy depends on [node pool
+    // configuration](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies).
+    // The nodes are generally still usable during this operation.
     UPGRADE_NODES = 4;
 
-    // Cluster repair.
+    // A problem has been detected with the control plane and is being repaired.
+    // This operation type is initiated by GKE. For more details, see
+    // [documentation on
+    // repairs](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
     REPAIR_CLUSTER = 5;
 
-    // Cluster update.
+    // The cluster is being updated. This is a broad category of operations and
+    // includes operations that only change metadata as well as those that must
+    // recreate the entire cluster. If the control plane must be recreated, this
+    // will cause temporary downtime for zonal clusters.
+    //
+    // Some features require recreating the nodes as well. Those will be
+    // recreated as separate operations and the update may not be completely
+    // functional until the node pools recreations finish. Node recreations will
+    // generally follow [maintenance
+    // policies](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions).
+    //
+    // Some GKE-initiated operations use this type. This includes certain types
+    // of auto-upgrades and incident mitigations.
     UPDATE_CLUSTER = 6;
 
-    // Node pool create.
+    // A node pool is being created. The node pool should be assumed to be
+    // unusable until this operation finishes. In the event of an error, the
+    // node pool may be partially created.
+    //
+    // If enabled, [node
+    // autoprovisioning](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-provisioning)
+    // may have automatically initiated such operations.
     CREATE_NODE_POOL = 7;
 
-    // Node pool delete.
+    // The node pool is being deleted. The node pool should be assumed to be
+    // unusable as soon as this operation starts.
     DELETE_NODE_POOL = 8;
 
-    // Set node pool management.
+    // The node pool's [manamagent][google.container.v1.NodePool.management]
+    // field is being updated. These operations only update metadata and may be
+    // concurrent with most other operations.
     SET_NODE_POOL_MANAGEMENT = 9;
 
-    // Automatic node pool repair.
+    // A problem has been detected with nodes and [they are being
+    // repaired](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair).
+    // This operation type is initiated by GKE, typically automatically. This
+    // operation may be concurrent with other operations and there may be
+    // multiple repairs occurring on the same node pool.
     AUTO_REPAIR_NODES = 10;
 
-    // Automatic node upgrade.
-    AUTO_UPGRADE_NODES = 11;
+    // Unused. Automatic node upgrade uses
+    // [UPGRADE_NODES][google.container.v1.Operation.Type.UPGRADE_NODES].
+    AUTO_UPGRADE_NODES = 11 [deprecated = true];
 
-    // Set labels.
-    SET_LABELS = 12;
+    // Unused. Updating labels uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_LABELS = 12 [deprecated = true];
 
-    // Set/generate master auth materials
-    SET_MASTER_AUTH = 13;
+    // Unused. Updating master auth uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_MASTER_AUTH = 13 [deprecated = true];
 
-    // Set node pool size.
+    // The node pool is being resized. With the exception of resizing to or from
+    // size zero, the node pool is generally usable during this operation.
     SET_NODE_POOL_SIZE = 14;
 
-    // Updates network policy for a cluster.
-    SET_NETWORK_POLICY = 15;
+    // Unused. Updating network policy uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_NETWORK_POLICY = 15 [deprecated = true];
 
-    // Set the maintenance policy.
-    SET_MAINTENANCE_POLICY = 16;
+    // Unused. Updating maintenance policy uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_MAINTENANCE_POLICY = 16 [deprecated = true];
+
+    // The control plane is being resized. This operation type is initiated by
+    // GKE. These operations are often performed preemptively to ensure that the
+    // control plane has sufficient resources and is not typically an indication
+    // of issues. For more details, see
+    // [documentation on
+    // resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
+    RESIZE_CLUSTER = 18;
   }
 
   // The server-assigned ID for the operation.
@@ -2181,10 +2439,25 @@ message Operation {
   string status_message = 5
       [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Server-defined URL for the resource.
+  // Server-defined URI for the operation. Example:
+  // `https://container.googleapis.com/v1alpha1/projects/123/locations/us-central1/operations/operation-123`.
   string self_link = 6;
 
-  // Server-defined URL for the target of the operation.
+  // Server-defined URI for the target of the operation. The format of this is a
+  // URI to the resource being modified (such as a cluster, node pool, or node).
+  // For node pool repairs, there may be multiple nodes being repaired, but only
+  // one will be the target.
+  //
+  // Examples:
+  //
+  // -
+  // ##
+  // `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
+  //
+  // ##
+  // `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
+  //
+  // `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
   string target_link = 7;
 
   // [Output only] The name of the Google Compute Engine
@@ -3153,6 +3426,11 @@ message NodePool {
 
     // The type of placement.
     Type type = 1;
+
+    // If set, refers to the name of a custom resource policy supplied by the
+    // user. The resource policy must be in the same project and region as the
+    // node pool. If not found, InvalidArgument error is returned.
+    string policy_name = 3;
   }
 
   // The name of the node pool.
@@ -3237,6 +3515,9 @@ message NodePool {
   // fields, and may be sent on update requests to ensure the client has an
   // up-to-date value before proceeding.
   string etag = 110;
+
+  // Enable best effort provisioning for nodes
+  BestEffortProvisioning best_effort_provisioning = 113;
 }
 
 // NodeManagement defines the set of node management services turned on for the
@@ -3255,6 +3536,19 @@ message NodeManagement {
 
   // Specifies the Auto Upgrade knobs for the node pool.
   AutoUpgradeOptions upgrade_options = 10;
+}
+
+// Best effort provisioning.
+message BestEffortProvisioning {
+  // When this is enabled, cluster/node pool creations will ignore non-fatal
+  // errors like stockout to best provision as many nodes as possible right now
+  // and eventually bring up all target number of nodes
+  bool enabled = 1;
+
+  // Minimum number of nodes to be provisioned to be considered as succeeded,
+  // and the rest of nodes will be provisioned gradually and eventually when
+  // stockout issue has been resolved.
+  int32 min_provision_nodes = 2;
 }
 
 // AutoUpgradeOptions defines the set of options for the user to control how
@@ -3595,6 +3889,9 @@ message AutoprovisioningNodePoolDefaults {
   // https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
   // available image types.
   string image_type = 10;
+
+  // Enable or disable Kubelet read only port.
+  optional bool insecure_kubelet_readonly_port_enabled = 13;
 }
 
 // Contains information about amount of some resource in the cluster.
@@ -3783,6 +4080,9 @@ message AcceleratorConfig {
 
   // The configuration for GPU sharing options.
   optional GPUSharingConfig gpu_sharing_config = 5;
+
+  // The configuration for auto installation of GPU driver.
+  optional GPUDriverInstallationConfig gpu_driver_installation_config = 6;
 }
 
 // GPUSharingConfig represents the GPU sharing configuration for Hardware
@@ -3802,6 +4102,28 @@ message GPUSharingConfig {
 
   // The type of GPU sharing strategy to enable on the GPU node.
   optional GPUSharingStrategy gpu_sharing_strategy = 2;
+}
+
+// GPUDriverInstallationConfig specifies the version of GPU driver to be auto
+// installed.
+message GPUDriverInstallationConfig {
+  // The GPU driver version to install.
+  enum GPUDriverVersion {
+    // Default value is to not install any GPU driver.
+    GPU_DRIVER_VERSION_UNSPECIFIED = 0;
+
+    // Disable GPU driver auto installation and needs manual installation
+    INSTALLATION_DISABLED = 1;
+
+    // "Default" GPU driver in COS and Ubuntu.
+    DEFAULT = 2;
+
+    // "Latest" GPU driver in COS.
+    LATEST = 3;
+  }
+
+  // Mode for how the GPU driver is installed.
+  optional GPUDriverVersion gpu_driver_version = 1;
 }
 
 // WorkloadMetadataConfig defines the metadata configuration to expose to
@@ -3922,6 +4244,21 @@ message StatusCondition {
 
 // NetworkConfig reports the relative names of network & subnetwork.
 message NetworkConfig {
+  // Configuration of network bandwidth tiers
+  message ClusterNetworkPerformanceConfig {
+    // Node network tier
+    enum Tier {
+      // Default value
+      TIER_UNSPECIFIED = 0;
+
+      // Higher bandwidth, actual values based on VM size.
+      TIER_1 = 1;
+    }
+
+    // Specifies the total network bandwidth tier for NodePools in the cluster.
+    optional Tier total_egress_bandwidth_tier = 1;
+  }
+
   // Output only. The relative name of the Google Compute Engine
   // [network][google.container.v1.NetworkConfig.network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
   // to which the cluster is connected. Example:
@@ -3966,6 +4303,15 @@ message NetworkConfig {
   // GatewayAPIConfig contains the desired config of Gateway API on this
   // cluster.
   GatewayAPIConfig gateway_api_config = 16;
+
+  // Whether multi-networking is enabled for this cluster.
+  bool enable_multi_networking = 17;
+
+  // Network bandwidth tier configuration.
+  ClusterNetworkPerformanceConfig network_performance_config = 18;
+
+  // Whether FQDN Network Policy is enabled on this cluster.
+  optional bool enable_fqdn_network_policy = 19;
 }
 
 // GatewayAPIConfig contains the desired config of Gateway API on this cluster.
@@ -4076,6 +4422,64 @@ message GetJSONWebKeysResponse {
   repeated Jwk keys = 1;
 }
 
+// CheckAutopilotCompatibilityRequest requests getting the blockers for the
+// given operation in the cluster.
+message CheckAutopilotCompatibilityRequest {
+  // The name (project, location, cluster) of the cluster to retrieve.
+  // Specified in the format `projects/*/locations/*/clusters/*`.
+  string name = 1;
+}
+
+// AutopilotCompatibilityIssue contains information about a specific
+// compatibility issue with Autopilot mode.
+message AutopilotCompatibilityIssue {
+  // The type of the reported issue.
+  enum IssueType {
+    // Default value, should not be used.
+    UNSPECIFIED = 0;
+
+    // Indicates that the issue is a known incompatibility between the
+    // cluster and Autopilot mode.
+    INCOMPATIBILITY = 1;
+
+    // Indicates the issue is an incompatibility if customers take no further
+    // action to resolve.
+    ADDITIONAL_CONFIG_REQUIRED = 2;
+
+    // Indicates the issue is not an incompatibility, but depending on the
+    // workloads business logic, there is a potential that they won't work on
+    // Autopilot.
+    PASSED_WITH_OPTIONAL_CONFIG = 3;
+  }
+
+  // The last time when this issue was observed.
+  google.protobuf.Timestamp last_observation = 1;
+
+  // The constraint type of the issue.
+  string constraint_type = 2;
+
+  // The incompatibility type of this issue.
+  IssueType incompatibility_type = 3;
+
+  // The name of the resources which are subject to this issue.
+  repeated string subjects = 4;
+
+  // A URL to a public documnetation, which addresses resolving this issue.
+  string documentation_url = 5;
+
+  // The description of the issue.
+  string description = 6;
+}
+
+// CheckAutopilotCompatibilityResponse has a list of compatibility issues.
+message CheckAutopilotCompatibilityResponse {
+  // The list of issues for the given operation.
+  repeated AutopilotCompatibilityIssue issues = 1;
+
+  // The summary of the autopilot compatibility response.
+  string summary = 2;
+}
+
 // ReleaseChannel indicates which release channel a cluster is
 // subscribed to. Release channels are arranged in order of risk.
 //
@@ -4142,6 +4546,9 @@ message DNSConfig {
 
     // Use CloudDNS for DNS resolution.
     CLOUD_DNS = 2;
+
+    // Use KubeDNS for DNS resolution.
+    KUBE_DNS = 3;
   }
 
   // DNSScope lists the various scopes of access to cluster DNS records.
@@ -4215,12 +4622,12 @@ message DatabaseEncryption {
     DECRYPTED = 2;
   }
 
-  // Denotes the state of etcd encryption.
-  State state = 2;
-
   // Name of CloudKMS key to use for the encryption of secrets in etcd.
   // Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
   string key_name = 1;
+
+  // The desired state of etcd encryption.
+  State state = 2;
 }
 
 // ListUsableSubnetworksRequest requests the list of usable subnetworks
@@ -4551,6 +4958,16 @@ message SecurityBulletinEvent {
 message Autopilot {
   // Enable Autopilot
   bool enabled = 1;
+
+  // Workload policy configuration for Autopilot.
+  WorkloadPolicyConfig workload_policy_config = 2;
+}
+
+// WorkloadPolicyConfig is the configuration of workload policy for autopilot
+// clusters.
+message WorkloadPolicyConfig {
+  // If true, workloads can use NET_ADMIN capability.
+  optional bool allow_net_admin = 1;
 }
 
 // LoggingConfig is cluster logging configuration.
@@ -4594,6 +5011,35 @@ message MonitoringConfig {
   // Enable Google Cloud Managed Service for Prometheus
   // in the cluster.
   ManagedPrometheusConfig managed_prometheus_config = 2;
+
+  // Configuration of Advanced Datapath Observability features.
+  AdvancedDatapathObservabilityConfig advanced_datapath_observability_config =
+      3;
+}
+
+// AdvancedDatapathObservabilityConfig specifies configuration of observability
+// features of advanced datapath.
+message AdvancedDatapathObservabilityConfig {
+  // Supported Relay modes
+  enum RelayMode {
+    // Default value. This shouldn't be used.
+    RELAY_MODE_UNSPECIFIED = 0;
+
+    // disabled
+    DISABLED = 1;
+
+    // exposed via internal load balancer
+    INTERNAL_VPC_LB = 3;
+
+    // exposed via external load balancer
+    EXTERNAL_LB = 4;
+  }
+
+  // Expose flow metrics on nodes
+  bool enable_metrics = 1;
+
+  // Method used to make Relay available
+  RelayMode relay_mode = 2;
 }
 
 // NodePoolLoggingConfig specifies logging configuration for nodepools.

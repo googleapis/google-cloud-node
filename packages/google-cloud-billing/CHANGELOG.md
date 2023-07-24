@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/billing-v3.3.2...billing-v3.4.0) (2023-06-28)
+
+
+### Features
+
+* [billing] added resource_reference for name in GetProjectBillingInfoRequest message ([#4356](https://github.com/googleapis/google-cloud-node/issues/4356)) ([a77e51f](https://github.com/googleapis/google-cloud-node/commit/a77e51fe3fc235676189525f6a582844a830cc99))
+
 ## [3.3.2](https://github.com/googleapis/google-cloud-node/compare/billing-v3.3.1...billing-v3.3.2) (2023-04-13)
 
 

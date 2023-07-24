@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.7.0...deploy-v2.8.0) (2023-07-11)
+
+
+### Features
+
+* [deploy] added support routeUpdateWaitTime field for Deployment Strategies ([#4408](https://github.com/googleapis/google-cloud-node/issues/4408)) ([4c2442f](https://github.com/googleapis/google-cloud-node/commit/4c2442fb3b2183d49bdd721ddc751f5b4cbcabca))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.6.0...deploy-v2.7.0) (2023-06-28)
+
+
+### Features
+
+* [deploy] Add deploy parameters for cloud deploy ([#4367](https://github.com/googleapis/google-cloud-node/issues/4367)) ([dd8b0ec](https://github.com/googleapis/google-cloud-node/commit/dd8b0ec2df1c39330e1a104de55e809d9a31a1a9))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.5.0...deploy-v2.6.0) (2023-06-06)
+
+
+### Features
+
+* [deploy] Add support for disabling Pod overprovisioning in the progressive deployment strategy configuration for a Kubernetes Target ([#4317](https://github.com/googleapis/google-cloud-node/issues/4317)) ([10bb492](https://github.com/googleapis/google-cloud-node/commit/10bb49288c297bfd04bf48b26646e3990b454e27))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.4.1...deploy-v2.5.0) (2023-05-04)
+
+
+### Features
+
+* [deploy] added support for DeployArtifacts ([#4222](https://github.com/googleapis/google-cloud-node/issues/4222)) ([840390b](https://github.com/googleapis/google-cloud-node/commit/840390b4fdad779617572db6ce54922cb894e667))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.4.0...deploy-v2.4.1) (2023-04-13)
 
 

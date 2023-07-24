@@ -31,8 +31,8 @@ function main(parent) {
   /**
    *  Required. The name of the environment to retrieve history for.
    *  Supported formats:
-   *  - `projects/<Project Number / ID>/agent/environments/<Environment ID>`
-   *  - `projects/<Project Number / ID>/locations/<Location
+   *  - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *  - `projects/<Project ID>/locations/<Location
    *    ID>/agent/environments/<Environment ID>`
    */
   // const parent = 'abc123'

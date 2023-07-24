@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-datacatalog",
-        "version": "3.3.0",
+        "version": "3.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 96,
+                    "end": 102,
                     "type": "FULL"
                 }
             ],
@@ -478,7 +478,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 95,
                     "type": "FULL"
                 }
             ],
@@ -497,6 +497,14 @@
                     },
                     {
                         "name": "fully_qualified_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -1514,7 +1522,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -1529,6 +1537,10 @@
                     },
                     {
                         "name": "gcs_bucket_path",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "job_id",
                         "type": "TYPE_STRING"
                     }
                 ],

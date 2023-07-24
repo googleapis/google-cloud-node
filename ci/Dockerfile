@@ -31,16 +31,19 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
-FROM node:${NODE_VERSION}-alpine
+ENV PNPM_VERSION=7.32.2
+RUN curl https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 
-COPY --from=build /bin/flakybot /bin/flakybot
+FROM node:${NODE_VERSION}-alpine
 
 # Hack for not found error with flakybot
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
 COPY --from=build /usr/local/gcloud /usr/local/gcloud
 COPY --from=build /bin/flakybot /bin/flakybot
+COPY --from=build /root/.local/share/pnpm /root/.local/share/pnpm
 
 RUN apk add --no-cache git bash python3
 
-ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+ENV PNPM_HOME=/root/.local/share/pnpm
+ENV PATH=$PNPM_HOME:$PATH

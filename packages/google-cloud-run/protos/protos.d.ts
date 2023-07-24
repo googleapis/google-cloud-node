@@ -4078,7 +4078,8 @@ export namespace google {
                         EXECUTION_REASON_UNDEFINED = 0,
                         JOB_STATUS_SERVICE_POLLING_ERROR = 1,
                         NON_ZERO_EXIT_CODE = 2,
-                        CANCELLED = 3
+                        CANCELLED = 3,
+                        CANCELLING = 4
                     }
                 }
 
@@ -4671,6 +4672,9 @@ export namespace google {
                     /** Execution logUri */
                     logUri?: (string|null);
 
+                    /** Execution satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
                     /** Execution etag */
                     etag?: (string|null);
                 }
@@ -4758,6 +4762,9 @@ export namespace google {
 
                     /** Execution logUri. */
                     public logUri: string;
+
+                    /** Execution satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /** Execution etag. */
                     public etag: string;
@@ -5147,6 +5154,9 @@ export namespace google {
 
                     /** ResourceRequirements cpuIdle */
                     cpuIdle?: (boolean|null);
+
+                    /** ResourceRequirements startupCpuBoost */
+                    startupCpuBoost?: (boolean|null);
                 }
 
                 /** Represents a ResourceRequirements. */
@@ -5163,6 +5173,9 @@ export namespace google {
 
                     /** ResourceRequirements cpuIdle. */
                     public cpuIdle: boolean;
+
+                    /** ResourceRequirements startupCpuBoost. */
+                    public startupCpuBoost: boolean;
 
                     /**
                      * Creates a new ResourceRequirements instance using the specified properties.
@@ -6331,6 +6344,9 @@ export namespace google {
 
                     /** HTTPGetAction httpHeaders */
                     httpHeaders?: (google.cloud.run.v2.IHTTPHeader[]|null);
+
+                    /** HTTPGetAction port */
+                    port?: (number|null);
                 }
 
                 /** Represents a HTTPGetAction. */
@@ -6347,6 +6363,9 @@ export namespace google {
 
                     /** HTTPGetAction httpHeaders. */
                     public httpHeaders: google.cloud.run.v2.IHTTPHeader[];
+
+                    /** HTTPGetAction port. */
+                    public port: number;
 
                     /**
                      * Creates a new HTTPGetAction instance using the specified properties.
@@ -8233,6 +8252,9 @@ export namespace google {
                     /** Job reconciling */
                     reconciling?: (boolean|null);
 
+                    /** Job satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
                     /** Job etag */
                     etag?: (string|null);
                 }
@@ -8311,6 +8333,9 @@ export namespace google {
 
                     /** Job reconciling. */
                     public reconciling: boolean;
+
+                    /** Job satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /** Job etag. */
                     public etag: string;
@@ -9094,6 +9119,12 @@ export namespace google {
                     /** Revision logUri */
                     logUri?: (string|null);
 
+                    /** Revision satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** Revision sessionAffinity */
+                    sessionAffinity?: (boolean|null);
+
                     /** Revision etag */
                     etag?: (string|null);
                 }
@@ -9184,6 +9215,12 @@ export namespace google {
 
                     /** Revision logUri. */
                     public logUri: string;
+
+                    /** Revision satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** Revision sessionAffinity. */
+                    public sessionAffinity: boolean;
 
                     /** Revision etag. */
                     public etag: string;
@@ -9304,6 +9341,9 @@ export namespace google {
 
                     /** RevisionTemplate maxInstanceRequestConcurrency */
                     maxInstanceRequestConcurrency?: (number|null);
+
+                    /** RevisionTemplate sessionAffinity */
+                    sessionAffinity?: (boolean|null);
                 }
 
                 /** Represents a RevisionTemplate. */
@@ -9350,6 +9390,9 @@ export namespace google {
 
                     /** RevisionTemplate maxInstanceRequestConcurrency. */
                     public maxInstanceRequestConcurrency: number;
+
+                    /** RevisionTemplate sessionAffinity. */
+                    public sessionAffinity: boolean;
 
                     /**
                      * Creates a new RevisionTemplate instance using the specified properties.
@@ -10350,6 +10393,12 @@ export namespace google {
                     /** Service uri */
                     uri?: (string|null);
 
+                    /** Service customAudiences */
+                    customAudiences?: (string[]|null);
+
+                    /** Service satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
                     /** Service reconciling */
                     reconciling?: (boolean|null);
 
@@ -10443,6 +10492,12 @@ export namespace google {
 
                     /** Service uri. */
                     public uri: string;
+
+                    /** Service customAudiences. */
+                    public customAudiences: string[];
+
+                    /** Service satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /** Service reconciling. */
                     public reconciling: boolean;
@@ -11239,6 +11294,9 @@ export namespace google {
                     /** Task logUri */
                     logUri?: (string|null);
 
+                    /** Task satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
                     /** Task etag */
                     etag?: (string|null);
                 }
@@ -11335,6 +11393,9 @@ export namespace google {
 
                     /** Task logUri. */
                     public logUri: string;
+
+                    /** Task satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /** Task etag. */
                     public etag: string;

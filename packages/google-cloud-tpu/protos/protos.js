@@ -19220,6 +19220,7 @@
                          * @property {string|null} [queuedResource] Node queuedResource
                          * @property {google.cloud.tpu.v2alpha1.IAcceleratorConfig|null} [acceleratorConfig] Node acceleratorConfig
                          * @property {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] Node shieldedInstanceConfig
+                         * @property {boolean|null} [multisliceNode] Node multisliceNode
                          */
     
                         /**
@@ -19428,6 +19429,14 @@
                         Node.prototype.shieldedInstanceConfig = null;
     
                         /**
+                         * Node multisliceNode.
+                         * @member {boolean} multisliceNode
+                         * @memberof google.cloud.tpu.v2alpha1.Node
+                         * @instance
+                         */
+                        Node.prototype.multisliceNode = false;
+    
+                        /**
                          * Creates a new Node instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2alpha1.Node
@@ -19503,6 +19512,8 @@
                                 $root.google.cloud.tpu.v2alpha1.AcceleratorConfig.encode(message.acceleratorConfig, writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
                             if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
                                 $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                            if (message.multisliceNode != null && Object.hasOwnProperty.call(message, "multisliceNode"))
+                                writer.uint32(/* id 47, wireType 0 =*/376).bool(message.multisliceNode);
                             return writer;
                         };
     
@@ -19673,6 +19684,10 @@
                                     }
                                 case 45: {
                                         message.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 47: {
+                                        message.multisliceNode = reader.bool();
                                         break;
                                     }
                                 default:
@@ -19856,6 +19871,9 @@
                                 if (error)
                                     return "shieldedInstanceConfig." + error;
                             }
+                            if (message.multisliceNode != null && message.hasOwnProperty("multisliceNode"))
+                                if (typeof message.multisliceNode !== "boolean")
+                                    return "multisliceNode: boolean expected";
                             return null;
                         };
     
@@ -20095,6 +20113,8 @@
                                     throw TypeError(".google.cloud.tpu.v2alpha1.Node.shieldedInstanceConfig: object expected");
                                 message.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
                             }
+                            if (object.multisliceNode != null)
+                                message.multisliceNode = Boolean(object.multisliceNode);
                             return message;
                         };
     
@@ -20143,6 +20163,7 @@
                                 object.queuedResource = "";
                                 object.acceleratorConfig = null;
                                 object.shieldedInstanceConfig = null;
+                                object.multisliceNode = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20212,6 +20233,8 @@
                                 object.acceleratorConfig = $root.google.cloud.tpu.v2alpha1.AcceleratorConfig.toObject(message.acceleratorConfig, options);
                             if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
                                 object.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
+                            if (message.multisliceNode != null && message.hasOwnProperty("multisliceNode"))
+                                object.multisliceNode = message.multisliceNode;
                             return object;
                         };
     
@@ -20334,6 +20357,7 @@
                          * @property {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed|null} [guaranteed] QueuedResource guaranteed
                          * @property {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null} [queueingPolicy] QueuedResource queueingPolicy
                          * @property {google.cloud.tpu.v2alpha1.IQueuedResourceState|null} [state] QueuedResource state
+                         * @property {string|null} [reservationName] QueuedResource reservationName
                          */
     
                         /**
@@ -20399,6 +20423,14 @@
                          */
                         QueuedResource.prototype.state = null;
     
+                        /**
+                         * QueuedResource reservationName.
+                         * @member {string} reservationName
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.reservationName = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -20460,6 +20492,8 @@
                                 $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.encode(message.queueingPolicy, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 $root.google.cloud.tpu.v2alpha1.QueuedResourceState.encode(message.state, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.reservationName != null && Object.hasOwnProperty.call(message, "reservationName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.reservationName);
                             return writer;
                         };
     
@@ -20516,6 +20550,10 @@
                                     }
                                 case 6: {
                                         message.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.reservationName = reader.string();
                                         break;
                                     }
                                 default:
@@ -20593,6 +20631,9 @@
                                 if (error)
                                     return "state." + error;
                             }
+                            if (message.reservationName != null && message.hasOwnProperty("reservationName"))
+                                if (!$util.isString(message.reservationName))
+                                    return "reservationName: string expected";
                             return null;
                         };
     
@@ -20635,6 +20676,8 @@
                                     throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.state: object expected");
                                 message.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.fromObject(object.state);
                             }
+                            if (object.reservationName != null)
+                                message.reservationName = String(object.reservationName);
                             return message;
                         };
     
@@ -20655,6 +20698,7 @@
                                 object.name = "";
                                 object.queueingPolicy = null;
                                 object.state = null;
+                                object.reservationName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20677,6 +20721,8 @@
                                 object.queueingPolicy = $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.toObject(message.queueingPolicy, options);
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.toObject(message.state, options);
+                            if (message.reservationName != null && message.hasOwnProperty("reservationName"))
+                                object.reservationName = message.reservationName;
                             return object;
                         };
     
@@ -26889,6 +26935,7 @@
                          * @interface IDeleteQueuedResourceRequest
                          * @property {string|null} [name] DeleteQueuedResourceRequest name
                          * @property {string|null} [requestId] DeleteQueuedResourceRequest requestId
+                         * @property {boolean|null} [force] DeleteQueuedResourceRequest force
                          */
     
                         /**
@@ -26923,6 +26970,14 @@
                         DeleteQueuedResourceRequest.prototype.requestId = "";
     
                         /**
+                         * DeleteQueuedResourceRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @instance
+                         */
+                        DeleteQueuedResourceRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new DeleteQueuedResourceRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
@@ -26950,6 +27005,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                             return writer;
                         };
     
@@ -26990,6 +27047,10 @@
                                     }
                                 case 2: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.force = reader.bool();
                                         break;
                                     }
                                 default:
@@ -27033,6 +27094,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -27052,6 +27116,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -27071,11 +27137,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     

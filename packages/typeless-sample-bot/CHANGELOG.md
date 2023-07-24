@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.3](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.3.2...typeless-sample-bot-v1.3.3) (2023-05-26)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency recast to ^0.23.0 ([#4277](https://github.com/googleapis/google-cloud-node/issues/4277)) ([b6ae70d](https://github.com/googleapis/google-cloud-node/commit/b6ae70ddcc50fc3bfd1abbb347b25e0bfcafccf0))
+
+## [1.3.2](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.3.1...typeless-sample-bot-v1.3.2) (2023-05-11)
+
+
+### Bug Fixes
+
+* Do not exit with 1 on empty folder ([#4272](https://github.com/googleapis/google-cloud-node/issues/4272)) ([a538959](https://github.com/googleapis/google-cloud-node/commit/a5389596ba5b0c707582612a6b2aa84385fefc26))
+
 ## [1.3.1](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.3.0...typeless-sample-bot-v1.3.1) (2023-04-13)
 
 

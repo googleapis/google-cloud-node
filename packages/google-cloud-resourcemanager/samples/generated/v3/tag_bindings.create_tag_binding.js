@@ -33,8 +33,8 @@ function main(tagBinding) {
    */
   // const tagBinding = {}
   /**
-   *  Optional. Set to true to perform the validations necessary for creating the resource,
-   *  but not actually perform the action.
+   *  Optional. Set to true to perform the validations necessary for creating the
+   *  resource, but not actually perform the action.
    */
   // const validateOnly = true
 

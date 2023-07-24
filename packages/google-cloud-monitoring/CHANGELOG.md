@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [3.0.5](https://github.com/googleapis/google-cloud-node/compare/monitoring-v3.0.4...monitoring-v3.0.5) (2023-06-28)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency yargs to v17 ([#4351](https://github.com/googleapis/google-cloud-node/issues/4351)) ([4fb5285](https://github.com/googleapis/google-cloud-node/commit/4fb528559c204cee33329c4e55021aa1fd0e4974))
+
 ## [3.0.4](https://github.com/googleapis/google-cloud-node/compare/monitoring-v3.0.3...monitoring-v3.0.4) (2023-04-13)
 
 

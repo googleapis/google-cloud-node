@@ -1808,6 +1808,7 @@
                              * @property {google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null} [cloudSpanner] Connection cloudSpanner
                              * @property {google.cloud.bigquery.connection.v1.ICloudResourceProperties|null} [cloudResource] Connection cloudResource
                              * @property {google.cloud.bigquery.connection.v1.ISparkProperties|null} [spark] Connection spark
+                             * @property {google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties|null} [salesforceDataCloud] Connection salesforceDataCloud
                              * @property {number|Long|null} [creationTime] Connection creationTime
                              * @property {number|Long|null} [lastModifiedTime] Connection lastModifiedTime
                              * @property {boolean|null} [hasCredential] Connection hasCredential
@@ -1901,6 +1902,14 @@
                             Connection.prototype.spark = null;
     
                             /**
+                             * Connection salesforceDataCloud.
+                             * @member {google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties|null|undefined} salesforceDataCloud
+                             * @memberof google.cloud.bigquery.connection.v1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.salesforceDataCloud = null;
+    
+                            /**
                              * Connection creationTime.
                              * @member {number|Long} creationTime
                              * @memberof google.cloud.bigquery.connection.v1.Connection
@@ -1929,12 +1938,12 @@
     
                             /**
                              * Connection properties.
-                             * @member {"cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|"spark"|undefined} properties
+                             * @member {"cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|"spark"|"salesforceDataCloud"|undefined} properties
                              * @memberof google.cloud.bigquery.connection.v1.Connection
                              * @instance
                              */
                             Object.defineProperty(Connection.prototype, "properties", {
-                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "azure", "cloudSpanner", "cloudResource", "spark"]),
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "azure", "cloudSpanner", "cloudResource", "spark", "salesforceDataCloud"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1986,6 +1995,8 @@
                                     $root.google.cloud.bigquery.connection.v1.CloudResourceProperties.encode(message.cloudResource, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                                 if (message.spark != null && Object.hasOwnProperty.call(message, "spark"))
                                     $root.google.cloud.bigquery.connection.v1.SparkProperties.encode(message.spark, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                                if (message.salesforceDataCloud != null && Object.hasOwnProperty.call(message, "salesforceDataCloud"))
+                                    $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.encode(message.salesforceDataCloud, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2054,6 +2065,10 @@
                                         }
                                     case 23: {
                                             message.spark = $root.google.cloud.bigquery.connection.v1.SparkProperties.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 24: {
+                                            message.salesforceDataCloud = $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 5: {
@@ -2171,6 +2186,16 @@
                                             return "spark." + error;
                                     }
                                 }
+                                if (message.salesforceDataCloud != null && message.hasOwnProperty("salesforceDataCloud")) {
+                                    if (properties.properties === 1)
+                                        return "properties: multiple values";
+                                    properties.properties = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.verify(message.salesforceDataCloud);
+                                        if (error)
+                                            return "salesforceDataCloud." + error;
+                                    }
+                                }
                                 if (message.creationTime != null && message.hasOwnProperty("creationTime"))
                                     if (!$util.isInteger(message.creationTime) && !(message.creationTime && $util.isInteger(message.creationTime.low) && $util.isInteger(message.creationTime.high)))
                                         return "creationTime: integer|Long expected";
@@ -2230,6 +2255,11 @@
                                     if (typeof object.spark !== "object")
                                         throw TypeError(".google.cloud.bigquery.connection.v1.Connection.spark: object expected");
                                     message.spark = $root.google.cloud.bigquery.connection.v1.SparkProperties.fromObject(object.spark);
+                                }
+                                if (object.salesforceDataCloud != null) {
+                                    if (typeof object.salesforceDataCloud !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.Connection.salesforceDataCloud: object expected");
+                                    message.salesforceDataCloud = $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.fromObject(object.salesforceDataCloud);
                                 }
                                 if (object.creationTime != null)
                                     if ($util.Long)
@@ -2330,6 +2360,11 @@
                                     object.spark = $root.google.cloud.bigquery.connection.v1.SparkProperties.toObject(message.spark, options);
                                     if (options.oneofs)
                                         object.properties = "spark";
+                                }
+                                if (message.salesforceDataCloud != null && message.hasOwnProperty("salesforceDataCloud")) {
+                                    object.salesforceDataCloud = $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.toObject(message.salesforceDataCloud, options);
+                                    if (options.oneofs)
+                                        object.properties = "salesforceDataCloud";
                                 }
                                 return object;
                             };
@@ -2939,7 +2974,9 @@
                              * @interface ICloudSpannerProperties
                              * @property {string|null} [database] CloudSpannerProperties database
                              * @property {boolean|null} [useParallelism] CloudSpannerProperties useParallelism
+                             * @property {number|null} [maxParallelism] CloudSpannerProperties maxParallelism
                              * @property {boolean|null} [useServerlessAnalytics] CloudSpannerProperties useServerlessAnalytics
+                             * @property {boolean|null} [useDataBoost] CloudSpannerProperties useDataBoost
                              * @property {string|null} [databaseRole] CloudSpannerProperties databaseRole
                              */
     
@@ -2975,12 +3012,28 @@
                             CloudSpannerProperties.prototype.useParallelism = false;
     
                             /**
+                             * CloudSpannerProperties maxParallelism.
+                             * @member {number} maxParallelism
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             */
+                            CloudSpannerProperties.prototype.maxParallelism = 0;
+    
+                            /**
                              * CloudSpannerProperties useServerlessAnalytics.
                              * @member {boolean} useServerlessAnalytics
                              * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
                              * @instance
                              */
                             CloudSpannerProperties.prototype.useServerlessAnalytics = false;
+    
+                            /**
+                             * CloudSpannerProperties useDataBoost.
+                             * @member {boolean} useDataBoost
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             */
+                            CloudSpannerProperties.prototype.useDataBoost = false;
     
                             /**
                              * CloudSpannerProperties databaseRole.
@@ -3022,6 +3075,10 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.useServerlessAnalytics);
                                 if (message.databaseRole != null && Object.hasOwnProperty.call(message, "databaseRole"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.databaseRole);
+                                if (message.maxParallelism != null && Object.hasOwnProperty.call(message, "maxParallelism"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maxParallelism);
+                                if (message.useDataBoost != null && Object.hasOwnProperty.call(message, "useDataBoost"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.useDataBoost);
                                 return writer;
                             };
     
@@ -3064,8 +3121,16 @@
                                             message.useParallelism = reader.bool();
                                             break;
                                         }
+                                    case 5: {
+                                            message.maxParallelism = reader.int32();
+                                            break;
+                                        }
                                     case 3: {
                                             message.useServerlessAnalytics = reader.bool();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.useDataBoost = reader.bool();
                                             break;
                                         }
                                     case 4: {
@@ -3113,9 +3178,15 @@
                                 if (message.useParallelism != null && message.hasOwnProperty("useParallelism"))
                                     if (typeof message.useParallelism !== "boolean")
                                         return "useParallelism: boolean expected";
+                                if (message.maxParallelism != null && message.hasOwnProperty("maxParallelism"))
+                                    if (!$util.isInteger(message.maxParallelism))
+                                        return "maxParallelism: integer expected";
                                 if (message.useServerlessAnalytics != null && message.hasOwnProperty("useServerlessAnalytics"))
                                     if (typeof message.useServerlessAnalytics !== "boolean")
                                         return "useServerlessAnalytics: boolean expected";
+                                if (message.useDataBoost != null && message.hasOwnProperty("useDataBoost"))
+                                    if (typeof message.useDataBoost !== "boolean")
+                                        return "useDataBoost: boolean expected";
                                 if (message.databaseRole != null && message.hasOwnProperty("databaseRole"))
                                     if (!$util.isString(message.databaseRole))
                                         return "databaseRole: string expected";
@@ -3138,8 +3209,12 @@
                                     message.database = String(object.database);
                                 if (object.useParallelism != null)
                                     message.useParallelism = Boolean(object.useParallelism);
+                                if (object.maxParallelism != null)
+                                    message.maxParallelism = object.maxParallelism | 0;
                                 if (object.useServerlessAnalytics != null)
                                     message.useServerlessAnalytics = Boolean(object.useServerlessAnalytics);
+                                if (object.useDataBoost != null)
+                                    message.useDataBoost = Boolean(object.useDataBoost);
                                 if (object.databaseRole != null)
                                     message.databaseRole = String(object.databaseRole);
                                 return message;
@@ -3163,6 +3238,8 @@
                                     object.useParallelism = false;
                                     object.useServerlessAnalytics = false;
                                     object.databaseRole = "";
+                                    object.maxParallelism = 0;
+                                    object.useDataBoost = false;
                                 }
                                 if (message.database != null && message.hasOwnProperty("database"))
                                     object.database = message.database;
@@ -3172,6 +3249,10 @@
                                     object.useServerlessAnalytics = message.useServerlessAnalytics;
                                 if (message.databaseRole != null && message.hasOwnProperty("databaseRole"))
                                     object.databaseRole = message.databaseRole;
+                                if (message.maxParallelism != null && message.hasOwnProperty("maxParallelism"))
+                                    object.maxParallelism = message.maxParallelism;
+                                if (message.useDataBoost != null && message.hasOwnProperty("useDataBoost"))
+                                    object.useDataBoost = message.useDataBoost;
                                 return object;
                             };
     
@@ -5152,6 +5233,256 @@
                             };
     
                             return SparkProperties;
+                        })();
+    
+                        v1.SalesforceDataCloudProperties = (function() {
+    
+                            /**
+                             * Properties of a SalesforceDataCloudProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface ISalesforceDataCloudProperties
+                             * @property {string|null} [instanceUri] SalesforceDataCloudProperties instanceUri
+                             * @property {string|null} [identity] SalesforceDataCloudProperties identity
+                             * @property {string|null} [tenantId] SalesforceDataCloudProperties tenantId
+                             */
+    
+                            /**
+                             * Constructs a new SalesforceDataCloudProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents a SalesforceDataCloudProperties.
+                             * @implements ISalesforceDataCloudProperties
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties=} [properties] Properties to set
+                             */
+                            function SalesforceDataCloudProperties(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SalesforceDataCloudProperties instanceUri.
+                             * @member {string} instanceUri
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @instance
+                             */
+                            SalesforceDataCloudProperties.prototype.instanceUri = "";
+    
+                            /**
+                             * SalesforceDataCloudProperties identity.
+                             * @member {string} identity
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @instance
+                             */
+                            SalesforceDataCloudProperties.prototype.identity = "";
+    
+                            /**
+                             * SalesforceDataCloudProperties tenantId.
+                             * @member {string} tenantId
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @instance
+                             */
+                            SalesforceDataCloudProperties.prototype.tenantId = "";
+    
+                            /**
+                             * Creates a new SalesforceDataCloudProperties instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties} SalesforceDataCloudProperties instance
+                             */
+                            SalesforceDataCloudProperties.create = function create(properties) {
+                                return new SalesforceDataCloudProperties(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SalesforceDataCloudProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties} message SalesforceDataCloudProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SalesforceDataCloudProperties.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.instanceUri != null && Object.hasOwnProperty.call(message, "instanceUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.instanceUri);
+                                if (message.identity != null && Object.hasOwnProperty.call(message, "identity"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.identity);
+                                if (message.tenantId != null && Object.hasOwnProperty.call(message, "tenantId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.tenantId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SalesforceDataCloudProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISalesforceDataCloudProperties} message SalesforceDataCloudProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SalesforceDataCloudProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SalesforceDataCloudProperties message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties} SalesforceDataCloudProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SalesforceDataCloudProperties.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.instanceUri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.identity = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.tenantId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SalesforceDataCloudProperties message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties} SalesforceDataCloudProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SalesforceDataCloudProperties.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SalesforceDataCloudProperties message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SalesforceDataCloudProperties.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.instanceUri != null && message.hasOwnProperty("instanceUri"))
+                                    if (!$util.isString(message.instanceUri))
+                                        return "instanceUri: string expected";
+                                if (message.identity != null && message.hasOwnProperty("identity"))
+                                    if (!$util.isString(message.identity))
+                                        return "identity: string expected";
+                                if (message.tenantId != null && message.hasOwnProperty("tenantId"))
+                                    if (!$util.isString(message.tenantId))
+                                        return "tenantId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SalesforceDataCloudProperties message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties} SalesforceDataCloudProperties
+                             */
+                            SalesforceDataCloudProperties.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties();
+                                if (object.instanceUri != null)
+                                    message.instanceUri = String(object.instanceUri);
+                                if (object.identity != null)
+                                    message.identity = String(object.identity);
+                                if (object.tenantId != null)
+                                    message.tenantId = String(object.tenantId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SalesforceDataCloudProperties message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties} message SalesforceDataCloudProperties
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SalesforceDataCloudProperties.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.instanceUri = "";
+                                    object.identity = "";
+                                    object.tenantId = "";
+                                }
+                                if (message.instanceUri != null && message.hasOwnProperty("instanceUri"))
+                                    object.instanceUri = message.instanceUri;
+                                if (message.identity != null && message.hasOwnProperty("identity"))
+                                    object.identity = message.identity;
+                                if (message.tenantId != null && message.hasOwnProperty("tenantId"))
+                                    object.tenantId = message.tenantId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SalesforceDataCloudProperties to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SalesforceDataCloudProperties.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SalesforceDataCloudProperties
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SalesforceDataCloudProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1.SalesforceDataCloudProperties";
+                            };
+    
+                            return SalesforceDataCloudProperties;
                         })();
     
                         return v1;

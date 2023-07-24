@@ -30,7 +30,7 @@ function main(projectId) {
    */
   /**
    *  The parent of the collection of `Builds`.
-   *  Format: `projects/{project}/locations/location`
+   *  Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

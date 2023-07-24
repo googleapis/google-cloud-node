@@ -45,6 +45,11 @@
                 "exportData"
               ]
             },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
+              ]
+            },
             "ListDatasets": {
               "methods": [
                 "listDatasets",
@@ -118,6 +123,11 @@
             "ExportData": {
               "methods": [
                 "exportData"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "deleteSavedQuery"
               ]
             },
             "ListDatasets": {
@@ -266,6 +276,11 @@
                 "undeployModel"
               ]
             },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
+              ]
+            },
             "ListEndpoints": {
               "methods": [
                 "listEndpoints",
@@ -306,6 +321,11 @@
             "UndeployModel": {
               "methods": [
                 "undeployModel"
+              ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutateDeployedModel"
               ]
             },
             "ListEndpoints": {
@@ -1606,6 +1626,30 @@
         }
       }
     },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelGardenServiceClient",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "getPublisherModel"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -1816,6 +1860,64 @@
         }
       }
     },
+    "PersistentResourceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PersistentResourceServiceClient",
+          "rpcs": {
+            "GetPersistentResource": {
+              "methods": [
+                "getPersistentResource"
+              ]
+            },
+            "CreatePersistentResource": {
+              "methods": [
+                "createPersistentResource"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "deletePersistentResource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "listPersistentResources",
+                "listPersistentResourcesStream",
+                "listPersistentResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PersistentResourceServiceClient",
+          "rpcs": {
+            "GetPersistentResource": {
+              "methods": [
+                "getPersistentResource"
+              ]
+            },
+            "CreatePersistentResource": {
+              "methods": [
+                "createPersistentResource"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "deletePersistentResource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "listPersistentResources",
+                "listPersistentResourcesStream",
+                "listPersistentResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PipelineService": {
       "clients": {
         "grpc": {
@@ -2007,6 +2109,11 @@
                 "resumeSchedule"
               ]
             },
+            "UpdateSchedule": {
+              "methods": [
+                "updateSchedule"
+              ]
+            },
             "DeleteSchedule": {
               "methods": [
                 "deleteSchedule"
@@ -2042,6 +2149,11 @@
             "ResumeSchedule": {
               "methods": [
                 "resumeSchedule"
+              ]
+            },
+            "UpdateSchedule": {
+              "methods": [
+                "updateSchedule"
               ]
             },
             "DeleteSchedule": {
@@ -2141,6 +2253,11 @@
             "ReadTensorboardUsage": {
               "methods": [
                 "readTensorboardUsage"
+              ]
+            },
+            "ReadTensorboardSize": {
+              "methods": [
+                "readTensorboardSize"
               ]
             },
             "CreateTensorboardExperiment": {
@@ -2301,6 +2418,11 @@
             "ReadTensorboardUsage": {
               "methods": [
                 "readTensorboardUsage"
+              ]
+            },
+            "ReadTensorboardSize": {
+              "methods": [
+                "readTensorboardSize"
               ]
             },
             "CreateTensorboardExperiment": {

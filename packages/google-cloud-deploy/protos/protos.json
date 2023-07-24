@@ -684,6 +684,34 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "deployParameters": {
+                          "rule": "repeated",
+                          "type": "DeployParameters",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeployParameters": {
+                      "fields": {
+                        "values": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "matchTargetLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -841,6 +869,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "routeUpdateWaitTime": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -858,6 +893,13 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "disablePodOverprovisioning": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -1219,19 +1261,31 @@
                         },
                         "gke": {
                           "type": "GkeCluster",
-                          "id": 15
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "anthosCluster": {
                           "type": "AnthosCluster",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "run": {
                           "type": "CloudRunLocation",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "multiTarget": {
                           "type": "MultiTarget",
-                          "id": 19
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "etag": {
                           "type": "string",
@@ -1244,6 +1298,14 @@
                           "rule": "repeated",
                           "type": "ExecutionConfig",
                           "id": 16
+                        },
+                        "deployParameters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1733,6 +1795,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "deployParameters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1911,7 +1981,33 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "jobManifestsPath": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "DeployArtifact": {
+                      "fields": {
+                        "artifactUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "manifestPaths": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -2925,6 +3021,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "artifact": {
+                          "type": "DeployArtifact",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3199,6 +3302,10 @@
                       "values": {
                         "TYPE_UNSPECIFIED": 0,
                         "TYPE_PUBSUB_NOTIFICATION_FAILURE": 1,
+                        "TYPE_RESOURCE_STATE_CHANGE": 3,
+                        "TYPE_PROCESS_ABORTED": 4,
+                        "TYPE_RESTRICTION_VIOLATED": 5,
+                        "TYPE_RESOURCE_DELETED": 6,
                         "TYPE_RENDER_STATUES_CHANGE": 2
                       }
                     },

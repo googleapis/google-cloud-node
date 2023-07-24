@@ -220,9 +220,6 @@ export class TensorboardServiceClient {
       deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
-      endpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpoints/{endpoint}'
-      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -272,11 +269,24 @@ export class TensorboardServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/endpoints/{endpoint}'
+      ),
+      projectLocationPublisherModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+        ),
+      publisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'publishers/{publisher}/models/{model}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -385,6 +395,12 @@ export class TensorboardServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -392,6 +408,12 @@ export class TensorboardServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
           ],
         },
@@ -409,6 +431,14 @@ export class TensorboardServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -418,6 +448,14 @@ export class TensorboardServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -434,6 +472,12 @@ export class TensorboardServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -441,6 +485,12 @@ export class TensorboardServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
           ],
         },
@@ -858,6 +908,10 @@ export class TensorboardServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -895,6 +949,14 @@ export class TensorboardServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
         },
@@ -1054,6 +1116,9 @@ export class TensorboardServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1082,6 +1147,12 @@ export class TensorboardServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
         },
@@ -1232,6 +1303,9 @@ export class TensorboardServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1260,6 +1334,12 @@ export class TensorboardServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
             },
           ],
         },
@@ -1457,6 +1537,12 @@ export class TensorboardServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
             },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
           ],
         },
       ];
@@ -1595,10 +1681,11 @@ export class TensorboardServiceClient {
     const tensorboardServiceStubMethods = [
       'createTensorboard',
       'getTensorboard',
-      'readTensorboardUsage',
       'updateTensorboard',
       'listTensorboards',
       'deleteTensorboard',
+      'readTensorboardUsage',
+      'readTensorboardSize',
       'createTensorboardExperiment',
       'getTensorboardExperiment',
       'updateTensorboardExperiment',
@@ -1912,6 +1999,105 @@ export class TensorboardServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.readTensorboardUsage(request, options, callback);
+  }
+  /**
+   * Returns the storage size for a given TensorBoard instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboard
+   *   Required. The name of the Tensorboard resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.ReadTensorboardSizeResponse | ReadTensorboardSizeResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.read_tensorboard_size.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardSize_async
+   */
+  readTensorboardSize(
+    request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  readTensorboardSize(
+    request: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  readTensorboardSize(
+    request: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  readTensorboardSize(
+    request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        tensorboard: request.tensorboard ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.readTensorboardSize(request, options, callback);
   }
   /**
    * Creates a TensorboardExperiment.
@@ -5421,12 +5607,12 @@ export class TensorboardServiceClient {
    *   Values above 10000 are coerced to 10000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link |TensorboardService.ExportTensorboardTimeSeries} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link |TensorboardService.ExportTensorboardTimeSeries} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the TensorboardTimeSeries' data.
    *   By default, TensorboardTimeSeries' data is returned in a pseudo random
@@ -5539,12 +5725,12 @@ export class TensorboardServiceClient {
    *   Values above 10000 are coerced to 10000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link |TensorboardService.ExportTensorboardTimeSeries} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link |TensorboardService.ExportTensorboardTimeSeries} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the TensorboardTimeSeries' data.
    *   By default, TensorboardTimeSeries' data is returned in a pseudo random
@@ -5602,12 +5788,12 @@ export class TensorboardServiceClient {
    *   Values above 10000 are coerced to 10000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link |TensorboardService.ExportTensorboardTimeSeries} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link |TensorboardService.ExportTensorboardTimeSeries} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the TensorboardTimeSeries' data.
    *   By default, TensorboardTimeSeries' data is returned in a pseudo random
@@ -6698,55 +6884,6 @@ export class TensorboardServiceClient {
   }
 
   /**
-   * Return a fully-qualified endpoint resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} endpoint
-   * @returns {string} Resource name string.
-   */
-  endpointPath(project: string, location: string, endpoint: string) {
-    return this.pathTemplates.endpointPathTemplate.render({
-      project: project,
-      location: location,
-      endpoint: endpoint,
-    });
-  }
-
-  /**
-   * Parse the project from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
-  }
-
-  /**
-   * Parse the location from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
-  }
-
-  /**
-   * Parse the endpoint from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the endpoint.
-   */
-  matchEndpointFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
-  }
-
-  /**
    * Return a fully-qualified entityType resource name string.
    *
    * @param {string} project
@@ -7759,6 +7896,67 @@ export class TensorboardServiceClient {
   }
 
   /**
+   * Return a fully-qualified persistentResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} persistent_resource
+   * @returns {string} Resource name string.
+   */
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.render({
+      project: project,
+      location: location,
+      persistent_resource: persistentResource,
+    });
+  }
+
+  /**
+   * Parse the project from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the persistent_resource from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the persistent_resource.
+   */
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
+  }
+
+  /**
    * Return a fully-qualified pipelineJob resource name string.
    *
    * @param {string} project
@@ -7831,6 +8029,194 @@ export class TensorboardServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationEndpointPath(
+    project: string,
+    location: string,
+    endpoint: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      endpoint: endpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).location;
+  }
+
+  /**
+   * Parse the endpoint from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the endpoint.
+   */
+  matchEndpointFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPublisherModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  projectLocationPublisherModelPath(
+    project: string,
+    location: string,
+    publisher: string,
+    model: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
+      project: project,
+      location: location,
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).location;
+  }
+
+  /**
+   * Parse the publisher from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).model;
+  }
+
+  /**
+   * Return a fully-qualified publisherModel resource name string.
+   *
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  publisherModelPath(publisher: string, model: string) {
+    return this.pathTemplates.publisherModelPathTemplate.render({
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the publisher from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).model;
   }
 
   /**

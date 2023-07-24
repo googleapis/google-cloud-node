@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource name of the metadata import to retrieve, in the
-   *  following form:
+   *  Required. The relative resource name of the metadata import to retrieve, in
+   *  the following form:
    *  `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
    */
   // const name = 'abc123'

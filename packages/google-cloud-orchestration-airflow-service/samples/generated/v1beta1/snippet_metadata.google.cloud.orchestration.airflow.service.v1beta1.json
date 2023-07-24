@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-service",
-        "version": "2.3.1",
+        "version": "2.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -316,6 +316,170 @@
             }
         },
         {
+            "regionTag": "composer_v1beta1_generated_Environments_ExecuteAirflowCommand_async",
+            "title": "Environments executeAirflowCommand Sample",
+            "origin": "API_DEFINITION",
+            "description": " Executes Airflow CLI command.",
+            "canonical": true,
+            "file": "environments.execute_airflow_command.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExecuteAirflowCommand",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.ExecuteAirflowCommand",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "command",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subcommand",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "ExecuteAirflowCommand",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.ExecuteAirflowCommand",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1beta1_generated_Environments_StopAirflowCommand_async",
+            "title": "Environments stopAirflowCommand Sample",
+            "origin": "API_DEFINITION",
+            "description": " Stops Airflow CLI command execution.",
+            "canonical": true,
+            "file": "environments.stop_airflow_command.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StopAirflowCommand",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.StopAirflowCommand",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "execution_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "pod",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "pod_namespace",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "StopAirflowCommand",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.StopAirflowCommand",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1beta1_generated_Environments_PollAirflowCommand_async",
+            "title": "Environments pollAirflowCommand Sample",
+            "origin": "API_DEFINITION",
+            "description": " Polls Airflow CLI command execution and fetches logs.",
+            "canonical": true,
+            "file": "environments.poll_airflow_command.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PollAirflowCommand",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.PollAirflowCommand",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "execution_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "pod",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "pod_namespace",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "next_line_number",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "PollAirflowCommand",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.PollAirflowCommand",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "composer_v1beta1_generated_Environments_SaveSnapshot_async",
             "title": "Environments saveSnapshot Sample",
             "origin": "API_DEFINITION",
@@ -412,6 +576,86 @@
                 "method": {
                     "shortName": "LoadSnapshot",
                     "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.LoadSnapshot",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1beta1_generated_Environments_DatabaseFailover_async",
+            "title": "Environments databaseFailover Sample",
+            "origin": "API_DEFINITION",
+            "description": " Triggers database failover (only for highly resilient environments).",
+            "canonical": true,
+            "file": "environments.database_failover.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DatabaseFailover",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.DatabaseFailover",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "DatabaseFailover",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.DatabaseFailover",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1beta1_generated_Environments_FetchDatabaseProperties_async",
+            "title": "Environments fetchDatabaseProperties Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetches database properties.",
+            "canonical": true,
+            "file": "environments.fetch_database_properties.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchDatabaseProperties",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.FetchDatabaseProperties",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "FetchDatabaseProperties",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.FetchDatabaseProperties",
                     "service": {
                         "shortName": "Environments",
                         "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"

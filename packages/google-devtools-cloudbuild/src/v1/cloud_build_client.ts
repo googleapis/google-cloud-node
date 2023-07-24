@@ -194,20 +194,32 @@ export class CloudBuildClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
       projectBuildPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/builds/{build}'
       ),
+      projectConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/githubEnterpriseConfigs/{config}'
+      ),
       projectLocationBuildPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/builds/{build}'
+      ),
+      projectLocationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/githubEnterpriseConfigs/{config}'
       ),
       projectLocationTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/triggers/{trigger}'
       ),
       projectTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/triggers/{trigger}'
+      ),
+      repositoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connections/{connection}/repositories/{repository}'
       ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{version}'
@@ -602,12 +614,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        id: request.id ?? '',
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.getBuild(request, options, callback);
   }
@@ -700,12 +723,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        id: request.id ?? '',
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.cancelBuild(request, options, callback);
   }
@@ -806,11 +840,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.createBuildTrigger(request, options, callback);
   }
@@ -905,12 +949,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        trigger_id: request.triggerId ?? '',
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.getBuildTrigger(request, options, callback);
   }
@@ -1011,12 +1066,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        trigger_id: request.triggerId ?? '',
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.deleteBuildTrigger(request, options, callback);
   }
@@ -1116,12 +1182,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.trigger?.resourceName;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        trigger_id: request.triggerId ?? '',
-        'trigger.resource_name': request.trigger!.resourceName ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.updateBuildTrigger(request, options, callback);
   }
@@ -1319,10 +1396,25 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp(
+              'projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+'
+            )
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.getWorkerPool(request, options, callback);
   }
@@ -1432,11 +1524,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.createBuild(request, options, callback);
   }
@@ -1496,7 +1598,7 @@ export class CloudBuildClient {
    *
    * For builds that specify `StorageSource`:
    *
-   * * If the original build pulled source from Google Cloud Storage without
+   * * If the original build pulled source from Cloud Storage without
    * specifying the generation of the object, the new build will use the current
    * object, which may be different from the original build source.
    * * If the original build pulled source from Cloud Storage and specified the
@@ -1602,12 +1704,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        id: request.id ?? '',
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.retryBuild(request, options, callback);
   }
@@ -1750,10 +1863,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.approveBuild(request, options, callback);
   }
@@ -1795,6 +1921,12 @@ export class CloudBuildClient {
   /**
    * Runs a `BuildTrigger` at a particular source revision.
    *
+   * To run a regional or global trigger, use the POST request
+   * that includes the location endpoint in the path (ex.
+   * v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The
+   * POST request that does not include the location endpoint in the path can
+   * only be used when running global triggers.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -1806,6 +1938,7 @@ export class CloudBuildClient {
    *   Required. ID of the trigger.
    * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
    *   Source to build against this trigger.
+   *   Branch and tag names cannot consist of regular expressions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1895,12 +2028,23 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+')
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        trigger_id: request.triggerId ?? '',
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.runBuildTrigger(request, options, callback);
   }
@@ -2047,10 +2191,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.createWorkerPool(request, options, callback);
   }
@@ -2097,10 +2252,10 @@ export class CloudBuildClient {
    * @param {string} request.name
    *   Required. The name of the `WorkerPool` to delete.
    *   Format:
-   *   `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
-   * @param {string} request.etag
-   *   Optional. If this is provided, it must match the server's etag on the
-   *   workerpool for the request to be processed.
+   *   `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+   * @param {string} [request.etag]
+   *   Optional. If provided, it must match the server's etag on the workerpool
+   *   for the request to be processed.
    * @param {boolean} request.allowMissing
    *   If set to true, and the `WorkerPool` is not found, the request will succeed
    *   but no action will be taken on the server.
@@ -2196,10 +2351,25 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp(
+              'projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+'
+            )
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.deleteWorkerPool(request, options, callback);
   }
@@ -2342,10 +2512,25 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.workerPool?.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp(
+              'projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+'
+            )
+          );
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'worker_pool.name': request.workerPool!.name ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.updateWorkerPool(request, options, callback);
   }
@@ -2394,7 +2579,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent of the collection of `Builds`.
-   *   Format: `projects/{project}/locations/location`
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -2491,11 +2676,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.listBuilds(request, options, callback);
   }
@@ -2506,7 +2701,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent of the collection of `Builds`.
-   *   Format: `projects/{project}/locations/location`
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -2543,11 +2738,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2566,7 +2771,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent of the collection of `Builds`.
-   *   Format: `projects/{project}/locations/location`
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -2604,11 +2809,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2714,11 +2929,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.listBuildTriggers(request, options, callback);
   }
@@ -2756,11 +2981,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2807,11 +3042,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2915,10 +3160,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.listWorkerPools(request, options, callback);
   }
@@ -2956,10 +3212,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3006,10 +3273,21 @@ export class CloudBuildClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['location'] ?? fieldValue;
+          Object.assign(routingParameter, {location: parameterValue});
+        }
+      }
+    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3130,6 +3408,42 @@ export class CloudBuildClient {
   }
 
   /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, network: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -3191,6 +3505,44 @@ export class CloudBuildClient {
   }
 
   /**
+   * Return a fully-qualified projectConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} config
+   * @returns {string} Resource name string.
+   */
+  projectConfigPath(project: string, config: string) {
+    return this.pathTemplates.projectConfigPathTemplate.render({
+      project: project,
+      config: config,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConfig resource.
+   *
+   * @param {string} projectConfigName
+   *   A fully-qualified path representing project_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConfigName(projectConfigName: string) {
+    return this.pathTemplates.projectConfigPathTemplate.match(projectConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the config from ProjectConfig resource.
+   *
+   * @param {string} projectConfigName
+   *   A fully-qualified path representing project_config resource.
+   * @returns {string} A string representing the config.
+   */
+  matchConfigFromProjectConfigName(projectConfigName: string) {
+    return this.pathTemplates.projectConfigPathTemplate.match(projectConfigName)
+      .config;
+  }
+
+  /**
    * Return a fully-qualified projectLocationBuild resource name string.
    *
    * @param {string} project
@@ -3243,6 +3595,63 @@ export class CloudBuildClient {
     return this.pathTemplates.projectLocationBuildPathTemplate.match(
       projectLocationBuildName
     ).build;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} config
+   * @returns {string} Resource name string.
+   */
+  projectLocationConfigPath(project: string, location: string, config: string) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.render({
+      project: project,
+      location: location,
+      config: config,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConfig resource.
+   *
+   * @param {string} projectLocationConfigName
+   *   A fully-qualified path representing project_location_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConfigName(projectLocationConfigName: string) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.match(
+      projectLocationConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConfig resource.
+   *
+   * @param {string} projectLocationConfigName
+   *   A fully-qualified path representing project_location_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConfigName(
+    projectLocationConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.match(
+      projectLocationConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the config from ProjectLocationConfig resource.
+   *
+   * @param {string} projectLocationConfigName
+   *   A fully-qualified path representing project_location_config resource.
+   * @returns {string} A string representing the config.
+   */
+  matchConfigFromProjectLocationConfigName(projectLocationConfigName: string) {
+    return this.pathTemplates.projectLocationConfigPathTemplate.match(
+      projectLocationConfigName
+    ).config;
   }
 
   /**
@@ -3348,6 +3757,77 @@ export class CloudBuildClient {
     return this.pathTemplates.projectTriggerPathTemplate.match(
       projectTriggerName
     ).trigger;
+  }
+
+  /**
+   * Return a fully-qualified repository resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connection
+   * @param {string} repository
+   * @returns {string} Resource name string.
+   */
+  repositoryPath(
+    project: string,
+    location: string,
+    connection: string,
+    repository: string
+  ) {
+    return this.pathTemplates.repositoryPathTemplate.render({
+      project: project,
+      location: location,
+      connection: connection,
+      repository: repository,
+    });
+  }
+
+  /**
+   * Parse the project from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .location;
+  }
+
+  /**
+   * Parse the connection from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the connection.
+   */
+  matchConnectionFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .connection;
+  }
+
+  /**
+   * Parse the repository from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .repository;
   }
 
   /**

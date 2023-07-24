@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-routing",
-        "version": "0.5.0",
+        "version": "0.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 140,
+                    "end": 184,
                     "type": "FULL"
                 }
             ],
@@ -64,6 +64,10 @@
                         "type": ".google.protobuf.Timestamp"
                     },
                     {
+                        "name": "arrival_time",
+                        "type": ".google.protobuf.Timestamp"
+                    },
+                    {
                         "name": "compute_alternative_routes",
                         "type": "TYPE_BOOL"
                     },
@@ -84,12 +88,24 @@
                         "type": ".google.maps.routing.v2.Units"
                     },
                     {
+                        "name": "optimize_waypoint_order",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
                         "name": "requested_reference_routes",
                         "type": "TYPE_ENUM[]"
                     },
                     {
                         "name": "extra_computations",
                         "type": "TYPE_ENUM[]"
+                    },
+                    {
+                        "name": "traffic_model",
+                        "type": ".google.maps.routing.v2.TrafficModel"
+                    },
+                    {
+                        "name": "transit_preferences",
+                        "type": ".google.maps.routing.v2.TransitPreferences"
                     }
                 ],
                 "resultType": ".google.maps.routing.v2.ComputeRoutesResponse",
@@ -118,7 +134,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 109,
+                    "end": 138,
                     "type": "FULL"
                 }
             ],
@@ -148,6 +164,10 @@
                         "type": ".google.protobuf.Timestamp"
                     },
                     {
+                        "name": "arrival_time",
+                        "type": ".google.protobuf.Timestamp"
+                    },
+                    {
                         "name": "language_code",
                         "type": "TYPE_STRING"
                     },
@@ -158,6 +178,14 @@
                     {
                         "name": "extra_computations",
                         "type": "TYPE_ENUM[]"
+                    },
+                    {
+                        "name": "traffic_model",
+                        "type": ".google.maps.routing.v2.TrafficModel"
+                    },
+                    {
+                        "name": "transit_preferences",
+                        "type": ".google.maps.routing.v2.TransitPreferences"
                     }
                 ],
                 "resultType": ".google.maps.routing.v2.RouteMatrixElement",

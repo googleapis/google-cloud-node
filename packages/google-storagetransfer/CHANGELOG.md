@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v2.3.2...storage-transfer-v2.4.0) (2023-06-28)
+
+
+### Features
+
+* [storagetransfer] add event driven transfer configuration ([#4376](https://github.com/googleapis/google-cloud-node/issues/4376)) ([f6f3726](https://github.com/googleapis/google-cloud-node/commit/f6f3726caf528c591f55772c23b8836a2657c2c8))
+
 ## [2.3.2](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v2.3.1...storage-transfer-v2.3.2) (2023-04-13)
 
 

@@ -35,7 +35,7 @@ function main(parent, documentTemplate) {
    */
   // const parent = 'abc123'
   /**
-   *  The Google Cloud Storage location for the documents.
+   *  Optional. The Google Cloud Storage location for the documents.
    *  The path can include a wildcard.
    *  These URIs may have the forms
    *  `gs://<bucket-name>/<object-name>`.

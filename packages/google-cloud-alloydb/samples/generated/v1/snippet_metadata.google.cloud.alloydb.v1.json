@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-alloydb",
-        "version": "0.1.0",
+        "version": "0.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -78,7 +78,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -90,6 +90,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.alloydb.v1.ClusterView"
                     }
                 ],
                 "resultType": ".google.cloud.alloydb.v1.Cluster",
@@ -276,6 +280,58 @@
             }
         },
         {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_PromoteCluster_async",
+            "title": "AlloyDBAdmin promoteCluster Sample",
+            "origin": "API_DEFINITION",
+            "description": " Promotes a SECONDARY cluster. This turns down replication from the PRIMARY cluster and promotes a secondary cluster into its own standalone cluster. Imperative only.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.promote_cluster.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PromoteCluster",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.PromoteCluster",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "PromoteCluster",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.PromoteCluster",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "alloydb_v1_generated_AlloyDBAdmin_RestoreCluster_async",
             "title": "AlloyDBAdmin restoreCluster Sample",
             "origin": "API_DEFINITION",
@@ -286,7 +342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -298,6 +354,10 @@
                     {
                         "name": "backup_source",
                         "type": ".google.cloud.alloydb.v1.BackupSource"
+                    },
+                    {
+                        "name": "continuous_backup_source",
+                        "type": ".google.cloud.alloydb.v1.ContinuousBackupSource"
                     },
                     {
                         "name": "parent",
@@ -328,6 +388,62 @@
                 "method": {
                     "shortName": "RestoreCluster",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.RestoreCluster",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryCluster_async",
+            "title": "AlloyDBAdmin createSecondaryCluster Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a cluster of type SECONDARY in the given location using the primary cluster as the source.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.create_secondary_cluster.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSecondaryCluster",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateSecondaryCluster",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cluster_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cluster",
+                        "type": ".google.cloud.alloydb.v1.Cluster"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "CreateSecondaryCluster",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateSecondaryCluster",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
@@ -484,6 +600,62 @@
                 "method": {
                     "shortName": "CreateInstance",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateInstance",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryInstance_async",
+            "title": "AlloyDBAdmin createSecondaryInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new SECONDARY Instance in a given project and location.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.create_secondary_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSecondaryInstance",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateSecondaryInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instance_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instance",
+                        "type": ".google.cloud.alloydb.v1.Instance"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "CreateSecondaryInstance",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateSecondaryInstance",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
@@ -688,6 +860,58 @@
                 "method": {
                     "shortName": "FailoverInstance",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.FailoverInstance",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_InjectFault_async",
+            "title": "AlloyDBAdmin injectFault Sample",
+            "origin": "API_DEFINITION",
+            "description": " Injects fault in an instance. Imperative only.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.inject_fault.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "InjectFault",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.InjectFault",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "fault_type",
+                        "type": ".google.cloud.alloydb.v1.InjectFaultRequest.FaultType"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "InjectFault",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.InjectFault",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
@@ -1044,6 +1268,262 @@
                 "method": {
                     "shortName": "ListSupportedDatabaseFlags",
                     "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ListSupportedDatabaseFlags",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_ListUsers_async",
+            "title": "AlloyDBAdmin listUsers Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists Users in a given project and location.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.list_users.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListUsers",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ListUsers",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.ListUsersResponse",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "ListUsers",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.ListUsers",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_GetUser_async",
+            "title": "AlloyDBAdmin getUser Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single User.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.get_user.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetUser",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.GetUser",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.User",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "GetUser",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.GetUser",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_CreateUser_async",
+            "title": "AlloyDBAdmin createUser Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new User in a given project, location, and cluster.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.create_user.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 82,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateUser",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateUser",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user",
+                        "type": ".google.cloud.alloydb.v1.User"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.User",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "CreateUser",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.CreateUser",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_UpdateUser_async",
+            "title": "AlloyDBAdmin updateUser Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a single User.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.update_user.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 84,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateUser",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.UpdateUser",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "user",
+                        "type": ".google.cloud.alloydb.v1.User"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "allow_missing",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.User",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "UpdateUser",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.UpdateUser",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_DeleteUser_async",
+            "title": "AlloyDBAdmin deleteUser Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single User.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.delete_user.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteUser",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.DeleteUser",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "DeleteUser",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.DeleteUser",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"

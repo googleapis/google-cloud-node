@@ -523,6 +523,133 @@ describe('v1.VmwareEngineClient', () => {
     });
   });
 
+  describe('getSubnet', () => {
+    it('invokes getSubnet without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetSubnetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.Subnet()
+      );
+      client.innerApiCalls.getSubnet = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSubnet(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSubnet without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetSubnetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.Subnet()
+      );
+      client.innerApiCalls.getSubnet =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSubnet(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.ISubnet | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSubnet with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetSubnetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSubnet = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getSubnet(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSubnet with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetSubnetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSubnet(request), expectedError);
+    });
+  });
+
   describe('getNodeType', () => {
     it('invokes getNodeType without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -1316,6 +1443,137 @@ describe('v1.VmwareEngineClient', () => {
         client.getVmwareEngineNetwork(request),
         expectedError
       );
+    });
+  });
+
+  describe('getPrivateConnection', () => {
+    it('invokes getPrivateConnection without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+      );
+      client.innerApiCalls.getPrivateConnection =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getPrivateConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPrivateConnection without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+      );
+      client.innerApiCalls.getPrivateConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPrivateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IPrivateConnection | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPrivateConnection with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPrivateConnection = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getPrivateConnection(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPrivateConnection with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPrivateConnection(request), expectedError);
     });
   });
 
@@ -2681,6 +2939,200 @@ describe('v1.VmwareEngineClient', () => {
         client.checkDeleteClusterProgress(''),
         expectedError
       );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateSubnet', () => {
+    it('invokes updateSubnet without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
+      );
+      request.subnet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateSubnetRequest',
+        ['subnet', 'name']
+      );
+      request.subnet.name = defaultValue1;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateSubnet = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateSubnet(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubnet without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
+      );
+      request.subnet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateSubnetRequest',
+        ['subnet', 'name']
+      );
+      request.subnet.name = defaultValue1;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateSubnet =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSubnet(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.ISubnet,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.ISubnet,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubnet with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
+      );
+      request.subnet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateSubnetRequest',
+        ['subnet', 'name']
+      );
+      request.subnet.name = defaultValue1;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSubnet = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSubnet(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSubnet with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
+      );
+      request.subnet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateSubnetRequest',
+        ['subnet', 'name']
+      );
+      request.subnet.name = defaultValue1;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSubnet = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateSubnet(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSubnet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateSubnetProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateSubnetProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateSubnetProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkUpdateSubnetProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -4452,6 +4904,604 @@ describe('v1.VmwareEngineClient', () => {
       );
       await assert.rejects(
         client.checkDeleteVmwareEngineNetworkProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createPrivateConnection', () => {
+    it('invokes createPrivateConnection without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createPrivateConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createPrivateConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPrivateConnection without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createPrivateConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createPrivateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPrivateConnection with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createPrivateConnection(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPrivateConnection with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createPrivateConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreatePrivateConnectionProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreatePrivateConnectionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreatePrivateConnectionProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreatePrivateConnectionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updatePrivateConnection', () => {
+    it('invokes updatePrivateConnection without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
+      );
+      request.privateConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest',
+        ['privateConnection', 'name']
+      );
+      request.privateConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePrivateConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updatePrivateConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePrivateConnection without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
+      );
+      request.privateConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest',
+        ['privateConnection', 'name']
+      );
+      request.privateConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePrivateConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePrivateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePrivateConnection with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
+      );
+      request.privateConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest',
+        ['privateConnection', 'name']
+      );
+      request.privateConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePrivateConnection = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updatePrivateConnection(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePrivateConnection with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
+      );
+      request.privateConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest',
+        ['privateConnection', 'name']
+      );
+      request.privateConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePrivateConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updatePrivateConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdatePrivateConnectionProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdatePrivateConnectionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdatePrivateConnectionProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdatePrivateConnectionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deletePrivateConnection', () => {
+    it('invokes deletePrivateConnection without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePrivateConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deletePrivateConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePrivateConnection without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePrivateConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deletePrivateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePrivateConnection with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deletePrivateConnection(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePrivateConnection with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deletePrivateConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePrivateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeletePrivateConnectionProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeletePrivateConnectionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeletePrivateConnectionProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeletePrivateConnectionProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -6786,6 +7836,721 @@ describe('v1.VmwareEngineClient', () => {
       );
     });
   });
+
+  describe('listPrivateConnections', () => {
+    it('invokes listPrivateConnections without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+      ];
+      client.innerApiCalls.listPrivateConnections =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listPrivateConnections(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPrivateConnections without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+      ];
+      client.innerApiCalls.listPrivateConnections =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPrivateConnections(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.vmwareengine.v1.IPrivateConnection[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPrivateConnections with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPrivateConnections = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listPrivateConnections(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPrivateConnectionsStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+      ];
+      client.descriptors.page.listPrivateConnections.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPrivateConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.PrivateConnection[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.PrivateConnection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listPrivateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPrivateConnections, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listPrivateConnectionsStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPrivateConnections.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPrivateConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.PrivateConnection[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.PrivateConnection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listPrivateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPrivateConnections, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPrivateConnections without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PrivateConnection()
+        ),
+      ];
+      client.descriptors.page.listPrivateConnections.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IPrivateConnection[] =
+        [];
+      const iterable = client.listPrivateConnectionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPrivateConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnections
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPrivateConnections with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPrivateConnections.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPrivateConnectionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IPrivateConnection[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPrivateConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnections
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listPrivateConnectionPeeringRoutes', () => {
+    it('invokes listPrivateConnectionPeeringRoutes without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.innerApiCalls.listPrivateConnectionPeeringRoutes =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listPrivateConnectionPeeringRoutes(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPrivateConnectionPeeringRoutes without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.innerApiCalls.listPrivateConnectionPeeringRoutes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPrivateConnectionPeeringRoutes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IPeeringRoute[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPrivateConnectionPeeringRoutes with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPrivateConnectionPeeringRoutes = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listPrivateConnectionPeeringRoutes(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPrivateConnectionPeeringRoutesStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.descriptors.page.listPrivateConnectionPeeringRoutes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPrivateConnectionPeeringRoutesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.PeeringRoute[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.PeeringRoute) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listPrivateConnectionPeeringRoutes,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listPrivateConnectionPeeringRoutesStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPrivateConnectionPeeringRoutes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPrivateConnectionPeeringRoutesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.PeeringRoute[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.PeeringRoute) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listPrivateConnectionPeeringRoutes,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPrivateConnectionPeeringRoutes without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.descriptors.page.listPrivateConnectionPeeringRoutes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IPeeringRoute[] = [];
+      const iterable = client.listPrivateConnectionPeeringRoutesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPrivateConnectionPeeringRoutes with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPrivateConnectionPeeringRoutes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPrivateConnectionPeeringRoutesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IPeeringRoute[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listPrivateConnectionPeeringRoutes
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -8007,6 +9772,83 @@ describe('v1.VmwareEngineClient', () => {
         assert.strictEqual(result, 'privateCloudValue');
         assert(
           (client.pathTemplates.privateCloudPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('privateConnection', () => {
+      const fakePath = '/rendered/path/privateConnection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        private_connection: 'privateConnectionValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.privateConnectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.privateConnectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('privateConnectionPath', () => {
+        const result = client.privateConnectionPath(
+          'projectValue',
+          'locationValue',
+          'privateConnectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.privateConnectionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPrivateConnectionName', () => {
+        const result = client.matchProjectFromPrivateConnectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.privateConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPrivateConnectionName', () => {
+        const result = client.matchLocationFromPrivateConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.privateConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPrivateConnectionFromPrivateConnectionName', () => {
+        const result =
+          client.matchPrivateConnectionFromPrivateConnectionName(fakePath);
+        assert.strictEqual(result, 'privateConnectionValue');
+        assert(
+          (
+            client.pathTemplates.privateConnectionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

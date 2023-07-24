@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ message Restore {
   }
 
   // Output only. The full name of the Restore resource.
-  // Format: projects/*/locations/*/restorePlans/*/restores/*
+  // Format: `projects/*/locations/*/restorePlans/*/restores/*`
   string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Server generated global unique identifier of
@@ -71,19 +71,23 @@ message Restore {
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The timestamp when this Restore resource was created.
-  google.protobuf.Timestamp create_time = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp create_time = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The timestamp when this Restore resource was last
   // updated.
-  google.protobuf.Timestamp update_time = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp update_time = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // User specified descriptive string for this Restore.
   string description = 5;
 
-  // Required. Immutable. A reference to the [Backup][google.cloud.gkebackup.v1.Backup] used as the source from which this Restore
-  // will restore. Note that this Backup must be a sub-resource of the
-  // RestorePlan's [backup_plan][google.cloud.gkebackup.v1.RestorePlan.backup_plan].
-  // Format: projects/*/locations/*/backupPlans/*/backups/*.
+  // Required. Immutable. A reference to the
+  // [Backup][google.cloud.gkebackup.v1.Backup] used as the source from which
+  // this Restore will restore. Note that this Backup must be a sub-resource of
+  // the RestorePlan's
+  // [backup_plan][google.cloud.gkebackup.v1.RestorePlan.backup_plan]. Format:
+  // `projects/*/locations/*/backupPlans/*/backups/*`.
   string backup = 6 [
     (google.api.field_behavior) = IMMUTABLE,
     (google.api.field_behavior) = REQUIRED,
@@ -95,10 +99,11 @@ message Restore {
   // Output only. The target cluster into which this Restore will restore data.
   // Valid formats:
   //
-  //   - projects/*/locations/*/clusters/*
-  //   - projects/*/zones/*/clusters/*
+  //   - `projects/*/locations/*/clusters/*`
+  //   - `projects/*/zones/*/clusters/*`
   //
-  // Inherited from parent RestorePlan's [cluster][google.cloud.gkebackup.v1.RestorePlan.cluster] value.
+  // Inherited from parent RestorePlan's
+  // [cluster][google.cloud.gkebackup.v1.RestorePlan.cluster] value.
   string cluster = 7 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (google.api.resource_reference) = {
@@ -106,7 +111,8 @@ message Restore {
     }
   ];
 
-  // Output only. Configuration of the Restore.  Inherited from parent RestorePlan's
+  // Output only. Configuration of the Restore.  Inherited from parent
+  // RestorePlan's
   // [restore_config][google.cloud.gkebackup.v1.RestorePlan.restore_config].
   RestoreConfig restore_config = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 
@@ -116,27 +122,31 @@ message Restore {
   // Output only. The current state of the Restore.
   State state = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. Human-readable description of why the Restore is in its current state.
+  // Output only. Human-readable description of why the Restore is in its
+  // current state.
   string state_reason = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Timestamp of when the restore operation completed.
-  google.protobuf.Timestamp complete_time = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+  google.protobuf.Timestamp complete_time = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Number of resources restored during the restore execution.
-  int32 resources_restored_count = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
+  int32 resources_restored_count = 13
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Number of resources excluded during the restore execution.
-  int32 resources_excluded_count = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
+  int32 resources_excluded_count = 14
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. Number of resources that failed to be restored during the restore
-  // execution.
+  // Output only. Number of resources that failed to be restored during the
+  // restore execution.
   int32 resources_failed_count = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Number of volumes restored during the restore execution.
   int32 volumes_restored_count = 16 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. `etag` is used for optimistic concurrency control as a way to help
-  // prevent simultaneous updates of a restore from overwriting each other.
+  // Output only. `etag` is used for optimistic concurrency control as a way to
+  // help prevent simultaneous updates of a restore from overwriting each other.
   // It is strongly suggested that systems make use of the `etag` in the
   // read-modify-write cycle to perform restore updates in order to avoid
   // race conditions: An `etag` is returned in the response to `GetRestore`,
@@ -147,24 +157,24 @@ message Restore {
 }
 
 // Configuration of a restore.
-// Next id: 9
+// Next id: 12
 message RestoreConfig {
-  // Defines how volume data should be restored
+  // Defines how volume data should be restored.
   enum VolumeDataRestorePolicy {
     // Unspecified (illegal).
     VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED = 0;
 
-    // For each PVC to be restored, will create a new underlying volume (and PV)
+    // For each PVC to be restored, create a new underlying volume and PV
     // from the corresponding VolumeBackup contained within the Backup.
     RESTORE_VOLUME_DATA_FROM_BACKUP = 1;
 
     // For each PVC to be restored, attempt to reuse the original PV contained
-    // in the Backup (with its original underlying volume).  Note that option
+    // in the Backup (with its original underlying volume). This option
     // is likely only usable when restoring a workload to its original cluster.
     REUSE_VOLUME_HANDLE_FROM_BACKUP = 2;
 
-    // For each PVC to be restored, PVCs will be created without any particular
-    // action to restore data.  In this case, the normal Kubernetes provisioning
+    // For each PVC to be restored, create PVC without any particular
+    // action to restore data. In this case, the normal Kubernetes provisioning
     // logic would kick in, and this would likely result in either dynamically
     // provisioning blank PVs or binding to statically provisioned PVs.
     NO_VOLUME_DATA_RESTORATION = 3;
@@ -181,8 +191,8 @@ message RestoreConfig {
     USE_EXISTING_VERSION = 1;
 
     // Delete the existing version before re-creating it from the Backup.
-    // Note that this is a dangerous option which could cause unintentional
-    // data loss if used inappropriately - for example, deleting a CRD will
+    // This is a dangerous option which could cause unintentional
+    // data loss if used inappropriately. For example, deleting a CRD will
     // cause Kubernetes to delete all CRs of that type.
     USE_BACKUP_VERSION = 2;
   }
@@ -224,13 +234,44 @@ message RestoreConfig {
     string resource_kind = 2;
   }
 
-  // Identifies the cluster-scoped resources to restore from the Backup.
+  // Defines the scope of cluster-scoped resources to restore.
+  //
+  // Some group kinds are not reasonable choices for a restore, and will cause
+  // an error if selected here. Any scope selection that would restore
+  // "all valid" resources automatically excludes these group kinds.
+  // - gkebackup.gke.io/BackupJob
+  // - gkebackup.gke.io/RestoreJob
+  // - metrics.k8s.io/NodeMetrics
+  // - migration.k8s.io/StorageState
+  // - migration.k8s.io/StorageVersionMigration
+  // - Node
+  // - snapshot.storage.k8s.io/VolumeSnapshotContent
+  // - storage.k8s.io/CSINode
+  //
+  // Some group kinds are driven by restore configuration elsewhere,
+  // and will cause an error if selected here.
+  // - Namespace
+  // - PersistentVolume
   message ClusterResourceRestoreScope {
-    // A list of "types" of cluster-scoped resources to be restored from the
-    // Backup.  An empty list means that NO cluster-scoped resources will be
-    // restored. Note that Namespaces and PersistentVolume restoration is
-    // handled separately and is not governed by this field.
+    // A list of cluster-scoped resource group kinds to restore from the
+    // backup. If specified, only the selected resources will be restored.
+    // Mutually exclusive to any other field in the message.
     repeated GroupKind selected_group_kinds = 1;
+
+    // A list of cluster-scoped resource group kinds to NOT restore from the
+    // backup. If specified, all valid cluster-scoped resources will be
+    // restored except for those specified in the list.
+    // Mutually exclusive to any other field in the message.
+    repeated GroupKind excluded_group_kinds = 2;
+
+    // If True, all valid cluster-scoped resources will be restored.
+    // Mutually exclusive to any other field in the message.
+    bool all_group_kinds = 3;
+
+    // If True, no cluster-scoped resources will be restored.
+    // This has the same restore scope as if the message is not defined.
+    // Mutually exclusive to any other field in the message.
+    bool no_group_kinds = 4;
   }
 
   // A transformation rule to be applied against Kubernetes resources as they
@@ -270,13 +311,118 @@ message RestoreConfig {
     // value does not match this expression. If this field is NOT specified,
     // then ALL fields matched by the target_json_path expression will undergo
     // substitution. Note that an empty (e.g., "", rather than unspecified)
-    // value for for this field will only match empty fields.
+    // value for this field will only match empty fields.
     string original_value_pattern = 4;
 
     // This is the new value to set for any fields that pass the filtering and
     // selection criteria. To remove a value from a Kubernetes resource, either
     // leave this field unspecified, or set it to the empty string ("").
     string new_value = 5;
+  }
+
+  // TransformationRuleAction defines a TransformationRule action based on the
+  // JSON Patch RFC (https://www.rfc-editor.org/rfc/rfc6902)
+  message TransformationRuleAction {
+    // Possible values for operations of a transformation rule action.
+    enum Op {
+      // Unspecified operation
+      OP_UNSPECIFIED = 0;
+
+      // The "remove" operation removes the value at the target location.
+      REMOVE = 1;
+
+      // The "move" operation removes the value at a specified location and
+      // adds it to the target location.
+      MOVE = 2;
+
+      // The "copy" operation copies the value at a specified location to the
+      // target location.
+      COPY = 3;
+
+      // The "add" operation performs one of the following functions,
+      // depending upon what the target location references:
+      // 1. If the target location specifies an array index, a new value is
+      // inserted into the array at the specified index.
+      // 2. If the target location specifies an object member that does not
+      // already exist, a new member is added to the object.
+      // 3. If the target location specifies an object member that does exist,
+      // that member's value is replaced.
+      ADD = 4;
+
+      // The "test" operation tests that a value at the target location is
+      // equal to a specified value.
+      TEST = 5;
+
+      // The "replace" operation replaces the value at the target location
+      // with a new value.  The operation object MUST contain a "value" member
+      // whose content specifies the replacement value.
+      REPLACE = 6;
+    }
+
+    // Required. op specifies the operation to perform.
+    Op op = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // A string containing a JSON Pointer value that references the location in
+    // the target document to move the value from.
+    string from_path = 2;
+
+    // A string containing a JSON-Pointer value that references a location
+    // within the target document where the operation is performed.
+    string path = 3;
+
+    // A string that specifies the desired value in string format to
+    // use for transformation.
+    string value = 4;
+  }
+
+  // ResourceFilter specifies matching criteria to limit the scope of a
+  // change to a specific set of kubernetes resources that are selected for
+  // restoration from a backup.
+  message ResourceFilter {
+    // (Filtering parameter) Any resource subject to transformation must be
+    // contained within one of the listed Kubernetes Namespace in the Backup.
+    // If this field is not provided, no namespace filtering will be performed
+    // (all resources in all Namespaces, including all cluster-scoped resources,
+    // will be candidates for transformation).
+    // To mix cluster-scoped and namespaced resources in the same rule, use an
+    // empty string ("") as one of the target namespaces.
+    repeated string namespaces = 1;
+
+    // (Filtering parameter) Any resource subject to transformation must belong
+    // to one of the listed "types". If this field is not provided, no type
+    // filtering will be performed (all resources of all types matching previous
+    // filtering parameters will be candidates for transformation).
+    repeated GroupKind group_kinds = 2;
+
+    // This is a [JSONPath]
+    // (https://github.com/json-path/JsonPath/blob/master/README.md)
+    // expression that matches specific fields of candidate
+    // resources and it operates as a filtering parameter (resources that
+    // are not matched with this expression will not be candidates for
+    // transformation).
+    string json_path = 3;
+  }
+
+  // A transformation rule to be applied against Kubernetes resources as they
+  // are selected for restoration from a Backup. A rule contains both filtering
+  // logic (which resources are subject to transform) and transformation logic.
+  message TransformationRule {
+    // Required. A list of transformation rule actions to take against candidate
+    // resources. Actions are executed in order defined - this order matters, as
+    // they could potentially interfere with each other and the first operation
+    // could affect the outcome of the second operation.
+    repeated TransformationRuleAction field_actions = 1
+        [(google.api.field_behavior) = REQUIRED];
+
+    // This field is used to specify a set of fields that should be used to
+    // determine which resources in backup should be acted upon by the supplied
+    // transformation rule actions, and this will ensure that only specific
+    // resources are affected by transformation rule actions.
+    ResourceFilter resource_filter = 2;
+
+    // The description is a user specified string description of the
+    // transformation rule.
+    string description = 3;
   }
 
   // Specifies the mechanism to be used to restore volume data.
@@ -287,7 +433,8 @@ message RestoreConfig {
   // Defines the behavior for handling the situation where cluster-scoped
   // resources being restored already exist in the target cluster. This MUST be
   // set to a value other than CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED if
-  // [cluster_resource_restore_scope][google.cloud.gkebackup.v1.RestoreConfig.cluster_resource_restore_scope] is not empty.
+  // [cluster_resource_restore_scope][google.cloud.gkebackup.v1.RestoreConfig.cluster_resource_restore_scope]
+  // is not empty.
   ClusterResourceConflictPolicy cluster_resource_conflict_policy = 2;
 
   // Defines the behavior for handling the situation where sets of namespaced
@@ -302,6 +449,12 @@ message RestoreConfig {
   // Specifies the namespaced resources to restore from the Backup.
   // Only one of the entries may be specified. If not specified, NO namespaced
   // resources will be restored.
+  //
+  // Note: Resources will never be restored into *managed* namespaces such as
+  // `kube-system`, `kube-public`, or `kube-node-lease`. These namespaces
+  // are silently skipped when
+  // [all_namespaces][google.cloud.gkebackup.v1.RestoreConfig.all_namespaces] is
+  // selected. Listing them explicitly will result in an error.
   oneof namespaced_resource_restore_scope {
     // Restore all namespaced resources in the Backup if set to "True".
     // Specifying this field to "False" is an error.
@@ -315,6 +468,14 @@ message RestoreConfig {
     // ProtectedApplications and all the resources to which they refer will be
     // restored.
     NamespacedNames selected_applications = 7;
+
+    // Do not restore any namespaced resources if set to "True".
+    // Specifying this field to "False" is not allowed.
+    bool no_namespaces = 9;
+
+    // A list of selected namespaces excluded from restoration. All
+    // namespaces except those in this list will be restored.
+    Namespaces excluded_namespaces = 10;
   }
 
   // A list of transformation rules to be applied against Kubernetes resources
@@ -323,4 +484,11 @@ message RestoreConfig {
   // the filtering logic of subsequent rules. An empty list means no
   // substitution will occur.
   repeated SubstitutionRule substitution_rules = 8;
+
+  // A list of transformation rules to be applied against Kubernetes resources
+  // as they are selected for restoration from a Backup. Rules are executed in
+  // order defined - this order matters, as changes made by a rule may impact
+  // the filtering logic of subsequent rules. An empty list means no
+  // transformation will occur.
+  repeated TransformationRule transformation_rules = 11;
 }

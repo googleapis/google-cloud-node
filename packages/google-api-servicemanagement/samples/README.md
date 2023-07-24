@@ -28,7 +28,6 @@
   * [Service_manager.submit_config_source](#service_manager.submit_config_source)
   * [Service_manager.undelete_service](#service_manager.undelete_service)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -310,23 +309,6 @@ __Usage:__
 
 
 `node packages/google-api-servicemanagement/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-api-servicemanagement/samples/test/quickstart.js`
 
 
 

@@ -405,6 +405,26 @@
                 "deleteExpandedDataSet"
               ]
             },
+            "GetChannelGroup": {
+              "methods": [
+                "getChannelGroup"
+              ]
+            },
+            "CreateChannelGroup": {
+              "methods": [
+                "createChannelGroup"
+              ]
+            },
+            "UpdateChannelGroup": {
+              "methods": [
+                "updateChannelGroup"
+              ]
+            },
+            "DeleteChannelGroup": {
+              "methods": [
+                "deleteChannelGroup"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "setAutomatedGa4ConfigurationOptOut"
@@ -443,6 +463,46 @@
             "ListConnectedSiteTags": {
               "methods": [
                 "listConnectedSiteTags"
+              ]
+            },
+            "FetchConnectedGa4Property": {
+              "methods": [
+                "fetchConnectedGa4Property"
+              ]
+            },
+            "GetAdSenseLink": {
+              "methods": [
+                "getAdSenseLink"
+              ]
+            },
+            "CreateAdSenseLink": {
+              "methods": [
+                "createAdSenseLink"
+              ]
+            },
+            "DeleteAdSenseLink": {
+              "methods": [
+                "deleteAdSenseLink"
+              ]
+            },
+            "GetEventCreateRule": {
+              "methods": [
+                "getEventCreateRule"
+              ]
+            },
+            "CreateEventCreateRule": {
+              "methods": [
+                "createEventCreateRule"
+              ]
+            },
+            "UpdateEventCreateRule": {
+              "methods": [
+                "updateEventCreateRule"
+              ]
+            },
+            "DeleteEventCreateRule": {
+              "methods": [
+                "deleteEventCreateRule"
               ]
             },
             "ListAccounts": {
@@ -578,11 +638,32 @@
                 "listExpandedDataSetsAsync"
               ]
             },
+            "ListChannelGroups": {
+              "methods": [
+                "listChannelGroups",
+                "listChannelGroupsStream",
+                "listChannelGroupsAsync"
+              ]
+            },
             "ListBigQueryLinks": {
               "methods": [
                 "listBigQueryLinks",
                 "listBigQueryLinksStream",
                 "listBigQueryLinksAsync"
+              ]
+            },
+            "ListAdSenseLinks": {
+              "methods": [
+                "listAdSenseLinks",
+                "listAdSenseLinksStream",
+                "listAdSenseLinksAsync"
+              ]
+            },
+            "ListEventCreateRules": {
+              "methods": [
+                "listEventCreateRules",
+                "listEventCreateRulesStream",
+                "listEventCreateRulesAsync"
               ]
             }
           }
@@ -985,6 +1066,26 @@
                 "deleteExpandedDataSet"
               ]
             },
+            "GetChannelGroup": {
+              "methods": [
+                "getChannelGroup"
+              ]
+            },
+            "CreateChannelGroup": {
+              "methods": [
+                "createChannelGroup"
+              ]
+            },
+            "UpdateChannelGroup": {
+              "methods": [
+                "updateChannelGroup"
+              ]
+            },
+            "DeleteChannelGroup": {
+              "methods": [
+                "deleteChannelGroup"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "setAutomatedGa4ConfigurationOptOut"
@@ -1023,6 +1124,46 @@
             "ListConnectedSiteTags": {
               "methods": [
                 "listConnectedSiteTags"
+              ]
+            },
+            "FetchConnectedGa4Property": {
+              "methods": [
+                "fetchConnectedGa4Property"
+              ]
+            },
+            "GetAdSenseLink": {
+              "methods": [
+                "getAdSenseLink"
+              ]
+            },
+            "CreateAdSenseLink": {
+              "methods": [
+                "createAdSenseLink"
+              ]
+            },
+            "DeleteAdSenseLink": {
+              "methods": [
+                "deleteAdSenseLink"
+              ]
+            },
+            "GetEventCreateRule": {
+              "methods": [
+                "getEventCreateRule"
+              ]
+            },
+            "CreateEventCreateRule": {
+              "methods": [
+                "createEventCreateRule"
+              ]
+            },
+            "UpdateEventCreateRule": {
+              "methods": [
+                "updateEventCreateRule"
+              ]
+            },
+            "DeleteEventCreateRule": {
+              "methods": [
+                "deleteEventCreateRule"
               ]
             },
             "ListAccounts": {
@@ -1158,11 +1299,32 @@
                 "listExpandedDataSetsAsync"
               ]
             },
+            "ListChannelGroups": {
+              "methods": [
+                "listChannelGroups",
+                "listChannelGroupsStream",
+                "listChannelGroupsAsync"
+              ]
+            },
             "ListBigQueryLinks": {
               "methods": [
                 "listBigQueryLinks",
                 "listBigQueryLinksStream",
                 "listBigQueryLinksAsync"
+              ]
+            },
+            "ListAdSenseLinks": {
+              "methods": [
+                "listAdSenseLinks",
+                "listAdSenseLinksStream",
+                "listAdSenseLinksAsync"
+              ]
+            },
+            "ListEventCreateRules": {
+              "methods": [
+                "listEventCreateRules",
+                "listEventCreateRulesStream",
+                "listEventCreateRulesAsync"
               ]
             }
           }

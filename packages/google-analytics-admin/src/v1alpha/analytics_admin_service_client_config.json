@@ -523,6 +523,31 @@
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
+        "GetChannelGroup": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListChannelGroups": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateChannelGroup": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateChannelGroup": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteChannelGroup": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
         "SetAutomatedGa4ConfigurationOptOut": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
@@ -564,6 +589,56 @@
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
         "ListConnectedSiteTags": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "FetchConnectedGa4Property": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetAdSenseLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateAdSenseLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteAdSenseLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListAdSenseLinks": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetEventCreateRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListEventCreateRules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateEventCreateRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateEventCreateRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteEventCreateRule": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"

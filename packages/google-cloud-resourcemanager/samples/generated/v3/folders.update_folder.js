@@ -29,8 +29,8 @@ function main(folder, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new definition of the Folder. It must include the `name` field, which
-   *  cannot be changed.
+   *  Required. The new definition of the Folder. It must include the `name`
+   *  field, which cannot be changed.
    */
   // const folder = {}
   /**

@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.8.0...dialogflow-v5.9.0) (2023-06-28)
+
+
+### Features
+
+* [dialogflow] added dialogflow_assist_answer ([#4364](https://github.com/googleapis/google-cloud-node/issues/4364)) ([2339f4d](https://github.com/googleapis/google-cloud-node/commit/2339f4d2c62fda48c745f4dde3f071fa4346fc9b))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency yargs to v17 ([#4351](https://github.com/googleapis/google-cloud-node/issues/4351)) ([4fb5285](https://github.com/googleapis/google-cloud-node/commit/4fb528559c204cee33329c4e55021aa1fd0e4974))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.7.1...dialogflow-v5.8.0) (2023-05-20)
+
+
+### Features
+
+* [dialogflow] add baseline model configuration for conversation summarization ([#4255](https://github.com/googleapis/google-cloud-node/issues/4255)) ([88877b9](https://github.com/googleapis/google-cloud-node/commit/88877b9509815d76f1915aa87e97597ec7e1520d))
+
 ## [5.7.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.7.0...dialogflow-v5.7.1) (2023-04-13)
 
 

@@ -35,7 +35,7 @@ function main(parent, requests) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. A maximum of 1000 Messages can be created in a batch.
+   *  Required. A maximum of 300 messages can be created in a batch.
    *  CreateMessageRequest.message.send_time   is required. All created
    *  messages will have identical
    *  Message.create_time google.cloud.dialogflow.v2beta1.Message.create_time.

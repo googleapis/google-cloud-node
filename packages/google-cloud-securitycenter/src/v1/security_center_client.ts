@@ -927,9 +927,9 @@ export class SecurityCenterClient {
    *   Required. The mute config being created.
    * @param {string} request.muteConfigId
    *   Required. Unique identifier provided by the client within the parent scope.
-   *   It must consist of lower case letters, numbers, and hyphen, with the first
-   *   character a letter, the last a letter or a number, and a 63 character
-   *   maximum.
+   *   It must consist of only lowercase letters, numbers, and hyphens, must start
+   *   with a letter, must end with either a letter or a number, and must be 63
+   *   characters or less.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3126,7 +3126,7 @@ export class SecurityCenterClient {
    * Updates the SecurityHealthAnalyticsCustomModule under the given name based
    * on the given update mask. Updating the enablement state is supported on
    * both resident and inherited modules (though resident modules cannot have an
-   * enablement state of “inherited”). Updating the display name and custom
+   * enablement state of "inherited"). Updating the display name and custom
    * config of a module is supported on resident modules only.
    *
    * @param {Object} request
@@ -3446,9 +3446,9 @@ export class SecurityCenterClient {
    *   Required. The BigQuery export being created.
    * @param {string} request.bigQueryExportId
    *   Required. Unique identifier provided by the client within the parent scope.
-   *   It must consist of lower case letters, numbers, and hyphen, with the first
-   *   character a letter, the last a letter or a number, and a 63 character
-   *   maximum.
+   *   It must consist of only lowercase letters, numbers, and hyphens, must start
+   *   with a letter, must end with either a letter or a number, and must be 63
+   *   characters or less.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3930,6 +3930,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/security_center.run_asset_discovery.js</caption>
    * region_tag:securitycenter_v1_generated_SecurityCenter_RunAssetDiscovery_async
+   * @deprecated RunAssetDiscovery is deprecated and may be removed in a future version.
    */
   runAssetDiscovery(
     request?: protos.google.cloud.securitycenter.v1.IRunAssetDiscoveryRequest,
@@ -4013,6 +4014,11 @@ export class SecurityCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$RunAssetDiscovery',
+      'RunAssetDiscovery is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.runAssetDiscovery(request, options, callback);
   }
   /**
@@ -4026,6 +4032,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/security_center.run_asset_discovery.js</caption>
    * region_tag:securitycenter_v1_generated_SecurityCenter_RunAssetDiscovery_async
+   * @deprecated RunAssetDiscovery is deprecated and may be removed in a future version.
    */
   async checkRunAssetDiscoveryProgress(
     name: string
@@ -4035,6 +4042,11 @@ export class SecurityCenterClient {
       protos.google.protobuf.Empty
     >
   > {
+    this.warn(
+      'DEP$SecurityCenter-$checkRunAssetDiscoveryProgress',
+      'checkRunAssetDiscoveryProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4194,6 +4206,7 @@ export class SecurityCenterClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated GroupAssets is deprecated and may be removed in a future version.
    */
   groupAssets(
     request?: protos.google.cloud.securitycenter.v1.IGroupAssetsRequest,
@@ -4267,6 +4280,11 @@ export class SecurityCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$GroupAssets',
+      'GroupAssets is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.groupAssets(request, options, callback);
   }
 
@@ -4411,6 +4429,7 @@ export class SecurityCenterClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated GroupAssets is deprecated and may be removed in a future version.
    */
   groupAssetsStream(
     request?: protos.google.cloud.securitycenter.v1.IGroupAssetsRequest,
@@ -4427,6 +4446,11 @@ export class SecurityCenterClient {
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$GroupAssets',
+      'GroupAssets is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.groupAssets.createStream(
       this.innerApiCalls.groupAssets as GaxCall,
       request,
@@ -4578,6 +4602,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/security_center.group_assets.js</caption>
    * region_tag:securitycenter_v1_generated_SecurityCenter_GroupAssets_async
+   * @deprecated GroupAssets is deprecated and may be removed in a future version.
    */
   groupAssetsAsync(
     request?: protos.google.cloud.securitycenter.v1.IGroupAssetsRequest,
@@ -4594,6 +4619,11 @@ export class SecurityCenterClient {
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$GroupAssets',
+      'GroupAssets is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.groupAssets.asyncIterate(
       this.innerApiCalls['groupAssets'] as GaxCall,
       request as {},
@@ -5313,6 +5343,7 @@ export class SecurityCenterClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated ListAssets is deprecated and may be removed in a future version.
    */
   listAssets(
     request?: protos.google.cloud.securitycenter.v1.IListAssetsRequest,
@@ -5386,6 +5417,11 @@ export class SecurityCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$ListAssets',
+      'ListAssets is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listAssets(request, options, callback);
   }
 
@@ -5536,6 +5572,7 @@ export class SecurityCenterClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated ListAssets is deprecated and may be removed in a future version.
    */
   listAssetsStream(
     request?: protos.google.cloud.securitycenter.v1.IListAssetsRequest,
@@ -5552,6 +5589,11 @@ export class SecurityCenterClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$ListAssets',
+      'ListAssets is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -5709,6 +5751,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/security_center.list_assets.js</caption>
    * region_tag:securitycenter_v1_generated_SecurityCenter_ListAssets_async
+   * @deprecated ListAssets is deprecated and may be removed in a future version.
    */
   listAssetsAsync(
     request?: protos.google.cloud.securitycenter.v1.IListAssetsRequest,
@@ -5725,6 +5768,11 @@ export class SecurityCenterClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$SecurityCenter-$ListAssets',
+      'ListAssets is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},

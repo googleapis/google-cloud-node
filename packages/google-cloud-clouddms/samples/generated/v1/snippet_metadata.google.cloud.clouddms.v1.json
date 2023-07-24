@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-clouddms",
-        "version": "2.2.1",
+        "version": "2.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -555,7 +555,7 @@
             "regionTag": "datamigration_v1_generated_DataMigrationService_ListConnectionProfiles_async",
             "title": "DataMigrationService listConnectionProfiles Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieve a list of all connection profiles in a given project and location.",
+            "description": " Retrieves a list of all connection profiles in a given project and location.",
             "canonical": true,
             "file": "data_migration_service.list_connection_profiles.js",
             "language": "JAVASCRIPT",
@@ -658,7 +658,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -682,6 +682,14 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_validation",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -710,7 +718,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -730,6 +738,14 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_validation",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -788,6 +804,930 @@
                 "method": {
                     "shortName": "DeleteConnectionProfile",
                     "fullName": "google.cloud.clouddms.v1.DataMigrationService.DeleteConnectionProfile",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_CreatePrivateConnection_async",
+            "title": "DataMigrationService createPrivateConnection Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new private connection in a given project and location.",
+            "canonical": true,
+            "file": "data_migration_service.create_private_connection.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePrivateConnection",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.CreatePrivateConnection",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "private_connection_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "private_connection",
+                        "type": ".google.cloud.clouddms.v1.PrivateConnection"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip_validation",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "CreatePrivateConnection",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.CreatePrivateConnection",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_GetPrivateConnection_async",
+            "title": "DataMigrationService getPrivateConnection Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single private connection.",
+            "canonical": true,
+            "file": "data_migration_service.get_private_connection.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPrivateConnection",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.GetPrivateConnection",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.PrivateConnection",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPrivateConnection",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.GetPrivateConnection",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_ListPrivateConnections_async",
+            "title": "DataMigrationService listPrivateConnections Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of private connections in a given project and location.",
+            "canonical": true,
+            "file": "data_migration_service.list_private_connections.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 82,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPrivateConnections",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.ListPrivateConnections",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.ListPrivateConnectionsResponse",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "ListPrivateConnections",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.ListPrivateConnections",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_DeletePrivateConnection_async",
+            "title": "DataMigrationService deletePrivateConnection Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single Database Migration Service private connection.",
+            "canonical": true,
+            "file": "data_migration_service.delete_private_connection.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeletePrivateConnection",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.DeletePrivateConnection",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "DeletePrivateConnection",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.DeletePrivateConnection",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_GetConversionWorkspace_async",
+            "title": "DataMigrationService getConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single conversion workspace.",
+            "canonical": true,
+            "file": "data_migration_service.get_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.GetConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.ConversionWorkspace",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "GetConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.GetConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_ListConversionWorkspaces_async",
+            "title": "DataMigrationService listConversionWorkspaces Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists conversion workspaces in a given project and location.",
+            "canonical": true,
+            "file": "data_migration_service.list_conversion_workspaces.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListConversionWorkspaces",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.ListConversionWorkspaces",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.ListConversionWorkspacesResponse",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "ListConversionWorkspaces",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.ListConversionWorkspaces",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_CreateConversionWorkspace_async",
+            "title": "DataMigrationService createConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new conversion workspace in a given project and location.",
+            "canonical": true,
+            "file": "data_migration_service.create_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.CreateConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "conversion_workspace_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "conversion_workspace",
+                        "type": ".google.cloud.clouddms.v1.ConversionWorkspace"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.CreateConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_UpdateConversionWorkspace_async",
+            "title": "DataMigrationService updateConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a single conversion workspace.",
+            "canonical": true,
+            "file": "data_migration_service.update_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.UpdateConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "conversion_workspace",
+                        "type": ".google.cloud.clouddms.v1.ConversionWorkspace"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.UpdateConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_DeleteConversionWorkspace_async",
+            "title": "DataMigrationService deleteConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single conversion workspace.",
+            "canonical": true,
+            "file": "data_migration_service.delete_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.DeleteConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.DeleteConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_SeedConversionWorkspace_async",
+            "title": "DataMigrationService seedConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports a snapshot of the source database into the conversion workspace.",
+            "canonical": true,
+            "file": "data_migration_service.seed_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SeedConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.SeedConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "auto_commit",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "source_connection_profile",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_connection_profile",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "SeedConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.SeedConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_ImportMappingRules_async",
+            "title": "DataMigrationService importMappingRules Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports the mapping rules for a given conversion workspace. Supports various formats of external rules files.",
+            "canonical": true,
+            "file": "data_migration_service.import_mapping_rules.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportMappingRules",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.ImportMappingRules",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "rules_format",
+                        "type": ".google.cloud.clouddms.v1.ImportRulesFileFormat"
+                    },
+                    {
+                        "name": "rules_files",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "auto_commit",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportMappingRules",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.ImportMappingRules",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_ConvertConversionWorkspace_async",
+            "title": "DataMigrationService convertConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a draft tree schema for the destination database.",
+            "canonical": true,
+            "file": "data_migration_service.convert_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ConvertConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.ConvertConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "auto_commit",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "ConvertConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.ConvertConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_CommitConversionWorkspace_async",
+            "title": "DataMigrationService commitConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Marks all the data in the conversion workspace as committed.",
+            "canonical": true,
+            "file": "data_migration_service.commit_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CommitConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.CommitConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "commit_name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "CommitConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.CommitConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_RollbackConversionWorkspace_async",
+            "title": "DataMigrationService rollbackConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Rolls back a conversion workspace to the last committed snapshot.",
+            "canonical": true,
+            "file": "data_migration_service.rollback_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RollbackConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.RollbackConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "RollbackConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.RollbackConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_ApplyConversionWorkspace_async",
+            "title": "DataMigrationService applyConversionWorkspace Sample",
+            "origin": "API_DEFINITION",
+            "description": " Applies draft tree onto a specific destination database.",
+            "canonical": true,
+            "file": "data_migration_service.apply_conversion_workspace.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ApplyConversionWorkspace",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.ApplyConversionWorkspace",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "connection_profile",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "ApplyConversionWorkspace",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.ApplyConversionWorkspace",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_DescribeDatabaseEntities_async",
+            "title": "DataMigrationService describeDatabaseEntities Sample",
+            "origin": "API_DEFINITION",
+            "description": " Describes the database entities tree for a specific conversion workspace and a specific tree type. Database entities are not resources like conversion workspaces or mapping rules, and they can't be created, updated or deleted. Instead, they are simple data objects describing the structure of the client database.",
+            "canonical": true,
+            "file": "data_migration_service.describe_database_entities.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 89,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DescribeDatabaseEntities",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.DescribeDatabaseEntities",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversion_workspace",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tree",
+                        "type": ".google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType"
+                    },
+                    {
+                        "name": "uncommitted",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "commit_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "DescribeDatabaseEntities",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.DescribeDatabaseEntities",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_SearchBackgroundJobs_async",
+            "title": "DataMigrationService searchBackgroundJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Searches/lists the background jobs for a specific conversion workspace. The background jobs are not resources like conversion workspaces or mapping rules, and they can't be created, updated or deleted. Instead, they are a way to expose the data plane jobs log.",
+            "canonical": true,
+            "file": "data_migration_service.search_background_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchBackgroundJobs",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.SearchBackgroundJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversion_workspace",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_most_recent_per_job_type",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "max_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "completed_until_time",
+                        "type": ".google.protobuf.Timestamp"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.SearchBackgroundJobsResponse",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "SearchBackgroundJobs",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.SearchBackgroundJobs",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_DescribeConversionWorkspaceRevisions_async",
+            "title": "DataMigrationService describeConversionWorkspaceRevisions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of committed revisions of a specific conversion workspace.",
+            "canonical": true,
+            "file": "data_migration_service.describe_conversion_workspace_revisions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DescribeConversionWorkspaceRevisions",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.DescribeConversionWorkspaceRevisions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversion_workspace",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "commit_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "DescribeConversionWorkspaceRevisions",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.DescribeConversionWorkspaceRevisions",
+                    "service": {
+                        "shortName": "DataMigrationService",
+                        "fullName": "google.cloud.clouddms.v1.DataMigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datamigration_v1_generated_DataMigrationService_FetchStaticIps_async",
+            "title": "DataMigrationService fetchStaticIps Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetches a set of static IP addresses that need to be allowlisted by the customer when using the static-IP connectivity method.",
+            "canonical": true,
+            "file": "data_migration_service.fetch_static_ips.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchStaticIps",
+                "fullName": "google.cloud.clouddms.v1.DataMigrationService.FetchStaticIps",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.clouddms.v1.FetchStaticIpsResponse",
+                "client": {
+                    "shortName": "DataMigrationServiceClient",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationServiceClient"
+                },
+                "method": {
+                    "shortName": "FetchStaticIps",
+                    "fullName": "google.cloud.clouddms.v1.DataMigrationService.FetchStaticIps",
                     "service": {
                         "shortName": "DataMigrationService",
                         "fullName": "google.cloud.clouddms.v1.DataMigrationService"

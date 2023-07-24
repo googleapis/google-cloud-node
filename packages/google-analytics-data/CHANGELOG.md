@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/data-v3.2.2...data-v3.3.0) (2023-07-11)
+
+
+### Features
+
+* [analytics-data] add `CreateAudienceList`, `QueryAudienceList`,`GetAudienceList`,`ListAudienceLists` methods to the Data API v1 alpha ([#4409](https://github.com/googleapis/google-cloud-node/issues/4409)) ([b81d695](https://github.com/googleapis/google-cloud-node/commit/b81d695e7f0a70d0b2821a8c2de8dbf34f801b70))
+
 ## [3.2.2](https://github.com/googleapis/google-cloud-node/compare/data-v3.2.1...data-v3.2.2) (2023-04-13)
 
 

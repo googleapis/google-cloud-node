@@ -306,14 +306,15 @@ export class IamCheckerClient {
   // -- Service calls --
   // -------------------
   /**
-   * Checks whether a member has a specific permission for a specific resource,
-   * and explains why the member does or does not have that permission.
+   * Checks whether a principal has a specific permission for a specific
+   * resource, and explains why the principal does or does not have that
+   * permission.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.policytroubleshooter.v1.AccessTuple} request.accessTuple
-   *   The information to use for checking whether a member has a permission for a
-   *   resource.
+   *   The information to use for checking whether a principal has a permission
+   *   for a resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

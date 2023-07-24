@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v0.3.2...gke-backup-v0.4.0) (2023-06-28)
+
+
+### Features
+
+* [gkebackup] added new restore scope options ([#4377](https://github.com/googleapis/google-cloud-node/issues/4377)) ([b2dca93](https://github.com/googleapis/google-cloud-node/commit/b2dca930afe3368815935bbc45915fa89ee5cfc3))
+
 ## [0.3.2](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v0.3.1...gke-backup-v0.3.2) (2023-04-13)
 
 

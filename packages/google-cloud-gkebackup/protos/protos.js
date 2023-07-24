@@ -2320,6 +2320,8 @@
                          * @property {boolean|null} [deactivated] BackupPlan deactivated
                          * @property {google.cloud.gkebackup.v1.BackupPlan.IBackupConfig|null} [backupConfig] BackupPlan backupConfig
                          * @property {number|null} [protectedPodCount] BackupPlan protectedPodCount
+                         * @property {google.cloud.gkebackup.v1.BackupPlan.State|null} [state] BackupPlan state
+                         * @property {string|null} [stateReason] BackupPlan stateReason
                          */
     
                         /**
@@ -2443,6 +2445,22 @@
                         BackupPlan.prototype.protectedPodCount = 0;
     
                         /**
+                         * BackupPlan state.
+                         * @member {google.cloud.gkebackup.v1.BackupPlan.State} state
+                         * @memberof google.cloud.gkebackup.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.state = 0;
+    
+                        /**
+                         * BackupPlan stateReason.
+                         * @member {string} stateReason
+                         * @memberof google.cloud.gkebackup.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.stateReason = "";
+    
+                        /**
                          * Creates a new BackupPlan instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkebackup.v1.BackupPlan
@@ -2493,6 +2511,10 @@
                                 $root.google.cloud.gkebackup.v1.BackupPlan.BackupConfig.encode(message.backupConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.protectedPodCount != null && Object.hasOwnProperty.call(message, "protectedPodCount"))
                                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.protectedPodCount);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.state);
+                            if (message.stateReason != null && Object.hasOwnProperty.call(message, "stateReason"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.stateReason);
                             return writer;
                         };
     
@@ -2598,6 +2620,14 @@
                                         message.protectedPodCount = reader.int32();
                                         break;
                                     }
+                                case 14: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.stateReason = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2687,6 +2717,22 @@
                             if (message.protectedPodCount != null && message.hasOwnProperty("protectedPodCount"))
                                 if (!$util.isInteger(message.protectedPodCount))
                                     return "protectedPodCount: integer expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.stateReason != null && message.hasOwnProperty("stateReason"))
+                                if (!$util.isString(message.stateReason))
+                                    return "stateReason: string expected";
                             return null;
                         };
     
@@ -2748,6 +2794,44 @@
                             }
                             if (object.protectedPodCount != null)
                                 message.protectedPodCount = object.protectedPodCount | 0;
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CLUSTER_PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PROVISIONING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "READY":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "DEACTIVATED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "DELETING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            }
+                            if (object.stateReason != null)
+                                message.stateReason = String(object.stateReason);
                             return message;
                         };
     
@@ -2779,6 +2863,8 @@
                                 object.deactivated = false;
                                 object.backupConfig = null;
                                 object.protectedPodCount = 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateReason = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2810,6 +2896,10 @@
                                 object.backupConfig = $root.google.cloud.gkebackup.v1.BackupPlan.BackupConfig.toObject(message.backupConfig, options);
                             if (message.protectedPodCount != null && message.hasOwnProperty("protectedPodCount"))
                                 object.protectedPodCount = message.protectedPodCount;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.gkebackup.v1.BackupPlan.State[message.state] === undefined ? message.state : $root.google.cloud.gkebackup.v1.BackupPlan.State[message.state] : message.state;
+                            if (message.stateReason != null && message.hasOwnProperty("stateReason"))
+                                object.stateReason = message.stateReason;
                             return object;
                         };
     
@@ -3681,6 +3771,30 @@
                             };
     
                             return BackupConfig;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.gkebackup.v1.BackupPlan.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CLUSTER_PENDING=1 CLUSTER_PENDING value
+                         * @property {number} PROVISIONING=2 PROVISIONING value
+                         * @property {number} READY=3 READY value
+                         * @property {number} FAILED=4 FAILED value
+                         * @property {number} DEACTIVATED=5 DEACTIVATED value
+                         * @property {number} DELETING=6 DELETING value
+                         */
+                        BackupPlan.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLUSTER_PENDING"] = 1;
+                            values[valuesById[2] = "PROVISIONING"] = 2;
+                            values[valuesById[3] = "READY"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            values[valuesById[5] = "DEACTIVATED"] = 5;
+                            values[valuesById[6] = "DELETING"] = 6;
+                            return values;
                         })();
     
                         return BackupPlan;
@@ -13114,7 +13228,10 @@
                          * @property {boolean|null} [allNamespaces] RestoreConfig allNamespaces
                          * @property {google.cloud.gkebackup.v1.INamespaces|null} [selectedNamespaces] RestoreConfig selectedNamespaces
                          * @property {google.cloud.gkebackup.v1.INamespacedNames|null} [selectedApplications] RestoreConfig selectedApplications
+                         * @property {boolean|null} [noNamespaces] RestoreConfig noNamespaces
+                         * @property {google.cloud.gkebackup.v1.INamespaces|null} [excludedNamespaces] RestoreConfig excludedNamespaces
                          * @property {Array.<google.cloud.gkebackup.v1.RestoreConfig.ISubstitutionRule>|null} [substitutionRules] RestoreConfig substitutionRules
+                         * @property {Array.<google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule>|null} [transformationRules] RestoreConfig transformationRules
                          */
     
                         /**
@@ -13127,6 +13244,7 @@
                          */
                         function RestoreConfig(properties) {
                             this.substitutionRules = [];
+                            this.transformationRules = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -13190,6 +13308,22 @@
                         RestoreConfig.prototype.selectedApplications = null;
     
                         /**
+                         * RestoreConfig noNamespaces.
+                         * @member {boolean|null|undefined} noNamespaces
+                         * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                         * @instance
+                         */
+                        RestoreConfig.prototype.noNamespaces = null;
+    
+                        /**
+                         * RestoreConfig excludedNamespaces.
+                         * @member {google.cloud.gkebackup.v1.INamespaces|null|undefined} excludedNamespaces
+                         * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                         * @instance
+                         */
+                        RestoreConfig.prototype.excludedNamespaces = null;
+    
+                        /**
                          * RestoreConfig substitutionRules.
                          * @member {Array.<google.cloud.gkebackup.v1.RestoreConfig.ISubstitutionRule>} substitutionRules
                          * @memberof google.cloud.gkebackup.v1.RestoreConfig
@@ -13197,17 +13331,25 @@
                          */
                         RestoreConfig.prototype.substitutionRules = $util.emptyArray;
     
+                        /**
+                         * RestoreConfig transformationRules.
+                         * @member {Array.<google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule>} transformationRules
+                         * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                         * @instance
+                         */
+                        RestoreConfig.prototype.transformationRules = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * RestoreConfig namespacedResourceRestoreScope.
-                         * @member {"allNamespaces"|"selectedNamespaces"|"selectedApplications"|undefined} namespacedResourceRestoreScope
+                         * @member {"allNamespaces"|"selectedNamespaces"|"selectedApplications"|"noNamespaces"|"excludedNamespaces"|undefined} namespacedResourceRestoreScope
                          * @memberof google.cloud.gkebackup.v1.RestoreConfig
                          * @instance
                          */
                         Object.defineProperty(RestoreConfig.prototype, "namespacedResourceRestoreScope", {
-                            get: $util.oneOfGetter($oneOfFields = ["allNamespaces", "selectedNamespaces", "selectedApplications"]),
+                            get: $util.oneOfGetter($oneOfFields = ["allNamespaces", "selectedNamespaces", "selectedApplications", "noNamespaces", "excludedNamespaces"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13252,6 +13394,13 @@
                             if (message.substitutionRules != null && message.substitutionRules.length)
                                 for (var i = 0; i < message.substitutionRules.length; ++i)
                                     $root.google.cloud.gkebackup.v1.RestoreConfig.SubstitutionRule.encode(message.substitutionRules[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.noNamespaces != null && Object.hasOwnProperty.call(message, "noNamespaces"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.noNamespaces);
+                            if (message.excludedNamespaces != null && Object.hasOwnProperty.call(message, "excludedNamespaces"))
+                                $root.google.cloud.gkebackup.v1.Namespaces.encode(message.excludedNamespaces, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.transformationRules != null && message.transformationRules.length)
+                                for (var i = 0; i < message.transformationRules.length; ++i)
+                                    $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.encode(message.transformationRules[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -13314,10 +13463,24 @@
                                         message.selectedApplications = $root.google.cloud.gkebackup.v1.NamespacedNames.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 9: {
+                                        message.noNamespaces = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.excludedNamespaces = $root.google.cloud.gkebackup.v1.Namespaces.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 8: {
                                         if (!(message.substitutionRules && message.substitutionRules.length))
                                             message.substitutionRules = [];
                                         message.substitutionRules.push($root.google.cloud.gkebackup.v1.RestoreConfig.SubstitutionRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.transformationRules && message.transformationRules.length))
+                                            message.transformationRules = [];
+                                        message.transformationRules.push($root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -13414,6 +13577,23 @@
                                         return "selectedApplications." + error;
                                 }
                             }
+                            if (message.noNamespaces != null && message.hasOwnProperty("noNamespaces")) {
+                                if (properties.namespacedResourceRestoreScope === 1)
+                                    return "namespacedResourceRestoreScope: multiple values";
+                                properties.namespacedResourceRestoreScope = 1;
+                                if (typeof message.noNamespaces !== "boolean")
+                                    return "noNamespaces: boolean expected";
+                            }
+                            if (message.excludedNamespaces != null && message.hasOwnProperty("excludedNamespaces")) {
+                                if (properties.namespacedResourceRestoreScope === 1)
+                                    return "namespacedResourceRestoreScope: multiple values";
+                                properties.namespacedResourceRestoreScope = 1;
+                                {
+                                    var error = $root.google.cloud.gkebackup.v1.Namespaces.verify(message.excludedNamespaces);
+                                    if (error)
+                                        return "excludedNamespaces." + error;
+                                }
+                            }
                             if (message.substitutionRules != null && message.hasOwnProperty("substitutionRules")) {
                                 if (!Array.isArray(message.substitutionRules))
                                     return "substitutionRules: array expected";
@@ -13421,6 +13601,15 @@
                                     var error = $root.google.cloud.gkebackup.v1.RestoreConfig.SubstitutionRule.verify(message.substitutionRules[i]);
                                     if (error)
                                         return "substitutionRules." + error;
+                                }
+                            }
+                            if (message.transformationRules != null && message.hasOwnProperty("transformationRules")) {
+                                if (!Array.isArray(message.transformationRules))
+                                    return "transformationRules: array expected";
+                                for (var i = 0; i < message.transformationRules.length; ++i) {
+                                    var error = $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.verify(message.transformationRules[i]);
+                                    if (error)
+                                        return "transformationRules." + error;
                                 }
                             }
                             return null;
@@ -13519,6 +13708,13 @@
                                     throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.selectedApplications: object expected");
                                 message.selectedApplications = $root.google.cloud.gkebackup.v1.NamespacedNames.fromObject(object.selectedApplications);
                             }
+                            if (object.noNamespaces != null)
+                                message.noNamespaces = Boolean(object.noNamespaces);
+                            if (object.excludedNamespaces != null) {
+                                if (typeof object.excludedNamespaces !== "object")
+                                    throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.excludedNamespaces: object expected");
+                                message.excludedNamespaces = $root.google.cloud.gkebackup.v1.Namespaces.fromObject(object.excludedNamespaces);
+                            }
                             if (object.substitutionRules) {
                                 if (!Array.isArray(object.substitutionRules))
                                     throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.substitutionRules: array expected");
@@ -13527,6 +13723,16 @@
                                     if (typeof object.substitutionRules[i] !== "object")
                                         throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.substitutionRules: object expected");
                                     message.substitutionRules[i] = $root.google.cloud.gkebackup.v1.RestoreConfig.SubstitutionRule.fromObject(object.substitutionRules[i]);
+                                }
+                            }
+                            if (object.transformationRules) {
+                                if (!Array.isArray(object.transformationRules))
+                                    throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.transformationRules: array expected");
+                                message.transformationRules = [];
+                                for (var i = 0; i < object.transformationRules.length; ++i) {
+                                    if (typeof object.transformationRules[i] !== "object")
+                                        throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.transformationRules: object expected");
+                                    message.transformationRules[i] = $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.fromObject(object.transformationRules[i]);
                                 }
                             }
                             return message;
@@ -13545,8 +13751,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.substitutionRules = [];
+                                object.transformationRules = [];
+                            }
                             if (options.defaults) {
                                 object.volumeDataRestorePolicy = options.enums === String ? "VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED" : 0;
                                 object.clusterResourceConflictPolicy = options.enums === String ? "CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED" : 0;
@@ -13580,6 +13788,21 @@
                                 object.substitutionRules = [];
                                 for (var j = 0; j < message.substitutionRules.length; ++j)
                                     object.substitutionRules[j] = $root.google.cloud.gkebackup.v1.RestoreConfig.SubstitutionRule.toObject(message.substitutionRules[j], options);
+                            }
+                            if (message.noNamespaces != null && message.hasOwnProperty("noNamespaces")) {
+                                object.noNamespaces = message.noNamespaces;
+                                if (options.oneofs)
+                                    object.namespacedResourceRestoreScope = "noNamespaces";
+                            }
+                            if (message.excludedNamespaces != null && message.hasOwnProperty("excludedNamespaces")) {
+                                object.excludedNamespaces = $root.google.cloud.gkebackup.v1.Namespaces.toObject(message.excludedNamespaces, options);
+                                if (options.oneofs)
+                                    object.namespacedResourceRestoreScope = "excludedNamespaces";
+                            }
+                            if (message.transformationRules && message.transformationRules.length) {
+                                object.transformationRules = [];
+                                for (var j = 0; j < message.transformationRules.length; ++j)
+                                    object.transformationRules[j] = $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.toObject(message.transformationRules[j], options);
                             }
                             return object;
                         };
@@ -13894,6 +14117,9 @@
                              * @memberof google.cloud.gkebackup.v1.RestoreConfig
                              * @interface IClusterResourceRestoreScope
                              * @property {Array.<google.cloud.gkebackup.v1.RestoreConfig.IGroupKind>|null} [selectedGroupKinds] ClusterResourceRestoreScope selectedGroupKinds
+                             * @property {Array.<google.cloud.gkebackup.v1.RestoreConfig.IGroupKind>|null} [excludedGroupKinds] ClusterResourceRestoreScope excludedGroupKinds
+                             * @property {boolean|null} [allGroupKinds] ClusterResourceRestoreScope allGroupKinds
+                             * @property {boolean|null} [noGroupKinds] ClusterResourceRestoreScope noGroupKinds
                              */
     
                             /**
@@ -13906,6 +14132,7 @@
                              */
                             function ClusterResourceRestoreScope(properties) {
                                 this.selectedGroupKinds = [];
+                                this.excludedGroupKinds = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -13919,6 +14146,30 @@
                              * @instance
                              */
                             ClusterResourceRestoreScope.prototype.selectedGroupKinds = $util.emptyArray;
+    
+                            /**
+                             * ClusterResourceRestoreScope excludedGroupKinds.
+                             * @member {Array.<google.cloud.gkebackup.v1.RestoreConfig.IGroupKind>} excludedGroupKinds
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ClusterResourceRestoreScope
+                             * @instance
+                             */
+                            ClusterResourceRestoreScope.prototype.excludedGroupKinds = $util.emptyArray;
+    
+                            /**
+                             * ClusterResourceRestoreScope allGroupKinds.
+                             * @member {boolean} allGroupKinds
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ClusterResourceRestoreScope
+                             * @instance
+                             */
+                            ClusterResourceRestoreScope.prototype.allGroupKinds = false;
+    
+                            /**
+                             * ClusterResourceRestoreScope noGroupKinds.
+                             * @member {boolean} noGroupKinds
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ClusterResourceRestoreScope
+                             * @instance
+                             */
+                            ClusterResourceRestoreScope.prototype.noGroupKinds = false;
     
                             /**
                              * Creates a new ClusterResourceRestoreScope instance using the specified properties.
@@ -13947,6 +14198,13 @@
                                 if (message.selectedGroupKinds != null && message.selectedGroupKinds.length)
                                     for (var i = 0; i < message.selectedGroupKinds.length; ++i)
                                         $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.encode(message.selectedGroupKinds[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.excludedGroupKinds != null && message.excludedGroupKinds.length)
+                                    for (var i = 0; i < message.excludedGroupKinds.length; ++i)
+                                        $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.encode(message.excludedGroupKinds[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.allGroupKinds != null && Object.hasOwnProperty.call(message, "allGroupKinds"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allGroupKinds);
+                                if (message.noGroupKinds != null && Object.hasOwnProperty.call(message, "noGroupKinds"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.noGroupKinds);
                                 return writer;
                             };
     
@@ -13985,6 +14243,20 @@
                                             if (!(message.selectedGroupKinds && message.selectedGroupKinds.length))
                                                 message.selectedGroupKinds = [];
                                             message.selectedGroupKinds.push($root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.excludedGroupKinds && message.excludedGroupKinds.length))
+                                                message.excludedGroupKinds = [];
+                                            message.excludedGroupKinds.push($root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.allGroupKinds = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.noGroupKinds = reader.bool();
                                             break;
                                         }
                                     default:
@@ -14031,6 +14303,21 @@
                                             return "selectedGroupKinds." + error;
                                     }
                                 }
+                                if (message.excludedGroupKinds != null && message.hasOwnProperty("excludedGroupKinds")) {
+                                    if (!Array.isArray(message.excludedGroupKinds))
+                                        return "excludedGroupKinds: array expected";
+                                    for (var i = 0; i < message.excludedGroupKinds.length; ++i) {
+                                        var error = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.verify(message.excludedGroupKinds[i]);
+                                        if (error)
+                                            return "excludedGroupKinds." + error;
+                                    }
+                                }
+                                if (message.allGroupKinds != null && message.hasOwnProperty("allGroupKinds"))
+                                    if (typeof message.allGroupKinds !== "boolean")
+                                        return "allGroupKinds: boolean expected";
+                                if (message.noGroupKinds != null && message.hasOwnProperty("noGroupKinds"))
+                                    if (typeof message.noGroupKinds !== "boolean")
+                                        return "noGroupKinds: boolean expected";
                                 return null;
                             };
     
@@ -14056,6 +14343,20 @@
                                         message.selectedGroupKinds[i] = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.fromObject(object.selectedGroupKinds[i]);
                                     }
                                 }
+                                if (object.excludedGroupKinds) {
+                                    if (!Array.isArray(object.excludedGroupKinds))
+                                        throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.ClusterResourceRestoreScope.excludedGroupKinds: array expected");
+                                    message.excludedGroupKinds = [];
+                                    for (var i = 0; i < object.excludedGroupKinds.length; ++i) {
+                                        if (typeof object.excludedGroupKinds[i] !== "object")
+                                            throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.ClusterResourceRestoreScope.excludedGroupKinds: object expected");
+                                        message.excludedGroupKinds[i] = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.fromObject(object.excludedGroupKinds[i]);
+                                    }
+                                }
+                                if (object.allGroupKinds != null)
+                                    message.allGroupKinds = Boolean(object.allGroupKinds);
+                                if (object.noGroupKinds != null)
+                                    message.noGroupKinds = Boolean(object.noGroupKinds);
                                 return message;
                             };
     
@@ -14072,13 +14373,28 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.arrays || options.defaults)
+                                if (options.arrays || options.defaults) {
                                     object.selectedGroupKinds = [];
+                                    object.excludedGroupKinds = [];
+                                }
+                                if (options.defaults) {
+                                    object.allGroupKinds = false;
+                                    object.noGroupKinds = false;
+                                }
                                 if (message.selectedGroupKinds && message.selectedGroupKinds.length) {
                                     object.selectedGroupKinds = [];
                                     for (var j = 0; j < message.selectedGroupKinds.length; ++j)
                                         object.selectedGroupKinds[j] = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.toObject(message.selectedGroupKinds[j], options);
                                 }
+                                if (message.excludedGroupKinds && message.excludedGroupKinds.length) {
+                                    object.excludedGroupKinds = [];
+                                    for (var j = 0; j < message.excludedGroupKinds.length; ++j)
+                                        object.excludedGroupKinds[j] = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.toObject(message.excludedGroupKinds[j], options);
+                                }
+                                if (message.allGroupKinds != null && message.hasOwnProperty("allGroupKinds"))
+                                    object.allGroupKinds = message.allGroupKinds;
+                                if (message.noGroupKinds != null && message.hasOwnProperty("noGroupKinds"))
+                                    object.noGroupKinds = message.noGroupKinds;
                                 return object;
                             };
     
@@ -14446,6 +14762,912 @@
                             return SubstitutionRule;
                         })();
     
+                        RestoreConfig.TransformationRuleAction = (function() {
+    
+                            /**
+                             * Properties of a TransformationRuleAction.
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                             * @interface ITransformationRuleAction
+                             * @property {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op|null} [op] TransformationRuleAction op
+                             * @property {string|null} [fromPath] TransformationRuleAction fromPath
+                             * @property {string|null} [path] TransformationRuleAction path
+                             * @property {string|null} [value] TransformationRuleAction value
+                             */
+    
+                            /**
+                             * Constructs a new TransformationRuleAction.
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                             * @classdesc Represents a TransformationRuleAction.
+                             * @implements ITransformationRuleAction
+                             * @constructor
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction=} [properties] Properties to set
+                             */
+                            function TransformationRuleAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TransformationRuleAction op.
+                             * @member {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op} op
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @instance
+                             */
+                            TransformationRuleAction.prototype.op = 0;
+    
+                            /**
+                             * TransformationRuleAction fromPath.
+                             * @member {string} fromPath
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @instance
+                             */
+                            TransformationRuleAction.prototype.fromPath = "";
+    
+                            /**
+                             * TransformationRuleAction path.
+                             * @member {string} path
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @instance
+                             */
+                            TransformationRuleAction.prototype.path = "";
+    
+                            /**
+                             * TransformationRuleAction value.
+                             * @member {string} value
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @instance
+                             */
+                            TransformationRuleAction.prototype.value = "";
+    
+                            /**
+                             * Creates a new TransformationRuleAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction=} [properties] Properties to set
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction} TransformationRuleAction instance
+                             */
+                            TransformationRuleAction.create = function create(properties) {
+                                return new TransformationRuleAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TransformationRuleAction message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction} message TransformationRuleAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TransformationRuleAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.op != null && Object.hasOwnProperty.call(message, "op"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.op);
+                                if (message.fromPath != null && Object.hasOwnProperty.call(message, "fromPath"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fromPath);
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TransformationRuleAction message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction} message TransformationRuleAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TransformationRuleAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TransformationRuleAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction} TransformationRuleAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TransformationRuleAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.op = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fromPath = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TransformationRuleAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction} TransformationRuleAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TransformationRuleAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TransformationRuleAction message.
+                             * @function verify
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TransformationRuleAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.op != null && message.hasOwnProperty("op"))
+                                    switch (message.op) {
+                                    default:
+                                        return "op: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                                if (message.fromPath != null && message.hasOwnProperty("fromPath"))
+                                    if (!$util.isString(message.fromPath))
+                                        return "fromPath: string expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TransformationRuleAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction} TransformationRuleAction
+                             */
+                            TransformationRuleAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction)
+                                    return object;
+                                var message = new $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction();
+                                switch (object.op) {
+                                default:
+                                    if (typeof object.op === "number") {
+                                        message.op = object.op;
+                                        break;
+                                    }
+                                    break;
+                                case "OP_UNSPECIFIED":
+                                case 0:
+                                    message.op = 0;
+                                    break;
+                                case "REMOVE":
+                                case 1:
+                                    message.op = 1;
+                                    break;
+                                case "MOVE":
+                                case 2:
+                                    message.op = 2;
+                                    break;
+                                case "COPY":
+                                case 3:
+                                    message.op = 3;
+                                    break;
+                                case "ADD":
+                                case 4:
+                                    message.op = 4;
+                                    break;
+                                case "TEST":
+                                case 5:
+                                    message.op = 5;
+                                    break;
+                                case "REPLACE":
+                                case 6:
+                                    message.op = 6;
+                                    break;
+                                }
+                                if (object.fromPath != null)
+                                    message.fromPath = String(object.fromPath);
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TransformationRuleAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction} message TransformationRuleAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TransformationRuleAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.op = options.enums === String ? "OP_UNSPECIFIED" : 0;
+                                    object.fromPath = "";
+                                    object.path = "";
+                                    object.value = "";
+                                }
+                                if (message.op != null && message.hasOwnProperty("op"))
+                                    object.op = options.enums === String ? $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op[message.op] === undefined ? message.op : $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op[message.op] : message.op;
+                                if (message.fromPath != null && message.hasOwnProperty("fromPath"))
+                                    object.fromPath = message.fromPath;
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TransformationRuleAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TransformationRuleAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TransformationRuleAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TransformationRuleAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction";
+                            };
+    
+                            /**
+                             * Op enum.
+                             * @name google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.Op
+                             * @enum {number}
+                             * @property {number} OP_UNSPECIFIED=0 OP_UNSPECIFIED value
+                             * @property {number} REMOVE=1 REMOVE value
+                             * @property {number} MOVE=2 MOVE value
+                             * @property {number} COPY=3 COPY value
+                             * @property {number} ADD=4 ADD value
+                             * @property {number} TEST=5 TEST value
+                             * @property {number} REPLACE=6 REPLACE value
+                             */
+                            TransformationRuleAction.Op = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "OP_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "REMOVE"] = 1;
+                                values[valuesById[2] = "MOVE"] = 2;
+                                values[valuesById[3] = "COPY"] = 3;
+                                values[valuesById[4] = "ADD"] = 4;
+                                values[valuesById[5] = "TEST"] = 5;
+                                values[valuesById[6] = "REPLACE"] = 6;
+                                return values;
+                            })();
+    
+                            return TransformationRuleAction;
+                        })();
+    
+                        RestoreConfig.ResourceFilter = (function() {
+    
+                            /**
+                             * Properties of a ResourceFilter.
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                             * @interface IResourceFilter
+                             * @property {Array.<string>|null} [namespaces] ResourceFilter namespaces
+                             * @property {Array.<google.cloud.gkebackup.v1.RestoreConfig.IGroupKind>|null} [groupKinds] ResourceFilter groupKinds
+                             * @property {string|null} [jsonPath] ResourceFilter jsonPath
+                             */
+    
+                            /**
+                             * Constructs a new ResourceFilter.
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                             * @classdesc Represents a ResourceFilter.
+                             * @implements IResourceFilter
+                             * @constructor
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter=} [properties] Properties to set
+                             */
+                            function ResourceFilter(properties) {
+                                this.namespaces = [];
+                                this.groupKinds = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ResourceFilter namespaces.
+                             * @member {Array.<string>} namespaces
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @instance
+                             */
+                            ResourceFilter.prototype.namespaces = $util.emptyArray;
+    
+                            /**
+                             * ResourceFilter groupKinds.
+                             * @member {Array.<google.cloud.gkebackup.v1.RestoreConfig.IGroupKind>} groupKinds
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @instance
+                             */
+                            ResourceFilter.prototype.groupKinds = $util.emptyArray;
+    
+                            /**
+                             * ResourceFilter jsonPath.
+                             * @member {string} jsonPath
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @instance
+                             */
+                            ResourceFilter.prototype.jsonPath = "";
+    
+                            /**
+                             * Creates a new ResourceFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter=} [properties] Properties to set
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter} ResourceFilter instance
+                             */
+                            ResourceFilter.create = function create(properties) {
+                                return new ResourceFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceFilter message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter} message ResourceFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.namespaces != null && message.namespaces.length)
+                                    for (var i = 0; i < message.namespaces.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.namespaces[i]);
+                                if (message.groupKinds != null && message.groupKinds.length)
+                                    for (var i = 0; i < message.groupKinds.length; ++i)
+                                        $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.encode(message.groupKinds[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.jsonPath != null && Object.hasOwnProperty.call(message, "jsonPath"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.jsonPath);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceFilter message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter} message ResourceFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ResourceFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter} ResourceFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.namespaces && message.namespaces.length))
+                                                message.namespaces = [];
+                                            message.namespaces.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.groupKinds && message.groupKinds.length))
+                                                message.groupKinds = [];
+                                            message.groupKinds.push($root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.jsonPath = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ResourceFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter} ResourceFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ResourceFilter message.
+                             * @function verify
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ResourceFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.namespaces != null && message.hasOwnProperty("namespaces")) {
+                                    if (!Array.isArray(message.namespaces))
+                                        return "namespaces: array expected";
+                                    for (var i = 0; i < message.namespaces.length; ++i)
+                                        if (!$util.isString(message.namespaces[i]))
+                                            return "namespaces: string[] expected";
+                                }
+                                if (message.groupKinds != null && message.hasOwnProperty("groupKinds")) {
+                                    if (!Array.isArray(message.groupKinds))
+                                        return "groupKinds: array expected";
+                                    for (var i = 0; i < message.groupKinds.length; ++i) {
+                                        var error = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.verify(message.groupKinds[i]);
+                                        if (error)
+                                            return "groupKinds." + error;
+                                    }
+                                }
+                                if (message.jsonPath != null && message.hasOwnProperty("jsonPath"))
+                                    if (!$util.isString(message.jsonPath))
+                                        return "jsonPath: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ResourceFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter} ResourceFilter
+                             */
+                            ResourceFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter)
+                                    return object;
+                                var message = new $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter();
+                                if (object.namespaces) {
+                                    if (!Array.isArray(object.namespaces))
+                                        throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.namespaces: array expected");
+                                    message.namespaces = [];
+                                    for (var i = 0; i < object.namespaces.length; ++i)
+                                        message.namespaces[i] = String(object.namespaces[i]);
+                                }
+                                if (object.groupKinds) {
+                                    if (!Array.isArray(object.groupKinds))
+                                        throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.groupKinds: array expected");
+                                    message.groupKinds = [];
+                                    for (var i = 0; i < object.groupKinds.length; ++i) {
+                                        if (typeof object.groupKinds[i] !== "object")
+                                            throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.groupKinds: object expected");
+                                        message.groupKinds[i] = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.fromObject(object.groupKinds[i]);
+                                    }
+                                }
+                                if (object.jsonPath != null)
+                                    message.jsonPath = String(object.jsonPath);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ResourceFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter} message ResourceFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ResourceFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.namespaces = [];
+                                    object.groupKinds = [];
+                                }
+                                if (options.defaults)
+                                    object.jsonPath = "";
+                                if (message.namespaces && message.namespaces.length) {
+                                    object.namespaces = [];
+                                    for (var j = 0; j < message.namespaces.length; ++j)
+                                        object.namespaces[j] = message.namespaces[j];
+                                }
+                                if (message.groupKinds && message.groupKinds.length) {
+                                    object.groupKinds = [];
+                                    for (var j = 0; j < message.groupKinds.length; ++j)
+                                        object.groupKinds[j] = $root.google.cloud.gkebackup.v1.RestoreConfig.GroupKind.toObject(message.groupKinds[j], options);
+                                }
+                                if (message.jsonPath != null && message.hasOwnProperty("jsonPath"))
+                                    object.jsonPath = message.jsonPath;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ResourceFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ResourceFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ResourceFilter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ResourceFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter";
+                            };
+    
+                            return ResourceFilter;
+                        })();
+    
+                        RestoreConfig.TransformationRule = (function() {
+    
+                            /**
+                             * Properties of a TransformationRule.
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                             * @interface ITransformationRule
+                             * @property {Array.<google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction>|null} [fieldActions] TransformationRule fieldActions
+                             * @property {google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter|null} [resourceFilter] TransformationRule resourceFilter
+                             * @property {string|null} [description] TransformationRule description
+                             */
+    
+                            /**
+                             * Constructs a new TransformationRule.
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig
+                             * @classdesc Represents a TransformationRule.
+                             * @implements ITransformationRule
+                             * @constructor
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule=} [properties] Properties to set
+                             */
+                            function TransformationRule(properties) {
+                                this.fieldActions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TransformationRule fieldActions.
+                             * @member {Array.<google.cloud.gkebackup.v1.RestoreConfig.ITransformationRuleAction>} fieldActions
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @instance
+                             */
+                            TransformationRule.prototype.fieldActions = $util.emptyArray;
+    
+                            /**
+                             * TransformationRule resourceFilter.
+                             * @member {google.cloud.gkebackup.v1.RestoreConfig.IResourceFilter|null|undefined} resourceFilter
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @instance
+                             */
+                            TransformationRule.prototype.resourceFilter = null;
+    
+                            /**
+                             * TransformationRule description.
+                             * @member {string} description
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @instance
+                             */
+                            TransformationRule.prototype.description = "";
+    
+                            /**
+                             * Creates a new TransformationRule instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule=} [properties] Properties to set
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRule} TransformationRule instance
+                             */
+                            TransformationRule.create = function create(properties) {
+                                return new TransformationRule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TransformationRule message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule} message TransformationRule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TransformationRule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.fieldActions != null && message.fieldActions.length)
+                                    for (var i = 0; i < message.fieldActions.length; ++i)
+                                        $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.encode(message.fieldActions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.resourceFilter != null && Object.hasOwnProperty.call(message, "resourceFilter"))
+                                    $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.encode(message.resourceFilter, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TransformationRule message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule} message TransformationRule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TransformationRule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TransformationRule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRule} TransformationRule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TransformationRule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.fieldActions && message.fieldActions.length))
+                                                message.fieldActions = [];
+                                            message.fieldActions.push($root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.resourceFilter = $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TransformationRule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRule} TransformationRule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TransformationRule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TransformationRule message.
+                             * @function verify
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TransformationRule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.fieldActions != null && message.hasOwnProperty("fieldActions")) {
+                                    if (!Array.isArray(message.fieldActions))
+                                        return "fieldActions: array expected";
+                                    for (var i = 0; i < message.fieldActions.length; ++i) {
+                                        var error = $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.verify(message.fieldActions[i]);
+                                        if (error)
+                                            return "fieldActions." + error;
+                                    }
+                                }
+                                if (message.resourceFilter != null && message.hasOwnProperty("resourceFilter")) {
+                                    var error = $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.verify(message.resourceFilter);
+                                    if (error)
+                                        return "resourceFilter." + error;
+                                }
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TransformationRule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkebackup.v1.RestoreConfig.TransformationRule} TransformationRule
+                             */
+                            TransformationRule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule)
+                                    return object;
+                                var message = new $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRule();
+                                if (object.fieldActions) {
+                                    if (!Array.isArray(object.fieldActions))
+                                        throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.fieldActions: array expected");
+                                    message.fieldActions = [];
+                                    for (var i = 0; i < object.fieldActions.length; ++i) {
+                                        if (typeof object.fieldActions[i] !== "object")
+                                            throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.fieldActions: object expected");
+                                        message.fieldActions[i] = $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.fromObject(object.fieldActions[i]);
+                                    }
+                                }
+                                if (object.resourceFilter != null) {
+                                    if (typeof object.resourceFilter !== "object")
+                                        throw TypeError(".google.cloud.gkebackup.v1.RestoreConfig.TransformationRule.resourceFilter: object expected");
+                                    message.resourceFilter = $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.fromObject(object.resourceFilter);
+                                }
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TransformationRule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {google.cloud.gkebackup.v1.RestoreConfig.TransformationRule} message TransformationRule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TransformationRule.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.fieldActions = [];
+                                if (options.defaults) {
+                                    object.resourceFilter = null;
+                                    object.description = "";
+                                }
+                                if (message.fieldActions && message.fieldActions.length) {
+                                    object.fieldActions = [];
+                                    for (var j = 0; j < message.fieldActions.length; ++j)
+                                        object.fieldActions[j] = $root.google.cloud.gkebackup.v1.RestoreConfig.TransformationRuleAction.toObject(message.fieldActions[j], options);
+                                }
+                                if (message.resourceFilter != null && message.hasOwnProperty("resourceFilter"))
+                                    object.resourceFilter = $root.google.cloud.gkebackup.v1.RestoreConfig.ResourceFilter.toObject(message.resourceFilter, options);
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TransformationRule to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TransformationRule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TransformationRule
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkebackup.v1.RestoreConfig.TransformationRule
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TransformationRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkebackup.v1.RestoreConfig.TransformationRule";
+                            };
+    
+                            return TransformationRule;
+                        })();
+    
                         return RestoreConfig;
                     })();
     
@@ -14465,6 +15687,8 @@
                          * @property {google.cloud.gkebackup.v1.IRestoreConfig|null} [restoreConfig] RestorePlan restoreConfig
                          * @property {Object.<string,string>|null} [labels] RestorePlan labels
                          * @property {string|null} [etag] RestorePlan etag
+                         * @property {google.cloud.gkebackup.v1.RestorePlan.State|null} [state] RestorePlan state
+                         * @property {string|null} [stateReason] RestorePlan stateReason
                          */
     
                         /**
@@ -14564,6 +15788,22 @@
                         RestorePlan.prototype.etag = "";
     
                         /**
+                         * RestorePlan state.
+                         * @member {google.cloud.gkebackup.v1.RestorePlan.State} state
+                         * @memberof google.cloud.gkebackup.v1.RestorePlan
+                         * @instance
+                         */
+                        RestorePlan.prototype.state = 0;
+    
+                        /**
+                         * RestorePlan stateReason.
+                         * @member {string} stateReason
+                         * @memberof google.cloud.gkebackup.v1.RestorePlan
+                         * @instance
+                         */
+                        RestorePlan.prototype.stateReason = "";
+    
+                        /**
                          * Creates a new RestorePlan instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkebackup.v1.RestorePlan
@@ -14608,6 +15848,10 @@
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.etag);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.state);
+                            if (message.stateReason != null && Object.hasOwnProperty.call(message, "stateReason"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.stateReason);
                             return writer;
                         };
     
@@ -14701,6 +15945,14 @@
                                         message.etag = reader.string();
                                         break;
                                     }
+                                case 11: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.stateReason = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14777,6 +16029,20 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.stateReason != null && message.hasOwnProperty("stateReason"))
+                                if (!$util.isString(message.stateReason))
+                                    return "stateReason: string expected";
                             return null;
                         };
     
@@ -14826,6 +16092,36 @@
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CLUSTER_PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.stateReason != null)
+                                message.stateReason = String(object.stateReason);
                             return message;
                         };
     
@@ -14854,6 +16150,8 @@
                                 object.cluster = "";
                                 object.restoreConfig = null;
                                 object.etag = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateReason = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14879,6 +16177,10 @@
                             }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.gkebackup.v1.RestorePlan.State[message.state] === undefined ? message.state : $root.google.cloud.gkebackup.v1.RestorePlan.State[message.state] : message.state;
+                            if (message.stateReason != null && message.hasOwnProperty("stateReason"))
+                                object.stateReason = message.stateReason;
                             return object;
                         };
     
@@ -14907,6 +16209,26 @@
                             }
                             return typeUrlPrefix + "/google.cloud.gkebackup.v1.RestorePlan";
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.gkebackup.v1.RestorePlan.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CLUSTER_PENDING=1 CLUSTER_PENDING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} DELETING=4 DELETING value
+                         */
+                        RestorePlan.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLUSTER_PENDING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            return values;
+                        })();
     
                         return RestorePlan;
                     })();

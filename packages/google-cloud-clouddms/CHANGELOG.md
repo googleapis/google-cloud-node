@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/dms-v2.2.2...dms-v2.3.0) (2023-05-20)
+
+
+### Features
+
+* [clouddms] add Oracle to PostgreSQL migration APIs ([#4285](https://github.com/googleapis/google-cloud-node/issues/4285)) ([65fadd5](https://github.com/googleapis/google-cloud-node/commit/65fadd5fedea461b89cf7aeeb0f825a83dd81e02))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/dms-v2.2.1...dms-v2.2.2) (2023-04-13)
 
 

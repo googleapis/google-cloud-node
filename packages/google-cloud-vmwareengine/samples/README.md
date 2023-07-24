@@ -16,22 +16,28 @@
   * [Vmware_engine.create_hcx_activation_key](#vmware_engine.create_hcx_activation_key)
   * [Vmware_engine.create_network_policy](#vmware_engine.create_network_policy)
   * [Vmware_engine.create_private_cloud](#vmware_engine.create_private_cloud)
+  * [Vmware_engine.create_private_connection](#vmware_engine.create_private_connection)
   * [Vmware_engine.create_vmware_engine_network](#vmware_engine.create_vmware_engine_network)
   * [Vmware_engine.delete_cluster](#vmware_engine.delete_cluster)
   * [Vmware_engine.delete_network_policy](#vmware_engine.delete_network_policy)
   * [Vmware_engine.delete_private_cloud](#vmware_engine.delete_private_cloud)
+  * [Vmware_engine.delete_private_connection](#vmware_engine.delete_private_connection)
   * [Vmware_engine.delete_vmware_engine_network](#vmware_engine.delete_vmware_engine_network)
   * [Vmware_engine.get_cluster](#vmware_engine.get_cluster)
   * [Vmware_engine.get_hcx_activation_key](#vmware_engine.get_hcx_activation_key)
   * [Vmware_engine.get_network_policy](#vmware_engine.get_network_policy)
   * [Vmware_engine.get_node_type](#vmware_engine.get_node_type)
   * [Vmware_engine.get_private_cloud](#vmware_engine.get_private_cloud)
+  * [Vmware_engine.get_private_connection](#vmware_engine.get_private_connection)
+  * [Vmware_engine.get_subnet](#vmware_engine.get_subnet)
   * [Vmware_engine.get_vmware_engine_network](#vmware_engine.get_vmware_engine_network)
   * [Vmware_engine.list_clusters](#vmware_engine.list_clusters)
   * [Vmware_engine.list_hcx_activation_keys](#vmware_engine.list_hcx_activation_keys)
   * [Vmware_engine.list_network_policies](#vmware_engine.list_network_policies)
   * [Vmware_engine.list_node_types](#vmware_engine.list_node_types)
   * [Vmware_engine.list_private_clouds](#vmware_engine.list_private_clouds)
+  * [Vmware_engine.list_private_connection_peering_routes](#vmware_engine.list_private_connection_peering_routes)
+  * [Vmware_engine.list_private_connections](#vmware_engine.list_private_connections)
   * [Vmware_engine.list_subnets](#vmware_engine.list_subnets)
   * [Vmware_engine.list_vmware_engine_networks](#vmware_engine.list_vmware_engine_networks)
   * [Vmware_engine.reset_nsx_credentials](#vmware_engine.reset_nsx_credentials)
@@ -42,8 +48,9 @@
   * [Vmware_engine.update_cluster](#vmware_engine.update_cluster)
   * [Vmware_engine.update_network_policy](#vmware_engine.update_network_policy)
   * [Vmware_engine.update_private_cloud](#vmware_engine.update_private_cloud)
+  * [Vmware_engine.update_private_connection](#vmware_engine.update_private_connection)
+  * [Vmware_engine.update_subnet](#vmware_engine.update_subnet)
   * [Vmware_engine.update_vmware_engine_network](#vmware_engine.update_vmware_engine_network)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -129,6 +136,23 @@ __Usage:__
 
 
 
+### Vmware_engine.create_private_connection
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_connection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_connection.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_private_connection.js`
+
+
+-----
+
+
+
+
 ### Vmware_engine.create_vmware_engine_network
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_vmware_engine_network.js).
@@ -190,6 +214,23 @@ __Usage:__
 
 
 `node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_cloud.js`
+
+
+-----
+
+
+
+
+### Vmware_engine.delete_private_connection
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_connection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_connection.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.delete_private_connection.js`
 
 
 -----
@@ -299,6 +340,40 @@ __Usage:__
 
 
 
+### Vmware_engine.get_private_connection
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_connection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_connection.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_private_connection.js`
+
+
+-----
+
+
+
+
+### Vmware_engine.get_subnet
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_subnet.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_subnet.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_subnet.js`
+
+
+-----
+
+
+
+
 ### Vmware_engine.get_vmware_engine_network
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.get_vmware_engine_network.js).
@@ -394,6 +469,40 @@ __Usage:__
 
 
 `node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_clouds.js`
+
+
+-----
+
+
+
+
+### Vmware_engine.list_private_connection_peering_routes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connection_peering_routes.js`
+
+
+-----
+
+
+
+
+### Vmware_engine.list_private_connections
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connections.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connections.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.list_private_connections.js`
 
 
 -----
@@ -571,6 +680,40 @@ __Usage:__
 
 
 
+### Vmware_engine.update_private_connection
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_connection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_connection.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_private_connection.js`
+
+
+-----
+
+
+
+
+### Vmware_engine.update_subnet
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_subnet.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_subnet.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_subnet.js`
+
+
+-----
+
+
+
+
 ### Vmware_engine.update_vmware_engine_network
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.update_vmware_engine_network.js).
@@ -598,23 +741,6 @@ __Usage:__
 
 
 `node packages/google-cloud-vmwareengine/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmwareengine/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-vmwareengine/samples/test/quickstart.js`
 
 
 

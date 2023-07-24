@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -192,7 +192,8 @@ service TestCases {
     };
   }
 
-  // Fetches a list of results for a given test case.
+  // Fetches the list of run results for the given test case. A maximum of 100
+  // results are kept for each test case.
   rpc ListTestCaseResults(ListTestCaseResultsRequest)
       returns (ListTestCaseResultsResponse) {
     option (google.api.http) = {
@@ -395,12 +396,16 @@ message TestRunDifference {
 
     // The message utterance.
     UTTERANCE = 4;
+
+    // The flow.
+    FLOW = 5;
   }
 
   // The type of diff.
   DiffType type = 1;
 
-  // A description of the diff, showing the actual output vs expected output.
+  // A human readable description of the diff, showing the actual output vs
+  // expected output.
   string description = 2;
 }
 
@@ -433,7 +438,7 @@ message TransitionCoverage {
     // The end node of a transition.
     TransitionNode target = 2;
 
-    // Whether or not the transition is covered by at least one of the
+    // Whether the transition is covered by at least one of the
     // agent's test cases.
     bool covered = 3;
 
@@ -465,7 +470,7 @@ message TransitionRouteGroupCoverage {
       // Intent route or condition route.
       TransitionRoute transition_route = 1;
 
-      // Whether or not the transition route is covered by at least one of the
+      // Whether the transition route is covered by at least one of the
       // agent's test cases.
       bool covered = 2;
     }
@@ -499,7 +504,7 @@ message IntentCoverage {
       type: "dialogflow.googleapis.com/Intent"
     }];
 
-    // Whether or not the intent is covered by at least one of the agent's
+    // Whether the intent is covered by at least one of the agent's
     // test cases.
     bool covered = 2;
   }

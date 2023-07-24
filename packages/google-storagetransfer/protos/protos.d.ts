@@ -2536,6 +2536,9 @@ export namespace google {
 
                 /** AwsS3Data roleArn */
                 roleArn?: (string|null);
+
+                /** AwsS3Data credentialsSecret */
+                credentialsSecret?: (string|null);
             }
 
             /** Represents an AwsS3Data. */
@@ -2558,6 +2561,9 @@ export namespace google {
 
                 /** AwsS3Data roleArn. */
                 public roleArn: string;
+
+                /** AwsS3Data credentialsSecret. */
+                public credentialsSecret: string;
 
                 /**
                  * Creates a new AwsS3Data instance using the specified properties.
@@ -2651,6 +2657,9 @@ export namespace google {
 
                 /** AzureBlobStorageData path */
                 path?: (string|null);
+
+                /** AzureBlobStorageData credentialsSecret */
+                credentialsSecret?: (string|null);
             }
 
             /** Represents an AzureBlobStorageData. */
@@ -2673,6 +2682,9 @@ export namespace google {
 
                 /** AzureBlobStorageData path. */
                 public path: string;
+
+                /** AzureBlobStorageData credentialsSecret. */
+                public credentialsSecret: string;
 
                 /**
                  * Creates a new AzureBlobStorageData instance using the specified properties.
@@ -4188,6 +4200,115 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of an EventStream. */
+            interface IEventStream {
+
+                /** EventStream name */
+                name?: (string|null);
+
+                /** EventStream eventStreamStartTime */
+                eventStreamStartTime?: (google.protobuf.ITimestamp|null);
+
+                /** EventStream eventStreamExpirationTime */
+                eventStreamExpirationTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents an EventStream. */
+            class EventStream implements IEventStream {
+
+                /**
+                 * Constructs a new EventStream.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IEventStream);
+
+                /** EventStream name. */
+                public name: string;
+
+                /** EventStream eventStreamStartTime. */
+                public eventStreamStartTime?: (google.protobuf.ITimestamp|null);
+
+                /** EventStream eventStreamExpirationTime. */
+                public eventStreamExpirationTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new EventStream instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EventStream instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IEventStream): google.storagetransfer.v1.EventStream;
+
+                /**
+                 * Encodes the specified EventStream message. Does not implicitly {@link google.storagetransfer.v1.EventStream.verify|verify} messages.
+                 * @param message EventStream message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IEventStream, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EventStream message, length delimited. Does not implicitly {@link google.storagetransfer.v1.EventStream.verify|verify} messages.
+                 * @param message EventStream message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IEventStream, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EventStream message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EventStream
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.EventStream;
+
+                /**
+                 * Decodes an EventStream message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EventStream
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.EventStream;
+
+                /**
+                 * Verifies an EventStream message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EventStream message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EventStream
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.EventStream;
+
+                /**
+                 * Creates a plain object from an EventStream message. Also converts values to other types if specified.
+                 * @param message EventStream
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.EventStream, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EventStream to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EventStream
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a TransferJob. */
             interface ITransferJob {
 
@@ -4211,6 +4332,9 @@ export namespace google {
 
                 /** TransferJob schedule */
                 schedule?: (google.storagetransfer.v1.ISchedule|null);
+
+                /** TransferJob eventStream */
+                eventStream?: (google.storagetransfer.v1.IEventStream|null);
 
                 /** TransferJob status */
                 status?: (google.storagetransfer.v1.TransferJob.Status|keyof typeof google.storagetransfer.v1.TransferJob.Status|null);
@@ -4257,6 +4381,9 @@ export namespace google {
 
                 /** TransferJob schedule. */
                 public schedule?: (google.storagetransfer.v1.ISchedule|null);
+
+                /** TransferJob eventStream. */
+                public eventStream?: (google.storagetransfer.v1.IEventStream|null);
 
                 /** TransferJob status. */
                 public status: (google.storagetransfer.v1.TransferJob.Status|keyof typeof google.storagetransfer.v1.TransferJob.Status);
@@ -5060,6 +5187,9 @@ export namespace google {
                 /** TransferOperation notificationConfig */
                 notificationConfig?: (google.storagetransfer.v1.INotificationConfig|null);
 
+                /** TransferOperation loggingConfig */
+                loggingConfig?: (google.storagetransfer.v1.ILoggingConfig|null);
+
                 /** TransferOperation startTime */
                 startTime?: (google.protobuf.ITimestamp|null);
 
@@ -5099,6 +5229,9 @@ export namespace google {
 
                 /** TransferOperation notificationConfig. */
                 public notificationConfig?: (google.storagetransfer.v1.INotificationConfig|null);
+
+                /** TransferOperation loggingConfig. */
+                public loggingConfig?: (google.storagetransfer.v1.ILoggingConfig|null);
 
                 /** TransferOperation startTime. */
                 public startTime?: (google.protobuf.ITimestamp|null);
@@ -5206,7 +5339,8 @@ export namespace google {
                     SUCCESS = 3,
                     FAILED = 4,
                     ABORTED = 5,
-                    QUEUED = 6
+                    QUEUED = 6,
+                    SUSPENDING = 7
                 }
             }
         }

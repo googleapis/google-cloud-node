@@ -200,6 +200,9 @@ export class DataCatalogClient {
       tagTemplateFieldPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
       ),
+      tagTemplateFieldEnumValuePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}'
+      ),
       taxonomyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/taxonomies/{taxonomy}'
       ),
@@ -300,6 +303,7 @@ export class DataCatalogClient {
       'createTagTemplateField',
       'updateTagTemplateField',
       'renameTagTemplateField',
+      'renameTagTemplateFieldEnumValue',
       'deleteTagTemplateField',
       'createTag',
       'updateTag',
@@ -517,8 +521,11 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.EntryGroup} request.entryGroup
    *   Required. The updated entry group. "name" field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to update on the entry group. If absent or empty, all modifiable
-   *   fields are updated.
+   *   Names of fields whose values to overwrite on an entry group.
+   *
+   *   If this parameter is absent or empty, all modifiable fields
+   *   are overwritten. If such fields are non-required and omitted in the
+   *   request body, their values are emptied.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -927,26 +934,30 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.Entry} request.entry
    *   Required. The updated entry. The "name" field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to update on the entry. If absent or empty, all modifiable
-   *   fields are updated.
+   *   Names of fields whose values to overwrite on an entry.
+   *
+   *   If this parameter is absent or empty, all modifiable fields
+   *   are overwritten. If such fields are non-required and omitted in the
+   *   request body, their values are emptied.
    *
    *   The following fields are modifiable:
+   *
    *   * For entries with type `DATA_STREAM`:
    *      * `schema`
-   *   * For entries with type `FILESET`
+   *   * For entries with type `FILESET`:
    *      * `schema`
    *      * `display_name`
    *      * `description`
    *      * `gcs_fileset_spec`
    *      * `gcs_fileset_spec.file_patterns`
-   *   * For entries with `user_specified_type`
+   *   * For entries with `user_specified_type`:
    *      * `schema`
    *      * `display_name`
    *      * `description`
-   *      * user_specified_type
-   *      * user_specified_system
-   *      * linked_resource
-   *      * source_system_timestamps
+   *      * `user_specified_type`
+   *      * `user_specified_system`
+   *      * `linked_resource`
+   *      * `source_system_timestamps`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1251,7 +1262,7 @@ export class DataCatalogClient {
    *     * `bigquery.dataset.project_id.dataset_id`
    *     * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
    *
-   *   `*_id`s shoud satisfy the standard SQL rules for identifiers.
+   *   `*_id`s should satisfy the standard SQL rules for identifiers.
    *   https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1556,13 +1567,12 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.TagTemplate} request.tagTemplate
    *   Required. The template to update. The "name" field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The field mask specifies the parts of the template to overwrite.
+   *   Names of fields whose values to overwrite on a tag template. Currently,
+   *   only `display_name` can be overwritten.
    *
-   *   Allowed fields:
-   *
-   *     * `display_name`
-   *
-   *   If absent or empty, all of the allowed fields above will be updated.
+   *   In general, if this parameter is absent or empty, all modifiable fields
+   *   are overwritten. If such fields are non-required and omitted in the
+   *   request body, their values are emptied.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1894,20 +1904,22 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.TagTemplateField} request.tagTemplateField
    *   Required. The template to update.
    * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The field mask specifies the parts of the template to be updated.
-   *   Allowed fields:
+   *   Optional. Names of fields whose values to overwrite on an individual field
+   *   of a tag template. The following fields are modifiable:
    *
    *     * `display_name`
    *     * `type.enum_type`
    *     * `is_required`
    *
-   *   If `update_mask` is not set or empty, all of the allowed fields above will
-   *   be updated.
+   *   If this parameter is absent or empty, all modifiable fields
+   *   are overwritten. If such fields are non-required and omitted in the request
+   *   body, their values are emptied with one exception: when updating an enum
+   *   type, the provided values are merged with the existing values. Therefore,
+   *   enum values can only be added, existing enum values cannot be deleted or
+   *   renamed.
    *
-   *   When updating an enum type, the provided values will be merged with the
-   *   existing values. Therefore, enum values can only be added, existing enum
-   *   values cannot be deleted nor renamed. Updating a template field from
-   *   optional to required is NOT allowed.
+   *   Additionally, updating a template field from optional to required is
+   *   *not* allowed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2016,7 +2028,8 @@ export class DataCatalogClient {
    *
    *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    * @param {string} request.newTagTemplateFieldId
-   *   Required. The new ID of this tag template field. For example, `my_new_field`.
+   *   Required. The new ID of this tag template field. For example,
+   *   `my_new_field`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2106,6 +2119,114 @@ export class DataCatalogClient {
       });
     this.initialize();
     return this.innerApiCalls.renameTagTemplateField(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Renames an enum value in a tag template. The enum values have to be unique
+   * within one enum field. Thus, an enum value cannot be renamed with a name
+   * used in any other enum value within the same enum field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the enum field value. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}
+   * @param {string} request.newEnumValueDisplayName
+   *   Required. The new display name of the enum value. For example,
+   *   `my_new_enum_value`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1beta1.TagTemplateField | TagTemplateField}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/data_catalog.rename_tag_template_field_enum_value.js</caption>
+   * region_tag:datacatalog_v1beta1_generated_DataCatalog_RenameTagTemplateFieldEnumValue_async
+   */
+  renameTagTemplateFieldEnumValue(
+    request?: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+      (
+        | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  renameTagTemplateFieldEnumValue(
+    request: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+      | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameTagTemplateFieldEnumValue(
+    request: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+      | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameTagTemplateFieldEnumValue(
+    request?: protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+          | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+      | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1beta1.ITagTemplateField,
+      (
+        | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.renameTagTemplateFieldEnumValue(
       request,
       options,
       callback
@@ -2234,8 +2355,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the resource to attach this tag to. Tags can be attached to
-   *   Entries. Example:
+   *   Required. The name of the resource to attach this tag to. Tags can be
+   *   attached to Entries. Example:
    *
    *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
    *
@@ -2335,8 +2456,14 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1beta1.Tag} request.tag
    *   Required. The updated tag. The "name" field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to update on the Tag. If absent or empty, all modifiable fields
-   *   are updated. Currently the only modifiable field is the field `fields`.
+   *   Note: Currently, this parameter can only take `"fields"` as value.
+   *
+   *   Names of fields whose values to overwrite on a tag. Currently, a tag has
+   *   the only modifiable field with the name `fields`.
+   *
+   *   In general, if this parameter is absent or empty, all modifiable fields
+   *   are overwritten. If such fields are non-required and omitted in the
+   *   request body, their values are emptied.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2833,7 +2960,7 @@ export class DataCatalogClient {
    * This is a custom method
    * (https://cloud.google.com/apis/design/custom_methods) and does not return
    * the complete resource, only the resource identifier and high level
-   * fields. Clients can subsequentally call `Get` methods.
+   * fields. Clients can subsequently call `Get` methods.
    *
    * Note that Data Catalog search queries do not guarantee full recall. Query
    * results that match your query may not be returned, even in subsequent
@@ -2851,10 +2978,10 @@ export class DataCatalogClient {
    *   `include_org_ids`, `include_project_ids` AND false
    *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
    *   return an error in such a case.
-   * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
-   *
-   *   Query strings can be simple as "x" or more qualified as:
+   * @param {string} [request.query]
+   *   Optional. The query string in search query syntax. An empty query string
+   *   will result in all data assets (in the specified scope) that the user has
+   *   access to. Query strings can be simple as "x" or more qualified as:
    *
    *   * name:x
    *   * column:x
@@ -2869,8 +2996,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
+   *   which indicates that this is a continuation of a prior
    *   {@link google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -2881,6 +3008,7 @@ export class DataCatalogClient {
    *     * `relevance`, only supports descending
    *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
    *       specified
+   *     * `default` that can only be descending
    *
    *   If not specified, defaults to `relevance` descending.
    * @param {object} [options]
@@ -2976,10 +3104,10 @@ export class DataCatalogClient {
    *   `include_org_ids`, `include_project_ids` AND false
    *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
    *   return an error in such a case.
-   * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
-   *
-   *   Query strings can be simple as "x" or more qualified as:
+   * @param {string} [request.query]
+   *   Optional. The query string in search query syntax. An empty query string
+   *   will result in all data assets (in the specified scope) that the user has
+   *   access to. Query strings can be simple as "x" or more qualified as:
    *
    *   * name:x
    *   * column:x
@@ -2994,8 +3122,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
+   *   which indicates that this is a continuation of a prior
    *   {@link google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -3006,6 +3134,7 @@ export class DataCatalogClient {
    *     * `relevance`, only supports descending
    *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
    *       specified
+   *     * `default` that can only be descending
    *
    *   If not specified, defaults to `relevance` descending.
    * @param {object} [options]
@@ -3049,10 +3178,10 @@ export class DataCatalogClient {
    *   `include_org_ids`, `include_project_ids` AND false
    *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
    *   return an error in such a case.
-   * @param {string} request.query
-   *   Required. The query string in search query syntax. The query must be non-empty.
-   *
-   *   Query strings can be simple as "x" or more qualified as:
+   * @param {string} [request.query]
+   *   Optional. The query string in search query syntax. An empty query string
+   *   will result in all data assets (in the specified scope) that the user has
+   *   access to. Query strings can be simple as "x" or more qualified as:
    *
    *   * name:x
    *   * column:x
@@ -3067,8 +3196,8 @@ export class DataCatalogClient {
    *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   {@link google.cloud.datacatalog.v1beta1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token},
+   *   which indicates that this is a continuation of a prior
    *   {@link google.cloud.datacatalog.v1beta1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call, and that the system should return the next page of data. If empty,
    *   the first page is returned.
@@ -3079,6 +3208,7 @@ export class DataCatalogClient {
    *     * `relevance`, only supports descending
    *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
    *       specified
+   *     * `default` that can only be descending
    *
    *   If not specified, defaults to `relevance` descending.
    * @param {object} [options]
@@ -3117,16 +3247,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
    *
    *   * projects/{project_id}/locations/{location}
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3220,16 +3350,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
    *
    *   * projects/{project_id}/locations/{location}
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3271,16 +3401,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups, which
+   *   can be provided in URL format. Example:
    *
    *   * projects/{project_id}/locations/{location}
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return. Default is 10. Max limit
+   *   is 1000. Throws an invalid argument for `page_size > 1000`.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Token that specifies which page is requested. If empty, the first
+   *   page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3535,13 +3665,15 @@ export class DataCatalogClient {
     ) as AsyncIterable<protos.google.cloud.datacatalog.v1beta1.IEntry>;
   }
   /**
-   * Lists the tags on an {@link google.cloud.datacatalog.v1beta1.Entry|Entry}.
+   * Lists tags assigned to an {@link google.cloud.datacatalog.v1beta1.Entry|Entry}.
+   * The {@link google.cloud.datacatalog.v1beta1.Tag.column|columns} in the response
+   * are lowercased.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
+   *   Required. The name of the Data Catalog resource to list the tags of. The
+   *   resource could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
    *   {@link google.cloud.datacatalog.v1beta1.EntryGroup|EntryGroup}.
    *
    *   Examples:
@@ -3646,8 +3778,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
+   *   Required. The name of the Data Catalog resource to list the tags of. The
+   *   resource could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
    *   {@link google.cloud.datacatalog.v1beta1.EntryGroup|EntryGroup}.
    *
    *   Examples:
@@ -3700,8 +3832,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
+   *   Required. The name of the Data Catalog resource to list the tags of. The
+   *   resource could be an {@link google.cloud.datacatalog.v1beta1.Entry|Entry} or an
    *   {@link google.cloud.datacatalog.v1beta1.EntryGroup|EntryGroup}.
    *
    *   Examples:
@@ -4206,6 +4338,107 @@ export class DataCatalogClient {
     return this.pathTemplates.tagTemplateFieldPathTemplate.match(
       tagTemplateFieldName
     ).field;
+  }
+
+  /**
+   * Return a fully-qualified tagTemplateFieldEnumValue resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tag_template
+   * @param {string} tag_template_field_id
+   * @param {string} enum_value_display_name
+   * @returns {string} Resource name string.
+   */
+  tagTemplateFieldEnumValuePath(
+    project: string,
+    location: string,
+    tagTemplate: string,
+    tagTemplateFieldId: string,
+    enumValueDisplayName: string
+  ) {
+    return this.pathTemplates.tagTemplateFieldEnumValuePathTemplate.render({
+      project: project,
+      location: location,
+      tag_template: tagTemplate,
+      tag_template_field_id: tagTemplateFieldId,
+      enum_value_display_name: enumValueDisplayName,
+    });
+  }
+
+  /**
+   * Parse the project from TagTemplateFieldEnumValue resource.
+   *
+   * @param {string} tagTemplateFieldEnumValueName
+   *   A fully-qualified path representing TagTemplateFieldEnumValue resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTagTemplateFieldEnumValueName(
+    tagTemplateFieldEnumValueName: string
+  ) {
+    return this.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match(
+      tagTemplateFieldEnumValueName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TagTemplateFieldEnumValue resource.
+   *
+   * @param {string} tagTemplateFieldEnumValueName
+   *   A fully-qualified path representing TagTemplateFieldEnumValue resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTagTemplateFieldEnumValueName(
+    tagTemplateFieldEnumValueName: string
+  ) {
+    return this.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match(
+      tagTemplateFieldEnumValueName
+    ).location;
+  }
+
+  /**
+   * Parse the tag_template from TagTemplateFieldEnumValue resource.
+   *
+   * @param {string} tagTemplateFieldEnumValueName
+   *   A fully-qualified path representing TagTemplateFieldEnumValue resource.
+   * @returns {string} A string representing the tag_template.
+   */
+  matchTagTemplateFromTagTemplateFieldEnumValueName(
+    tagTemplateFieldEnumValueName: string
+  ) {
+    return this.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match(
+      tagTemplateFieldEnumValueName
+    ).tag_template;
+  }
+
+  /**
+   * Parse the tag_template_field_id from TagTemplateFieldEnumValue resource.
+   *
+   * @param {string} tagTemplateFieldEnumValueName
+   *   A fully-qualified path representing TagTemplateFieldEnumValue resource.
+   * @returns {string} A string representing the tag_template_field_id.
+   */
+  matchTagTemplateFieldIdFromTagTemplateFieldEnumValueName(
+    tagTemplateFieldEnumValueName: string
+  ) {
+    return this.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match(
+      tagTemplateFieldEnumValueName
+    ).tag_template_field_id;
+  }
+
+  /**
+   * Parse the enum_value_display_name from TagTemplateFieldEnumValue resource.
+   *
+   * @param {string} tagTemplateFieldEnumValueName
+   *   A fully-qualified path representing TagTemplateFieldEnumValue resource.
+   * @returns {string} A string representing the enum_value_display_name.
+   */
+  matchEnumValueDisplayNameFromTagTemplateFieldEnumValueName(
+    tagTemplateFieldEnumValueName: string
+  ) {
+    return this.pathTemplates.tagTemplateFieldEnumValuePathTemplate.match(
+      tagTemplateFieldEnumValueName
+    ).enum_value_display_name;
   }
 
   /**

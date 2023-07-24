@@ -55,7 +55,7 @@ function main(entityType, featureSpecs) {
   // const entityType = 'abc123'
   /**
    *  Source column that holds entity IDs. If not provided, entity IDs are
-   *  extracted from the column named `entity_id`.
+   *  extracted from the column named entity_id.
    */
   // const entityIdField = 'abc123'
   /**

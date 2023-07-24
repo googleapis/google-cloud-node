@@ -271,6 +271,20 @@
                 "listChannelPartnerRepricingConfigsAsync"
               ]
             },
+            "ListSkuGroups": {
+              "methods": [
+                "listSkuGroups",
+                "listSkuGroupsStream",
+                "listSkuGroupsAsync"
+              ]
+            },
+            "ListSkuGroupBillableSkus": {
+              "methods": [
+                "listSkuGroupBillableSkus",
+                "listSkuGroupBillableSkusStream",
+                "listSkuGroupBillableSkusAsync"
+              ]
+            },
             "ListProducts": {
               "methods": [
                 "listProducts",
@@ -532,6 +546,20 @@
                 "listChannelPartnerRepricingConfigs",
                 "listChannelPartnerRepricingConfigsStream",
                 "listChannelPartnerRepricingConfigsAsync"
+              ]
+            },
+            "ListSkuGroups": {
+              "methods": [
+                "listSkuGroups",
+                "listSkuGroupsStream",
+                "listSkuGroupsAsync"
+              ]
+            },
+            "ListSkuGroupBillableSkus": {
+              "methods": [
+                "listSkuGroupBillableSkus",
+                "listSkuGroupBillableSkusStream",
+                "listSkuGroupBillableSkusAsync"
               ]
             },
             "ListProducts": {

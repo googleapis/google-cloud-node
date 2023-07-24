@@ -1,5 +1,43 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.7.0...discoveryengine-v0.8.0) (2023-06-28)
+
+
+### Features
+
+* [discoveryengine] support extractive content in search ([#4355](https://github.com/googleapis/google-cloud-node/issues/4355)) ([5958cfa](https://github.com/googleapis/google-cloud-node/commit/5958cfa56bd5280301f446a8863d6461ea86493e))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.6.0...discoveryengine-v0.7.0) (2023-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* use v1 as the default version ([#4333](https://github.com/googleapis/google-cloud-node/issues/4333))
+* [discoveryengine] remove the summarization feature from v1 version ([#4273](https://github.com/googleapis/google-cloud-node/issues/4273))
+
+### Features
+
+* Use v1 as the default version ([#4333](https://github.com/googleapis/google-cloud-node/issues/4333)) ([1415f5f](https://github.com/googleapis/google-cloud-node/commit/1415f5f0cdbd284fb11427fe1053048e278e7546))
+
+
+### Bug Fixes
+
+* [discoveryengine] remove the summarization feature from v1 version ([#4273](https://github.com/googleapis/google-cloud-node/issues/4273)) ([0b9c928](https://github.com/googleapis/google-cloud-node/commit/0b9c928a45e5de78dd13894dc537b351f90a9d56))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.5.0...discoveryengine-v0.6.0) (2023-05-04)
+
+
+### Features
+
+* [discoveryengine] add document purge API ([#4219](https://github.com/googleapis/google-cloud-node/issues/4219)) ([454fa79](https://github.com/googleapis/google-cloud-node/commit/454fa7943ddf664bc54a67e654d7e8a39ea55fed))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.4.1...discoveryengine-v0.5.0) (2023-04-24)
+
+
+### Features
+
+* [discoveryengine] add search, autocomplete and schema services ([#4201](https://github.com/googleapis/google-cloud-node/issues/4201)) ([de00e1d](https://github.com/googleapis/google-cloud-node/commit/de00e1d88877dd674dfd20b78a3de4476d65eb29))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.4.0...discoveryengine-v0.4.1) (2023-04-13)
 
 

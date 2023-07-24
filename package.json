@@ -40,7 +40,7 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "semistandard": "^16.0.0"
+    "semistandard": "^17.0.0"
   },
   "engines": {
     "node": ">=14"

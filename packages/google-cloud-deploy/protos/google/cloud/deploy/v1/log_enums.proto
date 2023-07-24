@@ -29,6 +29,18 @@ enum Type {
   // A Pub/Sub notification failed to be sent.
   TYPE_PUBSUB_NOTIFICATION_FAILURE = 1;
 
+  // Resource state changed.
+  TYPE_RESOURCE_STATE_CHANGE = 3;
+
+  // A process aborted.
+  TYPE_PROCESS_ABORTED = 4;
+
+  // Restriction check failed.
+  TYPE_RESTRICTION_VIOLATED = 5;
+
+  // Resource deleted.
+  TYPE_RESOURCE_DELETED = 6;
+
   // Deprecated: This field is never used. Use release_render log type instead.
   TYPE_RENDER_STATUES_CHANGE = 2 [deprecated = true];
 }

@@ -41,7 +41,8 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
-    "linkinator": "^4.0.0",
+    "linkinator": "4.1.2",
+    "long": "^5.2.3",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
@@ -52,24 +53,23 @@
     "webpack-cli": "^5.0.0"
   },
   "scripts": {
-    "test": "c8 mocha build/test",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
-    "lint": "gts check",
-    "fix": "gts fix",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
-    "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
-    "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean"
+    "fix": "gts fix",
+    "lint": "gts check",
+    "prepare": "npm run compile-protos && npm run compile",
+    "prelint": "cd samples; npm link ../; npm i",
+    "postpack": "minifyProtoJson",
+    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "c8 mocha build/system-test",
+    "test": "c8 mocha build/test"
   },
   "license": "Apache-2.0",
   "engines": {
     "node": ">=12.0.0"
   }
 }
-

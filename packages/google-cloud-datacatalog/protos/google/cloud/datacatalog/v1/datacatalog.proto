@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -700,7 +700,7 @@ message SearchCatalogRequest {
   // * `description:z`
   string query = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // Number of results to return in a single search page.
+  // Upper bound on the number of results you can get in a single response.
   //
   // Can't be negative or 0, defaults to 10 in this case.
   // The maximum number is 1000. If exceeded, throws an "invalid argument"
@@ -725,6 +725,13 @@ message SearchCatalogRequest {
   // * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
   // * `default` that can only be descending
   //
+  // Search queries don't guarantee full recall. Results that match your query
+  // might not be returned, even in subsequent result pages. Additionally,
+  // returned (and not returned) results can vary if you repeat search queries.
+  // If you are experiencing recall issues and you don't have to fetch the
+  // results in any specific order, consider setting this parameter to
+  // `default`.
+  //
   // If this parameter is omitted, it defaults to the descending `relevance`.
   string order_by = 5;
 }
@@ -734,6 +741,9 @@ message SearchCatalogRequest {
 message SearchCatalogResponse {
   // Search results.
   repeated SearchCatalogResult results = 1;
+
+  // The approximate total number of entries matched by the query.
+  int32 total_size = 2;
 
   // Pagination token that can be used in subsequent calls to retrieve the next
   // page of results.
@@ -971,7 +981,9 @@ message LookupEntryRequest {
     // (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
     string sql_resource = 3;
 
-    // Fully qualified name (FQN) of the resource.
+    // [Fully Qualified Name
+    // (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+    // of the resource.
     //
     // FQNs take two forms:
     //
@@ -988,6 +1000,16 @@ message LookupEntryRequest {
     // `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
     string fully_qualified_name = 5;
   }
+
+  // Project where the lookup should be performed. Required to lookup
+  // entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+  // using its `fully_qualified_name`. Ignored in other cases.
+  string project = 6;
+
+  // Location where the lookup should be performed. Required to lookup
+  // entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+  // using its `fully_qualified_name`. Ignored in other cases.
+  string location = 7;
 }
 
 // Entry metadata.
@@ -1037,34 +1059,19 @@ message Entry {
   // The maximum size is 200 bytes when encoded in UTF-8.
   string linked_resource = 9;
 
-  // Fully qualified name (FQN) of the resource. Set automatically for entries
-  // representing resources from synced systems. Settable only during creation
-  // and read-only afterwards. Can be used for search and lookup of the entries.
+  // [Fully Qualified Name
+  // (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+  // of the resource. Set automatically for entries representing resources from
+  // synced systems. Settable only during creation, and read-only later. Can
+  // be used for search and lookup of the entries.
   //
-  //
-  //
-  // FQNs take two forms:
-  //
-  // * For non-regionalized resources:
-  //
-  //   `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
-  //
-  // * For regionalized resources:
-  //
-  //   `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
-  //
-  // Example for a DPMS table:
-  //
-  // `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
   string fully_qualified_name = 29;
 
   // Required. Entry type.
   oneof entry_type {
     // The type of the entry.
-    // Only used for entries with types listed in the `EntryType` enum.
     //
-    // Currently, only `FILESET` enum value is allowed. All other entries
-    // created in Data Catalog must use the `user_specified_type`.
+    // For details, see [`EntryType`](#entrytype).
     EntryType type = 2;
 
     // Custom entry type that doesn't match any of the values allowed for input
@@ -1113,6 +1120,10 @@ message Entry {
     // Specification that applies to Looker sysstem. Only settable when
     // `user_specified_system` is equal to `LOOKER`
     LookerSystemSpec looker_system_spec = 40;
+
+    // Specification that applies to Cloud Bigtable system. Only settable when
+    // `integrated_system` is equal to `CLOUD_BIGTABLE`
+    CloudBigtableSystemSpec cloud_bigtable_system_spec = 41;
   }
 
   // Type specification.
@@ -1157,6 +1168,9 @@ message Entry {
     // Specification that applies to a fileset resource. Valid only
     // for entries with the `FILESET` type.
     FilesetSpec fileset_spec = 33;
+
+    // Specification that applies to a Service resource.
+    ServiceSpec service_spec = 42;
   }
 
   // Display name of an entry.
@@ -1402,6 +1416,49 @@ message LookerSystemSpec {
 
   // Name of the parent View. Empty if it does not exist.
   string parent_view_display_name = 6;
+}
+
+// Specification that applies to
+// all entries that are part of `CLOUD_BIGTABLE` system
+// (user_specified_type)
+message CloudBigtableSystemSpec {
+  // Display name of the Instance. This is user specified and different from
+  // the resource name.
+  string instance_display_name = 1;
+}
+
+// Specification that applies to Instance
+// entries that are part of `CLOUD_BIGTABLE` system.
+// (user_specified_type)
+message CloudBigtableInstanceSpec {
+  // Spec that applies to clusters of an Instance of Cloud Bigtable.
+  message CloudBigtableClusterSpec {
+    // Name of the cluster.
+    string display_name = 1;
+
+    // Location of the cluster, typically a Cloud zone.
+    string location = 2;
+
+    // Type of the resource. For a cluster this would be "CLUSTER".
+    string type = 3;
+
+    // A link back to the parent resource, in this case Instance.
+    string linked_resource = 4;
+  }
+
+  // The list of clusters for the Instance.
+  repeated CloudBigtableClusterSpec cloud_bigtable_cluster_specs = 1;
+}
+
+// Specification that applies to a Service resource. Valid only
+// for entries with the `SERVICE` type.
+message ServiceSpec {
+  // System spec
+  oneof system_spec {
+    // Specification that applies to Instance entries of `CLOUD_BIGTABLE`
+    // system.
+    CloudBigtableInstanceSpec cloud_bigtable_instance_spec = 1;
+  }
 }
 
 // Business Context of the entry.
@@ -1898,6 +1955,10 @@ message ImportEntriesRequest {
     // Path to a Cloud Storage bucket that contains a dump ready for ingestion.
     string gcs_bucket_path = 2;
   }
+
+  // Optional. (Optional) Dataplex task job id, if specified will be used as
+  // part of ImportEntries LRO ID
+  string job_id = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for [long-running operation][google.longrunning.Operation]
@@ -1974,8 +2035,18 @@ message ModifyEntryContactsRequest {
   Contacts contacts = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
-// The enum field that lists all the types of entry resources in Data
-// Catalog. For example, a BigQuery table entry has the `TABLE` type.
+// Metadata automatically ingested from Google Cloud resources like BigQuery
+// tables or Pub/Sub topics always uses enum values from `EntryType` as the type
+// of entry.
+//
+// Other sources of metadata like Hive or Oracle databases can identify the type
+// by either using one of the enum values from `EntryType` (for example,
+// `FILESET` for a Cloud Storage fileset) or specifying a custom value using
+// the [`Entry`](#resource:-entry) field `user_specified_type`. For more
+// information, see
+// [Surface files from Cloud Storage with fileset
+// entries](/data-catalog/docs/how-to/filesets) or [Create custom entries for
+// your data sources](/data-catalog/docs/how-to/custom-entries).
 enum EntryType {
   // Default unknown type.
   ENTRY_TYPE_UNSPECIFIED = 0;
@@ -1984,10 +2055,10 @@ enum EntryType {
   // logical views.
   TABLE = 2;
 
-  // Output only. The type of models.
+  // The type of models.
   //
-  // For more information, see [Supported models in BigQuery ML]
-  // (https://cloud.google.com/bigquery-ml/docs/introduction#supported_models_in).
+  // For more information, see [Supported models in BigQuery
+  // ML](/bigquery/docs/bqml-introduction#supported_models).
   MODEL = 5;
 
   // An entry type for streaming entries. For example, a Pub/Sub topic.
@@ -2003,11 +2074,11 @@ enum EntryType {
   // A database.
   DATABASE = 7;
 
-  // Output only. Connection to a data source. For example, a BigQuery
+  // Connection to a data source. For example, a BigQuery
   // connection.
   DATA_SOURCE_CONNECTION = 8;
 
-  // Output only. Routine, for example, a BigQuery routine.
+  // Routine, for example, a BigQuery routine.
   ROUTINE = 9;
 
   // A Dataplex lake.

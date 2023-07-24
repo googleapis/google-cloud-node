@@ -15,7 +15,7 @@
     "test": "echo tests deprecated"
   },
   "dependencies": {
-    "@google-cloud/iot": "^3.2.2",
+    "@google-cloud/iot": "^3.2.3",
     "@google-cloud/pubsub": "^3.0.0",
     "@google-cloud/storage": "^6.0.0"
   },
@@ -26,6 +26,6 @@
     "mocha": "^8.1.1",
     "mqtt": "^4.0.0",
     "uuid": "^9.0.0",
-    "yargs": "^16.0.0"
+    "yargs": "^17.0.0"
   }
 }

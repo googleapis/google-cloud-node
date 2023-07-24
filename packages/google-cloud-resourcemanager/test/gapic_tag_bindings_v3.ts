@@ -824,6 +824,548 @@ describe('v3.TagBindingsClient', () => {
     });
   });
 
+  describe('listEffectiveTags', () => {
+    it('invokes listEffectiveTags without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+      ];
+      client.innerApiCalls.listEffectiveTags = stubSimpleCall(expectedResponse);
+      const [response] = await client.listEffectiveTags(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listEffectiveTags without error using callback', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+      ];
+      client.innerApiCalls.listEffectiveTags =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEffectiveTags(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.resourcemanager.v3.IEffectiveTag[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listEffectiveTags with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEffectiveTags = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listEffectiveTags(request), expectedError);
+    });
+
+    it('invokes listEffectiveTagsStream without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+      ];
+      client.descriptors.page.listEffectiveTags.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEffectiveTagsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.resourcemanager.v3.EffectiveTag[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.resourcemanager.v3.EffectiveTag) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listEffectiveTags.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEffectiveTags, request)
+      );
+    });
+
+    it('invokes listEffectiveTagsStream with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEffectiveTags.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listEffectiveTagsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.resourcemanager.v3.EffectiveTag[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.resourcemanager.v3.EffectiveTag) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listEffectiveTags.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEffectiveTags, request)
+      );
+    });
+
+    it('uses async iteration with listEffectiveTags without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.resourcemanager.v3.EffectiveTag()
+        ),
+      ];
+      client.descriptors.page.listEffectiveTags.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.resourcemanager.v3.IEffectiveTag[] =
+        [];
+      const iterable = client.listEffectiveTagsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEffectiveTags.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listEffectiveTags with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEffectiveTags.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listEffectiveTagsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.resourcemanager.v3.IEffectiveTag[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEffectiveTags.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('folder', () => {
       const fakePath = '/rendered/path/folder';
@@ -971,6 +1513,55 @@ describe('v3.TagBindingsClient', () => {
         assert.strictEqual(result, 'tagBindingValue');
         assert(
           (client.pathTemplates.tagBindingPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tagHold', () => {
+      const fakePath = '/rendered/path/tagHold';
+      const expectedParameters = {
+        tag_value: 'tagValueValue',
+        tag_hold: 'tagHoldValue',
+      };
+      const client = new tagbindingsModule.v3.TagBindingsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tagHoldPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tagHoldPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tagHoldPath', () => {
+        const result = client.tagHoldPath('tagValueValue', 'tagHoldValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tagHoldPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchTagValueFromTagHoldName', () => {
+        const result = client.matchTagValueFromTagHoldName(fakePath);
+        assert.strictEqual(result, 'tagValueValue');
+        assert(
+          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagHoldFromTagHoldName', () => {
+        const result = client.matchTagHoldFromTagHoldName(fakePath);
+        assert.strictEqual(result, 'tagHoldValue');
+        assert(
+          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

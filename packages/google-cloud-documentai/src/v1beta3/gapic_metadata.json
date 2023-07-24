@@ -264,6 +264,50 @@
           }
         }
       }
+    },
+    "DocumentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DocumentServiceClient",
+          "rpcs": {
+            "GetDatasetSchema": {
+              "methods": [
+                "getDatasetSchema"
+              ]
+            },
+            "UpdateDatasetSchema": {
+              "methods": [
+                "updateDatasetSchema"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DocumentServiceClient",
+          "rpcs": {
+            "GetDatasetSchema": {
+              "methods": [
+                "getDatasetSchema"
+              ]
+            },
+            "UpdateDatasetSchema": {
+              "methods": [
+                "updateDatasetSchema"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

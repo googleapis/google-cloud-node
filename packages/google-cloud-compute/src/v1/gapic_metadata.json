@@ -77,6 +77,11 @@
                 "insert"
               ]
             },
+            "Move": {
+              "methods": [
+                "move"
+              ]
+            },
             "SetLabels": {
               "methods": [
                 "setLabels"
@@ -114,6 +119,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "Move": {
+              "methods": [
+                "move"
               ]
             },
             "SetLabels": {
@@ -511,6 +521,11 @@
                 "addResourcePolicies"
               ]
             },
+            "BulkInsert": {
+              "methods": [
+                "bulkInsert"
+              ]
+            },
             "CreateSnapshot": {
               "methods": [
                 "createSnapshot"
@@ -554,6 +569,21 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "StartAsyncReplication": {
+              "methods": [
+                "startAsyncReplication"
+              ]
+            },
+            "StopAsyncReplication": {
+              "methods": [
+                "stopAsyncReplication"
+              ]
+            },
+            "StopGroupAsyncReplication": {
+              "methods": [
+                "stopGroupAsyncReplication"
               ]
             },
             "TestIamPermissions": {
@@ -590,6 +620,11 @@
                 "addResourcePolicies"
               ]
             },
+            "BulkInsert": {
+              "methods": [
+                "bulkInsert"
+              ]
+            },
             "CreateSnapshot": {
               "methods": [
                 "createSnapshot"
@@ -633,6 +668,21 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "StartAsyncReplication": {
+              "methods": [
+                "startAsyncReplication"
+              ]
+            },
+            "StopAsyncReplication": {
+              "methods": [
+                "stopAsyncReplication"
+              ]
+            },
+            "StopGroupAsyncReplication": {
+              "methods": [
+                "stopGroupAsyncReplication"
               ]
             },
             "TestIamPermissions": {
@@ -1191,6 +1241,11 @@
                 "insert"
               ]
             },
+            "Move": {
+              "methods": [
+                "move"
+              ]
+            },
             "SetLabels": {
               "methods": [
                 "setLabels"
@@ -1221,6 +1276,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "Move": {
+              "methods": [
+                "move"
               ]
             },
             "SetLabels": {
@@ -2902,6 +2962,44 @@
         },
         "grpc-fallback": {
           "libraryClient": "InterconnectLocationsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InterconnectRemoteLocations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InterconnectRemoteLocationsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InterconnectRemoteLocationsClient",
           "rpcs": {
             "Get": {
               "methods": [
@@ -4847,6 +4945,11 @@
                 "addResourcePolicies"
               ]
             },
+            "BulkInsert": {
+              "methods": [
+                "bulkInsert"
+              ]
+            },
             "CreateSnapshot": {
               "methods": [
                 "createSnapshot"
@@ -4890,6 +4993,21 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "StartAsyncReplication": {
+              "methods": [
+                "startAsyncReplication"
+              ]
+            },
+            "StopAsyncReplication": {
+              "methods": [
+                "stopAsyncReplication"
+              ]
+            },
+            "StopGroupAsyncReplication": {
+              "methods": [
+                "stopGroupAsyncReplication"
               ]
             },
             "TestIamPermissions": {
@@ -4919,6 +5037,11 @@
                 "addResourcePolicies"
               ]
             },
+            "BulkInsert": {
+              "methods": [
+                "bulkInsert"
+              ]
+            },
             "CreateSnapshot": {
               "methods": [
                 "createSnapshot"
@@ -4962,6 +5085,21 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "StartAsyncReplication": {
+              "methods": [
+                "startAsyncReplication"
+              ]
+            },
+            "StopAsyncReplication": {
+              "methods": [
+                "stopAsyncReplication"
+              ]
+            },
+            "StopGroupAsyncReplication": {
+              "methods": [
+                "stopGroupAsyncReplication"
               ]
             },
             "TestIamPermissions": {

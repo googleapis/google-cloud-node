@@ -37,6 +37,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "userAgent": {
+                          "type": "string",
+                          "id": 12
+                        },
                         "serviceName": {
                           "type": "string",
                           "id": 5
@@ -259,6 +263,53 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "CloudDlpDataProfile": {
+                      "fields": {
+                        "dataProfile": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/TableDataProfile"
+                          }
+                        },
+                        "parentType": {
+                          "type": "ParentType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ParentType": {
+                          "values": {
+                            "PARENT_TYPE_UNSPECIFIED": 0,
+                            "ORGANIZATION": 1,
+                            "PROJECT": 2
+                          }
+                        }
+                      }
+                    },
+                    "CloudDlpInspection": {
+                      "fields": {
+                        "inspectJob": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
+                          }
+                        },
+                        "infoType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "infoTypeCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "fullScan": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
@@ -759,6 +810,14 @@
                           "rule": "repeated",
                           "type": "File",
                           "id": 46
+                        },
+                        "cloudDlpInspection": {
+                          "type": "CloudDlpInspection",
+                          "id": 48
+                        },
+                        "cloudDlpDataProfile": {
+                          "type": "CloudDlpDataProfile",
+                          "id": 49
                         },
                         "kernelRootkit": {
                           "type": "KernelRootkit",
@@ -2168,12 +2227,16 @@
                           "requestType": "GroupAssetsRequest",
                           "responseType": "GroupAssetsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=organizations/*}/assets:group",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/assets:group",
                             "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*}/assets:group",
@@ -2228,10 +2291,14 @@
                           "requestType": "ListAssetsRequest",
                           "responseType": "ListAssetsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{parent=organizations/*}/assets",
                             "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/assets"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=organizations/*}/assets",
@@ -2436,6 +2503,7 @@
                           "requestType": "RunAssetDiscoveryRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=organizations/*}/assets:runDiscovery",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "parent",
@@ -2443,6 +2511,9 @@
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*}/assets:runDiscovery",

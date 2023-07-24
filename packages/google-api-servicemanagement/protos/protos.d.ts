@@ -3298,6 +3298,97 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EnableServiceResponse. */
+                interface IEnableServiceResponse {
+                }
+
+                /** Represents an EnableServiceResponse. */
+                class EnableServiceResponse implements IEnableServiceResponse {
+
+                    /**
+                     * Constructs a new EnableServiceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.servicemanagement.v1.IEnableServiceResponse);
+
+                    /**
+                     * Creates a new EnableServiceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableServiceResponse instance
+                     */
+                    public static create(properties?: google.api.servicemanagement.v1.IEnableServiceResponse): google.api.servicemanagement.v1.EnableServiceResponse;
+
+                    /**
+                     * Encodes the specified EnableServiceResponse message. Does not implicitly {@link google.api.servicemanagement.v1.EnableServiceResponse.verify|verify} messages.
+                     * @param message EnableServiceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.servicemanagement.v1.IEnableServiceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableServiceResponse message, length delimited. Does not implicitly {@link google.api.servicemanagement.v1.EnableServiceResponse.verify|verify} messages.
+                     * @param message EnableServiceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.servicemanagement.v1.IEnableServiceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableServiceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableServiceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.servicemanagement.v1.EnableServiceResponse;
+
+                    /**
+                     * Decodes an EnableServiceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableServiceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.servicemanagement.v1.EnableServiceResponse;
+
+                    /**
+                     * Verifies an EnableServiceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableServiceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableServiceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.servicemanagement.v1.EnableServiceResponse;
+
+                    /**
+                     * Creates a plain object from an EnableServiceResponse message. Also converts values to other types if specified.
+                     * @param message EnableServiceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.servicemanagement.v1.EnableServiceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableServiceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnableServiceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerateConfigReportRequest. */
                 interface IGenerateConfigReportRequest {
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v0.1.2...maps-platform-datasets-v0.2.0) (2023-06-06)
+
+
+### Features
+
+* [mapsplatformdatasets] Add client libraries for v1 ([#4314](https://github.com/googleapis/google-cloud-node/issues/4314)) ([5c99df6](https://github.com/googleapis/google-cloud-node/commit/5c99df6328f6bd0cfc83a6a294377b47228c0943))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v0.1.1...maps-platform-datasets-v0.1.2) (2023-04-13)
 
 

@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.9.0...batch-v0.10.0) (2023-07-04)
+
+
+### Features
+
+* [batch] Add gpu driver version field ([#4391](https://github.com/googleapis/google-cloud-node/issues/4391)) ([ec08d08](https://github.com/googleapis/google-cloud-node/commit/ec08d08cd2d8c03b61d9e7a8e7879ecfcb83475f))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.8.0...batch-v0.9.0) (2023-06-14)
+
+
+### Features
+
+* [batch] implement minCpuPlatform ([d4d75c6](https://github.com/googleapis/google-cloud-node/commit/d4d75c629a19649256072d29766e2e692c771ee9))
+* Update TaskGroup doc ([d4d75c6](https://github.com/googleapis/google-cloud-node/commit/d4d75c629a19649256072d29766e2e692c771ee9))
+* **v1:** [batch] Add support for scheduling_policy ([#4340](https://github.com/googleapis/google-cloud-node/issues/4340)) ([d4d75c6](https://github.com/googleapis/google-cloud-node/commit/d4d75c629a19649256072d29766e2e692c771ee9))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.7.1...batch-v0.8.0) (2023-05-20)
+
+
+### Features
+
+* [batch] add support for placement policies ([#4182](https://github.com/googleapis/google-cloud-node/issues/4182)) ([9ece2b7](https://github.com/googleapis/google-cloud-node/commit/9ece2b7d96f3b18b32acfd5e24ba38f52f39dab9))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/batch-v0.7.0...batch-v0.7.1) (2023-04-13)
 
 

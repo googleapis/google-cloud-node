@@ -47,7 +47,6 @@
   * [Asset_service.list_assets](#asset_service.list_assets)
   * [Asset_service.export_assets](#asset_service.export_assets)
   * [List Assets](#list-assets)
-  * [Sample.test](#sample.test)
 
 ## Before you begin
 
@@ -654,23 +653,6 @@ __Usage:__
 
 
 `node listAssets <ASSET_TYPES> <content_type>`
-
-
------
-
-
-
-
-### Sample.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/test/sample.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/test/sample.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-asset/samples/test/sample.test.js`
 
 
 

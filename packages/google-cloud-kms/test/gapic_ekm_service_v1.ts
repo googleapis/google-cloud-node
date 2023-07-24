@@ -885,6 +885,137 @@ describe('v1.EkmServiceClient', () => {
     });
   });
 
+  describe('verifyConnectivity', () => {
+    it('invokes verifyConnectivity without error', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.VerifyConnectivityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.VerifyConnectivityResponse()
+      );
+      client.innerApiCalls.verifyConnectivity =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.verifyConnectivity(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.verifyConnectivity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyConnectivity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyConnectivity without error using callback', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.VerifyConnectivityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.VerifyConnectivityResponse()
+      );
+      client.innerApiCalls.verifyConnectivity =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.verifyConnectivity(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.IVerifyConnectivityResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.verifyConnectivity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyConnectivity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyConnectivity with error', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.VerifyConnectivityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.verifyConnectivity = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.verifyConnectivity(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.verifyConnectivity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyConnectivity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyConnectivity with closed client', async () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.VerifyConnectivityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.verifyConnectivity(request), expectedError);
+    });
+  });
+
   describe('listEkmConnections', () => {
     it('invokes listEkmConnections without error', async () => {
       const client = new ekmserviceModule.v1.EkmServiceClient({

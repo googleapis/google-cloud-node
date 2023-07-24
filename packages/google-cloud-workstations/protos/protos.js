@@ -779,6 +779,7 @@
                          * @property {string|null} [etag] WorkstationCluster etag
                          * @property {string|null} [network] WorkstationCluster network
                          * @property {string|null} [subnetwork] WorkstationCluster subnetwork
+                         * @property {string|null} [controlPlaneIp] WorkstationCluster controlPlaneIp
                          * @property {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null} [privateClusterConfig] WorkstationCluster privateClusterConfig
                          * @property {boolean|null} [degraded] WorkstationCluster degraded
                          * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationCluster conditions
@@ -899,6 +900,14 @@
                         WorkstationCluster.prototype.subnetwork = "";
     
                         /**
+                         * WorkstationCluster controlPlaneIp.
+                         * @member {string} controlPlaneIp
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.controlPlaneIp = "";
+    
+                        /**
                          * WorkstationCluster privateClusterConfig.
                          * @member {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null|undefined} privateClusterConfig
                          * @memberof google.cloud.workstations.v1.WorkstationCluster
@@ -979,6 +988,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.controlPlaneIp != null && Object.hasOwnProperty.call(message, "controlPlaneIp"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.controlPlaneIp);
                             return writer;
                         };
     
@@ -1099,6 +1110,10 @@
                                         message.subnetwork = reader.string();
                                         break;
                                     }
+                                case 16: {
+                                        message.controlPlaneIp = reader.string();
+                                        break;
+                                    }
                                 case 12: {
                                         message.privateClusterConfig = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.decode(reader, reader.uint32());
                                         break;
@@ -1200,6 +1215,9 @@
                             if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
                                 if (!$util.isString(message.subnetwork))
                                     return "subnetwork: string expected";
+                            if (message.controlPlaneIp != null && message.hasOwnProperty("controlPlaneIp"))
+                                if (!$util.isString(message.controlPlaneIp))
+                                    return "controlPlaneIp: string expected";
                             if (message.privateClusterConfig != null && message.hasOwnProperty("privateClusterConfig")) {
                                 var error = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify(message.privateClusterConfig);
                                 if (error)
@@ -1275,6 +1293,8 @@
                                 message.network = String(object.network);
                             if (object.subnetwork != null)
                                 message.subnetwork = String(object.subnetwork);
+                            if (object.controlPlaneIp != null)
+                                message.controlPlaneIp = String(object.controlPlaneIp);
                             if (object.privateClusterConfig != null) {
                                 if (typeof object.privateClusterConfig !== "object")
                                     throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.privateClusterConfig: object expected");
@@ -1327,6 +1347,7 @@
                                 object.subnetwork = "";
                                 object.privateClusterConfig = null;
                                 object.degraded = false;
+                                object.controlPlaneIp = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1368,6 +1389,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.controlPlaneIp != null && message.hasOwnProperty("controlPlaneIp"))
+                                object.controlPlaneIp = message.controlPlaneIp;
                             return object;
                         };
     
@@ -2671,6 +2694,7 @@
                                  * @property {string|null} [serviceAccount] GceInstance serviceAccount
                                  * @property {Array.<string>|null} [tags] GceInstance tags
                                  * @property {number|null} [poolSize] GceInstance poolSize
+                                 * @property {number|null} [pooledInstances] GceInstance pooledInstances
                                  * @property {boolean|null} [disablePublicIpAddresses] GceInstance disablePublicIpAddresses
                                  * @property {boolean|null} [enableNestedVirtualization] GceInstance enableNestedVirtualization
                                  * @property {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null} [shieldedInstanceConfig] GceInstance shieldedInstanceConfig
@@ -2725,6 +2749,14 @@
                                  * @instance
                                  */
                                 GceInstance.prototype.poolSize = 0;
+    
+                                /**
+                                 * GceInstance pooledInstances.
+                                 * @member {number} pooledInstances
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.pooledInstances = 0;
     
                                 /**
                                  * GceInstance disablePublicIpAddresses.
@@ -2809,6 +2841,8 @@
                                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.bootDiskSizeGb);
                                     if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
                                         $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                    if (message.pooledInstances != null && Object.hasOwnProperty.call(message, "pooledInstances"))
+                                        writer.uint32(/* id 12, wireType 0 =*/96).int32(message.pooledInstances);
                                     return writer;
                                 };
     
@@ -2859,6 +2893,10 @@
                                             }
                                         case 5: {
                                                 message.poolSize = reader.int32();
+                                                break;
+                                            }
+                                        case 12: {
+                                                message.pooledInstances = reader.int32();
                                                 break;
                                             }
                                         case 6: {
@@ -2932,6 +2970,9 @@
                                     if (message.poolSize != null && message.hasOwnProperty("poolSize"))
                                         if (!$util.isInteger(message.poolSize))
                                             return "poolSize: integer expected";
+                                    if (message.pooledInstances != null && message.hasOwnProperty("pooledInstances"))
+                                        if (!$util.isInteger(message.pooledInstances))
+                                            return "pooledInstances: integer expected";
                                     if (message.disablePublicIpAddresses != null && message.hasOwnProperty("disablePublicIpAddresses"))
                                         if (typeof message.disablePublicIpAddresses !== "boolean")
                                             return "disablePublicIpAddresses: boolean expected";
@@ -2979,6 +3020,8 @@
                                     }
                                     if (object.poolSize != null)
                                         message.poolSize = object.poolSize | 0;
+                                    if (object.pooledInstances != null)
+                                        message.pooledInstances = object.pooledInstances | 0;
                                     if (object.disablePublicIpAddresses != null)
                                         message.disablePublicIpAddresses = Boolean(object.disablePublicIpAddresses);
                                     if (object.enableNestedVirtualization != null)
@@ -3022,6 +3065,7 @@
                                         object.shieldedInstanceConfig = null;
                                         object.bootDiskSizeGb = 0;
                                         object.confidentialInstanceConfig = null;
+                                        object.pooledInstances = 0;
                                     }
                                     if (message.machineType != null && message.hasOwnProperty("machineType"))
                                         object.machineType = message.machineType;
@@ -3044,6 +3088,8 @@
                                         object.bootDiskSizeGb = message.bootDiskSizeGb;
                                     if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
                                         object.confidentialInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
+                                    if (message.pooledInstances != null && message.hasOwnProperty("pooledInstances"))
+                                        object.pooledInstances = message.pooledInstances;
                                     return object;
                                 };
     
@@ -13208,6 +13254,7 @@
                          * @property {string|null} [etag] WorkstationCluster etag
                          * @property {string|null} [network] WorkstationCluster network
                          * @property {string|null} [subnetwork] WorkstationCluster subnetwork
+                         * @property {string|null} [controlPlaneIp] WorkstationCluster controlPlaneIp
                          * @property {google.cloud.workstations.v1beta.WorkstationCluster.IPrivateClusterConfig|null} [privateClusterConfig] WorkstationCluster privateClusterConfig
                          * @property {boolean|null} [degraded] WorkstationCluster degraded
                          * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationCluster conditions
@@ -13328,6 +13375,14 @@
                         WorkstationCluster.prototype.subnetwork = "";
     
                         /**
+                         * WorkstationCluster controlPlaneIp.
+                         * @member {string} controlPlaneIp
+                         * @memberof google.cloud.workstations.v1beta.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.controlPlaneIp = "";
+    
+                        /**
                          * WorkstationCluster privateClusterConfig.
                          * @member {google.cloud.workstations.v1beta.WorkstationCluster.IPrivateClusterConfig|null|undefined} privateClusterConfig
                          * @memberof google.cloud.workstations.v1beta.WorkstationCluster
@@ -13408,6 +13463,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.controlPlaneIp != null && Object.hasOwnProperty.call(message, "controlPlaneIp"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.controlPlaneIp);
                             return writer;
                         };
     
@@ -13528,6 +13585,10 @@
                                         message.subnetwork = reader.string();
                                         break;
                                     }
+                                case 16: {
+                                        message.controlPlaneIp = reader.string();
+                                        break;
+                                    }
                                 case 12: {
                                         message.privateClusterConfig = $root.google.cloud.workstations.v1beta.WorkstationCluster.PrivateClusterConfig.decode(reader, reader.uint32());
                                         break;
@@ -13629,6 +13690,9 @@
                             if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
                                 if (!$util.isString(message.subnetwork))
                                     return "subnetwork: string expected";
+                            if (message.controlPlaneIp != null && message.hasOwnProperty("controlPlaneIp"))
+                                if (!$util.isString(message.controlPlaneIp))
+                                    return "controlPlaneIp: string expected";
                             if (message.privateClusterConfig != null && message.hasOwnProperty("privateClusterConfig")) {
                                 var error = $root.google.cloud.workstations.v1beta.WorkstationCluster.PrivateClusterConfig.verify(message.privateClusterConfig);
                                 if (error)
@@ -13704,6 +13768,8 @@
                                 message.network = String(object.network);
                             if (object.subnetwork != null)
                                 message.subnetwork = String(object.subnetwork);
+                            if (object.controlPlaneIp != null)
+                                message.controlPlaneIp = String(object.controlPlaneIp);
                             if (object.privateClusterConfig != null) {
                                 if (typeof object.privateClusterConfig !== "object")
                                     throw TypeError(".google.cloud.workstations.v1beta.WorkstationCluster.privateClusterConfig: object expected");
@@ -13756,6 +13822,7 @@
                                 object.subnetwork = "";
                                 object.privateClusterConfig = null;
                                 object.degraded = false;
+                                object.controlPlaneIp = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -13797,6 +13864,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.controlPlaneIp != null && message.hasOwnProperty("controlPlaneIp"))
+                                object.controlPlaneIp = message.controlPlaneIp;
                             return object;
                         };
     
@@ -14141,8 +14210,10 @@
                          * @property {Array.<google.cloud.workstations.v1beta.WorkstationConfig.IPersistentDirectory>|null} [persistentDirectories] WorkstationConfig persistentDirectories
                          * @property {google.cloud.workstations.v1beta.WorkstationConfig.IContainer|null} [container] WorkstationConfig container
                          * @property {google.cloud.workstations.v1beta.WorkstationConfig.ICustomerEncryptionKey|null} [encryptionKey] WorkstationConfig encryptionKey
+                         * @property {Array.<google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck>|null} [readinessChecks] WorkstationConfig readinessChecks
                          * @property {boolean|null} [degraded] WorkstationConfig degraded
                          * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationConfig conditions
+                         * @property {boolean|null} [enableAuditAgent] WorkstationConfig enableAuditAgent
                          */
     
                         /**
@@ -14157,6 +14228,7 @@
                             this.annotations = {};
                             this.labels = {};
                             this.persistentDirectories = [];
+                            this.readinessChecks = [];
                             this.conditions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -14293,6 +14365,14 @@
                         WorkstationConfig.prototype.encryptionKey = null;
     
                         /**
+                         * WorkstationConfig readinessChecks.
+                         * @member {Array.<google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck>} readinessChecks
+                         * @memberof google.cloud.workstations.v1beta.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.readinessChecks = $util.emptyArray;
+    
+                        /**
                          * WorkstationConfig degraded.
                          * @member {boolean} degraded
                          * @memberof google.cloud.workstations.v1beta.WorkstationConfig
@@ -14307,6 +14387,14 @@
                          * @instance
                          */
                         WorkstationConfig.prototype.conditions = $util.emptyArray;
+    
+                        /**
+                         * WorkstationConfig enableAuditAgent.
+                         * @member {boolean} enableAuditAgent
+                         * @memberof google.cloud.workstations.v1beta.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.enableAuditAgent = false;
     
                         /**
                          * Creates a new WorkstationConfig instance using the specified properties.
@@ -14372,6 +14460,11 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 18, wireType 2 =*/146).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.readinessChecks != null && message.readinessChecks.length)
+                                for (var i = 0; i < message.readinessChecks.length; ++i)
+                                    $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.encode(message.readinessChecks[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.enableAuditAgent != null && Object.hasOwnProperty.call(message, "enableAuditAgent"))
+                                writer.uint32(/* id 20, wireType 0 =*/160).bool(message.enableAuditAgent);
                             return writer;
                         };
     
@@ -14510,6 +14603,12 @@
                                         message.encryptionKey = $root.google.cloud.workstations.v1beta.WorkstationConfig.CustomerEncryptionKey.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 19: {
+                                        if (!(message.readinessChecks && message.readinessChecks.length))
+                                            message.readinessChecks = [];
+                                        message.readinessChecks.push($root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 15: {
                                         message.degraded = reader.bool();
                                         break;
@@ -14518,6 +14617,10 @@
                                         if (!(message.conditions && message.conditions.length))
                                             message.conditions = [];
                                         message.conditions.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 20: {
+                                        message.enableAuditAgent = reader.bool();
                                         break;
                                     }
                                 default:
@@ -14635,6 +14738,15 @@
                                 if (error)
                                     return "encryptionKey." + error;
                             }
+                            if (message.readinessChecks != null && message.hasOwnProperty("readinessChecks")) {
+                                if (!Array.isArray(message.readinessChecks))
+                                    return "readinessChecks: array expected";
+                                for (var i = 0; i < message.readinessChecks.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.verify(message.readinessChecks[i]);
+                                    if (error)
+                                        return "readinessChecks." + error;
+                                }
+                            }
                             if (message.degraded != null && message.hasOwnProperty("degraded"))
                                 if (typeof message.degraded !== "boolean")
                                     return "degraded: boolean expected";
@@ -14647,6 +14759,9 @@
                                         return "conditions." + error;
                                 }
                             }
+                            if (message.enableAuditAgent != null && message.hasOwnProperty("enableAuditAgent"))
+                                if (typeof message.enableAuditAgent !== "boolean")
+                                    return "enableAuditAgent: boolean expected";
                             return null;
                         };
     
@@ -14736,6 +14851,16 @@
                                     throw TypeError(".google.cloud.workstations.v1beta.WorkstationConfig.encryptionKey: object expected");
                                 message.encryptionKey = $root.google.cloud.workstations.v1beta.WorkstationConfig.CustomerEncryptionKey.fromObject(object.encryptionKey);
                             }
+                            if (object.readinessChecks) {
+                                if (!Array.isArray(object.readinessChecks))
+                                    throw TypeError(".google.cloud.workstations.v1beta.WorkstationConfig.readinessChecks: array expected");
+                                message.readinessChecks = [];
+                                for (var i = 0; i < object.readinessChecks.length; ++i) {
+                                    if (typeof object.readinessChecks[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1beta.WorkstationConfig.readinessChecks: object expected");
+                                    message.readinessChecks[i] = $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.fromObject(object.readinessChecks[i]);
+                                }
+                            }
                             if (object.degraded != null)
                                 message.degraded = Boolean(object.degraded);
                             if (object.conditions) {
@@ -14748,6 +14873,8 @@
                                     message.conditions[i] = $root.google.rpc.Status.fromObject(object.conditions[i]);
                                 }
                             }
+                            if (object.enableAuditAgent != null)
+                                message.enableAuditAgent = Boolean(object.enableAuditAgent);
                             return message;
                         };
     
@@ -14767,6 +14894,7 @@
                             if (options.arrays || options.defaults) {
                                 object.persistentDirectories = [];
                                 object.conditions = [];
+                                object.readinessChecks = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.annotations = {};
@@ -14787,6 +14915,7 @@
                                 object.container = null;
                                 object.degraded = false;
                                 object.encryptionKey = null;
+                                object.enableAuditAgent = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14837,6 +14966,13 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.readinessChecks && message.readinessChecks.length) {
+                                object.readinessChecks = [];
+                                for (var j = 0; j < message.readinessChecks.length; ++j)
+                                    object.readinessChecks[j] = $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.toObject(message.readinessChecks[j], options);
+                            }
+                            if (message.enableAuditAgent != null && message.hasOwnProperty("enableAuditAgent"))
+                                object.enableAuditAgent = message.enableAuditAgent;
                             return object;
                         };
     
@@ -15100,10 +15236,12 @@
                                  * @property {string|null} [serviceAccount] GceInstance serviceAccount
                                  * @property {Array.<string>|null} [tags] GceInstance tags
                                  * @property {number|null} [poolSize] GceInstance poolSize
+                                 * @property {number|null} [pooledInstances] GceInstance pooledInstances
                                  * @property {boolean|null} [disablePublicIpAddresses] GceInstance disablePublicIpAddresses
                                  * @property {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null} [shieldedInstanceConfig] GceInstance shieldedInstanceConfig
                                  * @property {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig|null} [confidentialInstanceConfig] GceInstance confidentialInstanceConfig
                                  * @property {number|null} [bootDiskSizeGb] GceInstance bootDiskSizeGb
+                                 * @property {Array.<google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator>|null} [accelerators] GceInstance accelerators
                                  */
     
                                 /**
@@ -15116,6 +15254,7 @@
                                  */
                                 function GceInstance(properties) {
                                     this.tags = [];
+                                    this.accelerators = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -15155,6 +15294,14 @@
                                 GceInstance.prototype.poolSize = 0;
     
                                 /**
+                                 * GceInstance pooledInstances.
+                                 * @member {number} pooledInstances
+                                 * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.pooledInstances = 0;
+    
+                                /**
                                  * GceInstance disablePublicIpAddresses.
                                  * @member {boolean} disablePublicIpAddresses
                                  * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance
@@ -15185,6 +15332,14 @@
                                  * @instance
                                  */
                                 GceInstance.prototype.bootDiskSizeGb = 0;
+    
+                                /**
+                                 * GceInstance accelerators.
+                                 * @member {Array.<google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator>} accelerators
+                                 * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.accelerators = $util.emptyArray;
     
                                 /**
                                  * Creates a new GceInstance instance using the specified properties.
@@ -15227,6 +15382,11 @@
                                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.bootDiskSizeGb);
                                     if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
                                         $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                    if (message.accelerators != null && message.accelerators.length)
+                                        for (var i = 0; i < message.accelerators.length; ++i)
+                                            $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.encode(message.accelerators[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                    if (message.pooledInstances != null && Object.hasOwnProperty.call(message, "pooledInstances"))
+                                        writer.uint32(/* id 12, wireType 0 =*/96).int32(message.pooledInstances);
                                     return writer;
                                 };
     
@@ -15279,6 +15439,10 @@
                                                 message.poolSize = reader.int32();
                                                 break;
                                             }
+                                        case 12: {
+                                                message.pooledInstances = reader.int32();
+                                                break;
+                                            }
                                         case 6: {
                                                 message.disablePublicIpAddresses = reader.bool();
                                                 break;
@@ -15293,6 +15457,12 @@
                                             }
                                         case 9: {
                                                 message.bootDiskSizeGb = reader.int32();
+                                                break;
+                                            }
+                                        case 11: {
+                                                if (!(message.accelerators && message.accelerators.length))
+                                                    message.accelerators = [];
+                                                message.accelerators.push($root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.decode(reader, reader.uint32()));
                                                 break;
                                             }
                                         default:
@@ -15346,6 +15516,9 @@
                                     if (message.poolSize != null && message.hasOwnProperty("poolSize"))
                                         if (!$util.isInteger(message.poolSize))
                                             return "poolSize: integer expected";
+                                    if (message.pooledInstances != null && message.hasOwnProperty("pooledInstances"))
+                                        if (!$util.isInteger(message.pooledInstances))
+                                            return "pooledInstances: integer expected";
                                     if (message.disablePublicIpAddresses != null && message.hasOwnProperty("disablePublicIpAddresses"))
                                         if (typeof message.disablePublicIpAddresses !== "boolean")
                                             return "disablePublicIpAddresses: boolean expected";
@@ -15362,6 +15535,15 @@
                                     if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
                                         if (!$util.isInteger(message.bootDiskSizeGb))
                                             return "bootDiskSizeGb: integer expected";
+                                    if (message.accelerators != null && message.hasOwnProperty("accelerators")) {
+                                        if (!Array.isArray(message.accelerators))
+                                            return "accelerators: array expected";
+                                        for (var i = 0; i < message.accelerators.length; ++i) {
+                                            var error = $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.verify(message.accelerators[i]);
+                                            if (error)
+                                                return "accelerators." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -15390,6 +15572,8 @@
                                     }
                                     if (object.poolSize != null)
                                         message.poolSize = object.poolSize | 0;
+                                    if (object.pooledInstances != null)
+                                        message.pooledInstances = object.pooledInstances | 0;
                                     if (object.disablePublicIpAddresses != null)
                                         message.disablePublicIpAddresses = Boolean(object.disablePublicIpAddresses);
                                     if (object.shieldedInstanceConfig != null) {
@@ -15404,6 +15588,16 @@
                                     }
                                     if (object.bootDiskSizeGb != null)
                                         message.bootDiskSizeGb = object.bootDiskSizeGb | 0;
+                                    if (object.accelerators) {
+                                        if (!Array.isArray(object.accelerators))
+                                            throw TypeError(".google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.accelerators: array expected");
+                                        message.accelerators = [];
+                                        for (var i = 0; i < object.accelerators.length; ++i) {
+                                            if (typeof object.accelerators[i] !== "object")
+                                                throw TypeError(".google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.accelerators: object expected");
+                                            message.accelerators[i] = $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.fromObject(object.accelerators[i]);
+                                        }
+                                    }
                                     return message;
                                 };
     
@@ -15420,8 +15614,10 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.arrays || options.defaults)
+                                    if (options.arrays || options.defaults) {
                                         object.tags = [];
+                                        object.accelerators = [];
+                                    }
                                     if (options.defaults) {
                                         object.machineType = "";
                                         object.serviceAccount = "";
@@ -15430,6 +15626,7 @@
                                         object.shieldedInstanceConfig = null;
                                         object.bootDiskSizeGb = 0;
                                         object.confidentialInstanceConfig = null;
+                                        object.pooledInstances = 0;
                                     }
                                     if (message.machineType != null && message.hasOwnProperty("machineType"))
                                         object.machineType = message.machineType;
@@ -15450,6 +15647,13 @@
                                         object.bootDiskSizeGb = message.bootDiskSizeGb;
                                     if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
                                         object.confidentialInstanceConfig = $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
+                                    if (message.accelerators && message.accelerators.length) {
+                                        object.accelerators = [];
+                                        for (var j = 0; j < message.accelerators.length; ++j)
+                                            object.accelerators[j] = $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.toObject(message.accelerators[j], options);
+                                    }
+                                    if (message.pooledInstances != null && message.hasOwnProperty("pooledInstances"))
+                                        object.pooledInstances = message.pooledInstances;
                                     return object;
                                 };
     
@@ -15930,6 +16134,233 @@
                                     };
     
                                     return GceConfidentialInstanceConfig;
+                                })();
+    
+                                GceInstance.Accelerator = (function() {
+    
+                                    /**
+                                     * Properties of an Accelerator.
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance
+                                     * @interface IAccelerator
+                                     * @property {string|null} [type] Accelerator type
+                                     * @property {number|null} [count] Accelerator count
+                                     */
+    
+                                    /**
+                                     * Constructs a new Accelerator.
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance
+                                     * @classdesc Represents an Accelerator.
+                                     * @implements IAccelerator
+                                     * @constructor
+                                     * @param {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator=} [properties] Properties to set
+                                     */
+                                    function Accelerator(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Accelerator type.
+                                     * @member {string} type
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @instance
+                                     */
+                                    Accelerator.prototype.type = "";
+    
+                                    /**
+                                     * Accelerator count.
+                                     * @member {number} count
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @instance
+                                     */
+                                    Accelerator.prototype.count = 0;
+    
+                                    /**
+                                     * Creates a new Accelerator instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator=} [properties] Properties to set
+                                     * @returns {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator} Accelerator instance
+                                     */
+                                    Accelerator.create = function create(properties) {
+                                        return new Accelerator(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Accelerator message. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator} message Accelerator message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Accelerator.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                                        if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.count);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Accelerator message, length delimited. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IAccelerator} message Accelerator message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Accelerator.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an Accelerator message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator} Accelerator
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Accelerator.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.type = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.count = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an Accelerator message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator} Accelerator
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Accelerator.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an Accelerator message.
+                                     * @function verify
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Accelerator.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            if (!$util.isString(message.type))
+                                                return "type: string expected";
+                                        if (message.count != null && message.hasOwnProperty("count"))
+                                            if (!$util.isInteger(message.count))
+                                                return "count: integer expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an Accelerator message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator} Accelerator
+                                     */
+                                    Accelerator.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator)
+                                            return object;
+                                        var message = new $root.google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator();
+                                        if (object.type != null)
+                                            message.type = String(object.type);
+                                        if (object.count != null)
+                                            message.count = object.count | 0;
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an Accelerator message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator} message Accelerator
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Accelerator.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.type = "";
+                                            object.count = 0;
+                                        }
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            object.type = message.type;
+                                        if (message.count != null && message.hasOwnProperty("count"))
+                                            object.count = message.count;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Accelerator to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Accelerator.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Accelerator
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Accelerator.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.Accelerator";
+                                    };
+    
+                                    return Accelerator;
                                 })();
     
                                 return GceInstance;
@@ -17141,6 +17572,233 @@
                             return CustomerEncryptionKey;
                         })();
     
+                        WorkstationConfig.ReadinessCheck = (function() {
+    
+                            /**
+                             * Properties of a ReadinessCheck.
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig
+                             * @interface IReadinessCheck
+                             * @property {string|null} [path] ReadinessCheck path
+                             * @property {number|null} [port] ReadinessCheck port
+                             */
+    
+                            /**
+                             * Constructs a new ReadinessCheck.
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig
+                             * @classdesc Represents a ReadinessCheck.
+                             * @implements IReadinessCheck
+                             * @constructor
+                             * @param {google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck=} [properties] Properties to set
+                             */
+                            function ReadinessCheck(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReadinessCheck path.
+                             * @member {string} path
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @instance
+                             */
+                            ReadinessCheck.prototype.path = "";
+    
+                            /**
+                             * ReadinessCheck port.
+                             * @member {number} port
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @instance
+                             */
+                            ReadinessCheck.prototype.port = 0;
+    
+                            /**
+                             * Creates a new ReadinessCheck instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck} ReadinessCheck instance
+                             */
+                            ReadinessCheck.create = function create(properties) {
+                                return new ReadinessCheck(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReadinessCheck message. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck} message ReadinessCheck message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadinessCheck.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                                if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReadinessCheck message, length delimited. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck} message ReadinessCheck message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadinessCheck.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReadinessCheck message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck} ReadinessCheck
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadinessCheck.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.port = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReadinessCheck message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck} ReadinessCheck
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadinessCheck.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReadinessCheck message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReadinessCheck.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                if (message.port != null && message.hasOwnProperty("port"))
+                                    if (!$util.isInteger(message.port))
+                                        return "port: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReadinessCheck message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck} ReadinessCheck
+                             */
+                            ReadinessCheck.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck();
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                if (object.port != null)
+                                    message.port = object.port | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReadinessCheck message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck} message ReadinessCheck
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReadinessCheck.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.path = "";
+                                    object.port = 0;
+                                }
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                if (message.port != null && message.hasOwnProperty("port"))
+                                    object.port = message.port;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReadinessCheck to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReadinessCheck.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReadinessCheck
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadinessCheck.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1beta.WorkstationConfig.ReadinessCheck";
+                            };
+    
+                            return ReadinessCheck;
+                        })();
+    
                         return WorkstationConfig;
                     })();
     
@@ -17162,6 +17820,7 @@
                          * @property {string|null} [etag] Workstation etag
                          * @property {google.cloud.workstations.v1beta.Workstation.State|null} [state] Workstation state
                          * @property {string|null} [host] Workstation host
+                         * @property {Object.<string,string>|null} [env] Workstation env
                          */
     
                         /**
@@ -17175,6 +17834,7 @@
                         function Workstation(properties) {
                             this.annotations = {};
                             this.labels = {};
+                            this.env = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17278,6 +17938,14 @@
                         Workstation.prototype.host = "";
     
                         /**
+                         * Workstation env.
+                         * @member {Object.<string,string>} env
+                         * @memberof google.cloud.workstations.v1beta.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.env = $util.emptyObject;
+    
+                        /**
                          * Creates a new Workstation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.workstations.v1beta.Workstation
@@ -17324,6 +17992,9 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
                             if (message.host != null && Object.hasOwnProperty.call(message, "host"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.host);
+                            if (message.env != null && Object.hasOwnProperty.call(message, "env"))
+                                for (var keys = Object.keys(message.env), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.env[keys[i]]).ldelim();
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
@@ -17447,6 +18118,29 @@
                                         message.host = reader.string();
                                         break;
                                     }
+                                case 12: {
+                                        if (message.env === $util.emptyObject)
+                                            message.env = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.env[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17542,6 +18236,14 @@
                             if (message.host != null && message.hasOwnProperty("host"))
                                 if (!$util.isString(message.host))
                                     return "host: string expected";
+                            if (message.env != null && message.hasOwnProperty("env")) {
+                                if (!$util.isObject(message.env))
+                                    return "env: object expected";
+                                var key = Object.keys(message.env);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.env[key[i]]))
+                                        return "env: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -17626,6 +18328,13 @@
                             }
                             if (object.host != null)
                                 message.host = String(object.host);
+                            if (object.env) {
+                                if (typeof object.env !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1beta.Workstation.env: object expected");
+                                message.env = {};
+                                for (var keys = Object.keys(object.env), i = 0; i < keys.length; ++i)
+                                    message.env[keys[i]] = String(object.env[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -17644,6 +18353,7 @@
                             var object = {};
                             if (options.objects || options.defaults) {
                                 object.annotations = {};
+                                object.env = {};
                                 object.labels = {};
                             }
                             if (options.defaults) {
@@ -17684,6 +18394,11 @@
                                 object.state = options.enums === String ? $root.google.cloud.workstations.v1beta.Workstation.State[message.state] === undefined ? message.state : $root.google.cloud.workstations.v1beta.Workstation.State[message.state] : message.state;
                             if (message.host != null && message.hasOwnProperty("host"))
                                 object.host = message.host;
+                            if (message.env && (keys2 = Object.keys(message.env)).length) {
+                                object.env = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.env[keys2[j]] = message.env[keys2[j]];
+                            }
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)

@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The source processor version to import from.
+   *  The source processor version to import from. The source processor version
+   *  and destination processor need to be in the same environment and region.
    */
   // const processorVersionSource = 'abc123'
   /**

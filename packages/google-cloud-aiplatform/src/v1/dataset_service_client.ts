@@ -44,8 +44,7 @@ import * as gapicConfig from './dataset_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The service that handles the CRUD of Vertex AI Dataset and its child
- *  resources.
+ *  The service that manages Vertex AI Dataset and its child resources.
  * @class
  * @memberof v1
  */
@@ -218,9 +217,6 @@ export class DatasetServiceClient {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
-      endpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpoints/{endpoint}'
-      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -272,6 +268,16 @@ export class DatasetServiceClient {
       ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
+      ),
+      projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/endpoints/{endpoint}'
+      ),
+      projectLocationPublisherModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+        ),
+      publisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'publishers/{publisher}/models/{model}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -370,6 +376,12 @@ export class DatasetServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -393,6 +405,14 @@ export class DatasetServiceClient {
               post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -410,6 +430,12 @@ export class DatasetServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
           ],
         },
@@ -579,6 +605,9 @@ export class DatasetServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -814,6 +843,10 @@ export class DatasetServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -982,6 +1015,7 @@ export class DatasetServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1138,6 +1172,7 @@ export class DatasetServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1323,6 +1358,9 @@ export class DatasetServiceClient {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
             },
             {
@@ -1368,6 +1406,12 @@ export class DatasetServiceClient {
     const exportDataMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.ExportDataOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteSavedQueryResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSavedQueryMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataset: new this._gaxModule.LongrunningDescriptor(
@@ -1389,6 +1433,11 @@ export class DatasetServiceClient {
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
+      ),
+      deleteSavedQuery: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSavedQueryResponse.decode.bind(deleteSavedQueryResponse),
+        deleteSavedQueryMetadata.decode.bind(deleteSavedQueryMetadata)
       ),
     };
 
@@ -1452,6 +1501,7 @@ export class DatasetServiceClient {
       'listDataItems',
       'searchDataItems',
       'listSavedQueries',
+      'deleteSavedQuery',
       'getAnnotationSpec',
       'listAnnotations',
     ];
@@ -2386,6 +2436,146 @@ export class DatasetServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ExportDataResponse,
       protos.google.cloud.aiplatform.v1.ExportDataOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a SavedQuery.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the SavedQuery to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.delete_saved_query.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_DeleteSavedQuery_async
+   */
+  deleteSavedQuery(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteSavedQuery(
+    request: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSavedQuery(
+    request: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSavedQuery(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSavedQuery(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSavedQuery()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.delete_saved_query.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_DeleteSavedQuery_async
+   */
+  async checkDeleteSavedQueryProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSavedQuery,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >;
   }
   /**
@@ -4649,55 +4839,6 @@ export class DatasetServiceClient {
   }
 
   /**
-   * Return a fully-qualified endpoint resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} endpoint
-   * @returns {string} Resource name string.
-   */
-  endpointPath(project: string, location: string, endpoint: string) {
-    return this.pathTemplates.endpointPathTemplate.render({
-      project: project,
-      location: location,
-      endpoint: endpoint,
-    });
-  }
-
-  /**
-   * Parse the project from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
-  }
-
-  /**
-   * Parse the location from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
-  }
-
-  /**
-   * Parse the endpoint from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the endpoint.
-   */
-  matchEndpointFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
-  }
-
-  /**
    * Return a fully-qualified entityType resource name string.
    *
    * @param {string} project
@@ -5759,6 +5900,194 @@ export class DatasetServiceClient {
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
     return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
       .pipeline_job;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationEndpointPath(
+    project: string,
+    location: string,
+    endpoint: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      endpoint: endpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).location;
+  }
+
+  /**
+   * Parse the endpoint from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the endpoint.
+   */
+  matchEndpointFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPublisherModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  projectLocationPublisherModelPath(
+    project: string,
+    location: string,
+    publisher: string,
+    model: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
+      project: project,
+      location: location,
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).location;
+  }
+
+  /**
+   * Parse the publisher from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).model;
+  }
+
+  /**
+   * Return a fully-qualified publisherModel resource name string.
+   *
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  publisherModelPath(publisher: string, model: string) {
+    return this.pathTemplates.publisherModelPathTemplate.render({
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the publisher from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).model;
   }
 
   /**

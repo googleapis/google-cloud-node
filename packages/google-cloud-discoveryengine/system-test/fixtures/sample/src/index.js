@@ -20,9 +20,10 @@
 const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
+  const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
-  const recommendationServiceClient =
-    new discoveryengine.RecommendationServiceClient();
+  const schemaServiceClient = new discoveryengine.SchemaServiceClient();
+  const searchServiceClient = new discoveryengine.SearchServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
 }
 

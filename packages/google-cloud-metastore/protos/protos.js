@@ -593,6 +593,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|queryMetadata}.
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @typedef QueryMetadataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls QueryMetadata.
+                         * @function queryMetadata
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1.IQueryMetadataRequest} request QueryMetadataRequest message or plain object
+                         * @param {google.cloud.metastore.v1.DataprocMetastore.QueryMetadataCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.queryMetadata = function queryMetadata(request, callback) {
+                            return this.rpcCall(queryMetadata, $root.google.cloud.metastore.v1.QueryMetadataRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "QueryMetadata" });
+    
+                        /**
+                         * Calls QueryMetadata.
+                         * @function queryMetadata
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1.IQueryMetadataRequest} request QueryMetadataRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|moveTableToDatabase}.
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @typedef MoveTableToDatabaseCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls MoveTableToDatabase.
+                         * @function moveTableToDatabase
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseRequest} request MoveTableToDatabaseRequest message or plain object
+                         * @param {google.cloud.metastore.v1.DataprocMetastore.MoveTableToDatabaseCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.moveTableToDatabase = function moveTableToDatabase(request, callback) {
+                            return this.rpcCall(moveTableToDatabase, $root.google.cloud.metastore.v1.MoveTableToDatabaseRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "MoveTableToDatabase" });
+    
+                        /**
+                         * Calls MoveTableToDatabase.
+                         * @function moveTableToDatabase
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseRequest} request MoveTableToDatabaseRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore|alterMetadataResourceLocation}.
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @typedef AlterMetadataResourceLocationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls AlterMetadataResourceLocation.
+                         * @function alterMetadataResourceLocation
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationRequest} request AlterMetadataResourceLocationRequest message or plain object
+                         * @param {google.cloud.metastore.v1.DataprocMetastore.AlterMetadataResourceLocationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataprocMetastore.prototype.alterMetadataResourceLocation = function alterMetadataResourceLocation(request, callback) {
+                            return this.rpcCall(alterMetadataResourceLocation, $root.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "AlterMetadataResourceLocation" });
+    
+                        /**
+                         * Calls AlterMetadataResourceLocation.
+                         * @function alterMetadataResourceLocation
+                         * @memberof google.cloud.metastore.v1.DataprocMetastore
+                         * @instance
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationRequest} request AlterMetadataResourceLocationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return DataprocMetastore;
                     })();
     
@@ -622,6 +721,7 @@
                          * @property {google.cloud.metastore.v1.INetworkConfig|null} [networkConfig] Service networkConfig
                          * @property {google.cloud.metastore.v1.Service.DatabaseType|null} [databaseType] Service databaseType
                          * @property {google.cloud.metastore.v1.ITelemetryConfig|null} [telemetryConfig] Service telemetryConfig
+                         * @property {google.cloud.metastore.v1.IScalingConfig|null} [scalingConfig] Service scalingConfig
                          */
     
                         /**
@@ -800,6 +900,14 @@
                          */
                         Service.prototype.telemetryConfig = null;
     
+                        /**
+                         * Service scalingConfig.
+                         * @member {google.cloud.metastore.v1.IScalingConfig|null|undefined} scalingConfig
+                         * @memberof google.cloud.metastore.v1.Service
+                         * @instance
+                         */
+                        Service.prototype.scalingConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -879,6 +987,8 @@
                                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.databaseType);
                             if (message.telemetryConfig != null && Object.hasOwnProperty.call(message, "telemetryConfig"))
                                 $root.google.cloud.metastore.v1.TelemetryConfig.encode(message.telemetryConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.scalingConfig != null && Object.hasOwnProperty.call(message, "scalingConfig"))
+                                $root.google.cloud.metastore.v1.ScalingConfig.encode(message.scalingConfig, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -1010,6 +1120,10 @@
                                     }
                                 case 23: {
                                         message.telemetryConfig = $root.google.cloud.metastore.v1.TelemetryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.scalingConfig = $root.google.cloud.metastore.v1.ScalingConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1160,6 +1274,11 @@
                                 var error = $root.google.cloud.metastore.v1.TelemetryConfig.verify(message.telemetryConfig);
                                 if (error)
                                     return "telemetryConfig." + error;
+                            }
+                            if (message.scalingConfig != null && message.hasOwnProperty("scalingConfig")) {
+                                var error = $root.google.cloud.metastore.v1.ScalingConfig.verify(message.scalingConfig);
+                                if (error)
+                                    return "scalingConfig." + error;
                             }
                             return null;
                         };
@@ -1337,6 +1456,11 @@
                                     throw TypeError(".google.cloud.metastore.v1.Service.telemetryConfig: object expected");
                                 message.telemetryConfig = $root.google.cloud.metastore.v1.TelemetryConfig.fromObject(object.telemetryConfig);
                             }
+                            if (object.scalingConfig != null) {
+                                if (typeof object.scalingConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1.Service.scalingConfig: object expected");
+                                message.scalingConfig = $root.google.cloud.metastore.v1.ScalingConfig.fromObject(object.scalingConfig);
+                            }
                             return message;
                         };
     
@@ -1374,6 +1498,7 @@
                                 object.networkConfig = null;
                                 object.databaseType = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
                                 object.telemetryConfig = null;
+                                object.scalingConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1422,6 +1547,8 @@
                                 object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1.Service.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1.Service.DatabaseType[message.databaseType] : message.databaseType;
                             if (message.telemetryConfig != null && message.hasOwnProperty("telemetryConfig"))
                                 object.telemetryConfig = $root.google.cloud.metastore.v1.TelemetryConfig.toObject(message.telemetryConfig, options);
+                            if (message.scalingConfig != null && message.hasOwnProperty("scalingConfig"))
+                                object.scalingConfig = $root.google.cloud.metastore.v1.ScalingConfig.toObject(message.scalingConfig, options);
                             return object;
                         };
     
@@ -1818,6 +1945,8 @@
                          * @property {string|null} [version] HiveMetastoreConfig version
                          * @property {Object.<string,string>|null} [configOverrides] HiveMetastoreConfig configOverrides
                          * @property {google.cloud.metastore.v1.IKerberosConfig|null} [kerberosConfig] HiveMetastoreConfig kerberosConfig
+                         * @property {google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol|null} [endpointProtocol] HiveMetastoreConfig endpointProtocol
+                         * @property {Object.<string,google.cloud.metastore.v1.IAuxiliaryVersionConfig>|null} [auxiliaryVersions] HiveMetastoreConfig auxiliaryVersions
                          */
     
                         /**
@@ -1830,6 +1959,7 @@
                          */
                         function HiveMetastoreConfig(properties) {
                             this.configOverrides = {};
+                            this.auxiliaryVersions = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1859,6 +1989,22 @@
                          * @instance
                          */
                         HiveMetastoreConfig.prototype.kerberosConfig = null;
+    
+                        /**
+                         * HiveMetastoreConfig endpointProtocol.
+                         * @member {google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol} endpointProtocol
+                         * @memberof google.cloud.metastore.v1.HiveMetastoreConfig
+                         * @instance
+                         */
+                        HiveMetastoreConfig.prototype.endpointProtocol = 0;
+    
+                        /**
+                         * HiveMetastoreConfig auxiliaryVersions.
+                         * @member {Object.<string,google.cloud.metastore.v1.IAuxiliaryVersionConfig>} auxiliaryVersions
+                         * @memberof google.cloud.metastore.v1.HiveMetastoreConfig
+                         * @instance
+                         */
+                        HiveMetastoreConfig.prototype.auxiliaryVersions = $util.emptyObject;
     
                         /**
                          * Creates a new HiveMetastoreConfig instance using the specified properties.
@@ -1891,6 +2037,13 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.configOverrides[keys[i]]).ldelim();
                             if (message.kerberosConfig != null && Object.hasOwnProperty.call(message, "kerberosConfig"))
                                 $root.google.cloud.metastore.v1.KerberosConfig.encode(message.kerberosConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.endpointProtocol != null && Object.hasOwnProperty.call(message, "endpointProtocol"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.endpointProtocol);
+                            if (message.auxiliaryVersions != null && Object.hasOwnProperty.call(message, "auxiliaryVersions"))
+                                for (var keys = Object.keys(message.auxiliaryVersions), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.metastore.v1.AuxiliaryVersionConfig.encode(message.auxiliaryVersions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             return writer;
                         };
     
@@ -1956,6 +2109,33 @@
                                         message.kerberosConfig = $root.google.cloud.metastore.v1.KerberosConfig.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 4: {
+                                        message.endpointProtocol = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.auxiliaryVersions === $util.emptyObject)
+                                            message.auxiliaryVersions = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.metastore.v1.AuxiliaryVersionConfig.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.auxiliaryVersions[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2007,6 +2187,25 @@
                                 if (error)
                                     return "kerberosConfig." + error;
                             }
+                            if (message.endpointProtocol != null && message.hasOwnProperty("endpointProtocol"))
+                                switch (message.endpointProtocol) {
+                                default:
+                                    return "endpointProtocol: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.auxiliaryVersions != null && message.hasOwnProperty("auxiliaryVersions")) {
+                                if (!$util.isObject(message.auxiliaryVersions))
+                                    return "auxiliaryVersions: object expected";
+                                var key = Object.keys(message.auxiliaryVersions);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.metastore.v1.AuxiliaryVersionConfig.verify(message.auxiliaryVersions[key[i]]);
+                                    if (error)
+                                        return "auxiliaryVersions." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2036,6 +2235,36 @@
                                     throw TypeError(".google.cloud.metastore.v1.HiveMetastoreConfig.kerberosConfig: object expected");
                                 message.kerberosConfig = $root.google.cloud.metastore.v1.KerberosConfig.fromObject(object.kerberosConfig);
                             }
+                            switch (object.endpointProtocol) {
+                            default:
+                                if (typeof object.endpointProtocol === "number") {
+                                    message.endpointProtocol = object.endpointProtocol;
+                                    break;
+                                }
+                                break;
+                            case "ENDPOINT_PROTOCOL_UNSPECIFIED":
+                            case 0:
+                                message.endpointProtocol = 0;
+                                break;
+                            case "THRIFT":
+                            case 1:
+                                message.endpointProtocol = 1;
+                                break;
+                            case "GRPC":
+                            case 2:
+                                message.endpointProtocol = 2;
+                                break;
+                            }
+                            if (object.auxiliaryVersions) {
+                                if (typeof object.auxiliaryVersions !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1.HiveMetastoreConfig.auxiliaryVersions: object expected");
+                                message.auxiliaryVersions = {};
+                                for (var keys = Object.keys(object.auxiliaryVersions), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.auxiliaryVersions[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.metastore.v1.HiveMetastoreConfig.auxiliaryVersions: object expected");
+                                    message.auxiliaryVersions[keys[i]] = $root.google.cloud.metastore.v1.AuxiliaryVersionConfig.fromObject(object.auxiliaryVersions[keys[i]]);
+                                }
+                            }
                             return message;
                         };
     
@@ -2052,11 +2281,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.configOverrides = {};
+                                object.auxiliaryVersions = {};
+                            }
                             if (options.defaults) {
                                 object.version = "";
                                 object.kerberosConfig = null;
+                                object.endpointProtocol = options.enums === String ? "ENDPOINT_PROTOCOL_UNSPECIFIED" : 0;
                             }
                             if (message.version != null && message.hasOwnProperty("version"))
                                 object.version = message.version;
@@ -2068,6 +2300,13 @@
                             }
                             if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig"))
                                 object.kerberosConfig = $root.google.cloud.metastore.v1.KerberosConfig.toObject(message.kerberosConfig, options);
+                            if (message.endpointProtocol != null && message.hasOwnProperty("endpointProtocol"))
+                                object.endpointProtocol = options.enums === String ? $root.google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol[message.endpointProtocol] === undefined ? message.endpointProtocol : $root.google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol[message.endpointProtocol] : message.endpointProtocol;
+                            if (message.auxiliaryVersions && (keys2 = Object.keys(message.auxiliaryVersions)).length) {
+                                object.auxiliaryVersions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.auxiliaryVersions[keys2[j]] = $root.google.cloud.metastore.v1.AuxiliaryVersionConfig.toObject(message.auxiliaryVersions[keys2[j]], options);
+                            }
                             return object;
                         };
     
@@ -2096,6 +2335,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.metastore.v1.HiveMetastoreConfig";
                         };
+    
+                        /**
+                         * EndpointProtocol enum.
+                         * @name google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol
+                         * @enum {number}
+                         * @property {number} ENDPOINT_PROTOCOL_UNSPECIFIED=0 ENDPOINT_PROTOCOL_UNSPECIFIED value
+                         * @property {number} THRIFT=1 THRIFT value
+                         * @property {number} GRPC=2 GRPC value
+                         */
+                        HiveMetastoreConfig.EndpointProtocol = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENDPOINT_PROTOCOL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "THRIFT"] = 1;
+                            values[valuesById[2] = "GRPC"] = 2;
+                            return values;
+                        })();
     
                         return HiveMetastoreConfig;
                     })();
@@ -2777,6 +3032,297 @@
                         };
     
                         return EncryptionConfig;
+                    })();
+    
+                    v1.AuxiliaryVersionConfig = (function() {
+    
+                        /**
+                         * Properties of an AuxiliaryVersionConfig.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IAuxiliaryVersionConfig
+                         * @property {string|null} [version] AuxiliaryVersionConfig version
+                         * @property {Object.<string,string>|null} [configOverrides] AuxiliaryVersionConfig configOverrides
+                         * @property {google.cloud.metastore.v1.INetworkConfig|null} [networkConfig] AuxiliaryVersionConfig networkConfig
+                         */
+    
+                        /**
+                         * Constructs a new AuxiliaryVersionConfig.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents an AuxiliaryVersionConfig.
+                         * @implements IAuxiliaryVersionConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IAuxiliaryVersionConfig=} [properties] Properties to set
+                         */
+                        function AuxiliaryVersionConfig(properties) {
+                            this.configOverrides = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AuxiliaryVersionConfig version.
+                         * @member {string} version
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @instance
+                         */
+                        AuxiliaryVersionConfig.prototype.version = "";
+    
+                        /**
+                         * AuxiliaryVersionConfig configOverrides.
+                         * @member {Object.<string,string>} configOverrides
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @instance
+                         */
+                        AuxiliaryVersionConfig.prototype.configOverrides = $util.emptyObject;
+    
+                        /**
+                         * AuxiliaryVersionConfig networkConfig.
+                         * @member {google.cloud.metastore.v1.INetworkConfig|null|undefined} networkConfig
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @instance
+                         */
+                        AuxiliaryVersionConfig.prototype.networkConfig = null;
+    
+                        /**
+                         * Creates a new AuxiliaryVersionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAuxiliaryVersionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.AuxiliaryVersionConfig} AuxiliaryVersionConfig instance
+                         */
+                        AuxiliaryVersionConfig.create = function create(properties) {
+                            return new AuxiliaryVersionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AuxiliaryVersionConfig message. Does not implicitly {@link google.cloud.metastore.v1.AuxiliaryVersionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAuxiliaryVersionConfig} message AuxiliaryVersionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuxiliaryVersionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                            if (message.configOverrides != null && Object.hasOwnProperty.call(message, "configOverrides"))
+                                for (var keys = Object.keys(message.configOverrides), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.configOverrides[keys[i]]).ldelim();
+                            if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                                $root.google.cloud.metastore.v1.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AuxiliaryVersionConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.AuxiliaryVersionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAuxiliaryVersionConfig} message AuxiliaryVersionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuxiliaryVersionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AuxiliaryVersionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.AuxiliaryVersionConfig} AuxiliaryVersionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuxiliaryVersionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.AuxiliaryVersionConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.version = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.configOverrides === $util.emptyObject)
+                                            message.configOverrides = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.configOverrides[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkConfig = $root.google.cloud.metastore.v1.NetworkConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AuxiliaryVersionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.AuxiliaryVersionConfig} AuxiliaryVersionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuxiliaryVersionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AuxiliaryVersionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AuxiliaryVersionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.configOverrides != null && message.hasOwnProperty("configOverrides")) {
+                                if (!$util.isObject(message.configOverrides))
+                                    return "configOverrides: object expected";
+                                var key = Object.keys(message.configOverrides);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.configOverrides[key[i]]))
+                                        return "configOverrides: string{k:string} expected";
+                            }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                                var error = $root.google.cloud.metastore.v1.NetworkConfig.verify(message.networkConfig);
+                                if (error)
+                                    return "networkConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AuxiliaryVersionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.AuxiliaryVersionConfig} AuxiliaryVersionConfig
+                         */
+                        AuxiliaryVersionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.AuxiliaryVersionConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.AuxiliaryVersionConfig();
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.configOverrides) {
+                                if (typeof object.configOverrides !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1.AuxiliaryVersionConfig.configOverrides: object expected");
+                                message.configOverrides = {};
+                                for (var keys = Object.keys(object.configOverrides), i = 0; i < keys.length; ++i)
+                                    message.configOverrides[keys[i]] = String(object.configOverrides[keys[i]]);
+                            }
+                            if (object.networkConfig != null) {
+                                if (typeof object.networkConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1.AuxiliaryVersionConfig.networkConfig: object expected");
+                                message.networkConfig = $root.google.cloud.metastore.v1.NetworkConfig.fromObject(object.networkConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AuxiliaryVersionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.AuxiliaryVersionConfig} message AuxiliaryVersionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AuxiliaryVersionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.configOverrides = {};
+                            if (options.defaults) {
+                                object.version = "";
+                                object.networkConfig = null;
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            var keys2;
+                            if (message.configOverrides && (keys2 = Object.keys(message.configOverrides)).length) {
+                                object.configOverrides = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.configOverrides[keys2[j]] = message.configOverrides[keys2[j]];
+                            }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                                object.networkConfig = $root.google.cloud.metastore.v1.NetworkConfig.toObject(message.networkConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AuxiliaryVersionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AuxiliaryVersionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AuxiliaryVersionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.AuxiliaryVersionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AuxiliaryVersionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.AuxiliaryVersionConfig";
+                        };
+    
+                        return AuxiliaryVersionConfig;
                     })();
     
                     v1.NetworkConfig = (function() {
@@ -4181,6 +4727,7 @@
                              * @interface IDatabaseDump
                              * @property {google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType|null} [databaseType] DatabaseDump databaseType
                              * @property {string|null} [gcsUri] DatabaseDump gcsUri
+                             * @property {string|null} [sourceDatabase] DatabaseDump sourceDatabase
                              * @property {google.cloud.metastore.v1.DatabaseDumpSpec.Type|null} [type] DatabaseDump type
                              */
     
@@ -4214,6 +4761,14 @@
                              * @instance
                              */
                             DatabaseDump.prototype.gcsUri = "";
+    
+                            /**
+                             * DatabaseDump sourceDatabase.
+                             * @member {string} sourceDatabase
+                             * @memberof google.cloud.metastore.v1.MetadataImport.DatabaseDump
+                             * @instance
+                             */
+                            DatabaseDump.prototype.sourceDatabase = "";
     
                             /**
                              * DatabaseDump type.
@@ -4251,6 +4806,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.databaseType);
                                 if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.gcsUri);
+                                if (message.sourceDatabase != null && Object.hasOwnProperty.call(message, "sourceDatabase"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceDatabase);
                                 if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
                                 return writer;
@@ -4293,6 +4850,10 @@
                                         }
                                     case 2: {
                                             message.gcsUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.sourceDatabase = reader.string();
                                             break;
                                         }
                                     case 4: {
@@ -4345,6 +4906,9 @@
                                 if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                     if (!$util.isString(message.gcsUri))
                                         return "gcsUri: string expected";
+                                if (message.sourceDatabase != null && message.hasOwnProperty("sourceDatabase"))
+                                    if (!$util.isString(message.sourceDatabase))
+                                        return "sourceDatabase: string expected";
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     switch (message.type) {
                                     default:
@@ -4387,6 +4951,8 @@
                                 }
                                 if (object.gcsUri != null)
                                     message.gcsUri = String(object.gcsUri);
+                                if (object.sourceDatabase != null)
+                                    message.sourceDatabase = String(object.sourceDatabase);
                                 switch (object.type) {
                                 default:
                                     if (typeof object.type === "number") {
@@ -4426,12 +4992,15 @@
                                 if (options.defaults) {
                                     object.databaseType = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
                                     object.gcsUri = "";
+                                    object.sourceDatabase = "";
                                     object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 }
                                 if (message.databaseType != null && message.hasOwnProperty("databaseType"))
                                     object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
                                 if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                     object.gcsUri = message.gcsUri;
+                                if (message.sourceDatabase != null && message.hasOwnProperty("sourceDatabase"))
+                                    object.sourceDatabase = message.sourceDatabase;
                                 if (message.type != null && message.hasOwnProperty("type"))
                                     object.type = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.type] : message.type;
                                 return object;
@@ -5762,6 +6331,317 @@
                         })();
     
                         return Restore;
+                    })();
+    
+                    v1.ScalingConfig = (function() {
+    
+                        /**
+                         * Properties of a ScalingConfig.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IScalingConfig
+                         * @property {google.cloud.metastore.v1.ScalingConfig.InstanceSize|null} [instanceSize] ScalingConfig instanceSize
+                         * @property {number|null} [scalingFactor] ScalingConfig scalingFactor
+                         */
+    
+                        /**
+                         * Constructs a new ScalingConfig.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents a ScalingConfig.
+                         * @implements IScalingConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IScalingConfig=} [properties] Properties to set
+                         */
+                        function ScalingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ScalingConfig instanceSize.
+                         * @member {google.cloud.metastore.v1.ScalingConfig.InstanceSize|null|undefined} instanceSize
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @instance
+                         */
+                        ScalingConfig.prototype.instanceSize = null;
+    
+                        /**
+                         * ScalingConfig scalingFactor.
+                         * @member {number|null|undefined} scalingFactor
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @instance
+                         */
+                        ScalingConfig.prototype.scalingFactor = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ScalingConfig scalingModel.
+                         * @member {"instanceSize"|"scalingFactor"|undefined} scalingModel
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ScalingConfig.prototype, "scalingModel", {
+                            get: $util.oneOfGetter($oneOfFields = ["instanceSize", "scalingFactor"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ScalingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.IScalingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.ScalingConfig} ScalingConfig instance
+                         */
+                        ScalingConfig.create = function create(properties) {
+                            return new ScalingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ScalingConfig message. Does not implicitly {@link google.cloud.metastore.v1.ScalingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.IScalingConfig} message ScalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScalingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceSize != null && Object.hasOwnProperty.call(message, "instanceSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.instanceSize);
+                            if (message.scalingFactor != null && Object.hasOwnProperty.call(message, "scalingFactor"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.scalingFactor);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ScalingConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ScalingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.IScalingConfig} message ScalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScalingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ScalingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.ScalingConfig} ScalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScalingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.ScalingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instanceSize = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.scalingFactor = reader.float();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ScalingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.ScalingConfig} ScalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScalingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ScalingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ScalingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.instanceSize != null && message.hasOwnProperty("instanceSize")) {
+                                properties.scalingModel = 1;
+                                switch (message.instanceSize) {
+                                default:
+                                    return "instanceSize: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            }
+                            if (message.scalingFactor != null && message.hasOwnProperty("scalingFactor")) {
+                                if (properties.scalingModel === 1)
+                                    return "scalingModel: multiple values";
+                                properties.scalingModel = 1;
+                                if (typeof message.scalingFactor !== "number")
+                                    return "scalingFactor: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ScalingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.ScalingConfig} ScalingConfig
+                         */
+                        ScalingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.ScalingConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.ScalingConfig();
+                            switch (object.instanceSize) {
+                            default:
+                                if (typeof object.instanceSize === "number") {
+                                    message.instanceSize = object.instanceSize;
+                                    break;
+                                }
+                                break;
+                            case "INSTANCE_SIZE_UNSPECIFIED":
+                            case 0:
+                                message.instanceSize = 0;
+                                break;
+                            case "EXTRA_SMALL":
+                            case 1:
+                                message.instanceSize = 1;
+                                break;
+                            case "SMALL":
+                            case 2:
+                                message.instanceSize = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.instanceSize = 3;
+                                break;
+                            case "LARGE":
+                            case 4:
+                                message.instanceSize = 4;
+                                break;
+                            case "EXTRA_LARGE":
+                            case 5:
+                                message.instanceSize = 5;
+                                break;
+                            }
+                            if (object.scalingFactor != null)
+                                message.scalingFactor = Number(object.scalingFactor);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ScalingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1.ScalingConfig} message ScalingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ScalingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.instanceSize != null && message.hasOwnProperty("instanceSize")) {
+                                object.instanceSize = options.enums === String ? $root.google.cloud.metastore.v1.ScalingConfig.InstanceSize[message.instanceSize] === undefined ? message.instanceSize : $root.google.cloud.metastore.v1.ScalingConfig.InstanceSize[message.instanceSize] : message.instanceSize;
+                                if (options.oneofs)
+                                    object.scalingModel = "instanceSize";
+                            }
+                            if (message.scalingFactor != null && message.hasOwnProperty("scalingFactor")) {
+                                object.scalingFactor = options.json && !isFinite(message.scalingFactor) ? String(message.scalingFactor) : message.scalingFactor;
+                                if (options.oneofs)
+                                    object.scalingModel = "scalingFactor";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ScalingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ScalingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ScalingConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ScalingConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ScalingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ScalingConfig";
+                        };
+    
+                        /**
+                         * InstanceSize enum.
+                         * @name google.cloud.metastore.v1.ScalingConfig.InstanceSize
+                         * @enum {number}
+                         * @property {number} INSTANCE_SIZE_UNSPECIFIED=0 INSTANCE_SIZE_UNSPECIFIED value
+                         * @property {number} EXTRA_SMALL=1 EXTRA_SMALL value
+                         * @property {number} SMALL=2 SMALL value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} LARGE=4 LARGE value
+                         * @property {number} EXTRA_LARGE=5 EXTRA_LARGE value
+                         */
+                        ScalingConfig.InstanceSize = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INSTANCE_SIZE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EXTRA_SMALL"] = 1;
+                            values[valuesById[2] = "SMALL"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "LARGE"] = 4;
+                            values[valuesById[5] = "EXTRA_LARGE"] = 5;
+                            return values;
+                        })();
+    
+                        return ScalingConfig;
                     })();
     
                     v1.ListServicesRequest = (function() {
@@ -11540,6 +12420,1547 @@
                         return DatabaseDumpSpec;
                     })();
     
+                    v1.QueryMetadataRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryMetadataRequest.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IQueryMetadataRequest
+                         * @property {string|null} [service] QueryMetadataRequest service
+                         * @property {string|null} [query] QueryMetadataRequest query
+                         */
+    
+                        /**
+                         * Constructs a new QueryMetadataRequest.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents a QueryMetadataRequest.
+                         * @implements IQueryMetadataRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IQueryMetadataRequest=} [properties] Properties to set
+                         */
+                        function QueryMetadataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryMetadataRequest service.
+                         * @member {string} service
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @instance
+                         */
+                        QueryMetadataRequest.prototype.service = "";
+    
+                        /**
+                         * QueryMetadataRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @instance
+                         */
+                        QueryMetadataRequest.prototype.query = "";
+    
+                        /**
+                         * Creates a new QueryMetadataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IQueryMetadataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.QueryMetadataRequest} QueryMetadataRequest instance
+                         */
+                        QueryMetadataRequest.create = function create(properties) {
+                            return new QueryMetadataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryMetadataRequest message. Does not implicitly {@link google.cloud.metastore.v1.QueryMetadataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IQueryMetadataRequest} message QueryMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryMetadataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.query);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryMetadataRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.QueryMetadataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IQueryMetadataRequest} message QueryMetadataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryMetadataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.QueryMetadataRequest} QueryMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryMetadataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.QueryMetadataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.query = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryMetadataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.QueryMetadataRequest} QueryMetadataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryMetadataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryMetadataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.QueryMetadataRequest} QueryMetadataRequest
+                         */
+                        QueryMetadataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.QueryMetadataRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.QueryMetadataRequest();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryMetadataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.QueryMetadataRequest} message QueryMetadataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryMetadataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = "";
+                                object.query = "";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryMetadataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryMetadataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryMetadataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.QueryMetadataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryMetadataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.QueryMetadataRequest";
+                        };
+    
+                        return QueryMetadataRequest;
+                    })();
+    
+                    v1.QueryMetadataResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryMetadataResponse.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IQueryMetadataResponse
+                         * @property {string|null} [resultManifestUri] QueryMetadataResponse resultManifestUri
+                         */
+    
+                        /**
+                         * Constructs a new QueryMetadataResponse.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents a QueryMetadataResponse.
+                         * @implements IQueryMetadataResponse
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IQueryMetadataResponse=} [properties] Properties to set
+                         */
+                        function QueryMetadataResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryMetadataResponse resultManifestUri.
+                         * @member {string} resultManifestUri
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @instance
+                         */
+                        QueryMetadataResponse.prototype.resultManifestUri = "";
+    
+                        /**
+                         * Creates a new QueryMetadataResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IQueryMetadataResponse=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.QueryMetadataResponse} QueryMetadataResponse instance
+                         */
+                        QueryMetadataResponse.create = function create(properties) {
+                            return new QueryMetadataResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryMetadataResponse message. Does not implicitly {@link google.cloud.metastore.v1.QueryMetadataResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IQueryMetadataResponse} message QueryMetadataResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryMetadataResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resultManifestUri != null && Object.hasOwnProperty.call(message, "resultManifestUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resultManifestUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryMetadataResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.QueryMetadataResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IQueryMetadataResponse} message QueryMetadataResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryMetadataResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryMetadataResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.QueryMetadataResponse} QueryMetadataResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryMetadataResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.QueryMetadataResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.resultManifestUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryMetadataResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.QueryMetadataResponse} QueryMetadataResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryMetadataResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryMetadataResponse message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryMetadataResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resultManifestUri != null && message.hasOwnProperty("resultManifestUri"))
+                                if (!$util.isString(message.resultManifestUri))
+                                    return "resultManifestUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.QueryMetadataResponse} QueryMetadataResponse
+                         */
+                        QueryMetadataResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.QueryMetadataResponse)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.QueryMetadataResponse();
+                            if (object.resultManifestUri != null)
+                                message.resultManifestUri = String(object.resultManifestUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryMetadataResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.QueryMetadataResponse} message QueryMetadataResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryMetadataResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.resultManifestUri = "";
+                            if (message.resultManifestUri != null && message.hasOwnProperty("resultManifestUri"))
+                                object.resultManifestUri = message.resultManifestUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryMetadataResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryMetadataResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryMetadataResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.QueryMetadataResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryMetadataResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.QueryMetadataResponse";
+                        };
+    
+                        return QueryMetadataResponse;
+                    })();
+    
+                    v1.ErrorDetails = (function() {
+    
+                        /**
+                         * Properties of an ErrorDetails.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IErrorDetails
+                         * @property {Object.<string,string>|null} [details] ErrorDetails details
+                         */
+    
+                        /**
+                         * Constructs a new ErrorDetails.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents an ErrorDetails.
+                         * @implements IErrorDetails
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IErrorDetails=} [properties] Properties to set
+                         */
+                        function ErrorDetails(properties) {
+                            this.details = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ErrorDetails details.
+                         * @member {Object.<string,string>} details
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @instance
+                         */
+                        ErrorDetails.prototype.details = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ErrorDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1.IErrorDetails=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.ErrorDetails} ErrorDetails instance
+                         */
+                        ErrorDetails.create = function create(properties) {
+                            return new ErrorDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ErrorDetails message. Does not implicitly {@link google.cloud.metastore.v1.ErrorDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1.IErrorDetails} message ErrorDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ErrorDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                for (var keys = Object.keys(message.details), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.details[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ErrorDetails message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ErrorDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1.IErrorDetails} message ErrorDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ErrorDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ErrorDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.ErrorDetails} ErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ErrorDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.ErrorDetails(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.details === $util.emptyObject)
+                                            message.details = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.details[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ErrorDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.ErrorDetails} ErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ErrorDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ErrorDetails message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ErrorDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                if (!$util.isObject(message.details))
+                                    return "details: object expected";
+                                var key = Object.keys(message.details);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.details[key[i]]))
+                                        return "details: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ErrorDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.ErrorDetails} ErrorDetails
+                         */
+                        ErrorDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.ErrorDetails)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.ErrorDetails();
+                            if (object.details) {
+                                if (typeof object.details !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1.ErrorDetails.details: object expected");
+                                message.details = {};
+                                for (var keys = Object.keys(object.details), i = 0; i < keys.length; ++i)
+                                    message.details[keys[i]] = String(object.details[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ErrorDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1.ErrorDetails} message ErrorDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ErrorDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.details = {};
+                            var keys2;
+                            if (message.details && (keys2 = Object.keys(message.details)).length) {
+                                object.details = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.details[keys2[j]] = message.details[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ErrorDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ErrorDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ErrorDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.ErrorDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ErrorDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.ErrorDetails";
+                        };
+    
+                        return ErrorDetails;
+                    })();
+    
+                    v1.MoveTableToDatabaseRequest = (function() {
+    
+                        /**
+                         * Properties of a MoveTableToDatabaseRequest.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IMoveTableToDatabaseRequest
+                         * @property {string|null} [service] MoveTableToDatabaseRequest service
+                         * @property {string|null} [tableName] MoveTableToDatabaseRequest tableName
+                         * @property {string|null} [dbName] MoveTableToDatabaseRequest dbName
+                         * @property {string|null} [destinationDbName] MoveTableToDatabaseRequest destinationDbName
+                         */
+    
+                        /**
+                         * Constructs a new MoveTableToDatabaseRequest.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents a MoveTableToDatabaseRequest.
+                         * @implements IMoveTableToDatabaseRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseRequest=} [properties] Properties to set
+                         */
+                        function MoveTableToDatabaseRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MoveTableToDatabaseRequest service.
+                         * @member {string} service
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @instance
+                         */
+                        MoveTableToDatabaseRequest.prototype.service = "";
+    
+                        /**
+                         * MoveTableToDatabaseRequest tableName.
+                         * @member {string} tableName
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @instance
+                         */
+                        MoveTableToDatabaseRequest.prototype.tableName = "";
+    
+                        /**
+                         * MoveTableToDatabaseRequest dbName.
+                         * @member {string} dbName
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @instance
+                         */
+                        MoveTableToDatabaseRequest.prototype.dbName = "";
+    
+                        /**
+                         * MoveTableToDatabaseRequest destinationDbName.
+                         * @member {string} destinationDbName
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @instance
+                         */
+                        MoveTableToDatabaseRequest.prototype.destinationDbName = "";
+    
+                        /**
+                         * Creates a new MoveTableToDatabaseRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseRequest} MoveTableToDatabaseRequest instance
+                         */
+                        MoveTableToDatabaseRequest.create = function create(properties) {
+                            return new MoveTableToDatabaseRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MoveTableToDatabaseRequest message. Does not implicitly {@link google.cloud.metastore.v1.MoveTableToDatabaseRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseRequest} message MoveTableToDatabaseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveTableToDatabaseRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.tableName != null && Object.hasOwnProperty.call(message, "tableName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tableName);
+                            if (message.dbName != null && Object.hasOwnProperty.call(message, "dbName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.dbName);
+                            if (message.destinationDbName != null && Object.hasOwnProperty.call(message, "destinationDbName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.destinationDbName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MoveTableToDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MoveTableToDatabaseRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseRequest} message MoveTableToDatabaseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveTableToDatabaseRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MoveTableToDatabaseRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseRequest} MoveTableToDatabaseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveTableToDatabaseRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.MoveTableToDatabaseRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tableName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dbName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.destinationDbName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MoveTableToDatabaseRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseRequest} MoveTableToDatabaseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveTableToDatabaseRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MoveTableToDatabaseRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MoveTableToDatabaseRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.tableName != null && message.hasOwnProperty("tableName"))
+                                if (!$util.isString(message.tableName))
+                                    return "tableName: string expected";
+                            if (message.dbName != null && message.hasOwnProperty("dbName"))
+                                if (!$util.isString(message.dbName))
+                                    return "dbName: string expected";
+                            if (message.destinationDbName != null && message.hasOwnProperty("destinationDbName"))
+                                if (!$util.isString(message.destinationDbName))
+                                    return "destinationDbName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MoveTableToDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseRequest} MoveTableToDatabaseRequest
+                         */
+                        MoveTableToDatabaseRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.MoveTableToDatabaseRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.MoveTableToDatabaseRequest();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.tableName != null)
+                                message.tableName = String(object.tableName);
+                            if (object.dbName != null)
+                                message.dbName = String(object.dbName);
+                            if (object.destinationDbName != null)
+                                message.destinationDbName = String(object.destinationDbName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MoveTableToDatabaseRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.MoveTableToDatabaseRequest} message MoveTableToDatabaseRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MoveTableToDatabaseRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = "";
+                                object.tableName = "";
+                                object.dbName = "";
+                                object.destinationDbName = "";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.tableName != null && message.hasOwnProperty("tableName"))
+                                object.tableName = message.tableName;
+                            if (message.dbName != null && message.hasOwnProperty("dbName"))
+                                object.dbName = message.dbName;
+                            if (message.destinationDbName != null && message.hasOwnProperty("destinationDbName"))
+                                object.destinationDbName = message.destinationDbName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MoveTableToDatabaseRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MoveTableToDatabaseRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MoveTableToDatabaseRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MoveTableToDatabaseRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.MoveTableToDatabaseRequest";
+                        };
+    
+                        return MoveTableToDatabaseRequest;
+                    })();
+    
+                    v1.MoveTableToDatabaseResponse = (function() {
+    
+                        /**
+                         * Properties of a MoveTableToDatabaseResponse.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IMoveTableToDatabaseResponse
+                         */
+    
+                        /**
+                         * Constructs a new MoveTableToDatabaseResponse.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents a MoveTableToDatabaseResponse.
+                         * @implements IMoveTableToDatabaseResponse
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseResponse=} [properties] Properties to set
+                         */
+                        function MoveTableToDatabaseResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new MoveTableToDatabaseResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseResponse=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseResponse} MoveTableToDatabaseResponse instance
+                         */
+                        MoveTableToDatabaseResponse.create = function create(properties) {
+                            return new MoveTableToDatabaseResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MoveTableToDatabaseResponse message. Does not implicitly {@link google.cloud.metastore.v1.MoveTableToDatabaseResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseResponse} message MoveTableToDatabaseResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveTableToDatabaseResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MoveTableToDatabaseResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.MoveTableToDatabaseResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IMoveTableToDatabaseResponse} message MoveTableToDatabaseResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveTableToDatabaseResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MoveTableToDatabaseResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseResponse} MoveTableToDatabaseResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveTableToDatabaseResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.MoveTableToDatabaseResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MoveTableToDatabaseResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseResponse} MoveTableToDatabaseResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveTableToDatabaseResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MoveTableToDatabaseResponse message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MoveTableToDatabaseResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MoveTableToDatabaseResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.MoveTableToDatabaseResponse} MoveTableToDatabaseResponse
+                         */
+                        MoveTableToDatabaseResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.MoveTableToDatabaseResponse)
+                                return object;
+                            return new $root.google.cloud.metastore.v1.MoveTableToDatabaseResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a MoveTableToDatabaseResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.MoveTableToDatabaseResponse} message MoveTableToDatabaseResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MoveTableToDatabaseResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this MoveTableToDatabaseResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MoveTableToDatabaseResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MoveTableToDatabaseResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.MoveTableToDatabaseResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MoveTableToDatabaseResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.MoveTableToDatabaseResponse";
+                        };
+    
+                        return MoveTableToDatabaseResponse;
+                    })();
+    
+                    v1.AlterMetadataResourceLocationRequest = (function() {
+    
+                        /**
+                         * Properties of an AlterMetadataResourceLocationRequest.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IAlterMetadataResourceLocationRequest
+                         * @property {string|null} [service] AlterMetadataResourceLocationRequest service
+                         * @property {string|null} [resourceName] AlterMetadataResourceLocationRequest resourceName
+                         * @property {string|null} [locationUri] AlterMetadataResourceLocationRequest locationUri
+                         */
+    
+                        /**
+                         * Constructs a new AlterMetadataResourceLocationRequest.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents an AlterMetadataResourceLocationRequest.
+                         * @implements IAlterMetadataResourceLocationRequest
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationRequest=} [properties] Properties to set
+                         */
+                        function AlterMetadataResourceLocationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AlterMetadataResourceLocationRequest service.
+                         * @member {string} service
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @instance
+                         */
+                        AlterMetadataResourceLocationRequest.prototype.service = "";
+    
+                        /**
+                         * AlterMetadataResourceLocationRequest resourceName.
+                         * @member {string} resourceName
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @instance
+                         */
+                        AlterMetadataResourceLocationRequest.prototype.resourceName = "";
+    
+                        /**
+                         * AlterMetadataResourceLocationRequest locationUri.
+                         * @member {string} locationUri
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @instance
+                         */
+                        AlterMetadataResourceLocationRequest.prototype.locationUri = "";
+    
+                        /**
+                         * Creates a new AlterMetadataResourceLocationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationRequest} AlterMetadataResourceLocationRequest instance
+                         */
+                        AlterMetadataResourceLocationRequest.create = function create(properties) {
+                            return new AlterMetadataResourceLocationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlterMetadataResourceLocationRequest message. Does not implicitly {@link google.cloud.metastore.v1.AlterMetadataResourceLocationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationRequest} message AlterMetadataResourceLocationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlterMetadataResourceLocationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceName);
+                            if (message.locationUri != null && Object.hasOwnProperty.call(message, "locationUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.locationUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlterMetadataResourceLocationRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.AlterMetadataResourceLocationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationRequest} message AlterMetadataResourceLocationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlterMetadataResourceLocationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlterMetadataResourceLocationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationRequest} AlterMetadataResourceLocationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlterMetadataResourceLocationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.service = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resourceName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.locationUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlterMetadataResourceLocationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationRequest} AlterMetadataResourceLocationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlterMetadataResourceLocationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlterMetadataResourceLocationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlterMetadataResourceLocationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                if (!$util.isString(message.resourceName))
+                                    return "resourceName: string expected";
+                            if (message.locationUri != null && message.hasOwnProperty("locationUri"))
+                                if (!$util.isString(message.locationUri))
+                                    return "locationUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlterMetadataResourceLocationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationRequest} AlterMetadataResourceLocationRequest
+                         */
+                        AlterMetadataResourceLocationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1.AlterMetadataResourceLocationRequest();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            if (object.resourceName != null)
+                                message.resourceName = String(object.resourceName);
+                            if (object.locationUri != null)
+                                message.locationUri = String(object.locationUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlterMetadataResourceLocationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {google.cloud.metastore.v1.AlterMetadataResourceLocationRequest} message AlterMetadataResourceLocationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlterMetadataResourceLocationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.service = "";
+                                object.resourceName = "";
+                                object.locationUri = "";
+                            }
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                object.resourceName = message.resourceName;
+                            if (message.locationUri != null && message.hasOwnProperty("locationUri"))
+                                object.locationUri = message.locationUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AlterMetadataResourceLocationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlterMetadataResourceLocationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlterMetadataResourceLocationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlterMetadataResourceLocationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.AlterMetadataResourceLocationRequest";
+                        };
+    
+                        return AlterMetadataResourceLocationRequest;
+                    })();
+    
+                    v1.AlterMetadataResourceLocationResponse = (function() {
+    
+                        /**
+                         * Properties of an AlterMetadataResourceLocationResponse.
+                         * @memberof google.cloud.metastore.v1
+                         * @interface IAlterMetadataResourceLocationResponse
+                         */
+    
+                        /**
+                         * Constructs a new AlterMetadataResourceLocationResponse.
+                         * @memberof google.cloud.metastore.v1
+                         * @classdesc Represents an AlterMetadataResourceLocationResponse.
+                         * @implements IAlterMetadataResourceLocationResponse
+                         * @constructor
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationResponse=} [properties] Properties to set
+                         */
+                        function AlterMetadataResourceLocationResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AlterMetadataResourceLocationResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationResponse=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationResponse} AlterMetadataResourceLocationResponse instance
+                         */
+                        AlterMetadataResourceLocationResponse.create = function create(properties) {
+                            return new AlterMetadataResourceLocationResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlterMetadataResourceLocationResponse message. Does not implicitly {@link google.cloud.metastore.v1.AlterMetadataResourceLocationResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationResponse} message AlterMetadataResourceLocationResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlterMetadataResourceLocationResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlterMetadataResourceLocationResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.AlterMetadataResourceLocationResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.IAlterMetadataResourceLocationResponse} message AlterMetadataResourceLocationResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlterMetadataResourceLocationResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlterMetadataResourceLocationResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationResponse} AlterMetadataResourceLocationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlterMetadataResourceLocationResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1.AlterMetadataResourceLocationResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlterMetadataResourceLocationResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationResponse} AlterMetadataResourceLocationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlterMetadataResourceLocationResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlterMetadataResourceLocationResponse message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlterMetadataResourceLocationResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlterMetadataResourceLocationResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1.AlterMetadataResourceLocationResponse} AlterMetadataResourceLocationResponse
+                         */
+                        AlterMetadataResourceLocationResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1.AlterMetadataResourceLocationResponse)
+                                return object;
+                            return new $root.google.cloud.metastore.v1.AlterMetadataResourceLocationResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlterMetadataResourceLocationResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {google.cloud.metastore.v1.AlterMetadataResourceLocationResponse} message AlterMetadataResourceLocationResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlterMetadataResourceLocationResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AlterMetadataResourceLocationResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlterMetadataResourceLocationResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlterMetadataResourceLocationResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1.AlterMetadataResourceLocationResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlterMetadataResourceLocationResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1.AlterMetadataResourceLocationResponse";
+                        };
+    
+                        return AlterMetadataResourceLocationResponse;
+                    })();
+    
                     v1.DataprocMetastoreFederation = (function() {
     
                         /**
@@ -12458,6 +14879,7 @@
                                 default:
                                     return "metastoreType: enum value expected";
                                 case 0:
+                                case 2:
                                 case 3:
                                     break;
                                 }
@@ -12488,6 +14910,10 @@
                             case "METASTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.metastoreType = 0;
+                                break;
+                            case "BIGQUERY":
+                            case 2:
+                                message.metastoreType = 2;
                                 break;
                             case "DATAPROC_METASTORE":
                             case 3:
@@ -12552,11 +14978,13 @@
                          * @name google.cloud.metastore.v1.BackendMetastore.MetastoreType
                          * @enum {number}
                          * @property {number} METASTORE_TYPE_UNSPECIFIED=0 METASTORE_TYPE_UNSPECIFIED value
+                         * @property {number} BIGQUERY=2 BIGQUERY value
                          * @property {number} DATAPROC_METASTORE=3 DATAPROC_METASTORE value
                          */
                         BackendMetastore.MetastoreType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "METASTORE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[2] = "BIGQUERY"] = 2;
                             values[valuesById[3] = "DATAPROC_METASTORE"] = 3;
                             return values;
                         })();
@@ -14817,6 +17245,7 @@
                          * @property {google.cloud.metastore.v1alpha.INetworkConfig|null} [networkConfig] Service networkConfig
                          * @property {google.cloud.metastore.v1alpha.Service.DatabaseType|null} [databaseType] Service databaseType
                          * @property {google.cloud.metastore.v1alpha.ITelemetryConfig|null} [telemetryConfig] Service telemetryConfig
+                         * @property {google.cloud.metastore.v1alpha.IScalingConfig|null} [scalingConfig] Service scalingConfig
                          */
     
                         /**
@@ -15003,6 +17432,14 @@
                          */
                         Service.prototype.telemetryConfig = null;
     
+                        /**
+                         * Service scalingConfig.
+                         * @member {google.cloud.metastore.v1alpha.IScalingConfig|null|undefined} scalingConfig
+                         * @memberof google.cloud.metastore.v1alpha.Service
+                         * @instance
+                         */
+                        Service.prototype.scalingConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -15084,6 +17521,8 @@
                                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.databaseType);
                             if (message.telemetryConfig != null && Object.hasOwnProperty.call(message, "telemetryConfig"))
                                 $root.google.cloud.metastore.v1alpha.TelemetryConfig.encode(message.telemetryConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.scalingConfig != null && Object.hasOwnProperty.call(message, "scalingConfig"))
+                                $root.google.cloud.metastore.v1alpha.ScalingConfig.encode(message.scalingConfig, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -15219,6 +17658,10 @@
                                     }
                                 case 23: {
                                         message.telemetryConfig = $root.google.cloud.metastore.v1alpha.TelemetryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.scalingConfig = $root.google.cloud.metastore.v1alpha.ScalingConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -15374,6 +17817,11 @@
                                 var error = $root.google.cloud.metastore.v1alpha.TelemetryConfig.verify(message.telemetryConfig);
                                 if (error)
                                     return "telemetryConfig." + error;
+                            }
+                            if (message.scalingConfig != null && message.hasOwnProperty("scalingConfig")) {
+                                var error = $root.google.cloud.metastore.v1alpha.ScalingConfig.verify(message.scalingConfig);
+                                if (error)
+                                    return "scalingConfig." + error;
                             }
                             return null;
                         };
@@ -15556,6 +18004,11 @@
                                     throw TypeError(".google.cloud.metastore.v1alpha.Service.telemetryConfig: object expected");
                                 message.telemetryConfig = $root.google.cloud.metastore.v1alpha.TelemetryConfig.fromObject(object.telemetryConfig);
                             }
+                            if (object.scalingConfig != null) {
+                                if (typeof object.scalingConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1alpha.Service.scalingConfig: object expected");
+                                message.scalingConfig = $root.google.cloud.metastore.v1alpha.ScalingConfig.fromObject(object.scalingConfig);
+                            }
                             return message;
                         };
     
@@ -15594,6 +18047,7 @@
                                 object.networkConfig = null;
                                 object.databaseType = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
                                 object.telemetryConfig = null;
+                                object.scalingConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -15644,6 +18098,8 @@
                                 object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1alpha.Service.DatabaseType[message.databaseType] : message.databaseType;
                             if (message.telemetryConfig != null && message.hasOwnProperty("telemetryConfig"))
                                 object.telemetryConfig = $root.google.cloud.metastore.v1alpha.TelemetryConfig.toObject(message.telemetryConfig, options);
+                            if (message.scalingConfig != null && message.hasOwnProperty("scalingConfig"))
+                                object.scalingConfig = $root.google.cloud.metastore.v1alpha.ScalingConfig.toObject(message.scalingConfig, options);
                             return object;
                         };
     
@@ -18315,6 +20771,7 @@
                          * @memberof google.cloud.metastore.v1alpha
                          * @interface INetworkConfig
                          * @property {Array.<google.cloud.metastore.v1alpha.NetworkConfig.IConsumer>|null} [consumers] NetworkConfig consumers
+                         * @property {boolean|null} [customRoutesEnabled] NetworkConfig customRoutesEnabled
                          */
     
                         /**
@@ -18340,6 +20797,14 @@
                          * @instance
                          */
                         NetworkConfig.prototype.consumers = $util.emptyArray;
+    
+                        /**
+                         * NetworkConfig customRoutesEnabled.
+                         * @member {boolean} customRoutesEnabled
+                         * @memberof google.cloud.metastore.v1alpha.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.customRoutesEnabled = false;
     
                         /**
                          * Creates a new NetworkConfig instance using the specified properties.
@@ -18368,6 +20833,8 @@
                             if (message.consumers != null && message.consumers.length)
                                 for (var i = 0; i < message.consumers.length; ++i)
                                     $root.google.cloud.metastore.v1alpha.NetworkConfig.Consumer.encode(message.consumers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.customRoutesEnabled != null && Object.hasOwnProperty.call(message, "customRoutesEnabled"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.customRoutesEnabled);
                             return writer;
                         };
     
@@ -18406,6 +20873,10 @@
                                         if (!(message.consumers && message.consumers.length))
                                             message.consumers = [];
                                         message.consumers.push($root.google.cloud.metastore.v1alpha.NetworkConfig.Consumer.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customRoutesEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -18452,6 +20923,9 @@
                                         return "consumers." + error;
                                 }
                             }
+                            if (message.customRoutesEnabled != null && message.hasOwnProperty("customRoutesEnabled"))
+                                if (typeof message.customRoutesEnabled !== "boolean")
+                                    return "customRoutesEnabled: boolean expected";
                             return null;
                         };
     
@@ -18477,6 +20951,8 @@
                                     message.consumers[i] = $root.google.cloud.metastore.v1alpha.NetworkConfig.Consumer.fromObject(object.consumers[i]);
                                 }
                             }
+                            if (object.customRoutesEnabled != null)
+                                message.customRoutesEnabled = Boolean(object.customRoutesEnabled);
                             return message;
                         };
     
@@ -18495,11 +20971,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.consumers = [];
+                            if (options.defaults)
+                                object.customRoutesEnabled = false;
                             if (message.consumers && message.consumers.length) {
                                 object.consumers = [];
                                 for (var j = 0; j < message.consumers.length; ++j)
                                     object.consumers[j] = $root.google.cloud.metastore.v1alpha.NetworkConfig.Consumer.toObject(message.consumers[j], options);
                             }
+                            if (message.customRoutesEnabled != null && message.hasOwnProperty("customRoutesEnabled"))
+                                object.customRoutesEnabled = message.customRoutesEnabled;
                             return object;
                         };
     
@@ -21314,6 +23794,317 @@
                         })();
     
                         return Restore;
+                    })();
+    
+                    v1alpha.ScalingConfig = (function() {
+    
+                        /**
+                         * Properties of a ScalingConfig.
+                         * @memberof google.cloud.metastore.v1alpha
+                         * @interface IScalingConfig
+                         * @property {google.cloud.metastore.v1alpha.ScalingConfig.InstanceSize|null} [instanceSize] ScalingConfig instanceSize
+                         * @property {number|null} [scalingFactor] ScalingConfig scalingFactor
+                         */
+    
+                        /**
+                         * Constructs a new ScalingConfig.
+                         * @memberof google.cloud.metastore.v1alpha
+                         * @classdesc Represents a ScalingConfig.
+                         * @implements IScalingConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1alpha.IScalingConfig=} [properties] Properties to set
+                         */
+                        function ScalingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ScalingConfig instanceSize.
+                         * @member {google.cloud.metastore.v1alpha.ScalingConfig.InstanceSize|null|undefined} instanceSize
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @instance
+                         */
+                        ScalingConfig.prototype.instanceSize = null;
+    
+                        /**
+                         * ScalingConfig scalingFactor.
+                         * @member {number|null|undefined} scalingFactor
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @instance
+                         */
+                        ScalingConfig.prototype.scalingFactor = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ScalingConfig scalingModel.
+                         * @member {"instanceSize"|"scalingFactor"|undefined} scalingModel
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ScalingConfig.prototype, "scalingModel", {
+                            get: $util.oneOfGetter($oneOfFields = ["instanceSize", "scalingFactor"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ScalingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.IScalingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1alpha.ScalingConfig} ScalingConfig instance
+                         */
+                        ScalingConfig.create = function create(properties) {
+                            return new ScalingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ScalingConfig message. Does not implicitly {@link google.cloud.metastore.v1alpha.ScalingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.IScalingConfig} message ScalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScalingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceSize != null && Object.hasOwnProperty.call(message, "instanceSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.instanceSize);
+                            if (message.scalingFactor != null && Object.hasOwnProperty.call(message, "scalingFactor"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.scalingFactor);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ScalingConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.ScalingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.IScalingConfig} message ScalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScalingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ScalingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1alpha.ScalingConfig} ScalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScalingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1alpha.ScalingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instanceSize = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.scalingFactor = reader.float();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ScalingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1alpha.ScalingConfig} ScalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScalingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ScalingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ScalingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.instanceSize != null && message.hasOwnProperty("instanceSize")) {
+                                properties.scalingModel = 1;
+                                switch (message.instanceSize) {
+                                default:
+                                    return "instanceSize: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            }
+                            if (message.scalingFactor != null && message.hasOwnProperty("scalingFactor")) {
+                                if (properties.scalingModel === 1)
+                                    return "scalingModel: multiple values";
+                                properties.scalingModel = 1;
+                                if (typeof message.scalingFactor !== "number")
+                                    return "scalingFactor: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ScalingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1alpha.ScalingConfig} ScalingConfig
+                         */
+                        ScalingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1alpha.ScalingConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1alpha.ScalingConfig();
+                            switch (object.instanceSize) {
+                            default:
+                                if (typeof object.instanceSize === "number") {
+                                    message.instanceSize = object.instanceSize;
+                                    break;
+                                }
+                                break;
+                            case "INSTANCE_SIZE_UNSPECIFIED":
+                            case 0:
+                                message.instanceSize = 0;
+                                break;
+                            case "EXTRA_SMALL":
+                            case 1:
+                                message.instanceSize = 1;
+                                break;
+                            case "SMALL":
+                            case 2:
+                                message.instanceSize = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.instanceSize = 3;
+                                break;
+                            case "LARGE":
+                            case 4:
+                                message.instanceSize = 4;
+                                break;
+                            case "EXTRA_LARGE":
+                            case 5:
+                                message.instanceSize = 5;
+                                break;
+                            }
+                            if (object.scalingFactor != null)
+                                message.scalingFactor = Number(object.scalingFactor);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ScalingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.ScalingConfig} message ScalingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ScalingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.instanceSize != null && message.hasOwnProperty("instanceSize")) {
+                                object.instanceSize = options.enums === String ? $root.google.cloud.metastore.v1alpha.ScalingConfig.InstanceSize[message.instanceSize] === undefined ? message.instanceSize : $root.google.cloud.metastore.v1alpha.ScalingConfig.InstanceSize[message.instanceSize] : message.instanceSize;
+                                if (options.oneofs)
+                                    object.scalingModel = "instanceSize";
+                            }
+                            if (message.scalingFactor != null && message.hasOwnProperty("scalingFactor")) {
+                                object.scalingFactor = options.json && !isFinite(message.scalingFactor) ? String(message.scalingFactor) : message.scalingFactor;
+                                if (options.oneofs)
+                                    object.scalingModel = "scalingFactor";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ScalingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ScalingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ScalingConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ScalingConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ScalingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ScalingConfig";
+                        };
+    
+                        /**
+                         * InstanceSize enum.
+                         * @name google.cloud.metastore.v1alpha.ScalingConfig.InstanceSize
+                         * @enum {number}
+                         * @property {number} INSTANCE_SIZE_UNSPECIFIED=0 INSTANCE_SIZE_UNSPECIFIED value
+                         * @property {number} EXTRA_SMALL=1 EXTRA_SMALL value
+                         * @property {number} SMALL=2 SMALL value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} LARGE=4 LARGE value
+                         * @property {number} EXTRA_LARGE=5 EXTRA_LARGE value
+                         */
+                        ScalingConfig.InstanceSize = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INSTANCE_SIZE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EXTRA_SMALL"] = 1;
+                            values[valuesById[2] = "SMALL"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "LARGE"] = 4;
+                            values[valuesById[5] = "EXTRA_LARGE"] = 5;
+                            return values;
+                        })();
+    
+                        return ScalingConfig;
                     })();
     
                     v1alpha.ListServicesRequest = (function() {
@@ -27952,6 +30743,244 @@
                         return QueryMetadataResponse;
                     })();
     
+                    v1alpha.ErrorDetails = (function() {
+    
+                        /**
+                         * Properties of an ErrorDetails.
+                         * @memberof google.cloud.metastore.v1alpha
+                         * @interface IErrorDetails
+                         * @property {Object.<string,string>|null} [details] ErrorDetails details
+                         */
+    
+                        /**
+                         * Constructs a new ErrorDetails.
+                         * @memberof google.cloud.metastore.v1alpha
+                         * @classdesc Represents an ErrorDetails.
+                         * @implements IErrorDetails
+                         * @constructor
+                         * @param {google.cloud.metastore.v1alpha.IErrorDetails=} [properties] Properties to set
+                         */
+                        function ErrorDetails(properties) {
+                            this.details = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ErrorDetails details.
+                         * @member {Object.<string,string>} details
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @instance
+                         */
+                        ErrorDetails.prototype.details = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ErrorDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.IErrorDetails=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1alpha.ErrorDetails} ErrorDetails instance
+                         */
+                        ErrorDetails.create = function create(properties) {
+                            return new ErrorDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ErrorDetails message. Does not implicitly {@link google.cloud.metastore.v1alpha.ErrorDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.IErrorDetails} message ErrorDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ErrorDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                for (var keys = Object.keys(message.details), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.details[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ErrorDetails message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.ErrorDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.IErrorDetails} message ErrorDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ErrorDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ErrorDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1alpha.ErrorDetails} ErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ErrorDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1alpha.ErrorDetails(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.details === $util.emptyObject)
+                                            message.details = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.details[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ErrorDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1alpha.ErrorDetails} ErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ErrorDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ErrorDetails message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ErrorDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                if (!$util.isObject(message.details))
+                                    return "details: object expected";
+                                var key = Object.keys(message.details);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.details[key[i]]))
+                                        return "details: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ErrorDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1alpha.ErrorDetails} ErrorDetails
+                         */
+                        ErrorDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1alpha.ErrorDetails)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1alpha.ErrorDetails();
+                            if (object.details) {
+                                if (typeof object.details !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1alpha.ErrorDetails.details: object expected");
+                                message.details = {};
+                                for (var keys = Object.keys(object.details), i = 0; i < keys.length; ++i)
+                                    message.details[keys[i]] = String(object.details[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ErrorDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1alpha.ErrorDetails} message ErrorDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ErrorDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.details = {};
+                            var keys2;
+                            if (message.details && (keys2 = Object.keys(message.details)).length) {
+                                object.details = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.details[keys2[j]] = message.details[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ErrorDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ErrorDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ErrorDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1alpha.ErrorDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ErrorDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1alpha.ErrorDetails";
+                        };
+    
+                        return ErrorDetails;
+                    })();
+    
                     v1alpha.MoveTableToDatabaseRequest = (function() {
     
                         /**
@@ -29743,6 +32772,7 @@
                                 default:
                                     return "metastoreType: enum value expected";
                                 case 0:
+                                case 1:
                                 case 2:
                                 case 3:
                                     break;
@@ -29774,6 +32804,10 @@
                             case "METASTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.metastoreType = 0;
+                                break;
+                            case "DATAPLEX":
+                            case 1:
+                                message.metastoreType = 1;
                                 break;
                             case "BIGQUERY":
                             case 2:
@@ -29842,12 +32876,14 @@
                          * @name google.cloud.metastore.v1alpha.BackendMetastore.MetastoreType
                          * @enum {number}
                          * @property {number} METASTORE_TYPE_UNSPECIFIED=0 METASTORE_TYPE_UNSPECIFIED value
+                         * @property {number} DATAPLEX=1 DATAPLEX value
                          * @property {number} BIGQUERY=2 BIGQUERY value
                          * @property {number} DATAPROC_METASTORE=3 DATAPROC_METASTORE value
                          */
                         BackendMetastore.MetastoreType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "METASTORE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DATAPLEX"] = 1;
                             values[valuesById[2] = "BIGQUERY"] = 2;
                             values[valuesById[3] = "DATAPROC_METASTORE"] = 3;
                             return values;
@@ -32109,6 +35145,7 @@
                          * @property {google.cloud.metastore.v1beta.INetworkConfig|null} [networkConfig] Service networkConfig
                          * @property {google.cloud.metastore.v1beta.Service.DatabaseType|null} [databaseType] Service databaseType
                          * @property {google.cloud.metastore.v1beta.ITelemetryConfig|null} [telemetryConfig] Service telemetryConfig
+                         * @property {google.cloud.metastore.v1beta.IScalingConfig|null} [scalingConfig] Service scalingConfig
                          */
     
                         /**
@@ -32295,6 +35332,14 @@
                          */
                         Service.prototype.telemetryConfig = null;
     
+                        /**
+                         * Service scalingConfig.
+                         * @member {google.cloud.metastore.v1beta.IScalingConfig|null|undefined} scalingConfig
+                         * @memberof google.cloud.metastore.v1beta.Service
+                         * @instance
+                         */
+                        Service.prototype.scalingConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -32376,6 +35421,8 @@
                                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.databaseType);
                             if (message.telemetryConfig != null && Object.hasOwnProperty.call(message, "telemetryConfig"))
                                 $root.google.cloud.metastore.v1beta.TelemetryConfig.encode(message.telemetryConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.scalingConfig != null && Object.hasOwnProperty.call(message, "scalingConfig"))
+                                $root.google.cloud.metastore.v1beta.ScalingConfig.encode(message.scalingConfig, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -32511,6 +35558,10 @@
                                     }
                                 case 23: {
                                         message.telemetryConfig = $root.google.cloud.metastore.v1beta.TelemetryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.scalingConfig = $root.google.cloud.metastore.v1beta.ScalingConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -32666,6 +35717,11 @@
                                 var error = $root.google.cloud.metastore.v1beta.TelemetryConfig.verify(message.telemetryConfig);
                                 if (error)
                                     return "telemetryConfig." + error;
+                            }
+                            if (message.scalingConfig != null && message.hasOwnProperty("scalingConfig")) {
+                                var error = $root.google.cloud.metastore.v1beta.ScalingConfig.verify(message.scalingConfig);
+                                if (error)
+                                    return "scalingConfig." + error;
                             }
                             return null;
                         };
@@ -32848,6 +35904,11 @@
                                     throw TypeError(".google.cloud.metastore.v1beta.Service.telemetryConfig: object expected");
                                 message.telemetryConfig = $root.google.cloud.metastore.v1beta.TelemetryConfig.fromObject(object.telemetryConfig);
                             }
+                            if (object.scalingConfig != null) {
+                                if (typeof object.scalingConfig !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.Service.scalingConfig: object expected");
+                                message.scalingConfig = $root.google.cloud.metastore.v1beta.ScalingConfig.fromObject(object.scalingConfig);
+                            }
                             return message;
                         };
     
@@ -32886,6 +35947,7 @@
                                 object.networkConfig = null;
                                 object.databaseType = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
                                 object.telemetryConfig = null;
+                                object.scalingConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -32936,6 +35998,8 @@
                                 object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1beta.Service.DatabaseType[message.databaseType] : message.databaseType;
                             if (message.telemetryConfig != null && message.hasOwnProperty("telemetryConfig"))
                                 object.telemetryConfig = $root.google.cloud.metastore.v1beta.TelemetryConfig.toObject(message.telemetryConfig, options);
+                            if (message.scalingConfig != null && message.hasOwnProperty("scalingConfig"))
+                                object.scalingConfig = $root.google.cloud.metastore.v1beta.ScalingConfig.toObject(message.scalingConfig, options);
                             return object;
                         };
     
@@ -35607,6 +38671,7 @@
                          * @memberof google.cloud.metastore.v1beta
                          * @interface INetworkConfig
                          * @property {Array.<google.cloud.metastore.v1beta.NetworkConfig.IConsumer>|null} [consumers] NetworkConfig consumers
+                         * @property {boolean|null} [customRoutesEnabled] NetworkConfig customRoutesEnabled
                          */
     
                         /**
@@ -35632,6 +38697,14 @@
                          * @instance
                          */
                         NetworkConfig.prototype.consumers = $util.emptyArray;
+    
+                        /**
+                         * NetworkConfig customRoutesEnabled.
+                         * @member {boolean} customRoutesEnabled
+                         * @memberof google.cloud.metastore.v1beta.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.customRoutesEnabled = false;
     
                         /**
                          * Creates a new NetworkConfig instance using the specified properties.
@@ -35660,6 +38733,8 @@
                             if (message.consumers != null && message.consumers.length)
                                 for (var i = 0; i < message.consumers.length; ++i)
                                     $root.google.cloud.metastore.v1beta.NetworkConfig.Consumer.encode(message.consumers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.customRoutesEnabled != null && Object.hasOwnProperty.call(message, "customRoutesEnabled"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.customRoutesEnabled);
                             return writer;
                         };
     
@@ -35698,6 +38773,10 @@
                                         if (!(message.consumers && message.consumers.length))
                                             message.consumers = [];
                                         message.consumers.push($root.google.cloud.metastore.v1beta.NetworkConfig.Consumer.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customRoutesEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -35744,6 +38823,9 @@
                                         return "consumers." + error;
                                 }
                             }
+                            if (message.customRoutesEnabled != null && message.hasOwnProperty("customRoutesEnabled"))
+                                if (typeof message.customRoutesEnabled !== "boolean")
+                                    return "customRoutesEnabled: boolean expected";
                             return null;
                         };
     
@@ -35769,6 +38851,8 @@
                                     message.consumers[i] = $root.google.cloud.metastore.v1beta.NetworkConfig.Consumer.fromObject(object.consumers[i]);
                                 }
                             }
+                            if (object.customRoutesEnabled != null)
+                                message.customRoutesEnabled = Boolean(object.customRoutesEnabled);
                             return message;
                         };
     
@@ -35787,11 +38871,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.consumers = [];
+                            if (options.defaults)
+                                object.customRoutesEnabled = false;
                             if (message.consumers && message.consumers.length) {
                                 object.consumers = [];
                                 for (var j = 0; j < message.consumers.length; ++j)
                                     object.consumers[j] = $root.google.cloud.metastore.v1beta.NetworkConfig.Consumer.toObject(message.consumers[j], options);
                             }
+                            if (message.customRoutesEnabled != null && message.hasOwnProperty("customRoutesEnabled"))
+                                object.customRoutesEnabled = message.customRoutesEnabled;
                             return object;
                         };
     
@@ -38606,6 +41694,317 @@
                         })();
     
                         return Restore;
+                    })();
+    
+                    v1beta.ScalingConfig = (function() {
+    
+                        /**
+                         * Properties of a ScalingConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IScalingConfig
+                         * @property {google.cloud.metastore.v1beta.ScalingConfig.InstanceSize|null} [instanceSize] ScalingConfig instanceSize
+                         * @property {number|null} [scalingFactor] ScalingConfig scalingFactor
+                         */
+    
+                        /**
+                         * Constructs a new ScalingConfig.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents a ScalingConfig.
+                         * @implements IScalingConfig
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IScalingConfig=} [properties] Properties to set
+                         */
+                        function ScalingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ScalingConfig instanceSize.
+                         * @member {google.cloud.metastore.v1beta.ScalingConfig.InstanceSize|null|undefined} instanceSize
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @instance
+                         */
+                        ScalingConfig.prototype.instanceSize = null;
+    
+                        /**
+                         * ScalingConfig scalingFactor.
+                         * @member {number|null|undefined} scalingFactor
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @instance
+                         */
+                        ScalingConfig.prototype.scalingFactor = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ScalingConfig scalingModel.
+                         * @member {"instanceSize"|"scalingFactor"|undefined} scalingModel
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ScalingConfig.prototype, "scalingModel", {
+                            get: $util.oneOfGetter($oneOfFields = ["instanceSize", "scalingFactor"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ScalingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IScalingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ScalingConfig} ScalingConfig instance
+                         */
+                        ScalingConfig.create = function create(properties) {
+                            return new ScalingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ScalingConfig message. Does not implicitly {@link google.cloud.metastore.v1beta.ScalingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IScalingConfig} message ScalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScalingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceSize != null && Object.hasOwnProperty.call(message, "instanceSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.instanceSize);
+                            if (message.scalingFactor != null && Object.hasOwnProperty.call(message, "scalingFactor"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.scalingFactor);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ScalingConfig message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ScalingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IScalingConfig} message ScalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScalingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ScalingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ScalingConfig} ScalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScalingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ScalingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instanceSize = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.scalingFactor = reader.float();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ScalingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ScalingConfig} ScalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScalingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ScalingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ScalingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.instanceSize != null && message.hasOwnProperty("instanceSize")) {
+                                properties.scalingModel = 1;
+                                switch (message.instanceSize) {
+                                default:
+                                    return "instanceSize: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            }
+                            if (message.scalingFactor != null && message.hasOwnProperty("scalingFactor")) {
+                                if (properties.scalingModel === 1)
+                                    return "scalingModel: multiple values";
+                                properties.scalingModel = 1;
+                                if (typeof message.scalingFactor !== "number")
+                                    return "scalingFactor: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ScalingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ScalingConfig} ScalingConfig
+                         */
+                        ScalingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ScalingConfig)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ScalingConfig();
+                            switch (object.instanceSize) {
+                            default:
+                                if (typeof object.instanceSize === "number") {
+                                    message.instanceSize = object.instanceSize;
+                                    break;
+                                }
+                                break;
+                            case "INSTANCE_SIZE_UNSPECIFIED":
+                            case 0:
+                                message.instanceSize = 0;
+                                break;
+                            case "EXTRA_SMALL":
+                            case 1:
+                                message.instanceSize = 1;
+                                break;
+                            case "SMALL":
+                            case 2:
+                                message.instanceSize = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.instanceSize = 3;
+                                break;
+                            case "LARGE":
+                            case 4:
+                                message.instanceSize = 4;
+                                break;
+                            case "EXTRA_LARGE":
+                            case 5:
+                                message.instanceSize = 5;
+                                break;
+                            }
+                            if (object.scalingFactor != null)
+                                message.scalingFactor = Number(object.scalingFactor);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ScalingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ScalingConfig} message ScalingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ScalingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.instanceSize != null && message.hasOwnProperty("instanceSize")) {
+                                object.instanceSize = options.enums === String ? $root.google.cloud.metastore.v1beta.ScalingConfig.InstanceSize[message.instanceSize] === undefined ? message.instanceSize : $root.google.cloud.metastore.v1beta.ScalingConfig.InstanceSize[message.instanceSize] : message.instanceSize;
+                                if (options.oneofs)
+                                    object.scalingModel = "instanceSize";
+                            }
+                            if (message.scalingFactor != null && message.hasOwnProperty("scalingFactor")) {
+                                object.scalingFactor = options.json && !isFinite(message.scalingFactor) ? String(message.scalingFactor) : message.scalingFactor;
+                                if (options.oneofs)
+                                    object.scalingModel = "scalingFactor";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ScalingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ScalingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ScalingConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ScalingConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ScalingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ScalingConfig";
+                        };
+    
+                        /**
+                         * InstanceSize enum.
+                         * @name google.cloud.metastore.v1beta.ScalingConfig.InstanceSize
+                         * @enum {number}
+                         * @property {number} INSTANCE_SIZE_UNSPECIFIED=0 INSTANCE_SIZE_UNSPECIFIED value
+                         * @property {number} EXTRA_SMALL=1 EXTRA_SMALL value
+                         * @property {number} SMALL=2 SMALL value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} LARGE=4 LARGE value
+                         * @property {number} EXTRA_LARGE=5 EXTRA_LARGE value
+                         */
+                        ScalingConfig.InstanceSize = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INSTANCE_SIZE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EXTRA_SMALL"] = 1;
+                            values[valuesById[2] = "SMALL"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "LARGE"] = 4;
+                            values[valuesById[5] = "EXTRA_LARGE"] = 5;
+                            return values;
+                        })();
+    
+                        return ScalingConfig;
                     })();
     
                     v1beta.ListServicesRequest = (function() {
@@ -45244,6 +48643,244 @@
                         return QueryMetadataResponse;
                     })();
     
+                    v1beta.ErrorDetails = (function() {
+    
+                        /**
+                         * Properties of an ErrorDetails.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @interface IErrorDetails
+                         * @property {Object.<string,string>|null} [details] ErrorDetails details
+                         */
+    
+                        /**
+                         * Constructs a new ErrorDetails.
+                         * @memberof google.cloud.metastore.v1beta
+                         * @classdesc Represents an ErrorDetails.
+                         * @implements IErrorDetails
+                         * @constructor
+                         * @param {google.cloud.metastore.v1beta.IErrorDetails=} [properties] Properties to set
+                         */
+                        function ErrorDetails(properties) {
+                            this.details = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ErrorDetails details.
+                         * @member {Object.<string,string>} details
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @instance
+                         */
+                        ErrorDetails.prototype.details = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ErrorDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IErrorDetails=} [properties] Properties to set
+                         * @returns {google.cloud.metastore.v1beta.ErrorDetails} ErrorDetails instance
+                         */
+                        ErrorDetails.create = function create(properties) {
+                            return new ErrorDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ErrorDetails message. Does not implicitly {@link google.cloud.metastore.v1beta.ErrorDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IErrorDetails} message ErrorDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ErrorDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                for (var keys = Object.keys(message.details), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.details[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ErrorDetails message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.ErrorDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.IErrorDetails} message ErrorDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ErrorDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ErrorDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.metastore.v1beta.ErrorDetails} ErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ErrorDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.metastore.v1beta.ErrorDetails(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.details === $util.emptyObject)
+                                            message.details = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.details[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ErrorDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.metastore.v1beta.ErrorDetails} ErrorDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ErrorDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ErrorDetails message.
+                         * @function verify
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ErrorDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                if (!$util.isObject(message.details))
+                                    return "details: object expected";
+                                var key = Object.keys(message.details);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.details[key[i]]))
+                                        return "details: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ErrorDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.metastore.v1beta.ErrorDetails} ErrorDetails
+                         */
+                        ErrorDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.metastore.v1beta.ErrorDetails)
+                                return object;
+                            var message = new $root.google.cloud.metastore.v1beta.ErrorDetails();
+                            if (object.details) {
+                                if (typeof object.details !== "object")
+                                    throw TypeError(".google.cloud.metastore.v1beta.ErrorDetails.details: object expected");
+                                message.details = {};
+                                for (var keys = Object.keys(object.details), i = 0; i < keys.length; ++i)
+                                    message.details[keys[i]] = String(object.details[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ErrorDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {google.cloud.metastore.v1beta.ErrorDetails} message ErrorDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ErrorDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.details = {};
+                            var keys2;
+                            if (message.details && (keys2 = Object.keys(message.details)).length) {
+                                object.details = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.details[keys2[j]] = message.details[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ErrorDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ErrorDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ErrorDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.metastore.v1beta.ErrorDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ErrorDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.metastore.v1beta.ErrorDetails";
+                        };
+    
+                        return ErrorDetails;
+                    })();
+    
                     v1beta.MoveTableToDatabaseRequest = (function() {
     
                         /**
@@ -47035,6 +50672,7 @@
                                 default:
                                     return "metastoreType: enum value expected";
                                 case 0:
+                                case 1:
                                 case 2:
                                 case 3:
                                     break;
@@ -47066,6 +50704,10 @@
                             case "METASTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.metastoreType = 0;
+                                break;
+                            case "DATAPLEX":
+                            case 1:
+                                message.metastoreType = 1;
                                 break;
                             case "BIGQUERY":
                             case 2:
@@ -47134,12 +50776,14 @@
                          * @name google.cloud.metastore.v1beta.BackendMetastore.MetastoreType
                          * @enum {number}
                          * @property {number} METASTORE_TYPE_UNSPECIFIED=0 METASTORE_TYPE_UNSPECIFIED value
+                         * @property {number} DATAPLEX=1 DATAPLEX value
                          * @property {number} BIGQUERY=2 BIGQUERY value
                          * @property {number} DATAPROC_METASTORE=3 DATAPROC_METASTORE value
                          */
                         BackendMetastore.MetastoreType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "METASTORE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DATAPLEX"] = 1;
                             values[valuesById[2] = "BIGQUERY"] = 2;
                             values[valuesById[3] = "DATAPROC_METASTORE"] = 3;
                             return values;

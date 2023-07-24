@@ -775,7 +775,7 @@ export class DataScanServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the DataScanJob:
-   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
    *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {google.cloud.dataplex.v1.GetDataScanJobRequest.DataScanJobView} [request.view]
@@ -879,6 +879,9 @@ export class DataScanServiceClient {
    *   * Must end with a number or a letter.
    *   * Must be between 1-63 characters.
    *   * Must be unique within the customer project / location.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1021,6 +1024,9 @@ export class DataScanServiceClient {
    *   Only fields specified in `update_mask` are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1305,7 +1311,7 @@ export class DataScanServiceClient {
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of dataScans to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 scans will be returned.
+   *   fewer than this value. If unspecified, at most 500 scans will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListDataScans` call. Provide
@@ -1410,7 +1416,7 @@ export class DataScanServiceClient {
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of dataScans to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 scans will be returned.
+   *   fewer than this value. If unspecified, at most 500 scans will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListDataScans` call. Provide
@@ -1469,7 +1475,7 @@ export class DataScanServiceClient {
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of dataScans to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 scans will be returned.
+   *   fewer than this value. If unspecified, at most 500 scans will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListDataScans` call. Provide

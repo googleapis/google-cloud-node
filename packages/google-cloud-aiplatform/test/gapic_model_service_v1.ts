@@ -1524,6 +1524,204 @@ describe('v1.ModelServiceClient', () => {
     });
   });
 
+  describe('updateExplanationDataset', () => {
+    it('invokes updateExplanationDataset without error', async () => {
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateExplanationDataset =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateExplanationDataset(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExplanationDataset without error using callback', async () => {
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateExplanationDataset =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateExplanationDataset(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+              protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetResponse,
+        protos.google.cloud.aiplatform.v1.IUpdateExplanationDatasetOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExplanationDataset with call error', async () => {
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExplanationDataset = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateExplanationDataset(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExplanationDataset with LRO error', async () => {
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateExplanationDatasetRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExplanationDataset = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateExplanationDataset(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExplanationDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateExplanationDatasetProgress without error', async () => {
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateExplanationDatasetProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateExplanationDatasetProgress with error', async () => {
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateExplanationDatasetProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteModel', () => {
     it('invokes deleteModel without error', async () => {
       const client = new modelserviceModule.v1.ModelServiceClient({
@@ -5074,70 +5272,6 @@ describe('v1.ModelServiceClient', () => {
       });
     });
 
-    describe('endpoint', () => {
-      const fakePath = '/rendered/path/endpoint';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        endpoint: 'endpointValue',
-      };
-      const client = new modelserviceModule.v1.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.endpointPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.endpointPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('endpointPath', () => {
-        const result = client.endpointPath(
-          'projectValue',
-          'locationValue',
-          'endpointValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.endpointPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEndpointName', () => {
-        const result = client.matchProjectFromEndpointName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEndpointName', () => {
-        const result = client.matchLocationFromEndpointName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEndpointFromEndpointName', () => {
-        const result = client.matchEndpointFromEndpointName(fakePath);
-        assert.strictEqual(result, 'endpointValue');
-        assert(
-          (client.pathTemplates.endpointPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('entityType', () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
@@ -6369,6 +6503,230 @@ describe('v1.ModelServiceClient', () => {
         assert.strictEqual(result, 'pipelineJobValue');
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationEndpoint', () => {
+      const fakePath = '/rendered/path/projectLocationEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        endpoint: 'endpointValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationEndpointPath', () => {
+        const result = client.projectLocationEndpointPath(
+          'projectValue',
+          'locationValue',
+          'endpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationEndpointName', () => {
+        const result =
+          client.matchProjectFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationEndpointName', () => {
+        const result =
+          client.matchLocationFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEndpointFromProjectLocationEndpointName', () => {
+        const result =
+          client.matchEndpointFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'endpointValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationPublisherModel', () => {
+      const fakePath = '/rendered/path/projectLocationPublisherModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationPublisherModelPath', () => {
+        const result = client.projectLocationPublisherModelPath(
+          'projectValue',
+          'locationValue',
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPublisherFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchPublisherFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromProjectLocationPublisherModelName', () => {
+        const result =
+          client.matchModelFromProjectLocationPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('publisherModel', () => {
+      const fakePath = '/rendered/path/publisherModel';
+      const expectedParameters = {
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.publisherModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.publisherModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('publisherModelPath', () => {
+        const result = client.publisherModelPath(
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPublisherFromPublisherModelName', () => {
+        const result = client.matchPublisherFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromPublisherModelName', () => {
+        const result = client.matchModelFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

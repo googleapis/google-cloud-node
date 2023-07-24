@@ -90,6 +90,11 @@
                 "renameTagTemplateField"
               ]
             },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "renameTagTemplateFieldEnumValue"
+              ]
+            },
             "DeleteTagTemplateField": {
               "methods": [
                 "deleteTagTemplateField"
@@ -236,6 +241,11 @@
             "RenameTagTemplateField": {
               "methods": [
                 "renameTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "renameTagTemplateFieldEnumValue"
               ]
             },
             "DeleteTagTemplateField": {

@@ -34,9 +34,9 @@ function main(name) {
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
    *  If the caller does not have permission to delete the
    *  Document google.cloud.discoveryengine.v1beta.Document, regardless of
-   *  whether or not it exists, a PERMISSION_DENIED error is returned.
+   *  whether or not it exists, a `PERMISSION_DENIED` error is returned.
    *  If the Document google.cloud.discoveryengine.v1beta.Document  to delete
-   *  does not exist, a NOT_FOUND error is returned.
+   *  does not exist, a `NOT_FOUND` error is returned.
    */
   // const name = 'abc123'
 

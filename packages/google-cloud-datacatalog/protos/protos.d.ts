@@ -473,6 +473,8 @@ export namespace google {
                     CLOUD_PUBSUB = 2,
                     DATAPROC_METASTORE = 3,
                     DATAPLEX = 4,
+                    CLOUD_SPANNER = 6,
+                    CLOUD_BIGTABLE = 7,
                     CLOUD_SQL = 8,
                     LOOKER = 9
                 }
@@ -1710,6 +1712,9 @@ export namespace google {
                     /** SearchCatalogResponse results */
                     results?: (google.cloud.datacatalog.v1.ISearchCatalogResult[]|null);
 
+                    /** SearchCatalogResponse totalSize */
+                    totalSize?: (number|null);
+
                     /** SearchCatalogResponse nextPageToken */
                     nextPageToken?: (string|null);
 
@@ -1728,6 +1733,9 @@ export namespace google {
 
                     /** SearchCatalogResponse results. */
                     public results: google.cloud.datacatalog.v1.ISearchCatalogResult[];
+
+                    /** SearchCatalogResponse totalSize. */
+                    public totalSize: number;
 
                     /** SearchCatalogResponse nextPageToken. */
                     public nextPageToken: string;
@@ -2860,6 +2868,12 @@ export namespace google {
 
                     /** LookupEntryRequest fullyQualifiedName */
                     fullyQualifiedName?: (string|null);
+
+                    /** LookupEntryRequest project */
+                    project?: (string|null);
+
+                    /** LookupEntryRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a LookupEntryRequest. */
@@ -2879,6 +2893,12 @@ export namespace google {
 
                     /** LookupEntryRequest fullyQualifiedName. */
                     public fullyQualifiedName?: (string|null);
+
+                    /** LookupEntryRequest project. */
+                    public project: string;
+
+                    /** LookupEntryRequest location. */
+                    public location: string;
 
                     /** LookupEntryRequest targetName. */
                     public targetName?: ("linkedResource"|"sqlResource"|"fullyQualifiedName");
@@ -2991,6 +3011,9 @@ export namespace google {
                     /** Entry lookerSystemSpec */
                     lookerSystemSpec?: (google.cloud.datacatalog.v1.ILookerSystemSpec|null);
 
+                    /** Entry cloudBigtableSystemSpec */
+                    cloudBigtableSystemSpec?: (google.cloud.datacatalog.v1.ICloudBigtableSystemSpec|null);
+
                     /** Entry gcsFilesetSpec */
                     gcsFilesetSpec?: (google.cloud.datacatalog.v1.IGcsFilesetSpec|null);
 
@@ -3011,6 +3034,9 @@ export namespace google {
 
                     /** Entry filesetSpec */
                     filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
+
+                    /** Entry serviceSpec */
+                    serviceSpec?: (google.cloud.datacatalog.v1.IServiceSpec|null);
 
                     /** Entry displayName */
                     displayName?: (string|null);
@@ -3076,6 +3102,9 @@ export namespace google {
                     /** Entry lookerSystemSpec. */
                     public lookerSystemSpec?: (google.cloud.datacatalog.v1.ILookerSystemSpec|null);
 
+                    /** Entry cloudBigtableSystemSpec. */
+                    public cloudBigtableSystemSpec?: (google.cloud.datacatalog.v1.ICloudBigtableSystemSpec|null);
+
                     /** Entry gcsFilesetSpec. */
                     public gcsFilesetSpec?: (google.cloud.datacatalog.v1.IGcsFilesetSpec|null);
 
@@ -3096,6 +3125,9 @@ export namespace google {
 
                     /** Entry filesetSpec. */
                     public filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
+
+                    /** Entry serviceSpec. */
+                    public serviceSpec?: (google.cloud.datacatalog.v1.IServiceSpec|null);
 
                     /** Entry displayName. */
                     public displayName: string;
@@ -3131,13 +3163,13 @@ export namespace google {
                     public system?: ("integratedSystem"|"userSpecifiedSystem");
 
                     /** Entry systemSpec. */
-                    public systemSpec?: ("sqlDatabaseSystemSpec"|"lookerSystemSpec");
+                    public systemSpec?: ("sqlDatabaseSystemSpec"|"lookerSystemSpec"|"cloudBigtableSystemSpec");
 
                     /** Entry typeSpec. */
                     public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
 
                     /** Entry spec. */
-                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"filesetSpec");
+                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"filesetSpec"|"serviceSpec");
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -4142,6 +4174,418 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LookerSystemSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudBigtableSystemSpec. */
+                interface ICloudBigtableSystemSpec {
+
+                    /** CloudBigtableSystemSpec instanceDisplayName */
+                    instanceDisplayName?: (string|null);
+                }
+
+                /** Represents a CloudBigtableSystemSpec. */
+                class CloudBigtableSystemSpec implements ICloudBigtableSystemSpec {
+
+                    /**
+                     * Constructs a new CloudBigtableSystemSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec);
+
+                    /** CloudBigtableSystemSpec instanceDisplayName. */
+                    public instanceDisplayName: string;
+
+                    /**
+                     * Creates a new CloudBigtableSystemSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudBigtableSystemSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Encodes the specified CloudBigtableSystemSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableSystemSpec.verify|verify} messages.
+                     * @param message CloudBigtableSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudBigtableSystemSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableSystemSpec.verify|verify} messages.
+                     * @param message CloudBigtableSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ICloudBigtableSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudBigtableSystemSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudBigtableSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Decodes a CloudBigtableSystemSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudBigtableSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Verifies a CloudBigtableSystemSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudBigtableSystemSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudBigtableSystemSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudBigtableSystemSpec;
+
+                    /**
+                     * Creates a plain object from a CloudBigtableSystemSpec message. Also converts values to other types if specified.
+                     * @param message CloudBigtableSystemSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.CloudBigtableSystemSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudBigtableSystemSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudBigtableSystemSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudBigtableInstanceSpec. */
+                interface ICloudBigtableInstanceSpec {
+
+                    /** CloudBigtableInstanceSpec cloudBigtableClusterSpecs */
+                    cloudBigtableClusterSpecs?: (google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec[]|null);
+                }
+
+                /** Represents a CloudBigtableInstanceSpec. */
+                class CloudBigtableInstanceSpec implements ICloudBigtableInstanceSpec {
+
+                    /**
+                     * Constructs a new CloudBigtableInstanceSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec);
+
+                    /** CloudBigtableInstanceSpec cloudBigtableClusterSpecs. */
+                    public cloudBigtableClusterSpecs: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec[];
+
+                    /**
+                     * Creates a new CloudBigtableInstanceSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudBigtableInstanceSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Encodes the specified CloudBigtableInstanceSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.verify|verify} messages.
+                     * @param message CloudBigtableInstanceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudBigtableInstanceSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.verify|verify} messages.
+                     * @param message CloudBigtableInstanceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudBigtableInstanceSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudBigtableInstanceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Decodes a CloudBigtableInstanceSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudBigtableInstanceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Verifies a CloudBigtableInstanceSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudBigtableInstanceSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudBigtableInstanceSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec;
+
+                    /**
+                     * Creates a plain object from a CloudBigtableInstanceSpec message. Also converts values to other types if specified.
+                     * @param message CloudBigtableInstanceSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudBigtableInstanceSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudBigtableInstanceSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CloudBigtableInstanceSpec {
+
+                    /** Properties of a CloudBigtableClusterSpec. */
+                    interface ICloudBigtableClusterSpec {
+
+                        /** CloudBigtableClusterSpec displayName */
+                        displayName?: (string|null);
+
+                        /** CloudBigtableClusterSpec location */
+                        location?: (string|null);
+
+                        /** CloudBigtableClusterSpec type */
+                        type?: (string|null);
+
+                        /** CloudBigtableClusterSpec linkedResource */
+                        linkedResource?: (string|null);
+                    }
+
+                    /** Represents a CloudBigtableClusterSpec. */
+                    class CloudBigtableClusterSpec implements ICloudBigtableClusterSpec {
+
+                        /**
+                         * Constructs a new CloudBigtableClusterSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec);
+
+                        /** CloudBigtableClusterSpec displayName. */
+                        public displayName: string;
+
+                        /** CloudBigtableClusterSpec location. */
+                        public location: string;
+
+                        /** CloudBigtableClusterSpec type. */
+                        public type: string;
+
+                        /** CloudBigtableClusterSpec linkedResource. */
+                        public linkedResource: string;
+
+                        /**
+                         * Creates a new CloudBigtableClusterSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudBigtableClusterSpec instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Encodes the specified CloudBigtableClusterSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec.verify|verify} messages.
+                         * @param message CloudBigtableClusterSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudBigtableClusterSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec.verify|verify} messages.
+                         * @param message CloudBigtableClusterSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.ICloudBigtableClusterSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudBigtableClusterSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudBigtableClusterSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Decodes a CloudBigtableClusterSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudBigtableClusterSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Verifies a CloudBigtableClusterSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudBigtableClusterSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudBigtableClusterSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec;
+
+                        /**
+                         * Creates a plain object from a CloudBigtableClusterSpec message. Also converts values to other types if specified.
+                         * @param message CloudBigtableClusterSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudBigtableClusterSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudBigtableClusterSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ServiceSpec. */
+                interface IServiceSpec {
+
+                    /** ServiceSpec cloudBigtableInstanceSpec */
+                    cloudBigtableInstanceSpec?: (google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec|null);
+                }
+
+                /** Represents a ServiceSpec. */
+                class ServiceSpec implements IServiceSpec {
+
+                    /**
+                     * Constructs a new ServiceSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IServiceSpec);
+
+                    /** ServiceSpec cloudBigtableInstanceSpec. */
+                    public cloudBigtableInstanceSpec?: (google.cloud.datacatalog.v1.ICloudBigtableInstanceSpec|null);
+
+                    /** ServiceSpec systemSpec. */
+                    public systemSpec?: "cloudBigtableInstanceSpec";
+
+                    /**
+                     * Creates a new ServiceSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IServiceSpec): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Encodes the specified ServiceSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.ServiceSpec.verify|verify} messages.
+                     * @param message ServiceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IServiceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ServiceSpec.verify|verify} messages.
+                     * @param message ServiceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IServiceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Decodes a ServiceSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Verifies a ServiceSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ServiceSpec;
+
+                    /**
+                     * Creates a plain object from a ServiceSpec message. Also converts values to other types if specified.
+                     * @param message ServiceSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ServiceSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceSpec
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7060,6 +7504,9 @@ export namespace google {
 
                     /** ImportEntriesRequest gcsBucketPath */
                     gcsBucketPath?: (string|null);
+
+                    /** ImportEntriesRequest jobId */
+                    jobId?: (string|null);
                 }
 
                 /** Represents an ImportEntriesRequest. */
@@ -7076,6 +7523,9 @@ export namespace google {
 
                     /** ImportEntriesRequest gcsBucketPath. */
                     public gcsBucketPath?: (string|null);
+
+                    /** ImportEntriesRequest jobId. */
+                    public jobId: string;
 
                     /** ImportEntriesRequest source. */
                     public source?: "gcsBucketPath";
@@ -14431,6 +14881,13 @@ export namespace google {
                     CLOUD_PUBSUB = 2
                 }
 
+                /** ManagingSystem enum. */
+                enum ManagingSystem {
+                    MANAGING_SYSTEM_UNSPECIFIED = 0,
+                    MANAGING_SYSTEM_DATAPLEX = 1,
+                    MANAGING_SYSTEM_OTHER = 2
+                }
+
                 /** Represents a DataCatalog */
                 class DataCatalog extends $protobuf.rpc.Service {
 
@@ -14718,6 +15175,20 @@ export namespace google {
                     public renameTagTemplateField(request: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest): Promise<google.cloud.datacatalog.v1beta1.TagTemplateField>;
 
                     /**
+                     * Calls RenameTagTemplateFieldEnumValue.
+                     * @param request RenameTagTemplateFieldEnumValueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TagTemplateField
+                     */
+                    public renameTagTemplateFieldEnumValue(request: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest, callback: google.cloud.datacatalog.v1beta1.DataCatalog.RenameTagTemplateFieldEnumValueCallback): void;
+
+                    /**
+                     * Calls RenameTagTemplateFieldEnumValue.
+                     * @param request RenameTagTemplateFieldEnumValueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public renameTagTemplateFieldEnumValue(request: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest): Promise<google.cloud.datacatalog.v1beta1.TagTemplateField>;
+
+                    /**
                      * Calls DeleteTagTemplateField.
                      * @param request DeleteTagTemplateFieldRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -14966,6 +15437,13 @@ export namespace google {
                     type RenameTagTemplateFieldCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.TagTemplateField) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog|renameTagTemplateFieldEnumValue}.
+                     * @param error Error, if any
+                     * @param [response] TagTemplateField
+                     */
+                    type RenameTagTemplateFieldEnumValueCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.TagTemplateField) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog|deleteTagTemplateField}.
                      * @param error Error, if any
                      * @param [response] Empty
@@ -15156,6 +15634,9 @@ export namespace google {
 
                         /** Scope includeGcpPublicDatasets */
                         includeGcpPublicDatasets?: (boolean|null);
+
+                        /** Scope restrictedLocations */
+                        restrictedLocations?: (string[]|null);
                     }
 
                     /** Represents a Scope. */
@@ -15175,6 +15656,9 @@ export namespace google {
 
                         /** Scope includeGcpPublicDatasets. */
                         public includeGcpPublicDatasets: boolean;
+
+                        /** Scope restrictedLocations. */
+                        public restrictedLocations: string[];
 
                         /**
                          * Creates a new Scope instance using the specified properties.
@@ -15261,8 +15745,14 @@ export namespace google {
                     /** SearchCatalogResponse results */
                     results?: (google.cloud.datacatalog.v1beta1.ISearchCatalogResult[]|null);
 
+                    /** SearchCatalogResponse totalSize */
+                    totalSize?: (number|null);
+
                     /** SearchCatalogResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** SearchCatalogResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a SearchCatalogResponse. */
@@ -15277,8 +15767,14 @@ export namespace google {
                     /** SearchCatalogResponse results. */
                     public results: google.cloud.datacatalog.v1beta1.ISearchCatalogResult[];
 
+                    /** SearchCatalogResponse totalSize. */
+                    public totalSize: number;
+
                     /** SearchCatalogResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** SearchCatalogResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new SearchCatalogResponse instance using the specified properties.
@@ -16541,6 +17037,9 @@ export namespace google {
 
                     /** Entry sourceSystemTimestamps */
                     sourceSystemTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /** Entry usageSignal */
+                    usageSignal?: (google.cloud.datacatalog.v1beta1.IUsageSignal|null);
                 }
 
                 /** Represents an Entry. */
@@ -16590,6 +17089,9 @@ export namespace google {
 
                     /** Entry sourceSystemTimestamps. */
                     public sourceSystemTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /** Entry usageSignal. */
+                    public usageSignal?: (google.cloud.datacatalog.v1beta1.IUsageSignal|null);
 
                     /** Entry entryType. */
                     public entryType?: ("type"|"userSpecifiedType");
@@ -17829,6 +18331,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RenameTagTemplateFieldEnumValueRequest. */
+                interface IRenameTagTemplateFieldEnumValueRequest {
+
+                    /** RenameTagTemplateFieldEnumValueRequest name */
+                    name?: (string|null);
+
+                    /** RenameTagTemplateFieldEnumValueRequest newEnumValueDisplayName */
+                    newEnumValueDisplayName?: (string|null);
+                }
+
+                /** Represents a RenameTagTemplateFieldEnumValueRequest. */
+                class RenameTagTemplateFieldEnumValueRequest implements IRenameTagTemplateFieldEnumValueRequest {
+
+                    /**
+                     * Constructs a new RenameTagTemplateFieldEnumValueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest);
+
+                    /** RenameTagTemplateFieldEnumValueRequest name. */
+                    public name: string;
+
+                    /** RenameTagTemplateFieldEnumValueRequest newEnumValueDisplayName. */
+                    public newEnumValueDisplayName: string;
+
+                    /**
+                     * Creates a new RenameTagTemplateFieldEnumValueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenameTagTemplateFieldEnumValueRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest): google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest;
+
+                    /**
+                     * Encodes the specified RenameTagTemplateFieldEnumValueRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest.verify|verify} messages.
+                     * @param message RenameTagTemplateFieldEnumValueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenameTagTemplateFieldEnumValueRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest.verify|verify} messages.
+                     * @param message RenameTagTemplateFieldEnumValueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenameTagTemplateFieldEnumValueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenameTagTemplateFieldEnumValueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest;
+
+                    /**
+                     * Decodes a RenameTagTemplateFieldEnumValueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenameTagTemplateFieldEnumValueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest;
+
+                    /**
+                     * Verifies a RenameTagTemplateFieldEnumValueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenameTagTemplateFieldEnumValueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenameTagTemplateFieldEnumValueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest;
+
+                    /**
+                     * Creates a plain object from a RenameTagTemplateFieldEnumValueRequest message. Also converts values to other types if specified.
+                     * @param message RenameTagTemplateFieldEnumValueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenameTagTemplateFieldEnumValueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenameTagTemplateFieldEnumValueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteTagTemplateFieldRequest. */
                 interface IDeleteTagTemplateFieldRequest {
 
@@ -18924,6 +19529,9 @@ export namespace google {
 
                     /** SearchCatalogResult linkedResource */
                     linkedResource?: (string|null);
+
+                    /** SearchCatalogResult modifyTime */
+                    modifyTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a SearchCatalogResult. */
@@ -18946,6 +19554,9 @@ export namespace google {
 
                     /** SearchCatalogResult linkedResource. */
                     public linkedResource: string;
+
+                    /** SearchCatalogResult modifyTime. */
+                    public modifyTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new SearchCatalogResult instance using the specified properties.
@@ -19149,7 +19760,8 @@ export namespace google {
                 enum TableSourceType {
                     TABLE_SOURCE_TYPE_UNSPECIFIED = 0,
                     BIGQUERY_VIEW = 2,
-                    BIGQUERY_TABLE = 5
+                    BIGQUERY_TABLE = 5,
+                    BIGQUERY_MATERIALIZED_VIEW = 7
                 }
 
                 /** Properties of a ViewSpec. */
@@ -19939,6 +20551,9 @@ export namespace google {
                     /** TagTemplateField isRequired */
                     isRequired?: (boolean|null);
 
+                    /** TagTemplateField description */
+                    description?: (string|null);
+
                     /** TagTemplateField order */
                     order?: (number|null);
                 }
@@ -19963,6 +20578,9 @@ export namespace google {
 
                     /** TagTemplateField isRequired. */
                     public isRequired: boolean;
+
+                    /** TagTemplateField description. */
+                    public description: string;
 
                     /** TagTemplateField order. */
                     public order: number;
@@ -20152,6 +20770,15 @@ export namespace google {
                 }
 
                 namespace FieldType {
+
+                    /** PrimitiveType enum. */
+                    enum PrimitiveType {
+                        PRIMITIVE_TYPE_UNSPECIFIED = 0,
+                        DOUBLE = 1,
+                        STRING = 2,
+                        BOOL = 3,
+                        TIMESTAMP = 4
+                    }
 
                     /** Properties of an EnumType. */
                     interface IEnumType {
@@ -20349,15 +20976,224 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
+                }
 
-                    /** PrimitiveType enum. */
-                    enum PrimitiveType {
-                        PRIMITIVE_TYPE_UNSPECIFIED = 0,
-                        DOUBLE = 1,
-                        STRING = 2,
-                        BOOL = 3,
-                        TIMESTAMP = 4
-                    }
+                /** Properties of a UsageStats. */
+                interface IUsageStats {
+
+                    /** UsageStats totalCompletions */
+                    totalCompletions?: (number|null);
+
+                    /** UsageStats totalFailures */
+                    totalFailures?: (number|null);
+
+                    /** UsageStats totalCancellations */
+                    totalCancellations?: (number|null);
+
+                    /** UsageStats totalExecutionTimeForCompletionsMillis */
+                    totalExecutionTimeForCompletionsMillis?: (number|null);
+                }
+
+                /** Represents a UsageStats. */
+                class UsageStats implements IUsageStats {
+
+                    /**
+                     * Constructs a new UsageStats.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IUsageStats);
+
+                    /** UsageStats totalCompletions. */
+                    public totalCompletions: number;
+
+                    /** UsageStats totalFailures. */
+                    public totalFailures: number;
+
+                    /** UsageStats totalCancellations. */
+                    public totalCancellations: number;
+
+                    /** UsageStats totalExecutionTimeForCompletionsMillis. */
+                    public totalExecutionTimeForCompletionsMillis: number;
+
+                    /**
+                     * Creates a new UsageStats instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageStats instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IUsageStats): google.cloud.datacatalog.v1beta1.UsageStats;
+
+                    /**
+                     * Encodes the specified UsageStats message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UsageStats.verify|verify} messages.
+                     * @param message UsageStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IUsageStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageStats message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UsageStats.verify|verify} messages.
+                     * @param message UsageStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IUsageStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageStats message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.UsageStats;
+
+                    /**
+                     * Decodes a UsageStats message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.UsageStats;
+
+                    /**
+                     * Verifies a UsageStats message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageStats message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageStats
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.UsageStats;
+
+                    /**
+                     * Creates a plain object from a UsageStats message. Also converts values to other types if specified.
+                     * @param message UsageStats
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.UsageStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageStats to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UsageStats
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UsageSignal. */
+                interface IUsageSignal {
+
+                    /** UsageSignal updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UsageSignal usageWithinTimeRange */
+                    usageWithinTimeRange?: ({ [k: string]: google.cloud.datacatalog.v1beta1.IUsageStats }|null);
+                }
+
+                /** Represents a UsageSignal. */
+                class UsageSignal implements IUsageSignal {
+
+                    /**
+                     * Constructs a new UsageSignal.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IUsageSignal);
+
+                    /** UsageSignal updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UsageSignal usageWithinTimeRange. */
+                    public usageWithinTimeRange: { [k: string]: google.cloud.datacatalog.v1beta1.IUsageStats };
+
+                    /**
+                     * Creates a new UsageSignal instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageSignal instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IUsageSignal): google.cloud.datacatalog.v1beta1.UsageSignal;
+
+                    /**
+                     * Encodes the specified UsageSignal message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UsageSignal.verify|verify} messages.
+                     * @param message UsageSignal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IUsageSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageSignal message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UsageSignal.verify|verify} messages.
+                     * @param message UsageSignal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IUsageSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageSignal message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageSignal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.UsageSignal;
+
+                    /**
+                     * Decodes a UsageSignal message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageSignal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.UsageSignal;
+
+                    /**
+                     * Verifies a UsageSignal message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageSignal message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageSignal
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.UsageSignal;
+
+                    /**
+                     * Creates a plain object from a UsageSignal message. Also converts values to other types if specified.
+                     * @param message UsageSignal
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.UsageSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageSignal to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UsageSignal
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a PolicyTagManager */
@@ -20669,8 +21505,17 @@ export namespace google {
                     /** Taxonomy description */
                     description?: (string|null);
 
+                    /** Taxonomy policyTagCount */
+                    policyTagCount?: (number|null);
+
+                    /** Taxonomy taxonomyTimestamps */
+                    taxonomyTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
                     /** Taxonomy activatedPolicyTypes */
                     activatedPolicyTypes?: (google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[]|null);
+
+                    /** Taxonomy service */
+                    service?: (google.cloud.datacatalog.v1beta1.Taxonomy.IService|null);
                 }
 
                 /** Represents a Taxonomy. */
@@ -20691,8 +21536,17 @@ export namespace google {
                     /** Taxonomy description. */
                     public description: string;
 
+                    /** Taxonomy policyTagCount. */
+                    public policyTagCount: number;
+
+                    /** Taxonomy taxonomyTimestamps. */
+                    public taxonomyTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
                     /** Taxonomy activatedPolicyTypes. */
                     public activatedPolicyTypes: google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[];
+
+                    /** Taxonomy service. */
+                    public service?: (google.cloud.datacatalog.v1beta1.Taxonomy.IService|null);
 
                     /**
                      * Creates a new Taxonomy instance using the specified properties.
@@ -20778,6 +21632,109 @@ export namespace google {
                     enum PolicyType {
                         POLICY_TYPE_UNSPECIFIED = 0,
                         FINE_GRAINED_ACCESS_CONTROL = 1
+                    }
+
+                    /** Properties of a Service. */
+                    interface IService {
+
+                        /** Service name */
+                        name?: (google.cloud.datacatalog.v1beta1.ManagingSystem|keyof typeof google.cloud.datacatalog.v1beta1.ManagingSystem|null);
+
+                        /** Service identity */
+                        identity?: (string|null);
+                    }
+
+                    /** Represents a Service. */
+                    class Service implements IService {
+
+                        /**
+                         * Constructs a new Service.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1beta1.Taxonomy.IService);
+
+                        /** Service name. */
+                        public name: (google.cloud.datacatalog.v1beta1.ManagingSystem|keyof typeof google.cloud.datacatalog.v1beta1.ManagingSystem);
+
+                        /** Service identity. */
+                        public identity: string;
+
+                        /**
+                         * Creates a new Service instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Service instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1beta1.Taxonomy.IService): google.cloud.datacatalog.v1beta1.Taxonomy.Service;
+
+                        /**
+                         * Encodes the specified Service message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.Service.verify|verify} messages.
+                         * @param message Service message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1beta1.Taxonomy.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Service message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.Service.verify|verify} messages.
+                         * @param message Service message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.Taxonomy.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Service message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.Taxonomy.Service;
+
+                        /**
+                         * Decodes a Service message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.Taxonomy.Service;
+
+                        /**
+                         * Verifies a Service message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Service
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.Taxonomy.Service;
+
+                        /**
+                         * Creates a plain object from a Service message. Also converts values to other types if specified.
+                         * @param message Service
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1beta1.Taxonomy.Service, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Service to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Service
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -21216,6 +22173,9 @@ export namespace google {
 
                     /** ListTaxonomiesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListTaxonomiesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListTaxonomiesRequest. */
@@ -21235,6 +22195,9 @@ export namespace google {
 
                     /** ListTaxonomiesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListTaxonomiesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListTaxonomiesRequest instance using the specified properties.
@@ -22203,6 +23166,9 @@ export namespace google {
 
                     /** SerializedTaxonomy policyTags */
                     policyTags?: (google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[]|null);
+
+                    /** SerializedTaxonomy activatedPolicyTypes */
+                    activatedPolicyTypes?: (google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[]|null);
                 }
 
                 /** Represents a SerializedTaxonomy. */
@@ -22222,6 +23188,9 @@ export namespace google {
 
                     /** SerializedTaxonomy policyTags. */
                     public policyTags: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[];
+
+                    /** SerializedTaxonomy activatedPolicyTypes. */
+                    public activatedPolicyTypes: google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[];
 
                     /**
                      * Creates a new SerializedTaxonomy instance using the specified properties.
@@ -22304,6 +23273,9 @@ export namespace google {
                 /** Properties of a SerializedPolicyTag. */
                 interface ISerializedPolicyTag {
 
+                    /** SerializedPolicyTag policyTag */
+                    policyTag?: (string|null);
+
                     /** SerializedPolicyTag displayName */
                     displayName?: (string|null);
 
@@ -22322,6 +23294,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag);
+
+                    /** SerializedPolicyTag policyTag. */
+                    public policyTag: string;
 
                     /** SerializedPolicyTag displayName. */
                     public displayName: string;

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-servicedirectory",
-        "version": "4.0.5",
+        "version": "4.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 99,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -346,7 +346,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 103,
+                    "end": 106,
                     "type": "FULL"
                 }
             ],
@@ -574,7 +574,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 106,
+                    "end": 108,
                     "type": "FULL"
                 }
             ],
@@ -747,7 +747,7 @@
             "regionTag": "servicedirectory_v1beta1_generated_RegistrationService_GetIamPolicy_async",
             "title": "ServiceDirectory getIamPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets the IAM Policy for a resource (namespace or service only).",
+            "description": " Gets the IAM Policy for a resource",
             "canonical": true,
             "file": "registration_service.get_iam_policy.js",
             "language": "JAVASCRIPT",
@@ -791,7 +791,7 @@
             "regionTag": "servicedirectory_v1beta1_generated_RegistrationService_SetIamPolicy_async",
             "title": "ServiceDirectory setIamPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Sets the IAM Policy for a resource (namespace or service only).",
+            "description": " Sets the IAM Policy for a resource",
             "canonical": true,
             "file": "registration_service.set_iam_policy.js",
             "language": "JAVASCRIPT",
@@ -839,7 +839,7 @@
             "regionTag": "servicedirectory_v1beta1_generated_RegistrationService_TestIamPermissions_async",
             "title": "ServiceDirectory testIamPermissions Sample",
             "origin": "API_DEFINITION",
-            "description": " Tests IAM permissions for a resource (namespace or service only).",
+            "description": " Tests IAM permissions for a resource (namespace, service  or service workload only).",
             "canonical": true,
             "file": "registration_service.test_iam_permissions.js",
             "language": "JAVASCRIPT",

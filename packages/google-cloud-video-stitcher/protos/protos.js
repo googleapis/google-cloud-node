@@ -4578,6 +4578,1013 @@
                             return ProgressEvent;
                         })();
     
+                        /**
+                         * AdTracking enum.
+                         * @name google.cloud.video.stitcher.v1.AdTracking
+                         * @enum {number}
+                         * @property {number} AD_TRACKING_UNSPECIFIED=0 AD_TRACKING_UNSPECIFIED value
+                         * @property {number} CLIENT=1 CLIENT value
+                         * @property {number} SERVER=2 SERVER value
+                         */
+                        v1.AdTracking = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "AD_TRACKING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLIENT"] = 1;
+                            values[valuesById[2] = "SERVER"] = 2;
+                            return values;
+                        })();
+    
+                        v1.LiveConfig = (function() {
+    
+                            /**
+                             * Properties of a LiveConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface ILiveConfig
+                             * @property {string|null} [name] LiveConfig name
+                             * @property {string|null} [sourceUri] LiveConfig sourceUri
+                             * @property {string|null} [adTagUri] LiveConfig adTagUri
+                             * @property {google.cloud.video.stitcher.v1.IGamLiveConfig|null} [gamLiveConfig] LiveConfig gamLiveConfig
+                             * @property {google.cloud.video.stitcher.v1.LiveConfig.State|null} [state] LiveConfig state
+                             * @property {google.cloud.video.stitcher.v1.AdTracking|null} [adTracking] LiveConfig adTracking
+                             * @property {string|null} [defaultSlate] LiveConfig defaultSlate
+                             * @property {google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy|null} [stitchingPolicy] LiveConfig stitchingPolicy
+                             * @property {google.cloud.video.stitcher.v1.IPrefetchConfig|null} [prefetchConfig] LiveConfig prefetchConfig
+                             */
+    
+                            /**
+                             * Constructs a new LiveConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a LiveConfig.
+                             * @implements ILiveConfig
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.ILiveConfig=} [properties] Properties to set
+                             */
+                            function LiveConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LiveConfig name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.name = "";
+    
+                            /**
+                             * LiveConfig sourceUri.
+                             * @member {string} sourceUri
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.sourceUri = "";
+    
+                            /**
+                             * LiveConfig adTagUri.
+                             * @member {string} adTagUri
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.adTagUri = "";
+    
+                            /**
+                             * LiveConfig gamLiveConfig.
+                             * @member {google.cloud.video.stitcher.v1.IGamLiveConfig|null|undefined} gamLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.gamLiveConfig = null;
+    
+                            /**
+                             * LiveConfig state.
+                             * @member {google.cloud.video.stitcher.v1.LiveConfig.State} state
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.state = 0;
+    
+                            /**
+                             * LiveConfig adTracking.
+                             * @member {google.cloud.video.stitcher.v1.AdTracking} adTracking
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.adTracking = 0;
+    
+                            /**
+                             * LiveConfig defaultSlate.
+                             * @member {string} defaultSlate
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.defaultSlate = "";
+    
+                            /**
+                             * LiveConfig stitchingPolicy.
+                             * @member {google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy} stitchingPolicy
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.stitchingPolicy = 0;
+    
+                            /**
+                             * LiveConfig prefetchConfig.
+                             * @member {google.cloud.video.stitcher.v1.IPrefetchConfig|null|undefined} prefetchConfig
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.prefetchConfig = null;
+    
+                            /**
+                             * Creates a new LiveConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ILiveConfig=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.LiveConfig} LiveConfig instance
+                             */
+                            LiveConfig.create = function create(properties) {
+                                return new LiveConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LiveConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ILiveConfig} message LiveConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LiveConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.sourceUri != null && Object.hasOwnProperty.call(message, "sourceUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceUri);
+                                if (message.adTagUri != null && Object.hasOwnProperty.call(message, "adTagUri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.adTagUri);
+                                if (message.gamLiveConfig != null && Object.hasOwnProperty.call(message, "gamLiveConfig"))
+                                    $root.google.cloud.video.stitcher.v1.GamLiveConfig.encode(message.gamLiveConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                                if (message.adTracking != null && Object.hasOwnProperty.call(message, "adTracking"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.adTracking);
+                                if (message.defaultSlate != null && Object.hasOwnProperty.call(message, "defaultSlate"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.defaultSlate);
+                                if (message.stitchingPolicy != null && Object.hasOwnProperty.call(message, "stitchingPolicy"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.stitchingPolicy);
+                                if (message.prefetchConfig != null && Object.hasOwnProperty.call(message, "prefetchConfig"))
+                                    $root.google.cloud.video.stitcher.v1.PrefetchConfig.encode(message.prefetchConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LiveConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ILiveConfig} message LiveConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LiveConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LiveConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.LiveConfig} LiveConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LiveConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.LiveConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sourceUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.adTagUri = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.gamLiveConfig = $root.google.cloud.video.stitcher.v1.GamLiveConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.adTracking = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.defaultSlate = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.stitchingPolicy = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LiveConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.LiveConfig} LiveConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LiveConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LiveConfig message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LiveConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.sourceUri != null && message.hasOwnProperty("sourceUri"))
+                                    if (!$util.isString(message.sourceUri))
+                                        return "sourceUri: string expected";
+                                if (message.adTagUri != null && message.hasOwnProperty("adTagUri"))
+                                    if (!$util.isString(message.adTagUri))
+                                        return "adTagUri: string expected";
+                                if (message.gamLiveConfig != null && message.hasOwnProperty("gamLiveConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.GamLiveConfig.verify(message.gamLiveConfig);
+                                    if (error)
+                                        return "gamLiveConfig." + error;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.adTracking != null && message.hasOwnProperty("adTracking"))
+                                    switch (message.adTracking) {
+                                    default:
+                                        return "adTracking: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.defaultSlate != null && message.hasOwnProperty("defaultSlate"))
+                                    if (!$util.isString(message.defaultSlate))
+                                        return "defaultSlate: string expected";
+                                if (message.stitchingPolicy != null && message.hasOwnProperty("stitchingPolicy"))
+                                    switch (message.stitchingPolicy) {
+                                    default:
+                                        return "stitchingPolicy: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.prefetchConfig != null && message.hasOwnProperty("prefetchConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.PrefetchConfig.verify(message.prefetchConfig);
+                                    if (error)
+                                        return "prefetchConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LiveConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.LiveConfig} LiveConfig
+                             */
+                            LiveConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.LiveConfig)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.LiveConfig();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.sourceUri != null)
+                                    message.sourceUri = String(object.sourceUri);
+                                if (object.adTagUri != null)
+                                    message.adTagUri = String(object.adTagUri);
+                                if (object.gamLiveConfig != null) {
+                                    if (typeof object.gamLiveConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.LiveConfig.gamLiveConfig: object expected");
+                                    message.gamLiveConfig = $root.google.cloud.video.stitcher.v1.GamLiveConfig.fromObject(object.gamLiveConfig);
+                                }
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "CREATING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "READY":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                }
+                                switch (object.adTracking) {
+                                default:
+                                    if (typeof object.adTracking === "number") {
+                                        message.adTracking = object.adTracking;
+                                        break;
+                                    }
+                                    break;
+                                case "AD_TRACKING_UNSPECIFIED":
+                                case 0:
+                                    message.adTracking = 0;
+                                    break;
+                                case "CLIENT":
+                                case 1:
+                                    message.adTracking = 1;
+                                    break;
+                                case "SERVER":
+                                case 2:
+                                    message.adTracking = 2;
+                                    break;
+                                }
+                                if (object.defaultSlate != null)
+                                    message.defaultSlate = String(object.defaultSlate);
+                                switch (object.stitchingPolicy) {
+                                default:
+                                    if (typeof object.stitchingPolicy === "number") {
+                                        message.stitchingPolicy = object.stitchingPolicy;
+                                        break;
+                                    }
+                                    break;
+                                case "STITCHING_POLICY_UNSPECIFIED":
+                                case 0:
+                                    message.stitchingPolicy = 0;
+                                    break;
+                                case "CUT_CURRENT":
+                                case 1:
+                                    message.stitchingPolicy = 1;
+                                    break;
+                                case "COMPLETE_AD":
+                                case 2:
+                                    message.stitchingPolicy = 2;
+                                    break;
+                                }
+                                if (object.prefetchConfig != null) {
+                                    if (typeof object.prefetchConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.LiveConfig.prefetchConfig: object expected");
+                                    message.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.fromObject(object.prefetchConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LiveConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.LiveConfig} message LiveConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LiveConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.sourceUri = "";
+                                    object.adTagUri = "";
+                                    object.gamLiveConfig = null;
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.adTracking = options.enums === String ? "AD_TRACKING_UNSPECIFIED" : 0;
+                                    object.defaultSlate = "";
+                                    object.stitchingPolicy = options.enums === String ? "STITCHING_POLICY_UNSPECIFIED" : 0;
+                                    object.prefetchConfig = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.sourceUri != null && message.hasOwnProperty("sourceUri"))
+                                    object.sourceUri = message.sourceUri;
+                                if (message.adTagUri != null && message.hasOwnProperty("adTagUri"))
+                                    object.adTagUri = message.adTagUri;
+                                if (message.gamLiveConfig != null && message.hasOwnProperty("gamLiveConfig"))
+                                    object.gamLiveConfig = $root.google.cloud.video.stitcher.v1.GamLiveConfig.toObject(message.gamLiveConfig, options);
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.video.stitcher.v1.LiveConfig.State[message.state] === undefined ? message.state : $root.google.cloud.video.stitcher.v1.LiveConfig.State[message.state] : message.state;
+                                if (message.adTracking != null && message.hasOwnProperty("adTracking"))
+                                    object.adTracking = options.enums === String ? $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] === undefined ? message.adTracking : $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] : message.adTracking;
+                                if (message.defaultSlate != null && message.hasOwnProperty("defaultSlate"))
+                                    object.defaultSlate = message.defaultSlate;
+                                if (message.stitchingPolicy != null && message.hasOwnProperty("stitchingPolicy"))
+                                    object.stitchingPolicy = options.enums === String ? $root.google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy[message.stitchingPolicy] === undefined ? message.stitchingPolicy : $root.google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy[message.stitchingPolicy] : message.stitchingPolicy;
+                                if (message.prefetchConfig != null && message.hasOwnProperty("prefetchConfig"))
+                                    object.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.toObject(message.prefetchConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LiveConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LiveConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LiveConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LiveConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.LiveConfig";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.video.stitcher.v1.LiveConfig.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} CREATING=1 CREATING value
+                             * @property {number} READY=2 READY value
+                             * @property {number} DELETING=3 DELETING value
+                             */
+                            LiveConfig.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CREATING"] = 1;
+                                values[valuesById[2] = "READY"] = 2;
+                                values[valuesById[3] = "DELETING"] = 3;
+                                return values;
+                            })();
+    
+                            /**
+                             * StitchingPolicy enum.
+                             * @name google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy
+                             * @enum {number}
+                             * @property {number} STITCHING_POLICY_UNSPECIFIED=0 STITCHING_POLICY_UNSPECIFIED value
+                             * @property {number} CUT_CURRENT=1 CUT_CURRENT value
+                             * @property {number} COMPLETE_AD=2 COMPLETE_AD value
+                             */
+                            LiveConfig.StitchingPolicy = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STITCHING_POLICY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CUT_CURRENT"] = 1;
+                                values[valuesById[2] = "COMPLETE_AD"] = 2;
+                                return values;
+                            })();
+    
+                            return LiveConfig;
+                        })();
+    
+                        v1.PrefetchConfig = (function() {
+    
+                            /**
+                             * Properties of a PrefetchConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IPrefetchConfig
+                             * @property {boolean|null} [enabled] PrefetchConfig enabled
+                             * @property {google.protobuf.IDuration|null} [initialAdRequestDuration] PrefetchConfig initialAdRequestDuration
+                             */
+    
+                            /**
+                             * Constructs a new PrefetchConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a PrefetchConfig.
+                             * @implements IPrefetchConfig
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IPrefetchConfig=} [properties] Properties to set
+                             */
+                            function PrefetchConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PrefetchConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @instance
+                             */
+                            PrefetchConfig.prototype.enabled = false;
+    
+                            /**
+                             * PrefetchConfig initialAdRequestDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} initialAdRequestDuration
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @instance
+                             */
+                            PrefetchConfig.prototype.initialAdRequestDuration = null;
+    
+                            /**
+                             * Creates a new PrefetchConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IPrefetchConfig=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.PrefetchConfig} PrefetchConfig instance
+                             */
+                            PrefetchConfig.create = function create(properties) {
+                                return new PrefetchConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrefetchConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.PrefetchConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IPrefetchConfig} message PrefetchConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrefetchConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                if (message.initialAdRequestDuration != null && Object.hasOwnProperty.call(message, "initialAdRequestDuration"))
+                                    $root.google.protobuf.Duration.encode(message.initialAdRequestDuration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrefetchConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.PrefetchConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IPrefetchConfig} message PrefetchConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrefetchConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrefetchConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.PrefetchConfig} PrefetchConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrefetchConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.PrefetchConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.initialAdRequestDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrefetchConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.PrefetchConfig} PrefetchConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrefetchConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrefetchConfig message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrefetchConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                if (message.initialAdRequestDuration != null && message.hasOwnProperty("initialAdRequestDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.initialAdRequestDuration);
+                                    if (error)
+                                        return "initialAdRequestDuration." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrefetchConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.PrefetchConfig} PrefetchConfig
+                             */
+                            PrefetchConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.PrefetchConfig)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.PrefetchConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                if (object.initialAdRequestDuration != null) {
+                                    if (typeof object.initialAdRequestDuration !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.PrefetchConfig.initialAdRequestDuration: object expected");
+                                    message.initialAdRequestDuration = $root.google.protobuf.Duration.fromObject(object.initialAdRequestDuration);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrefetchConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.PrefetchConfig} message PrefetchConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrefetchConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.enabled = false;
+                                    object.initialAdRequestDuration = null;
+                                }
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                if (message.initialAdRequestDuration != null && message.hasOwnProperty("initialAdRequestDuration"))
+                                    object.initialAdRequestDuration = $root.google.protobuf.Duration.toObject(message.initialAdRequestDuration, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PrefetchConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrefetchConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrefetchConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.PrefetchConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrefetchConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.PrefetchConfig";
+                            };
+    
+                            return PrefetchConfig;
+                        })();
+    
+                        v1.GamLiveConfig = (function() {
+    
+                            /**
+                             * Properties of a GamLiveConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IGamLiveConfig
+                             * @property {string|null} [networkCode] GamLiveConfig networkCode
+                             * @property {string|null} [assetKey] GamLiveConfig assetKey
+                             * @property {string|null} [customAssetKey] GamLiveConfig customAssetKey
+                             */
+    
+                            /**
+                             * Constructs a new GamLiveConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a GamLiveConfig.
+                             * @implements IGamLiveConfig
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IGamLiveConfig=} [properties] Properties to set
+                             */
+                            function GamLiveConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GamLiveConfig networkCode.
+                             * @member {string} networkCode
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @instance
+                             */
+                            GamLiveConfig.prototype.networkCode = "";
+    
+                            /**
+                             * GamLiveConfig assetKey.
+                             * @member {string} assetKey
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @instance
+                             */
+                            GamLiveConfig.prototype.assetKey = "";
+    
+                            /**
+                             * GamLiveConfig customAssetKey.
+                             * @member {string} customAssetKey
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @instance
+                             */
+                            GamLiveConfig.prototype.customAssetKey = "";
+    
+                            /**
+                             * Creates a new GamLiveConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGamLiveConfig=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.GamLiveConfig} GamLiveConfig instance
+                             */
+                            GamLiveConfig.create = function create(properties) {
+                                return new GamLiveConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GamLiveConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamLiveConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGamLiveConfig} message GamLiveConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GamLiveConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.networkCode != null && Object.hasOwnProperty.call(message, "networkCode"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkCode);
+                                if (message.assetKey != null && Object.hasOwnProperty.call(message, "assetKey"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.assetKey);
+                                if (message.customAssetKey != null && Object.hasOwnProperty.call(message, "customAssetKey"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.customAssetKey);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GamLiveConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamLiveConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGamLiveConfig} message GamLiveConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GamLiveConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GamLiveConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.GamLiveConfig} GamLiveConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GamLiveConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.GamLiveConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.networkCode = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.assetKey = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.customAssetKey = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GamLiveConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.GamLiveConfig} GamLiveConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GamLiveConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GamLiveConfig message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GamLiveConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                    if (!$util.isString(message.networkCode))
+                                        return "networkCode: string expected";
+                                if (message.assetKey != null && message.hasOwnProperty("assetKey"))
+                                    if (!$util.isString(message.assetKey))
+                                        return "assetKey: string expected";
+                                if (message.customAssetKey != null && message.hasOwnProperty("customAssetKey"))
+                                    if (!$util.isString(message.customAssetKey))
+                                        return "customAssetKey: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GamLiveConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.GamLiveConfig} GamLiveConfig
+                             */
+                            GamLiveConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.GamLiveConfig)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.GamLiveConfig();
+                                if (object.networkCode != null)
+                                    message.networkCode = String(object.networkCode);
+                                if (object.assetKey != null)
+                                    message.assetKey = String(object.assetKey);
+                                if (object.customAssetKey != null)
+                                    message.customAssetKey = String(object.customAssetKey);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GamLiveConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.GamLiveConfig} message GamLiveConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GamLiveConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.networkCode = "";
+                                    object.assetKey = "";
+                                    object.customAssetKey = "";
+                                }
+                                if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                    object.networkCode = message.networkCode;
+                                if (message.assetKey != null && message.hasOwnProperty("assetKey"))
+                                    object.assetKey = message.assetKey;
+                                if (message.customAssetKey != null && message.hasOwnProperty("customAssetKey"))
+                                    object.customAssetKey = message.customAssetKey;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GamLiveConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GamLiveConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GamLiveConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.GamLiveConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GamLiveConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.GamLiveConfig";
+                            };
+    
+                            return GamLiveConfig;
+                        })();
+    
                         v1.VodSession = (function() {
     
                             /**
@@ -4590,9 +5597,10 @@
                              * @property {string|null} [sourceUri] VodSession sourceUri
                              * @property {string|null} [adTagUri] VodSession adTagUri
                              * @property {Object.<string,string>|null} [adTagMacroMap] VodSession adTagMacroMap
-                             * @property {boolean|null} [clientAdTracking] VodSession clientAdTracking
                              * @property {google.cloud.video.stitcher.v1.IManifestOptions|null} [manifestOptions] VodSession manifestOptions
                              * @property {string|null} [assetId] VodSession assetId
+                             * @property {google.cloud.video.stitcher.v1.AdTracking|null} [adTracking] VodSession adTracking
+                             * @property {google.cloud.video.stitcher.v1.VodSession.IGamSettings|null} [gamSettings] VodSession gamSettings
                              */
     
                             /**
@@ -4660,14 +5668,6 @@
                             VodSession.prototype.adTagMacroMap = $util.emptyObject;
     
                             /**
-                             * VodSession clientAdTracking.
-                             * @member {boolean} clientAdTracking
-                             * @memberof google.cloud.video.stitcher.v1.VodSession
-                             * @instance
-                             */
-                            VodSession.prototype.clientAdTracking = false;
-    
-                            /**
                              * VodSession manifestOptions.
                              * @member {google.cloud.video.stitcher.v1.IManifestOptions|null|undefined} manifestOptions
                              * @memberof google.cloud.video.stitcher.v1.VodSession
@@ -4682,6 +5682,22 @@
                              * @instance
                              */
                             VodSession.prototype.assetId = "";
+    
+                            /**
+                             * VodSession adTracking.
+                             * @member {google.cloud.video.stitcher.v1.AdTracking} adTracking
+                             * @memberof google.cloud.video.stitcher.v1.VodSession
+                             * @instance
+                             */
+                            VodSession.prototype.adTracking = 0;
+    
+                            /**
+                             * VodSession gamSettings.
+                             * @member {google.cloud.video.stitcher.v1.VodSession.IGamSettings|null|undefined} gamSettings
+                             * @memberof google.cloud.video.stitcher.v1.VodSession
+                             * @instance
+                             */
+                            VodSession.prototype.gamSettings = null;
     
                             /**
                              * Creates a new VodSession instance using the specified properties.
@@ -4720,12 +5736,14 @@
                                 if (message.adTagMacroMap != null && Object.hasOwnProperty.call(message, "adTagMacroMap"))
                                     for (var keys = Object.keys(message.adTagMacroMap), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.adTagMacroMap[keys[i]]).ldelim();
-                                if (message.clientAdTracking != null && Object.hasOwnProperty.call(message, "clientAdTracking"))
-                                    writer.uint32(/* id 8, wireType 0 =*/64).bool(message.clientAdTracking);
                                 if (message.manifestOptions != null && Object.hasOwnProperty.call(message, "manifestOptions"))
                                     $root.google.cloud.video.stitcher.v1.ManifestOptions.encode(message.manifestOptions, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 if (message.assetId != null && Object.hasOwnProperty.call(message, "assetId"))
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.assetId);
+                                if (message.adTracking != null && Object.hasOwnProperty.call(message, "adTracking"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).int32(message.adTracking);
+                                if (message.gamSettings != null && Object.hasOwnProperty.call(message, "gamSettings"))
+                                    $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.encode(message.gamSettings, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4803,16 +5821,20 @@
                                             message.adTagMacroMap[key] = value;
                                             break;
                                         }
-                                    case 8: {
-                                            message.clientAdTracking = reader.bool();
-                                            break;
-                                        }
                                     case 9: {
                                             message.manifestOptions = $root.google.cloud.video.stitcher.v1.ManifestOptions.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 10: {
                                             message.assetId = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.adTracking = reader.int32();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -4875,9 +5897,6 @@
                                         if (!$util.isString(message.adTagMacroMap[key[i]]))
                                             return "adTagMacroMap: string{k:string} expected";
                                 }
-                                if (message.clientAdTracking != null && message.hasOwnProperty("clientAdTracking"))
-                                    if (typeof message.clientAdTracking !== "boolean")
-                                        return "clientAdTracking: boolean expected";
                                 if (message.manifestOptions != null && message.hasOwnProperty("manifestOptions")) {
                                     var error = $root.google.cloud.video.stitcher.v1.ManifestOptions.verify(message.manifestOptions);
                                     if (error)
@@ -4886,6 +5905,20 @@
                                 if (message.assetId != null && message.hasOwnProperty("assetId"))
                                     if (!$util.isString(message.assetId))
                                         return "assetId: string expected";
+                                if (message.adTracking != null && message.hasOwnProperty("adTracking"))
+                                    switch (message.adTracking) {
+                                    default:
+                                        return "adTracking: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.gamSettings != null && message.hasOwnProperty("gamSettings")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.verify(message.gamSettings);
+                                    if (error)
+                                        return "gamSettings." + error;
+                                }
                                 return null;
                             };
     
@@ -4921,8 +5954,6 @@
                                     for (var keys = Object.keys(object.adTagMacroMap), i = 0; i < keys.length; ++i)
                                         message.adTagMacroMap[keys[i]] = String(object.adTagMacroMap[keys[i]]);
                                 }
-                                if (object.clientAdTracking != null)
-                                    message.clientAdTracking = Boolean(object.clientAdTracking);
                                 if (object.manifestOptions != null) {
                                     if (typeof object.manifestOptions !== "object")
                                         throw TypeError(".google.cloud.video.stitcher.v1.VodSession.manifestOptions: object expected");
@@ -4930,6 +5961,31 @@
                                 }
                                 if (object.assetId != null)
                                     message.assetId = String(object.assetId);
+                                switch (object.adTracking) {
+                                default:
+                                    if (typeof object.adTracking === "number") {
+                                        message.adTracking = object.adTracking;
+                                        break;
+                                    }
+                                    break;
+                                case "AD_TRACKING_UNSPECIFIED":
+                                case 0:
+                                    message.adTracking = 0;
+                                    break;
+                                case "CLIENT":
+                                case 1:
+                                    message.adTracking = 1;
+                                    break;
+                                case "SERVER":
+                                case 2:
+                                    message.adTracking = 2;
+                                    break;
+                                }
+                                if (object.gamSettings != null) {
+                                    if (typeof object.gamSettings !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.VodSession.gamSettings: object expected");
+                                    message.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.fromObject(object.gamSettings);
+                                }
                                 return message;
                             };
     
@@ -4954,9 +6010,10 @@
                                     object.playUri = "";
                                     object.sourceUri = "";
                                     object.adTagUri = "";
-                                    object.clientAdTracking = false;
                                     object.manifestOptions = null;
                                     object.assetId = "";
+                                    object.adTracking = options.enums === String ? "AD_TRACKING_UNSPECIFIED" : 0;
+                                    object.gamSettings = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -4974,12 +6031,14 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.adTagMacroMap[keys2[j]] = message.adTagMacroMap[keys2[j]];
                                 }
-                                if (message.clientAdTracking != null && message.hasOwnProperty("clientAdTracking"))
-                                    object.clientAdTracking = message.clientAdTracking;
                                 if (message.manifestOptions != null && message.hasOwnProperty("manifestOptions"))
                                     object.manifestOptions = $root.google.cloud.video.stitcher.v1.ManifestOptions.toObject(message.manifestOptions, options);
                                 if (message.assetId != null && message.hasOwnProperty("assetId"))
                                     object.assetId = message.assetId;
+                                if (message.adTracking != null && message.hasOwnProperty("adTracking"))
+                                    object.adTracking = options.enums === String ? $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] === undefined ? message.adTracking : $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] : message.adTracking;
+                                if (message.gamSettings != null && message.hasOwnProperty("gamSettings"))
+                                    object.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.toObject(message.gamSettings, options);
                                 return object;
                             };
     
@@ -5008,6 +6067,233 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.video.stitcher.v1.VodSession";
                             };
+    
+                            VodSession.GamSettings = (function() {
+    
+                                /**
+                                 * Properties of a GamSettings.
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession
+                                 * @interface IGamSettings
+                                 * @property {string|null} [networkCode] GamSettings networkCode
+                                 * @property {string|null} [streamId] GamSettings streamId
+                                 */
+    
+                                /**
+                                 * Constructs a new GamSettings.
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession
+                                 * @classdesc Represents a GamSettings.
+                                 * @implements IGamSettings
+                                 * @constructor
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings=} [properties] Properties to set
+                                 */
+                                function GamSettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GamSettings networkCode.
+                                 * @member {string} networkCode
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @instance
+                                 */
+                                GamSettings.prototype.networkCode = "";
+    
+                                /**
+                                 * GamSettings streamId.
+                                 * @member {string} streamId
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @instance
+                                 */
+                                GamSettings.prototype.streamId = "";
+    
+                                /**
+                                 * Creates a new GamSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings=} [properties] Properties to set
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings instance
+                                 */
+                                GamSettings.create = function create(properties) {
+                                    return new GamSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSettings message. Does not implicitly {@link google.cloud.video.stitcher.v1.VodSession.GamSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings} message GamSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.networkCode != null && Object.hasOwnProperty.call(message, "networkCode"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkCode);
+                                    if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.streamId);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSettings message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.VodSession.GamSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings} message GamSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GamSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSettings.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.VodSession.GamSettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.networkCode = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.streamId = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GamSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GamSettings message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GamSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                        if (!$util.isString(message.networkCode))
+                                            return "networkCode: string expected";
+                                    if (message.streamId != null && message.hasOwnProperty("streamId"))
+                                        if (!$util.isString(message.streamId))
+                                            return "streamId: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GamSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings
+                                 */
+                                GamSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.stitcher.v1.VodSession.GamSettings)
+                                        return object;
+                                    var message = new $root.google.cloud.video.stitcher.v1.VodSession.GamSettings();
+                                    if (object.networkCode != null)
+                                        message.networkCode = String(object.networkCode);
+                                    if (object.streamId != null)
+                                        message.streamId = String(object.streamId);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GamSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.GamSettings} message GamSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GamSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.networkCode = "";
+                                        object.streamId = "";
+                                    }
+                                    if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                        object.networkCode = message.networkCode;
+                                    if (message.streamId != null && message.hasOwnProperty("streamId"))
+                                        object.streamId = message.streamId;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GamSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GamSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GamSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GamSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.stitcher.v1.VodSession.GamSettings";
+                                };
+    
+                                return GamSettings;
+                            })();
     
                             return VodSession;
                         })();
@@ -6090,15 +7376,10 @@
                              * @interface ILiveSession
                              * @property {string|null} [name] LiveSession name
                              * @property {string|null} [playUri] LiveSession playUri
-                             * @property {string|null} [sourceUri] LiveSession sourceUri
-                             * @property {string|null} [defaultAdTagId] LiveSession defaultAdTagId
-                             * @property {Object.<string,google.cloud.video.stitcher.v1.IAdTag>|null} [adTagMap] LiveSession adTagMap
                              * @property {Object.<string,string>|null} [adTagMacros] LiveSession adTagMacros
-                             * @property {boolean|null} [clientAdTracking] LiveSession clientAdTracking
-                             * @property {string|null} [defaultSlateId] LiveSession defaultSlateId
-                             * @property {google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy|null} [stitchingPolicy] LiveSession stitchingPolicy
                              * @property {google.cloud.video.stitcher.v1.IManifestOptions|null} [manifestOptions] LiveSession manifestOptions
-                             * @property {string|null} [streamId] LiveSession streamId
+                             * @property {google.cloud.video.stitcher.v1.LiveSession.IGamSettings|null} [gamSettings] LiveSession gamSettings
+                             * @property {string|null} [liveConfig] LiveSession liveConfig
                              */
     
                             /**
@@ -6110,7 +7391,6 @@
                              * @param {google.cloud.video.stitcher.v1.ILiveSession=} [properties] Properties to set
                              */
                             function LiveSession(properties) {
-                                this.adTagMap = {};
                                 this.adTagMacros = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -6135,60 +7415,12 @@
                             LiveSession.prototype.playUri = "";
     
                             /**
-                             * LiveSession sourceUri.
-                             * @member {string} sourceUri
-                             * @memberof google.cloud.video.stitcher.v1.LiveSession
-                             * @instance
-                             */
-                            LiveSession.prototype.sourceUri = "";
-    
-                            /**
-                             * LiveSession defaultAdTagId.
-                             * @member {string} defaultAdTagId
-                             * @memberof google.cloud.video.stitcher.v1.LiveSession
-                             * @instance
-                             */
-                            LiveSession.prototype.defaultAdTagId = "";
-    
-                            /**
-                             * LiveSession adTagMap.
-                             * @member {Object.<string,google.cloud.video.stitcher.v1.IAdTag>} adTagMap
-                             * @memberof google.cloud.video.stitcher.v1.LiveSession
-                             * @instance
-                             */
-                            LiveSession.prototype.adTagMap = $util.emptyObject;
-    
-                            /**
                              * LiveSession adTagMacros.
                              * @member {Object.<string,string>} adTagMacros
                              * @memberof google.cloud.video.stitcher.v1.LiveSession
                              * @instance
                              */
                             LiveSession.prototype.adTagMacros = $util.emptyObject;
-    
-                            /**
-                             * LiveSession clientAdTracking.
-                             * @member {boolean} clientAdTracking
-                             * @memberof google.cloud.video.stitcher.v1.LiveSession
-                             * @instance
-                             */
-                            LiveSession.prototype.clientAdTracking = false;
-    
-                            /**
-                             * LiveSession defaultSlateId.
-                             * @member {string} defaultSlateId
-                             * @memberof google.cloud.video.stitcher.v1.LiveSession
-                             * @instance
-                             */
-                            LiveSession.prototype.defaultSlateId = "";
-    
-                            /**
-                             * LiveSession stitchingPolicy.
-                             * @member {google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy} stitchingPolicy
-                             * @memberof google.cloud.video.stitcher.v1.LiveSession
-                             * @instance
-                             */
-                            LiveSession.prototype.stitchingPolicy = 0;
     
                             /**
                              * LiveSession manifestOptions.
@@ -6199,12 +7431,20 @@
                             LiveSession.prototype.manifestOptions = null;
     
                             /**
-                             * LiveSession streamId.
-                             * @member {string} streamId
+                             * LiveSession gamSettings.
+                             * @member {google.cloud.video.stitcher.v1.LiveSession.IGamSettings|null|undefined} gamSettings
                              * @memberof google.cloud.video.stitcher.v1.LiveSession
                              * @instance
                              */
-                            LiveSession.prototype.streamId = "";
+                            LiveSession.prototype.gamSettings = null;
+    
+                            /**
+                             * LiveSession liveConfig.
+                             * @member {string} liveConfig
+                             * @memberof google.cloud.video.stitcher.v1.LiveSession
+                             * @instance
+                             */
+                            LiveSession.prototype.liveConfig = "";
     
                             /**
                              * Creates a new LiveSession instance using the specified properties.
@@ -6234,28 +7474,15 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.playUri != null && Object.hasOwnProperty.call(message, "playUri"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.playUri);
-                                if (message.sourceUri != null && Object.hasOwnProperty.call(message, "sourceUri"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceUri);
-                                if (message.defaultAdTagId != null && Object.hasOwnProperty.call(message, "defaultAdTagId"))
-                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.defaultAdTagId);
-                                if (message.adTagMap != null && Object.hasOwnProperty.call(message, "adTagMap"))
-                                    for (var keys = Object.keys(message.adTagMap), i = 0; i < keys.length; ++i) {
-                                        writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                        $root.google.cloud.video.stitcher.v1.AdTag.encode(message.adTagMap[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                    }
                                 if (message.adTagMacros != null && Object.hasOwnProperty.call(message, "adTagMacros"))
                                     for (var keys = Object.keys(message.adTagMacros), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.adTagMacros[keys[i]]).ldelim();
-                                if (message.clientAdTracking != null && Object.hasOwnProperty.call(message, "clientAdTracking"))
-                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.clientAdTracking);
-                                if (message.defaultSlateId != null && Object.hasOwnProperty.call(message, "defaultSlateId"))
-                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.defaultSlateId);
-                                if (message.stitchingPolicy != null && Object.hasOwnProperty.call(message, "stitchingPolicy"))
-                                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.stitchingPolicy);
                                 if (message.manifestOptions != null && Object.hasOwnProperty.call(message, "manifestOptions"))
                                     $root.google.cloud.video.stitcher.v1.ManifestOptions.encode(message.manifestOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                                if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
-                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.streamId);
+                                if (message.gamSettings != null && Object.hasOwnProperty.call(message, "gamSettings"))
+                                    $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.encode(message.gamSettings, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                                if (message.liveConfig != null && Object.hasOwnProperty.call(message, "liveConfig"))
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.liveConfig);
                                 return writer;
                             };
     
@@ -6298,37 +7525,6 @@
                                             message.playUri = reader.string();
                                             break;
                                         }
-                                    case 3: {
-                                            message.sourceUri = reader.string();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.defaultAdTagId = reader.string();
-                                            break;
-                                        }
-                                    case 5: {
-                                            if (message.adTagMap === $util.emptyObject)
-                                                message.adTagMap = {};
-                                            var end2 = reader.uint32() + reader.pos;
-                                            key = "";
-                                            value = null;
-                                            while (reader.pos < end2) {
-                                                var tag2 = reader.uint32();
-                                                switch (tag2 >>> 3) {
-                                                case 1:
-                                                    key = reader.string();
-                                                    break;
-                                                case 2:
-                                                    value = $root.google.cloud.video.stitcher.v1.AdTag.decode(reader, reader.uint32());
-                                                    break;
-                                                default:
-                                                    reader.skipType(tag2 & 7);
-                                                    break;
-                                                }
-                                            }
-                                            message.adTagMap[key] = value;
-                                            break;
-                                        }
                                     case 6: {
                                             if (message.adTagMacros === $util.emptyObject)
                                                 message.adTagMacros = {};
@@ -6352,24 +7548,16 @@
                                             message.adTagMacros[key] = value;
                                             break;
                                         }
-                                    case 7: {
-                                            message.clientAdTracking = reader.bool();
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.defaultSlateId = reader.string();
-                                            break;
-                                        }
-                                    case 9: {
-                                            message.stitchingPolicy = reader.int32();
-                                            break;
-                                        }
                                     case 10: {
                                             message.manifestOptions = $root.google.cloud.video.stitcher.v1.ManifestOptions.decode(reader, reader.uint32());
                                             break;
                                         }
-                                    case 11: {
-                                            message.streamId = reader.string();
+                                    case 15: {
+                                            message.gamSettings = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.liveConfig = reader.string();
                                             break;
                                         }
                                     default:
@@ -6413,22 +7601,6 @@
                                 if (message.playUri != null && message.hasOwnProperty("playUri"))
                                     if (!$util.isString(message.playUri))
                                         return "playUri: string expected";
-                                if (message.sourceUri != null && message.hasOwnProperty("sourceUri"))
-                                    if (!$util.isString(message.sourceUri))
-                                        return "sourceUri: string expected";
-                                if (message.defaultAdTagId != null && message.hasOwnProperty("defaultAdTagId"))
-                                    if (!$util.isString(message.defaultAdTagId))
-                                        return "defaultAdTagId: string expected";
-                                if (message.adTagMap != null && message.hasOwnProperty("adTagMap")) {
-                                    if (!$util.isObject(message.adTagMap))
-                                        return "adTagMap: object expected";
-                                    var key = Object.keys(message.adTagMap);
-                                    for (var i = 0; i < key.length; ++i) {
-                                        var error = $root.google.cloud.video.stitcher.v1.AdTag.verify(message.adTagMap[key[i]]);
-                                        if (error)
-                                            return "adTagMap." + error;
-                                    }
-                                }
                                 if (message.adTagMacros != null && message.hasOwnProperty("adTagMacros")) {
                                     if (!$util.isObject(message.adTagMacros))
                                         return "adTagMacros: object expected";
@@ -6437,29 +7609,19 @@
                                         if (!$util.isString(message.adTagMacros[key[i]]))
                                             return "adTagMacros: string{k:string} expected";
                                 }
-                                if (message.clientAdTracking != null && message.hasOwnProperty("clientAdTracking"))
-                                    if (typeof message.clientAdTracking !== "boolean")
-                                        return "clientAdTracking: boolean expected";
-                                if (message.defaultSlateId != null && message.hasOwnProperty("defaultSlateId"))
-                                    if (!$util.isString(message.defaultSlateId))
-                                        return "defaultSlateId: string expected";
-                                if (message.stitchingPolicy != null && message.hasOwnProperty("stitchingPolicy"))
-                                    switch (message.stitchingPolicy) {
-                                    default:
-                                        return "stitchingPolicy: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 3:
-                                        break;
-                                    }
                                 if (message.manifestOptions != null && message.hasOwnProperty("manifestOptions")) {
                                     var error = $root.google.cloud.video.stitcher.v1.ManifestOptions.verify(message.manifestOptions);
                                     if (error)
                                         return "manifestOptions." + error;
                                 }
-                                if (message.streamId != null && message.hasOwnProperty("streamId"))
-                                    if (!$util.isString(message.streamId))
-                                        return "streamId: string expected";
+                                if (message.gamSettings != null && message.hasOwnProperty("gamSettings")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.verify(message.gamSettings);
+                                    if (error)
+                                        return "gamSettings." + error;
+                                }
+                                if (message.liveConfig != null && message.hasOwnProperty("liveConfig"))
+                                    if (!$util.isString(message.liveConfig))
+                                        return "liveConfig: string expected";
                                 return null;
                             };
     
@@ -6479,20 +7641,6 @@
                                     message.name = String(object.name);
                                 if (object.playUri != null)
                                     message.playUri = String(object.playUri);
-                                if (object.sourceUri != null)
-                                    message.sourceUri = String(object.sourceUri);
-                                if (object.defaultAdTagId != null)
-                                    message.defaultAdTagId = String(object.defaultAdTagId);
-                                if (object.adTagMap) {
-                                    if (typeof object.adTagMap !== "object")
-                                        throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.adTagMap: object expected");
-                                    message.adTagMap = {};
-                                    for (var keys = Object.keys(object.adTagMap), i = 0; i < keys.length; ++i) {
-                                        if (typeof object.adTagMap[keys[i]] !== "object")
-                                            throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.adTagMap: object expected");
-                                        message.adTagMap[keys[i]] = $root.google.cloud.video.stitcher.v1.AdTag.fromObject(object.adTagMap[keys[i]]);
-                                    }
-                                }
                                 if (object.adTagMacros) {
                                     if (typeof object.adTagMacros !== "object")
                                         throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.adTagMacros: object expected");
@@ -6500,37 +7648,18 @@
                                     for (var keys = Object.keys(object.adTagMacros), i = 0; i < keys.length; ++i)
                                         message.adTagMacros[keys[i]] = String(object.adTagMacros[keys[i]]);
                                 }
-                                if (object.clientAdTracking != null)
-                                    message.clientAdTracking = Boolean(object.clientAdTracking);
-                                if (object.defaultSlateId != null)
-                                    message.defaultSlateId = String(object.defaultSlateId);
-                                switch (object.stitchingPolicy) {
-                                default:
-                                    if (typeof object.stitchingPolicy === "number") {
-                                        message.stitchingPolicy = object.stitchingPolicy;
-                                        break;
-                                    }
-                                    break;
-                                case "STITCHING_POLICY_UNSPECIFIED":
-                                case 0:
-                                    message.stitchingPolicy = 0;
-                                    break;
-                                case "COMPLETE_AD":
-                                case 1:
-                                    message.stitchingPolicy = 1;
-                                    break;
-                                case "CUT_CURRENT":
-                                case 3:
-                                    message.stitchingPolicy = 3;
-                                    break;
-                                }
                                 if (object.manifestOptions != null) {
                                     if (typeof object.manifestOptions !== "object")
                                         throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.manifestOptions: object expected");
                                     message.manifestOptions = $root.google.cloud.video.stitcher.v1.ManifestOptions.fromObject(object.manifestOptions);
                                 }
-                                if (object.streamId != null)
-                                    message.streamId = String(object.streamId);
+                                if (object.gamSettings != null) {
+                                    if (typeof object.gamSettings !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.gamSettings: object expected");
+                                    message.gamSettings = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.fromObject(object.gamSettings);
+                                }
+                                if (object.liveConfig != null)
+                                    message.liveConfig = String(object.liveConfig);
                                 return message;
                             };
     
@@ -6547,50 +7676,31 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.objects || options.defaults) {
-                                    object.adTagMap = {};
+                                if (options.objects || options.defaults)
                                     object.adTagMacros = {};
-                                }
                                 if (options.defaults) {
                                     object.name = "";
                                     object.playUri = "";
-                                    object.sourceUri = "";
-                                    object.defaultAdTagId = "";
-                                    object.clientAdTracking = false;
-                                    object.defaultSlateId = "";
-                                    object.stitchingPolicy = options.enums === String ? "STITCHING_POLICY_UNSPECIFIED" : 0;
                                     object.manifestOptions = null;
-                                    object.streamId = "";
+                                    object.gamSettings = null;
+                                    object.liveConfig = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.playUri != null && message.hasOwnProperty("playUri"))
                                     object.playUri = message.playUri;
-                                if (message.sourceUri != null && message.hasOwnProperty("sourceUri"))
-                                    object.sourceUri = message.sourceUri;
-                                if (message.defaultAdTagId != null && message.hasOwnProperty("defaultAdTagId"))
-                                    object.defaultAdTagId = message.defaultAdTagId;
                                 var keys2;
-                                if (message.adTagMap && (keys2 = Object.keys(message.adTagMap)).length) {
-                                    object.adTagMap = {};
-                                    for (var j = 0; j < keys2.length; ++j)
-                                        object.adTagMap[keys2[j]] = $root.google.cloud.video.stitcher.v1.AdTag.toObject(message.adTagMap[keys2[j]], options);
-                                }
                                 if (message.adTagMacros && (keys2 = Object.keys(message.adTagMacros)).length) {
                                     object.adTagMacros = {};
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.adTagMacros[keys2[j]] = message.adTagMacros[keys2[j]];
                                 }
-                                if (message.clientAdTracking != null && message.hasOwnProperty("clientAdTracking"))
-                                    object.clientAdTracking = message.clientAdTracking;
-                                if (message.defaultSlateId != null && message.hasOwnProperty("defaultSlateId"))
-                                    object.defaultSlateId = message.defaultSlateId;
-                                if (message.stitchingPolicy != null && message.hasOwnProperty("stitchingPolicy"))
-                                    object.stitchingPolicy = options.enums === String ? $root.google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy[message.stitchingPolicy] === undefined ? message.stitchingPolicy : $root.google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy[message.stitchingPolicy] : message.stitchingPolicy;
                                 if (message.manifestOptions != null && message.hasOwnProperty("manifestOptions"))
                                     object.manifestOptions = $root.google.cloud.video.stitcher.v1.ManifestOptions.toObject(message.manifestOptions, options);
-                                if (message.streamId != null && message.hasOwnProperty("streamId"))
-                                    object.streamId = message.streamId;
+                                if (message.gamSettings != null && message.hasOwnProperty("gamSettings"))
+                                    object.gamSettings = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.toObject(message.gamSettings, options);
+                                if (message.liveConfig != null && message.hasOwnProperty("liveConfig"))
+                                    object.liveConfig = message.liveConfig;
                                 return object;
                             };
     
@@ -6620,226 +7730,210 @@
                                 return typeUrlPrefix + "/google.cloud.video.stitcher.v1.LiveSession";
                             };
     
-                            /**
-                             * StitchingPolicy enum.
-                             * @name google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy
-                             * @enum {number}
-                             * @property {number} STITCHING_POLICY_UNSPECIFIED=0 STITCHING_POLICY_UNSPECIFIED value
-                             * @property {number} COMPLETE_AD=1 COMPLETE_AD value
-                             * @property {number} CUT_CURRENT=3 CUT_CURRENT value
-                             */
-                            LiveSession.StitchingPolicy = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "STITCHING_POLICY_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "COMPLETE_AD"] = 1;
-                                values[valuesById[3] = "CUT_CURRENT"] = 3;
-                                return values;
+                            LiveSession.GamSettings = (function() {
+    
+                                /**
+                                 * Properties of a GamSettings.
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession
+                                 * @interface IGamSettings
+                                 * @property {string|null} [streamId] GamSettings streamId
+                                 */
+    
+                                /**
+                                 * Constructs a new GamSettings.
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession
+                                 * @classdesc Represents a GamSettings.
+                                 * @implements IGamSettings
+                                 * @constructor
+                                 * @param {google.cloud.video.stitcher.v1.LiveSession.IGamSettings=} [properties] Properties to set
+                                 */
+                                function GamSettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GamSettings streamId.
+                                 * @member {string} streamId
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @instance
+                                 */
+                                GamSettings.prototype.streamId = "";
+    
+                                /**
+                                 * Creates a new GamSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.LiveSession.IGamSettings=} [properties] Properties to set
+                                 * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings} GamSettings instance
+                                 */
+                                GamSettings.create = function create(properties) {
+                                    return new GamSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSettings message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.LiveSession.IGamSettings} message GamSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.streamId);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSettings message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.LiveSession.IGamSettings} message GamSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GamSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings} GamSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSettings.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.streamId = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GamSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings} GamSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GamSettings message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GamSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.streamId != null && message.hasOwnProperty("streamId"))
+                                        if (!$util.isString(message.streamId))
+                                            return "streamId: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GamSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings} GamSettings
+                                 */
+                                GamSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings)
+                                        return object;
+                                    var message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings();
+                                    if (object.streamId != null)
+                                        message.streamId = String(object.streamId);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GamSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings} message GamSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GamSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.streamId = "";
+                                    if (message.streamId != null && message.hasOwnProperty("streamId"))
+                                        object.streamId = message.streamId;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GamSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GamSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GamSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GamSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.stitcher.v1.LiveSession.GamSettings";
+                                };
+    
+                                return GamSettings;
                             })();
     
                             return LiveSession;
-                        })();
-    
-                        v1.AdTag = (function() {
-    
-                            /**
-                             * Properties of an AdTag.
-                             * @memberof google.cloud.video.stitcher.v1
-                             * @interface IAdTag
-                             * @property {string|null} [uri] AdTag uri
-                             */
-    
-                            /**
-                             * Constructs a new AdTag.
-                             * @memberof google.cloud.video.stitcher.v1
-                             * @classdesc Represents an AdTag.
-                             * @implements IAdTag
-                             * @constructor
-                             * @param {google.cloud.video.stitcher.v1.IAdTag=} [properties] Properties to set
-                             */
-                            function AdTag(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AdTag uri.
-                             * @member {string} uri
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @instance
-                             */
-                            AdTag.prototype.uri = "";
-    
-                            /**
-                             * Creates a new AdTag instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.IAdTag=} [properties] Properties to set
-                             * @returns {google.cloud.video.stitcher.v1.AdTag} AdTag instance
-                             */
-                            AdTag.create = function create(properties) {
-                                return new AdTag(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AdTag message. Does not implicitly {@link google.cloud.video.stitcher.v1.AdTag.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.IAdTag} message AdTag message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AdTag.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AdTag message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.AdTag.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.IAdTag} message AdTag message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AdTag.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AdTag message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.video.stitcher.v1.AdTag} AdTag
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AdTag.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.AdTag();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.uri = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AdTag message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.video.stitcher.v1.AdTag} AdTag
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AdTag.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AdTag message.
-                             * @function verify
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AdTag.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.uri != null && message.hasOwnProperty("uri"))
-                                    if (!$util.isString(message.uri))
-                                        return "uri: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AdTag message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.video.stitcher.v1.AdTag} AdTag
-                             */
-                            AdTag.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.video.stitcher.v1.AdTag)
-                                    return object;
-                                var message = new $root.google.cloud.video.stitcher.v1.AdTag();
-                                if (object.uri != null)
-                                    message.uri = String(object.uri);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AdTag message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.AdTag} message AdTag
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AdTag.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.uri = "";
-                                if (message.uri != null && message.hasOwnProperty("uri"))
-                                    object.uri = message.uri;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AdTag to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AdTag.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AdTag
-                             * @function getTypeUrl
-                             * @memberof google.cloud.video.stitcher.v1.AdTag
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AdTag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.AdTag";
-                            };
-    
-                            return AdTag;
                         })();
     
                         v1.ManifestOptions = (function() {
@@ -7365,6 +8459,7 @@
                              * @interface ISlate
                              * @property {string|null} [name] Slate name
                              * @property {string|null} [uri] Slate uri
+                             * @property {google.cloud.video.stitcher.v1.Slate.IGamSlate|null} [gamSlate] Slate gamSlate
                              */
     
                             /**
@@ -7399,6 +8494,14 @@
                             Slate.prototype.uri = "";
     
                             /**
+                             * Slate gamSlate.
+                             * @member {google.cloud.video.stitcher.v1.Slate.IGamSlate|null|undefined} gamSlate
+                             * @memberof google.cloud.video.stitcher.v1.Slate
+                             * @instance
+                             */
+                            Slate.prototype.gamSlate = null;
+    
+                            /**
                              * Creates a new Slate instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.Slate
@@ -7426,6 +8529,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                                if (message.gamSlate != null && Object.hasOwnProperty.call(message, "gamSlate"))
+                                    $root.google.cloud.video.stitcher.v1.Slate.GamSlate.encode(message.gamSlate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7466,6 +8571,10 @@
                                         }
                                     case 2: {
                                             message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.gamSlate = $root.google.cloud.video.stitcher.v1.Slate.GamSlate.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -7509,6 +8618,11 @@
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     if (!$util.isString(message.uri))
                                         return "uri: string expected";
+                                if (message.gamSlate != null && message.hasOwnProperty("gamSlate")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.Slate.GamSlate.verify(message.gamSlate);
+                                    if (error)
+                                        return "gamSlate." + error;
+                                }
                                 return null;
                             };
     
@@ -7528,6 +8642,11 @@
                                     message.name = String(object.name);
                                 if (object.uri != null)
                                     message.uri = String(object.uri);
+                                if (object.gamSlate != null) {
+                                    if (typeof object.gamSlate !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.Slate.gamSlate: object expected");
+                                    message.gamSlate = $root.google.cloud.video.stitcher.v1.Slate.GamSlate.fromObject(object.gamSlate);
+                                }
                                 return message;
                             };
     
@@ -7547,11 +8666,14 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.uri = "";
+                                    object.gamSlate = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     object.uri = message.uri;
+                                if (message.gamSlate != null && message.hasOwnProperty("gamSlate"))
+                                    object.gamSlate = $root.google.cloud.video.stitcher.v1.Slate.GamSlate.toObject(message.gamSlate, options);
                                 return object;
                             };
     
@@ -7580,6 +8702,247 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.video.stitcher.v1.Slate";
                             };
+    
+                            Slate.GamSlate = (function() {
+    
+                                /**
+                                 * Properties of a GamSlate.
+                                 * @memberof google.cloud.video.stitcher.v1.Slate
+                                 * @interface IGamSlate
+                                 * @property {string|null} [networkCode] GamSlate networkCode
+                                 * @property {number|Long|null} [gamSlateId] GamSlate gamSlateId
+                                 */
+    
+                                /**
+                                 * Constructs a new GamSlate.
+                                 * @memberof google.cloud.video.stitcher.v1.Slate
+                                 * @classdesc Represents a GamSlate.
+                                 * @implements IGamSlate
+                                 * @constructor
+                                 * @param {google.cloud.video.stitcher.v1.Slate.IGamSlate=} [properties] Properties to set
+                                 */
+                                function GamSlate(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GamSlate networkCode.
+                                 * @member {string} networkCode
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @instance
+                                 */
+                                GamSlate.prototype.networkCode = "";
+    
+                                /**
+                                 * GamSlate gamSlateId.
+                                 * @member {number|Long} gamSlateId
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @instance
+                                 */
+                                GamSlate.prototype.gamSlateId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new GamSlate instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.Slate.IGamSlate=} [properties] Properties to set
+                                 * @returns {google.cloud.video.stitcher.v1.Slate.GamSlate} GamSlate instance
+                                 */
+                                GamSlate.create = function create(properties) {
+                                    return new GamSlate(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSlate message. Does not implicitly {@link google.cloud.video.stitcher.v1.Slate.GamSlate.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.Slate.IGamSlate} message GamSlate message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSlate.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.networkCode != null && Object.hasOwnProperty.call(message, "networkCode"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkCode);
+                                    if (message.gamSlateId != null && Object.hasOwnProperty.call(message, "gamSlateId"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.gamSlateId);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSlate message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.Slate.GamSlate.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.Slate.IGamSlate} message GamSlate message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSlate.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GamSlate message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.stitcher.v1.Slate.GamSlate} GamSlate
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSlate.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.Slate.GamSlate();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.networkCode = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.gamSlateId = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GamSlate message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.stitcher.v1.Slate.GamSlate} GamSlate
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSlate.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GamSlate message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GamSlate.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                        if (!$util.isString(message.networkCode))
+                                            return "networkCode: string expected";
+                                    if (message.gamSlateId != null && message.hasOwnProperty("gamSlateId"))
+                                        if (!$util.isInteger(message.gamSlateId) && !(message.gamSlateId && $util.isInteger(message.gamSlateId.low) && $util.isInteger(message.gamSlateId.high)))
+                                            return "gamSlateId: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GamSlate message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.stitcher.v1.Slate.GamSlate} GamSlate
+                                 */
+                                GamSlate.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.stitcher.v1.Slate.GamSlate)
+                                        return object;
+                                    var message = new $root.google.cloud.video.stitcher.v1.Slate.GamSlate();
+                                    if (object.networkCode != null)
+                                        message.networkCode = String(object.networkCode);
+                                    if (object.gamSlateId != null)
+                                        if ($util.Long)
+                                            (message.gamSlateId = $util.Long.fromValue(object.gamSlateId)).unsigned = false;
+                                        else if (typeof object.gamSlateId === "string")
+                                            message.gamSlateId = parseInt(object.gamSlateId, 10);
+                                        else if (typeof object.gamSlateId === "number")
+                                            message.gamSlateId = object.gamSlateId;
+                                        else if (typeof object.gamSlateId === "object")
+                                            message.gamSlateId = new $util.LongBits(object.gamSlateId.low >>> 0, object.gamSlateId.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GamSlate message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.Slate.GamSlate} message GamSlate
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GamSlate.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.networkCode = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.gamSlateId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.gamSlateId = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                        object.networkCode = message.networkCode;
+                                    if (message.gamSlateId != null && message.hasOwnProperty("gamSlateId"))
+                                        if (typeof message.gamSlateId === "number")
+                                            object.gamSlateId = options.longs === String ? String(message.gamSlateId) : message.gamSlateId;
+                                        else
+                                            object.gamSlateId = options.longs === String ? $util.Long.prototype.toString.call(message.gamSlateId) : options.longs === Number ? new $util.LongBits(message.gamSlateId.low >>> 0, message.gamSlateId.high >>> 0).toNumber() : message.gamSlateId;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GamSlate to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GamSlate.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GamSlate
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.stitcher.v1.Slate.GamSlate
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GamSlate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.stitcher.v1.Slate.GamSlate";
+                                };
+    
+                                return GamSlate;
+                            })();
     
                             return Slate;
                         })();
@@ -8214,7 +9577,7 @@
                              * @typedef CreateCdnKeyCallback
                              * @type {function}
                              * @param {Error|null} error Error, if any
-                             * @param {google.cloud.video.stitcher.v1.CdnKey} [response] CdnKey
+                             * @param {google.longrunning.Operation} [response] Operation
                              */
     
                             /**
@@ -8223,12 +9586,12 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.ICreateCdnKeyRequest} request CreateCdnKeyRequest message or plain object
-                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.CreateCdnKeyCallback} callback Node-style callback called with the error, if any, and CdnKey
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.CreateCdnKeyCallback} callback Node-style callback called with the error, if any, and Operation
                              * @returns {undefined}
                              * @variation 1
                              */
                             Object.defineProperty(VideoStitcherService.prototype.createCdnKey = function createCdnKey(request, callback) {
-                                return this.rpcCall(createCdnKey, $root.google.cloud.video.stitcher.v1.CreateCdnKeyRequest, $root.google.cloud.video.stitcher.v1.CdnKey, request, callback);
+                                return this.rpcCall(createCdnKey, $root.google.cloud.video.stitcher.v1.CreateCdnKeyRequest, $root.google.longrunning.Operation, request, callback);
                             }, "name", { value: "CreateCdnKey" });
     
                             /**
@@ -8237,7 +9600,7 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.ICreateCdnKeyRequest} request CreateCdnKeyRequest message or plain object
-                             * @returns {Promise<google.cloud.video.stitcher.v1.CdnKey>} Promise
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -8313,7 +9676,7 @@
                              * @typedef DeleteCdnKeyCallback
                              * @type {function}
                              * @param {Error|null} error Error, if any
-                             * @param {google.protobuf.Empty} [response] Empty
+                             * @param {google.longrunning.Operation} [response] Operation
                              */
     
                             /**
@@ -8322,12 +9685,12 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IDeleteCdnKeyRequest} request DeleteCdnKeyRequest message or plain object
-                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.DeleteCdnKeyCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.DeleteCdnKeyCallback} callback Node-style callback called with the error, if any, and Operation
                              * @returns {undefined}
                              * @variation 1
                              */
                             Object.defineProperty(VideoStitcherService.prototype.deleteCdnKey = function deleteCdnKey(request, callback) {
-                                return this.rpcCall(deleteCdnKey, $root.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest, $root.google.protobuf.Empty, request, callback);
+                                return this.rpcCall(deleteCdnKey, $root.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest, $root.google.longrunning.Operation, request, callback);
                             }, "name", { value: "DeleteCdnKey" });
     
                             /**
@@ -8336,7 +9699,7 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IDeleteCdnKeyRequest} request DeleteCdnKeyRequest message or plain object
-                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -8346,7 +9709,7 @@
                              * @typedef UpdateCdnKeyCallback
                              * @type {function}
                              * @param {Error|null} error Error, if any
-                             * @param {google.cloud.video.stitcher.v1.CdnKey} [response] CdnKey
+                             * @param {google.longrunning.Operation} [response] Operation
                              */
     
                             /**
@@ -8355,12 +9718,12 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IUpdateCdnKeyRequest} request UpdateCdnKeyRequest message or plain object
-                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.UpdateCdnKeyCallback} callback Node-style callback called with the error, if any, and CdnKey
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.UpdateCdnKeyCallback} callback Node-style callback called with the error, if any, and Operation
                              * @returns {undefined}
                              * @variation 1
                              */
                             Object.defineProperty(VideoStitcherService.prototype.updateCdnKey = function updateCdnKey(request, callback) {
-                                return this.rpcCall(updateCdnKey, $root.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest, $root.google.cloud.video.stitcher.v1.CdnKey, request, callback);
+                                return this.rpcCall(updateCdnKey, $root.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest, $root.google.longrunning.Operation, request, callback);
                             }, "name", { value: "UpdateCdnKey" });
     
                             /**
@@ -8369,7 +9732,7 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IUpdateCdnKeyRequest} request UpdateCdnKeyRequest message or plain object
-                             * @returns {Promise<google.cloud.video.stitcher.v1.CdnKey>} Promise
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -8643,7 +10006,7 @@
                              * @typedef CreateSlateCallback
                              * @type {function}
                              * @param {Error|null} error Error, if any
-                             * @param {google.cloud.video.stitcher.v1.Slate} [response] Slate
+                             * @param {google.longrunning.Operation} [response] Operation
                              */
     
                             /**
@@ -8652,12 +10015,12 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.ICreateSlateRequest} request CreateSlateRequest message or plain object
-                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.CreateSlateCallback} callback Node-style callback called with the error, if any, and Slate
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.CreateSlateCallback} callback Node-style callback called with the error, if any, and Operation
                              * @returns {undefined}
                              * @variation 1
                              */
                             Object.defineProperty(VideoStitcherService.prototype.createSlate = function createSlate(request, callback) {
-                                return this.rpcCall(createSlate, $root.google.cloud.video.stitcher.v1.CreateSlateRequest, $root.google.cloud.video.stitcher.v1.Slate, request, callback);
+                                return this.rpcCall(createSlate, $root.google.cloud.video.stitcher.v1.CreateSlateRequest, $root.google.longrunning.Operation, request, callback);
                             }, "name", { value: "CreateSlate" });
     
                             /**
@@ -8666,7 +10029,7 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.ICreateSlateRequest} request CreateSlateRequest message or plain object
-                             * @returns {Promise<google.cloud.video.stitcher.v1.Slate>} Promise
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -8742,7 +10105,7 @@
                              * @typedef UpdateSlateCallback
                              * @type {function}
                              * @param {Error|null} error Error, if any
-                             * @param {google.cloud.video.stitcher.v1.Slate} [response] Slate
+                             * @param {google.longrunning.Operation} [response] Operation
                              */
     
                             /**
@@ -8751,12 +10114,12 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IUpdateSlateRequest} request UpdateSlateRequest message or plain object
-                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.UpdateSlateCallback} callback Node-style callback called with the error, if any, and Slate
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.UpdateSlateCallback} callback Node-style callback called with the error, if any, and Operation
                              * @returns {undefined}
                              * @variation 1
                              */
                             Object.defineProperty(VideoStitcherService.prototype.updateSlate = function updateSlate(request, callback) {
-                                return this.rpcCall(updateSlate, $root.google.cloud.video.stitcher.v1.UpdateSlateRequest, $root.google.cloud.video.stitcher.v1.Slate, request, callback);
+                                return this.rpcCall(updateSlate, $root.google.cloud.video.stitcher.v1.UpdateSlateRequest, $root.google.longrunning.Operation, request, callback);
                             }, "name", { value: "UpdateSlate" });
     
                             /**
@@ -8765,7 +10128,7 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IUpdateSlateRequest} request UpdateSlateRequest message or plain object
-                             * @returns {Promise<google.cloud.video.stitcher.v1.Slate>} Promise
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -8775,7 +10138,7 @@
                              * @typedef DeleteSlateCallback
                              * @type {function}
                              * @param {Error|null} error Error, if any
-                             * @param {google.protobuf.Empty} [response] Empty
+                             * @param {google.longrunning.Operation} [response] Operation
                              */
     
                             /**
@@ -8784,12 +10147,12 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IDeleteSlateRequest} request DeleteSlateRequest message or plain object
-                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.DeleteSlateCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.DeleteSlateCallback} callback Node-style callback called with the error, if any, and Operation
                              * @returns {undefined}
                              * @variation 1
                              */
                             Object.defineProperty(VideoStitcherService.prototype.deleteSlate = function deleteSlate(request, callback) {
-                                return this.rpcCall(deleteSlate, $root.google.cloud.video.stitcher.v1.DeleteSlateRequest, $root.google.protobuf.Empty, request, callback);
+                                return this.rpcCall(deleteSlate, $root.google.cloud.video.stitcher.v1.DeleteSlateRequest, $root.google.longrunning.Operation, request, callback);
                             }, "name", { value: "DeleteSlate" });
     
                             /**
@@ -8798,7 +10161,7 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IDeleteSlateRequest} request DeleteSlateRequest message or plain object
-                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -8865,6 +10228,138 @@
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IGetLiveSessionRequest} request GetLiveSessionRequest message or plain object
                              * @returns {Promise<google.cloud.video.stitcher.v1.LiveSession>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createLiveConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef CreateLiveConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls CreateLiveConfig.
+                             * @function createLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.ICreateLiveConfigRequest} request CreateLiveConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.CreateLiveConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.createLiveConfig = function createLiveConfig(request, callback) {
+                                return this.rpcCall(createLiveConfig, $root.google.cloud.video.stitcher.v1.CreateLiveConfigRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "CreateLiveConfig" });
+    
+                            /**
+                             * Calls CreateLiveConfig.
+                             * @function createLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.ICreateLiveConfigRequest} request CreateLiveConfigRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|listLiveConfigs}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef ListLiveConfigsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.stitcher.v1.ListLiveConfigsResponse} [response] ListLiveConfigsResponse
+                             */
+    
+                            /**
+                             * Calls ListLiveConfigs.
+                             * @function listLiveConfigs
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsRequest} request ListLiveConfigsRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.ListLiveConfigsCallback} callback Node-style callback called with the error, if any, and ListLiveConfigsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.listLiveConfigs = function listLiveConfigs(request, callback) {
+                                return this.rpcCall(listLiveConfigs, $root.google.cloud.video.stitcher.v1.ListLiveConfigsRequest, $root.google.cloud.video.stitcher.v1.ListLiveConfigsResponse, request, callback);
+                            }, "name", { value: "ListLiveConfigs" });
+    
+                            /**
+                             * Calls ListLiveConfigs.
+                             * @function listLiveConfigs
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsRequest} request ListLiveConfigsRequest message or plain object
+                             * @returns {Promise<google.cloud.video.stitcher.v1.ListLiveConfigsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|getLiveConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef GetLiveConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.stitcher.v1.LiveConfig} [response] LiveConfig
+                             */
+    
+                            /**
+                             * Calls GetLiveConfig.
+                             * @function getLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IGetLiveConfigRequest} request GetLiveConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.GetLiveConfigCallback} callback Node-style callback called with the error, if any, and LiveConfig
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.getLiveConfig = function getLiveConfig(request, callback) {
+                                return this.rpcCall(getLiveConfig, $root.google.cloud.video.stitcher.v1.GetLiveConfigRequest, $root.google.cloud.video.stitcher.v1.LiveConfig, request, callback);
+                            }, "name", { value: "GetLiveConfig" });
+    
+                            /**
+                             * Calls GetLiveConfig.
+                             * @function getLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IGetLiveConfigRequest} request GetLiveConfigRequest message or plain object
+                             * @returns {Promise<google.cloud.video.stitcher.v1.LiveConfig>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|deleteLiveConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef DeleteLiveConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls DeleteLiveConfig.
+                             * @function deleteLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest} request DeleteLiveConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.DeleteLiveConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.deleteLiveConfig = function deleteLiveConfig(request, callback) {
+                                return this.rpcCall(deleteLiveConfig, $root.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "DeleteLiveConfig" });
+    
+                            /**
+                             * Calls DeleteLiveConfig.
+                             * @function deleteLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest} request DeleteLiveConfigRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
     
@@ -12900,6 +14395,7 @@
                              * @property {string|null} [parent] CreateSlateRequest parent
                              * @property {string|null} [slateId] CreateSlateRequest slateId
                              * @property {google.cloud.video.stitcher.v1.ISlate|null} [slate] CreateSlateRequest slate
+                             * @property {string|null} [requestId] CreateSlateRequest requestId
                              */
     
                             /**
@@ -12942,6 +14438,14 @@
                             CreateSlateRequest.prototype.slate = null;
     
                             /**
+                             * CreateSlateRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.video.stitcher.v1.CreateSlateRequest
+                             * @instance
+                             */
+                            CreateSlateRequest.prototype.requestId = "";
+    
+                            /**
                              * Creates a new CreateSlateRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.CreateSlateRequest
@@ -12971,6 +14475,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.slateId);
                                 if (message.slate != null && Object.hasOwnProperty.call(message, "slate"))
                                     $root.google.cloud.video.stitcher.v1.Slate.encode(message.slate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                                 return writer;
                             };
     
@@ -13015,6 +14521,10 @@
                                         }
                                     case 3: {
                                             message.slate = $root.google.cloud.video.stitcher.v1.Slate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.requestId = reader.string();
                                             break;
                                         }
                                     default:
@@ -13063,6 +14573,9 @@
                                     if (error)
                                         return "slate." + error;
                                 }
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
                                 return null;
                             };
     
@@ -13087,6 +14600,8 @@
                                         throw TypeError(".google.cloud.video.stitcher.v1.CreateSlateRequest.slate: object expected");
                                     message.slate = $root.google.cloud.video.stitcher.v1.Slate.fromObject(object.slate);
                                 }
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
                                 return message;
                             };
     
@@ -13107,6 +14622,7 @@
                                     object.parent = "";
                                     object.slateId = "";
                                     object.slate = null;
+                                    object.requestId = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -13114,6 +14630,8 @@
                                     object.slateId = message.slateId;
                                 if (message.slate != null && message.hasOwnProperty("slate"))
                                     object.slate = $root.google.cloud.video.stitcher.v1.Slate.toObject(message.slate, options);
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
                                 return object;
                             };
     
@@ -14806,6 +16324,1557 @@
                             };
     
                             return GetLiveSessionRequest;
+                        })();
+    
+                        v1.CreateLiveConfigRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface ICreateLiveConfigRequest
+                             * @property {string|null} [parent] CreateLiveConfigRequest parent
+                             * @property {string|null} [liveConfigId] CreateLiveConfigRequest liveConfigId
+                             * @property {google.cloud.video.stitcher.v1.ILiveConfig|null} [liveConfig] CreateLiveConfigRequest liveConfig
+                             * @property {string|null} [requestId] CreateLiveConfigRequest requestId
+                             */
+    
+                            /**
+                             * Constructs a new CreateLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a CreateLiveConfigRequest.
+                             * @implements ICreateLiveConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.ICreateLiveConfigRequest=} [properties] Properties to set
+                             */
+                            function CreateLiveConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateLiveConfigRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @instance
+                             */
+                            CreateLiveConfigRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateLiveConfigRequest liveConfigId.
+                             * @member {string} liveConfigId
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @instance
+                             */
+                            CreateLiveConfigRequest.prototype.liveConfigId = "";
+    
+                            /**
+                             * CreateLiveConfigRequest liveConfig.
+                             * @member {google.cloud.video.stitcher.v1.ILiveConfig|null|undefined} liveConfig
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @instance
+                             */
+                            CreateLiveConfigRequest.prototype.liveConfig = null;
+    
+                            /**
+                             * CreateLiveConfigRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @instance
+                             */
+                            CreateLiveConfigRequest.prototype.requestId = "";
+    
+                            /**
+                             * Creates a new CreateLiveConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ICreateLiveConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.CreateLiveConfigRequest} CreateLiveConfigRequest instance
+                             */
+                            CreateLiveConfigRequest.create = function create(properties) {
+                                return new CreateLiveConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateLiveConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ICreateLiveConfigRequest} message CreateLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateLiveConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.liveConfigId != null && Object.hasOwnProperty.call(message, "liveConfigId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.liveConfigId);
+                                if (message.liveConfig != null && Object.hasOwnProperty.call(message, "liveConfig"))
+                                    $root.google.cloud.video.stitcher.v1.LiveConfig.encode(message.liveConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateLiveConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ICreateLiveConfigRequest} message CreateLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateLiveConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateLiveConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.CreateLiveConfigRequest} CreateLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateLiveConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.CreateLiveConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.liveConfigId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.liveConfig = $root.google.cloud.video.stitcher.v1.LiveConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.requestId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateLiveConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.CreateLiveConfigRequest} CreateLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateLiveConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateLiveConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateLiveConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.liveConfigId != null && message.hasOwnProperty("liveConfigId"))
+                                    if (!$util.isString(message.liveConfigId))
+                                        return "liveConfigId: string expected";
+                                if (message.liveConfig != null && message.hasOwnProperty("liveConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.LiveConfig.verify(message.liveConfig);
+                                    if (error)
+                                        return "liveConfig." + error;
+                                }
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.CreateLiveConfigRequest} CreateLiveConfigRequest
+                             */
+                            CreateLiveConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.CreateLiveConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.CreateLiveConfigRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.liveConfigId != null)
+                                    message.liveConfigId = String(object.liveConfigId);
+                                if (object.liveConfig != null) {
+                                    if (typeof object.liveConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.CreateLiveConfigRequest.liveConfig: object expected");
+                                    message.liveConfig = $root.google.cloud.video.stitcher.v1.LiveConfig.fromObject(object.liveConfig);
+                                }
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateLiveConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.CreateLiveConfigRequest} message CreateLiveConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateLiveConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.liveConfigId = "";
+                                    object.liveConfig = null;
+                                    object.requestId = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.liveConfigId != null && message.hasOwnProperty("liveConfigId"))
+                                    object.liveConfigId = message.liveConfigId;
+                                if (message.liveConfig != null && message.hasOwnProperty("liveConfig"))
+                                    object.liveConfig = $root.google.cloud.video.stitcher.v1.LiveConfig.toObject(message.liveConfig, options);
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateLiveConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateLiveConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateLiveConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.CreateLiveConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateLiveConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.CreateLiveConfigRequest";
+                            };
+    
+                            return CreateLiveConfigRequest;
+                        })();
+    
+                        v1.ListLiveConfigsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListLiveConfigsRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IListLiveConfigsRequest
+                             * @property {string|null} [parent] ListLiveConfigsRequest parent
+                             * @property {number|null} [pageSize] ListLiveConfigsRequest pageSize
+                             * @property {string|null} [pageToken] ListLiveConfigsRequest pageToken
+                             * @property {string|null} [filter] ListLiveConfigsRequest filter
+                             * @property {string|null} [orderBy] ListLiveConfigsRequest orderBy
+                             */
+    
+                            /**
+                             * Constructs a new ListLiveConfigsRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a ListLiveConfigsRequest.
+                             * @implements IListLiveConfigsRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsRequest=} [properties] Properties to set
+                             */
+                            function ListLiveConfigsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListLiveConfigsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @instance
+                             */
+                            ListLiveConfigsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListLiveConfigsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @instance
+                             */
+                            ListLiveConfigsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListLiveConfigsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @instance
+                             */
+                            ListLiveConfigsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListLiveConfigsRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @instance
+                             */
+                            ListLiveConfigsRequest.prototype.filter = "";
+    
+                            /**
+                             * ListLiveConfigsRequest orderBy.
+                             * @member {string} orderBy
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @instance
+                             */
+                            ListLiveConfigsRequest.prototype.orderBy = "";
+    
+                            /**
+                             * Creates a new ListLiveConfigsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsRequest} ListLiveConfigsRequest instance
+                             */
+                            ListLiveConfigsRequest.create = function create(properties) {
+                                return new ListLiveConfigsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListLiveConfigsRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsRequest} message ListLiveConfigsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLiveConfigsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListLiveConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsRequest} message ListLiveConfigsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLiveConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListLiveConfigsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsRequest} ListLiveConfigsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLiveConfigsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.ListLiveConfigsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.orderBy = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListLiveConfigsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsRequest} ListLiveConfigsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLiveConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListLiveConfigsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListLiveConfigsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    if (!$util.isString(message.orderBy))
+                                        return "orderBy: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListLiveConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsRequest} ListLiveConfigsRequest
+                             */
+                            ListLiveConfigsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.ListLiveConfigsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.ListLiveConfigsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.orderBy != null)
+                                    message.orderBy = String(object.orderBy);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListLiveConfigsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ListLiveConfigsRequest} message ListLiveConfigsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListLiveConfigsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                    object.orderBy = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    object.orderBy = message.orderBy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListLiveConfigsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListLiveConfigsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListLiveConfigsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListLiveConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.ListLiveConfigsRequest";
+                            };
+    
+                            return ListLiveConfigsRequest;
+                        })();
+    
+                        v1.ListLiveConfigsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListLiveConfigsResponse.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IListLiveConfigsResponse
+                             * @property {Array.<google.cloud.video.stitcher.v1.ILiveConfig>|null} [liveConfigs] ListLiveConfigsResponse liveConfigs
+                             * @property {string|null} [nextPageToken] ListLiveConfigsResponse nextPageToken
+                             * @property {Array.<string>|null} [unreachable] ListLiveConfigsResponse unreachable
+                             */
+    
+                            /**
+                             * Constructs a new ListLiveConfigsResponse.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a ListLiveConfigsResponse.
+                             * @implements IListLiveConfigsResponse
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsResponse=} [properties] Properties to set
+                             */
+                            function ListLiveConfigsResponse(properties) {
+                                this.liveConfigs = [];
+                                this.unreachable = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListLiveConfigsResponse liveConfigs.
+                             * @member {Array.<google.cloud.video.stitcher.v1.ILiveConfig>} liveConfigs
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @instance
+                             */
+                            ListLiveConfigsResponse.prototype.liveConfigs = $util.emptyArray;
+    
+                            /**
+                             * ListLiveConfigsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @instance
+                             */
+                            ListLiveConfigsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * ListLiveConfigsResponse unreachable.
+                             * @member {Array.<string>} unreachable
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @instance
+                             */
+                            ListLiveConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ListLiveConfigsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsResponse} ListLiveConfigsResponse instance
+                             */
+                            ListLiveConfigsResponse.create = function create(properties) {
+                                return new ListLiveConfigsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListLiveConfigsResponse message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsResponse} message ListLiveConfigsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLiveConfigsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.liveConfigs != null && message.liveConfigs.length)
+                                    for (var i = 0; i < message.liveConfigs.length; ++i)
+                                        $root.google.cloud.video.stitcher.v1.LiveConfig.encode(message.liveConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                if (message.unreachable != null && message.unreachable.length)
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListLiveConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListLiveConfigsResponse} message ListLiveConfigsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLiveConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListLiveConfigsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsResponse} ListLiveConfigsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLiveConfigsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.ListLiveConfigsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.liveConfigs && message.liveConfigs.length))
+                                                message.liveConfigs = [];
+                                            message.liveConfigs.push($root.google.cloud.video.stitcher.v1.LiveConfig.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.unreachable && message.unreachable.length))
+                                                message.unreachable = [];
+                                            message.unreachable.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListLiveConfigsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsResponse} ListLiveConfigsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLiveConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListLiveConfigsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListLiveConfigsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.liveConfigs != null && message.hasOwnProperty("liveConfigs")) {
+                                    if (!Array.isArray(message.liveConfigs))
+                                        return "liveConfigs: array expected";
+                                    for (var i = 0; i < message.liveConfigs.length; ++i) {
+                                        var error = $root.google.cloud.video.stitcher.v1.LiveConfig.verify(message.liveConfigs[i]);
+                                        if (error)
+                                            return "liveConfigs." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                    if (!Array.isArray(message.unreachable))
+                                        return "unreachable: array expected";
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        if (!$util.isString(message.unreachable[i]))
+                                            return "unreachable: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListLiveConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.ListLiveConfigsResponse} ListLiveConfigsResponse
+                             */
+                            ListLiveConfigsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.ListLiveConfigsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.ListLiveConfigsResponse();
+                                if (object.liveConfigs) {
+                                    if (!Array.isArray(object.liveConfigs))
+                                        throw TypeError(".google.cloud.video.stitcher.v1.ListLiveConfigsResponse.liveConfigs: array expected");
+                                    message.liveConfigs = [];
+                                    for (var i = 0; i < object.liveConfigs.length; ++i) {
+                                        if (typeof object.liveConfigs[i] !== "object")
+                                            throw TypeError(".google.cloud.video.stitcher.v1.ListLiveConfigsResponse.liveConfigs: object expected");
+                                        message.liveConfigs[i] = $root.google.cloud.video.stitcher.v1.LiveConfig.fromObject(object.liveConfigs[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                if (object.unreachable) {
+                                    if (!Array.isArray(object.unreachable))
+                                        throw TypeError(".google.cloud.video.stitcher.v1.ListLiveConfigsResponse.unreachable: array expected");
+                                    message.unreachable = [];
+                                    for (var i = 0; i < object.unreachable.length; ++i)
+                                        message.unreachable[i] = String(object.unreachable[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListLiveConfigsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ListLiveConfigsResponse} message ListLiveConfigsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListLiveConfigsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.liveConfigs = [];
+                                    object.unreachable = [];
+                                }
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.liveConfigs && message.liveConfigs.length) {
+                                    object.liveConfigs = [];
+                                    for (var j = 0; j < message.liveConfigs.length; ++j)
+                                        object.liveConfigs[j] = $root.google.cloud.video.stitcher.v1.LiveConfig.toObject(message.liveConfigs[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                if (message.unreachable && message.unreachable.length) {
+                                    object.unreachable = [];
+                                    for (var j = 0; j < message.unreachable.length; ++j)
+                                        object.unreachable[j] = message.unreachable[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListLiveConfigsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListLiveConfigsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListLiveConfigsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.ListLiveConfigsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListLiveConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.ListLiveConfigsResponse";
+                            };
+    
+                            return ListLiveConfigsResponse;
+                        })();
+    
+                        v1.GetLiveConfigRequest = (function() {
+    
+                            /**
+                             * Properties of a GetLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IGetLiveConfigRequest
+                             * @property {string|null} [name] GetLiveConfigRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a GetLiveConfigRequest.
+                             * @implements IGetLiveConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IGetLiveConfigRequest=} [properties] Properties to set
+                             */
+                            function GetLiveConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetLiveConfigRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @instance
+                             */
+                            GetLiveConfigRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetLiveConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGetLiveConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.GetLiveConfigRequest} GetLiveConfigRequest instance
+                             */
+                            GetLiveConfigRequest.create = function create(properties) {
+                                return new GetLiveConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.GetLiveConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGetLiveConfigRequest} message GetLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetLiveConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GetLiveConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGetLiveConfigRequest} message GetLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetLiveConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetLiveConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.GetLiveConfigRequest} GetLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetLiveConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.GetLiveConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetLiveConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.GetLiveConfigRequest} GetLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetLiveConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetLiveConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetLiveConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.GetLiveConfigRequest} GetLiveConfigRequest
+                             */
+                            GetLiveConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.GetLiveConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.GetLiveConfigRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetLiveConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.GetLiveConfigRequest} message GetLiveConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetLiveConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetLiveConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetLiveConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetLiveConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.GetLiveConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetLiveConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.GetLiveConfigRequest";
+                            };
+    
+                            return GetLiveConfigRequest;
+                        })();
+    
+                        v1.DeleteLiveConfigRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IDeleteLiveConfigRequest
+                             * @property {string|null} [name] DeleteLiveConfigRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a DeleteLiveConfigRequest.
+                             * @implements IDeleteLiveConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest=} [properties] Properties to set
+                             */
+                            function DeleteLiveConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteLiveConfigRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @instance
+                             */
+                            DeleteLiveConfigRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteLiveConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.DeleteLiveConfigRequest} DeleteLiveConfigRequest instance
+                             */
+                            DeleteLiveConfigRequest.create = function create(properties) {
+                                return new DeleteLiveConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteLiveConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest} message DeleteLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteLiveConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteLiveConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest} message DeleteLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteLiveConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteLiveConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.DeleteLiveConfigRequest} DeleteLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteLiveConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteLiveConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.DeleteLiveConfigRequest} DeleteLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteLiveConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteLiveConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteLiveConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.DeleteLiveConfigRequest} DeleteLiveConfigRequest
+                             */
+                            DeleteLiveConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteLiveConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.DeleteLiveConfigRequest} message DeleteLiveConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteLiveConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteLiveConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteLiveConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteLiveConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.DeleteLiveConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteLiveConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.DeleteLiveConfigRequest";
+                            };
+    
+                            return DeleteLiveConfigRequest;
+                        })();
+    
+                        v1.OperationMetadata = (function() {
+    
+                            /**
+                             * Properties of an OperationMetadata.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IOperationMetadata
+                             * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                             * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                             * @property {string|null} [target] OperationMetadata target
+                             * @property {string|null} [verb] OperationMetadata verb
+                             */
+    
+                            /**
+                             * Constructs a new OperationMetadata.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents an OperationMetadata.
+                             * @implements IOperationMetadata
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata=} [properties] Properties to set
+                             */
+                            function OperationMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OperationMetadata createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.createTime = null;
+    
+                            /**
+                             * OperationMetadata endTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.endTime = null;
+    
+                            /**
+                             * OperationMetadata target.
+                             * @member {string} target
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.target = "";
+    
+                            /**
+                             * OperationMetadata verb.
+                             * @member {string} verb
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.verb = "";
+    
+                            /**
+                             * Creates a new OperationMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata instance
+                             */
+                            OperationMetadata.create = function create(properties) {
+                                return new OperationMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.video.stitcher.v1.OperationMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OperationMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                                if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.OperationMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OperationMetadata.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.OperationMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.target = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.verb = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OperationMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OperationMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                    if (error)
+                                        return "endTime." + error;
+                                }
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    if (!$util.isString(message.target))
+                                        return "target: string expected";
+                                if (message.verb != null && message.hasOwnProperty("verb"))
+                                    if (!$util.isString(message.verb))
+                                        return "verb: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata
+                             */
+                            OperationMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.OperationMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.OperationMetadata();
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.OperationMetadata.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.endTime != null) {
+                                    if (typeof object.endTime !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.OperationMetadata.endTime: object expected");
+                                    message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                }
+                                if (object.target != null)
+                                    message.target = String(object.target);
+                                if (object.verb != null)
+                                    message.verb = String(object.verb);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.OperationMetadata} message OperationMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OperationMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.createTime = null;
+                                    object.endTime = null;
+                                    object.target = "";
+                                    object.verb = "";
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                    object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    object.target = message.target;
+                                if (message.verb != null && message.hasOwnProperty("verb"))
+                                    object.verb = message.verb;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OperationMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OperationMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OperationMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.OperationMetadata";
+                            };
+    
+                            return OperationMetadata;
                         })();
     
                         return v1;
@@ -23718,6 +26787,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
                 /**
@@ -23778,6 +26848,14 @@
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
     
                 /**
+                 * MethodOptions .google.longrunning.operationInfo.
+                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -23808,6 +26886,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                        $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork()).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
@@ -23869,6 +26949,10 @@
                                 if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                     message[".google.api.methodSignature"] = [];
                                 message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -23939,6 +27023,11 @@
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        if (error)
+                            return ".google.longrunning.operationInfo." + error;
+                    }
                     return null;
                 };
     
@@ -23998,6 +27087,11 @@
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                     }
+                    if (object[".google.longrunning.operationInfo"] != null) {
+                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
+                    }
                     return message;
                 };
     
@@ -24021,6 +27115,7 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object[".google.longrunning.operationInfo"] = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -24032,6 +27127,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
+                        object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options);
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
@@ -27000,6 +30097,242 @@
                 return ListValue;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Empty = (function() {
     
                 /**
@@ -27394,7 +30727,2671 @@
                 return FieldMask;
             })();
     
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
             return protobuf;
+        })();
+    
+        google.longrunning = (function() {
+    
+            /**
+             * Namespace longrunning.
+             * @memberof google
+             * @namespace
+             */
+            var longrunning = {};
+    
+            longrunning.Operations = (function() {
+    
+                /**
+                 * Constructs a new Operations service.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operations
+                 * @extends $protobuf.rpc.Service
+                 * @constructor
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 */
+                function Operations(rpcImpl, requestDelimited, responseDelimited) {
+                    $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                }
+    
+                (Operations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Operations;
+    
+                /**
+                 * Creates new Operations service using the specified rpc implementation.
+                 * @function create
+                 * @memberof google.longrunning.Operations
+                 * @static
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 * @returns {Operations} RPC service. Useful where requests and/or responses are streamed.
+                 */
+                Operations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                    return new this(rpcImpl, requestDelimited, responseDelimited);
+                };
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef ListOperationsCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.ListOperationsResponse} [response] ListOperationsResponse
+                 */
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @param {google.longrunning.Operations.ListOperationsCallback} callback Node-style callback called with the error, if any, and ListOperationsResponse
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
+                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                }, "name", { value: "ListOperations" });
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @returns {Promise<google.longrunning.ListOperationsResponse>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef GetOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.GetOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
+                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "GetOperation" });
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef DeleteOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.DeleteOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
+                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "DeleteOperation" });
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef CancelOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.CancelOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
+                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "CancelOperation" });
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef WaitOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.WaitOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
+                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "WaitOperation" });
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                return Operations;
+            })();
+    
+            longrunning.Operation = (function() {
+    
+                /**
+                 * Properties of an Operation.
+                 * @memberof google.longrunning
+                 * @interface IOperation
+                 * @property {string|null} [name] Operation name
+                 * @property {google.protobuf.IAny|null} [metadata] Operation metadata
+                 * @property {boolean|null} [done] Operation done
+                 * @property {google.rpc.IStatus|null} [error] Operation error
+                 * @property {google.protobuf.IAny|null} [response] Operation response
+                 */
+    
+                /**
+                 * Constructs a new Operation.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operation.
+                 * @implements IOperation
+                 * @constructor
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 */
+                function Operation(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Operation name.
+                 * @member {string} name
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.name = "";
+    
+                /**
+                 * Operation metadata.
+                 * @member {google.protobuf.IAny|null|undefined} metadata
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.metadata = null;
+    
+                /**
+                 * Operation done.
+                 * @member {boolean} done
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.done = false;
+    
+                /**
+                 * Operation error.
+                 * @member {google.rpc.IStatus|null|undefined} error
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.error = null;
+    
+                /**
+                 * Operation response.
+                 * @member {google.protobuf.IAny|null|undefined} response
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.response = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Operation result.
+                 * @member {"error"|"response"|undefined} result
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Object.defineProperty(Operation.prototype, "result", {
+                    get: $util.oneOfGetter($oneOfFields = ["error", "response"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Operation instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 * @returns {google.longrunning.Operation} Operation instance
+                 */
+                Operation.create = function create(properties) {
+                    return new Operation(properties);
+                };
+    
+                /**
+                 * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.google.protobuf.Any.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.done);
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                        $root.google.protobuf.Any.encode(message.response, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Operation message.
+                 * @function verify
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Operation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.google.protobuf.Any.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        if (typeof message.done !== "boolean")
+                            return "done: boolean expected";
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        properties.result = 1;
+                        {
+                            var error = $root.google.rpc.Status.verify(message.error);
+                            if (error)
+                                return "error." + error;
+                        }
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        if (properties.result === 1)
+                            return "result: multiple values";
+                        properties.result = 1;
+                        {
+                            var error = $root.google.protobuf.Any.verify(message.response);
+                            if (error)
+                                return "response." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.Operation} Operation
+                 */
+                Operation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.Operation)
+                        return object;
+                    var message = new $root.google.longrunning.Operation();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".google.longrunning.Operation.metadata: object expected");
+                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata);
+                    }
+                    if (object.done != null)
+                        message.done = Boolean(object.done);
+                    if (object.error != null) {
+                        if (typeof object.error !== "object")
+                            throw TypeError(".google.longrunning.Operation.error: object expected");
+                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                    }
+                    if (object.response != null) {
+                        if (typeof object.response !== "object")
+                            throw TypeError(".google.longrunning.Operation.response: object expected");
+                        message.response = $root.google.protobuf.Any.fromObject(object.response);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Operation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.Operation} message Operation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Operation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.metadata = null;
+                        object.done = false;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options);
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        object.done = message.done;
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                        if (options.oneofs)
+                            object.result = "error";
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        object.response = $root.google.protobuf.Any.toObject(message.response, options);
+                        if (options.oneofs)
+                            object.result = "response";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Operation to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Operation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Operation
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.Operation";
+                };
+    
+                return Operation;
+            })();
+    
+            longrunning.GetOperationRequest = (function() {
+    
+                /**
+                 * Properties of a GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IGetOperationRequest
+                 * @property {string|null} [name] GetOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a GetOperationRequest.
+                 * @implements IGetOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 */
+                function GetOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GetOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 */
+                GetOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new GetOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest instance
+                 */
+                GetOperationRequest.create = function create(properties) {
+                    return new GetOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GetOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 */
+                GetOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.GetOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.GetOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.GetOperationRequest} message GetOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this GetOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
+                };
+    
+                return GetOperationRequest;
+            })();
+    
+            longrunning.ListOperationsRequest = (function() {
+    
+                /**
+                 * Properties of a ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsRequest
+                 * @property {string|null} [name] ListOperationsRequest name
+                 * @property {string|null} [filter] ListOperationsRequest filter
+                 * @property {number|null} [pageSize] ListOperationsRequest pageSize
+                 * @property {string|null} [pageToken] ListOperationsRequest pageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsRequest.
+                 * @implements IListOperationsRequest
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 */
+                function ListOperationsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.name = "";
+    
+                /**
+                 * ListOperationsRequest filter.
+                 * @member {string} filter
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.filter = "";
+    
+                /**
+                 * ListOperationsRequest pageSize.
+                 * @member {number} pageSize
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageSize = 0;
+    
+                /**
+                 * ListOperationsRequest pageToken.
+                 * @member {string} pageToken
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest instance
+                 */
+                ListOperationsRequest.create = function create(properties) {
+                    return new ListOperationsRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (!$util.isString(message.filter))
+                            return "filter: string expected";
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (!$util.isInteger(message.pageSize))
+                            return "pageSize: integer expected";
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (!$util.isString(message.pageToken))
+                            return "pageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 */
+                ListOperationsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsRequest)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.filter != null)
+                        message.filter = String(object.filter);
+                    if (object.pageSize != null)
+                        message.pageSize = object.pageSize | 0;
+                    if (object.pageToken != null)
+                        message.pageToken = String(object.pageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.ListOperationsRequest} message ListOperationsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.filter = "";
+                        object.pageSize = 0;
+                        object.pageToken = "";
+                        object.name = "";
+                    }
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        object.filter = message.filter;
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        object.pageSize = message.pageSize;
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        object.pageToken = message.pageToken;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
+                return ListOperationsRequest;
+            })();
+    
+            longrunning.ListOperationsResponse = (function() {
+    
+                /**
+                 * Properties of a ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsResponse
+                 * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
+                 * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsResponse.
+                 * @implements IListOperationsResponse
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 */
+                function ListOperationsResponse(properties) {
+                    this.operations = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsResponse operations.
+                 * @member {Array.<google.longrunning.IOperation>} operations
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.operations = $util.emptyArray;
+    
+                /**
+                 * ListOperationsResponse nextPageToken.
+                 * @member {string} nextPageToken
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsResponse instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse instance
+                 */
+                ListOperationsResponse.create = function create(properties) {
+                    return new ListOperationsResponse(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.operations != null && message.operations.length)
+                        for (var i = 0; i < message.operations.length; ++i)
+                            $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsResponse message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.operations != null && message.hasOwnProperty("operations")) {
+                        if (!Array.isArray(message.operations))
+                            return "operations: array expected";
+                        for (var i = 0; i < message.operations.length; ++i) {
+                            var error = $root.google.longrunning.Operation.verify(message.operations[i]);
+                            if (error)
+                                return "operations." + error;
+                        }
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (!$util.isString(message.nextPageToken))
+                            return "nextPageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 */
+                ListOperationsResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsResponse)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsResponse();
+                    if (object.operations) {
+                        if (!Array.isArray(object.operations))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
+                        message.operations = [];
+                        for (var i = 0; i < object.operations.length; ++i) {
+                            if (typeof object.operations[i] !== "object")
+                                throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
+                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i]);
+                        }
+                    }
+                    if (object.nextPageToken != null)
+                        message.nextPageToken = String(object.nextPageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.ListOperationsResponse} message ListOperationsResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.operations = [];
+                    if (options.defaults)
+                        object.nextPageToken = "";
+                    if (message.operations && message.operations.length) {
+                        object.operations = [];
+                        for (var j = 0; j < message.operations.length; ++j)
+                            object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options);
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        object.nextPageToken = message.nextPageToken;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsResponse to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
+                return ListOperationsResponse;
+            })();
+    
+            longrunning.CancelOperationRequest = (function() {
+    
+                /**
+                 * Properties of a CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface ICancelOperationRequest
+                 * @property {string|null} [name] CancelOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a CancelOperationRequest.
+                 * @implements ICancelOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 */
+                function CancelOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * CancelOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 */
+                CancelOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new CancelOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest instance
+                 */
+                CancelOperationRequest.create = function create(properties) {
+                    return new CancelOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a CancelOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CancelOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 */
+                CancelOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.CancelOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.CancelOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.CancelOperationRequest} message CancelOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CancelOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this CancelOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CancelOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
+                };
+    
+                return CancelOperationRequest;
+            })();
+    
+            longrunning.DeleteOperationRequest = (function() {
+    
+                /**
+                 * Properties of a DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IDeleteOperationRequest
+                 * @property {string|null} [name] DeleteOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a DeleteOperationRequest.
+                 * @implements IDeleteOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 */
+                function DeleteOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DeleteOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 */
+                DeleteOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new DeleteOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest instance
+                 */
+                DeleteOperationRequest.create = function create(properties) {
+                    return new DeleteOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DeleteOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DeleteOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 */
+                DeleteOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.DeleteOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.DeleteOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.DeleteOperationRequest} message DeleteOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DeleteOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DeleteOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DeleteOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
+                };
+    
+                return DeleteOperationRequest;
+            })();
+    
+            longrunning.WaitOperationRequest = (function() {
+    
+                /**
+                 * Properties of a WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IWaitOperationRequest
+                 * @property {string|null} [name] WaitOperationRequest name
+                 * @property {google.protobuf.IDuration|null} [timeout] WaitOperationRequest timeout
+                 */
+    
+                /**
+                 * Constructs a new WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a WaitOperationRequest.
+                 * @implements IWaitOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 */
+                function WaitOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WaitOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.name = "";
+    
+                /**
+                 * WaitOperationRequest timeout.
+                 * @member {google.protobuf.IDuration|null|undefined} timeout
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.timeout = null;
+    
+                /**
+                 * Creates a new WaitOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest instance
+                 */
+                WaitOperationRequest.create = function create(properties) {
+                    return new WaitOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                        $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WaitOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WaitOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                        var error = $root.google.protobuf.Duration.verify(message.timeout);
+                        if (error)
+                            return "timeout." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 */
+                WaitOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.WaitOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.WaitOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.timeout != null) {
+                        if (typeof object.timeout !== "object")
+                            throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
+                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.WaitOperationRequest} message WaitOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WaitOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.timeout = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.timeout != null && message.hasOwnProperty("timeout"))
+                        object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WaitOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WaitOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
+                };
+    
+                return WaitOperationRequest;
+            })();
+    
+            longrunning.OperationInfo = (function() {
+    
+                /**
+                 * Properties of an OperationInfo.
+                 * @memberof google.longrunning
+                 * @interface IOperationInfo
+                 * @property {string|null} [responseType] OperationInfo responseType
+                 * @property {string|null} [metadataType] OperationInfo metadataType
+                 */
+    
+                /**
+                 * Constructs a new OperationInfo.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an OperationInfo.
+                 * @implements IOperationInfo
+                 * @constructor
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 */
+                function OperationInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OperationInfo responseType.
+                 * @member {string} responseType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.responseType = "";
+    
+                /**
+                 * OperationInfo metadataType.
+                 * @member {string} metadataType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.metadataType = "";
+    
+                /**
+                 * Creates a new OperationInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 * @returns {google.longrunning.OperationInfo} OperationInfo instance
+                 */
+                OperationInfo.create = function create(properties) {
+                    return new OperationInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.responseType);
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OperationInfo message.
+                 * @function verify
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OperationInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        if (!$util.isString(message.responseType))
+                            return "responseType: string expected";
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        if (!$util.isString(message.metadataType))
+                            return "metadataType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 */
+                OperationInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.OperationInfo)
+                        return object;
+                    var message = new $root.google.longrunning.OperationInfo();
+                    if (object.responseType != null)
+                        message.responseType = String(object.responseType);
+                    if (object.metadataType != null)
+                        message.metadataType = String(object.metadataType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.OperationInfo} message OperationInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OperationInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.responseType = "";
+                        object.metadataType = "";
+                    }
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        object.responseType = message.responseType;
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        object.metadataType = message.metadataType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this OperationInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OperationInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
+                };
+    
+                return OperationInfo;
+            })();
+    
+            return longrunning;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;

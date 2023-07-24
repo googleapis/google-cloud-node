@@ -296,6 +296,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService|verifyConnectivity}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef VerifyConnectivityCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.VerifyConnectivityResponse} [response] VerifyConnectivityResponse
+                         */
+    
+                        /**
+                         * Calls VerifyConnectivity.
+                         * @function verifyConnectivity
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} request VerifyConnectivityRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.VerifyConnectivityCallback} callback Node-style callback called with the error, if any, and VerifyConnectivityResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.verifyConnectivity = function verifyConnectivity(request, callback) {
+                            return this.rpcCall(verifyConnectivity, $root.google.cloud.kms.v1.VerifyConnectivityRequest, $root.google.cloud.kms.v1.VerifyConnectivityResponse, request, callback);
+                        }, "name", { value: "VerifyConnectivity" });
+    
+                        /**
+                         * Calls VerifyConnectivity.
+                         * @function verifyConnectivity
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} request VerifyConnectivityRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.VerifyConnectivityResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return EkmService;
                     })();
     
@@ -3334,6 +3367,384 @@
                         return EkmConfig;
                     })();
     
+                    v1.VerifyConnectivityRequest = (function() {
+    
+                        /**
+                         * Properties of a VerifyConnectivityRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IVerifyConnectivityRequest
+                         * @property {string|null} [name] VerifyConnectivityRequest name
+                         */
+    
+                        /**
+                         * Constructs a new VerifyConnectivityRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a VerifyConnectivityRequest.
+                         * @implements IVerifyConnectivityRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest=} [properties] Properties to set
+                         */
+                        function VerifyConnectivityRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VerifyConnectivityRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @instance
+                         */
+                        VerifyConnectivityRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new VerifyConnectivityRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest instance
+                         */
+                        VerifyConnectivityRequest.create = function create(properties) {
+                            return new VerifyConnectivityRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityRequest message. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} message VerifyConnectivityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityRequest} message VerifyConnectivityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.VerifyConnectivityRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyConnectivityRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyConnectivityRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyConnectivityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityRequest} VerifyConnectivityRequest
+                         */
+                        VerifyConnectivityRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.VerifyConnectivityRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.VerifyConnectivityRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyConnectivityRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.VerifyConnectivityRequest} message VerifyConnectivityRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyConnectivityRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VerifyConnectivityRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyConnectivityRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyConnectivityRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyConnectivityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.VerifyConnectivityRequest";
+                        };
+    
+                        return VerifyConnectivityRequest;
+                    })();
+    
+                    v1.VerifyConnectivityResponse = (function() {
+    
+                        /**
+                         * Properties of a VerifyConnectivityResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IVerifyConnectivityResponse
+                         */
+    
+                        /**
+                         * Constructs a new VerifyConnectivityResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a VerifyConnectivityResponse.
+                         * @implements IVerifyConnectivityResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse=} [properties] Properties to set
+                         */
+                        function VerifyConnectivityResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new VerifyConnectivityResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse instance
+                         */
+                        VerifyConnectivityResponse.create = function create(properties) {
+                            return new VerifyConnectivityResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityResponse message. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse} message VerifyConnectivityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyConnectivityResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.VerifyConnectivityResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IVerifyConnectivityResponse} message VerifyConnectivityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyConnectivityResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.VerifyConnectivityResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyConnectivityResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyConnectivityResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyConnectivityResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyConnectivityResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyConnectivityResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.VerifyConnectivityResponse} VerifyConnectivityResponse
+                         */
+                        VerifyConnectivityResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.VerifyConnectivityResponse)
+                                return object;
+                            return new $root.google.cloud.kms.v1.VerifyConnectivityResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyConnectivityResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.VerifyConnectivityResponse} message VerifyConnectivityResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyConnectivityResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this VerifyConnectivityResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyConnectivityResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyConnectivityResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.VerifyConnectivityResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyConnectivityResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.VerifyConnectivityResponse";
+                        };
+    
+                        return VerifyConnectivityResponse;
+                    })();
+    
                     v1.KeyRing = (function() {
     
                         /**
@@ -3899,6 +4310,7 @@
                                 case 1:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 9:
                                     break;
                                 }
@@ -3988,6 +4400,10 @@
                             case "ASYMMETRIC_DECRYPT":
                             case 6:
                                 message.purpose = 6;
+                                break;
+                            case "RAW_ENCRYPT_DECRYPT":
+                            case 7:
+                                message.purpose = 7;
                                 break;
                             case "MAC":
                             case 9:
@@ -4125,6 +4541,7 @@
                          * @property {number} ENCRYPT_DECRYPT=1 ENCRYPT_DECRYPT value
                          * @property {number} ASYMMETRIC_SIGN=5 ASYMMETRIC_SIGN value
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
+                         * @property {number} RAW_ENCRYPT_DECRYPT=7 RAW_ENCRYPT_DECRYPT value
                          * @property {number} MAC=9 MAC value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
@@ -4133,6 +4550,7 @@
                             values[valuesById[1] = "ENCRYPT_DECRYPT"] = 1;
                             values[valuesById[5] = "ASYMMETRIC_SIGN"] = 5;
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
+                            values[valuesById[7] = "RAW_ENCRYPT_DECRYPT"] = 7;
                             values[valuesById[9] = "MAC"] = 9;
                             return values;
                         })();
@@ -4303,6 +4721,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -4389,6 +4813,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -5550,6 +5998,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -5740,6 +6194,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -5996,6 +6474,12 @@
                          * @enum {number}
                          * @property {number} CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED=0 CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED value
                          * @property {number} GOOGLE_SYMMETRIC_ENCRYPTION=1 GOOGLE_SYMMETRIC_ENCRYPTION value
+                         * @property {number} AES_128_GCM=41 AES_128_GCM value
+                         * @property {number} AES_256_GCM=19 AES_256_GCM value
+                         * @property {number} AES_128_CBC=42 AES_128_CBC value
+                         * @property {number} AES_256_CBC=43 AES_256_CBC value
+                         * @property {number} AES_128_CTR=44 AES_128_CTR value
+                         * @property {number} AES_256_CTR=45 AES_256_CTR value
                          * @property {number} RSA_SIGN_PSS_2048_SHA256=2 RSA_SIGN_PSS_2048_SHA256 value
                          * @property {number} RSA_SIGN_PSS_3072_SHA256=3 RSA_SIGN_PSS_3072_SHA256 value
                          * @property {number} RSA_SIGN_PSS_4096_SHA256=4 RSA_SIGN_PSS_4096_SHA256 value
@@ -6028,6 +6512,12 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GOOGLE_SYMMETRIC_ENCRYPTION"] = 1;
+                            values[valuesById[41] = "AES_128_GCM"] = 41;
+                            values[valuesById[19] = "AES_256_GCM"] = 19;
+                            values[valuesById[42] = "AES_128_CBC"] = 42;
+                            values[valuesById[43] = "AES_256_CBC"] = 43;
+                            values[valuesById[44] = "AES_128_CTR"] = 44;
+                            values[valuesById[45] = "AES_256_CTR"] = 45;
                             values[valuesById[2] = "RSA_SIGN_PSS_2048_SHA256"] = 2;
                             values[valuesById[3] = "RSA_SIGN_PSS_3072_SHA256"] = 3;
                             values[valuesById[4] = "RSA_SIGN_PSS_4096_SHA256"] = 4;
@@ -6307,6 +6797,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -6386,6 +6882,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -8358,6 +8878,72 @@
                          * @instance
                          * @param {google.cloud.kms.v1.IDecryptRequest} request DecryptRequest message or plain object
                          * @returns {Promise<google.cloud.kms.v1.DecryptResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|rawEncrypt}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef RawEncryptCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.RawEncryptResponse} [response] RawEncryptResponse
+                         */
+    
+                        /**
+                         * Calls RawEncrypt.
+                         * @function rawEncrypt
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IRawEncryptRequest} request RawEncryptRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.RawEncryptCallback} callback Node-style callback called with the error, if any, and RawEncryptResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.rawEncrypt = function rawEncrypt(request, callback) {
+                            return this.rpcCall(rawEncrypt, $root.google.cloud.kms.v1.RawEncryptRequest, $root.google.cloud.kms.v1.RawEncryptResponse, request, callback);
+                        }, "name", { value: "RawEncrypt" });
+    
+                        /**
+                         * Calls RawEncrypt.
+                         * @function rawEncrypt
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IRawEncryptRequest} request RawEncryptRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.RawEncryptResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|rawDecrypt}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef RawDecryptCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.RawDecryptResponse} [response] RawDecryptResponse
+                         */
+    
+                        /**
+                         * Calls RawDecrypt.
+                         * @function rawDecrypt
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IRawDecryptRequest} request RawDecryptRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.RawDecryptCallback} callback Node-style callback called with the error, if any, and RawDecryptResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.rawDecrypt = function rawDecrypt(request, callback) {
+                            return this.rpcCall(rawDecrypt, $root.google.cloud.kms.v1.RawDecryptRequest, $root.google.cloud.kms.v1.RawDecryptResponse, request, callback);
+                        }, "name", { value: "RawDecrypt" });
+    
+                        /**
+                         * Calls RawDecrypt.
+                         * @function rawDecrypt
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IRawDecryptRequest} request RawDecryptRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.RawDecryptResponse>} Promise
                          * @variation 2
                          */
     
@@ -12898,6 +13484,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -12971,6 +13563,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -15179,6 +15795,797 @@
                         return DecryptRequest;
                     })();
     
+                    v1.RawEncryptRequest = (function() {
+    
+                        /**
+                         * Properties of a RawEncryptRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRawEncryptRequest
+                         * @property {string|null} [name] RawEncryptRequest name
+                         * @property {Uint8Array|null} [plaintext] RawEncryptRequest plaintext
+                         * @property {Uint8Array|null} [additionalAuthenticatedData] RawEncryptRequest additionalAuthenticatedData
+                         * @property {google.protobuf.IInt64Value|null} [plaintextCrc32c] RawEncryptRequest plaintextCrc32c
+                         * @property {google.protobuf.IInt64Value|null} [additionalAuthenticatedDataCrc32c] RawEncryptRequest additionalAuthenticatedDataCrc32c
+                         * @property {Uint8Array|null} [initializationVector] RawEncryptRequest initializationVector
+                         * @property {google.protobuf.IInt64Value|null} [initializationVectorCrc32c] RawEncryptRequest initializationVectorCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new RawEncryptRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RawEncryptRequest.
+                         * @implements IRawEncryptRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRawEncryptRequest=} [properties] Properties to set
+                         */
+                        function RawEncryptRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawEncryptRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.name = "";
+    
+                        /**
+                         * RawEncryptRequest plaintext.
+                         * @member {Uint8Array} plaintext
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.plaintext = $util.newBuffer([]);
+    
+                        /**
+                         * RawEncryptRequest additionalAuthenticatedData.
+                         * @member {Uint8Array} additionalAuthenticatedData
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.additionalAuthenticatedData = $util.newBuffer([]);
+    
+                        /**
+                         * RawEncryptRequest plaintextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} plaintextCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.plaintextCrc32c = null;
+    
+                        /**
+                         * RawEncryptRequest additionalAuthenticatedDataCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} additionalAuthenticatedDataCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.additionalAuthenticatedDataCrc32c = null;
+    
+                        /**
+                         * RawEncryptRequest initializationVector.
+                         * @member {Uint8Array} initializationVector
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.initializationVector = $util.newBuffer([]);
+    
+                        /**
+                         * RawEncryptRequest initializationVectorCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} initializationVectorCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         */
+                        RawEncryptRequest.prototype.initializationVectorCrc32c = null;
+    
+                        /**
+                         * Creates a new RawEncryptRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawEncryptRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RawEncryptRequest} RawEncryptRequest instance
+                         */
+                        RawEncryptRequest.create = function create(properties) {
+                            return new RawEncryptRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawEncryptRequest message. Does not implicitly {@link google.cloud.kms.v1.RawEncryptRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawEncryptRequest} message RawEncryptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawEncryptRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.plaintext != null && Object.hasOwnProperty.call(message, "plaintext"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.plaintext);
+                            if (message.additionalAuthenticatedData != null && Object.hasOwnProperty.call(message, "additionalAuthenticatedData"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.additionalAuthenticatedData);
+                            if (message.plaintextCrc32c != null && Object.hasOwnProperty.call(message, "plaintextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.plaintextCrc32c, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.additionalAuthenticatedDataCrc32c != null && Object.hasOwnProperty.call(message, "additionalAuthenticatedDataCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.additionalAuthenticatedDataCrc32c, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.initializationVector != null && Object.hasOwnProperty.call(message, "initializationVector"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.initializationVector);
+                            if (message.initializationVectorCrc32c != null && Object.hasOwnProperty.call(message, "initializationVectorCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.initializationVectorCrc32c, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawEncryptRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawEncryptRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawEncryptRequest} message RawEncryptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawEncryptRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawEncryptRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RawEncryptRequest} RawEncryptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawEncryptRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawEncryptRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.plaintext = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.additionalAuthenticatedData = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.plaintextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.additionalAuthenticatedDataCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.initializationVector = reader.bytes();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.initializationVectorCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawEncryptRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RawEncryptRequest} RawEncryptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawEncryptRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawEncryptRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawEncryptRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
+                                if (!(message.plaintext && typeof message.plaintext.length === "number" || $util.isString(message.plaintext)))
+                                    return "plaintext: buffer expected";
+                            if (message.additionalAuthenticatedData != null && message.hasOwnProperty("additionalAuthenticatedData"))
+                                if (!(message.additionalAuthenticatedData && typeof message.additionalAuthenticatedData.length === "number" || $util.isString(message.additionalAuthenticatedData)))
+                                    return "additionalAuthenticatedData: buffer expected";
+                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.plaintextCrc32c);
+                                if (error)
+                                    return "plaintextCrc32c." + error;
+                            }
+                            if (message.additionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("additionalAuthenticatedDataCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.additionalAuthenticatedDataCrc32c);
+                                if (error)
+                                    return "additionalAuthenticatedDataCrc32c." + error;
+                            }
+                            if (message.initializationVector != null && message.hasOwnProperty("initializationVector"))
+                                if (!(message.initializationVector && typeof message.initializationVector.length === "number" || $util.isString(message.initializationVector)))
+                                    return "initializationVector: buffer expected";
+                            if (message.initializationVectorCrc32c != null && message.hasOwnProperty("initializationVectorCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.initializationVectorCrc32c);
+                                if (error)
+                                    return "initializationVectorCrc32c." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawEncryptRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RawEncryptRequest} RawEncryptRequest
+                         */
+                        RawEncryptRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RawEncryptRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RawEncryptRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.plaintext != null)
+                                if (typeof object.plaintext === "string")
+                                    $util.base64.decode(object.plaintext, message.plaintext = $util.newBuffer($util.base64.length(object.plaintext)), 0);
+                                else if (object.plaintext.length >= 0)
+                                    message.plaintext = object.plaintext;
+                            if (object.additionalAuthenticatedData != null)
+                                if (typeof object.additionalAuthenticatedData === "string")
+                                    $util.base64.decode(object.additionalAuthenticatedData, message.additionalAuthenticatedData = $util.newBuffer($util.base64.length(object.additionalAuthenticatedData)), 0);
+                                else if (object.additionalAuthenticatedData.length >= 0)
+                                    message.additionalAuthenticatedData = object.additionalAuthenticatedData;
+                            if (object.plaintextCrc32c != null) {
+                                if (typeof object.plaintextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawEncryptRequest.plaintextCrc32c: object expected");
+                                message.plaintextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.plaintextCrc32c);
+                            }
+                            if (object.additionalAuthenticatedDataCrc32c != null) {
+                                if (typeof object.additionalAuthenticatedDataCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawEncryptRequest.additionalAuthenticatedDataCrc32c: object expected");
+                                message.additionalAuthenticatedDataCrc32c = $root.google.protobuf.Int64Value.fromObject(object.additionalAuthenticatedDataCrc32c);
+                            }
+                            if (object.initializationVector != null)
+                                if (typeof object.initializationVector === "string")
+                                    $util.base64.decode(object.initializationVector, message.initializationVector = $util.newBuffer($util.base64.length(object.initializationVector)), 0);
+                                else if (object.initializationVector.length >= 0)
+                                    message.initializationVector = object.initializationVector;
+                            if (object.initializationVectorCrc32c != null) {
+                                if (typeof object.initializationVectorCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawEncryptRequest.initializationVectorCrc32c: object expected");
+                                message.initializationVectorCrc32c = $root.google.protobuf.Int64Value.fromObject(object.initializationVectorCrc32c);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawEncryptRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.RawEncryptRequest} message RawEncryptRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawEncryptRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.plaintext = "";
+                                else {
+                                    object.plaintext = [];
+                                    if (options.bytes !== Array)
+                                        object.plaintext = $util.newBuffer(object.plaintext);
+                                }
+                                if (options.bytes === String)
+                                    object.additionalAuthenticatedData = "";
+                                else {
+                                    object.additionalAuthenticatedData = [];
+                                    if (options.bytes !== Array)
+                                        object.additionalAuthenticatedData = $util.newBuffer(object.additionalAuthenticatedData);
+                                }
+                                object.plaintextCrc32c = null;
+                                object.additionalAuthenticatedDataCrc32c = null;
+                                if (options.bytes === String)
+                                    object.initializationVector = "";
+                                else {
+                                    object.initializationVector = [];
+                                    if (options.bytes !== Array)
+                                        object.initializationVector = $util.newBuffer(object.initializationVector);
+                                }
+                                object.initializationVectorCrc32c = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
+                                object.plaintext = options.bytes === String ? $util.base64.encode(message.plaintext, 0, message.plaintext.length) : options.bytes === Array ? Array.prototype.slice.call(message.plaintext) : message.plaintext;
+                            if (message.additionalAuthenticatedData != null && message.hasOwnProperty("additionalAuthenticatedData"))
+                                object.additionalAuthenticatedData = options.bytes === String ? $util.base64.encode(message.additionalAuthenticatedData, 0, message.additionalAuthenticatedData.length) : options.bytes === Array ? Array.prototype.slice.call(message.additionalAuthenticatedData) : message.additionalAuthenticatedData;
+                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c"))
+                                object.plaintextCrc32c = $root.google.protobuf.Int64Value.toObject(message.plaintextCrc32c, options);
+                            if (message.additionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("additionalAuthenticatedDataCrc32c"))
+                                object.additionalAuthenticatedDataCrc32c = $root.google.protobuf.Int64Value.toObject(message.additionalAuthenticatedDataCrc32c, options);
+                            if (message.initializationVector != null && message.hasOwnProperty("initializationVector"))
+                                object.initializationVector = options.bytes === String ? $util.base64.encode(message.initializationVector, 0, message.initializationVector.length) : options.bytes === Array ? Array.prototype.slice.call(message.initializationVector) : message.initializationVector;
+                            if (message.initializationVectorCrc32c != null && message.hasOwnProperty("initializationVectorCrc32c"))
+                                object.initializationVectorCrc32c = $root.google.protobuf.Int64Value.toObject(message.initializationVectorCrc32c, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawEncryptRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawEncryptRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RawEncryptRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.RawEncryptRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RawEncryptRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.RawEncryptRequest";
+                        };
+    
+                        return RawEncryptRequest;
+                    })();
+    
+                    v1.RawDecryptRequest = (function() {
+    
+                        /**
+                         * Properties of a RawDecryptRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRawDecryptRequest
+                         * @property {string|null} [name] RawDecryptRequest name
+                         * @property {Uint8Array|null} [ciphertext] RawDecryptRequest ciphertext
+                         * @property {Uint8Array|null} [additionalAuthenticatedData] RawDecryptRequest additionalAuthenticatedData
+                         * @property {Uint8Array|null} [initializationVector] RawDecryptRequest initializationVector
+                         * @property {number|null} [tagLength] RawDecryptRequest tagLength
+                         * @property {google.protobuf.IInt64Value|null} [ciphertextCrc32c] RawDecryptRequest ciphertextCrc32c
+                         * @property {google.protobuf.IInt64Value|null} [additionalAuthenticatedDataCrc32c] RawDecryptRequest additionalAuthenticatedDataCrc32c
+                         * @property {google.protobuf.IInt64Value|null} [initializationVectorCrc32c] RawDecryptRequest initializationVectorCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new RawDecryptRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RawDecryptRequest.
+                         * @implements IRawDecryptRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRawDecryptRequest=} [properties] Properties to set
+                         */
+                        function RawDecryptRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawDecryptRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.name = "";
+    
+                        /**
+                         * RawDecryptRequest ciphertext.
+                         * @member {Uint8Array} ciphertext
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.ciphertext = $util.newBuffer([]);
+    
+                        /**
+                         * RawDecryptRequest additionalAuthenticatedData.
+                         * @member {Uint8Array} additionalAuthenticatedData
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.additionalAuthenticatedData = $util.newBuffer([]);
+    
+                        /**
+                         * RawDecryptRequest initializationVector.
+                         * @member {Uint8Array} initializationVector
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.initializationVector = $util.newBuffer([]);
+    
+                        /**
+                         * RawDecryptRequest tagLength.
+                         * @member {number} tagLength
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.tagLength = 0;
+    
+                        /**
+                         * RawDecryptRequest ciphertextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} ciphertextCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.ciphertextCrc32c = null;
+    
+                        /**
+                         * RawDecryptRequest additionalAuthenticatedDataCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} additionalAuthenticatedDataCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.additionalAuthenticatedDataCrc32c = null;
+    
+                        /**
+                         * RawDecryptRequest initializationVectorCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} initializationVectorCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         */
+                        RawDecryptRequest.prototype.initializationVectorCrc32c = null;
+    
+                        /**
+                         * Creates a new RawDecryptRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawDecryptRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RawDecryptRequest} RawDecryptRequest instance
+                         */
+                        RawDecryptRequest.create = function create(properties) {
+                            return new RawDecryptRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawDecryptRequest message. Does not implicitly {@link google.cloud.kms.v1.RawDecryptRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawDecryptRequest} message RawDecryptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawDecryptRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ciphertext != null && Object.hasOwnProperty.call(message, "ciphertext"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ciphertext);
+                            if (message.additionalAuthenticatedData != null && Object.hasOwnProperty.call(message, "additionalAuthenticatedData"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.additionalAuthenticatedData);
+                            if (message.initializationVector != null && Object.hasOwnProperty.call(message, "initializationVector"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.initializationVector);
+                            if (message.tagLength != null && Object.hasOwnProperty.call(message, "tagLength"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.tagLength);
+                            if (message.ciphertextCrc32c != null && Object.hasOwnProperty.call(message, "ciphertextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.ciphertextCrc32c, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.additionalAuthenticatedDataCrc32c != null && Object.hasOwnProperty.call(message, "additionalAuthenticatedDataCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.additionalAuthenticatedDataCrc32c, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.initializationVectorCrc32c != null && Object.hasOwnProperty.call(message, "initializationVectorCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.initializationVectorCrc32c, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawDecryptRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawDecryptRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawDecryptRequest} message RawDecryptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawDecryptRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawDecryptRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RawDecryptRequest} RawDecryptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawDecryptRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawDecryptRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ciphertext = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.additionalAuthenticatedData = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.initializationVector = reader.bytes();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.tagLength = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ciphertextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.additionalAuthenticatedDataCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.initializationVectorCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawDecryptRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RawDecryptRequest} RawDecryptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawDecryptRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawDecryptRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawDecryptRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                if (!(message.ciphertext && typeof message.ciphertext.length === "number" || $util.isString(message.ciphertext)))
+                                    return "ciphertext: buffer expected";
+                            if (message.additionalAuthenticatedData != null && message.hasOwnProperty("additionalAuthenticatedData"))
+                                if (!(message.additionalAuthenticatedData && typeof message.additionalAuthenticatedData.length === "number" || $util.isString(message.additionalAuthenticatedData)))
+                                    return "additionalAuthenticatedData: buffer expected";
+                            if (message.initializationVector != null && message.hasOwnProperty("initializationVector"))
+                                if (!(message.initializationVector && typeof message.initializationVector.length === "number" || $util.isString(message.initializationVector)))
+                                    return "initializationVector: buffer expected";
+                            if (message.tagLength != null && message.hasOwnProperty("tagLength"))
+                                if (!$util.isInteger(message.tagLength))
+                                    return "tagLength: integer expected";
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.ciphertextCrc32c);
+                                if (error)
+                                    return "ciphertextCrc32c." + error;
+                            }
+                            if (message.additionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("additionalAuthenticatedDataCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.additionalAuthenticatedDataCrc32c);
+                                if (error)
+                                    return "additionalAuthenticatedDataCrc32c." + error;
+                            }
+                            if (message.initializationVectorCrc32c != null && message.hasOwnProperty("initializationVectorCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.initializationVectorCrc32c);
+                                if (error)
+                                    return "initializationVectorCrc32c." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawDecryptRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RawDecryptRequest} RawDecryptRequest
+                         */
+                        RawDecryptRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RawDecryptRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RawDecryptRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ciphertext != null)
+                                if (typeof object.ciphertext === "string")
+                                    $util.base64.decode(object.ciphertext, message.ciphertext = $util.newBuffer($util.base64.length(object.ciphertext)), 0);
+                                else if (object.ciphertext.length >= 0)
+                                    message.ciphertext = object.ciphertext;
+                            if (object.additionalAuthenticatedData != null)
+                                if (typeof object.additionalAuthenticatedData === "string")
+                                    $util.base64.decode(object.additionalAuthenticatedData, message.additionalAuthenticatedData = $util.newBuffer($util.base64.length(object.additionalAuthenticatedData)), 0);
+                                else if (object.additionalAuthenticatedData.length >= 0)
+                                    message.additionalAuthenticatedData = object.additionalAuthenticatedData;
+                            if (object.initializationVector != null)
+                                if (typeof object.initializationVector === "string")
+                                    $util.base64.decode(object.initializationVector, message.initializationVector = $util.newBuffer($util.base64.length(object.initializationVector)), 0);
+                                else if (object.initializationVector.length >= 0)
+                                    message.initializationVector = object.initializationVector;
+                            if (object.tagLength != null)
+                                message.tagLength = object.tagLength | 0;
+                            if (object.ciphertextCrc32c != null) {
+                                if (typeof object.ciphertextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawDecryptRequest.ciphertextCrc32c: object expected");
+                                message.ciphertextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.ciphertextCrc32c);
+                            }
+                            if (object.additionalAuthenticatedDataCrc32c != null) {
+                                if (typeof object.additionalAuthenticatedDataCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawDecryptRequest.additionalAuthenticatedDataCrc32c: object expected");
+                                message.additionalAuthenticatedDataCrc32c = $root.google.protobuf.Int64Value.fromObject(object.additionalAuthenticatedDataCrc32c);
+                            }
+                            if (object.initializationVectorCrc32c != null) {
+                                if (typeof object.initializationVectorCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawDecryptRequest.initializationVectorCrc32c: object expected");
+                                message.initializationVectorCrc32c = $root.google.protobuf.Int64Value.fromObject(object.initializationVectorCrc32c);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawDecryptRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.RawDecryptRequest} message RawDecryptRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawDecryptRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.ciphertext = "";
+                                else {
+                                    object.ciphertext = [];
+                                    if (options.bytes !== Array)
+                                        object.ciphertext = $util.newBuffer(object.ciphertext);
+                                }
+                                if (options.bytes === String)
+                                    object.additionalAuthenticatedData = "";
+                                else {
+                                    object.additionalAuthenticatedData = [];
+                                    if (options.bytes !== Array)
+                                        object.additionalAuthenticatedData = $util.newBuffer(object.additionalAuthenticatedData);
+                                }
+                                if (options.bytes === String)
+                                    object.initializationVector = "";
+                                else {
+                                    object.initializationVector = [];
+                                    if (options.bytes !== Array)
+                                        object.initializationVector = $util.newBuffer(object.initializationVector);
+                                }
+                                object.tagLength = 0;
+                                object.ciphertextCrc32c = null;
+                                object.additionalAuthenticatedDataCrc32c = null;
+                                object.initializationVectorCrc32c = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                object.ciphertext = options.bytes === String ? $util.base64.encode(message.ciphertext, 0, message.ciphertext.length) : options.bytes === Array ? Array.prototype.slice.call(message.ciphertext) : message.ciphertext;
+                            if (message.additionalAuthenticatedData != null && message.hasOwnProperty("additionalAuthenticatedData"))
+                                object.additionalAuthenticatedData = options.bytes === String ? $util.base64.encode(message.additionalAuthenticatedData, 0, message.additionalAuthenticatedData.length) : options.bytes === Array ? Array.prototype.slice.call(message.additionalAuthenticatedData) : message.additionalAuthenticatedData;
+                            if (message.initializationVector != null && message.hasOwnProperty("initializationVector"))
+                                object.initializationVector = options.bytes === String ? $util.base64.encode(message.initializationVector, 0, message.initializationVector.length) : options.bytes === Array ? Array.prototype.slice.call(message.initializationVector) : message.initializationVector;
+                            if (message.tagLength != null && message.hasOwnProperty("tagLength"))
+                                object.tagLength = message.tagLength;
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c"))
+                                object.ciphertextCrc32c = $root.google.protobuf.Int64Value.toObject(message.ciphertextCrc32c, options);
+                            if (message.additionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("additionalAuthenticatedDataCrc32c"))
+                                object.additionalAuthenticatedDataCrc32c = $root.google.protobuf.Int64Value.toObject(message.additionalAuthenticatedDataCrc32c, options);
+                            if (message.initializationVectorCrc32c != null && message.hasOwnProperty("initializationVectorCrc32c"))
+                                object.initializationVectorCrc32c = $root.google.protobuf.Int64Value.toObject(message.initializationVectorCrc32c, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawDecryptRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawDecryptRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RawDecryptRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.RawDecryptRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RawDecryptRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.RawDecryptRequest";
+                        };
+    
+                        return RawDecryptRequest;
+                    })();
+    
                     v1.AsymmetricSignRequest = (function() {
     
                         /**
@@ -17321,6 +18728,846 @@
                         };
     
                         return DecryptResponse;
+                    })();
+    
+                    v1.RawEncryptResponse = (function() {
+    
+                        /**
+                         * Properties of a RawEncryptResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRawEncryptResponse
+                         * @property {Uint8Array|null} [ciphertext] RawEncryptResponse ciphertext
+                         * @property {Uint8Array|null} [initializationVector] RawEncryptResponse initializationVector
+                         * @property {number|null} [tagLength] RawEncryptResponse tagLength
+                         * @property {google.protobuf.IInt64Value|null} [ciphertextCrc32c] RawEncryptResponse ciphertextCrc32c
+                         * @property {google.protobuf.IInt64Value|null} [initializationVectorCrc32c] RawEncryptResponse initializationVectorCrc32c
+                         * @property {boolean|null} [verifiedPlaintextCrc32c] RawEncryptResponse verifiedPlaintextCrc32c
+                         * @property {boolean|null} [verifiedAdditionalAuthenticatedDataCrc32c] RawEncryptResponse verifiedAdditionalAuthenticatedDataCrc32c
+                         * @property {boolean|null} [verifiedInitializationVectorCrc32c] RawEncryptResponse verifiedInitializationVectorCrc32c
+                         * @property {string|null} [name] RawEncryptResponse name
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] RawEncryptResponse protectionLevel
+                         */
+    
+                        /**
+                         * Constructs a new RawEncryptResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RawEncryptResponse.
+                         * @implements IRawEncryptResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRawEncryptResponse=} [properties] Properties to set
+                         */
+                        function RawEncryptResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawEncryptResponse ciphertext.
+                         * @member {Uint8Array} ciphertext
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.ciphertext = $util.newBuffer([]);
+    
+                        /**
+                         * RawEncryptResponse initializationVector.
+                         * @member {Uint8Array} initializationVector
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.initializationVector = $util.newBuffer([]);
+    
+                        /**
+                         * RawEncryptResponse tagLength.
+                         * @member {number} tagLength
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.tagLength = 0;
+    
+                        /**
+                         * RawEncryptResponse ciphertextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} ciphertextCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.ciphertextCrc32c = null;
+    
+                        /**
+                         * RawEncryptResponse initializationVectorCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} initializationVectorCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.initializationVectorCrc32c = null;
+    
+                        /**
+                         * RawEncryptResponse verifiedPlaintextCrc32c.
+                         * @member {boolean} verifiedPlaintextCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.verifiedPlaintextCrc32c = false;
+    
+                        /**
+                         * RawEncryptResponse verifiedAdditionalAuthenticatedDataCrc32c.
+                         * @member {boolean} verifiedAdditionalAuthenticatedDataCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.verifiedAdditionalAuthenticatedDataCrc32c = false;
+    
+                        /**
+                         * RawEncryptResponse verifiedInitializationVectorCrc32c.
+                         * @member {boolean} verifiedInitializationVectorCrc32c
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.verifiedInitializationVectorCrc32c = false;
+    
+                        /**
+                         * RawEncryptResponse name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.name = "";
+    
+                        /**
+                         * RawEncryptResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         */
+                        RawEncryptResponse.prototype.protectionLevel = 0;
+    
+                        /**
+                         * Creates a new RawEncryptResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawEncryptResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RawEncryptResponse} RawEncryptResponse instance
+                         */
+                        RawEncryptResponse.create = function create(properties) {
+                            return new RawEncryptResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawEncryptResponse message. Does not implicitly {@link google.cloud.kms.v1.RawEncryptResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawEncryptResponse} message RawEncryptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawEncryptResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ciphertext != null && Object.hasOwnProperty.call(message, "ciphertext"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.ciphertext);
+                            if (message.initializationVector != null && Object.hasOwnProperty.call(message, "initializationVector"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.initializationVector);
+                            if (message.tagLength != null && Object.hasOwnProperty.call(message, "tagLength"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.tagLength);
+                            if (message.ciphertextCrc32c != null && Object.hasOwnProperty.call(message, "ciphertextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.ciphertextCrc32c, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.initializationVectorCrc32c != null && Object.hasOwnProperty.call(message, "initializationVectorCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.initializationVectorCrc32c, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.verifiedPlaintextCrc32c != null && Object.hasOwnProperty.call(message, "verifiedPlaintextCrc32c"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.verifiedPlaintextCrc32c);
+                            if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && Object.hasOwnProperty.call(message, "verifiedAdditionalAuthenticatedDataCrc32c"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.verifiedAdditionalAuthenticatedDataCrc32c);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.name);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.protectionLevel);
+                            if (message.verifiedInitializationVectorCrc32c != null && Object.hasOwnProperty.call(message, "verifiedInitializationVectorCrc32c"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.verifiedInitializationVectorCrc32c);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawEncryptResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawEncryptResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawEncryptResponse} message RawEncryptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawEncryptResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawEncryptResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RawEncryptResponse} RawEncryptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawEncryptResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawEncryptResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ciphertext = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.initializationVector = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.tagLength = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ciphertextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.initializationVectorCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.verifiedPlaintextCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.verifiedAdditionalAuthenticatedDataCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.verifiedInitializationVectorCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.protectionLevel = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawEncryptResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RawEncryptResponse} RawEncryptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawEncryptResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawEncryptResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawEncryptResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                if (!(message.ciphertext && typeof message.ciphertext.length === "number" || $util.isString(message.ciphertext)))
+                                    return "ciphertext: buffer expected";
+                            if (message.initializationVector != null && message.hasOwnProperty("initializationVector"))
+                                if (!(message.initializationVector && typeof message.initializationVector.length === "number" || $util.isString(message.initializationVector)))
+                                    return "initializationVector: buffer expected";
+                            if (message.tagLength != null && message.hasOwnProperty("tagLength"))
+                                if (!$util.isInteger(message.tagLength))
+                                    return "tagLength: integer expected";
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.ciphertextCrc32c);
+                                if (error)
+                                    return "ciphertextCrc32c." + error;
+                            }
+                            if (message.initializationVectorCrc32c != null && message.hasOwnProperty("initializationVectorCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.initializationVectorCrc32c);
+                                if (error)
+                                    return "initializationVectorCrc32c." + error;
+                            }
+                            if (message.verifiedPlaintextCrc32c != null && message.hasOwnProperty("verifiedPlaintextCrc32c"))
+                                if (typeof message.verifiedPlaintextCrc32c !== "boolean")
+                                    return "verifiedPlaintextCrc32c: boolean expected";
+                            if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("verifiedAdditionalAuthenticatedDataCrc32c"))
+                                if (typeof message.verifiedAdditionalAuthenticatedDataCrc32c !== "boolean")
+                                    return "verifiedAdditionalAuthenticatedDataCrc32c: boolean expected";
+                            if (message.verifiedInitializationVectorCrc32c != null && message.hasOwnProperty("verifiedInitializationVectorCrc32c"))
+                                if (typeof message.verifiedInitializationVectorCrc32c !== "boolean")
+                                    return "verifiedInitializationVectorCrc32c: boolean expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawEncryptResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RawEncryptResponse} RawEncryptResponse
+                         */
+                        RawEncryptResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RawEncryptResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RawEncryptResponse();
+                            if (object.ciphertext != null)
+                                if (typeof object.ciphertext === "string")
+                                    $util.base64.decode(object.ciphertext, message.ciphertext = $util.newBuffer($util.base64.length(object.ciphertext)), 0);
+                                else if (object.ciphertext.length >= 0)
+                                    message.ciphertext = object.ciphertext;
+                            if (object.initializationVector != null)
+                                if (typeof object.initializationVector === "string")
+                                    $util.base64.decode(object.initializationVector, message.initializationVector = $util.newBuffer($util.base64.length(object.initializationVector)), 0);
+                                else if (object.initializationVector.length >= 0)
+                                    message.initializationVector = object.initializationVector;
+                            if (object.tagLength != null)
+                                message.tagLength = object.tagLength | 0;
+                            if (object.ciphertextCrc32c != null) {
+                                if (typeof object.ciphertextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawEncryptResponse.ciphertextCrc32c: object expected");
+                                message.ciphertextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.ciphertextCrc32c);
+                            }
+                            if (object.initializationVectorCrc32c != null) {
+                                if (typeof object.initializationVectorCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawEncryptResponse.initializationVectorCrc32c: object expected");
+                                message.initializationVectorCrc32c = $root.google.protobuf.Int64Value.fromObject(object.initializationVectorCrc32c);
+                            }
+                            if (object.verifiedPlaintextCrc32c != null)
+                                message.verifiedPlaintextCrc32c = Boolean(object.verifiedPlaintextCrc32c);
+                            if (object.verifiedAdditionalAuthenticatedDataCrc32c != null)
+                                message.verifiedAdditionalAuthenticatedDataCrc32c = Boolean(object.verifiedAdditionalAuthenticatedDataCrc32c);
+                            if (object.verifiedInitializationVectorCrc32c != null)
+                                message.verifiedInitializationVectorCrc32c = Boolean(object.verifiedInitializationVectorCrc32c);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.protectionLevel) {
+                            default:
+                                if (typeof object.protectionLevel === "number") {
+                                    message.protectionLevel = object.protectionLevel;
+                                    break;
+                                }
+                                break;
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawEncryptResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.RawEncryptResponse} message RawEncryptResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawEncryptResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.ciphertext = "";
+                                else {
+                                    object.ciphertext = [];
+                                    if (options.bytes !== Array)
+                                        object.ciphertext = $util.newBuffer(object.ciphertext);
+                                }
+                                if (options.bytes === String)
+                                    object.initializationVector = "";
+                                else {
+                                    object.initializationVector = [];
+                                    if (options.bytes !== Array)
+                                        object.initializationVector = $util.newBuffer(object.initializationVector);
+                                }
+                                object.tagLength = 0;
+                                object.ciphertextCrc32c = null;
+                                object.initializationVectorCrc32c = null;
+                                object.verifiedPlaintextCrc32c = false;
+                                object.verifiedAdditionalAuthenticatedDataCrc32c = false;
+                                object.name = "";
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                                object.verifiedInitializationVectorCrc32c = false;
+                            }
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                object.ciphertext = options.bytes === String ? $util.base64.encode(message.ciphertext, 0, message.ciphertext.length) : options.bytes === Array ? Array.prototype.slice.call(message.ciphertext) : message.ciphertext;
+                            if (message.initializationVector != null && message.hasOwnProperty("initializationVector"))
+                                object.initializationVector = options.bytes === String ? $util.base64.encode(message.initializationVector, 0, message.initializationVector.length) : options.bytes === Array ? Array.prototype.slice.call(message.initializationVector) : message.initializationVector;
+                            if (message.tagLength != null && message.hasOwnProperty("tagLength"))
+                                object.tagLength = message.tagLength;
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c"))
+                                object.ciphertextCrc32c = $root.google.protobuf.Int64Value.toObject(message.ciphertextCrc32c, options);
+                            if (message.initializationVectorCrc32c != null && message.hasOwnProperty("initializationVectorCrc32c"))
+                                object.initializationVectorCrc32c = $root.google.protobuf.Int64Value.toObject(message.initializationVectorCrc32c, options);
+                            if (message.verifiedPlaintextCrc32c != null && message.hasOwnProperty("verifiedPlaintextCrc32c"))
+                                object.verifiedPlaintextCrc32c = message.verifiedPlaintextCrc32c;
+                            if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("verifiedAdditionalAuthenticatedDataCrc32c"))
+                                object.verifiedAdditionalAuthenticatedDataCrc32c = message.verifiedAdditionalAuthenticatedDataCrc32c;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            if (message.verifiedInitializationVectorCrc32c != null && message.hasOwnProperty("verifiedInitializationVectorCrc32c"))
+                                object.verifiedInitializationVectorCrc32c = message.verifiedInitializationVectorCrc32c;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawEncryptResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawEncryptResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RawEncryptResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.RawEncryptResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RawEncryptResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.RawEncryptResponse";
+                        };
+    
+                        return RawEncryptResponse;
+                    })();
+    
+                    v1.RawDecryptResponse = (function() {
+    
+                        /**
+                         * Properties of a RawDecryptResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRawDecryptResponse
+                         * @property {Uint8Array|null} [plaintext] RawDecryptResponse plaintext
+                         * @property {google.protobuf.IInt64Value|null} [plaintextCrc32c] RawDecryptResponse plaintextCrc32c
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] RawDecryptResponse protectionLevel
+                         * @property {boolean|null} [verifiedCiphertextCrc32c] RawDecryptResponse verifiedCiphertextCrc32c
+                         * @property {boolean|null} [verifiedAdditionalAuthenticatedDataCrc32c] RawDecryptResponse verifiedAdditionalAuthenticatedDataCrc32c
+                         * @property {boolean|null} [verifiedInitializationVectorCrc32c] RawDecryptResponse verifiedInitializationVectorCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new RawDecryptResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RawDecryptResponse.
+                         * @implements IRawDecryptResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRawDecryptResponse=} [properties] Properties to set
+                         */
+                        function RawDecryptResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RawDecryptResponse plaintext.
+                         * @member {Uint8Array} plaintext
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         */
+                        RawDecryptResponse.prototype.plaintext = $util.newBuffer([]);
+    
+                        /**
+                         * RawDecryptResponse plaintextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} plaintextCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         */
+                        RawDecryptResponse.prototype.plaintextCrc32c = null;
+    
+                        /**
+                         * RawDecryptResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         */
+                        RawDecryptResponse.prototype.protectionLevel = 0;
+    
+                        /**
+                         * RawDecryptResponse verifiedCiphertextCrc32c.
+                         * @member {boolean} verifiedCiphertextCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         */
+                        RawDecryptResponse.prototype.verifiedCiphertextCrc32c = false;
+    
+                        /**
+                         * RawDecryptResponse verifiedAdditionalAuthenticatedDataCrc32c.
+                         * @member {boolean} verifiedAdditionalAuthenticatedDataCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         */
+                        RawDecryptResponse.prototype.verifiedAdditionalAuthenticatedDataCrc32c = false;
+    
+                        /**
+                         * RawDecryptResponse verifiedInitializationVectorCrc32c.
+                         * @member {boolean} verifiedInitializationVectorCrc32c
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         */
+                        RawDecryptResponse.prototype.verifiedInitializationVectorCrc32c = false;
+    
+                        /**
+                         * Creates a new RawDecryptResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawDecryptResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RawDecryptResponse} RawDecryptResponse instance
+                         */
+                        RawDecryptResponse.create = function create(properties) {
+                            return new RawDecryptResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RawDecryptResponse message. Does not implicitly {@link google.cloud.kms.v1.RawDecryptResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawDecryptResponse} message RawDecryptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawDecryptResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.plaintext != null && Object.hasOwnProperty.call(message, "plaintext"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.plaintext);
+                            if (message.plaintextCrc32c != null && Object.hasOwnProperty.call(message, "plaintextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.plaintextCrc32c, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.protectionLevel);
+                            if (message.verifiedCiphertextCrc32c != null && Object.hasOwnProperty.call(message, "verifiedCiphertextCrc32c"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.verifiedCiphertextCrc32c);
+                            if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && Object.hasOwnProperty.call(message, "verifiedAdditionalAuthenticatedDataCrc32c"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.verifiedAdditionalAuthenticatedDataCrc32c);
+                            if (message.verifiedInitializationVectorCrc32c != null && Object.hasOwnProperty.call(message, "verifiedInitializationVectorCrc32c"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.verifiedInitializationVectorCrc32c);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RawDecryptResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RawDecryptResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IRawDecryptResponse} message RawDecryptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RawDecryptResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RawDecryptResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RawDecryptResponse} RawDecryptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawDecryptResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawDecryptResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.plaintext = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.plaintextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.protectionLevel = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verifiedCiphertextCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.verifiedAdditionalAuthenticatedDataCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.verifiedInitializationVectorCrc32c = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RawDecryptResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RawDecryptResponse} RawDecryptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RawDecryptResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RawDecryptResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RawDecryptResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
+                                if (!(message.plaintext && typeof message.plaintext.length === "number" || $util.isString(message.plaintext)))
+                                    return "plaintext: buffer expected";
+                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.plaintextCrc32c);
+                                if (error)
+                                    return "plaintextCrc32c." + error;
+                            }
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
+                                if (typeof message.verifiedCiphertextCrc32c !== "boolean")
+                                    return "verifiedCiphertextCrc32c: boolean expected";
+                            if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("verifiedAdditionalAuthenticatedDataCrc32c"))
+                                if (typeof message.verifiedAdditionalAuthenticatedDataCrc32c !== "boolean")
+                                    return "verifiedAdditionalAuthenticatedDataCrc32c: boolean expected";
+                            if (message.verifiedInitializationVectorCrc32c != null && message.hasOwnProperty("verifiedInitializationVectorCrc32c"))
+                                if (typeof message.verifiedInitializationVectorCrc32c !== "boolean")
+                                    return "verifiedInitializationVectorCrc32c: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RawDecryptResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RawDecryptResponse} RawDecryptResponse
+                         */
+                        RawDecryptResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RawDecryptResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RawDecryptResponse();
+                            if (object.plaintext != null)
+                                if (typeof object.plaintext === "string")
+                                    $util.base64.decode(object.plaintext, message.plaintext = $util.newBuffer($util.base64.length(object.plaintext)), 0);
+                                else if (object.plaintext.length >= 0)
+                                    message.plaintext = object.plaintext;
+                            if (object.plaintextCrc32c != null) {
+                                if (typeof object.plaintextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RawDecryptResponse.plaintextCrc32c: object expected");
+                                message.plaintextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.plaintextCrc32c);
+                            }
+                            switch (object.protectionLevel) {
+                            default:
+                                if (typeof object.protectionLevel === "number") {
+                                    message.protectionLevel = object.protectionLevel;
+                                    break;
+                                }
+                                break;
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
+                                break;
+                            }
+                            if (object.verifiedCiphertextCrc32c != null)
+                                message.verifiedCiphertextCrc32c = Boolean(object.verifiedCiphertextCrc32c);
+                            if (object.verifiedAdditionalAuthenticatedDataCrc32c != null)
+                                message.verifiedAdditionalAuthenticatedDataCrc32c = Boolean(object.verifiedAdditionalAuthenticatedDataCrc32c);
+                            if (object.verifiedInitializationVectorCrc32c != null)
+                                message.verifiedInitializationVectorCrc32c = Boolean(object.verifiedInitializationVectorCrc32c);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RawDecryptResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.RawDecryptResponse} message RawDecryptResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RawDecryptResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.plaintext = "";
+                                else {
+                                    object.plaintext = [];
+                                    if (options.bytes !== Array)
+                                        object.plaintext = $util.newBuffer(object.plaintext);
+                                }
+                                object.plaintextCrc32c = null;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                                object.verifiedCiphertextCrc32c = false;
+                                object.verifiedAdditionalAuthenticatedDataCrc32c = false;
+                                object.verifiedInitializationVectorCrc32c = false;
+                            }
+                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
+                                object.plaintext = options.bytes === String ? $util.base64.encode(message.plaintext, 0, message.plaintext.length) : options.bytes === Array ? Array.prototype.slice.call(message.plaintext) : message.plaintext;
+                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c"))
+                                object.plaintextCrc32c = $root.google.protobuf.Int64Value.toObject(message.plaintextCrc32c, options);
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
+                                object.verifiedCiphertextCrc32c = message.verifiedCiphertextCrc32c;
+                            if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("verifiedAdditionalAuthenticatedDataCrc32c"))
+                                object.verifiedAdditionalAuthenticatedDataCrc32c = message.verifiedAdditionalAuthenticatedDataCrc32c;
+                            if (message.verifiedInitializationVectorCrc32c != null && message.hasOwnProperty("verifiedInitializationVectorCrc32c"))
+                                object.verifiedInitializationVectorCrc32c = message.verifiedInitializationVectorCrc32c;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RawDecryptResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RawDecryptResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RawDecryptResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.RawDecryptResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RawDecryptResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.RawDecryptResponse";
+                        };
+    
+                        return RawDecryptResponse;
                     })();
     
                     v1.AsymmetricSignResponse = (function() {

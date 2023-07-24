@@ -385,8 +385,16 @@ export class RoutesClient {
    *   Optional. Specifies the preferred encoding for the polyline.
    * @param {google.protobuf.Timestamp} [request.departureTime]
    *   Optional. The departure time. If you don't set this value, then this value
-   *   defaults to the time that you made the request. If you set this value to a
-   *   time that has already occurred, then the request fails.
+   *   defaults to the time that you made the request.
+   *   NOTE: You can only specify a `departure_time` in the past when
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   `TRANSIT`.
+   * @param {google.protobuf.Timestamp} [request.arrivalTime]
+   *   Optional. The arrival time.
+   *   NOTE: Can only be set when
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   `TRANSIT`. You can specify either departure_time or arrival_time, but not
+   *   both.
    * @param {boolean} [request.computeAlternativeRoutes]
    *   Optional. Specifies whether to calculate alternate routes in addition to
    *   the route. No alternative routes are returned for requests that have
@@ -406,12 +414,23 @@ export class RoutesClient {
    *   two-character value. For more information see
    *   https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#Country_code_top-level_domains
    * @param {google.maps.routing.v2.Units} [request.units]
-   *   Optional. Specifies the units of measure for the display fields. This
-   *   includes the `instruction` field in
+   *   Optional. Specifies the units of measure for the display fields. These
+   *   fields include the `instruction` field in
    *   {@link google.maps.routing.v2.NavigationInstruction|NavigationInstruction}. The
    *   units of measure used for the route, leg, step distance, and duration are
    *   not affected by this value. If you don't provide this value, then the
-   *   display units are inferred from the location of the request.
+   *   display units are inferred from the location of the first origin.
+   * @param {boolean} [request.optimizeWaypointOrder]
+   *   Optional. If set to true, the service attempts to minimize the overall cost
+   *   of the route by re-ordering the specified intermediate waypoints. The
+   *   request fails if any of the intermediate waypoints is a `via` waypoint. Use
+   *   `ComputeRoutesResponse.Routes.optimized_intermediate_waypoint_index` to
+   *   find the new ordering.
+   *   If `ComputeRoutesResponseroutes.optimized_intermediate_waypoint_index` is
+   *   not requested in the `X-Goog-FieldMask` header, the request fails.
+   *   If `optimize_waypoint_order` is set to false,
+   *   `ComputeRoutesResponse.optimized_intermediate_waypoint_index` will be
+   *   empty.
    * @param {number[]} [request.requestedReferenceRoutes]
    *   Optional. Specifies what reference routes to calculate as part of the
    *   request in addition to the default route. A reference route is a route with
@@ -423,6 +442,23 @@ export class RoutesClient {
    *   request. Note: These extra computations may return extra fields on the
    *   response. These extra fields must also be specified in the field mask to be
    *   returned in the response.
+   * @param {google.maps.routing.v2.TrafficModel} [request.trafficModel]
+   *   Optional. Specifies the assumptions to use when calculating time in
+   *   traffic. This setting affects the value returned in the duration field in
+   *   the {@link google.maps.routing.v2.Route|Route} and
+   *   {@link google.maps.routing.v2.RouteLeg|RouteLeg} which contains the predicted
+   *   time in traffic based on historical averages.
+   *   `TrafficModel` is only available for requests that have set
+   *   {@link google.maps.routing.v2.RoutingPreference|RoutingPreference} to
+   *   `TRAFFIC_AWARE_OPTIMAL` and
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.
+   *   Defaults to `BEST_GUESS` if traffic is requested and `TrafficModel` is not
+   *   specified.
+   * @param {google.maps.routing.v2.TransitPreferences} [request.transitPreferences]
+   *   Optional. Specifies preferences that influence the route returned for
+   *   `TRANSIT` routes. NOTE: You can only specify a `transit_preferences` when
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   `TRANSIT`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -560,9 +596,17 @@ export class RoutesClient {
    *   returned. You can specify this option only when the `travel_mode` is
    *   `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
    * @param {google.protobuf.Timestamp} [request.departureTime]
-   *   Optional. The departure time. If you don't set this value, this defaults to
-   *   the time that you made the request. If you set this value to a time that
-   *   has already occurred, the request fails.
+   *   Optional. The departure time. If you don't set this value, then this value
+   *   defaults to the time that you made the request.
+   *   NOTE: You can only specify a `departure_time` in the past when
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   `TRANSIT`.
+   * @param {google.protobuf.Timestamp} [request.arrivalTime]
+   *   Optional. The arrival time.
+   *   NOTE: Can only be set when
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   `TRANSIT`. You can specify either departure_time or arrival_time, but not
+   *   both.
    * @param {string} [request.languageCode]
    *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
    *   information, see
@@ -579,6 +623,21 @@ export class RoutesClient {
    *   request. Note: These extra computations may return extra fields on the
    *   response. These extra fields must also be specified in the field mask to be
    *   returned in the response.
+   * @param {google.maps.routing.v2.TrafficModel} [request.trafficModel]
+   *   Optional. Specifies the assumptions to use when calculating time in
+   *   traffic. This setting affects the value returned in the duration field in
+   *   the {@link google.maps.routing.v2.RouteMatrixElement|RouteMatrixElement} which
+   *   contains the predicted time in traffic based on historical averages.
+   *   {@link google.maps.routing.v2.RoutingPreference|RoutingPreference} to
+   *   `TRAFFIC_AWARE_OPTIMAL` and
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.
+   *   Defaults to `BEST_GUESS` if traffic is requested and `TrafficModel` is not
+   *   specified.
+   * @param {google.maps.routing.v2.TransitPreferences} [request.transitPreferences]
+   *   Optional. Specifies preferences that influence the route returned for
+   *   `TRANSIT` routes. NOTE: You can only specify a `transit_preferences` when
+   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   `TRANSIT`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

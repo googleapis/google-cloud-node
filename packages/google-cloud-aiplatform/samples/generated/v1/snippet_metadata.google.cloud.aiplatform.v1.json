@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.8.1",
+        "version": "2.17.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -540,6 +540,46 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_DatasetService_DeleteSavedQuery_async",
+            "title": "DatasetService deleteSavedQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a SavedQuery.",
+            "canonical": true,
+            "file": "dataset_service.delete_saved_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSavedQuery",
+                "fullName": "google.cloud.aiplatform.v1.DatasetService.DeleteSavedQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DatasetServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSavedQuery",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetService.DeleteSavedQuery",
+                    "service": {
+                        "shortName": "DatasetService",
+                        "fullName": "google.cloud.aiplatform.v1.DatasetService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_DatasetService_GetAnnotationSpec_async",
             "title": "DatasetService getAnnotationSpec Sample",
             "origin": "API_DEFINITION",
@@ -964,6 +1004,54 @@
                 "method": {
                     "shortName": "UndeployModel",
                     "fullName": "google.cloud.aiplatform.v1.EndpointService.UndeployModel",
+                    "service": {
+                        "shortName": "EndpointService",
+                        "fullName": "google.cloud.aiplatform.v1.EndpointService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_EndpointService_MutateDeployedModel_async",
+            "title": "DatasetService mutateDeployedModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
+            "canonical": true,
+            "file": "endpoint_service.mutate_deployed_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "MutateDeployedModel",
+                "fullName": "google.cloud.aiplatform.v1.EndpointService.MutateDeployedModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployed_model",
+                        "type": ".google.cloud.aiplatform.v1.DeployedModel"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EndpointServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.EndpointServiceClient"
+                },
+                "method": {
+                    "shortName": "MutateDeployedModel",
+                    "fullName": "google.cloud.aiplatform.v1.EndpointService.MutateDeployedModel",
                     "service": {
                         "shortName": "EndpointService",
                         "fullName": "google.cloud.aiplatform.v1.EndpointService"
@@ -4400,6 +4488,106 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_MatchService_FindNeighbors_async",
+            "title": "DatasetService findNeighbors Sample",
+            "origin": "API_DEFINITION",
+            "description": " Finds the nearest neighbors of each vector within the request.",
+            "canonical": true,
+            "file": "match_service.find_neighbors.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FindNeighbors",
+                "fullName": "google.cloud.aiplatform.v1.MatchService.FindNeighbors",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "index_endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployed_index_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "queries",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "return_full_datapoint",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.FindNeighborsResponse",
+                "client": {
+                    "shortName": "MatchServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.MatchServiceClient"
+                },
+                "method": {
+                    "shortName": "FindNeighbors",
+                    "fullName": "google.cloud.aiplatform.v1.MatchService.FindNeighbors",
+                    "service": {
+                        "shortName": "MatchService",
+                        "fullName": "google.cloud.aiplatform.v1.MatchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_MatchService_ReadIndexDatapoints_async",
+            "title": "DatasetService readIndexDatapoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Reads the datapoints/vectors of the given IDs. A maximum of 1000 datapoints can be retrieved in a batch.",
+            "canonical": true,
+            "file": "match_service.read_index_datapoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadIndexDatapoints",
+                "fullName": "google.cloud.aiplatform.v1.MatchService.ReadIndexDatapoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "index_endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployed_index_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ids",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ReadIndexDatapointsResponse",
+                "client": {
+                    "shortName": "MatchServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.MatchServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadIndexDatapoints",
+                    "fullName": "google.cloud.aiplatform.v1.MatchService.ReadIndexDatapoints",
+                    "service": {
+                        "shortName": "MatchService",
+                        "fullName": "google.cloud.aiplatform.v1.MatchService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_MetadataService_CreateMetadataStore_async",
             "title": "DatasetService createMetadataStore Sample",
             "origin": "API_DEFINITION",
@@ -4678,7 +4866,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 108,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -4734,7 +4922,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -4962,7 +5150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 114,
                     "type": "FULL"
                 }
             ],
@@ -5018,7 +5206,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -5426,7 +5614,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 108,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -5482,7 +5670,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -5846,7 +6034,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -5975,6 +6163,54 @@
                     "service": {
                         "shortName": "MigrationService",
                         "fullName": "google.cloud.aiplatform.v1.MigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ModelGardenService_GetPublisherModel_async",
+            "title": "DatasetService getPublisherModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Model Garden publisher model.",
+            "canonical": true,
+            "file": "model_garden_service.get_publisher_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPublisherModel",
+                "fullName": "google.cloud.aiplatform.v1.ModelGardenService.GetPublisherModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.aiplatform.v1.PublisherModelView"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.PublisherModel",
+                "client": {
+                    "shortName": "ModelGardenServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelGardenServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPublisherModel",
+                    "fullName": "google.cloud.aiplatform.v1.ModelGardenService.GetPublisherModel",
+                    "service": {
+                        "shortName": "ModelGardenService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelGardenService"
                     }
                 }
             }
@@ -6146,7 +6382,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -6232,6 +6468,50 @@
                 "method": {
                     "shortName": "UpdateModel",
                     "fullName": "google.cloud.aiplatform.v1.ModelService.UpdateModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ModelService_UpdateExplanationDataset_async",
+            "title": "DatasetService updateExplanationDataset Sample",
+            "origin": "API_DEFINITION",
+            "description": " Incrementally update the dataset used for an examples model.",
+            "canonical": true,
+            "file": "model_service.update_explanation_dataset.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateExplanationDataset",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.UpdateExplanationDataset",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "examples",
+                        "type": ".google.cloud.aiplatform.v1.Examples"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateExplanationDataset",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.UpdateExplanationDataset",
                     "service": {
                         "shortName": "ModelService",
                         "fullName": "google.cloud.aiplatform.v1.ModelService"
@@ -7331,7 +7611,7 @@
             "regionTag": "aiplatform_v1_generated_PredictionService_Explain_async",
             "title": "DatasetService explain Sample",
             "origin": "API_DEFINITION",
-            "description": " Perform an online explanation. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is specified, the corresponding DeployModel must have [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] populated. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is not specified, all DeployedModels must have [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] populated. Only deployed AutoML tabular Models have explanation_spec.",
+            "description": " Perform an online explanation. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is specified, the corresponding DeployModel must have [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] populated. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is not specified, all DeployedModels must have [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] populated.",
             "canonical": true,
             "file": "prediction_service.explain.js",
             "language": "JAVASCRIPT",
@@ -7692,46 +7972,6 @@
             }
         },
         {
-            "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async",
-            "title": "DatasetService readTensorboardUsage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of monthly active users for a given TensorBoard instance.",
-            "canonical": true,
-            "file": "tensorboard_service.read_tensorboard_usage.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReadTensorboardUsage",
-                "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "tensorboard",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.aiplatform.v1.ReadTensorboardUsageResponse",
-                "client": {
-                    "shortName": "TensorboardServiceClient",
-                    "fullName": "google.cloud.aiplatform.v1.TensorboardServiceClient"
-                },
-                "method": {
-                    "shortName": "ReadTensorboardUsage",
-                    "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
-                    "service": {
-                        "shortName": "TensorboardService",
-                        "fullName": "google.cloud.aiplatform.v1.TensorboardService"
-                    }
-                }
-            }
-        },
-        {
             "regionTag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboard_async",
             "title": "DatasetService updateTensorboard Sample",
             "origin": "API_DEFINITION",
@@ -7868,6 +8108,46 @@
                 "method": {
                     "shortName": "DeleteTensorboard",
                     "fullName": "google.cloud.aiplatform.v1.TensorboardService.DeleteTensorboard",
+                    "service": {
+                        "shortName": "TensorboardService",
+                        "fullName": "google.cloud.aiplatform.v1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async",
+            "title": "DatasetService readTensorboardUsage Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of monthly active users for a given TensorBoard instance.",
+            "canonical": true,
+            "file": "tensorboard_service.read_tensorboard_usage.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadTensorboardUsage",
+                "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tensorboard",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ReadTensorboardUsageResponse",
+                "client": {
+                    "shortName": "TensorboardServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.TensorboardServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadTensorboardUsage",
+                    "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
                     "service": {
                         "shortName": "TensorboardService",
                         "fullName": "google.cloud.aiplatform.v1.TensorboardService"
@@ -9159,7 +9439,7 @@
             "regionTag": "aiplatform_v1_generated_VizierService_SuggestTrials_async",
             "title": "DatasetService suggestTrials Sample",
             "origin": "API_DEFINITION",
-            "description": " Adds one or more Trials to a Study, with parameter values suggested by Vertex AI Vizier. Returns a long-running operation associated with the generation of Trial suggestions. When this long-running operation succeeds, it will contain a [SuggestTrialsResponse][google.cloud.ml.v1.SuggestTrialsResponse].",
+            "description": " Adds one or more Trials to a Study, with parameter values suggested by Vertex AI Vizier. Returns a long-running operation associated with the generation of Trial suggestions. When this long-running operation succeeds, it will contain a [SuggestTrialsResponse][google.cloud.aiplatform.v1.SuggestTrialsResponse].",
             "canonical": true,
             "file": "vizier_service.suggest_trials.js",
             "language": "JAVASCRIPT",

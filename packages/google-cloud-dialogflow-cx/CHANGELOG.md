@@ -1,5 +1,44 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.7.0...dialogflow-cx-v3.8.0) (2023-07-11)
+
+
+### Features
+
+* [dialogflow-cx] added GitIntegrationSettings to the Agent ([#4404](https://github.com/googleapis/google-cloud-node/issues/4404)) ([88e5a03](https://github.com/googleapis/google-cloud-node/commit/88e5a03ca13cd1a86d954f8f3ae66ea8a1c0abba))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.6.0...dialogflow-cx-v3.7.0) (2023-06-28)
+
+
+### Features
+
+* [dialogflow-cx] added include_bigquery_export_settings to ExportAgentRequest ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+* [dialogflow-cx] added include_bigquery_export_settings to ExportAgentRequest ([#4357](https://github.com/googleapis/google-cloud-node/issues/4357)) ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+* Added session_ttl to SessionProto ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+* Added session_ttl to SessionProto ([7778345](https://github.com/googleapis/google-cloud-node/commit/7778345f3d7089e3bdc1294beb4005cfa8793012))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.5.0...dialogflow-cx-v3.6.0) (2023-06-14)
+
+
+### Features
+
+* [dialogflow-cx] add support for flexible webhook ([64af37a](https://github.com/googleapis/google-cloud-node/commit/64af37afa0abccf87378b4813a26fbaba3ae8bb8))
+* [dialogflow-cx] add support for flexible webhook ([#4334](https://github.com/googleapis/google-cloud-node/issues/4334)) ([64af37a](https://github.com/googleapis/google-cloud-node/commit/64af37afa0abccf87378b4813a26fbaba3ae8bb8))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.4.2...dialogflow-cx-v3.5.0) (2023-05-11)
+
+
+### Features
+
+* [dialogflow-cx] extended CreateAgent timeout to 180 seconds ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* [dialogflow-cx] extended CreateAgent timeout to 180 seconds ([#4253](https://github.com/googleapis/google-cloud-node/issues/4253)) ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* Added debug info to StreamingDetectIntent ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* Added debug info to StreamingDetectIntent ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* Added dtmf digits to WebhookRequest ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* Added dtmf digits to WebhookRequest ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* Added FLOW as a new DiffType in TestRunDifference ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+* Added FLOW as a new DiffType in TestRunDifference ([22d6aa5](https://github.com/googleapis/google-cloud-node/commit/22d6aa5a2d9386ea5663672a4bfa8feff1f00eb7))
+
 ## [3.4.2](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.4.1...dialogflow-cx-v3.4.2) (2023-04-13)
 
 

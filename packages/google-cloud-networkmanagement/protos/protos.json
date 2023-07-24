@@ -106,6 +106,10 @@
                           "type": "string",
                           "id": 3
                         },
+                        "forwardingRule": {
+                          "type": "string",
+                          "id": 13
+                        },
                         "gkeMasterCluster": {
                           "type": "string",
                           "id": 7
@@ -1302,6 +1306,10 @@
                         "instance": {
                           "type": "string",
                           "id": 3
+                        },
+                        "forwardingRule": {
+                          "type": "string",
+                          "id": 13
                         },
                         "gkeMasterCluster": {
                           "type": "string",

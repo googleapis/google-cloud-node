@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Cluster_manager.cancel_operation](#cluster_manager.cancel_operation)
+  * [Cluster_manager.check_autopilot_compatibility](#cluster_manager.check_autopilot_compatibility)
   * [Cluster_manager.complete_i_p_rotation](#cluster_manager.complete_i_p_rotation)
   * [Cluster_manager.complete_node_pool_upgrade](#cluster_manager.complete_node_pool_upgrade)
   * [Cluster_manager.create_cluster](#cluster_manager.create_cluster)
@@ -46,6 +47,7 @@
   * [Cluster_manager.update_master](#cluster_manager.update_master)
   * [Cluster_manager.update_node_pool](#cluster_manager.update_node_pool)
   * [Cluster_manager.cancel_operation](#cluster_manager.cancel_operation)
+  * [Cluster_manager.check_autopilot_compatibility](#cluster_manager.check_autopilot_compatibility)
   * [Cluster_manager.complete_i_p_rotation](#cluster_manager.complete_i_p_rotation)
   * [Cluster_manager.complete_node_pool_upgrade](#cluster_manager.complete_node_pool_upgrade)
   * [Cluster_manager.create_cluster](#cluster_manager.create_cluster)
@@ -80,7 +82,6 @@
   * [Cluster_manager.update_master](#cluster_manager.update_master)
   * [Cluster_manager.update_node_pool](#cluster_manager.update_node_pool)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -107,6 +108,23 @@ __Usage:__
 
 
 `node packages/google-container/samples/generated/v1/cluster_manager.cancel_operation.js`
+
+
+-----
+
+
+
+
+### Cluster_manager.check_autopilot_compatibility
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/cluster_manager.check_autopilot_compatibility.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1/cluster_manager.check_autopilot_compatibility.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-container/samples/generated/v1/cluster_manager.check_autopilot_compatibility.js`
 
 
 -----
@@ -668,6 +686,23 @@ __Usage:__
 
 
 `node packages/google-container/samples/generated/v1beta1/cluster_manager.cancel_operation.js`
+
+
+-----
+
+
+
+
+### Cluster_manager.check_autopilot_compatibility
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js`
 
 
 -----
@@ -1246,23 +1281,6 @@ __Usage:__
 
 
 `node packages/google-container/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-container/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-container/samples/test/quickstart.test.js`
 
 
 

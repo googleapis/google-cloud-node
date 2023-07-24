@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-datastream",
-        "version": "2.2.0",
+        "version": "2.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -734,7 +734,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -774,7 +774,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -862,7 +862,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -886,6 +886,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -954,7 +958,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],

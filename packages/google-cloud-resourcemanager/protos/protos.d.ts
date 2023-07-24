@@ -4685,6 +4685,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteTagBinding(request: google.cloud.resourcemanager.v3.IDeleteTagBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListEffectiveTags.
+                     * @param request ListEffectiveTagsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEffectiveTagsResponse
+                     */
+                    public listEffectiveTags(request: google.cloud.resourcemanager.v3.IListEffectiveTagsRequest, callback: google.cloud.resourcemanager.v3.TagBindings.ListEffectiveTagsCallback): void;
+
+                    /**
+                     * Calls ListEffectiveTags.
+                     * @param request ListEffectiveTagsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEffectiveTags(request: google.cloud.resourcemanager.v3.IListEffectiveTagsRequest): Promise<google.cloud.resourcemanager.v3.ListEffectiveTagsResponse>;
                 }
 
                 namespace TagBindings {
@@ -4709,6 +4723,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteTagBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.resourcemanager.v3.TagBindings|listEffectiveTags}.
+                     * @param error Error, if any
+                     * @param [response] ListEffectiveTagsResponse
+                     */
+                    type ListEffectiveTagsCallback = (error: (Error|null), response?: google.cloud.resourcemanager.v3.ListEffectiveTagsResponse) => void;
                 }
 
                 /** Properties of a TagBinding. */
@@ -4722,6 +4743,9 @@ export namespace google {
 
                     /** TagBinding tagValue */
                     tagValue?: (string|null);
+
+                    /** TagBinding tagValueNamespacedName */
+                    tagValueNamespacedName?: (string|null);
                 }
 
                 /** Represents a TagBinding. */
@@ -4741,6 +4765,9 @@ export namespace google {
 
                     /** TagBinding tagValue. */
                     public tagValue: string;
+
+                    /** TagBinding tagValueNamespacedName. */
+                    public tagValueNamespacedName: string;
 
                     /**
                      * Creates a new TagBinding instance using the specified properties.
@@ -5414,6 +5441,1165 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ListEffectiveTagsRequest. */
+                interface IListEffectiveTagsRequest {
+
+                    /** ListEffectiveTagsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEffectiveTagsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEffectiveTagsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListEffectiveTagsRequest. */
+                class ListEffectiveTagsRequest implements IListEffectiveTagsRequest {
+
+                    /**
+                     * Constructs a new ListEffectiveTagsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IListEffectiveTagsRequest);
+
+                    /** ListEffectiveTagsRequest parent. */
+                    public parent: string;
+
+                    /** ListEffectiveTagsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEffectiveTagsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListEffectiveTagsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEffectiveTagsRequest instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IListEffectiveTagsRequest): google.cloud.resourcemanager.v3.ListEffectiveTagsRequest;
+
+                    /**
+                     * Encodes the specified ListEffectiveTagsRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsRequest.verify|verify} messages.
+                     * @param message ListEffectiveTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IListEffectiveTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEffectiveTagsRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsRequest.verify|verify} messages.
+                     * @param message ListEffectiveTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IListEffectiveTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEffectiveTagsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEffectiveTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.ListEffectiveTagsRequest;
+
+                    /**
+                     * Decodes a ListEffectiveTagsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEffectiveTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.ListEffectiveTagsRequest;
+
+                    /**
+                     * Verifies a ListEffectiveTagsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEffectiveTagsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEffectiveTagsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.ListEffectiveTagsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEffectiveTagsRequest message. Also converts values to other types if specified.
+                     * @param message ListEffectiveTagsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.ListEffectiveTagsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEffectiveTagsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEffectiveTagsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEffectiveTagsResponse. */
+                interface IListEffectiveTagsResponse {
+
+                    /** ListEffectiveTagsResponse effectiveTags */
+                    effectiveTags?: (google.cloud.resourcemanager.v3.IEffectiveTag[]|null);
+
+                    /** ListEffectiveTagsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEffectiveTagsResponse. */
+                class ListEffectiveTagsResponse implements IListEffectiveTagsResponse {
+
+                    /**
+                     * Constructs a new ListEffectiveTagsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IListEffectiveTagsResponse);
+
+                    /** ListEffectiveTagsResponse effectiveTags. */
+                    public effectiveTags: google.cloud.resourcemanager.v3.IEffectiveTag[];
+
+                    /** ListEffectiveTagsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEffectiveTagsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEffectiveTagsResponse instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IListEffectiveTagsResponse): google.cloud.resourcemanager.v3.ListEffectiveTagsResponse;
+
+                    /**
+                     * Encodes the specified ListEffectiveTagsResponse message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsResponse.verify|verify} messages.
+                     * @param message ListEffectiveTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IListEffectiveTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEffectiveTagsResponse message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsResponse.verify|verify} messages.
+                     * @param message ListEffectiveTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IListEffectiveTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEffectiveTagsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEffectiveTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.ListEffectiveTagsResponse;
+
+                    /**
+                     * Decodes a ListEffectiveTagsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEffectiveTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.ListEffectiveTagsResponse;
+
+                    /**
+                     * Verifies a ListEffectiveTagsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEffectiveTagsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEffectiveTagsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.ListEffectiveTagsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEffectiveTagsResponse message. Also converts values to other types if specified.
+                     * @param message ListEffectiveTagsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.ListEffectiveTagsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEffectiveTagsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEffectiveTagsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EffectiveTag. */
+                interface IEffectiveTag {
+
+                    /** EffectiveTag tagValue */
+                    tagValue?: (string|null);
+
+                    /** EffectiveTag namespacedTagValue */
+                    namespacedTagValue?: (string|null);
+
+                    /** EffectiveTag tagKey */
+                    tagKey?: (string|null);
+
+                    /** EffectiveTag namespacedTagKey */
+                    namespacedTagKey?: (string|null);
+
+                    /** EffectiveTag tagKeyParentName */
+                    tagKeyParentName?: (string|null);
+
+                    /** EffectiveTag inherited */
+                    inherited?: (boolean|null);
+                }
+
+                /** Represents an EffectiveTag. */
+                class EffectiveTag implements IEffectiveTag {
+
+                    /**
+                     * Constructs a new EffectiveTag.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IEffectiveTag);
+
+                    /** EffectiveTag tagValue. */
+                    public tagValue: string;
+
+                    /** EffectiveTag namespacedTagValue. */
+                    public namespacedTagValue: string;
+
+                    /** EffectiveTag tagKey. */
+                    public tagKey: string;
+
+                    /** EffectiveTag namespacedTagKey. */
+                    public namespacedTagKey: string;
+
+                    /** EffectiveTag tagKeyParentName. */
+                    public tagKeyParentName: string;
+
+                    /** EffectiveTag inherited. */
+                    public inherited: boolean;
+
+                    /**
+                     * Creates a new EffectiveTag instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EffectiveTag instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IEffectiveTag): google.cloud.resourcemanager.v3.EffectiveTag;
+
+                    /**
+                     * Encodes the specified EffectiveTag message. Does not implicitly {@link google.cloud.resourcemanager.v3.EffectiveTag.verify|verify} messages.
+                     * @param message EffectiveTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IEffectiveTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EffectiveTag message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.EffectiveTag.verify|verify} messages.
+                     * @param message EffectiveTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IEffectiveTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EffectiveTag message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EffectiveTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.EffectiveTag;
+
+                    /**
+                     * Decodes an EffectiveTag message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EffectiveTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.EffectiveTag;
+
+                    /**
+                     * Verifies an EffectiveTag message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EffectiveTag message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EffectiveTag
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.EffectiveTag;
+
+                    /**
+                     * Creates a plain object from an EffectiveTag message. Also converts values to other types if specified.
+                     * @param message EffectiveTag
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.EffectiveTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EffectiveTag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EffectiveTag
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a TagHolds */
+                class TagHolds extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new TagHolds service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new TagHolds service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): TagHolds;
+
+                    /**
+                     * Calls CreateTagHold.
+                     * @param request CreateTagHoldRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createTagHold(request: google.cloud.resourcemanager.v3.ICreateTagHoldRequest, callback: google.cloud.resourcemanager.v3.TagHolds.CreateTagHoldCallback): void;
+
+                    /**
+                     * Calls CreateTagHold.
+                     * @param request CreateTagHoldRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTagHold(request: google.cloud.resourcemanager.v3.ICreateTagHoldRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteTagHold.
+                     * @param request DeleteTagHoldRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteTagHold(request: google.cloud.resourcemanager.v3.IDeleteTagHoldRequest, callback: google.cloud.resourcemanager.v3.TagHolds.DeleteTagHoldCallback): void;
+
+                    /**
+                     * Calls DeleteTagHold.
+                     * @param request DeleteTagHoldRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTagHold(request: google.cloud.resourcemanager.v3.IDeleteTagHoldRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListTagHolds.
+                     * @param request ListTagHoldsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTagHoldsResponse
+                     */
+                    public listTagHolds(request: google.cloud.resourcemanager.v3.IListTagHoldsRequest, callback: google.cloud.resourcemanager.v3.TagHolds.ListTagHoldsCallback): void;
+
+                    /**
+                     * Calls ListTagHolds.
+                     * @param request ListTagHoldsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTagHolds(request: google.cloud.resourcemanager.v3.IListTagHoldsRequest): Promise<google.cloud.resourcemanager.v3.ListTagHoldsResponse>;
+                }
+
+                namespace TagHolds {
+
+                    /**
+                     * Callback as used by {@link google.cloud.resourcemanager.v3.TagHolds|createTagHold}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateTagHoldCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.resourcemanager.v3.TagHolds|deleteTagHold}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteTagHoldCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.resourcemanager.v3.TagHolds|listTagHolds}.
+                     * @param error Error, if any
+                     * @param [response] ListTagHoldsResponse
+                     */
+                    type ListTagHoldsCallback = (error: (Error|null), response?: google.cloud.resourcemanager.v3.ListTagHoldsResponse) => void;
+                }
+
+                /** Properties of a TagHold. */
+                interface ITagHold {
+
+                    /** TagHold name */
+                    name?: (string|null);
+
+                    /** TagHold holder */
+                    holder?: (string|null);
+
+                    /** TagHold origin */
+                    origin?: (string|null);
+
+                    /** TagHold helpLink */
+                    helpLink?: (string|null);
+
+                    /** TagHold createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TagHold. */
+                class TagHold implements ITagHold {
+
+                    /**
+                     * Constructs a new TagHold.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.ITagHold);
+
+                    /** TagHold name. */
+                    public name: string;
+
+                    /** TagHold holder. */
+                    public holder: string;
+
+                    /** TagHold origin. */
+                    public origin: string;
+
+                    /** TagHold helpLink. */
+                    public helpLink: string;
+
+                    /** TagHold createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TagHold instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TagHold instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.ITagHold): google.cloud.resourcemanager.v3.TagHold;
+
+                    /**
+                     * Encodes the specified TagHold message. Does not implicitly {@link google.cloud.resourcemanager.v3.TagHold.verify|verify} messages.
+                     * @param message TagHold message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.ITagHold, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TagHold message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.TagHold.verify|verify} messages.
+                     * @param message TagHold message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.ITagHold, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TagHold message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TagHold
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.TagHold;
+
+                    /**
+                     * Decodes a TagHold message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TagHold
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.TagHold;
+
+                    /**
+                     * Verifies a TagHold message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TagHold message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TagHold
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.TagHold;
+
+                    /**
+                     * Creates a plain object from a TagHold message. Also converts values to other types if specified.
+                     * @param message TagHold
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.TagHold, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TagHold to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TagHold
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateTagHoldRequest. */
+                interface ICreateTagHoldRequest {
+
+                    /** CreateTagHoldRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTagHoldRequest tagHold */
+                    tagHold?: (google.cloud.resourcemanager.v3.ITagHold|null);
+
+                    /** CreateTagHoldRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateTagHoldRequest. */
+                class CreateTagHoldRequest implements ICreateTagHoldRequest {
+
+                    /**
+                     * Constructs a new CreateTagHoldRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.ICreateTagHoldRequest);
+
+                    /** CreateTagHoldRequest parent. */
+                    public parent: string;
+
+                    /** CreateTagHoldRequest tagHold. */
+                    public tagHold?: (google.cloud.resourcemanager.v3.ITagHold|null);
+
+                    /** CreateTagHoldRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateTagHoldRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTagHoldRequest instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.ICreateTagHoldRequest): google.cloud.resourcemanager.v3.CreateTagHoldRequest;
+
+                    /**
+                     * Encodes the specified CreateTagHoldRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldRequest.verify|verify} messages.
+                     * @param message CreateTagHoldRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.ICreateTagHoldRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTagHoldRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldRequest.verify|verify} messages.
+                     * @param message CreateTagHoldRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.ICreateTagHoldRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTagHoldRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTagHoldRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.CreateTagHoldRequest;
+
+                    /**
+                     * Decodes a CreateTagHoldRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTagHoldRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.CreateTagHoldRequest;
+
+                    /**
+                     * Verifies a CreateTagHoldRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTagHoldRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTagHoldRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.CreateTagHoldRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTagHoldRequest message. Also converts values to other types if specified.
+                     * @param message CreateTagHoldRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.CreateTagHoldRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTagHoldRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTagHoldRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateTagHoldMetadata. */
+                interface ICreateTagHoldMetadata {
+                }
+
+                /** Represents a CreateTagHoldMetadata. */
+                class CreateTagHoldMetadata implements ICreateTagHoldMetadata {
+
+                    /**
+                     * Constructs a new CreateTagHoldMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.ICreateTagHoldMetadata);
+
+                    /**
+                     * Creates a new CreateTagHoldMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTagHoldMetadata instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.ICreateTagHoldMetadata): google.cloud.resourcemanager.v3.CreateTagHoldMetadata;
+
+                    /**
+                     * Encodes the specified CreateTagHoldMetadata message. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldMetadata.verify|verify} messages.
+                     * @param message CreateTagHoldMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.ICreateTagHoldMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTagHoldMetadata message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldMetadata.verify|verify} messages.
+                     * @param message CreateTagHoldMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.ICreateTagHoldMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTagHoldMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTagHoldMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.CreateTagHoldMetadata;
+
+                    /**
+                     * Decodes a CreateTagHoldMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTagHoldMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.CreateTagHoldMetadata;
+
+                    /**
+                     * Verifies a CreateTagHoldMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTagHoldMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTagHoldMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.CreateTagHoldMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateTagHoldMetadata message. Also converts values to other types if specified.
+                     * @param message CreateTagHoldMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.CreateTagHoldMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTagHoldMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTagHoldMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTagHoldRequest. */
+                interface IDeleteTagHoldRequest {
+
+                    /** DeleteTagHoldRequest name */
+                    name?: (string|null);
+
+                    /** DeleteTagHoldRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a DeleteTagHoldRequest. */
+                class DeleteTagHoldRequest implements IDeleteTagHoldRequest {
+
+                    /**
+                     * Constructs a new DeleteTagHoldRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IDeleteTagHoldRequest);
+
+                    /** DeleteTagHoldRequest name. */
+                    public name: string;
+
+                    /** DeleteTagHoldRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new DeleteTagHoldRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTagHoldRequest instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IDeleteTagHoldRequest): google.cloud.resourcemanager.v3.DeleteTagHoldRequest;
+
+                    /**
+                     * Encodes the specified DeleteTagHoldRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldRequest.verify|verify} messages.
+                     * @param message DeleteTagHoldRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IDeleteTagHoldRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTagHoldRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldRequest.verify|verify} messages.
+                     * @param message DeleteTagHoldRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IDeleteTagHoldRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTagHoldRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTagHoldRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.DeleteTagHoldRequest;
+
+                    /**
+                     * Decodes a DeleteTagHoldRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTagHoldRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.DeleteTagHoldRequest;
+
+                    /**
+                     * Verifies a DeleteTagHoldRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTagHoldRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTagHoldRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.DeleteTagHoldRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTagHoldRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTagHoldRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.DeleteTagHoldRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTagHoldRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTagHoldRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTagHoldMetadata. */
+                interface IDeleteTagHoldMetadata {
+                }
+
+                /** Represents a DeleteTagHoldMetadata. */
+                class DeleteTagHoldMetadata implements IDeleteTagHoldMetadata {
+
+                    /**
+                     * Constructs a new DeleteTagHoldMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata);
+
+                    /**
+                     * Creates a new DeleteTagHoldMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTagHoldMetadata instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata): google.cloud.resourcemanager.v3.DeleteTagHoldMetadata;
+
+                    /**
+                     * Encodes the specified DeleteTagHoldMetadata message. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldMetadata.verify|verify} messages.
+                     * @param message DeleteTagHoldMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTagHoldMetadata message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldMetadata.verify|verify} messages.
+                     * @param message DeleteTagHoldMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTagHoldMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTagHoldMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.DeleteTagHoldMetadata;
+
+                    /**
+                     * Decodes a DeleteTagHoldMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTagHoldMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.DeleteTagHoldMetadata;
+
+                    /**
+                     * Verifies a DeleteTagHoldMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTagHoldMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTagHoldMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.DeleteTagHoldMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteTagHoldMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteTagHoldMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.DeleteTagHoldMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTagHoldMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTagHoldMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTagHoldsRequest. */
+                interface IListTagHoldsRequest {
+
+                    /** ListTagHoldsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTagHoldsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTagHoldsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTagHoldsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListTagHoldsRequest. */
+                class ListTagHoldsRequest implements IListTagHoldsRequest {
+
+                    /**
+                     * Constructs a new ListTagHoldsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IListTagHoldsRequest);
+
+                    /** ListTagHoldsRequest parent. */
+                    public parent: string;
+
+                    /** ListTagHoldsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTagHoldsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTagHoldsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListTagHoldsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTagHoldsRequest instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IListTagHoldsRequest): google.cloud.resourcemanager.v3.ListTagHoldsRequest;
+
+                    /**
+                     * Encodes the specified ListTagHoldsRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsRequest.verify|verify} messages.
+                     * @param message ListTagHoldsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IListTagHoldsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTagHoldsRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsRequest.verify|verify} messages.
+                     * @param message ListTagHoldsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IListTagHoldsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTagHoldsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTagHoldsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.ListTagHoldsRequest;
+
+                    /**
+                     * Decodes a ListTagHoldsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTagHoldsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.ListTagHoldsRequest;
+
+                    /**
+                     * Verifies a ListTagHoldsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTagHoldsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTagHoldsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.ListTagHoldsRequest;
+
+                    /**
+                     * Creates a plain object from a ListTagHoldsRequest message. Also converts values to other types if specified.
+                     * @param message ListTagHoldsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.ListTagHoldsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTagHoldsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTagHoldsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTagHoldsResponse. */
+                interface IListTagHoldsResponse {
+
+                    /** ListTagHoldsResponse tagHolds */
+                    tagHolds?: (google.cloud.resourcemanager.v3.ITagHold[]|null);
+
+                    /** ListTagHoldsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListTagHoldsResponse. */
+                class ListTagHoldsResponse implements IListTagHoldsResponse {
+
+                    /**
+                     * Constructs a new ListTagHoldsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IListTagHoldsResponse);
+
+                    /** ListTagHoldsResponse tagHolds. */
+                    public tagHolds: google.cloud.resourcemanager.v3.ITagHold[];
+
+                    /** ListTagHoldsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListTagHoldsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTagHoldsResponse instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IListTagHoldsResponse): google.cloud.resourcemanager.v3.ListTagHoldsResponse;
+
+                    /**
+                     * Encodes the specified ListTagHoldsResponse message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsResponse.verify|verify} messages.
+                     * @param message ListTagHoldsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IListTagHoldsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTagHoldsResponse message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsResponse.verify|verify} messages.
+                     * @param message ListTagHoldsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IListTagHoldsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTagHoldsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTagHoldsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.ListTagHoldsResponse;
+
+                    /**
+                     * Decodes a ListTagHoldsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTagHoldsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.ListTagHoldsResponse;
+
+                    /**
+                     * Verifies a ListTagHoldsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTagHoldsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTagHoldsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.ListTagHoldsResponse;
+
+                    /**
+                     * Creates a plain object from a ListTagHoldsResponse message. Also converts values to other types if specified.
+                     * @param message ListTagHoldsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.ListTagHoldsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTagHoldsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTagHoldsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a TagKeys */
                 class TagKeys extends $protobuf.rpc.Service {
 
@@ -5461,6 +6647,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getTagKey(request: google.cloud.resourcemanager.v3.IGetTagKeyRequest): Promise<google.cloud.resourcemanager.v3.TagKey>;
+
+                    /**
+                     * Calls GetNamespacedTagKey.
+                     * @param request GetNamespacedTagKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TagKey
+                     */
+                    public getNamespacedTagKey(request: google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest, callback: google.cloud.resourcemanager.v3.TagKeys.GetNamespacedTagKeyCallback): void;
+
+                    /**
+                     * Calls GetNamespacedTagKey.
+                     * @param request GetNamespacedTagKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNamespacedTagKey(request: google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest): Promise<google.cloud.resourcemanager.v3.TagKey>;
 
                     /**
                      * Calls CreateTagKey.
@@ -5564,6 +6764,13 @@ export namespace google {
                     type GetTagKeyCallback = (error: (Error|null), response?: google.cloud.resourcemanager.v3.TagKey) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.resourcemanager.v3.TagKeys|getNamespacedTagKey}.
+                     * @param error Error, if any
+                     * @param [response] TagKey
+                     */
+                    type GetNamespacedTagKeyCallback = (error: (Error|null), response?: google.cloud.resourcemanager.v3.TagKey) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.resourcemanager.v3.TagKeys|createTagKey}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -5632,6 +6839,12 @@ export namespace google {
 
                     /** TagKey etag */
                     etag?: (string|null);
+
+                    /** TagKey purpose */
+                    purpose?: (google.cloud.resourcemanager.v3.Purpose|keyof typeof google.cloud.resourcemanager.v3.Purpose|null);
+
+                    /** TagKey purposeData */
+                    purposeData?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a TagKey. */
@@ -5666,6 +6879,12 @@ export namespace google {
 
                     /** TagKey etag. */
                     public etag: string;
+
+                    /** TagKey purpose. */
+                    public purpose: (google.cloud.resourcemanager.v3.Purpose|keyof typeof google.cloud.resourcemanager.v3.Purpose);
+
+                    /** TagKey purposeData. */
+                    public purposeData: { [k: string]: string };
 
                     /**
                      * Creates a new TagKey instance using the specified properties.
@@ -6048,6 +7267,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetTagKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetNamespacedTagKeyRequest. */
+                interface IGetNamespacedTagKeyRequest {
+
+                    /** GetNamespacedTagKeyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNamespacedTagKeyRequest. */
+                class GetNamespacedTagKeyRequest implements IGetNamespacedTagKeyRequest {
+
+                    /**
+                     * Constructs a new GetNamespacedTagKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest);
+
+                    /** GetNamespacedTagKeyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNamespacedTagKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNamespacedTagKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest): google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest;
+
+                    /**
+                     * Encodes the specified GetNamespacedTagKeyRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest.verify|verify} messages.
+                     * @param message GetNamespacedTagKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNamespacedTagKeyRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest.verify|verify} messages.
+                     * @param message GetNamespacedTagKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNamespacedTagKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNamespacedTagKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest;
+
+                    /**
+                     * Decodes a GetNamespacedTagKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNamespacedTagKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest;
+
+                    /**
+                     * Verifies a GetNamespacedTagKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNamespacedTagKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNamespacedTagKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest;
+
+                    /**
+                     * Creates a plain object from a GetNamespacedTagKeyRequest message. Also converts values to other types if specified.
+                     * @param message GetNamespacedTagKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNamespacedTagKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNamespacedTagKeyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6648,6 +7964,12 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Purpose enum. */
+                enum Purpose {
+                    PURPOSE_UNSPECIFIED = 0,
+                    GCE_FIREWALL = 1
+                }
+
                 /** Represents a TagValues */
                 class TagValues extends $protobuf.rpc.Service {
 
@@ -6695,6 +8017,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getTagValue(request: google.cloud.resourcemanager.v3.IGetTagValueRequest): Promise<google.cloud.resourcemanager.v3.TagValue>;
+
+                    /**
+                     * Calls GetNamespacedTagValue.
+                     * @param request GetNamespacedTagValueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TagValue
+                     */
+                    public getNamespacedTagValue(request: google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest, callback: google.cloud.resourcemanager.v3.TagValues.GetNamespacedTagValueCallback): void;
+
+                    /**
+                     * Calls GetNamespacedTagValue.
+                     * @param request GetNamespacedTagValueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNamespacedTagValue(request: google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest): Promise<google.cloud.resourcemanager.v3.TagValue>;
 
                     /**
                      * Calls CreateTagValue.
@@ -6796,6 +8132,13 @@ export namespace google {
                      * @param [response] TagValue
                      */
                     type GetTagValueCallback = (error: (Error|null), response?: google.cloud.resourcemanager.v3.TagValue) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.resourcemanager.v3.TagValues|getNamespacedTagValue}.
+                     * @param error Error, if any
+                     * @param [response] TagValue
+                     */
+                    type GetNamespacedTagValueCallback = (error: (Error|null), response?: google.cloud.resourcemanager.v3.TagValue) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.resourcemanager.v3.TagValues|createTagValue}.
@@ -7282,6 +8625,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetTagValueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetNamespacedTagValueRequest. */
+                interface IGetNamespacedTagValueRequest {
+
+                    /** GetNamespacedTagValueRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNamespacedTagValueRequest. */
+                class GetNamespacedTagValueRequest implements IGetNamespacedTagValueRequest {
+
+                    /**
+                     * Constructs a new GetNamespacedTagValueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest);
+
+                    /** GetNamespacedTagValueRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNamespacedTagValueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNamespacedTagValueRequest instance
+                     */
+                    public static create(properties?: google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest): google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest;
+
+                    /**
+                     * Encodes the specified GetNamespacedTagValueRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest.verify|verify} messages.
+                     * @param message GetNamespacedTagValueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNamespacedTagValueRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest.verify|verify} messages.
+                     * @param message GetNamespacedTagValueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNamespacedTagValueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNamespacedTagValueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest;
+
+                    /**
+                     * Decodes a GetNamespacedTagValueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNamespacedTagValueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest;
+
+                    /**
+                     * Verifies a GetNamespacedTagValueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNamespacedTagValueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNamespacedTagValueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest;
+
+                    /**
+                     * Creates a plain object from a GetNamespacedTagValueRequest message. Also converts values to other types if specified.
+                     * @param message GetNamespacedTagValueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNamespacedTagValueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNamespacedTagValueRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

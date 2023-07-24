@@ -283,6 +283,272 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteConnectionProfile(request: google.cloud.clouddms.v1.IDeleteConnectionProfileRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreatePrivateConnection.
+                     * @param request CreatePrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createPrivateConnection(request: google.cloud.clouddms.v1.ICreatePrivateConnectionRequest, callback: google.cloud.clouddms.v1.DataMigrationService.CreatePrivateConnectionCallback): void;
+
+                    /**
+                     * Calls CreatePrivateConnection.
+                     * @param request CreatePrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPrivateConnection(request: google.cloud.clouddms.v1.ICreatePrivateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetPrivateConnection.
+                     * @param request GetPrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PrivateConnection
+                     */
+                    public getPrivateConnection(request: google.cloud.clouddms.v1.IGetPrivateConnectionRequest, callback: google.cloud.clouddms.v1.DataMigrationService.GetPrivateConnectionCallback): void;
+
+                    /**
+                     * Calls GetPrivateConnection.
+                     * @param request GetPrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPrivateConnection(request: google.cloud.clouddms.v1.IGetPrivateConnectionRequest): Promise<google.cloud.clouddms.v1.PrivateConnection>;
+
+                    /**
+                     * Calls ListPrivateConnections.
+                     * @param request ListPrivateConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPrivateConnectionsResponse
+                     */
+                    public listPrivateConnections(request: google.cloud.clouddms.v1.IListPrivateConnectionsRequest, callback: google.cloud.clouddms.v1.DataMigrationService.ListPrivateConnectionsCallback): void;
+
+                    /**
+                     * Calls ListPrivateConnections.
+                     * @param request ListPrivateConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPrivateConnections(request: google.cloud.clouddms.v1.IListPrivateConnectionsRequest): Promise<google.cloud.clouddms.v1.ListPrivateConnectionsResponse>;
+
+                    /**
+                     * Calls DeletePrivateConnection.
+                     * @param request DeletePrivateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deletePrivateConnection(request: google.cloud.clouddms.v1.IDeletePrivateConnectionRequest, callback: google.cloud.clouddms.v1.DataMigrationService.DeletePrivateConnectionCallback): void;
+
+                    /**
+                     * Calls DeletePrivateConnection.
+                     * @param request DeletePrivateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePrivateConnection(request: google.cloud.clouddms.v1.IDeletePrivateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetConversionWorkspace.
+                     * @param request GetConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversionWorkspace
+                     */
+                    public getConversionWorkspace(request: google.cloud.clouddms.v1.IGetConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.GetConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls GetConversionWorkspace.
+                     * @param request GetConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConversionWorkspace(request: google.cloud.clouddms.v1.IGetConversionWorkspaceRequest): Promise<google.cloud.clouddms.v1.ConversionWorkspace>;
+
+                    /**
+                     * Calls ListConversionWorkspaces.
+                     * @param request ListConversionWorkspacesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConversionWorkspacesResponse
+                     */
+                    public listConversionWorkspaces(request: google.cloud.clouddms.v1.IListConversionWorkspacesRequest, callback: google.cloud.clouddms.v1.DataMigrationService.ListConversionWorkspacesCallback): void;
+
+                    /**
+                     * Calls ListConversionWorkspaces.
+                     * @param request ListConversionWorkspacesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConversionWorkspaces(request: google.cloud.clouddms.v1.IListConversionWorkspacesRequest): Promise<google.cloud.clouddms.v1.ListConversionWorkspacesResponse>;
+
+                    /**
+                     * Calls CreateConversionWorkspace.
+                     * @param request CreateConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createConversionWorkspace(request: google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.CreateConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls CreateConversionWorkspace.
+                     * @param request CreateConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConversionWorkspace(request: google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateConversionWorkspace.
+                     * @param request UpdateConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateConversionWorkspace(request: google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.UpdateConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls UpdateConversionWorkspace.
+                     * @param request UpdateConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConversionWorkspace(request: google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteConversionWorkspace.
+                     * @param request DeleteConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteConversionWorkspace(request: google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.DeleteConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls DeleteConversionWorkspace.
+                     * @param request DeleteConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConversionWorkspace(request: google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls SeedConversionWorkspace.
+                     * @param request SeedConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public seedConversionWorkspace(request: google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.SeedConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls SeedConversionWorkspace.
+                     * @param request SeedConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public seedConversionWorkspace(request: google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportMappingRules.
+                     * @param request ImportMappingRulesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importMappingRules(request: google.cloud.clouddms.v1.IImportMappingRulesRequest, callback: google.cloud.clouddms.v1.DataMigrationService.ImportMappingRulesCallback): void;
+
+                    /**
+                     * Calls ImportMappingRules.
+                     * @param request ImportMappingRulesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importMappingRules(request: google.cloud.clouddms.v1.IImportMappingRulesRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ConvertConversionWorkspace.
+                     * @param request ConvertConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public convertConversionWorkspace(request: google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.ConvertConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls ConvertConversionWorkspace.
+                     * @param request ConvertConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public convertConversionWorkspace(request: google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CommitConversionWorkspace.
+                     * @param request CommitConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public commitConversionWorkspace(request: google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.CommitConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls CommitConversionWorkspace.
+                     * @param request CommitConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public commitConversionWorkspace(request: google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RollbackConversionWorkspace.
+                     * @param request RollbackConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rollbackConversionWorkspace(request: google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.RollbackConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls RollbackConversionWorkspace.
+                     * @param request RollbackConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rollbackConversionWorkspace(request: google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ApplyConversionWorkspace.
+                     * @param request ApplyConversionWorkspaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public applyConversionWorkspace(request: google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest, callback: google.cloud.clouddms.v1.DataMigrationService.ApplyConversionWorkspaceCallback): void;
+
+                    /**
+                     * Calls ApplyConversionWorkspace.
+                     * @param request ApplyConversionWorkspaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public applyConversionWorkspace(request: google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DescribeDatabaseEntities.
+                     * @param request DescribeDatabaseEntitiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DescribeDatabaseEntitiesResponse
+                     */
+                    public describeDatabaseEntities(request: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest, callback: google.cloud.clouddms.v1.DataMigrationService.DescribeDatabaseEntitiesCallback): void;
+
+                    /**
+                     * Calls DescribeDatabaseEntities.
+                     * @param request DescribeDatabaseEntitiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public describeDatabaseEntities(request: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest): Promise<google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse>;
+
+                    /**
+                     * Calls SearchBackgroundJobs.
+                     * @param request SearchBackgroundJobsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchBackgroundJobsResponse
+                     */
+                    public searchBackgroundJobs(request: google.cloud.clouddms.v1.ISearchBackgroundJobsRequest, callback: google.cloud.clouddms.v1.DataMigrationService.SearchBackgroundJobsCallback): void;
+
+                    /**
+                     * Calls SearchBackgroundJobs.
+                     * @param request SearchBackgroundJobsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchBackgroundJobs(request: google.cloud.clouddms.v1.ISearchBackgroundJobsRequest): Promise<google.cloud.clouddms.v1.SearchBackgroundJobsResponse>;
+
+                    /**
+                     * Calls DescribeConversionWorkspaceRevisions.
+                     * @param request DescribeConversionWorkspaceRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DescribeConversionWorkspaceRevisionsResponse
+                     */
+                    public describeConversionWorkspaceRevisions(request: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest, callback: google.cloud.clouddms.v1.DataMigrationService.DescribeConversionWorkspaceRevisionsCallback): void;
+
+                    /**
+                     * Calls DescribeConversionWorkspaceRevisions.
+                     * @param request DescribeConversionWorkspaceRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public describeConversionWorkspaceRevisions(request: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest): Promise<google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse>;
+
+                    /**
+                     * Calls FetchStaticIps.
+                     * @param request FetchStaticIpsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchStaticIpsResponse
+                     */
+                    public fetchStaticIps(request: google.cloud.clouddms.v1.IFetchStaticIpsRequest, callback: google.cloud.clouddms.v1.DataMigrationService.FetchStaticIpsCallback): void;
+
+                    /**
+                     * Calls FetchStaticIps.
+                     * @param request FetchStaticIpsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchStaticIps(request: google.cloud.clouddms.v1.IFetchStaticIpsRequest): Promise<google.cloud.clouddms.v1.FetchStaticIpsResponse>;
                 }
 
                 namespace DataMigrationService {
@@ -405,6 +671,139 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteConnectionProfileCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|createPrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreatePrivateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|getPrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] PrivateConnection
+                     */
+                    type GetPrivateConnectionCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.PrivateConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|listPrivateConnections}.
+                     * @param error Error, if any
+                     * @param [response] ListPrivateConnectionsResponse
+                     */
+                    type ListPrivateConnectionsCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.ListPrivateConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|deletePrivateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeletePrivateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|getConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] ConversionWorkspace
+                     */
+                    type GetConversionWorkspaceCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.ConversionWorkspace) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|listConversionWorkspaces}.
+                     * @param error Error, if any
+                     * @param [response] ListConversionWorkspacesResponse
+                     */
+                    type ListConversionWorkspacesCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.ListConversionWorkspacesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|createConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|updateConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|deleteConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|seedConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SeedConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|importMappingRules}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportMappingRulesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|convertConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ConvertConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|commitConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CommitConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|rollbackConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RollbackConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|applyConversionWorkspace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ApplyConversionWorkspaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|describeDatabaseEntities}.
+                     * @param error Error, if any
+                     * @param [response] DescribeDatabaseEntitiesResponse
+                     */
+                    type DescribeDatabaseEntitiesCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|searchBackgroundJobs}.
+                     * @param error Error, if any
+                     * @param [response] SearchBackgroundJobsResponse
+                     */
+                    type SearchBackgroundJobsCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.SearchBackgroundJobsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|describeConversionWorkspaceRevisions}.
+                     * @param error Error, if any
+                     * @param [response] DescribeConversionWorkspaceRevisionsResponse
+                     */
+                    type DescribeConversionWorkspaceRevisionsCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|fetchStaticIps}.
+                     * @param error Error, if any
+                     * @param [response] FetchStaticIpsResponse
+                     */
+                    type FetchStaticIpsCallback = (error: (Error|null), response?: google.cloud.clouddms.v1.FetchStaticIpsResponse) => void;
                 }
 
                 /** Properties of a ListMigrationJobsRequest. */
@@ -2417,6 +2816,12 @@ export namespace google {
 
                     /** CreateConnectionProfileRequest requestId */
                     requestId?: (string|null);
+
+                    /** CreateConnectionProfileRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** CreateConnectionProfileRequest skipValidation */
+                    skipValidation?: (boolean|null);
                 }
 
                 /** Represents a CreateConnectionProfileRequest. */
@@ -2439,6 +2844,12 @@ export namespace google {
 
                     /** CreateConnectionProfileRequest requestId. */
                     public requestId: string;
+
+                    /** CreateConnectionProfileRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** CreateConnectionProfileRequest skipValidation. */
+                    public skipValidation: boolean;
 
                     /**
                      * Creates a new CreateConnectionProfileRequest instance using the specified properties.
@@ -2529,6 +2940,12 @@ export namespace google {
 
                     /** UpdateConnectionProfileRequest requestId */
                     requestId?: (string|null);
+
+                    /** UpdateConnectionProfileRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateConnectionProfileRequest skipValidation */
+                    skipValidation?: (boolean|null);
                 }
 
                 /** Represents an UpdateConnectionProfileRequest. */
@@ -2548,6 +2965,12 @@ export namespace google {
 
                     /** UpdateConnectionProfileRequest requestId. */
                     public requestId: string;
+
+                    /** UpdateConnectionProfileRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateConnectionProfileRequest skipValidation. */
+                    public skipValidation: boolean;
 
                     /**
                      * Creates a new UpdateConnectionProfileRequest instance using the specified properties.
@@ -2736,6 +3159,557 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreatePrivateConnectionRequest. */
+                interface ICreatePrivateConnectionRequest {
+
+                    /** CreatePrivateConnectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePrivateConnectionRequest privateConnectionId */
+                    privateConnectionId?: (string|null);
+
+                    /** CreatePrivateConnectionRequest privateConnection */
+                    privateConnection?: (google.cloud.clouddms.v1.IPrivateConnection|null);
+
+                    /** CreatePrivateConnectionRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreatePrivateConnectionRequest skipValidation */
+                    skipValidation?: (boolean|null);
+                }
+
+                /** Represents a CreatePrivateConnectionRequest. */
+                class CreatePrivateConnectionRequest implements ICreatePrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new CreatePrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ICreatePrivateConnectionRequest);
+
+                    /** CreatePrivateConnectionRequest parent. */
+                    public parent: string;
+
+                    /** CreatePrivateConnectionRequest privateConnectionId. */
+                    public privateConnectionId: string;
+
+                    /** CreatePrivateConnectionRequest privateConnection. */
+                    public privateConnection?: (google.cloud.clouddms.v1.IPrivateConnection|null);
+
+                    /** CreatePrivateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /** CreatePrivateConnectionRequest skipValidation. */
+                    public skipValidation: boolean;
+
+                    /**
+                     * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ICreatePrivateConnectionRequest): google.cloud.clouddms.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified CreatePrivateConnectionRequest message. Does not implicitly {@link google.cloud.clouddms.v1.CreatePrivateConnectionRequest.verify|verify} messages.
+                     * @param message CreatePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ICreatePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.CreatePrivateConnectionRequest.verify|verify} messages.
+                     * @param message CreatePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ICreatePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Decodes a CreatePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Verifies a CreatePrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.CreatePrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message CreatePrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.CreatePrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPrivateConnectionsRequest. */
+                interface IListPrivateConnectionsRequest {
+
+                    /** ListPrivateConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPrivateConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPrivateConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListPrivateConnectionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPrivateConnectionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListPrivateConnectionsRequest. */
+                class ListPrivateConnectionsRequest implements IListPrivateConnectionsRequest {
+
+                    /**
+                     * Constructs a new ListPrivateConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IListPrivateConnectionsRequest);
+
+                    /** ListPrivateConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListPrivateConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPrivateConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListPrivateConnectionsRequest filter. */
+                    public filter: string;
+
+                    /** ListPrivateConnectionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListPrivateConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPrivateConnectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IListPrivateConnectionsRequest): google.cloud.clouddms.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsRequest message. Does not implicitly {@link google.cloud.clouddms.v1.ListPrivateConnectionsRequest.verify|verify} messages.
+                     * @param message ListPrivateConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IListPrivateConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ListPrivateConnectionsRequest.verify|verify} messages.
+                     * @param message ListPrivateConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IListPrivateConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPrivateConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPrivateConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Verifies a ListPrivateConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPrivateConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPrivateConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ListPrivateConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPrivateConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListPrivateConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ListPrivateConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPrivateConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPrivateConnectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPrivateConnectionsResponse. */
+                interface IListPrivateConnectionsResponse {
+
+                    /** ListPrivateConnectionsResponse privateConnections */
+                    privateConnections?: (google.cloud.clouddms.v1.IPrivateConnection[]|null);
+
+                    /** ListPrivateConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListPrivateConnectionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListPrivateConnectionsResponse. */
+                class ListPrivateConnectionsResponse implements IListPrivateConnectionsResponse {
+
+                    /**
+                     * Constructs a new ListPrivateConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IListPrivateConnectionsResponse);
+
+                    /** ListPrivateConnectionsResponse privateConnections. */
+                    public privateConnections: google.cloud.clouddms.v1.IPrivateConnection[];
+
+                    /** ListPrivateConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListPrivateConnectionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListPrivateConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPrivateConnectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IListPrivateConnectionsResponse): google.cloud.clouddms.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsResponse message. Does not implicitly {@link google.cloud.clouddms.v1.ListPrivateConnectionsResponse.verify|verify} messages.
+                     * @param message ListPrivateConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IListPrivateConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPrivateConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ListPrivateConnectionsResponse.verify|verify} messages.
+                     * @param message ListPrivateConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IListPrivateConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPrivateConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Decodes a ListPrivateConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPrivateConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Verifies a ListPrivateConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPrivateConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPrivateConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ListPrivateConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPrivateConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListPrivateConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ListPrivateConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPrivateConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPrivateConnectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePrivateConnectionRequest. */
+                interface IDeletePrivateConnectionRequest {
+
+                    /** DeletePrivateConnectionRequest name */
+                    name?: (string|null);
+
+                    /** DeletePrivateConnectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeletePrivateConnectionRequest. */
+                class DeletePrivateConnectionRequest implements IDeletePrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new DeletePrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDeletePrivateConnectionRequest);
+
+                    /** DeletePrivateConnectionRequest name. */
+                    public name: string;
+
+                    /** DeletePrivateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeletePrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDeletePrivateConnectionRequest): google.cloud.clouddms.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified DeletePrivateConnectionRequest message. Does not implicitly {@link google.cloud.clouddms.v1.DeletePrivateConnectionRequest.verify|verify} messages.
+                     * @param message DeletePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDeletePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DeletePrivateConnectionRequest.verify|verify} messages.
+                     * @param message DeletePrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDeletePrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Decodes a DeletePrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Verifies a DeletePrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DeletePrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message DeletePrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DeletePrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPrivateConnectionRequest. */
+                interface IGetPrivateConnectionRequest {
+
+                    /** GetPrivateConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPrivateConnectionRequest. */
+                class GetPrivateConnectionRequest implements IGetPrivateConnectionRequest {
+
+                    /**
+                     * Constructs a new GetPrivateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IGetPrivateConnectionRequest);
+
+                    /** GetPrivateConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPrivateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPrivateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IGetPrivateConnectionRequest): google.cloud.clouddms.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Encodes the specified GetPrivateConnectionRequest message. Does not implicitly {@link google.cloud.clouddms.v1.GetPrivateConnectionRequest.verify|verify} messages.
+                     * @param message GetPrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IGetPrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPrivateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.GetPrivateConnectionRequest.verify|verify} messages.
+                     * @param message GetPrivateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IGetPrivateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPrivateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Decodes a GetPrivateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPrivateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Verifies a GetPrivateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPrivateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPrivateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.GetPrivateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetPrivateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message GetPrivateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.GetPrivateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPrivateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPrivateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
 
@@ -2863,6 +3837,2285 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConversionWorkspacesRequest. */
+                interface IListConversionWorkspacesRequest {
+
+                    /** ListConversionWorkspacesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConversionWorkspacesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConversionWorkspacesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListConversionWorkspacesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListConversionWorkspacesRequest. */
+                class ListConversionWorkspacesRequest implements IListConversionWorkspacesRequest {
+
+                    /**
+                     * Constructs a new ListConversionWorkspacesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IListConversionWorkspacesRequest);
+
+                    /** ListConversionWorkspacesRequest parent. */
+                    public parent: string;
+
+                    /** ListConversionWorkspacesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConversionWorkspacesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListConversionWorkspacesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListConversionWorkspacesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversionWorkspacesRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IListConversionWorkspacesRequest): google.cloud.clouddms.v1.ListConversionWorkspacesRequest;
+
+                    /**
+                     * Encodes the specified ListConversionWorkspacesRequest message. Does not implicitly {@link google.cloud.clouddms.v1.ListConversionWorkspacesRequest.verify|verify} messages.
+                     * @param message ListConversionWorkspacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IListConversionWorkspacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversionWorkspacesRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ListConversionWorkspacesRequest.verify|verify} messages.
+                     * @param message ListConversionWorkspacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IListConversionWorkspacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversionWorkspacesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversionWorkspacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ListConversionWorkspacesRequest;
+
+                    /**
+                     * Decodes a ListConversionWorkspacesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversionWorkspacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ListConversionWorkspacesRequest;
+
+                    /**
+                     * Verifies a ListConversionWorkspacesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversionWorkspacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversionWorkspacesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ListConversionWorkspacesRequest;
+
+                    /**
+                     * Creates a plain object from a ListConversionWorkspacesRequest message. Also converts values to other types if specified.
+                     * @param message ListConversionWorkspacesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ListConversionWorkspacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversionWorkspacesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConversionWorkspacesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConversionWorkspacesResponse. */
+                interface IListConversionWorkspacesResponse {
+
+                    /** ListConversionWorkspacesResponse conversionWorkspaces */
+                    conversionWorkspaces?: (google.cloud.clouddms.v1.IConversionWorkspace[]|null);
+
+                    /** ListConversionWorkspacesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListConversionWorkspacesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListConversionWorkspacesResponse. */
+                class ListConversionWorkspacesResponse implements IListConversionWorkspacesResponse {
+
+                    /**
+                     * Constructs a new ListConversionWorkspacesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IListConversionWorkspacesResponse);
+
+                    /** ListConversionWorkspacesResponse conversionWorkspaces. */
+                    public conversionWorkspaces: google.cloud.clouddms.v1.IConversionWorkspace[];
+
+                    /** ListConversionWorkspacesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListConversionWorkspacesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListConversionWorkspacesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversionWorkspacesResponse instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IListConversionWorkspacesResponse): google.cloud.clouddms.v1.ListConversionWorkspacesResponse;
+
+                    /**
+                     * Encodes the specified ListConversionWorkspacesResponse message. Does not implicitly {@link google.cloud.clouddms.v1.ListConversionWorkspacesResponse.verify|verify} messages.
+                     * @param message ListConversionWorkspacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IListConversionWorkspacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversionWorkspacesResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ListConversionWorkspacesResponse.verify|verify} messages.
+                     * @param message ListConversionWorkspacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IListConversionWorkspacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversionWorkspacesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversionWorkspacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ListConversionWorkspacesResponse;
+
+                    /**
+                     * Decodes a ListConversionWorkspacesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversionWorkspacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ListConversionWorkspacesResponse;
+
+                    /**
+                     * Verifies a ListConversionWorkspacesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversionWorkspacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversionWorkspacesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ListConversionWorkspacesResponse;
+
+                    /**
+                     * Creates a plain object from a ListConversionWorkspacesResponse message. Also converts values to other types if specified.
+                     * @param message ListConversionWorkspacesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ListConversionWorkspacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversionWorkspacesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConversionWorkspacesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetConversionWorkspaceRequest. */
+                interface IGetConversionWorkspaceRequest {
+
+                    /** GetConversionWorkspaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConversionWorkspaceRequest. */
+                class GetConversionWorkspaceRequest implements IGetConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new GetConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IGetConversionWorkspaceRequest);
+
+                    /** GetConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IGetConversionWorkspaceRequest): google.cloud.clouddms.v1.GetConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified GetConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.GetConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message GetConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IGetConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.GetConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message GetConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IGetConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.GetConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a GetConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.GetConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a GetConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.GetConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a GetConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message GetConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.GetConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConversionWorkspaceRequest. */
+                interface ICreateConversionWorkspaceRequest {
+
+                    /** CreateConversionWorkspaceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConversionWorkspaceRequest conversionWorkspaceId */
+                    conversionWorkspaceId?: (string|null);
+
+                    /** CreateConversionWorkspaceRequest conversionWorkspace */
+                    conversionWorkspace?: (google.cloud.clouddms.v1.IConversionWorkspace|null);
+
+                    /** CreateConversionWorkspaceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateConversionWorkspaceRequest. */
+                class CreateConversionWorkspaceRequest implements ICreateConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new CreateConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest);
+
+                    /** CreateConversionWorkspaceRequest parent. */
+                    public parent: string;
+
+                    /** CreateConversionWorkspaceRequest conversionWorkspaceId. */
+                    public conversionWorkspaceId: string;
+
+                    /** CreateConversionWorkspaceRequest conversionWorkspace. */
+                    public conversionWorkspace?: (google.cloud.clouddms.v1.IConversionWorkspace|null);
+
+                    /** CreateConversionWorkspaceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest): google.cloud.clouddms.v1.CreateConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified CreateConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.CreateConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message CreateConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.CreateConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message CreateConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ICreateConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.CreateConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a CreateConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.CreateConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a CreateConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.CreateConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message CreateConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.CreateConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConversionWorkspaceRequest. */
+                interface IUpdateConversionWorkspaceRequest {
+
+                    /** UpdateConversionWorkspaceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversionWorkspaceRequest conversionWorkspace */
+                    conversionWorkspace?: (google.cloud.clouddms.v1.IConversionWorkspace|null);
+
+                    /** UpdateConversionWorkspaceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateConversionWorkspaceRequest. */
+                class UpdateConversionWorkspaceRequest implements IUpdateConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new UpdateConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest);
+
+                    /** UpdateConversionWorkspaceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConversionWorkspaceRequest conversionWorkspace. */
+                    public conversionWorkspace?: (google.cloud.clouddms.v1.IConversionWorkspace|null);
+
+                    /** UpdateConversionWorkspaceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest): google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified UpdateConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message UpdateConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message UpdateConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IUpdateConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes an UpdateConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies an UpdateConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteConversionWorkspaceRequest. */
+                interface IDeleteConversionWorkspaceRequest {
+
+                    /** DeleteConversionWorkspaceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteConversionWorkspaceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteConversionWorkspaceRequest. */
+                class DeleteConversionWorkspaceRequest implements IDeleteConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new DeleteConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest);
+
+                    /** DeleteConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /** DeleteConversionWorkspaceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest): google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified DeleteConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message DeleteConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message DeleteConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a DeleteConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a DeleteConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CommitConversionWorkspaceRequest. */
+                interface ICommitConversionWorkspaceRequest {
+
+                    /** CommitConversionWorkspaceRequest name */
+                    name?: (string|null);
+
+                    /** CommitConversionWorkspaceRequest commitName */
+                    commitName?: (string|null);
+                }
+
+                /** Represents a CommitConversionWorkspaceRequest. */
+                class CommitConversionWorkspaceRequest implements ICommitConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new CommitConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest);
+
+                    /** CommitConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /** CommitConversionWorkspaceRequest commitName. */
+                    public commitName: string;
+
+                    /**
+                     * Creates a new CommitConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CommitConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest): google.cloud.clouddms.v1.CommitConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified CommitConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.CommitConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message CommitConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CommitConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.CommitConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message CommitConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ICommitConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CommitConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CommitConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.CommitConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a CommitConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CommitConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.CommitConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a CommitConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CommitConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CommitConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.CommitConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a CommitConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message CommitConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.CommitConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CommitConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CommitConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RollbackConversionWorkspaceRequest. */
+                interface IRollbackConversionWorkspaceRequest {
+
+                    /** RollbackConversionWorkspaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RollbackConversionWorkspaceRequest. */
+                class RollbackConversionWorkspaceRequest implements IRollbackConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new RollbackConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest);
+
+                    /** RollbackConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new RollbackConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RollbackConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest): google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified RollbackConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message RollbackConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RollbackConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message RollbackConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IRollbackConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RollbackConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RollbackConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a RollbackConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RollbackConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a RollbackConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RollbackConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RollbackConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a RollbackConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message RollbackConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RollbackConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RollbackConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApplyConversionWorkspaceRequest. */
+                interface IApplyConversionWorkspaceRequest {
+
+                    /** ApplyConversionWorkspaceRequest name */
+                    name?: (string|null);
+
+                    /** ApplyConversionWorkspaceRequest filter */
+                    filter?: (string|null);
+
+                    /** ApplyConversionWorkspaceRequest connectionProfile */
+                    connectionProfile?: (string|null);
+                }
+
+                /** Represents an ApplyConversionWorkspaceRequest. */
+                class ApplyConversionWorkspaceRequest implements IApplyConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new ApplyConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest);
+
+                    /** ApplyConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /** ApplyConversionWorkspaceRequest filter. */
+                    public filter: string;
+
+                    /** ApplyConversionWorkspaceRequest connectionProfile. */
+                    public connectionProfile?: (string|null);
+
+                    /** ApplyConversionWorkspaceRequest destination. */
+                    public destination?: "connectionProfile";
+
+                    /**
+                     * Creates a new ApplyConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplyConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest): google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified ApplyConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message ApplyConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplyConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message ApplyConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IApplyConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplyConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplyConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes an ApplyConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplyConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies an ApplyConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplyConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplyConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from an ApplyConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message ApplyConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplyConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApplyConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SeedConversionWorkspaceRequest. */
+                interface ISeedConversionWorkspaceRequest {
+
+                    /** SeedConversionWorkspaceRequest name */
+                    name?: (string|null);
+
+                    /** SeedConversionWorkspaceRequest autoCommit */
+                    autoCommit?: (boolean|null);
+
+                    /** SeedConversionWorkspaceRequest sourceConnectionProfile */
+                    sourceConnectionProfile?: (string|null);
+
+                    /** SeedConversionWorkspaceRequest destinationConnectionProfile */
+                    destinationConnectionProfile?: (string|null);
+                }
+
+                /** Represents a SeedConversionWorkspaceRequest. */
+                class SeedConversionWorkspaceRequest implements ISeedConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new SeedConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest);
+
+                    /** SeedConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /** SeedConversionWorkspaceRequest autoCommit. */
+                    public autoCommit: boolean;
+
+                    /** SeedConversionWorkspaceRequest sourceConnectionProfile. */
+                    public sourceConnectionProfile?: (string|null);
+
+                    /** SeedConversionWorkspaceRequest destinationConnectionProfile. */
+                    public destinationConnectionProfile?: (string|null);
+
+                    /** SeedConversionWorkspaceRequest seedFrom. */
+                    public seedFrom?: ("sourceConnectionProfile"|"destinationConnectionProfile");
+
+                    /**
+                     * Creates a new SeedConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SeedConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest): google.cloud.clouddms.v1.SeedConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified SeedConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.SeedConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message SeedConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SeedConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SeedConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message SeedConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ISeedConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SeedConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SeedConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.SeedConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a SeedConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SeedConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.SeedConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a SeedConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SeedConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SeedConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.SeedConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a SeedConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message SeedConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.SeedConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SeedConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SeedConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConvertConversionWorkspaceRequest. */
+                interface IConvertConversionWorkspaceRequest {
+
+                    /** ConvertConversionWorkspaceRequest name */
+                    name?: (string|null);
+
+                    /** ConvertConversionWorkspaceRequest autoCommit */
+                    autoCommit?: (boolean|null);
+
+                    /** ConvertConversionWorkspaceRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ConvertConversionWorkspaceRequest. */
+                class ConvertConversionWorkspaceRequest implements IConvertConversionWorkspaceRequest {
+
+                    /**
+                     * Constructs a new ConvertConversionWorkspaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest);
+
+                    /** ConvertConversionWorkspaceRequest name. */
+                    public name: string;
+
+                    /** ConvertConversionWorkspaceRequest autoCommit. */
+                    public autoCommit: boolean;
+
+                    /** ConvertConversionWorkspaceRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ConvertConversionWorkspaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConvertConversionWorkspaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest): google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest;
+
+                    /**
+                     * Encodes the specified ConvertConversionWorkspaceRequest message. Does not implicitly {@link google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message ConvertConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConvertConversionWorkspaceRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest.verify|verify} messages.
+                     * @param message ConvertConversionWorkspaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IConvertConversionWorkspaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConvertConversionWorkspaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConvertConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest;
+
+                    /**
+                     * Decodes a ConvertConversionWorkspaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConvertConversionWorkspaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest;
+
+                    /**
+                     * Verifies a ConvertConversionWorkspaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConvertConversionWorkspaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConvertConversionWorkspaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest;
+
+                    /**
+                     * Creates a plain object from a ConvertConversionWorkspaceRequest message. Also converts values to other types if specified.
+                     * @param message ConvertConversionWorkspaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConvertConversionWorkspaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConvertConversionWorkspaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportMappingRulesRequest. */
+                interface IImportMappingRulesRequest {
+
+                    /** ImportMappingRulesRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportMappingRulesRequest rulesFormat */
+                    rulesFormat?: (google.cloud.clouddms.v1.ImportRulesFileFormat|keyof typeof google.cloud.clouddms.v1.ImportRulesFileFormat|null);
+
+                    /** ImportMappingRulesRequest rulesFiles */
+                    rulesFiles?: (google.cloud.clouddms.v1.ImportMappingRulesRequest.IRulesFile[]|null);
+
+                    /** ImportMappingRulesRequest autoCommit */
+                    autoCommit?: (boolean|null);
+                }
+
+                /** Represents an ImportMappingRulesRequest. */
+                class ImportMappingRulesRequest implements IImportMappingRulesRequest {
+
+                    /**
+                     * Constructs a new ImportMappingRulesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IImportMappingRulesRequest);
+
+                    /** ImportMappingRulesRequest parent. */
+                    public parent: string;
+
+                    /** ImportMappingRulesRequest rulesFormat. */
+                    public rulesFormat: (google.cloud.clouddms.v1.ImportRulesFileFormat|keyof typeof google.cloud.clouddms.v1.ImportRulesFileFormat);
+
+                    /** ImportMappingRulesRequest rulesFiles. */
+                    public rulesFiles: google.cloud.clouddms.v1.ImportMappingRulesRequest.IRulesFile[];
+
+                    /** ImportMappingRulesRequest autoCommit. */
+                    public autoCommit: boolean;
+
+                    /**
+                     * Creates a new ImportMappingRulesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportMappingRulesRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IImportMappingRulesRequest): google.cloud.clouddms.v1.ImportMappingRulesRequest;
+
+                    /**
+                     * Encodes the specified ImportMappingRulesRequest message. Does not implicitly {@link google.cloud.clouddms.v1.ImportMappingRulesRequest.verify|verify} messages.
+                     * @param message ImportMappingRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IImportMappingRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportMappingRulesRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ImportMappingRulesRequest.verify|verify} messages.
+                     * @param message ImportMappingRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IImportMappingRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportMappingRulesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportMappingRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ImportMappingRulesRequest;
+
+                    /**
+                     * Decodes an ImportMappingRulesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportMappingRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ImportMappingRulesRequest;
+
+                    /**
+                     * Verifies an ImportMappingRulesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportMappingRulesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportMappingRulesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ImportMappingRulesRequest;
+
+                    /**
+                     * Creates a plain object from an ImportMappingRulesRequest message. Also converts values to other types if specified.
+                     * @param message ImportMappingRulesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ImportMappingRulesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportMappingRulesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportMappingRulesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportMappingRulesRequest {
+
+                    /** Properties of a RulesFile. */
+                    interface IRulesFile {
+
+                        /** RulesFile rulesSourceFilename */
+                        rulesSourceFilename?: (string|null);
+
+                        /** RulesFile rulesContent */
+                        rulesContent?: (string|null);
+                    }
+
+                    /** Represents a RulesFile. */
+                    class RulesFile implements IRulesFile {
+
+                        /**
+                         * Constructs a new RulesFile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.ImportMappingRulesRequest.IRulesFile);
+
+                        /** RulesFile rulesSourceFilename. */
+                        public rulesSourceFilename: string;
+
+                        /** RulesFile rulesContent. */
+                        public rulesContent: string;
+
+                        /**
+                         * Creates a new RulesFile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RulesFile instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.ImportMappingRulesRequest.IRulesFile): google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile;
+
+                        /**
+                         * Encodes the specified RulesFile message. Does not implicitly {@link google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile.verify|verify} messages.
+                         * @param message RulesFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.ImportMappingRulesRequest.IRulesFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RulesFile message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile.verify|verify} messages.
+                         * @param message RulesFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.ImportMappingRulesRequest.IRulesFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RulesFile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RulesFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile;
+
+                        /**
+                         * Decodes a RulesFile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RulesFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile;
+
+                        /**
+                         * Verifies a RulesFile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RulesFile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RulesFile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile;
+
+                        /**
+                         * Creates a plain object from a RulesFile message. Also converts values to other types if specified.
+                         * @param message RulesFile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.ImportMappingRulesRequest.RulesFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RulesFile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RulesFile
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a DescribeDatabaseEntitiesRequest. */
+                interface IDescribeDatabaseEntitiesRequest {
+
+                    /** DescribeDatabaseEntitiesRequest conversionWorkspace */
+                    conversionWorkspace?: (string|null);
+
+                    /** DescribeDatabaseEntitiesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** DescribeDatabaseEntitiesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** DescribeDatabaseEntitiesRequest tree */
+                    tree?: (google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType|keyof typeof google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType|null);
+
+                    /** DescribeDatabaseEntitiesRequest uncommitted */
+                    uncommitted?: (boolean|null);
+
+                    /** DescribeDatabaseEntitiesRequest commitId */
+                    commitId?: (string|null);
+
+                    /** DescribeDatabaseEntitiesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a DescribeDatabaseEntitiesRequest. */
+                class DescribeDatabaseEntitiesRequest implements IDescribeDatabaseEntitiesRequest {
+
+                    /**
+                     * Constructs a new DescribeDatabaseEntitiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest);
+
+                    /** DescribeDatabaseEntitiesRequest conversionWorkspace. */
+                    public conversionWorkspace: string;
+
+                    /** DescribeDatabaseEntitiesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** DescribeDatabaseEntitiesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** DescribeDatabaseEntitiesRequest tree. */
+                    public tree: (google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType|keyof typeof google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType);
+
+                    /** DescribeDatabaseEntitiesRequest uncommitted. */
+                    public uncommitted: boolean;
+
+                    /** DescribeDatabaseEntitiesRequest commitId. */
+                    public commitId: string;
+
+                    /** DescribeDatabaseEntitiesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new DescribeDatabaseEntitiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DescribeDatabaseEntitiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest): google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest;
+
+                    /**
+                     * Encodes the specified DescribeDatabaseEntitiesRequest message. Does not implicitly {@link google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.verify|verify} messages.
+                     * @param message DescribeDatabaseEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DescribeDatabaseEntitiesRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.verify|verify} messages.
+                     * @param message DescribeDatabaseEntitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DescribeDatabaseEntitiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DescribeDatabaseEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest;
+
+                    /**
+                     * Decodes a DescribeDatabaseEntitiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DescribeDatabaseEntitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest;
+
+                    /**
+                     * Verifies a DescribeDatabaseEntitiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DescribeDatabaseEntitiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DescribeDatabaseEntitiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest;
+
+                    /**
+                     * Creates a plain object from a DescribeDatabaseEntitiesRequest message. Also converts values to other types if specified.
+                     * @param message DescribeDatabaseEntitiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DescribeDatabaseEntitiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DescribeDatabaseEntitiesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DescribeDatabaseEntitiesRequest {
+
+                    /** DBTreeType enum. */
+                    enum DBTreeType {
+                        DB_TREE_TYPE_UNSPECIFIED = 0,
+                        SOURCE_TREE = 1,
+                        DRAFT_TREE = 2,
+                        DESTINATION_TREE = 3
+                    }
+                }
+
+                /** Properties of a DescribeDatabaseEntitiesResponse. */
+                interface IDescribeDatabaseEntitiesResponse {
+
+                    /** DescribeDatabaseEntitiesResponse databaseEntities */
+                    databaseEntities?: (google.cloud.clouddms.v1.IDatabaseEntity[]|null);
+
+                    /** DescribeDatabaseEntitiesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a DescribeDatabaseEntitiesResponse. */
+                class DescribeDatabaseEntitiesResponse implements IDescribeDatabaseEntitiesResponse {
+
+                    /**
+                     * Constructs a new DescribeDatabaseEntitiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse);
+
+                    /** DescribeDatabaseEntitiesResponse databaseEntities. */
+                    public databaseEntities: google.cloud.clouddms.v1.IDatabaseEntity[];
+
+                    /** DescribeDatabaseEntitiesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new DescribeDatabaseEntitiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DescribeDatabaseEntitiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse): google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse;
+
+                    /**
+                     * Encodes the specified DescribeDatabaseEntitiesResponse message. Does not implicitly {@link google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse.verify|verify} messages.
+                     * @param message DescribeDatabaseEntitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DescribeDatabaseEntitiesResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse.verify|verify} messages.
+                     * @param message DescribeDatabaseEntitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DescribeDatabaseEntitiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DescribeDatabaseEntitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse;
+
+                    /**
+                     * Decodes a DescribeDatabaseEntitiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DescribeDatabaseEntitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse;
+
+                    /**
+                     * Verifies a DescribeDatabaseEntitiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DescribeDatabaseEntitiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DescribeDatabaseEntitiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse;
+
+                    /**
+                     * Creates a plain object from a DescribeDatabaseEntitiesResponse message. Also converts values to other types if specified.
+                     * @param message DescribeDatabaseEntitiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DescribeDatabaseEntitiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DescribeDatabaseEntitiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DescribeDatabaseEntitiesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchBackgroundJobsRequest. */
+                interface ISearchBackgroundJobsRequest {
+
+                    /** SearchBackgroundJobsRequest conversionWorkspace */
+                    conversionWorkspace?: (string|null);
+
+                    /** SearchBackgroundJobsRequest returnMostRecentPerJobType */
+                    returnMostRecentPerJobType?: (boolean|null);
+
+                    /** SearchBackgroundJobsRequest maxSize */
+                    maxSize?: (number|null);
+
+                    /** SearchBackgroundJobsRequest completedUntilTime */
+                    completedUntilTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SearchBackgroundJobsRequest. */
+                class SearchBackgroundJobsRequest implements ISearchBackgroundJobsRequest {
+
+                    /**
+                     * Constructs a new SearchBackgroundJobsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ISearchBackgroundJobsRequest);
+
+                    /** SearchBackgroundJobsRequest conversionWorkspace. */
+                    public conversionWorkspace: string;
+
+                    /** SearchBackgroundJobsRequest returnMostRecentPerJobType. */
+                    public returnMostRecentPerJobType: boolean;
+
+                    /** SearchBackgroundJobsRequest maxSize. */
+                    public maxSize: number;
+
+                    /** SearchBackgroundJobsRequest completedUntilTime. */
+                    public completedUntilTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SearchBackgroundJobsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchBackgroundJobsRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ISearchBackgroundJobsRequest): google.cloud.clouddms.v1.SearchBackgroundJobsRequest;
+
+                    /**
+                     * Encodes the specified SearchBackgroundJobsRequest message. Does not implicitly {@link google.cloud.clouddms.v1.SearchBackgroundJobsRequest.verify|verify} messages.
+                     * @param message SearchBackgroundJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ISearchBackgroundJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchBackgroundJobsRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SearchBackgroundJobsRequest.verify|verify} messages.
+                     * @param message SearchBackgroundJobsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ISearchBackgroundJobsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchBackgroundJobsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchBackgroundJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.SearchBackgroundJobsRequest;
+
+                    /**
+                     * Decodes a SearchBackgroundJobsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchBackgroundJobsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.SearchBackgroundJobsRequest;
+
+                    /**
+                     * Verifies a SearchBackgroundJobsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchBackgroundJobsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchBackgroundJobsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.SearchBackgroundJobsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchBackgroundJobsRequest message. Also converts values to other types if specified.
+                     * @param message SearchBackgroundJobsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.SearchBackgroundJobsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchBackgroundJobsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchBackgroundJobsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchBackgroundJobsResponse. */
+                interface ISearchBackgroundJobsResponse {
+
+                    /** SearchBackgroundJobsResponse jobs */
+                    jobs?: (google.cloud.clouddms.v1.IBackgroundJobLogEntry[]|null);
+                }
+
+                /** Represents a SearchBackgroundJobsResponse. */
+                class SearchBackgroundJobsResponse implements ISearchBackgroundJobsResponse {
+
+                    /**
+                     * Constructs a new SearchBackgroundJobsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ISearchBackgroundJobsResponse);
+
+                    /** SearchBackgroundJobsResponse jobs. */
+                    public jobs: google.cloud.clouddms.v1.IBackgroundJobLogEntry[];
+
+                    /**
+                     * Creates a new SearchBackgroundJobsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchBackgroundJobsResponse instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ISearchBackgroundJobsResponse): google.cloud.clouddms.v1.SearchBackgroundJobsResponse;
+
+                    /**
+                     * Encodes the specified SearchBackgroundJobsResponse message. Does not implicitly {@link google.cloud.clouddms.v1.SearchBackgroundJobsResponse.verify|verify} messages.
+                     * @param message SearchBackgroundJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ISearchBackgroundJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchBackgroundJobsResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SearchBackgroundJobsResponse.verify|verify} messages.
+                     * @param message SearchBackgroundJobsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ISearchBackgroundJobsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchBackgroundJobsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchBackgroundJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.SearchBackgroundJobsResponse;
+
+                    /**
+                     * Decodes a SearchBackgroundJobsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchBackgroundJobsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.SearchBackgroundJobsResponse;
+
+                    /**
+                     * Verifies a SearchBackgroundJobsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchBackgroundJobsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchBackgroundJobsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.SearchBackgroundJobsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchBackgroundJobsResponse message. Also converts values to other types if specified.
+                     * @param message SearchBackgroundJobsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.SearchBackgroundJobsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchBackgroundJobsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchBackgroundJobsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DescribeConversionWorkspaceRevisionsRequest. */
+                interface IDescribeConversionWorkspaceRevisionsRequest {
+
+                    /** DescribeConversionWorkspaceRevisionsRequest conversionWorkspace */
+                    conversionWorkspace?: (string|null);
+
+                    /** DescribeConversionWorkspaceRevisionsRequest commitId */
+                    commitId?: (string|null);
+                }
+
+                /** Represents a DescribeConversionWorkspaceRevisionsRequest. */
+                class DescribeConversionWorkspaceRevisionsRequest implements IDescribeConversionWorkspaceRevisionsRequest {
+
+                    /**
+                     * Constructs a new DescribeConversionWorkspaceRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest);
+
+                    /** DescribeConversionWorkspaceRevisionsRequest conversionWorkspace. */
+                    public conversionWorkspace: string;
+
+                    /** DescribeConversionWorkspaceRevisionsRequest commitId. */
+                    public commitId: string;
+
+                    /**
+                     * Creates a new DescribeConversionWorkspaceRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DescribeConversionWorkspaceRevisionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest;
+
+                    /**
+                     * Encodes the specified DescribeConversionWorkspaceRevisionsRequest message. Does not implicitly {@link google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest.verify|verify} messages.
+                     * @param message DescribeConversionWorkspaceRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DescribeConversionWorkspaceRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest.verify|verify} messages.
+                     * @param message DescribeConversionWorkspaceRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DescribeConversionWorkspaceRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DescribeConversionWorkspaceRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest;
+
+                    /**
+                     * Decodes a DescribeConversionWorkspaceRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DescribeConversionWorkspaceRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest;
+
+                    /**
+                     * Verifies a DescribeConversionWorkspaceRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DescribeConversionWorkspaceRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DescribeConversionWorkspaceRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a DescribeConversionWorkspaceRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message DescribeConversionWorkspaceRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DescribeConversionWorkspaceRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DescribeConversionWorkspaceRevisionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DescribeConversionWorkspaceRevisionsResponse. */
+                interface IDescribeConversionWorkspaceRevisionsResponse {
+
+                    /** DescribeConversionWorkspaceRevisionsResponse revisions */
+                    revisions?: (google.cloud.clouddms.v1.IConversionWorkspace[]|null);
+                }
+
+                /** Represents a DescribeConversionWorkspaceRevisionsResponse. */
+                class DescribeConversionWorkspaceRevisionsResponse implements IDescribeConversionWorkspaceRevisionsResponse {
+
+                    /**
+                     * Constructs a new DescribeConversionWorkspaceRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse);
+
+                    /** DescribeConversionWorkspaceRevisionsResponse revisions. */
+                    public revisions: google.cloud.clouddms.v1.IConversionWorkspace[];
+
+                    /**
+                     * Creates a new DescribeConversionWorkspaceRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DescribeConversionWorkspaceRevisionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse;
+
+                    /**
+                     * Encodes the specified DescribeConversionWorkspaceRevisionsResponse message. Does not implicitly {@link google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse.verify|verify} messages.
+                     * @param message DescribeConversionWorkspaceRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DescribeConversionWorkspaceRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse.verify|verify} messages.
+                     * @param message DescribeConversionWorkspaceRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DescribeConversionWorkspaceRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DescribeConversionWorkspaceRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse;
+
+                    /**
+                     * Decodes a DescribeConversionWorkspaceRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DescribeConversionWorkspaceRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse;
+
+                    /**
+                     * Verifies a DescribeConversionWorkspaceRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DescribeConversionWorkspaceRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DescribeConversionWorkspaceRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a DescribeConversionWorkspaceRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message DescribeConversionWorkspaceRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DescribeConversionWorkspaceRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DescribeConversionWorkspaceRevisionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchStaticIpsRequest. */
+                interface IFetchStaticIpsRequest {
+
+                    /** FetchStaticIpsRequest name */
+                    name?: (string|null);
+
+                    /** FetchStaticIpsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchStaticIpsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchStaticIpsRequest. */
+                class FetchStaticIpsRequest implements IFetchStaticIpsRequest {
+
+                    /**
+                     * Constructs a new FetchStaticIpsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IFetchStaticIpsRequest);
+
+                    /** FetchStaticIpsRequest name. */
+                    public name: string;
+
+                    /** FetchStaticIpsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchStaticIpsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchStaticIpsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchStaticIpsRequest instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IFetchStaticIpsRequest): google.cloud.clouddms.v1.FetchStaticIpsRequest;
+
+                    /**
+                     * Encodes the specified FetchStaticIpsRequest message. Does not implicitly {@link google.cloud.clouddms.v1.FetchStaticIpsRequest.verify|verify} messages.
+                     * @param message FetchStaticIpsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IFetchStaticIpsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchStaticIpsRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.FetchStaticIpsRequest.verify|verify} messages.
+                     * @param message FetchStaticIpsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IFetchStaticIpsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchStaticIpsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchStaticIpsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.FetchStaticIpsRequest;
+
+                    /**
+                     * Decodes a FetchStaticIpsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchStaticIpsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.FetchStaticIpsRequest;
+
+                    /**
+                     * Verifies a FetchStaticIpsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchStaticIpsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchStaticIpsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.FetchStaticIpsRequest;
+
+                    /**
+                     * Creates a plain object from a FetchStaticIpsRequest message. Also converts values to other types if specified.
+                     * @param message FetchStaticIpsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.FetchStaticIpsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchStaticIpsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchStaticIpsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchStaticIpsResponse. */
+                interface IFetchStaticIpsResponse {
+
+                    /** FetchStaticIpsResponse staticIps */
+                    staticIps?: (string[]|null);
+
+                    /** FetchStaticIpsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchStaticIpsResponse. */
+                class FetchStaticIpsResponse implements IFetchStaticIpsResponse {
+
+                    /**
+                     * Constructs a new FetchStaticIpsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IFetchStaticIpsResponse);
+
+                    /** FetchStaticIpsResponse staticIps. */
+                    public staticIps: string[];
+
+                    /** FetchStaticIpsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchStaticIpsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchStaticIpsResponse instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IFetchStaticIpsResponse): google.cloud.clouddms.v1.FetchStaticIpsResponse;
+
+                    /**
+                     * Encodes the specified FetchStaticIpsResponse message. Does not implicitly {@link google.cloud.clouddms.v1.FetchStaticIpsResponse.verify|verify} messages.
+                     * @param message FetchStaticIpsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IFetchStaticIpsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchStaticIpsResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.FetchStaticIpsResponse.verify|verify} messages.
+                     * @param message FetchStaticIpsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IFetchStaticIpsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchStaticIpsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchStaticIpsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.FetchStaticIpsResponse;
+
+                    /**
+                     * Decodes a FetchStaticIpsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchStaticIpsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.FetchStaticIpsResponse;
+
+                    /**
+                     * Verifies a FetchStaticIpsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchStaticIpsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchStaticIpsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.FetchStaticIpsResponse;
+
+                    /**
+                     * Creates a plain object from a FetchStaticIpsResponse message. Also converts values to other types if specified.
+                     * @param message FetchStaticIpsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.FetchStaticIpsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchStaticIpsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchStaticIpsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3127,6 +6380,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** NetworkArchitecture enum. */
+                enum NetworkArchitecture {
+                    NETWORK_ARCHITECTURE_UNSPECIFIED = 0,
+                    NETWORK_ARCHITECTURE_OLD_CSQL_PRODUCER = 1,
+                    NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER = 2
+                }
+
                 /** Properties of a PostgreSqlConnectionProfile. */
                 interface IPostgreSqlConnectionProfile {
 
@@ -3150,6 +6410,15 @@ export namespace google {
 
                     /** PostgreSqlConnectionProfile cloudSqlId */
                     cloudSqlId?: (string|null);
+
+                    /** PostgreSqlConnectionProfile networkArchitecture */
+                    networkArchitecture?: (google.cloud.clouddms.v1.NetworkArchitecture|keyof typeof google.cloud.clouddms.v1.NetworkArchitecture|null);
+
+                    /** PostgreSqlConnectionProfile staticIpConnectivity */
+                    staticIpConnectivity?: (google.cloud.clouddms.v1.IStaticIpConnectivity|null);
+
+                    /** PostgreSqlConnectionProfile privateServiceConnectConnectivity */
+                    privateServiceConnectConnectivity?: (google.cloud.clouddms.v1.IPrivateServiceConnectConnectivity|null);
                 }
 
                 /** Represents a PostgreSqlConnectionProfile. */
@@ -3181,6 +6450,18 @@ export namespace google {
 
                     /** PostgreSqlConnectionProfile cloudSqlId. */
                     public cloudSqlId: string;
+
+                    /** PostgreSqlConnectionProfile networkArchitecture. */
+                    public networkArchitecture: (google.cloud.clouddms.v1.NetworkArchitecture|keyof typeof google.cloud.clouddms.v1.NetworkArchitecture);
+
+                    /** PostgreSqlConnectionProfile staticIpConnectivity. */
+                    public staticIpConnectivity?: (google.cloud.clouddms.v1.IStaticIpConnectivity|null);
+
+                    /** PostgreSqlConnectionProfile privateServiceConnectConnectivity. */
+                    public privateServiceConnectConnectivity?: (google.cloud.clouddms.v1.IPrivateServiceConnectConnectivity|null);
+
+                    /** PostgreSqlConnectionProfile connectivity. */
+                    public connectivity?: ("staticIpConnectivity"|"privateServiceConnectConnectivity");
 
                     /**
                      * Creates a new PostgreSqlConnectionProfile instance using the specified properties.
@@ -3260,6 +6541,154 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an OracleConnectionProfile. */
+                interface IOracleConnectionProfile {
+
+                    /** OracleConnectionProfile host */
+                    host?: (string|null);
+
+                    /** OracleConnectionProfile port */
+                    port?: (number|null);
+
+                    /** OracleConnectionProfile username */
+                    username?: (string|null);
+
+                    /** OracleConnectionProfile password */
+                    password?: (string|null);
+
+                    /** OracleConnectionProfile passwordSet */
+                    passwordSet?: (boolean|null);
+
+                    /** OracleConnectionProfile databaseService */
+                    databaseService?: (string|null);
+
+                    /** OracleConnectionProfile staticServiceIpConnectivity */
+                    staticServiceIpConnectivity?: (google.cloud.clouddms.v1.IStaticServiceIpConnectivity|null);
+
+                    /** OracleConnectionProfile forwardSshConnectivity */
+                    forwardSshConnectivity?: (google.cloud.clouddms.v1.IForwardSshTunnelConnectivity|null);
+
+                    /** OracleConnectionProfile privateConnectivity */
+                    privateConnectivity?: (google.cloud.clouddms.v1.IPrivateConnectivity|null);
+                }
+
+                /** Represents an OracleConnectionProfile. */
+                class OracleConnectionProfile implements IOracleConnectionProfile {
+
+                    /**
+                     * Constructs a new OracleConnectionProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IOracleConnectionProfile);
+
+                    /** OracleConnectionProfile host. */
+                    public host: string;
+
+                    /** OracleConnectionProfile port. */
+                    public port: number;
+
+                    /** OracleConnectionProfile username. */
+                    public username: string;
+
+                    /** OracleConnectionProfile password. */
+                    public password: string;
+
+                    /** OracleConnectionProfile passwordSet. */
+                    public passwordSet: boolean;
+
+                    /** OracleConnectionProfile databaseService. */
+                    public databaseService: string;
+
+                    /** OracleConnectionProfile staticServiceIpConnectivity. */
+                    public staticServiceIpConnectivity?: (google.cloud.clouddms.v1.IStaticServiceIpConnectivity|null);
+
+                    /** OracleConnectionProfile forwardSshConnectivity. */
+                    public forwardSshConnectivity?: (google.cloud.clouddms.v1.IForwardSshTunnelConnectivity|null);
+
+                    /** OracleConnectionProfile privateConnectivity. */
+                    public privateConnectivity?: (google.cloud.clouddms.v1.IPrivateConnectivity|null);
+
+                    /** OracleConnectionProfile connectivity. */
+                    public connectivity?: ("staticServiceIpConnectivity"|"forwardSshConnectivity"|"privateConnectivity");
+
+                    /**
+                     * Creates a new OracleConnectionProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OracleConnectionProfile instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IOracleConnectionProfile): google.cloud.clouddms.v1.OracleConnectionProfile;
+
+                    /**
+                     * Encodes the specified OracleConnectionProfile message. Does not implicitly {@link google.cloud.clouddms.v1.OracleConnectionProfile.verify|verify} messages.
+                     * @param message OracleConnectionProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IOracleConnectionProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OracleConnectionProfile message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.OracleConnectionProfile.verify|verify} messages.
+                     * @param message OracleConnectionProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IOracleConnectionProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OracleConnectionProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OracleConnectionProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.OracleConnectionProfile;
+
+                    /**
+                     * Decodes an OracleConnectionProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OracleConnectionProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.OracleConnectionProfile;
+
+                    /**
+                     * Verifies an OracleConnectionProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OracleConnectionProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OracleConnectionProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.OracleConnectionProfile;
+
+                    /**
+                     * Creates a plain object from an OracleConnectionProfile message. Also converts values to other types if specified.
+                     * @param message OracleConnectionProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.OracleConnectionProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OracleConnectionProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OracleConnectionProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CloudSqlConnectionProfile. */
                 interface ICloudSqlConnectionProfile {
 
@@ -3274,6 +6703,9 @@ export namespace google {
 
                     /** CloudSqlConnectionProfile publicIp */
                     publicIp?: (string|null);
+
+                    /** CloudSqlConnectionProfile additionalPublicIp */
+                    additionalPublicIp?: (string|null);
                 }
 
                 /** Represents a CloudSqlConnectionProfile. */
@@ -3296,6 +6728,9 @@ export namespace google {
 
                     /** CloudSqlConnectionProfile publicIp. */
                     public publicIp: string;
+
+                    /** CloudSqlConnectionProfile additionalPublicIp. */
+                    public additionalPublicIp: string;
 
                     /**
                      * Creates a new CloudSqlConnectionProfile instance using the specified properties.
@@ -3369,6 +6804,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CloudSqlConnectionProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlloyDbConnectionProfile. */
+                interface IAlloyDbConnectionProfile {
+
+                    /** AlloyDbConnectionProfile clusterId */
+                    clusterId?: (string|null);
+
+                    /** AlloyDbConnectionProfile settings */
+                    settings?: (google.cloud.clouddms.v1.IAlloyDbSettings|null);
+                }
+
+                /** Represents an AlloyDbConnectionProfile. */
+                class AlloyDbConnectionProfile implements IAlloyDbConnectionProfile {
+
+                    /**
+                     * Constructs a new AlloyDbConnectionProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IAlloyDbConnectionProfile);
+
+                    /** AlloyDbConnectionProfile clusterId. */
+                    public clusterId: string;
+
+                    /** AlloyDbConnectionProfile settings. */
+                    public settings?: (google.cloud.clouddms.v1.IAlloyDbSettings|null);
+
+                    /**
+                     * Creates a new AlloyDbConnectionProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlloyDbConnectionProfile instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IAlloyDbConnectionProfile): google.cloud.clouddms.v1.AlloyDbConnectionProfile;
+
+                    /**
+                     * Encodes the specified AlloyDbConnectionProfile message. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbConnectionProfile.verify|verify} messages.
+                     * @param message AlloyDbConnectionProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IAlloyDbConnectionProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlloyDbConnectionProfile message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbConnectionProfile.verify|verify} messages.
+                     * @param message AlloyDbConnectionProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IAlloyDbConnectionProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlloyDbConnectionProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlloyDbConnectionProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.AlloyDbConnectionProfile;
+
+                    /**
+                     * Decodes an AlloyDbConnectionProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlloyDbConnectionProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.AlloyDbConnectionProfile;
+
+                    /**
+                     * Verifies an AlloyDbConnectionProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlloyDbConnectionProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlloyDbConnectionProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.AlloyDbConnectionProfile;
+
+                    /**
+                     * Creates a plain object from an AlloyDbConnectionProfile message. Also converts values to other types if specified.
+                     * @param message AlloyDbConnectionProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.AlloyDbConnectionProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlloyDbConnectionProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlloyDbConnectionProfile
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3502,6 +7040,9 @@ export namespace google {
                     /** SqlIpConfig privateNetwork */
                     privateNetwork?: (string|null);
 
+                    /** SqlIpConfig allocatedIpRange */
+                    allocatedIpRange?: (string|null);
+
                     /** SqlIpConfig requireSsl */
                     requireSsl?: (google.protobuf.IBoolValue|null);
 
@@ -3523,6 +7064,9 @@ export namespace google {
 
                     /** SqlIpConfig privateNetwork. */
                     public privateNetwork: string;
+
+                    /** SqlIpConfig allocatedIpRange. */
+                    public allocatedIpRange: string;
 
                     /** SqlIpConfig requireSsl. */
                     public requireSsl?: (google.protobuf.IBoolValue|null);
@@ -3644,6 +7188,9 @@ export namespace google {
                     /** CloudSqlSettings zone */
                     zone?: (string|null);
 
+                    /** CloudSqlSettings secondaryZone */
+                    secondaryZone?: (string|null);
+
                     /** CloudSqlSettings sourceId */
                     sourceId?: (string|null);
 
@@ -3655,6 +7202,12 @@ export namespace google {
 
                     /** CloudSqlSettings collation */
                     collation?: (string|null);
+
+                    /** CloudSqlSettings cmekKeyName */
+                    cmekKeyName?: (string|null);
+
+                    /** CloudSqlSettings availabilityType */
+                    availabilityType?: (google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType|keyof typeof google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType|null);
                 }
 
                 /** Represents a CloudSqlSettings. */
@@ -3699,6 +7252,9 @@ export namespace google {
                     /** CloudSqlSettings zone. */
                     public zone: string;
 
+                    /** CloudSqlSettings secondaryZone. */
+                    public secondaryZone: string;
+
                     /** CloudSqlSettings sourceId. */
                     public sourceId: string;
 
@@ -3710,6 +7266,12 @@ export namespace google {
 
                     /** CloudSqlSettings collation. */
                     public collation: string;
+
+                    /** CloudSqlSettings cmekKeyName. */
+                    public cmekKeyName: string;
+
+                    /** CloudSqlSettings availabilityType. */
+                    public availabilityType: (google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType|keyof typeof google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType);
 
                     /**
                      * Creates a new CloudSqlSettings instance using the specified properties.
@@ -3815,7 +7377,566 @@ export namespace google {
                         POSTGRES_10 = 5,
                         MYSQL_8_0 = 6,
                         POSTGRES_12 = 7,
-                        POSTGRES_13 = 8
+                        POSTGRES_13 = 8,
+                        POSTGRES_14 = 17
+                    }
+
+                    /** SqlAvailabilityType enum. */
+                    enum SqlAvailabilityType {
+                        SQL_AVAILABILITY_TYPE_UNSPECIFIED = 0,
+                        ZONAL = 1,
+                        REGIONAL = 2
+                    }
+                }
+
+                /** Properties of an AlloyDbSettings. */
+                interface IAlloyDbSettings {
+
+                    /** AlloyDbSettings initialUser */
+                    initialUser?: (google.cloud.clouddms.v1.AlloyDbSettings.IUserPassword|null);
+
+                    /** AlloyDbSettings vpcNetwork */
+                    vpcNetwork?: (string|null);
+
+                    /** AlloyDbSettings labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AlloyDbSettings primaryInstanceSettings */
+                    primaryInstanceSettings?: (google.cloud.clouddms.v1.AlloyDbSettings.IPrimaryInstanceSettings|null);
+
+                    /** AlloyDbSettings encryptionConfig */
+                    encryptionConfig?: (google.cloud.clouddms.v1.AlloyDbSettings.IEncryptionConfig|null);
+                }
+
+                /** Represents an AlloyDbSettings. */
+                class AlloyDbSettings implements IAlloyDbSettings {
+
+                    /**
+                     * Constructs a new AlloyDbSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IAlloyDbSettings);
+
+                    /** AlloyDbSettings initialUser. */
+                    public initialUser?: (google.cloud.clouddms.v1.AlloyDbSettings.IUserPassword|null);
+
+                    /** AlloyDbSettings vpcNetwork. */
+                    public vpcNetwork: string;
+
+                    /** AlloyDbSettings labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AlloyDbSettings primaryInstanceSettings. */
+                    public primaryInstanceSettings?: (google.cloud.clouddms.v1.AlloyDbSettings.IPrimaryInstanceSettings|null);
+
+                    /** AlloyDbSettings encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.clouddms.v1.AlloyDbSettings.IEncryptionConfig|null);
+
+                    /**
+                     * Creates a new AlloyDbSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlloyDbSettings instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IAlloyDbSettings): google.cloud.clouddms.v1.AlloyDbSettings;
+
+                    /**
+                     * Encodes the specified AlloyDbSettings message. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.verify|verify} messages.
+                     * @param message AlloyDbSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IAlloyDbSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlloyDbSettings message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.verify|verify} messages.
+                     * @param message AlloyDbSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IAlloyDbSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlloyDbSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlloyDbSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.AlloyDbSettings;
+
+                    /**
+                     * Decodes an AlloyDbSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlloyDbSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.AlloyDbSettings;
+
+                    /**
+                     * Verifies an AlloyDbSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlloyDbSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlloyDbSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.AlloyDbSettings;
+
+                    /**
+                     * Creates a plain object from an AlloyDbSettings message. Also converts values to other types if specified.
+                     * @param message AlloyDbSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.AlloyDbSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlloyDbSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlloyDbSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AlloyDbSettings {
+
+                    /** Properties of a UserPassword. */
+                    interface IUserPassword {
+
+                        /** UserPassword user */
+                        user?: (string|null);
+
+                        /** UserPassword password */
+                        password?: (string|null);
+
+                        /** UserPassword passwordSet */
+                        passwordSet?: (boolean|null);
+                    }
+
+                    /** Represents a UserPassword. */
+                    class UserPassword implements IUserPassword {
+
+                        /**
+                         * Constructs a new UserPassword.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.AlloyDbSettings.IUserPassword);
+
+                        /** UserPassword user. */
+                        public user: string;
+
+                        /** UserPassword password. */
+                        public password: string;
+
+                        /** UserPassword passwordSet. */
+                        public passwordSet: boolean;
+
+                        /**
+                         * Creates a new UserPassword instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserPassword instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.AlloyDbSettings.IUserPassword): google.cloud.clouddms.v1.AlloyDbSettings.UserPassword;
+
+                        /**
+                         * Encodes the specified UserPassword message. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.UserPassword.verify|verify} messages.
+                         * @param message UserPassword message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.AlloyDbSettings.IUserPassword, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserPassword message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.UserPassword.verify|verify} messages.
+                         * @param message UserPassword message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.AlloyDbSettings.IUserPassword, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserPassword message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserPassword
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.AlloyDbSettings.UserPassword;
+
+                        /**
+                         * Decodes a UserPassword message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserPassword
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.AlloyDbSettings.UserPassword;
+
+                        /**
+                         * Verifies a UserPassword message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserPassword message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserPassword
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.AlloyDbSettings.UserPassword;
+
+                        /**
+                         * Creates a plain object from a UserPassword message. Also converts values to other types if specified.
+                         * @param message UserPassword
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.AlloyDbSettings.UserPassword, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserPassword to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserPassword
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PrimaryInstanceSettings. */
+                    interface IPrimaryInstanceSettings {
+
+                        /** PrimaryInstanceSettings id */
+                        id?: (string|null);
+
+                        /** PrimaryInstanceSettings machineConfig */
+                        machineConfig?: (google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.IMachineConfig|null);
+
+                        /** PrimaryInstanceSettings databaseFlags */
+                        databaseFlags?: ({ [k: string]: string }|null);
+
+                        /** PrimaryInstanceSettings labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** PrimaryInstanceSettings privateIp */
+                        privateIp?: (string|null);
+                    }
+
+                    /** Represents a PrimaryInstanceSettings. */
+                    class PrimaryInstanceSettings implements IPrimaryInstanceSettings {
+
+                        /**
+                         * Constructs a new PrimaryInstanceSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.AlloyDbSettings.IPrimaryInstanceSettings);
+
+                        /** PrimaryInstanceSettings id. */
+                        public id: string;
+
+                        /** PrimaryInstanceSettings machineConfig. */
+                        public machineConfig?: (google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.IMachineConfig|null);
+
+                        /** PrimaryInstanceSettings databaseFlags. */
+                        public databaseFlags: { [k: string]: string };
+
+                        /** PrimaryInstanceSettings labels. */
+                        public labels: { [k: string]: string };
+
+                        /** PrimaryInstanceSettings privateIp. */
+                        public privateIp: string;
+
+                        /**
+                         * Creates a new PrimaryInstanceSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrimaryInstanceSettings instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.AlloyDbSettings.IPrimaryInstanceSettings): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings;
+
+                        /**
+                         * Encodes the specified PrimaryInstanceSettings message. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.verify|verify} messages.
+                         * @param message PrimaryInstanceSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.AlloyDbSettings.IPrimaryInstanceSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrimaryInstanceSettings message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.verify|verify} messages.
+                         * @param message PrimaryInstanceSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.AlloyDbSettings.IPrimaryInstanceSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrimaryInstanceSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrimaryInstanceSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings;
+
+                        /**
+                         * Decodes a PrimaryInstanceSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrimaryInstanceSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings;
+
+                        /**
+                         * Verifies a PrimaryInstanceSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrimaryInstanceSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrimaryInstanceSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings;
+
+                        /**
+                         * Creates a plain object from a PrimaryInstanceSettings message. Also converts values to other types if specified.
+                         * @param message PrimaryInstanceSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrimaryInstanceSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrimaryInstanceSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PrimaryInstanceSettings {
+
+                        /** Properties of a MachineConfig. */
+                        interface IMachineConfig {
+
+                            /** MachineConfig cpuCount */
+                            cpuCount?: (number|null);
+                        }
+
+                        /** Represents a MachineConfig. */
+                        class MachineConfig implements IMachineConfig {
+
+                            /**
+                             * Constructs a new MachineConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.IMachineConfig);
+
+                            /** MachineConfig cpuCount. */
+                            public cpuCount: number;
+
+                            /**
+                             * Creates a new MachineConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MachineConfig instance
+                             */
+                            public static create(properties?: google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.IMachineConfig): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig;
+
+                            /**
+                             * Encodes the specified MachineConfig message. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig.verify|verify} messages.
+                             * @param message MachineConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.IMachineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MachineConfig message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig.verify|verify} messages.
+                             * @param message MachineConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.IMachineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MachineConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MachineConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig;
+
+                            /**
+                             * Decodes a MachineConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MachineConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig;
+
+                            /**
+                             * Verifies a MachineConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MachineConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MachineConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig;
+
+                            /**
+                             * Creates a plain object from a MachineConfig message. Also converts values to other types if specified.
+                             * @param message MachineConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MachineConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MachineConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an EncryptionConfig. */
+                    interface IEncryptionConfig {
+
+                        /** EncryptionConfig kmsKeyName */
+                        kmsKeyName?: (string|null);
+                    }
+
+                    /** Represents an EncryptionConfig. */
+                    class EncryptionConfig implements IEncryptionConfig {
+
+                        /**
+                         * Constructs a new EncryptionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.AlloyDbSettings.IEncryptionConfig);
+
+                        /** EncryptionConfig kmsKeyName. */
+                        public kmsKeyName: string;
+
+                        /**
+                         * Creates a new EncryptionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EncryptionConfig instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.AlloyDbSettings.IEncryptionConfig): google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig;
+
+                        /**
+                         * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig.verify|verify} messages.
+                         * @param message EncryptionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.AlloyDbSettings.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig.verify|verify} messages.
+                         * @param message EncryptionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.AlloyDbSettings.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EncryptionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EncryptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig;
+
+                        /**
+                         * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EncryptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig;
+
+                        /**
+                         * Verifies an EncryptionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EncryptionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig;
+
+                        /**
+                         * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                         * @param message EncryptionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EncryptionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EncryptionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -3904,6 +8025,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for StaticIpConnectivity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PrivateServiceConnectConnectivity. */
+                interface IPrivateServiceConnectConnectivity {
+
+                    /** PrivateServiceConnectConnectivity serviceAttachment */
+                    serviceAttachment?: (string|null);
+                }
+
+                /** Represents a PrivateServiceConnectConnectivity. */
+                class PrivateServiceConnectConnectivity implements IPrivateServiceConnectConnectivity {
+
+                    /**
+                     * Constructs a new PrivateServiceConnectConnectivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IPrivateServiceConnectConnectivity);
+
+                    /** PrivateServiceConnectConnectivity serviceAttachment. */
+                    public serviceAttachment: string;
+
+                    /**
+                     * Creates a new PrivateServiceConnectConnectivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateServiceConnectConnectivity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IPrivateServiceConnectConnectivity): google.cloud.clouddms.v1.PrivateServiceConnectConnectivity;
+
+                    /**
+                     * Encodes the specified PrivateServiceConnectConnectivity message. Does not implicitly {@link google.cloud.clouddms.v1.PrivateServiceConnectConnectivity.verify|verify} messages.
+                     * @param message PrivateServiceConnectConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IPrivateServiceConnectConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateServiceConnectConnectivity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.PrivateServiceConnectConnectivity.verify|verify} messages.
+                     * @param message PrivateServiceConnectConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IPrivateServiceConnectConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateServiceConnectConnectivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateServiceConnectConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.PrivateServiceConnectConnectivity;
+
+                    /**
+                     * Decodes a PrivateServiceConnectConnectivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateServiceConnectConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.PrivateServiceConnectConnectivity;
+
+                    /**
+                     * Verifies a PrivateServiceConnectConnectivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateServiceConnectConnectivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateServiceConnectConnectivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.PrivateServiceConnectConnectivity;
+
+                    /**
+                     * Creates a plain object from a PrivateServiceConnectConnectivity message. Also converts values to other types if specified.
+                     * @param message PrivateServiceConnectConnectivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.PrivateServiceConnectConnectivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateServiceConnectConnectivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateServiceConnectConnectivity
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4122,6 +8340,318 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ForwardSshTunnelConnectivity. */
+                interface IForwardSshTunnelConnectivity {
+
+                    /** ForwardSshTunnelConnectivity hostname */
+                    hostname?: (string|null);
+
+                    /** ForwardSshTunnelConnectivity username */
+                    username?: (string|null);
+
+                    /** ForwardSshTunnelConnectivity port */
+                    port?: (number|null);
+
+                    /** ForwardSshTunnelConnectivity password */
+                    password?: (string|null);
+
+                    /** ForwardSshTunnelConnectivity privateKey */
+                    privateKey?: (string|null);
+                }
+
+                /** Represents a ForwardSshTunnelConnectivity. */
+                class ForwardSshTunnelConnectivity implements IForwardSshTunnelConnectivity {
+
+                    /**
+                     * Constructs a new ForwardSshTunnelConnectivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IForwardSshTunnelConnectivity);
+
+                    /** ForwardSshTunnelConnectivity hostname. */
+                    public hostname: string;
+
+                    /** ForwardSshTunnelConnectivity username. */
+                    public username: string;
+
+                    /** ForwardSshTunnelConnectivity port. */
+                    public port: number;
+
+                    /** ForwardSshTunnelConnectivity password. */
+                    public password?: (string|null);
+
+                    /** ForwardSshTunnelConnectivity privateKey. */
+                    public privateKey?: (string|null);
+
+                    /** ForwardSshTunnelConnectivity authenticationMethod. */
+                    public authenticationMethod?: ("password"|"privateKey");
+
+                    /**
+                     * Creates a new ForwardSshTunnelConnectivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ForwardSshTunnelConnectivity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IForwardSshTunnelConnectivity): google.cloud.clouddms.v1.ForwardSshTunnelConnectivity;
+
+                    /**
+                     * Encodes the specified ForwardSshTunnelConnectivity message. Does not implicitly {@link google.cloud.clouddms.v1.ForwardSshTunnelConnectivity.verify|verify} messages.
+                     * @param message ForwardSshTunnelConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IForwardSshTunnelConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ForwardSshTunnelConnectivity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ForwardSshTunnelConnectivity.verify|verify} messages.
+                     * @param message ForwardSshTunnelConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IForwardSshTunnelConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ForwardSshTunnelConnectivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ForwardSshTunnelConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ForwardSshTunnelConnectivity;
+
+                    /**
+                     * Decodes a ForwardSshTunnelConnectivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ForwardSshTunnelConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ForwardSshTunnelConnectivity;
+
+                    /**
+                     * Verifies a ForwardSshTunnelConnectivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ForwardSshTunnelConnectivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ForwardSshTunnelConnectivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ForwardSshTunnelConnectivity;
+
+                    /**
+                     * Creates a plain object from a ForwardSshTunnelConnectivity message. Also converts values to other types if specified.
+                     * @param message ForwardSshTunnelConnectivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ForwardSshTunnelConnectivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ForwardSshTunnelConnectivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ForwardSshTunnelConnectivity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StaticServiceIpConnectivity. */
+                interface IStaticServiceIpConnectivity {
+                }
+
+                /** Represents a StaticServiceIpConnectivity. */
+                class StaticServiceIpConnectivity implements IStaticServiceIpConnectivity {
+
+                    /**
+                     * Constructs a new StaticServiceIpConnectivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IStaticServiceIpConnectivity);
+
+                    /**
+                     * Creates a new StaticServiceIpConnectivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StaticServiceIpConnectivity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IStaticServiceIpConnectivity): google.cloud.clouddms.v1.StaticServiceIpConnectivity;
+
+                    /**
+                     * Encodes the specified StaticServiceIpConnectivity message. Does not implicitly {@link google.cloud.clouddms.v1.StaticServiceIpConnectivity.verify|verify} messages.
+                     * @param message StaticServiceIpConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IStaticServiceIpConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StaticServiceIpConnectivity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.StaticServiceIpConnectivity.verify|verify} messages.
+                     * @param message StaticServiceIpConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IStaticServiceIpConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StaticServiceIpConnectivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StaticServiceIpConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.StaticServiceIpConnectivity;
+
+                    /**
+                     * Decodes a StaticServiceIpConnectivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StaticServiceIpConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.StaticServiceIpConnectivity;
+
+                    /**
+                     * Verifies a StaticServiceIpConnectivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StaticServiceIpConnectivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StaticServiceIpConnectivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.StaticServiceIpConnectivity;
+
+                    /**
+                     * Creates a plain object from a StaticServiceIpConnectivity message. Also converts values to other types if specified.
+                     * @param message StaticServiceIpConnectivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.StaticServiceIpConnectivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StaticServiceIpConnectivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StaticServiceIpConnectivity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PrivateConnectivity. */
+                interface IPrivateConnectivity {
+
+                    /** PrivateConnectivity privateConnection */
+                    privateConnection?: (string|null);
+                }
+
+                /** Represents a PrivateConnectivity. */
+                class PrivateConnectivity implements IPrivateConnectivity {
+
+                    /**
+                     * Constructs a new PrivateConnectivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IPrivateConnectivity);
+
+                    /** PrivateConnectivity privateConnection. */
+                    public privateConnection: string;
+
+                    /**
+                     * Creates a new PrivateConnectivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateConnectivity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IPrivateConnectivity): google.cloud.clouddms.v1.PrivateConnectivity;
+
+                    /**
+                     * Encodes the specified PrivateConnectivity message. Does not implicitly {@link google.cloud.clouddms.v1.PrivateConnectivity.verify|verify} messages.
+                     * @param message PrivateConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IPrivateConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateConnectivity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.PrivateConnectivity.verify|verify} messages.
+                     * @param message PrivateConnectivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IPrivateConnectivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateConnectivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.PrivateConnectivity;
+
+                    /**
+                     * Decodes a PrivateConnectivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateConnectivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.PrivateConnectivity;
+
+                    /**
+                     * Verifies a PrivateConnectivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateConnectivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateConnectivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.PrivateConnectivity;
+
+                    /**
+                     * Creates a plain object from a PrivateConnectivity message. Also converts values to other types if specified.
+                     * @param message PrivateConnectivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.PrivateConnectivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateConnectivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateConnectivity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DatabaseType. */
                 interface IDatabaseType {
 
@@ -4255,6 +8785,9 @@ export namespace google {
                     /** MigrationJob dumpPath */
                     dumpPath?: (string|null);
 
+                    /** MigrationJob dumpFlags */
+                    dumpFlags?: (google.cloud.clouddms.v1.MigrationJob.IDumpFlags|null);
+
                     /** MigrationJob source */
                     source?: (string|null);
 
@@ -4284,6 +8817,15 @@ export namespace google {
 
                     /** MigrationJob endTime */
                     endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MigrationJob conversionWorkspace */
+                    conversionWorkspace?: (google.cloud.clouddms.v1.IConversionWorkspaceInfo|null);
+
+                    /** MigrationJob filter */
+                    filter?: (string|null);
+
+                    /** MigrationJob cmekKeyName */
+                    cmekKeyName?: (string|null);
                 }
 
                 /** Represents a MigrationJob. */
@@ -4322,6 +8864,9 @@ export namespace google {
                     /** MigrationJob dumpPath. */
                     public dumpPath: string;
 
+                    /** MigrationJob dumpFlags. */
+                    public dumpFlags?: (google.cloud.clouddms.v1.MigrationJob.IDumpFlags|null);
+
                     /** MigrationJob source. */
                     public source: string;
 
@@ -4351,6 +8896,15 @@ export namespace google {
 
                     /** MigrationJob endTime. */
                     public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MigrationJob conversionWorkspace. */
+                    public conversionWorkspace?: (google.cloud.clouddms.v1.IConversionWorkspaceInfo|null);
+
+                    /** MigrationJob filter. */
+                    public filter: string;
+
+                    /** MigrationJob cmekKeyName. */
+                    public cmekKeyName: string;
 
                     /** MigrationJob connectivity. */
                     public connectivity?: ("reverseSshConnectivity"|"vpcPeeringConnectivity"|"staticIpConnectivity");
@@ -4471,6 +9025,309 @@ export namespace google {
                         ONE_TIME = 1,
                         CONTINUOUS = 2
                     }
+
+                    /** Properties of a DumpFlag. */
+                    interface IDumpFlag {
+
+                        /** DumpFlag name */
+                        name?: (string|null);
+
+                        /** DumpFlag value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a DumpFlag. */
+                    class DumpFlag implements IDumpFlag {
+
+                        /**
+                         * Constructs a new DumpFlag.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.MigrationJob.IDumpFlag);
+
+                        /** DumpFlag name. */
+                        public name: string;
+
+                        /** DumpFlag value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new DumpFlag instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DumpFlag instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.MigrationJob.IDumpFlag): google.cloud.clouddms.v1.MigrationJob.DumpFlag;
+
+                        /**
+                         * Encodes the specified DumpFlag message. Does not implicitly {@link google.cloud.clouddms.v1.MigrationJob.DumpFlag.verify|verify} messages.
+                         * @param message DumpFlag message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.MigrationJob.IDumpFlag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DumpFlag message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MigrationJob.DumpFlag.verify|verify} messages.
+                         * @param message DumpFlag message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.MigrationJob.IDumpFlag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DumpFlag message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DumpFlag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.MigrationJob.DumpFlag;
+
+                        /**
+                         * Decodes a DumpFlag message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DumpFlag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.MigrationJob.DumpFlag;
+
+                        /**
+                         * Verifies a DumpFlag message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DumpFlag message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DumpFlag
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.MigrationJob.DumpFlag;
+
+                        /**
+                         * Creates a plain object from a DumpFlag message. Also converts values to other types if specified.
+                         * @param message DumpFlag
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.MigrationJob.DumpFlag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DumpFlag to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DumpFlag
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DumpFlags. */
+                    interface IDumpFlags {
+
+                        /** DumpFlags dumpFlags */
+                        dumpFlags?: (google.cloud.clouddms.v1.MigrationJob.IDumpFlag[]|null);
+                    }
+
+                    /** Represents a DumpFlags. */
+                    class DumpFlags implements IDumpFlags {
+
+                        /**
+                         * Constructs a new DumpFlags.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.MigrationJob.IDumpFlags);
+
+                        /** DumpFlags dumpFlags. */
+                        public dumpFlags: google.cloud.clouddms.v1.MigrationJob.IDumpFlag[];
+
+                        /**
+                         * Creates a new DumpFlags instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DumpFlags instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.MigrationJob.IDumpFlags): google.cloud.clouddms.v1.MigrationJob.DumpFlags;
+
+                        /**
+                         * Encodes the specified DumpFlags message. Does not implicitly {@link google.cloud.clouddms.v1.MigrationJob.DumpFlags.verify|verify} messages.
+                         * @param message DumpFlags message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.MigrationJob.IDumpFlags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DumpFlags message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MigrationJob.DumpFlags.verify|verify} messages.
+                         * @param message DumpFlags message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.MigrationJob.IDumpFlags, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DumpFlags message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DumpFlags
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.MigrationJob.DumpFlags;
+
+                        /**
+                         * Decodes a DumpFlags message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DumpFlags
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.MigrationJob.DumpFlags;
+
+                        /**
+                         * Verifies a DumpFlags message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DumpFlags message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DumpFlags
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.MigrationJob.DumpFlags;
+
+                        /**
+                         * Creates a plain object from a DumpFlags message. Also converts values to other types if specified.
+                         * @param message DumpFlags
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.MigrationJob.DumpFlags, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DumpFlags to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DumpFlags
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ConversionWorkspaceInfo. */
+                interface IConversionWorkspaceInfo {
+
+                    /** ConversionWorkspaceInfo name */
+                    name?: (string|null);
+
+                    /** ConversionWorkspaceInfo commitId */
+                    commitId?: (string|null);
+                }
+
+                /** Represents a ConversionWorkspaceInfo. */
+                class ConversionWorkspaceInfo implements IConversionWorkspaceInfo {
+
+                    /**
+                     * Constructs a new ConversionWorkspaceInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IConversionWorkspaceInfo);
+
+                    /** ConversionWorkspaceInfo name. */
+                    public name: string;
+
+                    /** ConversionWorkspaceInfo commitId. */
+                    public commitId: string;
+
+                    /**
+                     * Creates a new ConversionWorkspaceInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversionWorkspaceInfo instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IConversionWorkspaceInfo): google.cloud.clouddms.v1.ConversionWorkspaceInfo;
+
+                    /**
+                     * Encodes the specified ConversionWorkspaceInfo message. Does not implicitly {@link google.cloud.clouddms.v1.ConversionWorkspaceInfo.verify|verify} messages.
+                     * @param message ConversionWorkspaceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IConversionWorkspaceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversionWorkspaceInfo message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ConversionWorkspaceInfo.verify|verify} messages.
+                     * @param message ConversionWorkspaceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IConversionWorkspaceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversionWorkspaceInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversionWorkspaceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ConversionWorkspaceInfo;
+
+                    /**
+                     * Decodes a ConversionWorkspaceInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversionWorkspaceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ConversionWorkspaceInfo;
+
+                    /**
+                     * Verifies a ConversionWorkspaceInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversionWorkspaceInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversionWorkspaceInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ConversionWorkspaceInfo;
+
+                    /**
+                     * Creates a plain object from a ConversionWorkspaceInfo message. Also converts values to other types if specified.
+                     * @param message ConversionWorkspaceInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ConversionWorkspaceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversionWorkspaceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversionWorkspaceInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ConnectionProfile. */
@@ -4500,8 +9357,14 @@ export namespace google {
                     /** ConnectionProfile postgresql */
                     postgresql?: (google.cloud.clouddms.v1.IPostgreSqlConnectionProfile|null);
 
+                    /** ConnectionProfile oracle */
+                    oracle?: (google.cloud.clouddms.v1.IOracleConnectionProfile|null);
+
                     /** ConnectionProfile cloudsql */
                     cloudsql?: (google.cloud.clouddms.v1.ICloudSqlConnectionProfile|null);
+
+                    /** ConnectionProfile alloydb */
+                    alloydb?: (google.cloud.clouddms.v1.IAlloyDbConnectionProfile|null);
 
                     /** ConnectionProfile error */
                     error?: (google.rpc.IStatus|null);
@@ -4543,8 +9406,14 @@ export namespace google {
                     /** ConnectionProfile postgresql. */
                     public postgresql?: (google.cloud.clouddms.v1.IPostgreSqlConnectionProfile|null);
 
+                    /** ConnectionProfile oracle. */
+                    public oracle?: (google.cloud.clouddms.v1.IOracleConnectionProfile|null);
+
                     /** ConnectionProfile cloudsql. */
                     public cloudsql?: (google.cloud.clouddms.v1.ICloudSqlConnectionProfile|null);
+
+                    /** ConnectionProfile alloydb. */
+                    public alloydb?: (google.cloud.clouddms.v1.IAlloyDbConnectionProfile|null);
 
                     /** ConnectionProfile error. */
                     public error?: (google.rpc.IStatus|null);
@@ -4553,7 +9422,7 @@ export namespace google {
                     public provider: (google.cloud.clouddms.v1.DatabaseProvider|keyof typeof google.cloud.clouddms.v1.DatabaseProvider);
 
                     /** ConnectionProfile connectionProfile. */
-                    public connectionProfile?: ("mysql"|"postgresql"|"cloudsql");
+                    public connectionProfile?: ("mysql"|"postgresql"|"oracle"|"cloudsql"|"alloydb");
 
                     /**
                      * Creates a new ConnectionProfile instance using the specified properties.
@@ -4780,7 +9649,12 @@ export namespace google {
                         UNSUPPORTED_GTID_MODE = 17,
                         UNSUPPORTED_TABLE_DEFINITION = 18,
                         UNSUPPORTED_DEFINER = 19,
-                        CANT_RESTART_RUNNING_MIGRATION = 21
+                        CANT_RESTART_RUNNING_MIGRATION = 21,
+                        TABLES_WITH_LIMITED_SUPPORT = 24,
+                        UNSUPPORTED_DATABASE_LOCALE = 25,
+                        UNSUPPORTED_DATABASE_FDW_CONFIG = 26,
+                        ERROR_RDBMS = 27,
+                        SOURCE_SIZE_EXCEEDS_THRESHOLD = 28
                     }
                 }
 
@@ -4788,14 +9662,3013 @@ export namespace google {
                 enum DatabaseEngine {
                     DATABASE_ENGINE_UNSPECIFIED = 0,
                     MYSQL = 1,
-                    POSTGRESQL = 2
+                    POSTGRESQL = 2,
+                    ORACLE = 4
                 }
 
                 /** DatabaseProvider enum. */
                 enum DatabaseProvider {
                     DATABASE_PROVIDER_UNSPECIFIED = 0,
                     CLOUDSQL = 1,
-                    RDS = 2
+                    RDS = 2,
+                    AURORA = 3,
+                    ALLOYDB = 4
+                }
+
+                /** Properties of a PrivateConnection. */
+                interface IPrivateConnection {
+
+                    /** PrivateConnection name */
+                    name?: (string|null);
+
+                    /** PrivateConnection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** PrivateConnection displayName */
+                    displayName?: (string|null);
+
+                    /** PrivateConnection state */
+                    state?: (google.cloud.clouddms.v1.PrivateConnection.State|keyof typeof google.cloud.clouddms.v1.PrivateConnection.State|null);
+
+                    /** PrivateConnection error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** PrivateConnection vpcPeeringConfig */
+                    vpcPeeringConfig?: (google.cloud.clouddms.v1.IVpcPeeringConfig|null);
+                }
+
+                /** Represents a PrivateConnection. */
+                class PrivateConnection implements IPrivateConnection {
+
+                    /**
+                     * Constructs a new PrivateConnection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IPrivateConnection);
+
+                    /** PrivateConnection name. */
+                    public name: string;
+
+                    /** PrivateConnection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateConnection labels. */
+                    public labels: { [k: string]: string };
+
+                    /** PrivateConnection displayName. */
+                    public displayName: string;
+
+                    /** PrivateConnection state. */
+                    public state: (google.cloud.clouddms.v1.PrivateConnection.State|keyof typeof google.cloud.clouddms.v1.PrivateConnection.State);
+
+                    /** PrivateConnection error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** PrivateConnection vpcPeeringConfig. */
+                    public vpcPeeringConfig?: (google.cloud.clouddms.v1.IVpcPeeringConfig|null);
+
+                    /** PrivateConnection connectivity. */
+                    public connectivity?: "vpcPeeringConfig";
+
+                    /**
+                     * Creates a new PrivateConnection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateConnection instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IPrivateConnection): google.cloud.clouddms.v1.PrivateConnection;
+
+                    /**
+                     * Encodes the specified PrivateConnection message. Does not implicitly {@link google.cloud.clouddms.v1.PrivateConnection.verify|verify} messages.
+                     * @param message PrivateConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IPrivateConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateConnection message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.PrivateConnection.verify|verify} messages.
+                     * @param message PrivateConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IPrivateConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateConnection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.PrivateConnection;
+
+                    /**
+                     * Decodes a PrivateConnection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.PrivateConnection;
+
+                    /**
+                     * Verifies a PrivateConnection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateConnection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateConnection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.PrivateConnection;
+
+                    /**
+                     * Creates a plain object from a PrivateConnection message. Also converts values to other types if specified.
+                     * @param message PrivateConnection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.PrivateConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateConnection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateConnection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PrivateConnection {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        CREATED = 2,
+                        FAILED = 3,
+                        DELETING = 4,
+                        FAILED_TO_DELETE = 5,
+                        DELETED = 6
+                    }
+                }
+
+                /** Properties of a VpcPeeringConfig. */
+                interface IVpcPeeringConfig {
+
+                    /** VpcPeeringConfig vpcName */
+                    vpcName?: (string|null);
+
+                    /** VpcPeeringConfig subnet */
+                    subnet?: (string|null);
+                }
+
+                /** Represents a VpcPeeringConfig. */
+                class VpcPeeringConfig implements IVpcPeeringConfig {
+
+                    /**
+                     * Constructs a new VpcPeeringConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IVpcPeeringConfig);
+
+                    /** VpcPeeringConfig vpcName. */
+                    public vpcName: string;
+
+                    /** VpcPeeringConfig subnet. */
+                    public subnet: string;
+
+                    /**
+                     * Creates a new VpcPeeringConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VpcPeeringConfig instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IVpcPeeringConfig): google.cloud.clouddms.v1.VpcPeeringConfig;
+
+                    /**
+                     * Encodes the specified VpcPeeringConfig message. Does not implicitly {@link google.cloud.clouddms.v1.VpcPeeringConfig.verify|verify} messages.
+                     * @param message VpcPeeringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IVpcPeeringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VpcPeeringConfig message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.VpcPeeringConfig.verify|verify} messages.
+                     * @param message VpcPeeringConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IVpcPeeringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VpcPeeringConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VpcPeeringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.VpcPeeringConfig;
+
+                    /**
+                     * Decodes a VpcPeeringConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VpcPeeringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.VpcPeeringConfig;
+
+                    /**
+                     * Verifies a VpcPeeringConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VpcPeeringConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VpcPeeringConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.VpcPeeringConfig;
+
+                    /**
+                     * Creates a plain object from a VpcPeeringConfig message. Also converts values to other types if specified.
+                     * @param message VpcPeeringConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.VpcPeeringConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VpcPeeringConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VpcPeeringConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatabaseEngineInfo. */
+                interface IDatabaseEngineInfo {
+
+                    /** DatabaseEngineInfo engine */
+                    engine?: (google.cloud.clouddms.v1.DatabaseEngine|keyof typeof google.cloud.clouddms.v1.DatabaseEngine|null);
+
+                    /** DatabaseEngineInfo version */
+                    version?: (string|null);
+                }
+
+                /** Represents a DatabaseEngineInfo. */
+                class DatabaseEngineInfo implements IDatabaseEngineInfo {
+
+                    /**
+                     * Constructs a new DatabaseEngineInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDatabaseEngineInfo);
+
+                    /** DatabaseEngineInfo engine. */
+                    public engine: (google.cloud.clouddms.v1.DatabaseEngine|keyof typeof google.cloud.clouddms.v1.DatabaseEngine);
+
+                    /** DatabaseEngineInfo version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new DatabaseEngineInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseEngineInfo instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDatabaseEngineInfo): google.cloud.clouddms.v1.DatabaseEngineInfo;
+
+                    /**
+                     * Encodes the specified DatabaseEngineInfo message. Does not implicitly {@link google.cloud.clouddms.v1.DatabaseEngineInfo.verify|verify} messages.
+                     * @param message DatabaseEngineInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDatabaseEngineInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseEngineInfo message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DatabaseEngineInfo.verify|verify} messages.
+                     * @param message DatabaseEngineInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDatabaseEngineInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseEngineInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseEngineInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DatabaseEngineInfo;
+
+                    /**
+                     * Decodes a DatabaseEngineInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseEngineInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DatabaseEngineInfo;
+
+                    /**
+                     * Verifies a DatabaseEngineInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseEngineInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseEngineInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DatabaseEngineInfo;
+
+                    /**
+                     * Creates a plain object from a DatabaseEngineInfo message. Also converts values to other types if specified.
+                     * @param message DatabaseEngineInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DatabaseEngineInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseEngineInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseEngineInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversionWorkspace. */
+                interface IConversionWorkspace {
+
+                    /** ConversionWorkspace name */
+                    name?: (string|null);
+
+                    /** ConversionWorkspace source */
+                    source?: (google.cloud.clouddms.v1.IDatabaseEngineInfo|null);
+
+                    /** ConversionWorkspace destination */
+                    destination?: (google.cloud.clouddms.v1.IDatabaseEngineInfo|null);
+
+                    /** ConversionWorkspace globalSettings */
+                    globalSettings?: ({ [k: string]: string }|null);
+
+                    /** ConversionWorkspace hasUncommittedChanges */
+                    hasUncommittedChanges?: (boolean|null);
+
+                    /** ConversionWorkspace latestCommitId */
+                    latestCommitId?: (string|null);
+
+                    /** ConversionWorkspace latestCommitTime */
+                    latestCommitTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversionWorkspace createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversionWorkspace updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversionWorkspace displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a ConversionWorkspace. */
+                class ConversionWorkspace implements IConversionWorkspace {
+
+                    /**
+                     * Constructs a new ConversionWorkspace.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IConversionWorkspace);
+
+                    /** ConversionWorkspace name. */
+                    public name: string;
+
+                    /** ConversionWorkspace source. */
+                    public source?: (google.cloud.clouddms.v1.IDatabaseEngineInfo|null);
+
+                    /** ConversionWorkspace destination. */
+                    public destination?: (google.cloud.clouddms.v1.IDatabaseEngineInfo|null);
+
+                    /** ConversionWorkspace globalSettings. */
+                    public globalSettings: { [k: string]: string };
+
+                    /** ConversionWorkspace hasUncommittedChanges. */
+                    public hasUncommittedChanges: boolean;
+
+                    /** ConversionWorkspace latestCommitId. */
+                    public latestCommitId: string;
+
+                    /** ConversionWorkspace latestCommitTime. */
+                    public latestCommitTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversionWorkspace createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversionWorkspace updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversionWorkspace displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new ConversionWorkspace instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversionWorkspace instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IConversionWorkspace): google.cloud.clouddms.v1.ConversionWorkspace;
+
+                    /**
+                     * Encodes the specified ConversionWorkspace message. Does not implicitly {@link google.cloud.clouddms.v1.ConversionWorkspace.verify|verify} messages.
+                     * @param message ConversionWorkspace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IConversionWorkspace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversionWorkspace message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ConversionWorkspace.verify|verify} messages.
+                     * @param message ConversionWorkspace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IConversionWorkspace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversionWorkspace message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversionWorkspace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ConversionWorkspace;
+
+                    /**
+                     * Decodes a ConversionWorkspace message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversionWorkspace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ConversionWorkspace;
+
+                    /**
+                     * Verifies a ConversionWorkspace message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversionWorkspace message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversionWorkspace
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ConversionWorkspace;
+
+                    /**
+                     * Creates a plain object from a ConversionWorkspace message. Also converts values to other types if specified.
+                     * @param message ConversionWorkspace
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ConversionWorkspace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversionWorkspace to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversionWorkspace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BackgroundJobLogEntry. */
+                interface IBackgroundJobLogEntry {
+
+                    /** BackgroundJobLogEntry id */
+                    id?: (string|null);
+
+                    /** BackgroundJobLogEntry jobType */
+                    jobType?: (google.cloud.clouddms.v1.BackgroundJobType|keyof typeof google.cloud.clouddms.v1.BackgroundJobType|null);
+
+                    /** BackgroundJobLogEntry startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackgroundJobLogEntry finishTime */
+                    finishTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackgroundJobLogEntry completionState */
+                    completionState?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.JobCompletionState|keyof typeof google.cloud.clouddms.v1.BackgroundJobLogEntry.JobCompletionState|null);
+
+                    /** BackgroundJobLogEntry completionComment */
+                    completionComment?: (string|null);
+
+                    /** BackgroundJobLogEntry requestAutocommit */
+                    requestAutocommit?: (boolean|null);
+
+                    /** BackgroundJobLogEntry seedJobDetails */
+                    seedJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.ISeedJobDetails|null);
+
+                    /** BackgroundJobLogEntry importRulesJobDetails */
+                    importRulesJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.IImportRulesJobDetails|null);
+
+                    /** BackgroundJobLogEntry convertJobDetails */
+                    convertJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.IConvertJobDetails|null);
+
+                    /** BackgroundJobLogEntry applyJobDetails */
+                    applyJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.IApplyJobDetails|null);
+                }
+
+                /** Represents a BackgroundJobLogEntry. */
+                class BackgroundJobLogEntry implements IBackgroundJobLogEntry {
+
+                    /**
+                     * Constructs a new BackgroundJobLogEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IBackgroundJobLogEntry);
+
+                    /** BackgroundJobLogEntry id. */
+                    public id: string;
+
+                    /** BackgroundJobLogEntry jobType. */
+                    public jobType: (google.cloud.clouddms.v1.BackgroundJobType|keyof typeof google.cloud.clouddms.v1.BackgroundJobType);
+
+                    /** BackgroundJobLogEntry startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackgroundJobLogEntry finishTime. */
+                    public finishTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackgroundJobLogEntry completionState. */
+                    public completionState: (google.cloud.clouddms.v1.BackgroundJobLogEntry.JobCompletionState|keyof typeof google.cloud.clouddms.v1.BackgroundJobLogEntry.JobCompletionState);
+
+                    /** BackgroundJobLogEntry completionComment. */
+                    public completionComment: string;
+
+                    /** BackgroundJobLogEntry requestAutocommit. */
+                    public requestAutocommit: boolean;
+
+                    /** BackgroundJobLogEntry seedJobDetails. */
+                    public seedJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.ISeedJobDetails|null);
+
+                    /** BackgroundJobLogEntry importRulesJobDetails. */
+                    public importRulesJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.IImportRulesJobDetails|null);
+
+                    /** BackgroundJobLogEntry convertJobDetails. */
+                    public convertJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.IConvertJobDetails|null);
+
+                    /** BackgroundJobLogEntry applyJobDetails. */
+                    public applyJobDetails?: (google.cloud.clouddms.v1.BackgroundJobLogEntry.IApplyJobDetails|null);
+
+                    /** BackgroundJobLogEntry jobDetails. */
+                    public jobDetails?: ("seedJobDetails"|"importRulesJobDetails"|"convertJobDetails"|"applyJobDetails");
+
+                    /**
+                     * Creates a new BackgroundJobLogEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackgroundJobLogEntry instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IBackgroundJobLogEntry): google.cloud.clouddms.v1.BackgroundJobLogEntry;
+
+                    /**
+                     * Encodes the specified BackgroundJobLogEntry message. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.verify|verify} messages.
+                     * @param message BackgroundJobLogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IBackgroundJobLogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackgroundJobLogEntry message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.verify|verify} messages.
+                     * @param message BackgroundJobLogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IBackgroundJobLogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackgroundJobLogEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackgroundJobLogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.BackgroundJobLogEntry;
+
+                    /**
+                     * Decodes a BackgroundJobLogEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackgroundJobLogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.BackgroundJobLogEntry;
+
+                    /**
+                     * Verifies a BackgroundJobLogEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackgroundJobLogEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackgroundJobLogEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.BackgroundJobLogEntry;
+
+                    /**
+                     * Creates a plain object from a BackgroundJobLogEntry message. Also converts values to other types if specified.
+                     * @param message BackgroundJobLogEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.BackgroundJobLogEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackgroundJobLogEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackgroundJobLogEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BackgroundJobLogEntry {
+
+                    /** JobCompletionState enum. */
+                    enum JobCompletionState {
+                        JOB_COMPLETION_STATE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2
+                    }
+
+                    /** Properties of a SeedJobDetails. */
+                    interface ISeedJobDetails {
+
+                        /** SeedJobDetails connectionProfile */
+                        connectionProfile?: (string|null);
+                    }
+
+                    /** Represents a SeedJobDetails. */
+                    class SeedJobDetails implements ISeedJobDetails {
+
+                        /**
+                         * Constructs a new SeedJobDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.ISeedJobDetails);
+
+                        /** SeedJobDetails connectionProfile. */
+                        public connectionProfile: string;
+
+                        /**
+                         * Creates a new SeedJobDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SeedJobDetails instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.ISeedJobDetails): google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails;
+
+                        /**
+                         * Encodes the specified SeedJobDetails message. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails.verify|verify} messages.
+                         * @param message SeedJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.ISeedJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SeedJobDetails message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails.verify|verify} messages.
+                         * @param message SeedJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.ISeedJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SeedJobDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SeedJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails;
+
+                        /**
+                         * Decodes a SeedJobDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SeedJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails;
+
+                        /**
+                         * Verifies a SeedJobDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SeedJobDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SeedJobDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails;
+
+                        /**
+                         * Creates a plain object from a SeedJobDetails message. Also converts values to other types if specified.
+                         * @param message SeedJobDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SeedJobDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SeedJobDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ImportRulesJobDetails. */
+                    interface IImportRulesJobDetails {
+
+                        /** ImportRulesJobDetails files */
+                        files?: (string[]|null);
+
+                        /** ImportRulesJobDetails fileFormat */
+                        fileFormat?: (google.cloud.clouddms.v1.ImportRulesFileFormat|keyof typeof google.cloud.clouddms.v1.ImportRulesFileFormat|null);
+                    }
+
+                    /** Represents an ImportRulesJobDetails. */
+                    class ImportRulesJobDetails implements IImportRulesJobDetails {
+
+                        /**
+                         * Constructs a new ImportRulesJobDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.IImportRulesJobDetails);
+
+                        /** ImportRulesJobDetails files. */
+                        public files: string[];
+
+                        /** ImportRulesJobDetails fileFormat. */
+                        public fileFormat: (google.cloud.clouddms.v1.ImportRulesFileFormat|keyof typeof google.cloud.clouddms.v1.ImportRulesFileFormat);
+
+                        /**
+                         * Creates a new ImportRulesJobDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportRulesJobDetails instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.IImportRulesJobDetails): google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails;
+
+                        /**
+                         * Encodes the specified ImportRulesJobDetails message. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails.verify|verify} messages.
+                         * @param message ImportRulesJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.IImportRulesJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportRulesJobDetails message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails.verify|verify} messages.
+                         * @param message ImportRulesJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.IImportRulesJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportRulesJobDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportRulesJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails;
+
+                        /**
+                         * Decodes an ImportRulesJobDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportRulesJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails;
+
+                        /**
+                         * Verifies an ImportRulesJobDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportRulesJobDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportRulesJobDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails;
+
+                        /**
+                         * Creates a plain object from an ImportRulesJobDetails message. Also converts values to other types if specified.
+                         * @param message ImportRulesJobDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportRulesJobDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImportRulesJobDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConvertJobDetails. */
+                    interface IConvertJobDetails {
+
+                        /** ConvertJobDetails filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a ConvertJobDetails. */
+                    class ConvertJobDetails implements IConvertJobDetails {
+
+                        /**
+                         * Constructs a new ConvertJobDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.IConvertJobDetails);
+
+                        /** ConvertJobDetails filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new ConvertJobDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConvertJobDetails instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.IConvertJobDetails): google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails;
+
+                        /**
+                         * Encodes the specified ConvertJobDetails message. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails.verify|verify} messages.
+                         * @param message ConvertJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.IConvertJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConvertJobDetails message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails.verify|verify} messages.
+                         * @param message ConvertJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.IConvertJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConvertJobDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConvertJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails;
+
+                        /**
+                         * Decodes a ConvertJobDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConvertJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails;
+
+                        /**
+                         * Verifies a ConvertJobDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConvertJobDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConvertJobDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails;
+
+                        /**
+                         * Creates a plain object from a ConvertJobDetails message. Also converts values to other types if specified.
+                         * @param message ConvertJobDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConvertJobDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConvertJobDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ApplyJobDetails. */
+                    interface IApplyJobDetails {
+
+                        /** ApplyJobDetails connectionProfile */
+                        connectionProfile?: (string|null);
+
+                        /** ApplyJobDetails filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents an ApplyJobDetails. */
+                    class ApplyJobDetails implements IApplyJobDetails {
+
+                        /**
+                         * Constructs a new ApplyJobDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.IApplyJobDetails);
+
+                        /** ApplyJobDetails connectionProfile. */
+                        public connectionProfile: string;
+
+                        /** ApplyJobDetails filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new ApplyJobDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ApplyJobDetails instance
+                         */
+                        public static create(properties?: google.cloud.clouddms.v1.BackgroundJobLogEntry.IApplyJobDetails): google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails;
+
+                        /**
+                         * Encodes the specified ApplyJobDetails message. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails.verify|verify} messages.
+                         * @param message ApplyJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.IApplyJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ApplyJobDetails message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails.verify|verify} messages.
+                         * @param message ApplyJobDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.IApplyJobDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ApplyJobDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ApplyJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails;
+
+                        /**
+                         * Decodes an ApplyJobDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ApplyJobDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails;
+
+                        /**
+                         * Verifies an ApplyJobDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ApplyJobDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ApplyJobDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails;
+
+                        /**
+                         * Creates a plain object from an ApplyJobDetails message. Also converts values to other types if specified.
+                         * @param message ApplyJobDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ApplyJobDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ApplyJobDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a DatabaseEntity. */
+                interface IDatabaseEntity {
+
+                    /** DatabaseEntity shortName */
+                    shortName?: (string|null);
+
+                    /** DatabaseEntity parentEntity */
+                    parentEntity?: (string|null);
+
+                    /** DatabaseEntity tree */
+                    tree?: (google.cloud.clouddms.v1.DatabaseEntity.TreeType|keyof typeof google.cloud.clouddms.v1.DatabaseEntity.TreeType|null);
+
+                    /** DatabaseEntity entityType */
+                    entityType?: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType|null);
+
+                    /** DatabaseEntity mappings */
+                    mappings?: (google.cloud.clouddms.v1.IEntityMapping[]|null);
+
+                    /** DatabaseEntity schema */
+                    schema?: (google.cloud.clouddms.v1.ISchemaEntity|null);
+
+                    /** DatabaseEntity table */
+                    table?: (google.cloud.clouddms.v1.ITableEntity|null);
+
+                    /** DatabaseEntity view */
+                    view?: (google.cloud.clouddms.v1.IViewEntity|null);
+
+                    /** DatabaseEntity sequence */
+                    sequence?: (google.cloud.clouddms.v1.ISequenceEntity|null);
+
+                    /** DatabaseEntity storedProcedure */
+                    storedProcedure?: (google.cloud.clouddms.v1.IStoredProcedureEntity|null);
+
+                    /** DatabaseEntity databaseFunction */
+                    databaseFunction?: (google.cloud.clouddms.v1.IFunctionEntity|null);
+
+                    /** DatabaseEntity synonym */
+                    synonym?: (google.cloud.clouddms.v1.ISynonymEntity|null);
+
+                    /** DatabaseEntity databasePackage */
+                    databasePackage?: (google.cloud.clouddms.v1.IPackageEntity|null);
+                }
+
+                /** Represents a DatabaseEntity. */
+                class DatabaseEntity implements IDatabaseEntity {
+
+                    /**
+                     * Constructs a new DatabaseEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IDatabaseEntity);
+
+                    /** DatabaseEntity shortName. */
+                    public shortName: string;
+
+                    /** DatabaseEntity parentEntity. */
+                    public parentEntity: string;
+
+                    /** DatabaseEntity tree. */
+                    public tree: (google.cloud.clouddms.v1.DatabaseEntity.TreeType|keyof typeof google.cloud.clouddms.v1.DatabaseEntity.TreeType);
+
+                    /** DatabaseEntity entityType. */
+                    public entityType: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType);
+
+                    /** DatabaseEntity mappings. */
+                    public mappings: google.cloud.clouddms.v1.IEntityMapping[];
+
+                    /** DatabaseEntity schema. */
+                    public schema?: (google.cloud.clouddms.v1.ISchemaEntity|null);
+
+                    /** DatabaseEntity table. */
+                    public table?: (google.cloud.clouddms.v1.ITableEntity|null);
+
+                    /** DatabaseEntity view. */
+                    public view?: (google.cloud.clouddms.v1.IViewEntity|null);
+
+                    /** DatabaseEntity sequence. */
+                    public sequence?: (google.cloud.clouddms.v1.ISequenceEntity|null);
+
+                    /** DatabaseEntity storedProcedure. */
+                    public storedProcedure?: (google.cloud.clouddms.v1.IStoredProcedureEntity|null);
+
+                    /** DatabaseEntity databaseFunction. */
+                    public databaseFunction?: (google.cloud.clouddms.v1.IFunctionEntity|null);
+
+                    /** DatabaseEntity synonym. */
+                    public synonym?: (google.cloud.clouddms.v1.ISynonymEntity|null);
+
+                    /** DatabaseEntity databasePackage. */
+                    public databasePackage?: (google.cloud.clouddms.v1.IPackageEntity|null);
+
+                    /** DatabaseEntity entityBody. */
+                    public entityBody?: ("schema"|"table"|"view"|"sequence"|"storedProcedure"|"databaseFunction"|"synonym"|"databasePackage");
+
+                    /**
+                     * Creates a new DatabaseEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IDatabaseEntity): google.cloud.clouddms.v1.DatabaseEntity;
+
+                    /**
+                     * Encodes the specified DatabaseEntity message. Does not implicitly {@link google.cloud.clouddms.v1.DatabaseEntity.verify|verify} messages.
+                     * @param message DatabaseEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IDatabaseEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DatabaseEntity.verify|verify} messages.
+                     * @param message DatabaseEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IDatabaseEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.DatabaseEntity;
+
+                    /**
+                     * Decodes a DatabaseEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.DatabaseEntity;
+
+                    /**
+                     * Verifies a DatabaseEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.DatabaseEntity;
+
+                    /**
+                     * Creates a plain object from a DatabaseEntity message. Also converts values to other types if specified.
+                     * @param message DatabaseEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.DatabaseEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DatabaseEntity {
+
+                    /** TreeType enum. */
+                    enum TreeType {
+                        TREE_TYPE_UNSPECIFIED = 0,
+                        SOURCE = 1,
+                        DRAFT = 2,
+                        DESTINATION = 3
+                    }
+                }
+
+                /** Properties of a SchemaEntity. */
+                interface ISchemaEntity {
+
+                    /** SchemaEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a SchemaEntity. */
+                class SchemaEntity implements ISchemaEntity {
+
+                    /**
+                     * Constructs a new SchemaEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ISchemaEntity);
+
+                    /** SchemaEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new SchemaEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SchemaEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ISchemaEntity): google.cloud.clouddms.v1.SchemaEntity;
+
+                    /**
+                     * Encodes the specified SchemaEntity message. Does not implicitly {@link google.cloud.clouddms.v1.SchemaEntity.verify|verify} messages.
+                     * @param message SchemaEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ISchemaEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SchemaEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SchemaEntity.verify|verify} messages.
+                     * @param message SchemaEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ISchemaEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SchemaEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SchemaEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.SchemaEntity;
+
+                    /**
+                     * Decodes a SchemaEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SchemaEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.SchemaEntity;
+
+                    /**
+                     * Verifies a SchemaEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SchemaEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SchemaEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.SchemaEntity;
+
+                    /**
+                     * Creates a plain object from a SchemaEntity message. Also converts values to other types if specified.
+                     * @param message SchemaEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.SchemaEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SchemaEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SchemaEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TableEntity. */
+                interface ITableEntity {
+
+                    /** TableEntity columns */
+                    columns?: (google.cloud.clouddms.v1.IColumnEntity[]|null);
+
+                    /** TableEntity constraints */
+                    constraints?: (google.cloud.clouddms.v1.IConstraintEntity[]|null);
+
+                    /** TableEntity indices */
+                    indices?: (google.cloud.clouddms.v1.IIndexEntity[]|null);
+
+                    /** TableEntity triggers */
+                    triggers?: (google.cloud.clouddms.v1.ITriggerEntity[]|null);
+
+                    /** TableEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** TableEntity comment */
+                    comment?: (string|null);
+                }
+
+                /** Represents a TableEntity. */
+                class TableEntity implements ITableEntity {
+
+                    /**
+                     * Constructs a new TableEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ITableEntity);
+
+                    /** TableEntity columns. */
+                    public columns: google.cloud.clouddms.v1.IColumnEntity[];
+
+                    /** TableEntity constraints. */
+                    public constraints: google.cloud.clouddms.v1.IConstraintEntity[];
+
+                    /** TableEntity indices. */
+                    public indices: google.cloud.clouddms.v1.IIndexEntity[];
+
+                    /** TableEntity triggers. */
+                    public triggers: google.cloud.clouddms.v1.ITriggerEntity[];
+
+                    /** TableEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** TableEntity comment. */
+                    public comment: string;
+
+                    /**
+                     * Creates a new TableEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ITableEntity): google.cloud.clouddms.v1.TableEntity;
+
+                    /**
+                     * Encodes the specified TableEntity message. Does not implicitly {@link google.cloud.clouddms.v1.TableEntity.verify|verify} messages.
+                     * @param message TableEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ITableEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.TableEntity.verify|verify} messages.
+                     * @param message TableEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ITableEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.TableEntity;
+
+                    /**
+                     * Decodes a TableEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.TableEntity;
+
+                    /**
+                     * Verifies a TableEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.TableEntity;
+
+                    /**
+                     * Creates a plain object from a TableEntity message. Also converts values to other types if specified.
+                     * @param message TableEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.TableEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TableEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ColumnEntity. */
+                interface IColumnEntity {
+
+                    /** ColumnEntity name */
+                    name?: (string|null);
+
+                    /** ColumnEntity dataType */
+                    dataType?: (string|null);
+
+                    /** ColumnEntity charset */
+                    charset?: (string|null);
+
+                    /** ColumnEntity collation */
+                    collation?: (string|null);
+
+                    /** ColumnEntity length */
+                    length?: (number|Long|string|null);
+
+                    /** ColumnEntity precision */
+                    precision?: (number|null);
+
+                    /** ColumnEntity scale */
+                    scale?: (number|null);
+
+                    /** ColumnEntity fractionalSecondsPrecision */
+                    fractionalSecondsPrecision?: (number|null);
+
+                    /** ColumnEntity array */
+                    array?: (boolean|null);
+
+                    /** ColumnEntity arrayLength */
+                    arrayLength?: (number|null);
+
+                    /** ColumnEntity nullable */
+                    nullable?: (boolean|null);
+
+                    /** ColumnEntity autoGenerated */
+                    autoGenerated?: (boolean|null);
+
+                    /** ColumnEntity udt */
+                    udt?: (boolean|null);
+
+                    /** ColumnEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** ColumnEntity setValues */
+                    setValues?: (string[]|null);
+
+                    /** ColumnEntity comment */
+                    comment?: (string|null);
+
+                    /** ColumnEntity ordinalPosition */
+                    ordinalPosition?: (number|null);
+
+                    /** ColumnEntity defaultValue */
+                    defaultValue?: (string|null);
+                }
+
+                /** Represents a ColumnEntity. */
+                class ColumnEntity implements IColumnEntity {
+
+                    /**
+                     * Constructs a new ColumnEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IColumnEntity);
+
+                    /** ColumnEntity name. */
+                    public name: string;
+
+                    /** ColumnEntity dataType. */
+                    public dataType: string;
+
+                    /** ColumnEntity charset. */
+                    public charset: string;
+
+                    /** ColumnEntity collation. */
+                    public collation: string;
+
+                    /** ColumnEntity length. */
+                    public length: (number|Long|string);
+
+                    /** ColumnEntity precision. */
+                    public precision: number;
+
+                    /** ColumnEntity scale. */
+                    public scale: number;
+
+                    /** ColumnEntity fractionalSecondsPrecision. */
+                    public fractionalSecondsPrecision: number;
+
+                    /** ColumnEntity array. */
+                    public array: boolean;
+
+                    /** ColumnEntity arrayLength. */
+                    public arrayLength: number;
+
+                    /** ColumnEntity nullable. */
+                    public nullable: boolean;
+
+                    /** ColumnEntity autoGenerated. */
+                    public autoGenerated: boolean;
+
+                    /** ColumnEntity udt. */
+                    public udt: boolean;
+
+                    /** ColumnEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** ColumnEntity setValues. */
+                    public setValues: string[];
+
+                    /** ColumnEntity comment. */
+                    public comment: string;
+
+                    /** ColumnEntity ordinalPosition. */
+                    public ordinalPosition: number;
+
+                    /** ColumnEntity defaultValue. */
+                    public defaultValue: string;
+
+                    /**
+                     * Creates a new ColumnEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IColumnEntity): google.cloud.clouddms.v1.ColumnEntity;
+
+                    /**
+                     * Encodes the specified ColumnEntity message. Does not implicitly {@link google.cloud.clouddms.v1.ColumnEntity.verify|verify} messages.
+                     * @param message ColumnEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IColumnEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ColumnEntity.verify|verify} messages.
+                     * @param message ColumnEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IColumnEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ColumnEntity;
+
+                    /**
+                     * Decodes a ColumnEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ColumnEntity;
+
+                    /**
+                     * Verifies a ColumnEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ColumnEntity;
+
+                    /**
+                     * Creates a plain object from a ColumnEntity message. Also converts values to other types if specified.
+                     * @param message ColumnEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ColumnEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColumnEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConstraintEntity. */
+                interface IConstraintEntity {
+
+                    /** ConstraintEntity name */
+                    name?: (string|null);
+
+                    /** ConstraintEntity type */
+                    type?: (string|null);
+
+                    /** ConstraintEntity tableColumns */
+                    tableColumns?: (string[]|null);
+
+                    /** ConstraintEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** ConstraintEntity referenceColumns */
+                    referenceColumns?: (string[]|null);
+
+                    /** ConstraintEntity referenceTable */
+                    referenceTable?: (string|null);
+
+                    /** ConstraintEntity tableName */
+                    tableName?: (string|null);
+                }
+
+                /** Represents a ConstraintEntity. */
+                class ConstraintEntity implements IConstraintEntity {
+
+                    /**
+                     * Constructs a new ConstraintEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IConstraintEntity);
+
+                    /** ConstraintEntity name. */
+                    public name: string;
+
+                    /** ConstraintEntity type. */
+                    public type: string;
+
+                    /** ConstraintEntity tableColumns. */
+                    public tableColumns: string[];
+
+                    /** ConstraintEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** ConstraintEntity referenceColumns. */
+                    public referenceColumns: string[];
+
+                    /** ConstraintEntity referenceTable. */
+                    public referenceTable: string;
+
+                    /** ConstraintEntity tableName. */
+                    public tableName: string;
+
+                    /**
+                     * Creates a new ConstraintEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConstraintEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IConstraintEntity): google.cloud.clouddms.v1.ConstraintEntity;
+
+                    /**
+                     * Encodes the specified ConstraintEntity message. Does not implicitly {@link google.cloud.clouddms.v1.ConstraintEntity.verify|verify} messages.
+                     * @param message ConstraintEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IConstraintEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConstraintEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ConstraintEntity.verify|verify} messages.
+                     * @param message ConstraintEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IConstraintEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConstraintEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConstraintEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ConstraintEntity;
+
+                    /**
+                     * Decodes a ConstraintEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConstraintEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ConstraintEntity;
+
+                    /**
+                     * Verifies a ConstraintEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConstraintEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConstraintEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ConstraintEntity;
+
+                    /**
+                     * Creates a plain object from a ConstraintEntity message. Also converts values to other types if specified.
+                     * @param message ConstraintEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ConstraintEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConstraintEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConstraintEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IndexEntity. */
+                interface IIndexEntity {
+
+                    /** IndexEntity name */
+                    name?: (string|null);
+
+                    /** IndexEntity type */
+                    type?: (string|null);
+
+                    /** IndexEntity tableColumns */
+                    tableColumns?: (string[]|null);
+
+                    /** IndexEntity unique */
+                    unique?: (boolean|null);
+
+                    /** IndexEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents an IndexEntity. */
+                class IndexEntity implements IIndexEntity {
+
+                    /**
+                     * Constructs a new IndexEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IIndexEntity);
+
+                    /** IndexEntity name. */
+                    public name: string;
+
+                    /** IndexEntity type. */
+                    public type: string;
+
+                    /** IndexEntity tableColumns. */
+                    public tableColumns: string[];
+
+                    /** IndexEntity unique. */
+                    public unique: boolean;
+
+                    /** IndexEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new IndexEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IndexEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IIndexEntity): google.cloud.clouddms.v1.IndexEntity;
+
+                    /**
+                     * Encodes the specified IndexEntity message. Does not implicitly {@link google.cloud.clouddms.v1.IndexEntity.verify|verify} messages.
+                     * @param message IndexEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IIndexEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IndexEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.IndexEntity.verify|verify} messages.
+                     * @param message IndexEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IIndexEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IndexEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IndexEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.IndexEntity;
+
+                    /**
+                     * Decodes an IndexEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IndexEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.IndexEntity;
+
+                    /**
+                     * Verifies an IndexEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IndexEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IndexEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.IndexEntity;
+
+                    /**
+                     * Creates a plain object from an IndexEntity message. Also converts values to other types if specified.
+                     * @param message IndexEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.IndexEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IndexEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IndexEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TriggerEntity. */
+                interface ITriggerEntity {
+
+                    /** TriggerEntity name */
+                    name?: (string|null);
+
+                    /** TriggerEntity triggeringEvents */
+                    triggeringEvents?: (string[]|null);
+
+                    /** TriggerEntity triggerType */
+                    triggerType?: (string|null);
+
+                    /** TriggerEntity sqlCode */
+                    sqlCode?: (string|null);
+
+                    /** TriggerEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a TriggerEntity. */
+                class TriggerEntity implements ITriggerEntity {
+
+                    /**
+                     * Constructs a new TriggerEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ITriggerEntity);
+
+                    /** TriggerEntity name. */
+                    public name: string;
+
+                    /** TriggerEntity triggeringEvents. */
+                    public triggeringEvents: string[];
+
+                    /** TriggerEntity triggerType. */
+                    public triggerType: string;
+
+                    /** TriggerEntity sqlCode. */
+                    public sqlCode: string;
+
+                    /** TriggerEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new TriggerEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TriggerEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ITriggerEntity): google.cloud.clouddms.v1.TriggerEntity;
+
+                    /**
+                     * Encodes the specified TriggerEntity message. Does not implicitly {@link google.cloud.clouddms.v1.TriggerEntity.verify|verify} messages.
+                     * @param message TriggerEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ITriggerEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TriggerEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.TriggerEntity.verify|verify} messages.
+                     * @param message TriggerEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ITriggerEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TriggerEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TriggerEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.TriggerEntity;
+
+                    /**
+                     * Decodes a TriggerEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TriggerEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.TriggerEntity;
+
+                    /**
+                     * Verifies a TriggerEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TriggerEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TriggerEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.TriggerEntity;
+
+                    /**
+                     * Creates a plain object from a TriggerEntity message. Also converts values to other types if specified.
+                     * @param message TriggerEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.TriggerEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TriggerEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TriggerEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ViewEntity. */
+                interface IViewEntity {
+
+                    /** ViewEntity sqlCode */
+                    sqlCode?: (string|null);
+
+                    /** ViewEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** ViewEntity constraints */
+                    constraints?: (google.cloud.clouddms.v1.IConstraintEntity[]|null);
+                }
+
+                /** Represents a ViewEntity. */
+                class ViewEntity implements IViewEntity {
+
+                    /**
+                     * Constructs a new ViewEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IViewEntity);
+
+                    /** ViewEntity sqlCode. */
+                    public sqlCode: string;
+
+                    /** ViewEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /** ViewEntity constraints. */
+                    public constraints: google.cloud.clouddms.v1.IConstraintEntity[];
+
+                    /**
+                     * Creates a new ViewEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ViewEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IViewEntity): google.cloud.clouddms.v1.ViewEntity;
+
+                    /**
+                     * Encodes the specified ViewEntity message. Does not implicitly {@link google.cloud.clouddms.v1.ViewEntity.verify|verify} messages.
+                     * @param message ViewEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IViewEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ViewEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ViewEntity.verify|verify} messages.
+                     * @param message ViewEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IViewEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ViewEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ViewEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.ViewEntity;
+
+                    /**
+                     * Decodes a ViewEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ViewEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.ViewEntity;
+
+                    /**
+                     * Verifies a ViewEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ViewEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ViewEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.ViewEntity;
+
+                    /**
+                     * Creates a plain object from a ViewEntity message. Also converts values to other types if specified.
+                     * @param message ViewEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.ViewEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ViewEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ViewEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SequenceEntity. */
+                interface ISequenceEntity {
+
+                    /** SequenceEntity increment */
+                    increment?: (number|Long|string|null);
+
+                    /** SequenceEntity startValue */
+                    startValue?: (Uint8Array|string|null);
+
+                    /** SequenceEntity maxValue */
+                    maxValue?: (Uint8Array|string|null);
+
+                    /** SequenceEntity minValue */
+                    minValue?: (Uint8Array|string|null);
+
+                    /** SequenceEntity cycle */
+                    cycle?: (boolean|null);
+
+                    /** SequenceEntity cache */
+                    cache?: (number|Long|string|null);
+
+                    /** SequenceEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a SequenceEntity. */
+                class SequenceEntity implements ISequenceEntity {
+
+                    /**
+                     * Constructs a new SequenceEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ISequenceEntity);
+
+                    /** SequenceEntity increment. */
+                    public increment: (number|Long|string);
+
+                    /** SequenceEntity startValue. */
+                    public startValue: (Uint8Array|string);
+
+                    /** SequenceEntity maxValue. */
+                    public maxValue: (Uint8Array|string);
+
+                    /** SequenceEntity minValue. */
+                    public minValue: (Uint8Array|string);
+
+                    /** SequenceEntity cycle. */
+                    public cycle: boolean;
+
+                    /** SequenceEntity cache. */
+                    public cache: (number|Long|string);
+
+                    /** SequenceEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new SequenceEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SequenceEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ISequenceEntity): google.cloud.clouddms.v1.SequenceEntity;
+
+                    /**
+                     * Encodes the specified SequenceEntity message. Does not implicitly {@link google.cloud.clouddms.v1.SequenceEntity.verify|verify} messages.
+                     * @param message SequenceEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ISequenceEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SequenceEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SequenceEntity.verify|verify} messages.
+                     * @param message SequenceEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ISequenceEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SequenceEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SequenceEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.SequenceEntity;
+
+                    /**
+                     * Decodes a SequenceEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SequenceEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.SequenceEntity;
+
+                    /**
+                     * Verifies a SequenceEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SequenceEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SequenceEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.SequenceEntity;
+
+                    /**
+                     * Creates a plain object from a SequenceEntity message. Also converts values to other types if specified.
+                     * @param message SequenceEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.SequenceEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SequenceEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SequenceEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StoredProcedureEntity. */
+                interface IStoredProcedureEntity {
+
+                    /** StoredProcedureEntity sqlCode */
+                    sqlCode?: (string|null);
+
+                    /** StoredProcedureEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a StoredProcedureEntity. */
+                class StoredProcedureEntity implements IStoredProcedureEntity {
+
+                    /**
+                     * Constructs a new StoredProcedureEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IStoredProcedureEntity);
+
+                    /** StoredProcedureEntity sqlCode. */
+                    public sqlCode: string;
+
+                    /** StoredProcedureEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new StoredProcedureEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StoredProcedureEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IStoredProcedureEntity): google.cloud.clouddms.v1.StoredProcedureEntity;
+
+                    /**
+                     * Encodes the specified StoredProcedureEntity message. Does not implicitly {@link google.cloud.clouddms.v1.StoredProcedureEntity.verify|verify} messages.
+                     * @param message StoredProcedureEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IStoredProcedureEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StoredProcedureEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.StoredProcedureEntity.verify|verify} messages.
+                     * @param message StoredProcedureEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IStoredProcedureEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StoredProcedureEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StoredProcedureEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.StoredProcedureEntity;
+
+                    /**
+                     * Decodes a StoredProcedureEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StoredProcedureEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.StoredProcedureEntity;
+
+                    /**
+                     * Verifies a StoredProcedureEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StoredProcedureEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StoredProcedureEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.StoredProcedureEntity;
+
+                    /**
+                     * Creates a plain object from a StoredProcedureEntity message. Also converts values to other types if specified.
+                     * @param message StoredProcedureEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.StoredProcedureEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StoredProcedureEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StoredProcedureEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FunctionEntity. */
+                interface IFunctionEntity {
+
+                    /** FunctionEntity sqlCode */
+                    sqlCode?: (string|null);
+
+                    /** FunctionEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a FunctionEntity. */
+                class FunctionEntity implements IFunctionEntity {
+
+                    /**
+                     * Constructs a new FunctionEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IFunctionEntity);
+
+                    /** FunctionEntity sqlCode. */
+                    public sqlCode: string;
+
+                    /** FunctionEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new FunctionEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IFunctionEntity): google.cloud.clouddms.v1.FunctionEntity;
+
+                    /**
+                     * Encodes the specified FunctionEntity message. Does not implicitly {@link google.cloud.clouddms.v1.FunctionEntity.verify|verify} messages.
+                     * @param message FunctionEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IFunctionEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.FunctionEntity.verify|verify} messages.
+                     * @param message FunctionEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IFunctionEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.FunctionEntity;
+
+                    /**
+                     * Decodes a FunctionEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.FunctionEntity;
+
+                    /**
+                     * Verifies a FunctionEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.FunctionEntity;
+
+                    /**
+                     * Creates a plain object from a FunctionEntity message. Also converts values to other types if specified.
+                     * @param message FunctionEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.FunctionEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SynonymEntity. */
+                interface ISynonymEntity {
+
+                    /** SynonymEntity sourceEntity */
+                    sourceEntity?: (string|null);
+
+                    /** SynonymEntity sourceType */
+                    sourceType?: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType|null);
+
+                    /** SynonymEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a SynonymEntity. */
+                class SynonymEntity implements ISynonymEntity {
+
+                    /**
+                     * Constructs a new SynonymEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.ISynonymEntity);
+
+                    /** SynonymEntity sourceEntity. */
+                    public sourceEntity: string;
+
+                    /** SynonymEntity sourceType. */
+                    public sourceType: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType);
+
+                    /** SynonymEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new SynonymEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SynonymEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.ISynonymEntity): google.cloud.clouddms.v1.SynonymEntity;
+
+                    /**
+                     * Encodes the specified SynonymEntity message. Does not implicitly {@link google.cloud.clouddms.v1.SynonymEntity.verify|verify} messages.
+                     * @param message SynonymEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.ISynonymEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SynonymEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SynonymEntity.verify|verify} messages.
+                     * @param message SynonymEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.ISynonymEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SynonymEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SynonymEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.SynonymEntity;
+
+                    /**
+                     * Decodes a SynonymEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SynonymEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.SynonymEntity;
+
+                    /**
+                     * Verifies a SynonymEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SynonymEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SynonymEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.SynonymEntity;
+
+                    /**
+                     * Creates a plain object from a SynonymEntity message. Also converts values to other types if specified.
+                     * @param message SynonymEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.SynonymEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SynonymEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SynonymEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PackageEntity. */
+                interface IPackageEntity {
+
+                    /** PackageEntity packageSqlCode */
+                    packageSqlCode?: (string|null);
+
+                    /** PackageEntity packageBody */
+                    packageBody?: (string|null);
+
+                    /** PackageEntity customFeatures */
+                    customFeatures?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a PackageEntity. */
+                class PackageEntity implements IPackageEntity {
+
+                    /**
+                     * Constructs a new PackageEntity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IPackageEntity);
+
+                    /** PackageEntity packageSqlCode. */
+                    public packageSqlCode: string;
+
+                    /** PackageEntity packageBody. */
+                    public packageBody: string;
+
+                    /** PackageEntity customFeatures. */
+                    public customFeatures?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new PackageEntity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PackageEntity instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IPackageEntity): google.cloud.clouddms.v1.PackageEntity;
+
+                    /**
+                     * Encodes the specified PackageEntity message. Does not implicitly {@link google.cloud.clouddms.v1.PackageEntity.verify|verify} messages.
+                     * @param message PackageEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IPackageEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PackageEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.PackageEntity.verify|verify} messages.
+                     * @param message PackageEntity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IPackageEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PackageEntity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PackageEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.PackageEntity;
+
+                    /**
+                     * Decodes a PackageEntity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PackageEntity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.PackageEntity;
+
+                    /**
+                     * Verifies a PackageEntity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PackageEntity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PackageEntity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.PackageEntity;
+
+                    /**
+                     * Creates a plain object from a PackageEntity message. Also converts values to other types if specified.
+                     * @param message PackageEntity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.PackageEntity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PackageEntity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PackageEntity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EntityMapping. */
+                interface IEntityMapping {
+
+                    /** EntityMapping sourceEntity */
+                    sourceEntity?: (string|null);
+
+                    /** EntityMapping draftEntity */
+                    draftEntity?: (string|null);
+
+                    /** EntityMapping sourceType */
+                    sourceType?: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType|null);
+
+                    /** EntityMapping draftType */
+                    draftType?: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType|null);
+
+                    /** EntityMapping mappingLog */
+                    mappingLog?: (google.cloud.clouddms.v1.IEntityMappingLogEntry[]|null);
+                }
+
+                /** Represents an EntityMapping. */
+                class EntityMapping implements IEntityMapping {
+
+                    /**
+                     * Constructs a new EntityMapping.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IEntityMapping);
+
+                    /** EntityMapping sourceEntity. */
+                    public sourceEntity: string;
+
+                    /** EntityMapping draftEntity. */
+                    public draftEntity: string;
+
+                    /** EntityMapping sourceType. */
+                    public sourceType: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType);
+
+                    /** EntityMapping draftType. */
+                    public draftType: (google.cloud.clouddms.v1.DatabaseEntityType|keyof typeof google.cloud.clouddms.v1.DatabaseEntityType);
+
+                    /** EntityMapping mappingLog. */
+                    public mappingLog: google.cloud.clouddms.v1.IEntityMappingLogEntry[];
+
+                    /**
+                     * Creates a new EntityMapping instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntityMapping instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IEntityMapping): google.cloud.clouddms.v1.EntityMapping;
+
+                    /**
+                     * Encodes the specified EntityMapping message. Does not implicitly {@link google.cloud.clouddms.v1.EntityMapping.verify|verify} messages.
+                     * @param message EntityMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IEntityMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntityMapping message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.EntityMapping.verify|verify} messages.
+                     * @param message EntityMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IEntityMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntityMapping message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntityMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.EntityMapping;
+
+                    /**
+                     * Decodes an EntityMapping message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntityMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.EntityMapping;
+
+                    /**
+                     * Verifies an EntityMapping message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntityMapping message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntityMapping
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.EntityMapping;
+
+                    /**
+                     * Creates a plain object from an EntityMapping message. Also converts values to other types if specified.
+                     * @param message EntityMapping
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.EntityMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntityMapping to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EntityMapping
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EntityMappingLogEntry. */
+                interface IEntityMappingLogEntry {
+
+                    /** EntityMappingLogEntry ruleId */
+                    ruleId?: (string|null);
+
+                    /** EntityMappingLogEntry ruleRevisionId */
+                    ruleRevisionId?: (string|null);
+
+                    /** EntityMappingLogEntry mappingComment */
+                    mappingComment?: (string|null);
+                }
+
+                /** Represents an EntityMappingLogEntry. */
+                class EntityMappingLogEntry implements IEntityMappingLogEntry {
+
+                    /**
+                     * Constructs a new EntityMappingLogEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.clouddms.v1.IEntityMappingLogEntry);
+
+                    /** EntityMappingLogEntry ruleId. */
+                    public ruleId: string;
+
+                    /** EntityMappingLogEntry ruleRevisionId. */
+                    public ruleRevisionId: string;
+
+                    /** EntityMappingLogEntry mappingComment. */
+                    public mappingComment: string;
+
+                    /**
+                     * Creates a new EntityMappingLogEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntityMappingLogEntry instance
+                     */
+                    public static create(properties?: google.cloud.clouddms.v1.IEntityMappingLogEntry): google.cloud.clouddms.v1.EntityMappingLogEntry;
+
+                    /**
+                     * Encodes the specified EntityMappingLogEntry message. Does not implicitly {@link google.cloud.clouddms.v1.EntityMappingLogEntry.verify|verify} messages.
+                     * @param message EntityMappingLogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.clouddms.v1.IEntityMappingLogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntityMappingLogEntry message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.EntityMappingLogEntry.verify|verify} messages.
+                     * @param message EntityMappingLogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.clouddms.v1.IEntityMappingLogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntityMappingLogEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntityMappingLogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.clouddms.v1.EntityMappingLogEntry;
+
+                    /**
+                     * Decodes an EntityMappingLogEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntityMappingLogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.clouddms.v1.EntityMappingLogEntry;
+
+                    /**
+                     * Verifies an EntityMappingLogEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntityMappingLogEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntityMappingLogEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.clouddms.v1.EntityMappingLogEntry;
+
+                    /**
+                     * Creates a plain object from an EntityMappingLogEntry message. Also converts values to other types if specified.
+                     * @param message EntityMappingLogEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.clouddms.v1.EntityMappingLogEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntityMappingLogEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EntityMappingLogEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** DatabaseEntityType enum. */
+                enum DatabaseEntityType {
+                    DATABASE_ENTITY_TYPE_UNSPECIFIED = 0,
+                    DATABASE_ENTITY_TYPE_SCHEMA = 1,
+                    DATABASE_ENTITY_TYPE_TABLE = 2,
+                    DATABASE_ENTITY_TYPE_COLUMN = 3,
+                    DATABASE_ENTITY_TYPE_CONSTRAINT = 4,
+                    DATABASE_ENTITY_TYPE_INDEX = 5,
+                    DATABASE_ENTITY_TYPE_TRIGGER = 6,
+                    DATABASE_ENTITY_TYPE_VIEW = 7,
+                    DATABASE_ENTITY_TYPE_SEQUENCE = 8,
+                    DATABASE_ENTITY_TYPE_STORED_PROCEDURE = 9,
+                    DATABASE_ENTITY_TYPE_FUNCTION = 10,
+                    DATABASE_ENTITY_TYPE_SYNONYM = 11,
+                    DATABASE_ENTITY_TYPE_DATABASE_PACKAGE = 12,
+                    DATABASE_ENTITY_TYPE_UDT = 13,
+                    DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW = 14,
+                    DATABASE_ENTITY_TYPE_DATABASE = 15
+                }
+
+                /** BackgroundJobType enum. */
+                enum BackgroundJobType {
+                    BACKGROUND_JOB_TYPE_UNSPECIFIED = 0,
+                    BACKGROUND_JOB_TYPE_SOURCE_SEED = 1,
+                    BACKGROUND_JOB_TYPE_CONVERT = 2,
+                    BACKGROUND_JOB_TYPE_APPLY_DESTINATION = 3,
+                    BACKGROUND_JOB_TYPE_IMPORT_RULES_FILE = 5
+                }
+
+                /** ImportRulesFileFormat enum. */
+                enum ImportRulesFileFormat {
+                    IMPORT_RULES_FILE_FORMAT_UNSPECIFIED = 0,
+                    IMPORT_RULES_FILE_FORMAT_HARBOUR_BRIDGE_SESSION_FILE = 1,
+                    IMPORT_RULES_FILE_FORMAT_ORATOPG_CONFIG_FILE = 2
                 }
             }
         }
@@ -9954,6 +17827,335 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
+
+            /**
+             * Constructs a new Struct.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IStruct);
+
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
+
+            /**
+             * Creates a new Struct instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Struct instance
+             */
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
+
+            /**
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
+
+            /**
+             * Verifies a Struct message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Struct
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
+
+            /**
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Struct to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Value. */
+        interface IValue {
+
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
+        }
+
+        /** Represents a Value. */
+        class Value implements IValue {
+
+            /**
+             * Constructs a new Value.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IValue);
+
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
+
+            /**
+             * Creates a new Value instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Value instance
+             */
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
+
+            /**
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
+
+            /**
+             * Verifies a Value message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Value
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
+
+            /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Value to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
+        }
+
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
+
+            /**
+             * Constructs a new ListValue.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
+
+            /**
+             * Creates a new ListValue instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListValue instance
+             */
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
+
+            /**
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
+
+            /**
+             * Verifies a ListValue message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListValue
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
+
+            /**
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

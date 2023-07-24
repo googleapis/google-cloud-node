@@ -29,10 +29,10 @@ function main(tagKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new definition of the TagKey. Only the `description` and `etag` fields
-   *  can be updated by this request. If the `etag` field is not empty, it
-   *  must match the `etag` field of the existing tag key. Otherwise,
-   *  `FAILED_PRECONDITION` will be returned.
+   *  Required. The new definition of the TagKey. Only the `description` and
+   *  `etag` fields can be updated by this request. If the `etag` field is not
+   *  empty, it must match the `etag` field of the existing tag key. Otherwise,
+   *  `ABORTED` will be returned.
    */
   // const tagKey = {}
   /**

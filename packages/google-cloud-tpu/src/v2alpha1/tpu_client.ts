@@ -1790,7 +1790,7 @@ export class TpuClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    * @param {string} request.queuedResourceId
-   *   The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$
+   *   The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$`
    *   regex format.
    * @param {google.cloud.tpu.v2alpha1.QueuedResource} request.queuedResource
    *   Required. The queued resource.
@@ -1936,6 +1936,12 @@ export class TpuClient {
    *   Required. The resource name.
    * @param {string} request.requestId
    *   Idempotent request UUID.
+   * @param {boolean} request.force
+   *   If set to true, all running nodes belonging to this queued resource will
+   *   be deleted first and then the queued resource will be deleted.
+   *   Otherwise (i.e. force=false), the queued resource will only be deleted if
+   *   its nodes have already been deleted or the queued resource is in the
+   *   ACCEPTED, FAILED, or SUSPENDED state.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

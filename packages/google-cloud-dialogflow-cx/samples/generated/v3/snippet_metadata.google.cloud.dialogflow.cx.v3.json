@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "3.4.1",
+        "version": "3.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -238,7 +238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -262,6 +262,14 @@
                     {
                         "name": "environment",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "git_destination",
+                        "type": ".google.cloud.dialogflow.cx.v3.ExportAgentRequest.GitDestination"
+                    },
+                    {
+                        "name": "include_bigquery_export_settings",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -290,7 +298,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -310,6 +318,10 @@
                     {
                         "name": "agent_content",
                         "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "git_source",
+                        "type": ".google.cloud.dialogflow.cx.v3.RestoreAgentRequest.GitSource"
                     },
                     {
                         "name": "restore_option",
@@ -2958,7 +2970,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -2985,6 +2997,10 @@
                     },
                     {
                         "name": "enable_partial_response",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_debugging_info",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -3567,7 +3583,7 @@
             "regionTag": "dialogflow_v3_generated_TestCases_ListTestCaseResults_async",
             "title": "Agents listTestCaseResults Sample",
             "origin": "API_DEFINITION",
-            "description": " Fetches a list of results for a given test case.",
+            "description": " Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.",
             "canonical": true,
             "file": "test_cases.list_test_case_results.js",
             "language": "JAVASCRIPT",
