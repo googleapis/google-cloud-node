@@ -41,7 +41,7 @@ fi
 # Install dependencies
 echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
 pnpm install --ignore-scripts --engine-strict --prod; pnpm install
-
+pnpm add -D protobufjs@^7.0.0
 
 retval=0
 
