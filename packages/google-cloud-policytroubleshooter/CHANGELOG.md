@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-v2.0.8...policy-troubleshooter-v2.1.0) (2023-07-24)
+
+
+### Features
+
+* [policytroubleshooter] include errors in troubleshoot response ([#4427](https://github.com/googleapis/google-cloud-node/issues/4427)) ([18a983e](https://github.com/googleapis/google-cloud-node/commit/18a983ed186ad8a5047d5d040b178214f3cfc228))
+
 ## [2.0.8](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-v2.0.7...policy-troubleshooter-v2.0.8) (2023-04-13)
 
 

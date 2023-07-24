@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v4.0.7...service-directory-v4.1.0) (2023-07-24)
+
+
+### Features
+
+* [servicedirectory] added network and uid fields in Endpoint message ([#4437](https://github.com/googleapis/google-cloud-node/issues/4437)) ([055fad6](https://github.com/googleapis/google-cloud-node/commit/055fad68f4a7ad95989db236f67afb4c1b7e05b7))
+
 ## [4.0.7](https://github.com/googleapis/google-cloud-node/compare/service-directory-v4.0.6...service-directory-v4.0.7) (2023-04-13)
 
 
