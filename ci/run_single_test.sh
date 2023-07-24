@@ -41,8 +41,8 @@ fi
 # Install dependencies
 echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
 pnpm install --ignore-scripts --engine-strict --prod; pnpm install
-echo "pnpm add -D protobufjs@^7.0.0"
-pnpm add -D protobufjs@^7.0.0
+echo "pnpm add protobufjs@^7.0.0"
+pnpm add protobufjs@^7.0.0
 echo "pnpm add -D long@^5.2.3"
 pnpm add -D long@^5.2.3
 
