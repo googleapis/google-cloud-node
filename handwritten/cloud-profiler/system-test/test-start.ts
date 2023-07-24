@@ -19,7 +19,7 @@ import * as nock from 'nock';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from '../protos/profile';
+import {perftools} from 'pprof/proto/profile';
 import {RequestProfile} from '../src/profiler';
 
 const API = 'https://cloudprofiler.googleapis.com/v2';
