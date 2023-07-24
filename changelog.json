@@ -5,6 +5,217 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b658620294d3aefd02afd17b762f410bb623c8da",
+          "message": "[alloydb] add metadata exchange support for AlloyDB connectors",
+          "issues": [
+            "4417"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "e1bbf754-1e84-4296-a315-cc6f06247977",
+      "createTime": "2023-07-24T20:33:29.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "90d9a44b9ba3fb6dbb90f2ff6315f7898776b910",
+          "message": "[kmsinventory] add resource_types to SearchAllResources, to allow filtering by resource type",
+          "issues": [
+            "4420"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "c5be2116-2fd1-4a61-b4ff-ee5ef3dea525",
+      "createTime": "2023-07-24T20:33:29.499Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5dcb3c28ad2cf68485fe535d83d281b0d95cba38",
+          "message": "[cloudbuild] add git_file_source and git_repo_source to build_trigger",
+          "issues": [
+            "4434"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "58a520990dab3fdc00f5838a9b875a4fc72cf158",
+          "message": "[cloudbuild] Add routing information in Cloud Build GRPC clients",
+          "issues": [
+            "4410"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "9af084a9-490f-4d57-bd0f-987c82d73e43",
+      "createTime": "2023-07-24T20:33:29.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3eabc8b6cf0bd7086f814d5fd3c5f200b5bec04",
+          "message": "[container] add policy_name to PlacementPolicy message within a node pool",
+          "issues": [
+            "4440"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "bf2e891dfecafc8c1c145b2a2fd86997a314b535",
+          "message": "[container] Add Multi-networking API",
+          "issues": [
+            "4426"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "cb9285425846480beb111a5a13fd0dbfe215b6f5",
+          "message": "[container] add advanced_datapath_observability_config to monitoring_config",
+          "issues": [
+            "4414"
+          ]
+        }
+      ],
+      "version": "4.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "ed7c8de6-9c38-4fa4-a849-6231b75007a3",
+      "createTime": "2023-07-24T20:33:29.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5f19ab6bab05774ced7a3947f9bb129f748d01f5",
+          "message": "[video] added support for slate events which allow users to create and insert a slate into a live stream to replace the main live stream content",
+          "issues": [
+            "4438"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "77d300d7-0b77-427f-88de-4e09c5635a07",
+      "createTime": "2023-07-24T20:33:29.439Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dcb6f87303bea503867b5ccc5af9c57d0c2f993e",
+          "message": "[tasks] increase timeout of RPC methods to 20s for v2",
+          "issues": [
+            "4425"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e751b2c0-e000-4bb6-95e5-423a5a1e94ff",
+      "createTime": "2023-07-24T20:33:29.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "055fad68f4a7ad95989db236f67afb4c1b7e05b7",
+          "message": "[servicedirectory] added network and uid fields in Endpoint message",
+          "issues": [
+            "4437"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "c510bc7e-af16-48b9-a937-0d7276d39aeb",
+      "createTime": "2023-07-24T20:33:29.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "18a983ed186ad8a5047d5d040b178214f3cfc228",
+          "message": "[policytroubleshooter] include errors in troubleshoot response",
+          "issues": [
+            "4427"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "378e1efc-95f5-479e-9f5b-4111d6bfc3b6",
+      "createTime": "2023-07-24T20:33:29.421Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "28b5dca1c319bb74b7e087044cd99eb4d6971783",
+          "message": "[kms] add interoperable symmetric encryption system",
+          "issues": [
+            "4431"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "a1d864f8-81c5-4e66-9761-dececea24d04",
+      "createTime": "2023-07-24T20:33:29.416Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8c33c07ea55a99cc4129e905247271acc08ca884",
+          "message": "[datastream] Add precision and scale to MysqlColumn",
+          "issues": [
+            "4441"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "77306d9e-310d-4f6c-853d-71049b22f107",
+      "createTime": "2023-07-24T20:33:29.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3f99064cfc29afce6cd7f8b72b881ae7ceb8a394",
+          "message": "Add data_item_count to Dataset",
+          "issues": [
+            "4411"
+          ]
+        }
+      ],
+      "version": "2.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "da57a134-177d-4e4d-ad29-f49e418fb4b1",
+      "createTime": "2023-07-24T20:33:29.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "f3e866e2c16ba430d7fb3bf0abc723b04ea9e994",
           "message": "[cloudbuild] added e2-medium machine type",
           "issues": [
@@ -11128,5 +11339,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-07-11T01:38:57.211Z"
+  "updateTime": "2023-07-24T20:33:29.503Z"
 }

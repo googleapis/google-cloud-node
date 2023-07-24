@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.16.0...aiplatform-v2.17.0) (2023-07-24)
+
+
+### Features
+
+* Add data_item_count to Dataset ([#4411](https://github.com/googleapis/google-cloud-node/issues/4411)) ([3f99064](https://github.com/googleapis/google-cloud-node/commit/3f99064cfc29afce6cd7f8b72b881ae7ceb8a394))
+
 ## [2.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.15.0...aiplatform-v2.16.0) (2023-06-28)
 
 
