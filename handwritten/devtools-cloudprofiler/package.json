@@ -10,13 +10,14 @@
     "system-test": "c8 --no-clean mocha build/system-test/test-*.js --timeout=60000",
     "samples-test": "echo 'no sample tests'",
     "clean": "gts clean",
-    "compile": "tsc -p .",
+    "compile": "tsc -p . && cp -R protos build",
     "fix": "gts fix",
     "lint": "gts check",
     "docs": "jsdoc -c .jsdoc.js",
     "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
+    "proto": "mkdir -p protos && pbjs -t static-module -w commonjs -o protos/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o protos/profiler.d.ts protos/profiler.js",
     "license-check": "jsgl --local .",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
@@ -36,9 +37,9 @@
     "extend": "^3.0.2",
     "gcp-metadata": "^4.0.0",
     "parse-duration": "^1.0.0",
-    "pprof": "3.2.1",
+    "pprof": "3.2.0",
     "pretty-ms": "^7.0.0",
-    "protobufjs": "~7.2.4",
+    "protobufjs": "~7.2.0",
     "semver": "^7.0.0",
     "teeny-request": "^8.0.0"
   },
@@ -68,10 +69,12 @@
   },
   "files": [
     "build/src",
-    "build/third_party/cloud-debug-nodejs"
+    "build/third_party/cloud-debug-nodejs",
+    "build/protos"
   ],
   "nyc": {
     "exclude": [
+      "protos",
       "build/test",
       "build/system-test"
     ]
