@@ -198,11 +198,20 @@ export class DataplexServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAttributePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
+      ),
+      dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
       ),
       dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+      ),
+      dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
@@ -347,6 +356,15 @@ export class DataplexServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -386,6 +404,18 @@ export class DataplexServiceClient {
               post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -423,6 +453,18 @@ export class DataplexServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -1131,6 +1173,22 @@ export class DataplexServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the task:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+   * @param {number[]} [request.labels]
+   *   Optional. User-defined labels for the task. If the map is left empty, the
+   *   task will run with existing labels from task definition. If the map
+   *   contains an entry with a new key, the same will be added to existing set of
+   *   labels. If the map contains an entry with an existing label key in task
+   *   definition, the task will run with new label value for that entry. Clearing
+   *   an existing label will require label value to be explicitly set to a hyphen
+   *   "-". The label value cannot be empty.
+   * @param {number[]} [request.args]
+   *   Optional. Execution spec arguments. If the map is left empty, the task will
+   *   run with existing execution spec args from task definition. If the map
+   *   contains an entry with a new key, the same will be added to existing set of
+   *   args. If the map contains an entry with an existing arg key in task
+   *   definition, the task will run with new arg value for that entry. Clearing
+   *   an existing arg will require arg value to be explicitly set to a hyphen
+   *   "-". The arg value cannot be empty.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6142,6 +6200,138 @@ export class DataplexServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAttribute resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataTaxonomy
+   * @param {string} data_attribute_id
+   * @returns {string} Resource name string.
+   */
+  dataAttributePath(
+    project: string,
+    location: string,
+    dataTaxonomy: string,
+    dataAttributeId: string
+  ) {
+    return this.pathTemplates.dataAttributePathTemplate.render({
+      project: project,
+      location: location,
+      dataTaxonomy: dataTaxonomy,
+      data_attribute_id: dataAttributeId,
+    });
+  }
+
+  /**
+   * Parse the project from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .location;
+  }
+
+  /**
+   * Parse the dataTaxonomy from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the dataTaxonomy.
+   */
+  matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .dataTaxonomy;
+  }
+
+  /**
+   * Parse the data_attribute_id from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the data_attribute_id.
+   */
+  matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .data_attribute_id;
+  }
+
+  /**
+   * Return a fully-qualified dataAttributeBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_attribute_binding_id
+   * @returns {string} Resource name string.
+   */
+  dataAttributeBindingPath(
+    project: string,
+    location: string,
+    dataAttributeBindingId: string
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.render({
+      project: project,
+      location: location,
+      data_attribute_binding_id: dataAttributeBindingId,
+    });
+  }
+
+  /**
+   * Parse the project from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).location;
+  }
+
+  /**
+   * Parse the data_attribute_binding_id from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the data_attribute_binding_id.
+   */
+  matchDataAttributeBindingIdFromDataAttributeBindingName(
+    dataAttributeBindingName: string
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).data_attribute_binding_id;
+  }
+
+  /**
    * Return a fully-qualified dataScan resource name string.
    *
    * @param {string} project
@@ -6259,6 +6449,58 @@ export class DataplexServiceClient {
   matchJobFromDataScanJobName(dataScanJobName: string) {
     return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
       .job;
+  }
+
+  /**
+   * Return a fully-qualified dataTaxonomy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_taxonomy_id
+   * @returns {string} Resource name string.
+   */
+  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.render({
+      project: project,
+      location: location,
+      data_taxonomy_id: dataTaxonomyId,
+    });
+  }
+
+  /**
+   * Parse the project from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .location;
+  }
+
+  /**
+   * Parse the data_taxonomy_id from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the data_taxonomy_id.
+   */
+  matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .data_taxonomy_id;
   }
 
   /**
