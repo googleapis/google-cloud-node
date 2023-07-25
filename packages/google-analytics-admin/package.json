@@ -46,9 +46,7 @@
   },
   "dependencies": {
     "google-auth-library": "^9.0.0",
-    "google-gax": "^4.0.2-debug",
-    "gapic-tools": "0.1.21-debug",
-    "protobufjs": "^7.2.4",
+    "google-gax": "^4.0.1",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {
