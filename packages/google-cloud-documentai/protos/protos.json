@@ -8605,7 +8605,8 @@
                       "oneofs": {
                         "source": {
                           "oneof": [
-                            "processorVersionSource"
+                            "processorVersionSource",
+                            "externalProcessorVersionSource"
                           ]
                         }
                       },
@@ -8617,12 +8618,36 @@
                             "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
                           }
                         },
+                        "externalProcessorVersionSource": {
+                          "type": "ExternalProcessorVersionSource",
+                          "id": 3
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).child_type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ExternalProcessorVersionSource": {
+                          "fields": {
+                            "processorVersion": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "serviceEndpoint": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }

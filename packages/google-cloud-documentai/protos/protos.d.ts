@@ -39831,6 +39831,9 @@ export namespace google {
                     /** ImportProcessorVersionRequest processorVersionSource */
                     processorVersionSource?: (string|null);
 
+                    /** ImportProcessorVersionRequest externalProcessorVersionSource */
+                    externalProcessorVersionSource?: (google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.IExternalProcessorVersionSource|null);
+
                     /** ImportProcessorVersionRequest parent */
                     parent?: (string|null);
                 }
@@ -39847,11 +39850,14 @@ export namespace google {
                     /** ImportProcessorVersionRequest processorVersionSource. */
                     public processorVersionSource?: (string|null);
 
+                    /** ImportProcessorVersionRequest externalProcessorVersionSource. */
+                    public externalProcessorVersionSource?: (google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.IExternalProcessorVersionSource|null);
+
                     /** ImportProcessorVersionRequest parent. */
                     public parent: string;
 
                     /** ImportProcessorVersionRequest source. */
-                    public source?: "processorVersionSource";
+                    public source?: ("processorVersionSource"|"externalProcessorVersionSource");
 
                     /**
                      * Creates a new ImportProcessorVersionRequest instance using the specified properties.
@@ -39929,6 +39935,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportProcessorVersionRequest {
+
+                    /** Properties of an ExternalProcessorVersionSource. */
+                    interface IExternalProcessorVersionSource {
+
+                        /** ExternalProcessorVersionSource processorVersion */
+                        processorVersion?: (string|null);
+
+                        /** ExternalProcessorVersionSource serviceEndpoint */
+                        serviceEndpoint?: (string|null);
+                    }
+
+                    /** Represents an ExternalProcessorVersionSource. */
+                    class ExternalProcessorVersionSource implements IExternalProcessorVersionSource {
+
+                        /**
+                         * Constructs a new ExternalProcessorVersionSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.IExternalProcessorVersionSource);
+
+                        /** ExternalProcessorVersionSource processorVersion. */
+                        public processorVersion: string;
+
+                        /** ExternalProcessorVersionSource serviceEndpoint. */
+                        public serviceEndpoint: string;
+
+                        /**
+                         * Creates a new ExternalProcessorVersionSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExternalProcessorVersionSource instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.IExternalProcessorVersionSource): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource;
+
+                        /**
+                         * Encodes the specified ExternalProcessorVersionSource message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource.verify|verify} messages.
+                         * @param message ExternalProcessorVersionSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.IExternalProcessorVersionSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExternalProcessorVersionSource message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource.verify|verify} messages.
+                         * @param message ExternalProcessorVersionSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.IExternalProcessorVersionSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExternalProcessorVersionSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExternalProcessorVersionSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource;
+
+                        /**
+                         * Decodes an ExternalProcessorVersionSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExternalProcessorVersionSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource;
+
+                        /**
+                         * Verifies an ExternalProcessorVersionSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExternalProcessorVersionSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExternalProcessorVersionSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource;
+
+                        /**
+                         * Creates a plain object from an ExternalProcessorVersionSource message. Also converts values to other types if specified.
+                         * @param message ExternalProcessorVersionSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExternalProcessorVersionSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExternalProcessorVersionSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an ImportProcessorVersionResponse. */

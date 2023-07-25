@@ -1038,7 +1038,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -1050,6 +1050,10 @@
                     {
                         "name": "processor_version_source",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "external_processor_version_source",
+                        "type": ".google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource"
                     },
                     {
                         "name": "parent",
