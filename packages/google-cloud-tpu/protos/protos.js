@@ -9094,6 +9094,8 @@
                          * @property {Array.<google.cloud.tpu.v2.ISymptom>|null} [symptoms] Node symptoms
                          * @property {google.cloud.tpu.v2.IShieldedInstanceConfig|null} [shieldedInstanceConfig] Node shieldedInstanceConfig
                          * @property {google.cloud.tpu.v2.IAcceleratorConfig|null} [acceleratorConfig] Node acceleratorConfig
+                         * @property {string|null} [queuedResource] Node queuedResource
+                         * @property {boolean|null} [multisliceNode] Node multisliceNode
                          */
     
                         /**
@@ -9294,6 +9296,22 @@
                         Node.prototype.acceleratorConfig = null;
     
                         /**
+                         * Node queuedResource.
+                         * @member {string} queuedResource
+                         * @memberof google.cloud.tpu.v2.Node
+                         * @instance
+                         */
+                        Node.prototype.queuedResource = "";
+    
+                        /**
+                         * Node multisliceNode.
+                         * @member {boolean} multisliceNode
+                         * @memberof google.cloud.tpu.v2.Node
+                         * @instance
+                         */
+                        Node.prototype.multisliceNode = false;
+    
+                        /**
                          * Creates a new Node instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2.Node
@@ -9367,6 +9385,10 @@
                                 $root.google.cloud.tpu.v2.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                             if (message.acceleratorConfig != null && Object.hasOwnProperty.call(message, "acceleratorConfig"))
                                 $root.google.cloud.tpu.v2.AcceleratorConfig.encode(message.acceleratorConfig, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
+                            if (message.queuedResource != null && Object.hasOwnProperty.call(message, "queuedResource"))
+                                writer.uint32(/* id 47, wireType 2 =*/378).string(message.queuedResource);
+                            if (message.multisliceNode != null && Object.hasOwnProperty.call(message, "multisliceNode"))
+                                writer.uint32(/* id 48, wireType 0 =*/384).bool(message.multisliceNode);
                             return writer;
                         };
     
@@ -9533,6 +9555,14 @@
                                     }
                                 case 46: {
                                         message.acceleratorConfig = $root.google.cloud.tpu.v2.AcceleratorConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 47: {
+                                        message.queuedResource = reader.string();
+                                        break;
+                                    }
+                                case 48: {
+                                        message.multisliceNode = reader.bool();
                                         break;
                                     }
                                 default:
@@ -9714,6 +9744,12 @@
                                 if (error)
                                     return "acceleratorConfig." + error;
                             }
+                            if (message.queuedResource != null && message.hasOwnProperty("queuedResource"))
+                                if (!$util.isString(message.queuedResource))
+                                    return "queuedResource: string expected";
+                            if (message.multisliceNode != null && message.hasOwnProperty("multisliceNode"))
+                                if (typeof message.multisliceNode !== "boolean")
+                                    return "multisliceNode: boolean expected";
                             return null;
                         };
     
@@ -9955,6 +9991,10 @@
                                     throw TypeError(".google.cloud.tpu.v2.Node.acceleratorConfig: object expected");
                                 message.acceleratorConfig = $root.google.cloud.tpu.v2.AcceleratorConfig.fromObject(object.acceleratorConfig);
                             }
+                            if (object.queuedResource != null)
+                                message.queuedResource = String(object.queuedResource);
+                            if (object.multisliceNode != null)
+                                message.multisliceNode = Boolean(object.multisliceNode);
                             return message;
                         };
     
@@ -10002,6 +10042,8 @@
                                 object.apiVersion = options.enums === String ? "API_VERSION_UNSPECIFIED" : 0;
                                 object.shieldedInstanceConfig = null;
                                 object.acceleratorConfig = null;
+                                object.queuedResource = "";
+                                object.multisliceNode = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10069,6 +10111,10 @@
                                 object.shieldedInstanceConfig = $root.google.cloud.tpu.v2.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig"))
                                 object.acceleratorConfig = $root.google.cloud.tpu.v2.AcceleratorConfig.toObject(message.acceleratorConfig, options);
+                            if (message.queuedResource != null && message.hasOwnProperty("queuedResource"))
+                                object.queuedResource = message.queuedResource;
+                            if (message.multisliceNode != null && message.hasOwnProperty("multisliceNode"))
+                                object.multisliceNode = message.multisliceNode;
                             return object;
                         };
     

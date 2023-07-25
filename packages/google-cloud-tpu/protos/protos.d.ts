@@ -3990,6 +3990,12 @@ export namespace google {
 
                     /** Node acceleratorConfig */
                     acceleratorConfig?: (google.cloud.tpu.v2.IAcceleratorConfig|null);
+
+                    /** Node queuedResource */
+                    queuedResource?: (string|null);
+
+                    /** Node multisliceNode */
+                    multisliceNode?: (boolean|null);
                 }
 
                 /** Represents a Node. */
@@ -4066,6 +4072,12 @@ export namespace google {
 
                     /** Node acceleratorConfig. */
                     public acceleratorConfig?: (google.cloud.tpu.v2.IAcceleratorConfig|null);
+
+                    /** Node queuedResource. */
+                    public queuedResource: string;
+
+                    /** Node multisliceNode. */
+                    public multisliceNode: boolean;
 
                     /**
                      * Creates a new Node instance using the specified properties.

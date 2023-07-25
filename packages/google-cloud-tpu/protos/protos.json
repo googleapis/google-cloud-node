@@ -1207,7 +1207,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "state": {
@@ -1315,6 +1315,20 @@
                         "acceleratorConfig": {
                           "type": "AcceleratorConfig",
                           "id": 46
+                        },
+                        "queuedResource": {
+                          "type": "string",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "multisliceNode": {
+                          "type": "bool",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
