@@ -40,8 +40,8 @@ fi
 
 pnpm config set enable-pre-post-scripts true
 # Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install --force"
+pnpm install --ignore-scripts --engine-strict --prod; pnpm install --force
 echo "pnpm add protobufjs@^7.0.0"
 pnpm add protobufjs@^7.0.0
 echo "pnpm add -D long@^5.2.3"
