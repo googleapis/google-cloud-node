@@ -20401,6 +20401,7 @@
                          * @property {google.cloud.tpu.v2alpha1.QueuedResource.ITpu|null} [tpu] QueuedResource tpu
                          * @property {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort|null} [bestEffort] QueuedResource bestEffort
                          * @property {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed|null} [guaranteed] QueuedResource guaranteed
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResource.ISpot|null} [spot] QueuedResource spot
                          * @property {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null} [queueingPolicy] QueuedResource queueingPolicy
                          * @property {google.cloud.tpu.v2alpha1.IQueuedResourceState|null} [state] QueuedResource state
                          * @property {string|null} [reservationName] QueuedResource reservationName
@@ -20454,6 +20455,14 @@
                         QueuedResource.prototype.guaranteed = null;
     
                         /**
+                         * QueuedResource spot.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResource.ISpot|null|undefined} spot
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.spot = null;
+    
+                        /**
                          * QueuedResource queueingPolicy.
                          * @member {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null|undefined} queueingPolicy
                          * @memberof google.cloud.tpu.v2alpha1.QueuedResource
@@ -20493,12 +20502,12 @@
     
                         /**
                          * QueuedResource tier.
-                         * @member {"bestEffort"|"guaranteed"|undefined} tier
+                         * @member {"bestEffort"|"guaranteed"|"spot"|undefined} tier
                          * @memberof google.cloud.tpu.v2alpha1.QueuedResource
                          * @instance
                          */
                         Object.defineProperty(QueuedResource.prototype, "tier", {
-                            get: $util.oneOfGetter($oneOfFields = ["bestEffort", "guaranteed"]),
+                            get: $util.oneOfGetter($oneOfFields = ["bestEffort", "guaranteed", "spot"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -20540,6 +20549,8 @@
                                 $root.google.cloud.tpu.v2alpha1.QueuedResourceState.encode(message.state, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.reservationName != null && Object.hasOwnProperty.call(message, "reservationName"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.reservationName);
+                            if (message.spot != null && Object.hasOwnProperty.call(message, "spot"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot.encode(message.spot, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -20588,6 +20599,10 @@
                                     }
                                 case 4: {
                                         message.guaranteed = $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.spot = $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -20667,6 +20682,16 @@
                                         return "guaranteed." + error;
                                 }
                             }
+                            if (message.spot != null && message.hasOwnProperty("spot")) {
+                                if (properties.tier === 1)
+                                    return "tier: multiple values";
+                                properties.tier = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot.verify(message.spot);
+                                    if (error)
+                                        return "spot." + error;
+                                }
+                            }
                             if (message.queueingPolicy != null && message.hasOwnProperty("queueingPolicy")) {
                                 var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.verify(message.queueingPolicy);
                                 if (error)
@@ -20711,6 +20736,11 @@
                                 if (typeof object.guaranteed !== "object")
                                     throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.guaranteed: object expected");
                                 message.guaranteed = $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.fromObject(object.guaranteed);
+                            }
+                            if (object.spot != null) {
+                                if (typeof object.spot !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.spot: object expected");
+                                message.spot = $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot.fromObject(object.spot);
                             }
                             if (object.queueingPolicy != null) {
                                 if (typeof object.queueingPolicy !== "object")
@@ -20769,6 +20799,11 @@
                                 object.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.toObject(message.state, options);
                             if (message.reservationName != null && message.hasOwnProperty("reservationName"))
                                 object.reservationName = message.reservationName;
+                            if (message.spot != null && message.hasOwnProperty("spot")) {
+                                object.spot = $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot.toObject(message.spot, options);
+                                if (options.oneofs)
+                                    object.tier = "spot";
+                            }
                             return object;
                         };
     
@@ -21450,6 +21485,181 @@
                             };
     
                             return BestEffort;
+                        })();
+    
+                        QueuedResource.Spot = (function() {
+    
+                            /**
+                             * Properties of a Spot.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @interface ISpot
+                             */
+    
+                            /**
+                             * Constructs a new Spot.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @classdesc Represents a Spot.
+                             * @implements ISpot
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ISpot=} [properties] Properties to set
+                             */
+                            function Spot(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new Spot instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ISpot=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Spot} Spot instance
+                             */
+                            Spot.create = function create(properties) {
+                                return new Spot(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Spot message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Spot.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ISpot} message Spot message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Spot.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Spot message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Spot.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ISpot} message Spot message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Spot.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Spot message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Spot} Spot
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Spot.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Spot message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Spot} Spot
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Spot.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Spot message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Spot.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Spot message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Spot} Spot
+                             */
+                            Spot.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResource.Spot();
+                            };
+    
+                            /**
+                             * Creates a plain object from a Spot message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.Spot} message Spot
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Spot.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this Spot to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Spot.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Spot
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Spot
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Spot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.Spot";
+                            };
+    
+                            return Spot;
                         })();
     
                         QueuedResource.Guaranteed = (function() {

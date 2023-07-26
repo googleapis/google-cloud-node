@@ -2537,7 +2537,8 @@
                         "tier": {
                           "oneof": [
                             "bestEffort",
-                            "guaranteed"
+                            "guaranteed",
+                            "spot"
                           ]
                         }
                       },
@@ -2560,6 +2561,13 @@
                         "guaranteed": {
                           "type": "Guaranteed",
                           "id": 4
+                        },
+                        "spot": {
+                          "type": "Spot",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "queueingPolicy": {
                           "type": "QueueingPolicy",
@@ -2613,6 +2621,9 @@
                           }
                         },
                         "BestEffort": {
+                          "fields": {}
+                        },
+                        "Spot": {
                           "fields": {}
                         },
                         "Guaranteed": {
