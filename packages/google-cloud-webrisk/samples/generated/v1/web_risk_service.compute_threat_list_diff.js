@@ -41,7 +41,7 @@ function main(threatType, constraints) {
    *  ComputeThreatListDiff), this may be left empty and a full database
    *  snapshot will be returned.
    */
-  // const versionToken = 'Buffer.from('string')'
+  // const versionToken = Buffer.from('string')
   /**
    *  Required. The constraints associated with this request.
    */

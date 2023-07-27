@@ -31,7 +31,7 @@ function main(requests) {
   /**
    *  Required. Individual image annotation requests for this batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Vision library
   const {ImageAnnotatorClient} = require('@google-cloud/vision').v1p1beta1;

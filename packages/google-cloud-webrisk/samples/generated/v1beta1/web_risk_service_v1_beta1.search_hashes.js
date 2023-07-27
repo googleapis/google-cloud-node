@@ -32,11 +32,11 @@ function main(threatTypes) {
    *  A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
    *  hash. For JSON requests, this field is base64-encoded.
    */
-  // const hashPrefix = 'Buffer.from('string')'
+  // const hashPrefix = Buffer.from('string')
   /**
    *  Required. The ThreatLists to search in.
    */
-  // const threatTypes = 1234
+  // const threatTypes = [1,2,3,4]
 
   // Imports the Webrisk library
   const {WebRiskServiceV1Beta1Client} = require('@google-cloud/web-risk').v1beta1;

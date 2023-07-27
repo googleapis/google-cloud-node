@@ -364,8 +364,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js</caption>
    * region_tag:texttospeech_v1beta1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async
@@ -460,8 +459,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js</caption>
    * region_tag:texttospeech_v1beta1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async

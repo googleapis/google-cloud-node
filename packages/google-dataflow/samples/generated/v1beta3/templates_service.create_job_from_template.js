@@ -45,7 +45,7 @@ function main() {
   /**
    *  The runtime parameters to pass to the job.
    */
-  // const parameters = 1234
+  // const parameters = [1,2,3,4]
   /**
    *  The runtime environment for the job.
    */

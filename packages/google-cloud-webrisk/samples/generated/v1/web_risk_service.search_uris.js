@@ -36,7 +36,7 @@ function main(uri, threatTypes) {
    *  Required. The ThreatLists to search in. Multiple ThreatLists may be
    *  specified.
    */
-  // const threatTypes = 1234
+  // const threatTypes = [1,2,3,4]
 
   // Imports the Webrisk library
   const {WebRiskServiceClient} = require('@google-cloud/web-risk').v1;

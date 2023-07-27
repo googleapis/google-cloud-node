@@ -350,9 +350,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.GenerateAccessTokenResponse | GenerateAccessTokenResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.GenerateAccessTokenResponse|GenerateAccessTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.generate_access_token.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_GenerateAccessToken_async
@@ -461,9 +460,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.GenerateIdTokenResponse | GenerateIdTokenResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.GenerateIdTokenResponse|GenerateIdTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.generate_id_token.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_GenerateIdToken_async
@@ -568,9 +566,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.SignBlobResponse | SignBlobResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.SignBlobResponse|SignBlobResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.sign_blob.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_SignBlob_async
@@ -667,9 +664,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.SignJwtResponse | SignJwtResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.SignJwtResponse|SignJwtResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.sign_jwt.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_SignJwt_async

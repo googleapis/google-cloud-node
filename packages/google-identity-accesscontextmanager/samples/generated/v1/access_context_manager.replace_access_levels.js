@@ -43,7 +43,7 @@ function main(parent, accessLevels) {
    *  Access Policy 
    *  google.identity.accesscontextmanager.v1.AccessPolicy.
    */
-  // const accessLevels = 1234
+  // const accessLevels = [1,2,3,4]
   /**
    *  Optional. The etag for the version of the Access Policy 
    *  google.identity.accesscontextmanager.v1.AccessPolicy  that this
