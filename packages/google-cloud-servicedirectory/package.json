@@ -32,7 +32,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^3.5.8",
+    "google-gax": "^4.0.0",
     "json-schema": "^0.4.0"
   },
   "devDependencies": {

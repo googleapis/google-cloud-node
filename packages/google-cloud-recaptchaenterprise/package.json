@@ -30,7 +30,7 @@
     "reCAPTCHA Enterprise API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.8"
+    "google-gax": "^4.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
