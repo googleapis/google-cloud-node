@@ -38,7 +38,7 @@ function main(name, importConfigs) {
    *  Required. The desired input locations. The contents of all input locations
    *  will be imported in one batch.
    */
-  // const importConfigs = 1234
+  // const importConfigs = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {DatasetServiceClient} = require('@google-cloud/aiplatform').v1beta1;

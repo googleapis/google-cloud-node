@@ -38,7 +38,7 @@ function main(execution) {
   /**
    *  The Events to create and add.
    */
-  // const events = 1234
+  // const events = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {MetadataServiceClient} = require('@google-cloud/aiplatform').v1;

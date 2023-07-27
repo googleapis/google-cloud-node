@@ -1668,9 +1668,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Tensorboard|Tensorboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.get_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_GetTensorboard_async
@@ -1761,9 +1760,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ReadTensorboardUsageResponse | ReadTensorboardUsageResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ReadTensorboardUsageResponse|ReadTensorboardUsageResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.read_tensorboard_usage.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async
@@ -1864,13 +1862,12 @@ export class TensorboardServiceClient {
    *   final component of the Tensorboard experiment's resource name.
    *
    *   This value should be 1-128 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
+   *   are /{@link protos.0-9|a-z}-/.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardExperiment|TensorboardExperiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.create_tensorboard_experiment.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_CreateTensorboardExperiment_async
@@ -1971,9 +1968,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardExperiment|TensorboardExperiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.get_tensorboard_experiment.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_GetTensorboardExperiment_async
@@ -2081,9 +2077,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardExperiment|TensorboardExperiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.update_tensorboard_experiment.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_UpdateTensorboardExperiment_async
@@ -2189,13 +2184,12 @@ export class TensorboardServiceClient {
    *   component of the Tensorboard run's resource name.
    *
    *   This value should be 1-128 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
+   *   are /{@link protos.0-9|a-z}-/.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardRun|TensorboardRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.create_tensorboard_run.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_CreateTensorboardRun_async
@@ -2297,9 +2291,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse | BatchCreateTensorboardRunsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse|BatchCreateTensorboardRunsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.batch_create_tensorboard_runs.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_BatchCreateTensorboardRuns_async
@@ -2400,9 +2393,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardRun|TensorboardRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.get_tensorboard_run.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_GetTensorboardRun_async
@@ -2500,9 +2492,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardRun|TensorboardRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.update_tensorboard_run.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_UpdateTensorboardRun_async
@@ -2606,9 +2597,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse | BatchCreateTensorboardTimeSeriesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse|BatchCreateTensorboardTimeSeriesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.batch_create_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_BatchCreateTensorboardTimeSeries_async
@@ -2711,15 +2701,14 @@ export class TensorboardServiceClient {
    *   Optional. The user specified unique ID to use for the
    *   TensorboardTimeSeries, which becomes the final component of the
    *   TensorboardTimeSeries's resource name. This value should match
-   *   "{@link a-z0-9-|a-z0-9}{0, 127}"
+   *   "{@link protos.a-z0-9-|a-z0-9}{0, 127}"
    * @param {google.cloud.aiplatform.v1.TensorboardTimeSeries} request.tensorboardTimeSeries
    *   Required. The TensorboardTimeSeries to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardTimeSeries|TensorboardTimeSeries}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.create_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_CreateTensorboardTimeSeries_async
@@ -2820,9 +2809,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardTimeSeries|TensorboardTimeSeries}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.get_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_GetTensorboardTimeSeries_async
@@ -2931,9 +2919,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardTimeSeries|TensorboardTimeSeries}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.update_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_UpdateTensorboardTimeSeries_async
@@ -3037,7 +3024,7 @@ export class TensorboardServiceClient {
    *   TensorboardTimeSeries to read data from. Format:
    *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
    *   The TensorboardTimeSeries referenced by
-   *   {@link google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest.time_series|time_series}
+   *   {@link protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest.time_series|time_series}
    *   must be sub resources of this Tensorboard.
    * @param {string[]} request.timeSeries
    *   Required. The resource names of the TensorboardTimeSeries to read data
@@ -3046,9 +3033,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse | BatchReadTensorboardTimeSeriesDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse|BatchReadTensorboardTimeSeriesDataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.batch_read_tensorboard_time_series_data.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_BatchReadTensorboardTimeSeriesData_async
@@ -3160,9 +3146,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse | ReadTensorboardTimeSeriesDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse|ReadTensorboardTimeSeriesDataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.read_tensorboard_time_series_data.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ReadTensorboardTimeSeriesData_async
@@ -3266,9 +3251,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse | WriteTensorboardExperimentDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse|WriteTensorboardExperimentDataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.write_tensorboard_experiment_data.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_WriteTensorboardExperimentData_async
@@ -3376,9 +3360,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse | WriteTensorboardRunDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse|WriteTensorboardRunDataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.write_tensorboard_run_data.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_WriteTensorboardRunData_async
@@ -3485,9 +3468,8 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits {@link google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse | ReadTensorboardBlobDataResponse} on 'data' event.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
+   *   An object stream which emits {@link protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse|ReadTensorboardBlobDataResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.read_tensorboard_blob_data.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ReadTensorboardBlobData_async
@@ -3524,8 +3506,7 @@ export class TensorboardServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.create_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_CreateTensorboard_async
@@ -3620,8 +3601,7 @@ export class TensorboardServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.create_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_CreateTensorboard_async
@@ -3671,8 +3651,7 @@ export class TensorboardServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.update_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_UpdateTensorboard_async
@@ -3767,8 +3746,7 @@ export class TensorboardServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.update_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_UpdateTensorboard_async
@@ -3811,8 +3789,7 @@ export class TensorboardServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboard_async
@@ -3907,8 +3884,7 @@ export class TensorboardServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboard_async
@@ -3951,8 +3927,7 @@ export class TensorboardServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard_experiment.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboardExperiment_async
@@ -4051,8 +4026,7 @@ export class TensorboardServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard_experiment.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboardExperiment_async
@@ -4095,8 +4069,7 @@ export class TensorboardServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard_run.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboardRun_async
@@ -4191,8 +4164,7 @@ export class TensorboardServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard_run.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboardRun_async
@@ -4235,8 +4207,7 @@ export class TensorboardServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboardTimeSeries_async
@@ -4335,8 +4306,7 @@ export class TensorboardServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.delete_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_DeleteTensorboardTimeSeries_async
@@ -4382,11 +4352,11 @@ export class TensorboardServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4395,14 +4365,13 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.Tensorboard|Tensorboard}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTensorboardsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboards(
@@ -4497,11 +4466,11 @@ export class TensorboardServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4510,13 +4479,12 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.Tensorboard|Tensorboard} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardsStream(
@@ -4560,11 +4528,11 @@ export class TensorboardServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboards|TensorboardService.ListTensorboards}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4573,12 +4541,11 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.Tensorboard|Tensorboard}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.list_tensorboards.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ListTensorboards_async
@@ -4622,11 +4589,11 @@ export class TensorboardServiceClient {
    *   above 1000 are coerced to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4635,14 +4602,13 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.TensorboardExperiment|TensorboardExperiment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTensorboardExperimentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardExperiments(
@@ -4741,11 +4707,11 @@ export class TensorboardServiceClient {
    *   above 1000 are coerced to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4754,13 +4720,12 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardExperiment|TensorboardExperiment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardExperimentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardExperimentsStream(
@@ -4804,11 +4769,11 @@ export class TensorboardServiceClient {
    *   above 1000 are coerced to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardExperiments|TensorboardService.ListTensorboardExperiments}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4817,12 +4782,11 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardExperiment|TensorboardExperiment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.list_tensorboard_experiments.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ListTensorboardExperiments_async
@@ -4866,11 +4830,11 @@ export class TensorboardServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4879,14 +4843,13 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.TensorboardRun|TensorboardRun}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTensorboardRunsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardRuns(
@@ -4981,11 +4944,11 @@ export class TensorboardServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -4994,13 +4957,12 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardRun|TensorboardRun} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardRunsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardRunsStream(
@@ -5044,11 +5006,11 @@ export class TensorboardServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardRuns|TensorboardService.ListTensorboardRuns}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -5057,12 +5019,11 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardRun|TensorboardRun}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.list_tensorboard_runs.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ListTensorboardRuns_async
@@ -5106,11 +5067,11 @@ export class TensorboardServiceClient {
    *   above 1000 are coerced to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -5119,14 +5080,13 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.TensorboardTimeSeries|TensorboardTimeSeries}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTensorboardTimeSeriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardTimeSeries(
@@ -5225,11 +5185,11 @@ export class TensorboardServiceClient {
    *   above 1000 are coerced to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -5238,13 +5198,12 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.TensorboardTimeSeries|TensorboardTimeSeries} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardTimeSeriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTensorboardTimeSeriesStream(
@@ -5288,11 +5247,11 @@ export class TensorboardServiceClient {
    *   above 1000 are coerced to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ListTensorboardTimeSeries|TensorboardService.ListTensorboardTimeSeries}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the list.
@@ -5301,12 +5260,11 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardTimeSeries|TensorboardTimeSeries}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.list_tensorboard_time_series.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ListTensorboardTimeSeries_async
@@ -5350,11 +5308,11 @@ export class TensorboardServiceClient {
    *   Values above 10000 are coerced to 10000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the TensorboardTimeSeries' data.
@@ -5363,14 +5321,13 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TimeSeriesDataPoint | TimeSeriesDataPoint}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint|TimeSeriesDataPoint}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `exportTensorboardTimeSeriesDataAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   exportTensorboardTimeSeriesData(
@@ -5468,11 +5425,11 @@ export class TensorboardServiceClient {
    *   Values above 10000 are coerced to 10000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the TensorboardTimeSeries' data.
@@ -5481,13 +5438,12 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TimeSeriesDataPoint | TimeSeriesDataPoint} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint|TimeSeriesDataPoint} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `exportTensorboardTimeSeriesDataAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   exportTensorboardTimeSeriesDataStream(
@@ -5531,11 +5487,11 @@ export class TensorboardServiceClient {
    *   Values above 10000 are coerced to 10000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
+   *   {@link protos.google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData|ExportTensorboardTimeSeriesData}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   Field to use to sort the TensorboardTimeSeries' data.
@@ -5544,12 +5500,11 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.TimeSeriesDataPoint | TimeSeriesDataPoint}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint|TimeSeriesDataPoint}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tensorboard_service.export_tensorboard_time_series_data.js</caption>
    * region_tag:aiplatform_v1_generated_TensorboardService_ExportTensorboardTimeSeriesData_async
@@ -5615,7 +5570,7 @@ export class TensorboardServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -5636,8 +5591,7 @@ export class TensorboardServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5663,7 +5617,7 @@ export class TensorboardServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -5684,8 +5638,7 @@ export class TensorboardServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5712,7 +5665,7 @@ export class TensorboardServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -5727,8 +5680,7 @@ export class TensorboardServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -5774,12 +5726,11 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

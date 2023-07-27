@@ -42,7 +42,7 @@ function main(parent, requests) {
    *  Required. The request message specifying the TensorboardTimeSeries to
    *  create. A maximum of 1000 TensorboardTimeSeries can be created in a batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;

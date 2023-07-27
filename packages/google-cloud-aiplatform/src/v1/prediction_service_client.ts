@@ -451,21 +451,20 @@ export class PredictionServiceClient {
    *   in case of AutoML Models, or, in case of customer created Models, the
    *   behaviour is as documented by that Model.
    *   The schema of any single instance may be specified via Endpoint's
-   *   DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's}
-   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
+   *   DeployedModels' {@link protos.google.cloud.aiplatform.v1.DeployedModel.model|Model's}
+   *   {@link protos.google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link protos.google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
    * @param {google.protobuf.Value} request.parameters
    *   The parameters that govern the prediction. The schema of the parameters may
    *   be specified via Endpoint's DeployedModels' [Model's
    *   ][google.cloud.aiplatform.v1.DeployedModel.model]
-   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+   *   {@link protos.google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link protos.google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.PredictResponse | PredictResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.PredictResponse|PredictResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/prediction_service.predict.js</caption>
    * region_tag:aiplatform_v1_generated_PredictionService_Predict_async
@@ -542,11 +541,11 @@ export class PredictionServiceClient {
    * The response includes the following HTTP headers:
    *
    * * `X-Vertex-AI-Endpoint-Id`: ID of the
-   * {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} that served this
+   * {@link protos.google.cloud.aiplatform.v1.Endpoint|Endpoint} that served this
    * prediction.
    *
    * * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's
-   * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} that served this
+   * {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModel} that served this
    * prediction.
    *
    * @param {Object} request
@@ -558,25 +557,24 @@ export class PredictionServiceClient {
    * @param {google.api.HttpBody} request.httpBody
    *   The prediction input. Supports HTTP headers and arbitrary data payload.
    *
-   *   A {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} may have an
+   *   A {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModel} may have an
    *   upper limit on the number of instances it supports per request. When this
    *   limit it is exceeded for an AutoML model, the
-   *   {@link google.cloud.aiplatform.v1.PredictionService.RawPredict|RawPredict}
+   *   {@link protos.google.cloud.aiplatform.v1.PredictionService.RawPredict|RawPredict}
    *   method returns an error. When this limit is exceeded for a custom-trained
    *   model, the behavior varies depending on the model.
    *
    *   You can specify the schema for each instance in the
-   *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
-   *   field when you create a {@link google.cloud.aiplatform.v1.Model|Model}. This
+   *   {@link protos.google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
+   *   field when you create a {@link protos.google.cloud.aiplatform.v1.Model|Model}. This
    *   schema applies when you deploy the `Model` as a `DeployedModel` to an
-   *   {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} and use the `RawPredict`
+   *   {@link protos.google.cloud.aiplatform.v1.Endpoint|Endpoint} and use the `RawPredict`
    *   method.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.HttpBody | HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/prediction_service.raw_predict.js</caption>
    * region_tag:aiplatform_v1_generated_PredictionService_RawPredict_async
@@ -653,13 +651,13 @@ export class PredictionServiceClient {
    * Perform an online explanation.
    *
    * If
-   * {@link google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id}
+   * {@link protos.google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id}
    * is specified, the corresponding DeployModel must have
-   * {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
+   * {@link protos.google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
    * populated. If
-   * {@link google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id}
+   * {@link protos.google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id}
    * is not specified, all DeployedModels must have
-   * {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
+   * {@link protos.google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
    * populated.
    *
    * @param {Object} request
@@ -675,18 +673,18 @@ export class PredictionServiceClient {
    *   in case of AutoML Models, or, in case of customer created Models, the
    *   behaviour is as documented by that Model.
    *   The schema of any single instance may be specified via Endpoint's
-   *   DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's}
-   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
+   *   DeployedModels' {@link protos.google.cloud.aiplatform.v1.DeployedModel.model|Model's}
+   *   {@link protos.google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link protos.google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
    * @param {google.protobuf.Value} request.parameters
    *   The parameters that govern the prediction. The schema of the parameters may
    *   be specified via Endpoint's DeployedModels' [Model's
    *   ][google.cloud.aiplatform.v1.DeployedModel.model]
-   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+   *   {@link protos.google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link protos.google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
    * @param {google.cloud.aiplatform.v1.ExplanationSpecOverride} request.explanationSpecOverride
    *   If specified, overrides the
-   *   {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
+   *   {@link protos.google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
    *   of the DeployedModel. Can be used for explaining prediction results with
    *   different configurations, such as:
    *    - Explaining top-5 predictions results as opposed to top-1;
@@ -696,13 +694,12 @@ export class PredictionServiceClient {
    * @param {string} request.deployedModelId
    *   If specified, this ExplainRequest will be served by the chosen
    *   DeployedModel, overriding
-   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|Endpoint.traffic_split}.
+   *   {@link protos.google.cloud.aiplatform.v1.Endpoint.traffic_split|Endpoint.traffic_split}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ExplainResponse | ExplainResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ExplainResponse|ExplainResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/prediction_service.explain.js</caption>
    * region_tag:aiplatform_v1_generated_PredictionService_Explain_async
@@ -813,7 +810,7 @@ export class PredictionServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -834,8 +831,7 @@ export class PredictionServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -861,7 +857,7 @@ export class PredictionServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -882,8 +878,7 @@ export class PredictionServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -910,7 +905,7 @@ export class PredictionServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -925,8 +920,7 @@ export class PredictionServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -972,12 +966,11 @@ export class PredictionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

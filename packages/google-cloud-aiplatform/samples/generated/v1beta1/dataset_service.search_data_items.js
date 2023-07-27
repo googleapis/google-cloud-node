@@ -83,7 +83,7 @@ function main(dataset) {
    *  Must specify `saved_query_id=` - saved query id that annotations should
    *  belong to.
    */
-  // const annotationFilters = 'abc123'
+  // const annotationFilters = ['abc','def']
   /**
    *  Mask specifying which fields of
    *  DataItemView google.cloud.aiplatform.v1beta1.DataItemView  to read.

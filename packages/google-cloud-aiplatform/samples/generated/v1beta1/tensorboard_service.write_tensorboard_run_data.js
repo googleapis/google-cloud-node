@@ -41,7 +41,7 @@ function main(tensorboardRun, timeSeriesData) {
    *  step.
    *  The upper limit of data points per write request is 5000.
    */
-  // const timeSeriesData = 1234
+  // const timeSeriesData = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;

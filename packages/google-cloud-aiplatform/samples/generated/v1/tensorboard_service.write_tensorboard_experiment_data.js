@@ -37,7 +37,7 @@ function main(tensorboardExperiment, writeRunDataRequests) {
   /**
    *  Required. Requests containing per-run TensorboardTimeSeries data to write.
    */
-  // const writeRunDataRequests = 1234
+  // const writeRunDataRequests = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1;

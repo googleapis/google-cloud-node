@@ -1629,9 +1629,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.get_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_GetModel_async
@@ -1729,13 +1728,12 @@ export class ModelServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
    *   For the `FieldMask` definition, see
-   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.update_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_UpdateModel_async
@@ -1821,7 +1819,7 @@ export class ModelServiceClient {
    * @param {string[]} request.versionAliases
    *   Required. The set of version aliases to merge.
    *   The alias should be at most 128 characters, and match
-   *   `{@link a-zA-Z0-9-|a-z}{0,126}[a-z-0-9]`.
+   *   `{@link protos.a-zA-Z0-9-|a-z}{0,126}[a-z-0-9]`.
    *   Add the `-` prefix to an alias means removing that alias from the version.
    *   `-` is NOT counted in the 128 characters. Example: `-golden` means removing
    *   the `golden` alias from the version.
@@ -1834,9 +1832,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.merge_version_aliases.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_MergeVersionAliases_async
@@ -1928,9 +1925,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ModelEvaluation | ModelEvaluation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelEvaluation|ModelEvaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.import_model_evaluation.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ImportModelEvaluation_async
@@ -2029,9 +2025,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse | BatchImportModelEvaluationSlicesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse|BatchImportModelEvaluationSlicesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.batch_import_model_evaluation_slices.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_async
@@ -2134,9 +2129,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsResponse | BatchImportEvaluatedAnnotationsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsResponse|BatchImportEvaluatedAnnotationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.batch_import_evaluated_annotations.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_BatchImportEvaluatedAnnotations_async
@@ -2237,9 +2231,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ModelEvaluation | ModelEvaluation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelEvaluation|ModelEvaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.get_model_evaluation.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_GetModelEvaluation_async
@@ -2330,9 +2323,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ModelEvaluationSlice | ModelEvaluationSlice}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelEvaluationSlice|ModelEvaluationSlice}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.get_model_evaluation_slice.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_GetModelEvaluationSlice_async
@@ -2455,8 +2447,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.upload_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_UploadModel_async
@@ -2551,8 +2542,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.upload_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_UploadModel_async
@@ -2596,8 +2586,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.update_explanation_dataset.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_UpdateExplanationDataset_async
@@ -2696,8 +2685,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.update_explanation_dataset.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_UpdateExplanationDataset_async
@@ -2729,10 +2717,10 @@ export class ModelServiceClient {
    * Deletes a Model.
    *
    * A model cannot be deleted if any
-   * {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} resource has a
-   * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} based on the
+   * {@link protos.google.cloud.aiplatform.v1.Endpoint|Endpoint} resource has a
+   * {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModel} based on the
    * model in its
-   * {@link google.cloud.aiplatform.v1.Endpoint.deployed_models|deployed_models}
+   * {@link protos.google.cloud.aiplatform.v1.Endpoint.deployed_models|deployed_models}
    * field.
    *
    * @param {Object} request
@@ -2746,8 +2734,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.delete_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_DeleteModel_async
@@ -2842,8 +2829,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.delete_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_DeleteModel_async
@@ -2875,9 +2861,9 @@ export class ModelServiceClient {
    * Deletes a Model version.
    *
    * Model version can only be deleted if there are no
-   * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModels} created from it.
+   * {@link protos.google.cloud.aiplatform.v1.DeployedModel|DeployedModels} created from it.
    * Deleting the only version in the Model is not allowed. Use
-   * {@link google.cloud.aiplatform.v1.ModelService.DeleteModel|DeleteModel} for
+   * {@link protos.google.cloud.aiplatform.v1.ModelService.DeleteModel|DeleteModel} for
    * deleting the Model instead.
    *
    * @param {Object} request
@@ -2893,8 +2879,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.delete_model_version.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_DeleteModelVersion_async
@@ -2989,8 +2974,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.delete_model_version.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_DeleteModelVersion_async
@@ -3038,8 +3022,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.export_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ExportModel_async
@@ -3134,8 +3117,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.export_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ExportModel_async
@@ -3167,7 +3149,7 @@ export class ModelServiceClient {
    * Copies an already existing Vertex AI Model into the specified Location.
    * The source Model must exist in the same Project.
    * When copying custom Models, the users themselves are responsible for
-   * {@link google.cloud.aiplatform.v1.Model.metadata|Model.metadata} content to be
+   * {@link protos.google.cloud.aiplatform.v1.Model.metadata|Model.metadata} content to be
    * region-agnostic, as well as making sure that any resources (e.g. files) it
    * depends on remain accessible.
    *
@@ -3199,8 +3181,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.copy_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_CopyModel_async
@@ -3295,8 +3276,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.copy_model.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_CopyModel_async
@@ -3355,9 +3335,9 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
@@ -3374,14 +3354,13 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Model | Model}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.Model|Model}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModels(
@@ -3483,9 +3462,9 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
@@ -3502,13 +3481,12 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Model | Model} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.Model|Model} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelsStream(
@@ -3565,9 +3543,9 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
@@ -3584,12 +3562,11 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.Model | Model}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.Model|Model}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.list_models.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ListModels_async
@@ -3627,9 +3604,9 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelVersions|ListModelVersions}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelVersions|ListModelVersions}
    *   call.
    * @param {string} request.filter
    *   An expression for filtering the results of the request. For field names
@@ -3657,14 +3634,13 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Model | Model}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.Model|Model}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listModelVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelVersions(
@@ -3753,9 +3729,9 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelVersions|ListModelVersions}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelVersions|ListModelVersions}
    *   call.
    * @param {string} request.filter
    *   An expression for filtering the results of the request. For field names
@@ -3783,13 +3759,12 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Model | Model} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.Model|Model} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listModelVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelVersionsStream(
@@ -3827,9 +3802,9 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelVersions|ListModelVersions}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelVersions|ListModelVersions}
    *   call.
    * @param {string} request.filter
    *   An expression for filtering the results of the request. For field names
@@ -3857,12 +3832,11 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.Model | Model}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.Model|Model}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.list_model_versions.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ListModelVersions_async
@@ -3903,23 +3877,22 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.ModelEvaluation | ModelEvaluation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelEvaluation|ModelEvaluation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listModelEvaluationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelEvaluations(
@@ -4011,22 +3984,21 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.ModelEvaluation | ModelEvaluation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelEvaluation|ModelEvaluation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listModelEvaluationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelEvaluationsStream(
@@ -4067,21 +4039,20 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.ModelEvaluation | ModelEvaluation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.ModelEvaluation|ModelEvaluation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.list_model_evaluations.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ListModelEvaluations_async
@@ -4125,23 +4096,22 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.ModelEvaluationSlice | ModelEvaluationSlice}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelEvaluationSlice|ModelEvaluationSlice}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listModelEvaluationSlicesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelEvaluationSlices(
@@ -4240,22 +4210,21 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.ModelEvaluationSlice | ModelEvaluationSlice} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelEvaluationSlice|ModelEvaluationSlice} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listModelEvaluationSlicesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelEvaluationSlicesStream(
@@ -4299,21 +4268,20 @@ export class ModelServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.ModelEvaluationSlice | ModelEvaluationSlice}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.ModelEvaluationSlice|ModelEvaluationSlice}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/model_service.list_model_evaluation_slices.js</caption>
    * region_tag:aiplatform_v1_generated_ModelService_ListModelEvaluationSlices_async
@@ -4378,7 +4346,7 @@ export class ModelServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -4399,8 +4367,7 @@ export class ModelServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4426,7 +4393,7 @@ export class ModelServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -4447,8 +4414,7 @@ export class ModelServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4475,7 +4441,7 @@ export class ModelServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -4490,8 +4456,7 @@ export class ModelServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -4537,12 +4502,11 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
