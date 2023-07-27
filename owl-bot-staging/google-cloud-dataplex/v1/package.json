@@ -1,0 +1,66 @@
+{
+  "name": "@google-cloud/dataplex",
+  "version": "0.1.0",
+  "description": "Dataplex client for Node.js",
+  "repository": "googleapis/nodejs-dataplex",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src",
+    "build/protos"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google dataplex",
+    "dataplex",
+    "content service",
+    "dataplex service",
+    "data scan service",
+    "data taxonomy service",
+    "metadata service"
+  ],
+  "scripts": {
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile-protos": "compileProtos src",
+    "docs": "jsdoc -c .jsdoc.js",
+    "fix": "gts fix",
+    "lint": "gts check",
+    "prepare": "npm run compile-protos && npm run compile",
+    "system-test": "c8 mocha build/system-test",
+    "test": "c8 mocha build/test"
+  },
+  "dependencies": {
+    "google-gax": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.11.18",
+    "@types/sinon": "^10.0.15",
+    "c8": "^8.0.1",
+    "gapic-tools": "^0.1.7",
+    "gts": "3.1.1",
+    "jsdoc": "^4.0.2",
+    "jsdoc-fresh": "^2.0.2",
+    "jsdoc-region-tag": "^2.0.1",
+    "mocha": "^10.2.0",
+    "null-loader": "^4.0.1",
+    "pack-n-play": "^1.0.0-2",
+    "sinon": "^15.2.0",
+    "ts-loader": "^8.4.0",
+    "typescript": "5.1.6",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "engines": {
+    "node": ">=v14"
+  }
+}
