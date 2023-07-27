@@ -317,8 +317,7 @@ export class GlobalNetworkEndpointGroupsClient {
  * @returns {Promise} - The promise which resolves to an array.
  *   The first element of the array is an object representing
  *   a long running operation.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  *   This method is considered to be in beta. This means while
  *   stable it is still a work-in-progress and under active development,
@@ -405,8 +404,7 @@ export class GlobalNetworkEndpointGroupsClient {
  * @returns {Promise} - The promise which resolves to an array.
  *   The first element of the array is an object representing
  *   a long running operation.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  *   This method is considered to be in beta. This means while
  *   stable it is still a work-in-progress and under active development,
@@ -495,8 +493,7 @@ export class GlobalNetworkEndpointGroupsClient {
  * @returns {Promise} - The promise which resolves to an array.
  *   The first element of the array is an object representing
  *   a long running operation.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  *   This method is considered to be in beta. This means while
  *   stable it is still a work-in-progress and under active development,
@@ -579,9 +576,8 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.compute.v1.NetworkEndpointGroup | NetworkEndpointGroup}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.NetworkEndpointGroup|NetworkEndpointGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/global_network_endpoint_groups.get.js</caption>
  * region_tag:compute_v1_generated_GlobalNetworkEndpointGroups_Get_async
@@ -657,8 +653,7 @@ export class GlobalNetworkEndpointGroupsClient {
  * @returns {Promise} - The promise which resolves to an array.
  *   The first element of the array is an object representing
  *   a long running operation.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  *   This method is considered to be in beta. This means while
  *   stable it is still a work-in-progress and under active development,
@@ -749,14 +744,13 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.cloud.compute.v1.NetworkEndpointGroup | NetworkEndpointGroup}.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.NetworkEndpointGroup|NetworkEndpointGroup}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   list(
@@ -835,13 +829,12 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.cloud.compute.v1.NetworkEndpointGroup | NetworkEndpointGroup} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.NetworkEndpointGroup|NetworkEndpointGroup} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listStream(
@@ -888,12 +881,11 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.cloud.compute.v1.NetworkEndpointGroup | NetworkEndpointGroup}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.cloud.compute.v1.NetworkEndpointGroup|NetworkEndpointGroup}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/global_network_endpoint_groups.list.js</caption>
  * region_tag:compute_v1_generated_GlobalNetworkEndpointGroups_List_async
@@ -942,14 +934,13 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.cloud.compute.v1.NetworkEndpointWithHealthStatus | NetworkEndpointWithHealthStatus}.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus|NetworkEndpointWithHealthStatus}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listNetworkEndpointsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listNetworkEndpoints(
@@ -1031,13 +1022,12 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.cloud.compute.v1.NetworkEndpointWithHealthStatus | NetworkEndpointWithHealthStatus} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus|NetworkEndpointWithHealthStatus} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listNetworkEndpointsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listNetworkEndpointsStream(
@@ -1087,12 +1077,11 @@ export class GlobalNetworkEndpointGroupsClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.cloud.compute.v1.NetworkEndpointWithHealthStatus | NetworkEndpointWithHealthStatus}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.cloud.compute.v1.NetworkEndpointWithHealthStatus|NetworkEndpointWithHealthStatus}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/global_network_endpoint_groups.list_network_endpoints.js</caption>
  * region_tag:compute_v1_generated_GlobalNetworkEndpointGroups_ListNetworkEndpoints_async
