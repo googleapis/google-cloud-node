@@ -360,9 +360,8 @@ export class UserEventServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.UserEvent | UserEvent}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.UserEvent|UserEvent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/user_event_service.write_user_event.js</caption>
  * region_tag:discoveryengine_v1beta_generated_UserEventService_WriteUserEvent_async
@@ -448,9 +447,8 @@ export class UserEventServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.api.HttpBody | HttpBody}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/user_event_service.collect_user_event.js</caption>
  * region_tag:discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async
@@ -539,8 +537,7 @@ export class UserEventServiceClient {
  *   The first element of the array is an object representing
  *   a long running operation. Its `promise()` method returns a promise
  *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
  * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async
@@ -605,8 +602,7 @@ export class UserEventServiceClient {
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/user_event_service.import_user_events.js</caption>
  * region_tag:discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async

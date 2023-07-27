@@ -31,7 +31,7 @@ import * as gapicConfig from './schema_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s.
+ *  Service for managing {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s.
  * @class
  * @memberof v1beta
  */
@@ -373,7 +373,7 @@ export class SchemaServiceClient {
   // -- Service calls --
   // -------------------
 /**
- * Gets a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
+ * Gets a {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -383,9 +383,8 @@ export class SchemaServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.Schema | Schema}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.get_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_GetSchema_async
@@ -446,7 +445,7 @@ export class SchemaServiceClient {
   }
 
 /**
- * Creates a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
+ * Creates a {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -454,13 +453,13 @@ export class SchemaServiceClient {
  *   Required. The parent data store resource name, in the format of
  *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
  * @param {google.cloud.discoveryengine.v1beta.Schema} request.schema
- *   Required. The {@link google.cloud.discoveryengine.v1beta.Schema|Schema} to
+ *   Required. The {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema} to
  *   create.
  * @param {string} request.schemaId
  *   Required. The ID to use for the
- *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}, which will become the
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}, which will become the
  *   final component of the
- *   {@link google.cloud.discoveryengine.v1beta.Schema.name|Schema.name}.
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema.name|Schema.name}.
  *
  *   This field should conform to
  *   [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length
@@ -471,8 +470,7 @@ export class SchemaServiceClient {
  *   The first element of the array is an object representing
  *   a long running operation. Its `promise()` method returns a promise
  *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.create_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_CreateSchema_async
@@ -537,8 +535,7 @@ export class SchemaServiceClient {
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.create_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_CreateSchema_async
@@ -550,17 +547,17 @@ export class SchemaServiceClient {
     return decodeOperation as LROperation<protos.google.cloud.discoveryengine.v1beta.Schema, protos.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata>;
   }
 /**
- * Updates a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
+ * Updates a {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {google.cloud.discoveryengine.v1beta.Schema} request.schema
- *   Required. The {@link google.cloud.discoveryengine.v1beta.Schema|Schema} to
+ *   Required. The {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema} to
  *   update.
  * @param {boolean} request.allowMissing
  *   If set to true, and the
- *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema} is not found, a new
- *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema} will be created. In
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema} is not found, a new
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema} will be created. In
  *   this situation, `update_mask` is ignored.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -568,8 +565,7 @@ export class SchemaServiceClient {
  *   The first element of the array is an object representing
  *   a long running operation. Its `promise()` method returns a promise
  *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.update_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_UpdateSchema_async
@@ -634,8 +630,7 @@ export class SchemaServiceClient {
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.update_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_UpdateSchema_async
@@ -647,7 +642,7 @@ export class SchemaServiceClient {
     return decodeOperation as LROperation<protos.google.cloud.discoveryengine.v1beta.Schema, protos.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata>;
   }
 /**
- * Deletes a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
+ * Deletes a {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -660,8 +655,7 @@ export class SchemaServiceClient {
  *   The first element of the array is an object representing
  *   a long running operation. Its `promise()` method returns a promise
  *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.delete_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async
@@ -726,8 +720,7 @@ export class SchemaServiceClient {
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.delete_schema.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async
@@ -739,7 +732,7 @@ export class SchemaServiceClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata>;
   }
  /**
- * Gets a list of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s.
+ * Gets a list of {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -747,32 +740,31 @@ export class SchemaServiceClient {
  *   Required. The parent data store resource name, in the format of
  *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
  * @param {number} request.pageSize
- *   The maximum number of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s
+ *   The maximum number of {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s
  *   to return. The service may return fewer than this value.
  *
  *   If unspecified, at most 100
- *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
  *
  *   The maximum value is 1000; values above 1000 will be coerced to 1000.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to
- *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
  *   must match the call that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1beta.Schema | Schema}.
+ *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listSchemasAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listSchemas(
@@ -840,31 +832,30 @@ export class SchemaServiceClient {
  *   Required. The parent data store resource name, in the format of
  *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
  * @param {number} request.pageSize
- *   The maximum number of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s
+ *   The maximum number of {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s
  *   to return. The service may return fewer than this value.
  *
  *   If unspecified, at most 100
- *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
  *
  *   The maximum value is 1000; values above 1000 will be coerced to 1000.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to
- *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
  *   must match the call that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1beta.Schema | Schema} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listSchemasAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listSchemasStream(
@@ -900,30 +891,29 @@ export class SchemaServiceClient {
  *   Required. The parent data store resource name, in the format of
  *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
  * @param {number} request.pageSize
- *   The maximum number of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s
+ *   The maximum number of {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s
  *   to return. The service may return fewer than this value.
  *
  *   If unspecified, at most 100
- *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
  *
  *   The maximum value is 1000; values above 1000 will be coerced to 1000.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to
- *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
  *   must match the call that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.cloud.discoveryengine.v1beta.Schema | Schema}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Schema|Schema}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/schema_service.list_schemas.js</caption>
  * region_tag:discoveryengine_v1beta_generated_SchemaService_ListSchemas_async

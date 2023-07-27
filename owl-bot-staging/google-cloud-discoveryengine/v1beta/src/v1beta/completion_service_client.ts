@@ -336,7 +336,7 @@ export class CompletionServiceClient {
  *
  *   * `document` - Using suggestions generated from user-imported documents.
  *   * `search-history` - Using suggestions generated from the past history of
- *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
  *   API calls. Do not use it when there is no traffic for Search API.
  *   * `user-event` - Using suggestions generated from user-imported search
  *   events.
@@ -347,7 +347,7 @@ export class CompletionServiceClient {
  *
  *   * `document` is the default model for regular dataStores.
  *   * `search-history` is the default model for
- *   {@link |IndustryVertical.SITE_SEARCH} dataStores.
+ *   {@link protos.|IndustryVertical.SITE_SEARCH} dataStores.
  * @param {string} request.userPseudoId
  *   A unique identifier for tracking visitors. For example, this could be
  *   implemented with an HTTP cookie, which should be able to uniquely identify
@@ -357,9 +357,9 @@ export class CompletionServiceClient {
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
  *   This should be the same identifier as
- *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
  *   and
- *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
+ *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
  *
  *   The field must be a UTF-8 encoded string with a length limit of 128
  *   characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
@@ -371,9 +371,8 @@ export class CompletionServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse | CompleteQueryResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.CompleteQueryResponse|CompleteQueryResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta/completion_service.complete_query.js</caption>
  * region_tag:discoveryengine_v1beta_generated_CompletionService_CompleteQuery_async

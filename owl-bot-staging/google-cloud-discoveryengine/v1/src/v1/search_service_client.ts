@@ -347,26 +347,26 @@ export class SearchServiceClient {
  * @param {string} request.query
  *   Raw search query.
  * @param {number} request.pageSize
- *   Maximum number of {@link google.cloud.discoveryengine.v1.Document|Document}s to
+ *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
  *   return. If unspecified, defaults to a reasonable value. The maximum allowed
  *   value is 100. Values above 100 will be coerced to 100.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
  * @param {string} request.pageToken
  *   A page token received from a previous
- *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to
- *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
  *   must match the call that provided the page token. Otherwise, an
  *    `INVALID_ARGUMENT`  error is returned.
  * @param {number} request.offset
  *   A 0-indexed integer that specifies the current offset (that is, starting
  *   result location, amongst the
- *   {@link google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
+ *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
  *   relevant) in search results. This field is only considered if
- *   {@link google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
@@ -399,9 +399,9 @@ export class SearchServiceClient {
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
  *   This should be the same identifier as
- *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
  *   and
- *   {@link google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
  *
  *   The field must be a UTF-8 encoded string with a length limit of 128
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
@@ -410,7 +410,7 @@ export class SearchServiceClient {
  *   search.
  * @param {boolean} request.safeSearch
  *   Whether to turn on safe search. This is only supported for
- *   {@link |ContentConfig.PUBLIC_WEBSITE}.
+ *   {@link protos.|ContentConfig.PUBLIC_WEBSITE}.
  * @param {number[]} request.userLabels
  *   The user labels applied to a resource must meet the following requirements:
  *
@@ -432,14 +432,13 @@ export class SearchServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult | SearchResult}.
+ *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.SearchResponse.SearchResult|SearchResult}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `searchAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   search(
@@ -517,26 +516,26 @@ export class SearchServiceClient {
  * @param {string} request.query
  *   Raw search query.
  * @param {number} request.pageSize
- *   Maximum number of {@link google.cloud.discoveryengine.v1.Document|Document}s to
+ *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
  *   return. If unspecified, defaults to a reasonable value. The maximum allowed
  *   value is 100. Values above 100 will be coerced to 100.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
  * @param {string} request.pageToken
  *   A page token received from a previous
- *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to
- *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
  *   must match the call that provided the page token. Otherwise, an
  *    `INVALID_ARGUMENT`  error is returned.
  * @param {number} request.offset
  *   A 0-indexed integer that specifies the current offset (that is, starting
  *   result location, amongst the
- *   {@link google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
+ *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
  *   relevant) in search results. This field is only considered if
- *   {@link google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
@@ -569,9 +568,9 @@ export class SearchServiceClient {
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
  *   This should be the same identifier as
- *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
  *   and
- *   {@link google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
  *
  *   The field must be a UTF-8 encoded string with a length limit of 128
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
@@ -580,7 +579,7 @@ export class SearchServiceClient {
  *   search.
  * @param {boolean} request.safeSearch
  *   Whether to turn on safe search. This is only supported for
- *   {@link |ContentConfig.PUBLIC_WEBSITE}.
+ *   {@link protos.|ContentConfig.PUBLIC_WEBSITE}.
  * @param {number[]} request.userLabels
  *   The user labels applied to a resource must meet the following requirements:
  *
@@ -602,13 +601,12 @@ export class SearchServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult | SearchResult} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.SearchResponse.SearchResult|SearchResult} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `searchAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   searchStream(
@@ -654,26 +652,26 @@ export class SearchServiceClient {
  * @param {string} request.query
  *   Raw search query.
  * @param {number} request.pageSize
- *   Maximum number of {@link google.cloud.discoveryengine.v1.Document|Document}s to
+ *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
  *   return. If unspecified, defaults to a reasonable value. The maximum allowed
  *   value is 100. Values above 100 will be coerced to 100.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
  * @param {string} request.pageToken
  *   A page token received from a previous
- *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to
- *   {@link google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
  *   must match the call that provided the page token. Otherwise, an
  *    `INVALID_ARGUMENT`  error is returned.
  * @param {number} request.offset
  *   A 0-indexed integer that specifies the current offset (that is, starting
  *   result location, amongst the
- *   {@link google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
+ *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s deemed by the API as
  *   relevant) in search results. This field is only considered if
- *   {@link google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest.page_token|page_token} is
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
@@ -706,9 +704,9 @@ export class SearchServiceClient {
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
  *   This should be the same identifier as
- *   {@link google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
  *   and
- *   {@link google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+ *   {@link protos.google.cloud.discoveryengine.v1.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
  *
  *   The field must be a UTF-8 encoded string with a length limit of 128
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
@@ -717,7 +715,7 @@ export class SearchServiceClient {
  *   search.
  * @param {boolean} request.safeSearch
  *   Whether to turn on safe search. This is only supported for
- *   {@link |ContentConfig.PUBLIC_WEBSITE}.
+ *   {@link protos.|ContentConfig.PUBLIC_WEBSITE}.
  * @param {number[]} request.userLabels
  *   The user labels applied to a resource must meet the following requirements:
  *
@@ -739,12 +737,11 @@ export class SearchServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult | SearchResult}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.cloud.discoveryengine.v1.SearchResponse.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1/search_service.search.js</caption>
  * region_tag:discoveryengine_v1_generated_SearchService_Search_async
