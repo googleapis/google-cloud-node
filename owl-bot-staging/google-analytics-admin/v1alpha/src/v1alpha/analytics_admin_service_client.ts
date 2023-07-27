@@ -449,9 +449,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Account | Account}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Account|Account}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_account.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAccount_async
@@ -532,9 +531,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_account.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteAccount_async
@@ -609,9 +607,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Account | Account}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Account|Account}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_account.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAccount_async
@@ -683,9 +680,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ProvisionAccountTicketResponse | ProvisionAccountTicketResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ProvisionAccountTicketResponse|ProvisionAccountTicketResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.provision_account_ticket.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ProvisionAccountTicket_async
@@ -751,9 +747,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Property | Property}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Property|Property}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_property.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetProperty_async
@@ -823,9 +818,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Property | Property}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Property|Property}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_property.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateProperty_async
@@ -901,9 +895,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Property | Property}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Property|Property}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_property.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteProperty_async
@@ -979,9 +972,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Property | Property}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Property|Property}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_property.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateProperty_async
@@ -1050,9 +1042,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.UserLink | UserLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.UserLink|UserLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_user_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetUserLink_async
@@ -1128,9 +1119,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchGetUserLinksResponse | BatchGetUserLinksResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BatchGetUserLinksResponse|BatchGetUserLinksResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_get_user_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetUserLinks_async
@@ -1208,9 +1198,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.UserLink | UserLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.UserLink|UserLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_user_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateUserLink_async
@@ -1292,9 +1281,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchCreateUserLinksResponse | BatchCreateUserLinksResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BatchCreateUserLinksResponse|BatchCreateUserLinksResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_create_user_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchCreateUserLinks_async
@@ -1363,9 +1351,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.UserLink | UserLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.UserLink|UserLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_user_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateUserLink_async
@@ -1440,9 +1427,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchUpdateUserLinksResponse | BatchUpdateUserLinksResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksResponse|BatchUpdateUserLinksResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_update_user_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchUpdateUserLinks_async
@@ -1511,9 +1497,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_user_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteUserLink_async
@@ -1588,9 +1573,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_delete_user_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchDeleteUserLinks_async
@@ -1664,9 +1648,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.FirebaseLink | FirebaseLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.FirebaseLink|FirebaseLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_firebase_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateFirebaseLink_async
@@ -1736,9 +1719,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_firebase_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteFirebaseLink_async
@@ -1811,9 +1793,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.GlobalSiteTag | GlobalSiteTag}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.GlobalSiteTag|GlobalSiteTag}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_global_site_tag.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetGlobalSiteTag_async
@@ -1884,9 +1865,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.GoogleAdsLink | GoogleAdsLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.GoogleAdsLink|GoogleAdsLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_google_ads_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateGoogleAdsLink_async
@@ -1960,9 +1940,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.GoogleAdsLink | GoogleAdsLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.GoogleAdsLink|GoogleAdsLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_google_ads_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateGoogleAdsLink_async
@@ -2031,9 +2010,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_google_ads_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteGoogleAdsLink_async
@@ -2105,9 +2083,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DataSharingSettings | DataSharingSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DataSharingSettings|DataSharingSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_data_sharing_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataSharingSettings_async
@@ -2178,9 +2155,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret | MeasurementProtocolSecret}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret|MeasurementProtocolSecret}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_measurement_protocol_secret.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetMeasurementProtocolSecret_async
@@ -2252,9 +2228,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret | MeasurementProtocolSecret}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret|MeasurementProtocolSecret}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_measurement_protocol_secret.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateMeasurementProtocolSecret_async
@@ -2325,9 +2300,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_measurement_protocol_secret.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteMeasurementProtocolSecret_async
@@ -2399,9 +2373,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret | MeasurementProtocolSecret}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret|MeasurementProtocolSecret}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_measurement_protocol_secret.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_async
@@ -2483,9 +2456,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse | AcknowledgeUserDataCollectionResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse|AcknowledgeUserDataCollectionResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.acknowledge_user_data_collection.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_AcknowledgeUserDataCollection_async
@@ -2555,9 +2527,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.GoogleSignalsSettings | GoogleSignalsSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.GoogleSignalsSettings|GoogleSignalsSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_google_signals_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetGoogleSignalsSettings_async
@@ -2632,9 +2603,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.GoogleSignalsSettings | GoogleSignalsSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.GoogleSignalsSettings|GoogleSignalsSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_google_signals_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateGoogleSignalsSettings_async
@@ -2706,9 +2676,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ConversionEvent | ConversionEvent}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ConversionEvent|ConversionEvent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_conversion_event.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateConversionEvent_async
@@ -2779,9 +2748,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ConversionEvent | ConversionEvent}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ConversionEvent|ConversionEvent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_conversion_event.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetConversionEvent_async
@@ -2852,9 +2820,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_conversion_event.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteConversionEvent_async
@@ -2924,9 +2891,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink | DisplayVideo360AdvertiserLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink|DisplayVideo360AdvertiserLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_display_video360_advertiser_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDisplayVideo360AdvertiserLink_async
@@ -3001,9 +2967,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink | DisplayVideo360AdvertiserLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink|DisplayVideo360AdvertiserLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_display_video360_advertiser_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDisplayVideo360AdvertiserLink_async
@@ -3073,9 +3038,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_display_video360_advertiser_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteDisplayVideo360AdvertiserLink_async
@@ -3148,9 +3112,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink | DisplayVideo360AdvertiserLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink|DisplayVideo360AdvertiserLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_display_video360_advertiser_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDisplayVideo360AdvertiserLink_async
@@ -3220,9 +3183,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal | DisplayVideo360AdvertiserLinkProposal}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal|DisplayVideo360AdvertiserLinkProposal}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_display_video360_advertiser_link_proposal.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDisplayVideo360AdvertiserLinkProposal_async
@@ -3293,9 +3255,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal | DisplayVideo360AdvertiserLinkProposal}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal|DisplayVideo360AdvertiserLinkProposal}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_display_video360_advertiser_link_proposal.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDisplayVideo360AdvertiserLinkProposal_async
@@ -3366,9 +3327,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_display_video360_advertiser_link_proposal.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteDisplayVideo360AdvertiserLinkProposal_async
@@ -3440,9 +3400,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse | ApproveDisplayVideo360AdvertiserLinkProposalResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse|ApproveDisplayVideo360AdvertiserLinkProposalResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.approve_display_video360_advertiser_link_proposal.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ApproveDisplayVideo360AdvertiserLinkProposal_async
@@ -3516,9 +3475,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal | DisplayVideo360AdvertiserLinkProposal}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal|DisplayVideo360AdvertiserLinkProposal}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.cancel_display_video360_advertiser_link_proposal.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CancelDisplayVideo360AdvertiserLinkProposal_async
@@ -3589,9 +3547,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CustomDimension | CustomDimension}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CustomDimension|CustomDimension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_custom_dimension.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateCustomDimension_async
@@ -3664,9 +3621,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CustomDimension | CustomDimension}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CustomDimension|CustomDimension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_custom_dimension.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateCustomDimension_async
@@ -3736,9 +3692,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.archive_custom_dimension.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveCustomDimension_async
@@ -3808,9 +3763,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CustomDimension | CustomDimension}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CustomDimension|CustomDimension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_custom_dimension.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetCustomDimension_async
@@ -3881,9 +3835,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CustomMetric | CustomMetric}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CustomMetric|CustomMetric}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_custom_metric.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateCustomMetric_async
@@ -3956,9 +3909,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CustomMetric | CustomMetric}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CustomMetric|CustomMetric}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_custom_metric.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateCustomMetric_async
@@ -4028,9 +3980,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.archive_custom_metric.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveCustomMetric_async
@@ -4100,9 +4051,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CustomMetric | CustomMetric}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CustomMetric|CustomMetric}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_custom_metric.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetCustomMetric_async
@@ -4174,9 +4124,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DataRetentionSettings | DataRetentionSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DataRetentionSettings|DataRetentionSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_data_retention_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataRetentionSettings_async
@@ -4251,9 +4200,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DataRetentionSettings | DataRetentionSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DataRetentionSettings|DataRetentionSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_data_retention_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataRetentionSettings_async
@@ -4324,9 +4272,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DataStream | DataStream}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DataStream|DataStream}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_data_stream.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDataStream_async
@@ -4396,9 +4343,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_data_stream.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteDataStream_async
@@ -4471,9 +4417,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DataStream | DataStream}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DataStream|DataStream}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_data_stream.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDataStream_async
@@ -4543,9 +4488,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.DataStream | DataStream}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.DataStream|DataStream}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_data_stream.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataStream_async
@@ -4617,9 +4561,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Audience | Audience}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Audience|Audience}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_audience.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAudience_async
@@ -4690,9 +4633,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Audience | Audience}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Audience|Audience}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_audience.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAudience_async
@@ -4767,9 +4709,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.Audience | Audience}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.Audience|Audience}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_audience.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAudience_async
@@ -4838,9 +4779,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.archive_audience.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveAudience_async
@@ -4910,9 +4850,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.SearchAds360Link | SearchAds360Link}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SearchAds360Link|SearchAds360Link}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_search_ads360_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSearchAds360Link_async
@@ -4983,9 +4922,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.SearchAds360Link | SearchAds360Link}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SearchAds360Link|SearchAds360Link}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_search_ads360_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSearchAds360Link_async
@@ -5055,9 +4993,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_search_ads360_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSearchAds360Link_async
@@ -5130,9 +5067,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.SearchAds360Link | SearchAds360Link}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SearchAds360Link|SearchAds360Link}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_search_ads360_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSearchAds360Link_async
@@ -5202,9 +5138,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AttributionSettings | AttributionSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AttributionSettings|AttributionSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_attribution_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_async
@@ -5279,9 +5214,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AttributionSettings | AttributionSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AttributionSettings|AttributionSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_attribution_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAttributionSettings_async
@@ -5426,9 +5360,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.RunAccessReportResponse | RunAccessReportResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.RunAccessReportResponse|RunAccessReportResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.run_access_report.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_RunAccessReport_async
@@ -5501,9 +5434,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AccessBinding|AccessBinding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_access_binding.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAccessBinding_async
@@ -5575,9 +5507,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AccessBinding|AccessBinding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_access_binding.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAccessBinding_async
@@ -5646,9 +5577,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AccessBinding|AccessBinding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_access_binding.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAccessBinding_async
@@ -5719,9 +5649,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_access_binding.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteAccessBinding_async
@@ -5801,9 +5730,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchCreateAccessBindingsResponse | BatchCreateAccessBindingsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BatchCreateAccessBindingsResponse|BatchCreateAccessBindingsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_create_access_bindings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchCreateAccessBindings_async
@@ -5882,9 +5810,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchGetAccessBindingsResponse | BatchGetAccessBindingsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BatchGetAccessBindingsResponse|BatchGetAccessBindingsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_get_access_bindings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetAccessBindings_async
@@ -5962,9 +5889,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchUpdateAccessBindingsResponse | BatchUpdateAccessBindingsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BatchUpdateAccessBindingsResponse|BatchUpdateAccessBindingsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_update_access_bindings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchUpdateAccessBindings_async
@@ -6040,9 +5966,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_delete_access_bindings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchDeleteAccessBindings_async
@@ -6112,9 +6037,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ExpandedDataSet|ExpandedDataSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_expanded_data_set.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetExpandedDataSet_async
@@ -6185,9 +6109,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ExpandedDataSet|ExpandedDataSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_expanded_data_set.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateExpandedDataSet_async
@@ -6263,9 +6186,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ExpandedDataSet|ExpandedDataSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_expanded_data_set.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateExpandedDataSet_async
@@ -6334,9 +6256,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_expanded_data_set.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteExpandedDataSet_async
@@ -6406,9 +6327,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ChannelGroup|ChannelGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_channel_group.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetChannelGroup_async
@@ -6480,9 +6400,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ChannelGroup|ChannelGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_channel_group.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateChannelGroup_async
@@ -6558,9 +6477,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ChannelGroup|ChannelGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_channel_group.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateChannelGroup_async
@@ -6630,9 +6548,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_channel_group.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteChannelGroup_async
@@ -6708,9 +6625,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse | SetAutomatedGa4ConfigurationOptOutResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse|SetAutomatedGa4ConfigurationOptOutResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.set_automated_ga4_configuration_opt_out.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_async
@@ -6779,9 +6695,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse | FetchAutomatedGa4ConfigurationOptOutResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse|FetchAutomatedGa4ConfigurationOptOutResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.fetch_automated_ga4_configuration_opt_out.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchAutomatedGa4ConfigurationOptOut_async
@@ -6847,9 +6762,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BigQueryLink | BigQueryLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.BigQueryLink|BigQueryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_big_query_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetBigQueryLink_async
@@ -6923,9 +6837,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings | EnhancedMeasurementSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.EnhancedMeasurementSettings|EnhancedMeasurementSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_enhanced_measurement_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEnhancedMeasurementSettings_async
@@ -7002,9 +6915,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings | EnhancedMeasurementSettings}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.EnhancedMeasurementSettings|EnhancedMeasurementSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_enhanced_measurement_settings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEnhancedMeasurementSettings_async
@@ -7080,9 +6992,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse | CreateConnectedSiteTagResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse|CreateConnectedSiteTagResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_connected_site_tag.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateConnectedSiteTag_async
@@ -7153,9 +7064,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_connected_site_tag.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteConnectedSiteTag_async
@@ -7224,9 +7134,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse | ListConnectedSiteTagsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse|ListConnectedSiteTagsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_connected_site_tags.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async
@@ -7295,9 +7204,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse | FetchConnectedGa4PropertyResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse|FetchConnectedGa4PropertyResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.fetch_connected_ga4_property.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchConnectedGa4Property_async
@@ -7363,9 +7271,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AdSenseLink | AdSenseLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AdSenseLink|AdSenseLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_ad_sense_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAdSenseLink_async
@@ -7438,9 +7345,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AdSenseLink | AdSenseLink}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.AdSenseLink|AdSenseLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_ad_sense_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAdSenseLink_async
@@ -7511,9 +7417,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_ad_sense_link.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteAdSenseLink_async
@@ -7583,9 +7488,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EventCreateRule | EventCreateRule}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.EventCreateRule|EventCreateRule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_event_create_rule.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEventCreateRule_async
@@ -7656,9 +7560,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EventCreateRule | EventCreateRule}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.EventCreateRule|EventCreateRule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_event_create_rule.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateEventCreateRule_async
@@ -7734,9 +7637,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EventCreateRule | EventCreateRule}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.EventCreateRule|EventCreateRule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_event_create_rule.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEventCreateRule_async
@@ -7806,9 +7708,8 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_event_create_rule.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteEventCreateRule_async
@@ -7894,14 +7795,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.Account | Account}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.Account|Account}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listAccountsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAccounts(
@@ -7977,13 +7877,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.Account | Account} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.Account|Account} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listAccountsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAccountsStream(
@@ -8027,12 +7926,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.Account | Account}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.Account|Account}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_accounts.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccounts_async
@@ -8072,14 +7970,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.AccountSummary | AccountSummary}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.AccountSummary|AccountSummary}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listAccountSummariesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAccountSummaries(
@@ -8151,13 +8048,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.AccountSummary | AccountSummary} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.AccountSummary|AccountSummary} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listAccountSummariesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAccountSummariesStream(
@@ -8197,12 +8093,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.AccountSummary | AccountSummary}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.AccountSummary|AccountSummary}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_account_summaries.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccountSummaries_async
@@ -8268,14 +8163,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.Property | Property}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.Property|Property}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listPropertiesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listProperties(
@@ -8368,13 +8262,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.Property | Property} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.Property|Property} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listPropertiesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listPropertiesStream(
@@ -8435,12 +8328,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.Property | Property}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.Property|Property}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_properties.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListProperties_async
@@ -8482,14 +8374,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.UserLink | UserLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.UserLink|UserLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listUserLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listUserLinks(
@@ -8568,13 +8459,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.UserLink | UserLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.UserLink|UserLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listUserLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listUserLinksStream(
@@ -8621,12 +8511,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.UserLink | UserLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.UserLink|UserLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_user_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListUserLinks_async
@@ -8681,14 +8570,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.AuditUserLink | AuditUserLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.AuditUserLink|AuditUserLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `auditUserLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   auditUserLinks(
@@ -8767,13 +8655,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.AuditUserLink | AuditUserLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.AuditUserLink|AuditUserLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `auditUserLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   auditUserLinksStream(
@@ -8820,12 +8707,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.AuditUserLink | AuditUserLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.AuditUserLink|AuditUserLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.audit_user_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_AuditUserLinks_async
@@ -8874,14 +8760,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.FirebaseLink | FirebaseLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.FirebaseLink|FirebaseLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listFirebaseLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listFirebaseLinks(
@@ -8961,13 +8846,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.FirebaseLink | FirebaseLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.FirebaseLink|FirebaseLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listFirebaseLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listFirebaseLinksStream(
@@ -9015,12 +8899,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.FirebaseLink | FirebaseLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.FirebaseLink|FirebaseLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_firebase_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListFirebaseLinks_async
@@ -9067,14 +8950,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.GoogleAdsLink | GoogleAdsLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.GoogleAdsLink|GoogleAdsLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listGoogleAdsLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listGoogleAdsLinks(
@@ -9153,13 +9035,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.GoogleAdsLink | GoogleAdsLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.GoogleAdsLink|GoogleAdsLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listGoogleAdsLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listGoogleAdsLinksStream(
@@ -9206,12 +9087,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.GoogleAdsLink | GoogleAdsLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.GoogleAdsLink|GoogleAdsLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_google_ads_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListGoogleAdsLinks_async
@@ -9260,14 +9140,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret | MeasurementProtocolSecret}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret|MeasurementProtocolSecret}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listMeasurementProtocolSecretsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listMeasurementProtocolSecrets(
@@ -9347,13 +9226,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret | MeasurementProtocolSecret} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret|MeasurementProtocolSecret} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listMeasurementProtocolSecretsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listMeasurementProtocolSecretsStream(
@@ -9401,12 +9279,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret | MeasurementProtocolSecret}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret|MeasurementProtocolSecret}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_measurement_protocol_secrets.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListMeasurementProtocolSecrets_async
@@ -9472,14 +9349,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.ChangeHistoryEvent | ChangeHistoryEvent}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.ChangeHistoryEvent|ChangeHistoryEvent}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `searchChangeHistoryEventsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   searchChangeHistoryEvents(
@@ -9576,13 +9452,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.ChangeHistoryEvent | ChangeHistoryEvent} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.ChangeHistoryEvent|ChangeHistoryEvent} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `searchChangeHistoryEventsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   searchChangeHistoryEventsStream(
@@ -9647,12 +9522,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.ChangeHistoryEvent | ChangeHistoryEvent}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.ChangeHistoryEvent|ChangeHistoryEvent}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.search_change_history_events.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_SearchChangeHistoryEvents_async
@@ -9701,14 +9575,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.ConversionEvent | ConversionEvent}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.ConversionEvent|ConversionEvent}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listConversionEventsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listConversionEvents(
@@ -9787,13 +9660,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.ConversionEvent | ConversionEvent} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.ConversionEvent|ConversionEvent} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listConversionEventsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listConversionEventsStream(
@@ -9840,12 +9712,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.ConversionEvent | ConversionEvent}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.ConversionEvent|ConversionEvent}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_conversion_events.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConversionEvents_async
@@ -9893,14 +9764,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink | DisplayVideo360AdvertiserLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink|DisplayVideo360AdvertiserLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listDisplayVideo360AdvertiserLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listDisplayVideo360AdvertiserLinks(
@@ -9980,13 +9850,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink | DisplayVideo360AdvertiserLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink|DisplayVideo360AdvertiserLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listDisplayVideo360AdvertiserLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listDisplayVideo360AdvertiserLinksStream(
@@ -10034,12 +9903,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink | DisplayVideo360AdvertiserLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink|DisplayVideo360AdvertiserLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_display_video360_advertiser_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDisplayVideo360AdvertiserLinks_async
@@ -10088,14 +9956,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal | DisplayVideo360AdvertiserLinkProposal}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal|DisplayVideo360AdvertiserLinkProposal}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listDisplayVideo360AdvertiserLinkProposalsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listDisplayVideo360AdvertiserLinkProposals(
@@ -10176,13 +10043,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal | DisplayVideo360AdvertiserLinkProposal} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal|DisplayVideo360AdvertiserLinkProposal} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listDisplayVideo360AdvertiserLinkProposalsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listDisplayVideo360AdvertiserLinkProposalsStream(
@@ -10231,12 +10097,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal | DisplayVideo360AdvertiserLinkProposal}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal|DisplayVideo360AdvertiserLinkProposal}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_display_video360_advertiser_link_proposals.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDisplayVideo360AdvertiserLinkProposals_async
@@ -10283,14 +10148,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.CustomDimension | CustomDimension}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.CustomDimension|CustomDimension}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listCustomDimensionsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listCustomDimensions(
@@ -10369,13 +10233,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.CustomDimension | CustomDimension} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.CustomDimension|CustomDimension} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listCustomDimensionsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listCustomDimensionsStream(
@@ -10422,12 +10285,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.CustomDimension | CustomDimension}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.CustomDimension|CustomDimension}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_custom_dimensions.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListCustomDimensions_async
@@ -10474,14 +10336,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.CustomMetric | CustomMetric}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.CustomMetric|CustomMetric}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listCustomMetricsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listCustomMetrics(
@@ -10560,13 +10421,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.CustomMetric | CustomMetric} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.CustomMetric|CustomMetric} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listCustomMetricsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listCustomMetricsStream(
@@ -10613,12 +10473,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.CustomMetric | CustomMetric}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.CustomMetric|CustomMetric}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_custom_metrics.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListCustomMetrics_async
@@ -10665,14 +10524,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.DataStream | DataStream}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.DataStream|DataStream}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listDataStreamsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listDataStreams(
@@ -10751,13 +10609,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.DataStream | DataStream} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.DataStream|DataStream} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listDataStreamsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listDataStreamsStream(
@@ -10804,12 +10661,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.DataStream | DataStream}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.DataStream|DataStream}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_data_streams.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDataStreams_async
@@ -10858,14 +10714,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.Audience | Audience}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.Audience|Audience}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listAudiencesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAudiences(
@@ -10944,13 +10799,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.Audience | Audience} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.Audience|Audience} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listAudiencesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAudiencesStream(
@@ -10997,12 +10851,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.Audience | Audience}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.Audience|Audience}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_audiences.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAudiences_async
@@ -11050,14 +10903,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.SearchAds360Link | SearchAds360Link}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.SearchAds360Link|SearchAds360Link}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listSearchAds360LinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listSearchAds360Links(
@@ -11137,13 +10989,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.SearchAds360Link | SearchAds360Link} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.SearchAds360Link|SearchAds360Link} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listSearchAds360LinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listSearchAds360LinksStream(
@@ -11191,12 +11042,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.SearchAds360Link | SearchAds360Link}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.SearchAds360Link|SearchAds360Link}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_search_ads360_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSearchAds360Links_async
@@ -11245,14 +11095,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.AccessBinding|AccessBinding}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listAccessBindingsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAccessBindings(
@@ -11333,13 +11182,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.AccessBinding|AccessBinding} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listAccessBindingsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAccessBindingsStream(
@@ -11388,12 +11236,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.AccessBinding|AccessBinding}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_access_bindings.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccessBindings_async
@@ -11440,14 +11287,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.ExpandedDataSet|ExpandedDataSet}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listExpandedDataSetsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listExpandedDataSets(
@@ -11526,13 +11372,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.ExpandedDataSet|ExpandedDataSet} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listExpandedDataSetsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listExpandedDataSetsStream(
@@ -11579,12 +11424,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.ExpandedDataSet|ExpandedDataSet}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_expanded_data_sets.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListExpandedDataSets_async
@@ -11632,14 +11476,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.ChannelGroup|ChannelGroup}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listChannelGroupsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listChannelGroups(
@@ -11719,13 +11562,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.ChannelGroup|ChannelGroup} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listChannelGroupsAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listChannelGroupsStream(
@@ -11773,12 +11615,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.ChannelGroup|ChannelGroup}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_channel_groups.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListChannelGroups_async
@@ -11827,14 +11668,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.BigQueryLink | BigQueryLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.BigQueryLink|BigQueryLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listBigQueryLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listBigQueryLinks(
@@ -11915,13 +11755,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.BigQueryLink | BigQueryLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.BigQueryLink|BigQueryLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listBigQueryLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listBigQueryLinksStream(
@@ -11970,12 +11809,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.BigQueryLink | BigQueryLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.BigQueryLink|BigQueryLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_big_query_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListBigQueryLinks_async
@@ -12024,14 +11862,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.AdSenseLink | AdSenseLink}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.AdSenseLink|AdSenseLink}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listAdSenseLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAdSenseLinks(
@@ -12112,13 +11949,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.AdSenseLink | AdSenseLink} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.AdSenseLink|AdSenseLink} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listAdSenseLinksAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listAdSenseLinksStream(
@@ -12167,12 +12003,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.AdSenseLink | AdSenseLink}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.AdSenseLink|AdSenseLink}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_ad_sense_links.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAdSenseLinks_async
@@ -12219,14 +12054,13 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.EventCreateRule | EventCreateRule}.
+ *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.EventCreateRule|EventCreateRule}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
  *   We recommend using `listEventCreateRulesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listEventCreateRules(
@@ -12305,13 +12139,12 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.EventCreateRule | EventCreateRule} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.EventCreateRule|EventCreateRule} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
  *   We recommend using `listEventCreateRulesAsync()`
  *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
   listEventCreateRulesStream(
@@ -12358,12 +12191,11 @@ export class AnalyticsAdminServiceClient {
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.analytics.admin.v1alpha.EventCreateRule | EventCreateRule}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.analytics.admin.v1alpha.EventCreateRule|EventCreateRule}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_event_create_rules.js</caption>
  * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListEventCreateRules_async
