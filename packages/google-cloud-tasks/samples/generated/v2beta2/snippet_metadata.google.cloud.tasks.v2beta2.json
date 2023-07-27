@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-tasks",
-        "version": "3.1.2",
+        "version": "3.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -352,6 +352,50 @@
                 "method": {
                     "shortName": "ResumeQueue",
                     "fullName": "google.cloud.tasks.v2beta2.CloudTasks.ResumeQueue",
+                    "service": {
+                        "shortName": "CloudTasks",
+                        "fullName": "google.cloud.tasks.v2beta2.CloudTasks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudtasks_v2beta2_generated_CloudTasks_UploadQueueYaml_async",
+            "title": "tasks uploadQueueYaml Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update queue list by uploading a queue.yaml file. The queue.yaml file is supplied in the request body as a YAML encoded string. This method was added to support gcloud clients versions before 322.0.0. New clients should use CreateQueue instead of this method.",
+            "canonical": true,
+            "file": "cloud_tasks.upload_queue_yaml.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UploadQueueYaml",
+                "fullName": "google.cloud.tasks.v2beta2.CloudTasks.UploadQueueYaml",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "app_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "http_body",
+                        "type": ".google.api.HttpBody"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "CloudTasksClient",
+                    "fullName": "google.cloud.tasks.v2beta2.CloudTasksClient"
+                },
+                "method": {
+                    "shortName": "UploadQueueYaml",
+                    "fullName": "google.cloud.tasks.v2beta2.CloudTasks.UploadQueueYaml",
                     "service": {
                         "shortName": "CloudTasks",
                         "fullName": "google.cloud.tasks.v2beta2.CloudTasks"
@@ -916,6 +960,54 @@
                 "method": {
                     "shortName": "RunTask",
                     "fullName": "google.cloud.tasks.v2beta2.CloudTasks.RunTask",
+                    "service": {
+                        "shortName": "CloudTasks",
+                        "fullName": "google.cloud.tasks.v2beta2.CloudTasks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudtasks_v2beta2_generated_CloudTasks_BufferTask_async",
+            "title": "tasks bufferTask Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates and buffers a new task without the need to explicitly define a Task message. The queue must have [HTTP target][google.cloud.tasks.v2beta2.HttpTarget]. To create the task with a custom ID, use the following format and set TASK_ID to your desired ID: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer To create the task with an automatically generated ID, use the following format: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer. Note: This feature is in its experimental stage. You must request access to the API through the [Cloud Tasks BufferTask Experiment Signup form](https://forms.gle/X8Zr5hiXH5tTGFqh8).",
+            "canonical": true,
+            "file": "cloud_tasks.buffer_task.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BufferTask",
+                "fullName": "google.cloud.tasks.v2beta2.CloudTasks.BufferTask",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "queue",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "task_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "body",
+                        "type": ".google.api.HttpBody"
+                    }
+                ],
+                "resultType": ".google.cloud.tasks.v2beta2.BufferTaskResponse",
+                "client": {
+                    "shortName": "CloudTasksClient",
+                    "fullName": "google.cloud.tasks.v2beta2.CloudTasksClient"
+                },
+                "method": {
+                    "shortName": "BufferTask",
+                    "fullName": "google.cloud.tasks.v2beta2.CloudTasks.BufferTask",
                     "service": {
                         "shortName": "CloudTasks",
                         "fullName": "google.cloud.tasks.v2beta2.CloudTasks"

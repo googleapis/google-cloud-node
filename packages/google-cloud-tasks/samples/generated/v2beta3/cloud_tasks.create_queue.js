@@ -38,7 +38,8 @@ function main(parent, queue) {
   // const parent = 'abc123'
   /**
    *  Required. The queue to create.
-   *  Queue's name google.cloud.tasks.v2beta3.Queue.name  cannot be the same as an existing queue.
+   *  Queue's name google.cloud.tasks.v2beta3.Queue.name  cannot be the same as
+   *  an existing queue.
    */
   // const queue = {}
 

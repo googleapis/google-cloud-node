@@ -46,8 +46,8 @@ function main(parent) {
    *  Optional. The filter to list results by.
    *  General `filter` string syntax:
    *  `<field> <operator> <value> (<logical connector>)`
-   *  *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for map
-   *      field
+   *  *   `<field>` can be `name`, `address`, `port`, `metadata.<key>` for map
+   *      field, or `attributes.<field>` for attributes field
    *  *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *      means `HAS`, and is roughly the same as `=`
    *  *   `<value>` must be the same data type as field
@@ -69,6 +69,8 @@ function main(parent) {
    *  *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
    *      doesn't have a field called "doesnotexist". Since the filter does not
    *      match any endpoints, it returns no results
+   *  *   `attributes.kubernetes_resource_type=KUBERNETES_RESOURCE_TYPE_CLUSTER_
+   *      IP` returns endpoints with the corresponding kubernetes_resource_type
    *  For more information about filtering, see
    *  API Filtering (https://aip.dev/160).
    */

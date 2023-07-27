@@ -1171,6 +1171,16 @@
                       "type": "PodCIDROverprovisionConfig",
                       "id": 13
                     },
+                    "additionalNodeNetworkConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalNodeNetworkConfig",
+                      "id": 14
+                    },
+                    "additionalPodNetworkConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalPodNetworkConfig",
+                      "id": 15
+                    },
                     "podIpv4RangeUtilization": {
                       "type": "double",
                       "id": 16,
@@ -1204,6 +1214,44 @@
                             "TIER_1": 1
                           }
                         }
+                      }
+                    }
+                  }
+                },
+                "AdditionalNodeNetworkConfig": {
+                  "fields": {
+                    "network": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "AdditionalPodNetworkConfig": {
+                  "oneofs": {
+                    "_maxPodsPerNode": {
+                      "oneof": [
+                        "maxPodsPerNode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "secondaryPodRange": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "maxPodsPerNode": {
+                      "type": "MaxPodsConstraint",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
                       }
                     }
                   }
@@ -3788,6 +3836,10 @@
                         "type": {
                           "type": "Type",
                           "id": 1
+                        },
+                        "policyName": {
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -4650,6 +4702,10 @@
                     "gatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 16
+                    },
+                    "enableMultiNetworking": {
+                      "type": "bool",
+                      "id": 17
                     },
                     "networkPerformanceConfig": {
                       "type": "ClusterNetworkPerformanceConfig",
@@ -6607,6 +6663,10 @@
                     "soleTenantConfig": {
                       "type": "SoleTenantConfig",
                       "id": 42
+                    },
+                    "hostMaintenancePolicy": {
+                      "type": "HostMaintenancePolicy",
+                      "id": 44
                     }
                   }
                 },
@@ -6675,6 +6735,16 @@
                       "type": "PodCIDROverprovisionConfig",
                       "id": 13
                     },
+                    "additionalNodeNetworkConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalNodeNetworkConfig",
+                      "id": 14
+                    },
+                    "additionalPodNetworkConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalPodNetworkConfig",
+                      "id": 15
+                    },
                     "podIpv4RangeUtilization": {
                       "type": "double",
                       "id": 16,
@@ -6720,6 +6790,44 @@
                             "TIER_1": 1
                           }
                         }
+                      }
+                    }
+                  }
+                },
+                "AdditionalNodeNetworkConfig": {
+                  "fields": {
+                    "network": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "AdditionalPodNetworkConfig": {
+                  "oneofs": {
+                    "_maxPodsPerNode": {
+                      "oneof": [
+                        "maxPodsPerNode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "secondaryPodRange": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "maxPodsPerNode": {
+                      "type": "MaxPodsConstraint",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
                       }
                     }
                   }
@@ -6851,6 +6959,33 @@
                             "NOT_IN": 2
                           }
                         }
+                      }
+                    }
+                  }
+                },
+                "HostMaintenancePolicy": {
+                  "oneofs": {
+                    "_maintenanceInterval": {
+                      "oneof": [
+                        "maintenanceInterval"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "maintenanceInterval": {
+                      "type": "MaintenanceInterval",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "MaintenanceInterval": {
+                      "values": {
+                        "MAINTENANCE_INTERVAL_UNSPECIFIED": 0,
+                        "AS_NEEDED": 1,
+                        "PERIODIC": 2
                       }
                     }
                   }
@@ -7988,6 +8123,10 @@
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 3
+                    },
+                    "hostMaintenancePolicy": {
+                      "type": "HostMaintenancePolicy",
+                      "id": 5
                     }
                   }
                 },
@@ -8251,6 +8390,10 @@
                     "desiredK8sBetaApis": {
                       "type": "K8sBetaAPIConfig",
                       "id": 131
+                    },
+                    "desiredHostMaintenancePolicy": {
+                      "type": "HostMaintenancePolicy",
+                      "id": 132
                     }
                   }
                 },
@@ -9730,6 +9873,10 @@
                         "tpuTopology": {
                           "type": "string",
                           "id": 2
+                        },
+                        "policyName": {
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -10689,6 +10836,10 @@
                     "gatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 16
+                    },
+                    "enableMultiNetworking": {
+                      "type": "bool",
+                      "id": 17
                     },
                     "networkPerformanceConfig": {
                       "type": "ClusterNetworkPerformanceConfig",

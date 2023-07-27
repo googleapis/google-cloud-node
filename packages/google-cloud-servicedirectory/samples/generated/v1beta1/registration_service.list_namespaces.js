@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the project and location whose namespaces you'd like
-   *  to list.
+   *  Required. The resource name of the project and location whose namespaces
+   *  you'd like to list.
    */
   // const parent = 'abc123'
   /**
@@ -38,14 +38,16 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. The next_page_token value returned from a previous List request, if any.
+   *  Optional. The next_page_token value returned from a previous List request,
+   *  if any.
    */
   // const pageToken = 'abc123'
   /**
    *  Optional. The filter to list results by.
    *  General `filter` string syntax:
    *  `<field> <operator> <value> (<logical connector>)`
-   *  *   `<field>` can be `name` or `labels.<key>` for map field
+   *  *   `<field>` can be `name`, `labels.<key>` for map field, or
+   *  `attributes.<field>` for attributes field
    *  *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *      means `HAS`, and is roughly the same as `=`
    *  *   `<value>` must be the same data type as field
@@ -62,6 +64,8 @@ function main(parent) {
    *  *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
    *      doesn't have a field called "doesnotexist". Since the filter does not
    *      match any namespaces, it returns no results
+   *  *   `attributes.managed_registration=true` returns namespaces that are
+   *      managed by a GCP product or service
    *  For more information about filtering, see
    *  API Filtering (https://aip.dev/160).
    */

@@ -40,6 +40,12 @@ export namespace google {
 
                     /** Endpoint annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Endpoint network */
+                    network?: (string|null);
+
+                    /** Endpoint uid */
+                    uid?: (string|null);
                 }
 
                 /** Represents an Endpoint. */
@@ -62,6 +68,12 @@ export namespace google {
 
                     /** Endpoint annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Endpoint network. */
+                    public network: string;
+
+                    /** Endpoint uid. */
+                    public uid: string;
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -403,6 +415,9 @@ export namespace google {
 
                     /** Service endpoints */
                     endpoints?: (google.cloud.servicedirectory.v1.IEndpoint[]|null);
+
+                    /** Service uid */
+                    uid?: (string|null);
                 }
 
                 /** Represents a Service. */
@@ -422,6 +437,9 @@ export namespace google {
 
                     /** Service endpoints. */
                     public endpoints: google.cloud.servicedirectory.v1.IEndpoint[];
+
+                    /** Service uid. */
+                    public uid: string;
 
                     /**
                      * Creates a new Service instance using the specified properties.
@@ -509,6 +527,9 @@ export namespace google {
 
                     /** Namespace labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Namespace uid */
+                    uid?: (string|null);
                 }
 
                 /** Represents a Namespace. */
@@ -525,6 +546,9 @@ export namespace google {
 
                     /** Namespace labels. */
                     public labels: { [k: string]: string };
+
+                    /** Namespace uid. */
+                    public uid: string;
 
                     /**
                      * Creates a new Namespace instance using the specified properties.
@@ -2923,6 +2947,9 @@ export namespace google {
 
                     /** Endpoint updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Endpoint uid */
+                    uid?: (string|null);
                 }
 
                 /** Represents an Endpoint. */
@@ -2954,6 +2981,9 @@ export namespace google {
 
                     /** Endpoint updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Endpoint uid. */
+                    public uid: string;
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -3301,6 +3331,9 @@ export namespace google {
 
                     /** Service updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Service uid */
+                    uid?: (string|null);
                 }
 
                 /** Represents a Service. */
@@ -3326,6 +3359,9 @@ export namespace google {
 
                     /** Service updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Service uid. */
+                    public uid: string;
 
                     /**
                      * Creates a new Service instance using the specified properties.
@@ -3419,6 +3455,9 @@ export namespace google {
 
                     /** Namespace updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace uid */
+                    uid?: (string|null);
                 }
 
                 /** Represents a Namespace. */
@@ -3441,6 +3480,9 @@ export namespace google {
 
                     /** Namespace updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace uid. */
+                    public uid: string;
 
                     /**
                      * Creates a new Namespace instance using the specified properties.

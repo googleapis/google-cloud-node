@@ -60,6 +60,11 @@
                           "rule": "repeated",
                           "type": "ExplainedPolicy",
                           "id": 2
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 3
                         }
                       }
                     },
@@ -149,18 +154,6 @@
                         }
                       },
                       "nested": {
-                        "AnnotatedMembership": {
-                          "fields": {
-                            "membership": {
-                              "type": "Membership",
-                              "id": 1
-                            },
-                            "relevance": {
-                              "type": "HeuristicRelevance",
-                              "id": 2
-                            }
-                          }
-                        },
                         "RolePermission": {
                           "values": {
                             "ROLE_PERMISSION_UNSPECIFIED": 0,
@@ -176,6 +169,18 @@
                             "MEMBERSHIP_NOT_INCLUDED": 2,
                             "MEMBERSHIP_UNKNOWN_INFO_DENIED": 3,
                             "MEMBERSHIP_UNKNOWN_UNSUPPORTED": 4
+                          }
+                        },
+                        "AnnotatedMembership": {
+                          "fields": {
+                            "membership": {
+                              "type": "Membership",
+                              "id": 1
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -1265,6 +1270,18 @@
                   }
                 }
               }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
             }
           }
         },
@@ -1458,6 +1475,35 @@
                 "location": {
                   "type": "string",
                   "id": 4
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

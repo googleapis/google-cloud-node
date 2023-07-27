@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.7.0...kms-v3.8.0) (2023-07-24)
+
+
+### Features
+
+* [kms] add interoperable symmetric encryption system ([#4431](https://github.com/googleapis/google-cloud-node/issues/4431)) ([28b5dca](https://github.com/googleapis/google-cloud-node/commit/28b5dca1c319bb74b7e087044cd99eb4d6971783))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.6.0...kms-v3.7.0) (2023-07-11)
 
 

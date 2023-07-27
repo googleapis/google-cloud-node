@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v3.1.2...tasks-v3.2.0) (2023-07-24)
+
+
+### Features
+
+* [tasks] increase timeout of RPC methods to 20s for v2 ([#4425](https://github.com/googleapis/google-cloud-node/issues/4425)) ([dcb6f87](https://github.com/googleapis/google-cloud-node/commit/dcb6f87303bea503867b5ccc5af9c57d0c2f993e))
+
 ## [3.1.2](https://github.com/googleapis/google-cloud-node/compare/tasks-v3.1.1...tasks-v3.1.2) (2023-04-13)
 
 

@@ -2127,6 +2127,14 @@
                         "ordinalPosition": {
                           "type": "int32",
                           "id": 7
+                        },
+                        "precision": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "scale": {
+                          "type": "int32",
+                          "id": 9
                         }
                       }
                     },

@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.9.0...cloudbuild-v3.10.0) (2023-07-24)
+
+
+### Features
+
+* [cloudbuild] add git_file_source and git_repo_source to build_trigger ([#4434](https://github.com/googleapis/google-cloud-node/issues/4434)) ([5dcb3c2](https://github.com/googleapis/google-cloud-node/commit/5dcb3c28ad2cf68485fe535d83d281b0d95cba38))
+* [cloudbuild] Add routing information in Cloud Build GRPC clients ([#4410](https://github.com/googleapis/google-cloud-node/issues/4410)) ([58a5209](https://github.com/googleapis/google-cloud-node/commit/58a520990dab3fdc00f5838a9b875a4fc72cf158))
+
 ## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.8.0...cloudbuild-v3.9.0) (2023-07-11)
 
 

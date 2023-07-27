@@ -5233,6 +5233,278 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a GitRepoSource. */
+                interface IGitRepoSource {
+
+                    /** GitRepoSource uri */
+                    uri?: (string|null);
+
+                    /** GitRepoSource repository */
+                    repository?: (string|null);
+
+                    /** GitRepoSource ref */
+                    ref?: (string|null);
+
+                    /** GitRepoSource repoType */
+                    repoType?: (google.devtools.cloudbuild.v1.GitFileSource.RepoType|keyof typeof google.devtools.cloudbuild.v1.GitFileSource.RepoType|null);
+
+                    /** GitRepoSource githubEnterpriseConfig */
+                    githubEnterpriseConfig?: (string|null);
+                }
+
+                /** Represents a GitRepoSource. */
+                class GitRepoSource implements IGitRepoSource {
+
+                    /**
+                     * Constructs a new GitRepoSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitRepoSource);
+
+                    /** GitRepoSource uri. */
+                    public uri: string;
+
+                    /** GitRepoSource repository. */
+                    public repository?: (string|null);
+
+                    /** GitRepoSource ref. */
+                    public ref: string;
+
+                    /** GitRepoSource repoType. */
+                    public repoType: (google.devtools.cloudbuild.v1.GitFileSource.RepoType|keyof typeof google.devtools.cloudbuild.v1.GitFileSource.RepoType);
+
+                    /** GitRepoSource githubEnterpriseConfig. */
+                    public githubEnterpriseConfig?: (string|null);
+
+                    /** GitRepoSource source. */
+                    public source?: "repository";
+
+                    /** GitRepoSource enterpriseConfig. */
+                    public enterpriseConfig?: "githubEnterpriseConfig";
+
+                    /**
+                     * Creates a new GitRepoSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitRepoSource instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitRepoSource): google.devtools.cloudbuild.v1.GitRepoSource;
+
+                    /**
+                     * Encodes the specified GitRepoSource message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitRepoSource.verify|verify} messages.
+                     * @param message GitRepoSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitRepoSource message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitRepoSource.verify|verify} messages.
+                     * @param message GitRepoSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitRepoSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitRepoSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitRepoSource;
+
+                    /**
+                     * Decodes a GitRepoSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitRepoSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitRepoSource;
+
+                    /**
+                     * Verifies a GitRepoSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitRepoSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitRepoSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitRepoSource;
+
+                    /**
+                     * Creates a plain object from a GitRepoSource message. Also converts values to other types if specified.
+                     * @param message GitRepoSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitRepoSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitRepoSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitRepoSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GitFileSource. */
+                interface IGitFileSource {
+
+                    /** GitFileSource path */
+                    path?: (string|null);
+
+                    /** GitFileSource uri */
+                    uri?: (string|null);
+
+                    /** GitFileSource repository */
+                    repository?: (string|null);
+
+                    /** GitFileSource repoType */
+                    repoType?: (google.devtools.cloudbuild.v1.GitFileSource.RepoType|keyof typeof google.devtools.cloudbuild.v1.GitFileSource.RepoType|null);
+
+                    /** GitFileSource revision */
+                    revision?: (string|null);
+
+                    /** GitFileSource githubEnterpriseConfig */
+                    githubEnterpriseConfig?: (string|null);
+                }
+
+                /** Represents a GitFileSource. */
+                class GitFileSource implements IGitFileSource {
+
+                    /**
+                     * Constructs a new GitFileSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitFileSource);
+
+                    /** GitFileSource path. */
+                    public path: string;
+
+                    /** GitFileSource uri. */
+                    public uri: string;
+
+                    /** GitFileSource repository. */
+                    public repository?: (string|null);
+
+                    /** GitFileSource repoType. */
+                    public repoType: (google.devtools.cloudbuild.v1.GitFileSource.RepoType|keyof typeof google.devtools.cloudbuild.v1.GitFileSource.RepoType);
+
+                    /** GitFileSource revision. */
+                    public revision: string;
+
+                    /** GitFileSource githubEnterpriseConfig. */
+                    public githubEnterpriseConfig?: (string|null);
+
+                    /** GitFileSource source. */
+                    public source?: "repository";
+
+                    /** GitFileSource enterpriseConfig. */
+                    public enterpriseConfig?: "githubEnterpriseConfig";
+
+                    /**
+                     * Creates a new GitFileSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitFileSource instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitFileSource): google.devtools.cloudbuild.v1.GitFileSource;
+
+                    /**
+                     * Encodes the specified GitFileSource message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitFileSource.verify|verify} messages.
+                     * @param message GitFileSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitFileSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitFileSource message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitFileSource.verify|verify} messages.
+                     * @param message GitFileSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitFileSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitFileSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitFileSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitFileSource;
+
+                    /**
+                     * Decodes a GitFileSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitFileSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitFileSource;
+
+                    /**
+                     * Verifies a GitFileSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitFileSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitFileSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitFileSource;
+
+                    /**
+                     * Creates a plain object from a GitFileSource message. Also converts values to other types if specified.
+                     * @param message GitFileSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitFileSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitFileSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitFileSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GitFileSource {
+
+                    /** RepoType enum. */
+                    enum RepoType {
+                        UNKNOWN = 0,
+                        CLOUD_SOURCE_REPOSITORIES = 1,
+                        GITHUB = 2,
+                        BITBUCKET_SERVER = 3,
+                        GITLAB = 4
+                    }
+                }
+
                 /** Properties of a BuildTrigger. */
                 interface IBuildTrigger {
 
@@ -5272,6 +5544,9 @@ export namespace google {
                     /** BuildTrigger filename */
                     filename?: (string|null);
 
+                    /** BuildTrigger gitFileSource */
+                    gitFileSource?: (google.devtools.cloudbuild.v1.IGitFileSource|null);
+
                     /** BuildTrigger createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -5289,6 +5564,9 @@ export namespace google {
 
                     /** BuildTrigger filter */
                     filter?: (string|null);
+
+                    /** BuildTrigger sourceToBuild */
+                    sourceToBuild?: (google.devtools.cloudbuild.v1.IGitRepoSource|null);
 
                     /** BuildTrigger serviceAccount */
                     serviceAccount?: (string|null);
@@ -5342,6 +5620,9 @@ export namespace google {
                     /** BuildTrigger filename. */
                     public filename?: (string|null);
 
+                    /** BuildTrigger gitFileSource. */
+                    public gitFileSource?: (google.devtools.cloudbuild.v1.IGitFileSource|null);
+
                     /** BuildTrigger createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -5360,6 +5641,9 @@ export namespace google {
                     /** BuildTrigger filter. */
                     public filter: string;
 
+                    /** BuildTrigger sourceToBuild. */
+                    public sourceToBuild?: (google.devtools.cloudbuild.v1.IGitRepoSource|null);
+
                     /** BuildTrigger serviceAccount. */
                     public serviceAccount: string;
 
@@ -5367,7 +5651,7 @@ export namespace google {
                     public repositoryEventConfig?: (google.devtools.cloudbuild.v1.IRepositoryEventConfig|null);
 
                     /** BuildTrigger buildTemplate. */
-                    public buildTemplate?: ("autodetect"|"build"|"filename");
+                    public buildTemplate?: ("autodetect"|"build"|"filename"|"gitFileSource");
 
                     /**
                      * Creates a new BuildTrigger instance using the specified properties.
@@ -7357,6 +7641,266 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReceiveTriggerWebhookResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GitHubEnterpriseConfig. */
+                interface IGitHubEnterpriseConfig {
+
+                    /** GitHubEnterpriseConfig name */
+                    name?: (string|null);
+
+                    /** GitHubEnterpriseConfig hostUrl */
+                    hostUrl?: (string|null);
+
+                    /** GitHubEnterpriseConfig appId */
+                    appId?: (number|Long|string|null);
+
+                    /** GitHubEnterpriseConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GitHubEnterpriseConfig webhookKey */
+                    webhookKey?: (string|null);
+
+                    /** GitHubEnterpriseConfig peeredNetwork */
+                    peeredNetwork?: (string|null);
+
+                    /** GitHubEnterpriseConfig secrets */
+                    secrets?: (google.devtools.cloudbuild.v1.IGitHubEnterpriseSecrets|null);
+
+                    /** GitHubEnterpriseConfig displayName */
+                    displayName?: (string|null);
+
+                    /** GitHubEnterpriseConfig sslCa */
+                    sslCa?: (string|null);
+                }
+
+                /** Represents a GitHubEnterpriseConfig. */
+                class GitHubEnterpriseConfig implements IGitHubEnterpriseConfig {
+
+                    /**
+                     * Constructs a new GitHubEnterpriseConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitHubEnterpriseConfig);
+
+                    /** GitHubEnterpriseConfig name. */
+                    public name: string;
+
+                    /** GitHubEnterpriseConfig hostUrl. */
+                    public hostUrl: string;
+
+                    /** GitHubEnterpriseConfig appId. */
+                    public appId: (number|Long|string);
+
+                    /** GitHubEnterpriseConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GitHubEnterpriseConfig webhookKey. */
+                    public webhookKey: string;
+
+                    /** GitHubEnterpriseConfig peeredNetwork. */
+                    public peeredNetwork: string;
+
+                    /** GitHubEnterpriseConfig secrets. */
+                    public secrets?: (google.devtools.cloudbuild.v1.IGitHubEnterpriseSecrets|null);
+
+                    /** GitHubEnterpriseConfig displayName. */
+                    public displayName: string;
+
+                    /** GitHubEnterpriseConfig sslCa. */
+                    public sslCa: string;
+
+                    /**
+                     * Creates a new GitHubEnterpriseConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitHubEnterpriseConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitHubEnterpriseConfig): google.devtools.cloudbuild.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Encodes the specified GitHubEnterpriseConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitHubEnterpriseConfig.verify|verify} messages.
+                     * @param message GitHubEnterpriseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitHubEnterpriseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitHubEnterpriseConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitHubEnterpriseConfig.verify|verify} messages.
+                     * @param message GitHubEnterpriseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitHubEnterpriseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitHubEnterpriseConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitHubEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Decodes a GitHubEnterpriseConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitHubEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Verifies a GitHubEnterpriseConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitHubEnterpriseConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitHubEnterpriseConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitHubEnterpriseConfig;
+
+                    /**
+                     * Creates a plain object from a GitHubEnterpriseConfig message. Also converts values to other types if specified.
+                     * @param message GitHubEnterpriseConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitHubEnterpriseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitHubEnterpriseConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitHubEnterpriseConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GitHubEnterpriseSecrets. */
+                interface IGitHubEnterpriseSecrets {
+
+                    /** GitHubEnterpriseSecrets privateKeyVersionName */
+                    privateKeyVersionName?: (string|null);
+
+                    /** GitHubEnterpriseSecrets webhookSecretVersionName */
+                    webhookSecretVersionName?: (string|null);
+
+                    /** GitHubEnterpriseSecrets oauthSecretVersionName */
+                    oauthSecretVersionName?: (string|null);
+
+                    /** GitHubEnterpriseSecrets oauthClientIdVersionName */
+                    oauthClientIdVersionName?: (string|null);
+                }
+
+                /** Represents a GitHubEnterpriseSecrets. */
+                class GitHubEnterpriseSecrets implements IGitHubEnterpriseSecrets {
+
+                    /**
+                     * Constructs a new GitHubEnterpriseSecrets.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitHubEnterpriseSecrets);
+
+                    /** GitHubEnterpriseSecrets privateKeyVersionName. */
+                    public privateKeyVersionName: string;
+
+                    /** GitHubEnterpriseSecrets webhookSecretVersionName. */
+                    public webhookSecretVersionName: string;
+
+                    /** GitHubEnterpriseSecrets oauthSecretVersionName. */
+                    public oauthSecretVersionName: string;
+
+                    /** GitHubEnterpriseSecrets oauthClientIdVersionName. */
+                    public oauthClientIdVersionName: string;
+
+                    /**
+                     * Creates a new GitHubEnterpriseSecrets instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitHubEnterpriseSecrets instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitHubEnterpriseSecrets): google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets;
+
+                    /**
+                     * Encodes the specified GitHubEnterpriseSecrets message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets.verify|verify} messages.
+                     * @param message GitHubEnterpriseSecrets message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitHubEnterpriseSecrets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitHubEnterpriseSecrets message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets.verify|verify} messages.
+                     * @param message GitHubEnterpriseSecrets message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitHubEnterpriseSecrets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitHubEnterpriseSecrets message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitHubEnterpriseSecrets
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets;
+
+                    /**
+                     * Decodes a GitHubEnterpriseSecrets message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitHubEnterpriseSecrets
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets;
+
+                    /**
+                     * Verifies a GitHubEnterpriseSecrets message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitHubEnterpriseSecrets message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitHubEnterpriseSecrets
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets;
+
+                    /**
+                     * Creates a plain object from a GitHubEnterpriseSecrets message. Also converts values to other types if specified.
+                     * @param message GitHubEnterpriseSecrets
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitHubEnterpriseSecrets to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitHubEnterpriseSecrets
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

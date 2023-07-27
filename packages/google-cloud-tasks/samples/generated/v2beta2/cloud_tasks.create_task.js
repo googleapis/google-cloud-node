@@ -50,10 +50,10 @@ function main(parent, task) {
    *  that was deleted or completed recently then the call will fail
    *  with ALREADY_EXISTS google.rpc.Code.ALREADY_EXISTS.
    *  If the task's queue was created using Cloud Tasks, then another task with
-   *  the same name can't be created for ~1hour after the original task was
+   *  the same name can't be created for ~1 hour after the original task was
    *  deleted or completed. If the task's queue was created using queue.yaml or
    *  queue.xml, then another task with the same name can't be created
-   *  for ~9days after the original task was deleted or completed.
+   *  for ~9 days after the original task was deleted or completed.
    *  Because there is an extra lookup cost to identify duplicate task
    *  names, these CreateTask google.cloud.tasks.v2beta2.CloudTasks.CreateTask 
    *  calls have significantly increased latency. Using hashed strings for the

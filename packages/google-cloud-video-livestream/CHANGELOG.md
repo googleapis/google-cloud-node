@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v0.5.1...livestream-v0.6.0) (2023-07-24)
+
+
+### Features
+
+* [video] added support for slate events which allow users to create and insert a slate into a live stream to replace the main live stream content ([#4438](https://github.com/googleapis/google-cloud-node/issues/4438)) ([5f19ab6](https://github.com/googleapis/google-cloud-node/commit/5f19ab6bab05774ced7a3947f9bb129f748d01f5))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/livestream-v0.5.0...livestream-v0.5.1) (2023-04-13)
 
 

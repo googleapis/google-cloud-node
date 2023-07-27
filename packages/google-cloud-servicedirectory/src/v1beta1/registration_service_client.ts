@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -73,6 +75,7 @@ export class RegistrationServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   registrationServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -169,6 +172,10 @@ export class RegistrationServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -1583,7 +1590,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.deleteEndpoint(request, options, callback);
   }
   /**
-   * Gets the IAM Policy for a resource (namespace or service only).
+   * Gets the IAM Policy for a resource
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1670,7 +1677,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   /**
-   * Sets the IAM Policy for a resource (namespace or service only).
+   * Sets the IAM Policy for a resource
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1765,7 +1772,8 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   /**
-   * Tests IAM permissions for a resource (namespace or service only).
+   * Tests IAM permissions for a resource (namespace, service  or
+   * service workload only).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1860,19 +1868,21 @@ export class RegistrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the project and location whose namespaces you'd like
-   *   to list.
+   *   Required. The resource name of the project and location whose namespaces
+   *   you'd like to list.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to list results by.
    *
    *   General `filter` string syntax:
    *   `<field> <operator> <value> (<logical connector>)`
    *
-   *   *   `<field>` can be `name` or `labels.<key>` for map field
+   *   *   `<field>` can be `name`, `labels.<key>` for map field, or
+   *   `attributes.<field>` for attributes field
    *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *       means `HAS`, and is roughly the same as `=`
    *   *   `<value>` must be the same data type as field
@@ -1891,6 +1901,8 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any namespaces, it returns no results
+   *   *   `attributes.managed_registration=true` returns namespaces that are
+   *       managed by a GCP product or service
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -1998,19 +2010,21 @@ export class RegistrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the project and location whose namespaces you'd like
-   *   to list.
+   *   Required. The resource name of the project and location whose namespaces
+   *   you'd like to list.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to list results by.
    *
    *   General `filter` string syntax:
    *   `<field> <operator> <value> (<logical connector>)`
    *
-   *   *   `<field>` can be `name` or `labels.<key>` for map field
+   *   *   `<field>` can be `name`, `labels.<key>` for map field, or
+   *   `attributes.<field>` for attributes field
    *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *       means `HAS`, and is roughly the same as `=`
    *   *   `<value>` must be the same data type as field
@@ -2029,6 +2043,8 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any namespaces, it returns no results
+   *   *   `attributes.managed_registration=true` returns namespaces that are
+   *       managed by a GCP product or service
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2084,19 +2100,21 @@ export class RegistrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the project and location whose namespaces you'd like
-   *   to list.
+   *   Required. The resource name of the project and location whose namespaces
+   *   you'd like to list.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return.
    * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request, if any.
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
    * @param {string} [request.filter]
    *   Optional. The filter to list results by.
    *
    *   General `filter` string syntax:
    *   `<field> <operator> <value> (<logical connector>)`
    *
-   *   *   `<field>` can be `name` or `labels.<key>` for map field
+   *   *   `<field>` can be `name`, `labels.<key>` for map field, or
+   *   `attributes.<field>` for attributes field
    *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *       means `HAS`, and is roughly the same as `=`
    *   *   `<value>` must be the same data type as field
@@ -2115,6 +2133,8 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any namespaces, it returns no results
+   *   *   `attributes.managed_registration=true` returns namespaces that are
+   *       managed by a GCP product or service
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2204,6 +2224,9 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any services, it returns no results
+   *   *   `attributes.managed_registration=true` returns services that are
+   *   managed
+   *       by a GCP product or service
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2346,6 +2369,9 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any services, it returns no results
+   *   *   `attributes.managed_registration=true` returns services that are
+   *   managed
+   *       by a GCP product or service
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2436,6 +2462,9 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any services, it returns no results
+   *   *   `attributes.managed_registration=true` returns services that are
+   *   managed
+   *       by a GCP product or service
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2503,8 +2532,8 @@ export class RegistrationServiceClient {
    *   General `filter` string syntax:
    *   `<field> <operator> <value> (<logical connector>)`
    *
-   *   *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for map
-   *       field
+   *   *   `<field>` can be `name`, `address`, `port`, `metadata.<key>` for map
+   *       field, or `attributes.<field>` for attributes field
    *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *       means `HAS`, and is roughly the same as `=`
    *   *   `<value>` must be the same data type as field
@@ -2528,6 +2557,8 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any endpoints, it returns no results
+   *   *   `attributes.kubernetes_resource_type=KUBERNETES_RESOURCE_TYPE_CLUSTER_
+   *       IP` returns endpoints with the corresponding kubernetes_resource_type
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2648,8 +2679,8 @@ export class RegistrationServiceClient {
    *   General `filter` string syntax:
    *   `<field> <operator> <value> (<logical connector>)`
    *
-   *   *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for map
-   *       field
+   *   *   `<field>` can be `name`, `address`, `port`, `metadata.<key>` for map
+   *       field, or `attributes.<field>` for attributes field
    *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *       means `HAS`, and is roughly the same as `=`
    *   *   `<value>` must be the same data type as field
@@ -2673,6 +2704,8 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any endpoints, it returns no results
+   *   *   `attributes.kubernetes_resource_type=KUBERNETES_RESOURCE_TYPE_CLUSTER_
+   *       IP` returns endpoints with the corresponding kubernetes_resource_type
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2741,8 +2774,8 @@ export class RegistrationServiceClient {
    *   General `filter` string syntax:
    *   `<field> <operator> <value> (<logical connector>)`
    *
-   *   *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for map
-   *       field
+   *   *   `<field>` can be `name`, `address`, `port`, `metadata.<key>` for map
+   *       field, or `attributes.<field>` for attributes field
    *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
    *       means `HAS`, and is roughly the same as `=`
    *   *   `<value>` must be the same data type as field
@@ -2766,6 +2799,8 @@ export class RegistrationServiceClient {
    *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
    *       doesn't have a field called "doesnotexist". Since the filter does not
    *       match any endpoints, it returns no results
+   *   *   `attributes.kubernetes_resource_type=KUBERNETES_RESOURCE_TYPE_CLUSTER_
+   *       IP` returns endpoints with the corresponding kubernetes_resource_type
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -2814,6 +2849,86 @@ export class RegistrationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1beta1.IEndpoint>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3066,6 +3181,7 @@ export class RegistrationServiceClient {
       return this.registrationServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();

@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -60,6 +62,7 @@ export class CloudTasksClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   cloudTasksStub?: Promise<{[name: string]: Function}>;
 
@@ -156,6 +159,10 @@ export class CloudTasksClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -267,6 +274,7 @@ export class CloudTasksClient {
       'purgeQueue',
       'pauseQueue',
       'resumeQueue',
+      'uploadQueueYaml',
       'getIamPolicy',
       'setIamPolicy',
       'testIamPermissions',
@@ -279,6 +287,7 @@ export class CloudTasksClient {
       'renewLease',
       'cancelLease',
       'runTask',
+      'bufferTask',
     ];
     for (const methodName of cloudTasksStubMethods) {
       const callPromise = this.cloudTasksStub.then(
@@ -378,9 +387,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.get_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_GetQueue_async
@@ -473,18 +481,17 @@ export class CloudTasksClient {
    *
    *   The list of allowed locations can be obtained by calling Cloud
    *   Tasks' implementation of
-   *   {@link google.cloud.location.Locations.ListLocations|ListLocations}.
+   *   {@link protos.google.cloud.location.Locations.ListLocations|ListLocations}.
    * @param {google.cloud.tasks.v2beta2.Queue} request.queue
    *   Required. The queue to create.
    *
-   *   {@link google.cloud.tasks.v2beta2.Queue.name|Queue's name} cannot be the same as
+   *   {@link protos.google.cloud.tasks.v2beta2.Queue.name|Queue's name} cannot be the same as
    *   an existing queue.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.create_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_CreateQueue_async
@@ -579,12 +586,12 @@ export class CloudTasksClient {
    * @param {google.cloud.tasks.v2beta2.Queue} request.queue
    *   Required. The queue to create or update.
    *
-   *   The queue's {@link google.cloud.tasks.v2beta2.Queue.name|name} must be
+   *   The queue's {@link protos.google.cloud.tasks.v2beta2.Queue.name|name} must be
    *   specified.
    *
    *   Output only fields cannot be modified using UpdateQueue.
    *   Any value specified for an output only field will be ignored.
-   *   The queue's {@link google.cloud.tasks.v2beta2.Queue.name|name} cannot be
+   *   The queue's {@link protos.google.cloud.tasks.v2beta2.Queue.name|name} cannot be
    *   changed.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   A mask used to specify which fields of the queue are being updated.
@@ -593,9 +600,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.update_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_UpdateQueue_async
@@ -691,9 +697,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.delete_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_DeleteQueue_async
@@ -782,9 +787,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.purge_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_PurgeQueue_async
@@ -862,10 +866,10 @@ export class CloudTasksClient {
    *
    * If a queue is paused then the system will stop dispatching tasks
    * until the queue is resumed via
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.ResumeQueue|ResumeQueue}. Tasks can
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ResumeQueue|ResumeQueue}. Tasks can
    * still be added when the queue is paused. A queue is paused if its
-   * {@link google.cloud.tasks.v2beta2.Queue.state|state} is
-   * {@link google.cloud.tasks.v2beta2.Queue.State.PAUSED|PAUSED}.
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.state|state} is
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.State.PAUSED|PAUSED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -875,9 +879,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.pause_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_PauseQueue_async
@@ -954,12 +957,12 @@ export class CloudTasksClient {
    * Resume a queue.
    *
    * This method resumes a queue after it has been
-   * {@link google.cloud.tasks.v2beta2.Queue.State.PAUSED|PAUSED} or
-   * {@link google.cloud.tasks.v2beta2.Queue.State.DISABLED|DISABLED}. The state of a
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.State.PAUSED|PAUSED} or
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.State.DISABLED|DISABLED}. The state of a
    * queue is stored in the queue's
-   * {@link google.cloud.tasks.v2beta2.Queue.state|state}; after calling this method
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.state|state}; after calling this method
    * it will be set to
-   * {@link google.cloud.tasks.v2beta2.Queue.State.RUNNING|RUNNING}.
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.State.RUNNING|RUNNING}.
    *
    * WARNING: Resuming many high-QPS queues at the same time can
    * lead to target overloading. If you are resuming high-QPS
@@ -975,9 +978,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.resume_queue.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_ResumeQueue_async
@@ -1051,8 +1053,102 @@ export class CloudTasksClient {
     return this.innerApiCalls.resumeQueue(request, options, callback);
   }
   /**
+   * Update queue list by uploading a queue.yaml file.
+   *
+   * The queue.yaml file is supplied in the request body as a YAML encoded
+   * string. This method was added to support gcloud clients versions before
+   * 322.0.0. New clients should use CreateQueue instead of this method.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.appId
+   *   Required. The App ID is supplied as an HTTP parameter. Unlike internal
+   *   usage of App ID, it does not include a region prefix. Rather, the App ID
+   *   represents the Project ID against which to make the request.
+   * @param {google.api.HttpBody} request.httpBody
+   *   The http body contains the queue.yaml file which used to update queue lists
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js</caption>
+   * region_tag:cloudtasks_v2beta2_generated_CloudTasks_UploadQueueYaml_async
+   */
+  uploadQueueYaml(
+    request?: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  uploadQueueYaml(
+    request: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  uploadQueueYaml(
+    request: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  uploadQueueYaml(
+    request?: protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta2.IUploadQueueYamlRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.uploadQueueYaml(request, options, callback);
+  }
+  /**
    * Gets the access control policy for a
-   * {@link google.cloud.tasks.v2beta2.Queue|Queue}. Returns an empty policy if the
+   * {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}. Returns an empty policy if the
    * resource exists and does not have a policy set.
    *
    * Authorization requires the following
@@ -1072,9 +1168,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.get_iam_policy.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_GetIamPolicy_async
@@ -1147,7 +1242,7 @@ export class CloudTasksClient {
   }
   /**
    * Sets the access control policy for a
-   * {@link google.cloud.tasks.v2beta2.Queue|Queue}. Replaces any existing policy.
+   * {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}. Replaces any existing policy.
    *
    * Note: The Cloud Console does not check queue-level IAM permissions yet.
    * Project-level permissions are required to use the Cloud Console.
@@ -1177,9 +1272,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.set_iam_policy.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_SetIamPolicy_async
@@ -1252,9 +1346,9 @@ export class CloudTasksClient {
   }
   /**
    * Returns permissions that a caller has on a
-   * {@link google.cloud.tasks.v2beta2.Queue|Queue}. If the resource does not exist,
+   * {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}. If the resource does not exist,
    * this will return an empty set of permissions, not a
-   * {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} error.
+   * {@link protos.google.rpc.Code.NOT_FOUND|NOT_FOUND} error.
    *
    * Note: This operation is designed to be used for building permission-aware
    * UIs and command-line tools, not for authorization checking. This operation
@@ -1273,9 +1367,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.test_iam_permissions.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_TestIamPermissions_async
@@ -1356,24 +1449,23 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Task | Task}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.get_task.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_GetTask_async
@@ -1449,10 +1541,10 @@ export class CloudTasksClient {
    *
    * Tasks cannot be updated after creation; there is no UpdateTask command.
    *
-   * * For {@link google.cloud.tasks.v2beta2.AppEngineHttpTarget|App Engine queues},
+   * * For {@link protos.google.cloud.tasks.v2beta2.AppEngineHttpTarget|App Engine queues},
    * the maximum task size is
    *   100KB.
-   * * For {@link google.cloud.tasks.v2beta2.PullTarget|pull queues}, the maximum
+   * * For {@link protos.google.cloud.tasks.v2beta2.PullTarget|pull queues}, the maximum
    * task size is 1MB.
    *
    * @param {Object} request
@@ -1468,11 +1560,11 @@ export class CloudTasksClient {
    *   Task names have the following format:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
    *   The user can optionally specify a task
-   *   {@link google.cloud.tasks.v2beta2.Task.name|name}. If a name is not specified
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.name|name}. If a name is not specified
    *   then the system will generate a random unique task id, which will be set in
-   *   the task returned in the {@link google.cloud.tasks.v2beta2.Task.name|response}.
+   *   the task returned in the {@link protos.google.cloud.tasks.v2beta2.Task.name|response}.
    *
-   *   If {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} is not
+   *   If {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} is not
    *   set or is in the past then Cloud Tasks will set it to the current time.
    *
    *   Task De-duplication:
@@ -1480,15 +1572,15 @@ export class CloudTasksClient {
    *   Explicitly specifying a task ID enables task de-duplication.  If
    *   a task's ID is identical to that of an existing task or a task
    *   that was deleted or completed recently then the call will fail
-   *   with {@link google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS}.
+   *   with {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS}.
    *   If the task's queue was created using Cloud Tasks, then another task with
-   *   the same name can't be created for ~1hour after the original task was
+   *   the same name can't be created for ~1 hour after the original task was
    *   deleted or completed. If the task's queue was created using queue.yaml or
    *   queue.xml, then another task with the same name can't be created
-   *   for ~9days after the original task was deleted or completed.
+   *   for ~9 days after the original task was deleted or completed.
    *
    *   Because there is an extra lookup cost to identify duplicate task
-   *   names, these {@link google.cloud.tasks.v2beta2.CloudTasks.CreateTask|CreateTask}
+   *   names, these {@link protos.google.cloud.tasks.v2beta2.CloudTasks.CreateTask|CreateTask}
    *   calls have significantly increased latency. Using hashed strings for the
    *   task id or for the prefix of the task id is recommended. Choosing task ids
    *   that are sequential or have sequential prefixes, for example using a
@@ -1498,24 +1590,23 @@ export class CloudTasksClient {
    *   efficiently.
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Task | Task}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.create_task.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_CreateTask_async
@@ -1603,9 +1694,8 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.delete_task.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_DeleteTask_async
@@ -1680,27 +1770,27 @@ export class CloudTasksClient {
   }
   /**
    * Leases tasks from a pull queue for
-   * {@link google.cloud.tasks.v2beta2.LeaseTasksRequest.lease_duration|lease_duration}.
+   * {@link protos.google.cloud.tasks.v2beta2.LeaseTasksRequest.lease_duration|lease_duration}.
    *
    * This method is invoked by the worker to obtain a lease. The
    * worker must acknowledge the task via
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask|AcknowledgeTask}
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask|AcknowledgeTask}
    * after they have performed the work associated with the task.
    *
-   * The {@link google.cloud.tasks.v2beta2.PullMessage.payload|payload} is intended
+   * The {@link protos.google.cloud.tasks.v2beta2.PullMessage.payload|payload} is intended
    * to store data that the worker needs to perform the work associated with the
    * task. To return the payloads in the
-   * {@link google.cloud.tasks.v2beta2.LeaseTasksResponse|response}, set
-   * {@link google.cloud.tasks.v2beta2.LeaseTasksRequest.response_view|response_view}
-   * to {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}.
+   * {@link protos.google.cloud.tasks.v2beta2.LeaseTasksResponse|response}, set
+   * {@link protos.google.cloud.tasks.v2beta2.LeaseTasksRequest.response_view|response_view}
+   * to {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}.
    *
    * A maximum of 10 qps of
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} requests are
-   * allowed per queue. {@link google.rpc.Code.RESOURCE_EXHAUSTED|RESOURCE_EXHAUSTED}
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} requests are
+   * allowed per queue. {@link protos.google.rpc.Code.RESOURCE_EXHAUSTED|RESOURCE_EXHAUSTED}
    * is returned when this limit is
-   * exceeded. {@link google.rpc.Code.RESOURCE_EXHAUSTED|RESOURCE_EXHAUSTED}
+   * exceeded. {@link protos.google.rpc.Code.RESOURCE_EXHAUSTED|RESOURCE_EXHAUSTED}
    * is also returned when
-   * {@link google.cloud.tasks.v2beta2.RateLimits.max_tasks_dispatched_per_second|max_tasks_dispatched_per_second}
+   * {@link protos.google.cloud.tasks.v2beta2.RateLimits.max_tasks_dispatched_per_second|max_tasks_dispatched_per_second}
    * is exceeded.
    *
    * @param {Object} request
@@ -1724,50 +1814,50 @@ export class CloudTasksClient {
    *   Required. The duration of the lease.
    *
    *   Each task returned in the
-   *   {@link google.cloud.tasks.v2beta2.LeaseTasksResponse|response} will have its
-   *   {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} set to the
+   *   {@link protos.google.cloud.tasks.v2beta2.LeaseTasksResponse|response} will have its
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} set to the
    *   current time plus the `lease_duration`. The task is leased until its
-   *   {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}; thus, the
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}; thus, the
    *   task will not be returned to another
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} call before
-   *   its {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}.
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} call before
+   *   its {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}.
    *
    *
    *   After the worker has successfully finished the work associated
    *   with the task, the worker must call via
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask|AcknowledgeTask}
-   *   before the {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}.
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask|AcknowledgeTask}
+   *   before the {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}.
    *   Otherwise the task will be returned to a later
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} call so that
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} call so that
    *   another worker can retry it.
    *
    *   The maximum lease duration is 1 week.
    *   `lease_duration` will be truncated to the nearest second.
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {string} request.filter
    *   `filter` can be used to specify a subset of tasks to lease.
    *
    *   When `filter` is set to `tag=<my-tag>` then the
-   *   {@link google.cloud.tasks.v2beta2.LeaseTasksResponse|response} will contain only
-   *   tasks whose {@link google.cloud.tasks.v2beta2.PullMessage.tag|tag} is equal to
+   *   {@link protos.google.cloud.tasks.v2beta2.LeaseTasksResponse|response} will contain only
+   *   tasks whose {@link protos.google.cloud.tasks.v2beta2.PullMessage.tag|tag} is equal to
    *   `<my-tag>`. `<my-tag>` must be less than 500 characters.
    *
    *   When `filter` is set to `tag_function=oldest_tag()`, only tasks which have
    *   the same tag as the task with the oldest
-   *   {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} will be
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} will be
    *   returned.
    *
    *   Grammar Syntax:
@@ -1786,15 +1876,14 @@ export class CloudTasksClient {
    *   [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-),
    *   only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
    *   aren't UTF-8 encoded can't be used in the
-   *   {@link google.cloud.tasks.v2beta2.LeaseTasksRequest.filter|filter} and the
-   *   task's {@link google.cloud.tasks.v2beta2.PullMessage.tag|tag} will be displayed
+   *   {@link protos.google.cloud.tasks.v2beta2.LeaseTasksRequest.filter|filter} and the
+   *   task's {@link protos.google.cloud.tasks.v2beta2.PullMessage.tag|tag} will be displayed
    *   as empty in Cloud Tasks.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.LeaseTasksResponse | LeaseTasksResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.LeaseTasksResponse|LeaseTasksResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.lease_tasks.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_LeaseTasks_async
@@ -1871,17 +1960,17 @@ export class CloudTasksClient {
    * Acknowledges a pull task.
    *
    * The worker, that is, the entity that
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|leased} this task must
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|leased} this task must
    * call this method to indicate that the work associated with the task has
    * finished.
    *
    * The worker must acknowledge a task within the
-   * {@link google.cloud.tasks.v2beta2.LeaseTasksRequest.lease_duration|lease_duration}
+   * {@link protos.google.cloud.tasks.v2beta2.LeaseTasksRequest.lease_duration|lease_duration}
    * or the lease will expire and the task will become available to be leased
    * again. After the task is acknowledged, it will not be returned
-   * by a later {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks},
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.GetTask|GetTask}, or
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks}.
+   * by a later {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks},
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.GetTask|GetTask}, or
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1890,16 +1979,15 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.protobuf.Timestamp} request.scheduleTime
    *   Required. The task's current schedule time, available in the
-   *   {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} returned by
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} response or
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.RenewLease|RenewLease} response.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} returned by
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} response or
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RenewLease|RenewLease} response.
    *   This restriction is to ensure that your worker currently holds the lease.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.acknowledge_task.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_AcknowledgeTask_async
@@ -1984,7 +2072,7 @@ export class CloudTasksClient {
    * The worker can use this method to extend the lease by a new
    * duration, starting from now. The new task lease will be
    * returned in the task's
-   * {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}.
+   * {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1993,9 +2081,9 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.protobuf.Timestamp} request.scheduleTime
    *   Required. The task's current schedule time, available in the
-   *   {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} returned by
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} response or
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.RenewLease|RenewLease} response.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} returned by
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} response or
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RenewLease|RenewLease} response.
    *   This restriction is to ensure that your worker currently holds the lease.
    * @param {google.protobuf.Duration} request.leaseDuration
    *   Required. The desired new lease duration, starting from now.
@@ -2005,24 +2093,23 @@ export class CloudTasksClient {
    *   `lease_duration` will be truncated to the nearest second.
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Task | Task}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.renew_lease.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_RenewLease_async
@@ -2099,9 +2186,9 @@ export class CloudTasksClient {
    * Cancel a pull task's lease.
    *
    * The worker can use this method to cancel a task's lease by
-   * setting its {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}
+   * setting its {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time}
    * to now. This will make the task available to be leased to the next caller
-   * of {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks}.
+   * of {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2110,30 +2197,29 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.protobuf.Timestamp} request.scheduleTime
    *   Required. The task's current schedule time, available in the
-   *   {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} returned by
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} response or
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.RenewLease|RenewLease} response.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} returned by
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks|LeaseTasks} response or
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RenewLease|RenewLease} response.
    *   This restriction is to ensure that your worker currently holds the lease.
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Task | Task}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.cancel_lease.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_CancelLease_async
@@ -2211,32 +2297,32 @@ export class CloudTasksClient {
    *
    * When this method is called, Cloud Tasks will dispatch the task, even if
    * the task is already running, the queue has reached its
-   * {@link google.cloud.tasks.v2beta2.RateLimits|RateLimits} or is
-   * {@link google.cloud.tasks.v2beta2.Queue.State.PAUSED|PAUSED}.
+   * {@link protos.google.cloud.tasks.v2beta2.RateLimits|RateLimits} or is
+   * {@link protos.google.cloud.tasks.v2beta2.Queue.State.PAUSED|PAUSED}.
    *
    * This command is meant to be used for manual debugging. For
-   * example, {@link google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} can be
+   * example, {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} can be
    * used to retry a failed task after a fix has been made or to manually force
    * a task to be dispatched now.
    *
    * The dispatched task is returned. That is, the task that is returned
-   * contains the {@link google.cloud.tasks.v2beta2.Task.status|status} after the
+   * contains the {@link protos.google.cloud.tasks.v2beta2.Task.status|status} after the
    * task is dispatched but before the task is received by its target.
    *
    * If Cloud Tasks receives a successful response from the task's
    * target, then the task will be deleted; otherwise the task's
-   * {@link google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} will be
+   * {@link protos.google.cloud.tasks.v2beta2.Task.schedule_time|schedule_time} will be
    * reset to the time that
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} was called plus
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} was called plus
    * the retry delay specified in the queue's
-   * {@link google.cloud.tasks.v2beta2.RetryConfig|RetryConfig}.
+   * {@link protos.google.cloud.tasks.v2beta2.RetryConfig|RetryConfig}.
    *
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} returns
-   * {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} when it is called on a
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} returns
+   * {@link protos.google.rpc.Code.NOT_FOUND|NOT_FOUND} when it is called on a
    * task that has already succeeded or permanently failed.
    *
-   * {@link google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} cannot be called
-   * on a {@link google.cloud.tasks.v2beta2.PullMessage|pull task}.
+   * {@link protos.google.cloud.tasks.v2beta2.CloudTasks.RunTask|RunTask} cannot be called
+   * on a {@link protos.google.cloud.tasks.v2beta2.PullMessage|pull task}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2245,24 +2331,23 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tasks.v2beta2.Task | Task}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.run_task.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_RunTask_async
@@ -2333,6 +2418,112 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.runTask(request, options, callback);
   }
+  /**
+   * Creates and buffers a new task without the need to explicitly define a Task
+   * message. The queue must have [HTTP
+   * target][google.cloud.tasks.v2beta2.HttpTarget]. To create the task with a
+   * custom ID, use the following format and set TASK_ID to your desired ID:
+   * projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer
+   * To create the task with an automatically generated ID, use the following
+   * format:
+   * projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer.
+   * Note: This feature is in its experimental stage. You must request access to
+   * the API through the [Cloud Tasks BufferTask Experiment Signup
+   * form](https://forms.gle/X8Zr5hiXH5tTGFqh8).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.queue
+   *   Required. The parent queue name. For example:
+   *   projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   *
+   *   The queue must already exist.
+   * @param {string} [request.taskId]
+   *   Optional. Task ID for the task being created. If not provided, a random
+   *   task ID is assigned to the task.
+   * @param {google.api.HttpBody} [request.body]
+   *   Optional. Body of the HTTP request.
+   *
+   *   The body can take any generic value. The value is written to the
+   *   {@link protos.payload|HttpRequest} of the [Task].
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta2.BufferTaskResponse|BufferTaskResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta2/cloud_tasks.buffer_task.js</caption>
+   * region_tag:cloudtasks_v2beta2_generated_CloudTasks_BufferTask_async
+   */
+  bufferTask(
+    request?: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  bufferTask(
+    request: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bufferTask(
+    request: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bufferTask(
+    request?: protos.google.cloud.tasks.v2beta2.IBufferTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+          | protos.google.cloud.tasks.v2beta2.IBufferTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta2.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta2.IBufferTaskRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        queue: request.queue ?? '',
+        task_id: request.taskId ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bufferTask(request, options, callback);
+  }
 
   /**
    * Lists queues.
@@ -2346,7 +2537,7 @@ export class CloudTasksClient {
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} request.filter
    *   `filter` can be used to specify a subset of queues. Any
-   *   {@link google.cloud.tasks.v2beta2.Queue|Queue} field can be used as a filter and
+   *   {@link protos.google.cloud.tasks.v2beta2.Queue|Queue} field can be used as a filter and
    *   several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
    *   filter syntax is the same as described in [Stackdriver's Advanced Logs
    *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -2361,18 +2552,18 @@ export class CloudTasksClient {
    *   The maximum page size is 9800. If unspecified, the page size will
    *   be the maximum. Fewer queues than requested might be returned,
    *   even if more queues exist; use the
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
    *   in the response to determine if more queues exist.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return.
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues} method. It
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues} method. It
    *   is an error to switch the value of the
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while
    *   iterating through pages.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Read mask is used for a more granular control over what the API
@@ -2382,14 +2573,13 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.tasks.v2beta2.Queue | Queue}.
+   *   The first element of the array is Array of {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listQueuesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listQueues(
@@ -2470,7 +2660,7 @@ export class CloudTasksClient {
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} request.filter
    *   `filter` can be used to specify a subset of queues. Any
-   *   {@link google.cloud.tasks.v2beta2.Queue|Queue} field can be used as a filter and
+   *   {@link protos.google.cloud.tasks.v2beta2.Queue|Queue} field can be used as a filter and
    *   several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
    *   filter syntax is the same as described in [Stackdriver's Advanced Logs
    *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -2485,18 +2675,18 @@ export class CloudTasksClient {
    *   The maximum page size is 9800. If unspecified, the page size will
    *   be the maximum. Fewer queues than requested might be returned,
    *   even if more queues exist; use the
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
    *   in the response to determine if more queues exist.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return.
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues} method. It
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues} method. It
    *   is an error to switch the value of the
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while
    *   iterating through pages.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Read mask is used for a more granular control over what the API
@@ -2506,13 +2696,12 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.tasks.v2beta2.Queue | Queue} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.tasks.v2beta2.Queue|Queue} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listQueuesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listQueuesStream(
@@ -2548,7 +2737,7 @@ export class CloudTasksClient {
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} request.filter
    *   `filter` can be used to specify a subset of queues. Any
-   *   {@link google.cloud.tasks.v2beta2.Queue|Queue} field can be used as a filter and
+   *   {@link protos.google.cloud.tasks.v2beta2.Queue|Queue} field can be used as a filter and
    *   several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
    *   filter syntax is the same as described in [Stackdriver's Advanced Logs
    *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -2563,18 +2752,18 @@ export class CloudTasksClient {
    *   The maximum page size is 9800. If unspecified, the page size will
    *   be the maximum. Fewer queues than requested might be returned,
    *   even if more queues exist; use the
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
    *   in the response to determine if more queues exist.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return.
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues} method. It
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListQueues|ListQueues} method. It
    *   is an error to switch the value of the
-   *   {@link google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while
+   *   {@link protos.google.cloud.tasks.v2beta2.ListQueuesRequest.filter|filter} while
    *   iterating through pages.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Read mask is used for a more granular control over what the API
@@ -2584,12 +2773,11 @@ export class CloudTasksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.tasks.v2beta2.Queue | Queue}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.tasks.v2beta2.Queue|Queue}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.list_queues.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_ListQueues_async
@@ -2618,9 +2806,9 @@ export class CloudTasksClient {
   /**
    * Lists the tasks in a queue.
    *
-   * By default, only the {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}
+   * By default, only the {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}
    * view is retrieved due to performance considerations;
-   * {@link google.cloud.tasks.v2beta2.ListTasksRequest.response_view|response_view}
+   * {@link protos.google.cloud.tasks.v2beta2.ListTasksRequest.response_view|response_view}
    * controls the subset of information which is returned.
    *
    * The tasks may be returned in any order. The ordering may change at any
@@ -2633,23 +2821,23 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {number} request.pageSize
    *   Maximum page size.
    *
    *   Fewer tasks than requested might be returned, even if more tasks exist; use
-   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
    *   in the response to determine if more tasks exist.
    *
    *   The maximum page size is 1000. If unspecified, the page size will be the
@@ -2659,22 +2847,21 @@ export class CloudTasksClient {
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks} method.
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks} method.
    *
    *   The page token is valid for only 2 hours.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.tasks.v2beta2.Task | Task}.
+   *   The first element of the array is Array of {@link protos.google.cloud.tasks.v2beta2.Task|Task}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTasks(
@@ -2755,23 +2942,23 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {number} request.pageSize
    *   Maximum page size.
    *
    *   Fewer tasks than requested might be returned, even if more tasks exist; use
-   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
    *   in the response to determine if more tasks exist.
    *
    *   The maximum page size is 1000. If unspecified, the page size will be the
@@ -2781,21 +2968,20 @@ export class CloudTasksClient {
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks} method.
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks} method.
    *
    *   The page token is valid for only 2 hours.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.tasks.v2beta2.Task | Task} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.tasks.v2beta2.Task|Task} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTasksStream(
@@ -2831,23 +3017,23 @@ export class CloudTasksClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {google.cloud.tasks.v2beta2.Task.View} request.responseView
    *   The response_view specifies which subset of the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} will be returned.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} will be returned.
    *
    *   By default response_view is
-   *   {@link google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
+   *   {@link protos.google.cloud.tasks.v2beta2.Task.View.BASIC|BASIC}; not all information is
    *   retrieved by default because some data, such as payloads, might be
    *   desirable to return only when needed because of its large size or because
    *   of the sensitivity of data that it contains.
    *
-   *   Authorization for {@link google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
+   *   Authorization for {@link protos.google.cloud.tasks.v2beta2.Task.View.FULL|FULL}
    *   requires `cloudtasks.tasks.fullView` [Google
    *   IAM](https://cloud.google.com/iam/) permission on the
-   *   {@link google.cloud.tasks.v2beta2.Task|Task} resource.
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task} resource.
    * @param {number} request.pageSize
    *   Maximum page size.
    *
    *   Fewer tasks than requested might be returned, even if more tasks exist; use
-   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
    *   in the response to determine if more tasks exist.
    *
    *   The maximum page size is 1000. If unspecified, the page size will be the
@@ -2857,20 +3043,19 @@ export class CloudTasksClient {
    *
    *   To request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token|next_page_token}
    *   returned from the previous call to
-   *   {@link google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks} method.
+   *   {@link protos.google.cloud.tasks.v2beta2.CloudTasks.ListTasks|ListTasks} method.
    *
    *   The page token is valid for only 2 hours.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.tasks.v2beta2.Task | Task}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.tasks.v2beta2.Task|Task}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta2/cloud_tasks.list_tasks.js</caption>
    * region_tag:cloudtasks_v2beta2_generated_CloudTasks_ListTasks_async
@@ -2896,6 +3081,84 @@ export class CloudTasksClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.tasks.v2beta2.ITask>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3081,6 +3344,7 @@ export class CloudTasksClient {
       return this.cloudTasksStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();

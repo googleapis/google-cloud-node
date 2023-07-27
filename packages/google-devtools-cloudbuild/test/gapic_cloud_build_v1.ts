@@ -3561,6 +3561,55 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
+    describe('network', () => {
+      const fakePath = '/rendered/path/network';
+      const expectedParameters = {
+        project: 'projectValue',
+        network: 'networkValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.networkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.networkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('networkPath', () => {
+        const result = client.networkPath('projectValue', 'networkValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.networkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNetworkName', () => {
+        const result = client.matchProjectFromNetworkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.networkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNetworkFromNetworkName', () => {
+        const result = client.matchNetworkFromNetworkName(fakePath);
+        assert.strictEqual(result, 'networkValue');
+        assert(
+          (client.pathTemplates.networkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -3648,6 +3697,55 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
+    describe('projectConfig', () => {
+      const fakePath = '/rendered/path/projectConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        config: 'configValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectConfigPath', () => {
+        const result = client.projectConfigPath('projectValue', 'configValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConfigName', () => {
+        const result = client.matchProjectFromProjectConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConfigFromProjectConfigName', () => {
+        const result = client.matchConfigFromProjectConfigName(fakePath);
+        assert.strictEqual(result, 'configValue');
+        assert(
+          (client.pathTemplates.projectConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationBuild', () => {
       const fakePath = '/rendered/path/projectLocationBuild';
       const expectedParameters = {
@@ -3718,6 +3816,85 @@ describe('v1.CloudBuildClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationBuildPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConfig', () => {
+      const fakePath = '/rendered/path/projectLocationConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        config: 'configValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationConfigPath', () => {
+        const result = client.projectLocationConfigPath(
+          'projectValue',
+          'locationValue',
+          'configValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConfigFromProjectLocationConfigName', () => {
+        const result =
+          client.matchConfigFromProjectLocationConfigName(fakePath);
+        assert.strictEqual(result, 'configValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -45,6 +45,11 @@
                 "resumeQueue"
               ]
             },
+            "UploadQueueYaml": {
+              "methods": [
+                "uploadQueueYaml"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -98,6 +103,11 @@
             "RunTask": {
               "methods": [
                 "runTask"
+              ]
+            },
+            "BufferTask": {
+              "methods": [
+                "bufferTask"
               ]
             },
             "ListQueues": {
@@ -154,6 +164,11 @@
                 "resumeQueue"
               ]
             },
+            "UploadQueueYaml": {
+              "methods": [
+                "uploadQueueYaml"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -207,6 +222,11 @@
             "RunTask": {
               "methods": [
                 "runTask"
+              ]
+            },
+            "BufferTask": {
+              "methods": [
+                "bufferTask"
               ]
             },
             "ListQueues": {
