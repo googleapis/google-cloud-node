@@ -38,7 +38,6 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
-pnpm config set enable-pre-post-scripts true
 # Install dependencies
 echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
 pnpm install --ignore-scripts --engine-strict --prod; pnpm install
