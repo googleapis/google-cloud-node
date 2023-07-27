@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "google-auth-library": "^9.0.0",
-    "google-gax": "^4.0.1",
+    "google-gax": "^4.0.3",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {
@@ -55,7 +55,7 @@
     "@types/sinon": "^10.0.0",
     "c8": "^7.2.0",
     "gts": "^3.1.0",
-    "gapic-tools": "^0.1.7",
+    "gapic-tools": "^0.1.8",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
