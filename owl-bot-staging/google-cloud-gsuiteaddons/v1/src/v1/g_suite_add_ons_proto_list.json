@@ -1,0 +1,12 @@
+[
+  "../../protos/google/apps/script/type/addon_widget_set.proto",
+  "../../protos/google/apps/script/type/calendar/calendar_addon_manifest.proto",
+  "../../protos/google/apps/script/type/docs/docs_addon_manifest.proto",
+  "../../protos/google/apps/script/type/drive/drive_addon_manifest.proto",
+  "../../protos/google/apps/script/type/extension_point.proto",
+  "../../protos/google/apps/script/type/gmail/gmail_addon_manifest.proto",
+  "../../protos/google/apps/script/type/script_manifest.proto",
+  "../../protos/google/apps/script/type/sheets/sheets_addon_manifest.proto",
+  "../../protos/google/apps/script/type/slides/slides_addon_manifest.proto",
+  "../../protos/google/cloud/gsuiteaddons/v1/gsuiteaddons.proto"
+]
