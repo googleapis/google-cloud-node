@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/osconfig/v1beta/guest_policies.proto",
+  "../../protos/google/cloud/osconfig/v1beta/osconfig_common.proto",
+  "../../protos/google/cloud/osconfig/v1beta/osconfig_service.proto",
+  "../../protos/google/cloud/osconfig/v1beta/patch_deployments.proto",
+  "../../protos/google/cloud/osconfig/v1beta/patch_jobs.proto"
+]
