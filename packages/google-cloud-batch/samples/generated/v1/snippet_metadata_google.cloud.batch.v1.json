@@ -5,14 +5,14 @@
         "language": "TYPESCRIPT",
         "apis": [
             {
-                "id": "google.cloud.batch.v1alpha",
-                "version": "v1alpha"
+                "id": "google.cloud.batch.v1",
+                "version": "v1"
             }
         ]
     },
     "snippets": [
         {
-            "regionTag": "batch_v1alpha_generated_BatchService_CreateJob_async",
+            "regionTag": "batch_v1_generated_BatchService_CreateJob_async",
             "title": "BatchService createJob Sample",
             "origin": "API_DEFINITION",
             "description": " Create a Job.",
@@ -28,7 +28,7 @@
             ],
             "clientMethod": {
                 "shortName": "CreateJob",
-                "fullName": "google.cloud.batch.v1alpha.BatchService.CreateJob",
+                "fullName": "google.cloud.batch.v1.BatchService.CreateJob",
                 "async": true,
                 "parameters": [
                     {
@@ -41,30 +41,30 @@
                     },
                     {
                         "name": "job",
-                        "type": ".google.cloud.batch.v1alpha.Job"
+                        "type": ".google.cloud.batch.v1.Job"
                     },
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.batch.v1alpha.Job",
+                "resultType": ".google.cloud.batch.v1.Job",
                 "client": {
                     "shortName": "BatchServiceClient",
-                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                    "fullName": "google.cloud.batch.v1.BatchServiceClient"
                 },
                 "method": {
                     "shortName": "CreateJob",
-                    "fullName": "google.cloud.batch.v1alpha.BatchService.CreateJob",
+                    "fullName": "google.cloud.batch.v1.BatchService.CreateJob",
                     "service": {
                         "shortName": "BatchService",
-                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                        "fullName": "google.cloud.batch.v1.BatchService"
                     }
                 }
             }
         },
         {
-            "regionTag": "batch_v1alpha_generated_BatchService_GetJob_async",
+            "regionTag": "batch_v1_generated_BatchService_GetJob_async",
             "title": "BatchService getJob Sample",
             "origin": "API_DEFINITION",
             "description": " Get a Job specified by its resource name.",
@@ -80,7 +80,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetJob",
-                "fullName": "google.cloud.batch.v1alpha.BatchService.GetJob",
+                "fullName": "google.cloud.batch.v1.BatchService.GetJob",
                 "async": true,
                 "parameters": [
                     {
@@ -88,23 +88,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.batch.v1alpha.Job",
+                "resultType": ".google.cloud.batch.v1.Job",
                 "client": {
                     "shortName": "BatchServiceClient",
-                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                    "fullName": "google.cloud.batch.v1.BatchServiceClient"
                 },
                 "method": {
                     "shortName": "GetJob",
-                    "fullName": "google.cloud.batch.v1alpha.BatchService.GetJob",
+                    "fullName": "google.cloud.batch.v1.BatchService.GetJob",
                     "service": {
                         "shortName": "BatchService",
-                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                        "fullName": "google.cloud.batch.v1.BatchService"
                     }
                 }
             }
         },
         {
-            "regionTag": "batch_v1alpha_generated_BatchService_DeleteJob_async",
+            "regionTag": "batch_v1_generated_BatchService_DeleteJob_async",
             "title": "BatchService deleteJob Sample",
             "origin": "API_DEFINITION",
             "description": " Delete a Job.",
@@ -120,7 +120,7 @@
             ],
             "clientMethod": {
                 "shortName": "DeleteJob",
-                "fullName": "google.cloud.batch.v1alpha.BatchService.DeleteJob",
+                "fullName": "google.cloud.batch.v1.BatchService.DeleteJob",
                 "async": true,
                 "parameters": [
                     {
@@ -139,20 +139,20 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "BatchServiceClient",
-                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                    "fullName": "google.cloud.batch.v1.BatchServiceClient"
                 },
                 "method": {
                     "shortName": "DeleteJob",
-                    "fullName": "google.cloud.batch.v1alpha.BatchService.DeleteJob",
+                    "fullName": "google.cloud.batch.v1.BatchService.DeleteJob",
                     "service": {
                         "shortName": "BatchService",
-                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                        "fullName": "google.cloud.batch.v1.BatchService"
                     }
                 }
             }
         },
         {
-            "regionTag": "batch_v1alpha_generated_BatchService_ListJobs_async",
+            "regionTag": "batch_v1_generated_BatchService_ListJobs_async",
             "title": "BatchService listJobs Sample",
             "origin": "API_DEFINITION",
             "description": " List all Jobs for a project within a region.",
@@ -162,13 +162,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "ListJobs",
-                "fullName": "google.cloud.batch.v1alpha.BatchService.ListJobs",
+                "fullName": "google.cloud.batch.v1.BatchService.ListJobs",
                 "async": true,
                 "parameters": [
                     {
@@ -180,10 +180,6 @@
                         "type": "TYPE_STRING"
                     },
                     {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
                         "name": "page_size",
                         "type": "TYPE_INT32"
                     },
@@ -192,23 +188,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.batch.v1alpha.ListJobsResponse",
+                "resultType": ".google.cloud.batch.v1.ListJobsResponse",
                 "client": {
                     "shortName": "BatchServiceClient",
-                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                    "fullName": "google.cloud.batch.v1.BatchServiceClient"
                 },
                 "method": {
                     "shortName": "ListJobs",
-                    "fullName": "google.cloud.batch.v1alpha.BatchService.ListJobs",
+                    "fullName": "google.cloud.batch.v1.BatchService.ListJobs",
                     "service": {
                         "shortName": "BatchService",
-                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                        "fullName": "google.cloud.batch.v1.BatchService"
                     }
                 }
             }
         },
         {
-            "regionTag": "batch_v1alpha_generated_BatchService_GetTask_async",
+            "regionTag": "batch_v1_generated_BatchService_GetTask_async",
             "title": "BatchService getTask Sample",
             "origin": "API_DEFINITION",
             "description": " Return a single Task.",
@@ -224,7 +220,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetTask",
-                "fullName": "google.cloud.batch.v1alpha.BatchService.GetTask",
+                "fullName": "google.cloud.batch.v1.BatchService.GetTask",
                 "async": true,
                 "parameters": [
                     {
@@ -232,23 +228,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.batch.v1alpha.Task",
+                "resultType": ".google.cloud.batch.v1.Task",
                 "client": {
                     "shortName": "BatchServiceClient",
-                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                    "fullName": "google.cloud.batch.v1.BatchServiceClient"
                 },
                 "method": {
                     "shortName": "GetTask",
-                    "fullName": "google.cloud.batch.v1alpha.BatchService.GetTask",
+                    "fullName": "google.cloud.batch.v1.BatchService.GetTask",
                     "service": {
                         "shortName": "BatchService",
-                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                        "fullName": "google.cloud.batch.v1.BatchService"
                     }
                 }
             }
         },
         {
-            "regionTag": "batch_v1alpha_generated_BatchService_ListTasks_async",
+            "regionTag": "batch_v1_generated_BatchService_ListTasks_async",
             "title": "BatchService listTasks Sample",
             "origin": "API_DEFINITION",
             "description": " List Tasks associated with a job.",
@@ -258,13 +254,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "ListTasks",
-                "fullName": "google.cloud.batch.v1alpha.BatchService.ListTasks",
+                "fullName": "google.cloud.batch.v1.BatchService.ListTasks",
                 "async": true,
                 "parameters": [
                     {
@@ -276,10 +272,6 @@
                         "type": "TYPE_STRING"
                     },
                     {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
                         "name": "page_size",
                         "type": "TYPE_INT32"
                     },
@@ -288,17 +280,17 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.batch.v1alpha.ListTasksResponse",
+                "resultType": ".google.cloud.batch.v1.ListTasksResponse",
                 "client": {
                     "shortName": "BatchServiceClient",
-                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                    "fullName": "google.cloud.batch.v1.BatchServiceClient"
                 },
                 "method": {
                     "shortName": "ListTasks",
-                    "fullName": "google.cloud.batch.v1alpha.BatchService.ListTasks",
+                    "fullName": "google.cloud.batch.v1.BatchService.ListTasks",
                     "service": {
                         "shortName": "BatchService",
-                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                        "fullName": "google.cloud.batch.v1.BatchService"
                     }
                 }
             }
