@@ -42,7 +42,7 @@ function main(name) {
    *  an existing label will require label value to be explicitly set to a hyphen
    *  "-". The label value cannot be empty.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
   /**
    *  Optional. Execution spec arguments. If the map is left empty, the task will
    *  run with existing execution spec args from task definition. If the map
@@ -52,7 +52,7 @@ function main(name) {
    *  an existing arg will require arg value to be explicitly set to a hyphen
    *  "-". The arg value cannot be empty.
    */
-  // const args = 1234
+  // const args = [1,2,3,4]
 
   // Imports the Dataplex library
   const {DataplexServiceClient} = require('@google-cloud/dataplex').v1;
