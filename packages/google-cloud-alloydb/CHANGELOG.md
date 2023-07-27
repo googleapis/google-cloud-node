@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v0.2.0...alloydb-v0.3.0) (2023-07-24)
+
+
+### Features
+
+* [alloydb] add metadata exchange support for AlloyDB connectors ([#4417](https://github.com/googleapis/google-cloud-node/issues/4417)) ([b658620](https://github.com/googleapis/google-cloud-node/commit/b658620294d3aefd02afd17b762f410bb623c8da))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v0.1.1...alloydb-v0.2.0) (2023-06-14)
 
 

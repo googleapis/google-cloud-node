@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.16.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.15.0...container-v4.16.0) (2023-07-24)
+
+
+### Features
+
+* [container] add advanced_datapath_observability_config to monitoring_config ([#4414](https://github.com/googleapis/google-cloud-node/issues/4414)) ([cb92854](https://github.com/googleapis/google-cloud-node/commit/cb9285425846480beb111a5a13fd0dbfe215b6f5))
+* [container] Add Multi-networking API ([#4426](https://github.com/googleapis/google-cloud-node/issues/4426)) ([bf2e891](https://github.com/googleapis/google-cloud-node/commit/bf2e891dfecafc8c1c145b2a2fd86997a314b535))
+* [container] add policy_name to PlacementPolicy message within a node pool ([#4440](https://github.com/googleapis/google-cloud-node/issues/4440)) ([b3eabc8](https://github.com/googleapis/google-cloud-node/commit/b3eabc8b6cf0bd7086f814d5fd3c5f200b5bec04))
+
 ## [4.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.14.0...container-v4.15.0) (2023-07-11)
 
 

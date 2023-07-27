@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v2.3.0...datastream-v2.4.0) (2023-07-24)
+
+
+### Features
+
+* [datastream] Add precision and scale to MysqlColumn ([#4441](https://github.com/googleapis/google-cloud-node/issues/4441)) ([8c33c07](https://github.com/googleapis/google-cloud-node/commit/8c33c07ea55a99cc4129e905247271acc08ca884))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v2.2.2...datastream-v2.3.0) (2023-05-20)
 
 

@@ -7358,6 +7358,12 @@ export namespace google {
 
                     /** MysqlColumn ordinalPosition */
                     ordinalPosition?: (number|null);
+
+                    /** MysqlColumn precision */
+                    precision?: (number|null);
+
+                    /** MysqlColumn scale */
+                    scale?: (number|null);
                 }
 
                 /** Represents a MysqlColumn. */
@@ -7389,6 +7395,12 @@ export namespace google {
 
                     /** MysqlColumn ordinalPosition. */
                     public ordinalPosition: number;
+
+                    /** MysqlColumn precision. */
+                    public precision: number;
+
+                    /** MysqlColumn scale. */
+                    public scale: number;
 
                     /**
                      * Creates a new MysqlColumn instance using the specified properties.

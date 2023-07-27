@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/livestream",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "livestream client for Node.js",
   "repository": {
     "type": "git",
