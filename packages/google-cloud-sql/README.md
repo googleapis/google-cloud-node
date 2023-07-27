@@ -89,8 +89,7 @@ const sqlClient = new SqlOperationsServiceClient();
 
 async function callList() {
   // Construct request
-  const request = {
-  };
+  const request = {};
 
   // Run request
   const response = await sqlClient.list(request);
