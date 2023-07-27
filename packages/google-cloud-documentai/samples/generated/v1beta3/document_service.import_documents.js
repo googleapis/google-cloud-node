@@ -38,7 +38,7 @@ function main(dataset, batchDocumentsImportConfigs) {
    *  Required. The Cloud Storage uri containing raw documents that must be
    *  imported.
    */
-  // const batchDocumentsImportConfigs = 1234
+  // const batchDocumentsImportConfigs = [1,2,3,4]
 
   // Imports the Documentai library
   const {DocumentServiceClient} = require('@google-cloud/documentai').v1beta3;
