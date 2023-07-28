@@ -1703,7 +1703,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createSchedule(
@@ -1749,7 +1749,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1795,7 +1795,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getSchedule(
@@ -1841,7 +1841,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1890,7 +1890,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   pauseSchedule(
@@ -1936,7 +1936,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1995,7 +1995,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   resumeSchedule(
@@ -2041,7 +2041,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2097,7 +2097,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   updateSchedule(
@@ -2143,7 +2143,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2195,7 +2195,7 @@ export class ScheduleServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteSchedule(
@@ -2248,7 +2248,7 @@ export class ScheduleServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2388,7 +2388,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule[],
       protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
     ]
   >;
   listSchedules(
@@ -2434,7 +2434,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule[],
       protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
     ]
   > | void {
     request = request || {};

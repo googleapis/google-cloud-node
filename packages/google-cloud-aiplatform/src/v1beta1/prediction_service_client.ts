@@ -510,7 +510,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
       protos.google.cloud.aiplatform.v1beta1.IPredictRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   predict(
@@ -550,7 +550,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
       protos.google.cloud.aiplatform.v1beta1.IPredictRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -622,7 +622,7 @@ export class PredictionServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   rawPredict(
@@ -668,7 +668,7 @@ export class PredictionServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -754,7 +754,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
       protos.google.cloud.aiplatform.v1beta1.IExplainRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   explain(
@@ -794,7 +794,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
       protos.google.cloud.aiplatform.v1beta1.IExplainRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};

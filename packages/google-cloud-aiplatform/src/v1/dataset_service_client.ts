@@ -1618,7 +1618,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IGetDatasetRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getDataset(
@@ -1658,7 +1658,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IGetDatasetRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1710,7 +1710,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   updateDataset(
@@ -1756,7 +1756,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1804,7 +1804,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAnnotationSpec,
       protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getAnnotationSpec(
@@ -1850,7 +1850,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAnnotationSpec,
       protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1903,7 +1903,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createDataset(
@@ -1956,7 +1956,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2041,7 +2041,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteDataset(
@@ -2094,7 +2094,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2182,7 +2182,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IImportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   importData(
@@ -2235,7 +2235,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IImportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2322,7 +2322,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IExportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   exportData(
@@ -2375,7 +2375,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IExportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2460,7 +2460,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteSavedQuery(
@@ -2513,7 +2513,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2624,7 +2624,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataset[],
       protos.google.cloud.aiplatform.v1.IListDatasetsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListDatasetsResponse,
+      protos.google.cloud.aiplatform.v1.IListDatasetsResponse
     ]
   >;
   listDatasets(
@@ -2670,7 +2670,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataset[],
       protos.google.cloud.aiplatform.v1.IListDatasetsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListDatasetsResponse,
+      protos.google.cloud.aiplatform.v1.IListDatasetsResponse
     ]
   > | void {
     request = request || {};
@@ -2871,7 +2871,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataItem[],
       protos.google.cloud.aiplatform.v1.IListDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListDataItemsResponse,
+      protos.google.cloud.aiplatform.v1.IListDataItemsResponse
     ]
   >;
   listDataItems(
@@ -2917,7 +2917,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataItem[],
       protos.google.cloud.aiplatform.v1.IListDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListDataItemsResponse,
+      protos.google.cloud.aiplatform.v1.IListDataItemsResponse
     ]
   > | void {
     request = request || {};
@@ -3132,7 +3132,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataItemView[],
       protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchDataItemsResponse,
+      protos.google.cloud.aiplatform.v1.ISearchDataItemsResponse
     ]
   >;
   searchDataItems(
@@ -3178,7 +3178,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataItemView[],
       protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchDataItemsResponse,
+      protos.google.cloud.aiplatform.v1.ISearchDataItemsResponse
     ]
   > | void {
     request = request || {};
@@ -3441,7 +3441,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ISavedQuery[],
       protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest | null,
-      protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse,
+      protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse
     ]
   >;
   listSavedQueries(
@@ -3487,7 +3487,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ISavedQuery[],
       protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest | null,
-      protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse,
+      protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse
     ]
   > | void {
     request = request || {};
@@ -3654,7 +3654,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAnnotation[],
       protos.google.cloud.aiplatform.v1.IListAnnotationsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListAnnotationsResponse,
+      protos.google.cloud.aiplatform.v1.IListAnnotationsResponse
     ]
   >;
   listAnnotations(
@@ -3700,7 +3700,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAnnotation[],
       protos.google.cloud.aiplatform.v1.IListAnnotationsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListAnnotationsResponse,
+      protos.google.cloud.aiplatform.v1.IListAnnotationsResponse
     ]
   > | void {
     request = request || {};

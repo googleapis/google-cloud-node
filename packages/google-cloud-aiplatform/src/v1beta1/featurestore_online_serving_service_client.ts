@@ -506,7 +506,7 @@ export class FeaturestoreOnlineServingServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   readFeatureValues(
@@ -555,7 +555,7 @@ export class FeaturestoreOnlineServingServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -614,7 +614,7 @@ export class FeaturestoreOnlineServingServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   writeFeatureValues(
@@ -663,7 +663,7 @@ export class FeaturestoreOnlineServingServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};

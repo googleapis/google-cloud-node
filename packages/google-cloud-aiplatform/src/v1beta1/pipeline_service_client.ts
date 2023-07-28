@@ -1731,7 +1731,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createTrainingPipeline(
@@ -1780,7 +1780,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1833,7 +1833,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getTrainingPipeline(
@@ -1882,7 +1882,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1944,7 +1944,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   cancelTrainingPipeline(
@@ -1993,7 +1993,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2054,7 +2054,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createPipelineJob(
@@ -2103,7 +2103,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2149,7 +2149,7 @@ export class PipelineServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
       protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getPipelineJob(
@@ -2195,7 +2195,7 @@ export class PipelineServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
       protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2256,7 +2256,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   cancelPipelineJob(
@@ -2305,7 +2305,7 @@ export class PipelineServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2357,7 +2357,7 @@ export class PipelineServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteTrainingPipeline(
@@ -2410,7 +2410,7 @@ export class PipelineServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2499,7 +2499,7 @@ export class PipelineServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deletePipelineJob(
@@ -2552,7 +2552,7 @@ export class PipelineServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2666,7 +2666,7 @@ export class PipelineServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[],
       protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse
     ]
   >;
   listTrainingPipelines(
@@ -2712,7 +2712,7 @@ export class PipelineServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[],
       protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse
     ]
   > | void {
     request = request || {};
@@ -2967,7 +2967,7 @@ export class PipelineServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPipelineJob[],
       protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse
     ]
   >;
   listPipelineJobs(
@@ -3013,7 +3013,7 @@ export class PipelineServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPipelineJob[],
       protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse
     ]
   > | void {
     request = request || {};

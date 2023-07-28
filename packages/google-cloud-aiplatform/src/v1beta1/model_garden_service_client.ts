@@ -475,7 +475,7 @@ export class ModelGardenServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetPublisherModelRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getPublisherModel(
@@ -524,7 +524,7 @@ export class ModelGardenServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetPublisherModelRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};

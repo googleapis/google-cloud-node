@@ -1735,7 +1735,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy,
       protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createStudy(
@@ -1781,7 +1781,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy,
       protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1826,7 +1826,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy,
       protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getStudy(
@@ -1872,7 +1872,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy,
       protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1917,7 +1917,7 @@ export class VizierServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteStudy(
@@ -1963,7 +1963,7 @@ export class VizierServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2011,7 +2011,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy,
       protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   lookupStudy(
@@ -2057,7 +2057,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy,
       protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2104,7 +2104,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createTrial(
@@ -2150,7 +2150,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2196,7 +2196,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getTrial(
@@ -2242,7 +2242,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2294,7 +2294,7 @@ export class VizierServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   addTrialMeasurement(
@@ -2343,7 +2343,7 @@ export class VizierServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2399,7 +2399,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   completeTrial(
@@ -2445,7 +2445,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2491,7 +2491,7 @@ export class VizierServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteTrial(
@@ -2537,7 +2537,7 @@ export class VizierServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2583,7 +2583,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   stopTrial(
@@ -2629,7 +2629,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial,
       protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2679,7 +2679,7 @@ export class VizierServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   listOptimalTrials(
@@ -2728,7 +2728,7 @@ export class VizierServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2792,7 +2792,7 @@ export class VizierServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   suggestTrials(
@@ -2845,7 +2845,7 @@ export class VizierServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2933,7 +2933,7 @@ export class VizierServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   checkTrialEarlyStoppingState(
@@ -2986,7 +2986,7 @@ export class VizierServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -3078,7 +3078,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy[],
       protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
     ]
   >;
   listStudies(
@@ -3124,7 +3124,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IStudy[],
       protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
     ]
   > | void {
     request = request || {};
@@ -3273,7 +3273,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial[],
       protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
     ]
   >;
   listTrials(
@@ -3319,7 +3319,7 @@ export class VizierServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITrial[],
       protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse,
+      protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
     ]
   > | void {
     request = request || {};
