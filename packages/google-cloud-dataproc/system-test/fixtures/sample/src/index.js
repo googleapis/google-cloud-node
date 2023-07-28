@@ -16,17 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const dataproc = require('@google-cloud/dataproc');
 
 function main() {
-  const autoscalingPolicyServiceClient = new dataproc.AutoscalingPolicyServiceClient();
+  const autoscalingPolicyServiceClient =
+    new dataproc.AutoscalingPolicyServiceClient();
   const batchControllerClient = new dataproc.BatchControllerClient();
   const clusterControllerClient = new dataproc.ClusterControllerClient();
   const jobControllerClient = new dataproc.JobControllerClient();
   const nodeGroupControllerClient = new dataproc.NodeGroupControllerClient();
-  const workflowTemplateServiceClient = new dataproc.WorkflowTemplateServiceClient();
+  const workflowTemplateServiceClient =
+    new dataproc.WorkflowTemplateServiceClient();
 }
 
 main();

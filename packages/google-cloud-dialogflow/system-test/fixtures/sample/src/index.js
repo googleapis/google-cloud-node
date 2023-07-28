@@ -16,7 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const dialogflow = require('@google-cloud/dialogflow');
 
@@ -24,9 +23,11 @@ function main() {
   const agentsClient = new dialogflow.AgentsClient();
   const answerRecordsClient = new dialogflow.AnswerRecordsClient();
   const contextsClient = new dialogflow.ContextsClient();
-  const conversationDatasetsClient = new dialogflow.ConversationDatasetsClient();
+  const conversationDatasetsClient =
+    new dialogflow.ConversationDatasetsClient();
   const conversationModelsClient = new dialogflow.ConversationModelsClient();
-  const conversationProfilesClient = new dialogflow.ConversationProfilesClient();
+  const conversationProfilesClient =
+    new dialogflow.ConversationProfilesClient();
   const conversationsClient = new dialogflow.ConversationsClient();
   const documentsClient = new dialogflow.DocumentsClient();
   const entityTypesClient = new dialogflow.EntityTypesClient();

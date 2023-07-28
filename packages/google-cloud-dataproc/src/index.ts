@@ -31,7 +31,23 @@ type NodeGroupControllerClient = v1.NodeGroupControllerClient;
 const WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 
-export {v1, AutoscalingPolicyServiceClient, BatchControllerClient, ClusterControllerClient, JobControllerClient, NodeGroupControllerClient, WorkflowTemplateServiceClient};
-export default {v1, AutoscalingPolicyServiceClient, BatchControllerClient, ClusterControllerClient, JobControllerClient, NodeGroupControllerClient, WorkflowTemplateServiceClient};
+export {
+  v1,
+  AutoscalingPolicyServiceClient,
+  BatchControllerClient,
+  ClusterControllerClient,
+  JobControllerClient,
+  NodeGroupControllerClient,
+  WorkflowTemplateServiceClient,
+};
+export default {
+  v1,
+  AutoscalingPolicyServiceClient,
+  BatchControllerClient,
+  ClusterControllerClient,
+  JobControllerClient,
+  NodeGroupControllerClient,
+  WorkflowTemplateServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};
