@@ -38,7 +38,7 @@ function main(parent) {
    *  pattern is
    *  `//bigquery.googleapis.com/projects/{GCP-PROJECT-ID}/datasets/{DATASET-ID}/tables/{TABLE-ID}`.
    */
-  // const scopes = 'abc123'
+  // const scopes = ['abc','def']
   /**
    *  User query for which to generate suggestions. If the query is empty, zero
    *  state suggestions are returned. This allows UIs to display suggestions
@@ -53,7 +53,7 @@ function main(parent) {
    *  lower than suggestions for other types and the service may decide to cut
    *  these suggestions off.
    */
-  // const suggestionTypes = 1234
+  // const suggestionTypes = [1,2,3,4]
 
   // Imports the Dataqna library
   const {AutoSuggestionServiceClient} = require('@google-cloud/data-qna').v1alpha;

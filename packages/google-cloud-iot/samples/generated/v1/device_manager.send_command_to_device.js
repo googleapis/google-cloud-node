@@ -37,7 +37,7 @@ function main(name, binaryData) {
   /**
    *  Required. The command data to send to the device.
    */
-  // const binaryData = 'Buffer.from('string')'
+  // const binaryData = Buffer.from('string')
   /**
    *  Optional subfolder for the command. If empty, the command will be delivered
    *  to the /devices/{device-id}/commands topic, otherwise it will be delivered

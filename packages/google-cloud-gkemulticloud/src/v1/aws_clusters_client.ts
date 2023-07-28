@@ -482,14 +482,14 @@ export class AwsClustersClient {
   // -- Service calls --
   // -------------------
   /**
-   * Describes a specific {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * Describes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
    * resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
    *   describe.
    *
    *   `AwsCluster` names are formatted as
@@ -500,9 +500,8 @@ export class AwsClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AwsCluster | AwsCluster}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsCluster_async
@@ -583,13 +582,13 @@ export class AwsClustersClient {
   }
   /**
    * Generates a short-lived access token to authenticate to a given
-   * {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.awsCluster
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
    *   authenticate to.
    *
    *   `AwsCluster` names are formatted as
@@ -600,9 +599,8 @@ export class AwsClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse | GenerateAwsAccessTokenResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse|GenerateAwsAccessTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_access_token.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsAccessToken_async
@@ -693,13 +691,13 @@ export class AwsClustersClient {
   }
   /**
    * Describes a specific
-   * {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
    *   describe.
    *
    *   `AwsNodePool` names are formatted as
@@ -710,9 +708,8 @@ export class AwsClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AwsNodePool | AwsNodePool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_async
@@ -799,7 +796,7 @@ export class AwsClustersClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig} resource
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig} resource
    *   to describe.
    *
    *   `AwsServerConfig` names are formatted as
@@ -810,9 +807,8 @@ export class AwsClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AwsServerConfig | AwsServerConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_server_config.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async
@@ -899,18 +895,18 @@ export class AwsClustersClient {
   }
 
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
    * resource on a given Google Cloud Platform project and region.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location where this
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will be
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will be
    *   created.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
@@ -919,17 +915,17 @@ export class AwsClustersClient {
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
    *   Required. The specification of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to create.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to create.
    * @param {string} request.awsClusterId
    *   Required. A client provided ID the resource. Must be unique within the
    *   parent resource.
    *
    *   The provided ID will be part of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource name
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource name
    *   formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the cluster.
    * @param {object} [options]
@@ -938,8 +934,7 @@ export class AwsClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
@@ -1034,8 +1029,7 @@ export class AwsClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
@@ -1064,19 +1058,19 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Updates an {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
    *   resource to update.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually update the cluster.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. The elements of the repeated paths field can only include these
-   *   fields from {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}:
+   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}:
    *
    *    *   `description`.
    *    *   `annotations`.
@@ -1107,8 +1101,7 @@ export class AwsClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
@@ -1203,8 +1196,7 @@ export class AwsClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
@@ -1233,21 +1225,21 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
    * resource.
    *
    * Fails if the cluster has one or more associated
-   * {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to delete.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to delete.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -1258,14 +1250,14 @@ export class AwsClustersClient {
    *   If set, only validate the request, but do not actually delete the resource.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource is not
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource is not
    *   found, the request will succeed but no action will be taken on the server
-   *   and a completed {@link google.longrunning.Operation|Operation} will be returned.
+   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
    *
    *   Useful for idempotent deletion.
    * @param {string} request.etag
    *   The current etag of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    *   Allows clients to perform deletions through optimistic concurrency control.
    *
@@ -1277,8 +1269,7 @@ export class AwsClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
@@ -1373,8 +1364,7 @@ export class AwsClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
@@ -1403,17 +1393,17 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool},
-   * attached to a given {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool},
+   * attached to a given {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
    *   resource where this node pool will be created.
    *
    *   `AwsCluster` names are formatted as
@@ -1423,17 +1413,17 @@ export class AwsClustersClient {
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
    *   Required. The specification of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to create.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to create.
    * @param {string} request.awsNodePoolId
    *   Required. A client provided ID the resource. Must be unique within the
    *   parent resource.
    *
    *   The provided ID will be part of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource name
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource name
    *   formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the node
    *   pool.
@@ -1443,8 +1433,7 @@ export class AwsClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
@@ -1539,8 +1528,7 @@ export class AwsClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
@@ -1569,19 +1557,19 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Updates an {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
    *   resource to update.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but don't actually update the node pool.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. The elements of the repeated paths field can only include these
-   *   fields from {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}:
+   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}:
    *
    *    *   `annotations`.
    *    *   `version`.
@@ -1611,8 +1599,7 @@ export class AwsClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
@@ -1707,8 +1694,7 @@ export class AwsClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
@@ -1737,18 +1723,18 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
    * resource.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name the
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to delete.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to delete.
    *
    *   `AwsNodePool` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -1760,14 +1746,14 @@ export class AwsClustersClient {
    *   pool.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource is not
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource is not
    *   found, the request will succeed but no action will be taken on the server
-   *   and a completed {@link google.longrunning.Operation|Operation} will be returned.
+   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
    *
    *   Useful for idempotent deletion.
    * @param {string} request.etag
    *   The current ETag of the
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
    *
    *   Allows clients to perform deletions through optimistic concurrency control.
    *
@@ -1779,8 +1765,7 @@ export class AwsClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
@@ -1875,8 +1860,7 @@ export class AwsClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
@@ -1905,14 +1889,14 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources
    * on a given Google Cloud project and region.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -1924,23 +1908,22 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkemulticloud.v1.AwsCluster | AwsCluster}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAwsClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAwsClusters(
@@ -2024,7 +2007,7 @@ export class AwsClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2036,22 +2019,21 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkemulticloud.v1.AwsCluster | AwsCluster} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAwsClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAwsClustersStream(
@@ -2084,7 +2066,7 @@ export class AwsClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2096,21 +2078,20 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkemulticloud.v1.AwsCluster | AwsCluster}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_clusters.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_async
@@ -2137,15 +2118,15 @@ export class AwsClustersClient {
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsCluster>;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
    * resources on a given
-   * {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent `AwsCluster` which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -2158,23 +2139,22 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkemulticloud.v1.AwsNodePool | AwsNodePool}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAwsNodePoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAwsNodePools(
@@ -2258,7 +2238,7 @@ export class AwsClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent `AwsCluster` which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -2271,22 +2251,21 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkemulticloud.v1.AwsNodePool | AwsNodePool} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAwsNodePoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAwsNodePoolsStream(
@@ -2319,7 +2298,7 @@ export class AwsClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent `AwsCluster` which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -2332,21 +2311,20 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool | AwsNodePool}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_node_pools.js</caption>
    * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_async
