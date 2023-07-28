@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, userEvent) {
-  // [START discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async]
+function main(name) {
+  // [START discoveryengine_v1beta_generated_ConversationalSearchService_DeleteConversation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,30 @@ function main(parent, userEvent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent DataStore resource name, such as
-   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *  Required. The resource name of the Conversation to delete. Format:
+   *  `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. URL encoded UserEvent proto with a length limit of 2,000,000
-   *  characters.
-   */
-  // const userEvent = 'abc123'
-  /**
-   *  The URL including cgi-parameters but excluding the hash fragment with a
-   *  length limit of 5,000 characters. This is often more useful than the
-   *  referer URL, because many browsers only send the domain for third-party
-   *  requests.
-   */
-  // const uri = 'abc123'
-  /**
-   *  The event timestamp in milliseconds. This prevents browser caching of
-   *  otherwise identical get requests. The name is abbreviated to reduce the
-   *  payload bytes.
-   */
-  // const ets = 1234
+  // const name = 'abc123'
 
   // Imports the Discoveryengine library
-  const {UserEventServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  const {ConversationalSearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;
 
   // Instantiates a client
-  const discoveryengineClient = new UserEventServiceClient();
+  const discoveryengineClient = new ConversationalSearchServiceClient();
 
-  async function callCollectUserEvent() {
+  async function callDeleteConversation() {
     // Construct request
     const request = {
-      parent,
-      userEvent,
+      name,
     };
 
     // Run request
-    const response = await discoveryengineClient.collectUserEvent(request);
+    const response = await discoveryengineClient.deleteConversation(request);
     console.log(response);
   }
 
-  callCollectUserEvent();
-  // [END discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_async]
+  callDeleteConversation();
+  // [END discoveryengine_v1beta_generated_ConversationalSearchService_DeleteConversation_async]
 }
 
 process.on('unhandledRejection', err => {

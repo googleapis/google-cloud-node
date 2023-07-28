@@ -88,7 +88,7 @@ function main(servingConfig) {
    *    depending on the value. The only valid non-default value is 1,
    *    which enables image searching.
    */
-  // const params = 1234
+  // const params = [1,2,3,4]
   /**
    *  The query expansion specification that specifies the conditions under which
    *  query expansion will occur.
@@ -140,7 +140,7 @@ function main(servingConfig) {
    *  Document (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *  for more details.
    */
-  // const userLabels = 1234
+  // const userLabels = [1,2,3,4]
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1;

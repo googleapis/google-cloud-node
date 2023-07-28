@@ -23,24 +23,26 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/completion_service_client_config.json`.
+ * `src/v1beta/conversational_search_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './completion_service_client_config.json';
+import * as gapicConfig from './conversational_search_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for Auto-Completion.
+ *  Service for conversational search.
  * @class
  * @memberof v1beta
  */
-export class CompletionServiceClient {
+export class ConversationalSearchServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -58,10 +60,10 @@ export class CompletionServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  completionServiceStub?: Promise<{[name: string]: Function}>;
+  conversationalSearchServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of CompletionServiceClient.
+   * Construct an instance of ConversationalSearchServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -97,7 +99,7 @@ export class CompletionServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CompletionServiceClient({fallback: 'rest'}, gax);
+   *     const client = new ConversationalSearchServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -105,7 +107,8 @@ export class CompletionServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof CompletionServiceClient;
+    const staticMembers = this
+      .constructor as typeof ConversationalSearchServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -192,6 +195,10 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
         ),
+      projectLocationCollectionDataStoreServingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
+        ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
@@ -207,11 +214,26 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
         ),
+      projectLocationDataStoreServingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
+        ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listConversations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'conversations'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.CompletionService',
+      'google.cloud.discoveryengine.v1beta.ConversationalSearchService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -239,29 +261,36 @@ export class CompletionServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.completionServiceStub) {
-      return this.completionServiceStub;
+    if (this.conversationalSearchServiceStub) {
+      return this.conversationalSearchServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.CompletionService.
-    this.completionServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1beta.ConversationalSearchService.
+    this.conversationalSearchServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.CompletionService'
+            'google.cloud.discoveryengine.v1beta.ConversationalSearchService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1beta
-            .CompletionService,
+            .ConversationalSearchService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const completionServiceStubMethods = ['completeQuery'];
-    for (const methodName of completionServiceStubMethods) {
-      const callPromise = this.completionServiceStub.then(
+    const conversationalSearchServiceStubMethods = [
+      'converseConversation',
+      'createConversation',
+      'deleteConversation',
+      'updateConversation',
+      'getConversation',
+      'listConversations',
+    ];
+    for (const methodName of conversationalSearchServiceStubMethods) {
+      const callPromise = this.conversationalSearchServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -275,7 +304,7 @@ export class CompletionServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -286,7 +315,7 @@ export class CompletionServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.completionServiceStub;
+    return this.conversationalSearchServiceStub;
   }
 
   /**
@@ -343,121 +372,95 @@ export class CompletionServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Completes the specified user input with keyword suggestions.
+   * Converses a conversation.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.dataStore
-   *   Required. The parent data store resource name for which the completion is
-   *   performed, such as
-   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store`.
-   * @param {string} request.query
-   *   Required. The typeahead input used to fetch suggestions. Maximum length is
-   *   128 characters.
-   * @param {string} request.queryModel
-   *   Selects data model of query suggestions for serving. Currently supported
-   *   values:
-   *
-   *   * `document` - Using suggestions generated from user-imported documents.
-   *   * `search-history` - Using suggestions generated from the past history of
-   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
-   *   API calls. Do not use it when there is no traffic for Search API.
-   *   * `user-event` - Using suggestions generated from user-imported search
-   *   events.
-   *   * `document-completable` - Using suggestions taken directly from
-   *   user-imported document fields marked as completable.
-   *
-   *   Default values:
-   *
-   *   * `document` is the default model for regular dataStores.
-   *   * `search-history` is the default model for
-   *   {@link protos.|IndustryVertical.SITE_SEARCH} dataStores.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
-   *
-   *   This field should NOT have a fixed value such as `unknown_visitor`.
-   *
-   *   This should be the same identifier as
-   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   and
-   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
-   *
-   *   The field must be a UTF-8 encoded string with a length limit of 128
-   *   characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
-   * @param {boolean} request.includeTailSuggestions
-   *   Indicates if tail suggestions should be returned if there are no
-   *   suggestions that match the full query. Even if set to true, if there are
-   *   suggestions that match the full query, those are returned and no
-   *   tail suggestions are returned.
+   * @param {string} request.name
+   *   Required. The resource name of the Conversation to get. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`.
+   *   Use
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/-`
+   *   to activate auto session mode, which automatically creates a new
+   *   conversation inside a ConverseConversation session.
+   * @param {google.cloud.discoveryengine.v1beta.TextInput} request.query
+   *   Required. Current user input.
+   * @param {string} request.servingConfig
+   *   The resource name of the Serving Config to use. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
+   *   If this is not set, the default serving config will be used.
+   * @param {google.cloud.discoveryengine.v1beta.Conversation} request.conversation
+   *   The conversation to be used by auto session only. The name field will be
+   *   ignored as we automatically assign new name for the conversation in auto
+   *   session.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.CompleteQueryResponse|CompleteQueryResponse}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.ConverseConversationResponse|ConverseConversationResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/completion_service.complete_query.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_CompletionService_CompleteQuery_async
+   * @example <caption>include:samples/generated/v1beta/conversational_search_service.converse_conversation.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_ConversationalSearchService_ConverseConversation_async
    */
-  completeQuery(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+  converseConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      protos.google.cloud.discoveryengine.v1beta.IConverseConversationResponse,
       (
-        | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+        | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
-  completeQuery(
-    request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+  converseConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+      protos.google.cloud.discoveryengine.v1beta.IConverseConversationResponse,
+      | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  completeQuery(
-    request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+  converseConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+      protos.google.cloud.discoveryengine.v1beta.IConverseConversationResponse,
+      | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  completeQuery(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+  converseConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-          | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+          protos.google.cloud.discoveryengine.v1beta.IConverseConversationResponse,
+          | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+      protos.google.cloud.discoveryengine.v1beta.IConverseConversationResponse,
+      | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      protos.google.cloud.discoveryengine.v1beta.IConverseConversationResponse,
       (
-        | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+        | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
         | undefined
       ),
       {} | undefined
@@ -476,12 +479,667 @@ export class CompletionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        data_store: request.dataStore ?? '',
+        name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.completeQuery(request, options, callback);
+    return this.innerApiCalls.converseConversation(request, options, callback);
+  }
+  /**
+   * Creates a Conversation.
+   *
+   * If the {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation} to
+   * create already exists, an ALREADY_EXISTS error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Full resource name of parent data store. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {google.cloud.discoveryengine.v1beta.Conversation} request.conversation
+   *   Required. The conversation to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/conversational_search_service.create_conversation.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_ConversationalSearchService_CreateConversation_async
+   */
+  createConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IConversation,
+          | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createConversation(request, options, callback);
+  }
+  /**
+   * Deletes a Conversation.
+   *
+   * If the {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation} to
+   * delete does not exist, a NOT_FOUND error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Conversation to delete. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/conversational_search_service.delete_conversation.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_ConversationalSearchService_DeleteConversation_async
+   */
+  deleteConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteConversation(request, options, callback);
+  }
+  /**
+   * Updates a Conversation.
+   *
+   * {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation} action
+   * type cannot be changed. If the
+   * {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation} to update
+   * does not exist, a NOT_FOUND error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1beta.Conversation} request.conversation
+   *   Required. The Conversation to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided
+   *   {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation} to update.
+   *   The following are NOT supported:
+   *
+   *   * {@link protos.|conversation.name}
+   *
+   *   If not set or empty, all supported fields are updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/conversational_search_service.update_conversation.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_ConversationalSearchService_UpdateConversation_async
+   */
+  updateConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IConversation,
+          | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'conversation.name': request.conversation!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateConversation(request, options, callback);
+  }
+  /**
+   * Gets a Conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Conversation to get. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/conversational_search_service.get_conversation.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_ConversationalSearchService_GetConversation_async
+   */
+  getConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConversation(
+    request: protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConversation(
+    request?: protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IConversation,
+          | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getConversation(request, options, callback);
   }
 
+  /**
+   * Lists all Conversations by their parent
+   * {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The data store resource name. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {number} request.pageSize
+   *   Maximum number of results to return. If unspecified, defaults
+   *   to 50. Max allowed value is 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListConversations` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {string} request.filter
+   *   A filter to apply on the list results. The supported features are:
+   *   user_pseudo_id, state.
+   *
+   *   Example:
+   *   "user_pseudo_id = some_id"
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order.
+   *   Use "desc" after a field name for descending.
+   *   Supported fields:
+   *     * `update_time`
+   *     * `create_time`
+   *     * `conversation_name`
+   *
+   *   Example:
+   *   "update_time desc"
+   *   "create_time"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConversationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listConversations(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation[],
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+    ]
+  >;
+  listConversations(
+    request: protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+      | protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1beta.IConversation
+    >
+  ): void;
+  listConversations(
+    request: protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+      | protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1beta.IConversation
+    >
+  ): void;
+  listConversations(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.IConversation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+      | protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1beta.IConversation
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.IConversation[],
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listConversations(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The data store resource name. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {number} request.pageSize
+   *   Maximum number of results to return. If unspecified, defaults
+   *   to 50. Max allowed value is 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListConversations` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {string} request.filter
+   *   A filter to apply on the list results. The supported features are:
+   *   user_pseudo_id, state.
+   *
+   *   Example:
+   *   "user_pseudo_id = some_id"
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order.
+   *   Use "desc" after a field name for descending.
+   *   Supported fields:
+   *     * `update_time`
+   *     * `create_time`
+   *     * `conversation_name`
+   *
+   *   Example:
+   *   "update_time desc"
+   *   "create_time"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConversationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listConversationsStream(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listConversations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listConversations.createStream(
+      this.innerApiCalls.listConversations as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listConversations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The data store resource name. Format:
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {number} request.pageSize
+   *   Maximum number of results to return. If unspecified, defaults
+   *   to 50. Max allowed value is 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListConversations` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {string} request.filter
+   *   A filter to apply on the list results. The supported features are:
+   *   user_pseudo_id, state.
+   *
+   *   Example:
+   *   "user_pseudo_id = some_id"
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order.
+   *   Use "desc" after a field name for descending.
+   *   Supported fields:
+   *     * `update_time`
+   *     * `create_time`
+   *     * `conversation_name`
+   *
+   *   Example:
+   *   "update_time desc"
+   *   "create_time"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.discoveryengine.v1beta.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/conversational_search_service.list_conversations.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_ConversationalSearchService_ListConversations_async
+   */
+  listConversationsAsync(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1beta.IConversation> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listConversations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listConversations.asyncIterate(
+      this.innerApiCalls['listConversations'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.IConversation>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -899,6 +1557,109 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreServingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreServingConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        serving_config: servingConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).data_store;
+  }
+
+  /**
+   * Parse the serving_config from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).serving_config;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
@@ -1237,14 +1998,99 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreServingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreServingConfigPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        serving_config: servingConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).data_store;
+  }
+
+  /**
+   * Parse the serving_config from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).serving_config;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.completionServiceStub && !this._terminated) {
-      return this.completionServiceStub.then(stub => {
+    if (this.conversationalSearchServiceStub && !this._terminated) {
+      return this.conversationalSearchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
