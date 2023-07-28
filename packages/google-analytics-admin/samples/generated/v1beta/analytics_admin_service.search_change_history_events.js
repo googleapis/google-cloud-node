@@ -42,17 +42,17 @@ function main(account) {
    *  Optional. If set, only return changes if they are for a resource that
    *  matches at least one of these types.
    */
-  // const resourceType = 1234
+  // const resourceType = [1,2,3,4]
   /**
    *  Optional. If set, only return changes that match one or more of these types
    *  of actions.
    */
-  // const action = 1234
+  // const action = [1,2,3,4]
   /**
    *  Optional. If set, only return changes if they are made by a user in this
    *  list.
    */
-  // const actorEmail = 'abc123'
+  // const actorEmail = ['abc','def']
   /**
    *  Optional. If set, only return changes made after this time (inclusive).
    */
