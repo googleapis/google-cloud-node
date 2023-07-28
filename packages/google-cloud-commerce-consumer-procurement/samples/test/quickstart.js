@@ -35,10 +35,13 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
-      {cwd}
-    );
-    assert(output !== null);
+    execSync(`gcloud auth application-default set-quota-project ${projectId}`)
+    let output;
+    try {
+      output = execSync('node quickstart.js billingAccounts/1234', {cwd});
+    } catch (err) {
+      // We have to assert an error since we don't want to put in the actual billing account info
+      assert.ok(err.message.toString().match(new RegExp("Permission 'consumerprocurement.orders.list' denied on resource '//cloudbilling.googleapis.com/billingAccounts/1234'")))
+    }
   });
 });
