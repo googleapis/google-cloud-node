@@ -28,7 +28,7 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -303,6 +303,15 @@ export class PredictionServiceClient {
       ),
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      serverStreamingPredict: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        opts.fallback === 'rest'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.aiplatform.v1.PredictionService',
@@ -352,12 +361,29 @@ export class PredictionServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict', 'rawPredict', 'explain'];
+    const predictionServiceStubMethods = [
+      'predict',
+      'rawPredict',
+      'serverStreamingPredict',
+      'explain',
+    ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.'
+                    )
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -368,7 +394,7 @@ export class PredictionServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -769,6 +795,45 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.explain(request, options, callback);
+  }
+
+  /**
+   * Perform a server-side streaming online prediction request for Vertex
+   * LLM streaming.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {number[]} request.inputs
+   *   The prediction input.
+   * @param {google.cloud.aiplatform.v1.Tensor} request.parameters
+   *   The parameters that govern the prediction.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.aiplatform.v1.StreamingPredictResponse|StreamingPredictResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/prediction_service.server_streaming_predict.js</caption>
+   * region_tag:aiplatform_v1_generated_PredictionService_ServerStreamingPredict_async
+   */
+  serverStreamingPredict(
+    request?: protos.google.cloud.aiplatform.v1.IStreamingPredictRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        endpoint: request.endpoint ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.serverStreamingPredict(request, options);
   }
 
   /**
