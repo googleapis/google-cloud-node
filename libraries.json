@@ -855,24 +855,6 @@
     "support_documentation": "https://cloud.google.com/functions/docs/getting-support"
   },
   {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/game-servers/latest",
-    "product_documentation": "https://cloud.google.com/game-servers/",
-    "name": "game-servers",
-    "requires_billing": true,
-    "release_level": "stable",
-    "language": "nodejs",
-    "api_id": "gameservices.googleapis.com",
-    "distribution_name": "@google-cloud/game-servers",
-    "repo": "googleapis/google-cloud-node",
-    "issue_tracker": "",
-    "name_pretty": "Game Servers",
-    "default_version": "v1",
-    "api_shortname": "gameservices",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gaming",
-    "support_documentation": "https://cloud.google.com/game-servers/docs/getting-support"
-  },
-  {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-hub/latest",
     "api_id": "gkehub.googleapis.com",
     "distribution_name": "@google-cloud/gke-hub",
