@@ -40,7 +40,7 @@ function main(name) {
    *  The 0-based worker ID. If it is empty, all workers' GuestAttributes will be
    *  returned.
    */
-  // const workerIds = 'abc123'
+  // const workerIds = ['abc','def']
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2;

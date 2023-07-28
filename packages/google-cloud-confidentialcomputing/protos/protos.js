@@ -167,6 +167,24 @@
                         return ConfidentialComputing;
                     })();
     
+                    /**
+                     * SigningAlgorithm enum.
+                     * @name google.cloud.confidentialcomputing.v1.SigningAlgorithm
+                     * @enum {number}
+                     * @property {number} SIGNING_ALGORITHM_UNSPECIFIED=0 SIGNING_ALGORITHM_UNSPECIFIED value
+                     * @property {number} RSASSA_PSS_SHA256=1 RSASSA_PSS_SHA256 value
+                     * @property {number} RSASSA_PKCS1V15_SHA256=2 RSASSA_PKCS1V15_SHA256 value
+                     * @property {number} ECDSA_P256_SHA256=3 ECDSA_P256_SHA256 value
+                     */
+                    v1.SigningAlgorithm = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SIGNING_ALGORITHM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RSASSA_PSS_SHA256"] = 1;
+                        values[valuesById[2] = "RSASSA_PKCS1V15_SHA256"] = 2;
+                        values[valuesById[3] = "ECDSA_P256_SHA256"] = 3;
+                        return values;
+                    })();
+    
                     v1.Challenge = (function() {
     
                         /**
@@ -714,6 +732,8 @@
                          * @property {string|null} [challenge] VerifyAttestationRequest challenge
                          * @property {google.cloud.confidentialcomputing.v1.IGcpCredentials|null} [gcpCredentials] VerifyAttestationRequest gcpCredentials
                          * @property {google.cloud.confidentialcomputing.v1.ITpmAttestation|null} [tpmAttestation] VerifyAttestationRequest tpmAttestation
+                         * @property {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo|null} [confidentialSpaceInfo] VerifyAttestationRequest confidentialSpaceInfo
+                         * @property {google.cloud.confidentialcomputing.v1.ITokenOptions|null} [tokenOptions] VerifyAttestationRequest tokenOptions
                          */
     
                         /**
@@ -756,6 +776,22 @@
                         VerifyAttestationRequest.prototype.tpmAttestation = null;
     
                         /**
+                         * VerifyAttestationRequest confidentialSpaceInfo.
+                         * @member {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo|null|undefined} confidentialSpaceInfo
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.confidentialSpaceInfo = null;
+    
+                        /**
+                         * VerifyAttestationRequest tokenOptions.
+                         * @member {google.cloud.confidentialcomputing.v1.ITokenOptions|null|undefined} tokenOptions
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.tokenOptions = null;
+    
+                        /**
                          * Creates a new VerifyAttestationRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
@@ -785,6 +821,10 @@
                                 $root.google.cloud.confidentialcomputing.v1.GcpCredentials.encode(message.gcpCredentials, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.tpmAttestation != null && Object.hasOwnProperty.call(message, "tpmAttestation"))
                                 $root.google.cloud.confidentialcomputing.v1.TpmAttestation.encode(message.tpmAttestation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.confidentialSpaceInfo != null && Object.hasOwnProperty.call(message, "confidentialSpaceInfo"))
+                                $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.encode(message.confidentialSpaceInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.tokenOptions != null && Object.hasOwnProperty.call(message, "tokenOptions"))
+                                $root.google.cloud.confidentialcomputing.v1.TokenOptions.encode(message.tokenOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -829,6 +869,14 @@
                                     }
                                 case 3: {
                                         message.tpmAttestation = $root.google.cloud.confidentialcomputing.v1.TpmAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.confidentialSpaceInfo = $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.tokenOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -879,6 +927,16 @@
                                 if (error)
                                     return "tpmAttestation." + error;
                             }
+                            if (message.confidentialSpaceInfo != null && message.hasOwnProperty("confidentialSpaceInfo")) {
+                                var error = $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.verify(message.confidentialSpaceInfo);
+                                if (error)
+                                    return "confidentialSpaceInfo." + error;
+                            }
+                            if (message.tokenOptions != null && message.hasOwnProperty("tokenOptions")) {
+                                var error = $root.google.cloud.confidentialcomputing.v1.TokenOptions.verify(message.tokenOptions);
+                                if (error)
+                                    return "tokenOptions." + error;
+                            }
                             return null;
                         };
     
@@ -906,6 +964,16 @@
                                     throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.tpmAttestation: object expected");
                                 message.tpmAttestation = $root.google.cloud.confidentialcomputing.v1.TpmAttestation.fromObject(object.tpmAttestation);
                             }
+                            if (object.confidentialSpaceInfo != null) {
+                                if (typeof object.confidentialSpaceInfo !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.confidentialSpaceInfo: object expected");
+                                message.confidentialSpaceInfo = $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.fromObject(object.confidentialSpaceInfo);
+                            }
+                            if (object.tokenOptions != null) {
+                                if (typeof object.tokenOptions !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.tokenOptions: object expected");
+                                message.tokenOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.fromObject(object.tokenOptions);
+                            }
                             return message;
                         };
     
@@ -926,6 +994,8 @@
                                 object.challenge = "";
                                 object.gcpCredentials = null;
                                 object.tpmAttestation = null;
+                                object.confidentialSpaceInfo = null;
+                                object.tokenOptions = null;
                             }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 object.challenge = message.challenge;
@@ -933,6 +1003,10 @@
                                 object.gcpCredentials = $root.google.cloud.confidentialcomputing.v1.GcpCredentials.toObject(message.gcpCredentials, options);
                             if (message.tpmAttestation != null && message.hasOwnProperty("tpmAttestation"))
                                 object.tpmAttestation = $root.google.cloud.confidentialcomputing.v1.TpmAttestation.toObject(message.tpmAttestation, options);
+                            if (message.confidentialSpaceInfo != null && message.hasOwnProperty("confidentialSpaceInfo"))
+                                object.confidentialSpaceInfo = $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.toObject(message.confidentialSpaceInfo, options);
+                            if (message.tokenOptions != null && message.hasOwnProperty("tokenOptions"))
+                                object.tokenOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.toObject(message.tokenOptions, options);
                             return object;
                         };
     
@@ -1385,6 +1459,249 @@
                         };
     
                         return GcpCredentials;
+                    })();
+    
+                    v1.TokenOptions = (function() {
+    
+                        /**
+                         * Properties of a TokenOptions.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface ITokenOptions
+                         * @property {string|null} [audience] TokenOptions audience
+                         * @property {Array.<string>|null} [nonce] TokenOptions nonce
+                         */
+    
+                        /**
+                         * Constructs a new TokenOptions.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a TokenOptions.
+                         * @implements ITokenOptions
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.ITokenOptions=} [properties] Properties to set
+                         */
+                        function TokenOptions(properties) {
+                            this.nonce = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TokenOptions audience.
+                         * @member {string} audience
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @instance
+                         */
+                        TokenOptions.prototype.audience = "";
+    
+                        /**
+                         * TokenOptions nonce.
+                         * @member {Array.<string>} nonce
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @instance
+                         */
+                        TokenOptions.prototype.nonce = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TokenOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ITokenOptions=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.TokenOptions} TokenOptions instance
+                         */
+                        TokenOptions.create = function create(properties) {
+                            return new TokenOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TokenOptions message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ITokenOptions} message TokenOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TokenOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.audience);
+                            if (message.nonce != null && message.nonce.length)
+                                for (var i = 0; i < message.nonce.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonce[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TokenOptions message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TokenOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ITokenOptions} message TokenOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TokenOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TokenOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.TokenOptions} TokenOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TokenOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.nonce && message.nonce.length))
+                                            message.nonce = [];
+                                        message.nonce.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TokenOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.TokenOptions} TokenOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TokenOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TokenOptions message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TokenOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            if (message.nonce != null && message.hasOwnProperty("nonce")) {
+                                if (!Array.isArray(message.nonce))
+                                    return "nonce: array expected";
+                                for (var i = 0; i < message.nonce.length; ++i)
+                                    if (!$util.isString(message.nonce[i]))
+                                        return "nonce: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TokenOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.TokenOptions} TokenOptions
+                         */
+                        TokenOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.TokenOptions)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.TokenOptions();
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            if (object.nonce) {
+                                if (!Array.isArray(object.nonce))
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.TokenOptions.nonce: array expected");
+                                message.nonce = [];
+                                for (var i = 0; i < object.nonce.length; ++i)
+                                    message.nonce[i] = String(object.nonce[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TokenOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.TokenOptions} message TokenOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TokenOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nonce = [];
+                            if (options.defaults)
+                                object.audience = "";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            if (message.nonce && message.nonce.length) {
+                                object.nonce = [];
+                                for (var j = 0; j < message.nonce.length; ++j)
+                                    object.nonce[j] = message.nonce[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TokenOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TokenOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TokenOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TokenOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.TokenOptions";
+                        };
+    
+                        return TokenOptions;
                     })();
     
                     v1.TpmAttestation = (function() {
@@ -2083,6 +2400,783 @@
                         })();
     
                         return TpmAttestation;
+                    })();
+    
+                    v1.ConfidentialSpaceInfo = (function() {
+    
+                        /**
+                         * Properties of a ConfidentialSpaceInfo.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface IConfidentialSpaceInfo
+                         * @property {Array.<google.cloud.confidentialcomputing.v1.ISignedEntity>|null} [signedEntities] ConfidentialSpaceInfo signedEntities
+                         */
+    
+                        /**
+                         * Constructs a new ConfidentialSpaceInfo.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a ConfidentialSpaceInfo.
+                         * @implements IConfidentialSpaceInfo
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo=} [properties] Properties to set
+                         */
+                        function ConfidentialSpaceInfo(properties) {
+                            this.signedEntities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfidentialSpaceInfo signedEntities.
+                         * @member {Array.<google.cloud.confidentialcomputing.v1.ISignedEntity>} signedEntities
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @instance
+                         */
+                        ConfidentialSpaceInfo.prototype.signedEntities = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ConfidentialSpaceInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo} ConfidentialSpaceInfo instance
+                         */
+                        ConfidentialSpaceInfo.create = function create(properties) {
+                            return new ConfidentialSpaceInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfidentialSpaceInfo message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo} message ConfidentialSpaceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfidentialSpaceInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.signedEntities != null && message.signedEntities.length)
+                                for (var i = 0; i < message.signedEntities.length; ++i)
+                                    $root.google.cloud.confidentialcomputing.v1.SignedEntity.encode(message.signedEntities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfidentialSpaceInfo message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo} message ConfidentialSpaceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfidentialSpaceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfidentialSpaceInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo} ConfidentialSpaceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfidentialSpaceInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.signedEntities && message.signedEntities.length))
+                                            message.signedEntities = [];
+                                        message.signedEntities.push($root.google.cloud.confidentialcomputing.v1.SignedEntity.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfidentialSpaceInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo} ConfidentialSpaceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfidentialSpaceInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfidentialSpaceInfo message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfidentialSpaceInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.signedEntities != null && message.hasOwnProperty("signedEntities")) {
+                                if (!Array.isArray(message.signedEntities))
+                                    return "signedEntities: array expected";
+                                for (var i = 0; i < message.signedEntities.length; ++i) {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.SignedEntity.verify(message.signedEntities[i]);
+                                    if (error)
+                                        return "signedEntities." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfidentialSpaceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo} ConfidentialSpaceInfo
+                         */
+                        ConfidentialSpaceInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo();
+                            if (object.signedEntities) {
+                                if (!Array.isArray(object.signedEntities))
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.signedEntities: array expected");
+                                message.signedEntities = [];
+                                for (var i = 0; i < object.signedEntities.length; ++i) {
+                                    if (typeof object.signedEntities[i] !== "object")
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.signedEntities: object expected");
+                                    message.signedEntities[i] = $root.google.cloud.confidentialcomputing.v1.SignedEntity.fromObject(object.signedEntities[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfidentialSpaceInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo} message ConfidentialSpaceInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfidentialSpaceInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.signedEntities = [];
+                            if (message.signedEntities && message.signedEntities.length) {
+                                object.signedEntities = [];
+                                for (var j = 0; j < message.signedEntities.length; ++j)
+                                    object.signedEntities[j] = $root.google.cloud.confidentialcomputing.v1.SignedEntity.toObject(message.signedEntities[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfidentialSpaceInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfidentialSpaceInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConfidentialSpaceInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConfidentialSpaceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo";
+                        };
+    
+                        return ConfidentialSpaceInfo;
+                    })();
+    
+                    v1.SignedEntity = (function() {
+    
+                        /**
+                         * Properties of a SignedEntity.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface ISignedEntity
+                         * @property {Array.<google.cloud.confidentialcomputing.v1.IContainerImageSignature>|null} [containerImageSignatures] SignedEntity containerImageSignatures
+                         */
+    
+                        /**
+                         * Constructs a new SignedEntity.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a SignedEntity.
+                         * @implements ISignedEntity
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.ISignedEntity=} [properties] Properties to set
+                         */
+                        function SignedEntity(properties) {
+                            this.containerImageSignatures = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SignedEntity containerImageSignatures.
+                         * @member {Array.<google.cloud.confidentialcomputing.v1.IContainerImageSignature>} containerImageSignatures
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @instance
+                         */
+                        SignedEntity.prototype.containerImageSignatures = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SignedEntity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ISignedEntity=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.SignedEntity} SignedEntity instance
+                         */
+                        SignedEntity.create = function create(properties) {
+                            return new SignedEntity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SignedEntity message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.SignedEntity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ISignedEntity} message SignedEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SignedEntity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.containerImageSignatures != null && message.containerImageSignatures.length)
+                                for (var i = 0; i < message.containerImageSignatures.length; ++i)
+                                    $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature.encode(message.containerImageSignatures[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SignedEntity message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.SignedEntity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ISignedEntity} message SignedEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SignedEntity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SignedEntity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.SignedEntity} SignedEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SignedEntity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.SignedEntity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.containerImageSignatures && message.containerImageSignatures.length))
+                                            message.containerImageSignatures = [];
+                                        message.containerImageSignatures.push($root.google.cloud.confidentialcomputing.v1.ContainerImageSignature.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SignedEntity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.SignedEntity} SignedEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SignedEntity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SignedEntity message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SignedEntity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.containerImageSignatures != null && message.hasOwnProperty("containerImageSignatures")) {
+                                if (!Array.isArray(message.containerImageSignatures))
+                                    return "containerImageSignatures: array expected";
+                                for (var i = 0; i < message.containerImageSignatures.length; ++i) {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature.verify(message.containerImageSignatures[i]);
+                                    if (error)
+                                        return "containerImageSignatures." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SignedEntity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.SignedEntity} SignedEntity
+                         */
+                        SignedEntity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.SignedEntity)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.SignedEntity();
+                            if (object.containerImageSignatures) {
+                                if (!Array.isArray(object.containerImageSignatures))
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.SignedEntity.containerImageSignatures: array expected");
+                                message.containerImageSignatures = [];
+                                for (var i = 0; i < object.containerImageSignatures.length; ++i) {
+                                    if (typeof object.containerImageSignatures[i] !== "object")
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.SignedEntity.containerImageSignatures: object expected");
+                                    message.containerImageSignatures[i] = $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature.fromObject(object.containerImageSignatures[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SignedEntity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.SignedEntity} message SignedEntity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SignedEntity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.containerImageSignatures = [];
+                            if (message.containerImageSignatures && message.containerImageSignatures.length) {
+                                object.containerImageSignatures = [];
+                                for (var j = 0; j < message.containerImageSignatures.length; ++j)
+                                    object.containerImageSignatures[j] = $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature.toObject(message.containerImageSignatures[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SignedEntity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SignedEntity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SignedEntity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.SignedEntity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SignedEntity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.SignedEntity";
+                        };
+    
+                        return SignedEntity;
+                    })();
+    
+                    v1.ContainerImageSignature = (function() {
+    
+                        /**
+                         * Properties of a ContainerImageSignature.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface IContainerImageSignature
+                         * @property {Uint8Array|null} [payload] ContainerImageSignature payload
+                         * @property {Uint8Array|null} [signature] ContainerImageSignature signature
+                         * @property {Uint8Array|null} [publicKey] ContainerImageSignature publicKey
+                         * @property {google.cloud.confidentialcomputing.v1.SigningAlgorithm|null} [sigAlg] ContainerImageSignature sigAlg
+                         */
+    
+                        /**
+                         * Constructs a new ContainerImageSignature.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a ContainerImageSignature.
+                         * @implements IContainerImageSignature
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.IContainerImageSignature=} [properties] Properties to set
+                         */
+                        function ContainerImageSignature(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContainerImageSignature payload.
+                         * @member {Uint8Array} payload
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @instance
+                         */
+                        ContainerImageSignature.prototype.payload = $util.newBuffer([]);
+    
+                        /**
+                         * ContainerImageSignature signature.
+                         * @member {Uint8Array} signature
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @instance
+                         */
+                        ContainerImageSignature.prototype.signature = $util.newBuffer([]);
+    
+                        /**
+                         * ContainerImageSignature publicKey.
+                         * @member {Uint8Array} publicKey
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @instance
+                         */
+                        ContainerImageSignature.prototype.publicKey = $util.newBuffer([]);
+    
+                        /**
+                         * ContainerImageSignature sigAlg.
+                         * @member {google.cloud.confidentialcomputing.v1.SigningAlgorithm} sigAlg
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @instance
+                         */
+                        ContainerImageSignature.prototype.sigAlg = 0;
+    
+                        /**
+                         * Creates a new ContainerImageSignature instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.IContainerImageSignature=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.ContainerImageSignature} ContainerImageSignature instance
+                         */
+                        ContainerImageSignature.create = function create(properties) {
+                            return new ContainerImageSignature(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContainerImageSignature message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.ContainerImageSignature.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.IContainerImageSignature} message ContainerImageSignature message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContainerImageSignature.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.payload);
+                            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.signature);
+                            if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.publicKey);
+                            if (message.sigAlg != null && Object.hasOwnProperty.call(message, "sigAlg"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sigAlg);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContainerImageSignature message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.ContainerImageSignature.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.IContainerImageSignature} message ContainerImageSignature message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContainerImageSignature.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContainerImageSignature message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.ContainerImageSignature} ContainerImageSignature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContainerImageSignature.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.payload = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.signature = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.publicKey = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sigAlg = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContainerImageSignature message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.ContainerImageSignature} ContainerImageSignature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContainerImageSignature.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContainerImageSignature message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContainerImageSignature.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.payload != null && message.hasOwnProperty("payload"))
+                                if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
+                                    return "payload: buffer expected";
+                            if (message.signature != null && message.hasOwnProperty("signature"))
+                                if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
+                                    return "signature: buffer expected";
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                if (!(message.publicKey && typeof message.publicKey.length === "number" || $util.isString(message.publicKey)))
+                                    return "publicKey: buffer expected";
+                            if (message.sigAlg != null && message.hasOwnProperty("sigAlg"))
+                                switch (message.sigAlg) {
+                                default:
+                                    return "sigAlg: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContainerImageSignature message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.ContainerImageSignature} ContainerImageSignature
+                         */
+                        ContainerImageSignature.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.ContainerImageSignature();
+                            if (object.payload != null)
+                                if (typeof object.payload === "string")
+                                    $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                                else if (object.payload.length >= 0)
+                                    message.payload = object.payload;
+                            if (object.signature != null)
+                                if (typeof object.signature === "string")
+                                    $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
+                                else if (object.signature.length >= 0)
+                                    message.signature = object.signature;
+                            if (object.publicKey != null)
+                                if (typeof object.publicKey === "string")
+                                    $util.base64.decode(object.publicKey, message.publicKey = $util.newBuffer($util.base64.length(object.publicKey)), 0);
+                                else if (object.publicKey.length >= 0)
+                                    message.publicKey = object.publicKey;
+                            switch (object.sigAlg) {
+                            default:
+                                if (typeof object.sigAlg === "number") {
+                                    message.sigAlg = object.sigAlg;
+                                    break;
+                                }
+                                break;
+                            case "SIGNING_ALGORITHM_UNSPECIFIED":
+                            case 0:
+                                message.sigAlg = 0;
+                                break;
+                            case "RSASSA_PSS_SHA256":
+                            case 1:
+                                message.sigAlg = 1;
+                                break;
+                            case "RSASSA_PKCS1V15_SHA256":
+                            case 2:
+                                message.sigAlg = 2;
+                                break;
+                            case "ECDSA_P256_SHA256":
+                            case 3:
+                                message.sigAlg = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContainerImageSignature message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ContainerImageSignature} message ContainerImageSignature
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContainerImageSignature.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.payload = "";
+                                else {
+                                    object.payload = [];
+                                    if (options.bytes !== Array)
+                                        object.payload = $util.newBuffer(object.payload);
+                                }
+                                if (options.bytes === String)
+                                    object.signature = "";
+                                else {
+                                    object.signature = [];
+                                    if (options.bytes !== Array)
+                                        object.signature = $util.newBuffer(object.signature);
+                                }
+                                if (options.bytes === String)
+                                    object.publicKey = "";
+                                else {
+                                    object.publicKey = [];
+                                    if (options.bytes !== Array)
+                                        object.publicKey = $util.newBuffer(object.publicKey);
+                                }
+                                object.sigAlg = options.enums === String ? "SIGNING_ALGORITHM_UNSPECIFIED" : 0;
+                            }
+                            if (message.payload != null && message.hasOwnProperty("payload"))
+                                object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+                            if (message.signature != null && message.hasOwnProperty("signature"))
+                                object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                object.publicKey = options.bytes === String ? $util.base64.encode(message.publicKey, 0, message.publicKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.publicKey) : message.publicKey;
+                            if (message.sigAlg != null && message.hasOwnProperty("sigAlg"))
+                                object.sigAlg = options.enums === String ? $root.google.cloud.confidentialcomputing.v1.SigningAlgorithm[message.sigAlg] === undefined ? message.sigAlg : $root.google.cloud.confidentialcomputing.v1.SigningAlgorithm[message.sigAlg] : message.sigAlg;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContainerImageSignature to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContainerImageSignature.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContainerImageSignature
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.ContainerImageSignature
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContainerImageSignature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.ContainerImageSignature";
+                        };
+    
+                        return ContainerImageSignature;
                     })();
     
                     return v1;

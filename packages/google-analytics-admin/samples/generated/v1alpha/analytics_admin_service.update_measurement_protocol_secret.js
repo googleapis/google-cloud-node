@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(measurementProtocolSecret) {
+function main(measurementProtocolSecret, updateMask) {
   // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,7 +33,8 @@ function main(measurementProtocolSecret) {
    */
   // const measurementProtocolSecret = {}
   /**
-   *  The list of fields to be updated. Omitted fields will not be updated.
+   *  Required. The list of fields to be updated. Omitted fields will not be
+   *  updated.
    */
   // const updateMask = {}
 
@@ -47,6 +48,7 @@ function main(measurementProtocolSecret) {
     // Construct request
     const request = {
       measurementProtocolSecret,
+      updateMask,
     };
 
     // Run request
