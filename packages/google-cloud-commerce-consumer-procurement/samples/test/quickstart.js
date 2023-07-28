@@ -35,10 +35,8 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    execSync(`gcloud auth application-default set-quota-project ${projectId}`)
-    let output;
     try {
-      output = execSync('node quickstart.js billingAccounts/1234', {cwd});
+      execSync('node quickstart.js billingAccounts/1234', {cwd});
     } catch (err) {
       // We have to assert an error since we don't want to put in the actual billing account info
       // A secret could still be console.log()
