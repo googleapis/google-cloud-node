@@ -314,7 +314,7 @@ export class AddressValidationClient {
    *   The request object that will be sent.
    * @param {google.type.PostalAddress} request.address
    *   Required. The address being validated. Unformatted addresses should be
-   *   submitted via {@link google.type.PostalAddress.address_lines|`address_lines`}.
+   *   submitted via {@link protos.google.type.PostalAddress.address_lines|`address_lines`}.
    *
    *   The total length of the fields in this input must not exceed 280
    *   characters.
@@ -322,14 +322,14 @@ export class AddressValidationClient {
    *   Supported regions can be found in the
    *   [FAQ](https://developers.google.com/maps/documentation/address-validation/faq#which_regions_are_currently_supported).
    *
-   *   The {@link google.type.PostalAddress.language_code|language_code} value in the
+   *   The {@link protos.google.type.PostalAddress.language_code|language_code} value in the
    *   input address is reserved for future uses and is ignored today. The
    *   validated address result will be populated based on the preferred language
    *   for the given address, as identified by the system.
    *
    *   The Address Validation API ignores the values in
-   *   {@link google.type.PostalAddress.recipients|recipients} and
-   *   {@link google.type.PostalAddress.organization|organization}. Any values in those
+   *   {@link protos.google.type.PostalAddress.recipients|recipients} and
+   *   {@link protos.google.type.PostalAddress.organization|organization}. Any values in those
    *   fields will be discarded and not returned. Please do not set them.
    * @param {string} request.previousResponseId
    *   This field must be empty for the first address validation request. If
@@ -337,7 +337,7 @@ export class AddressValidationClient {
    *   example if the changes the user makes after the initial validation need to
    *   be re-validated), then each followup request must populate this field with
    *   the
-   *   {@link google.maps.addressvalidation.v1.ValidateAddressResponse.response_id|response_id}
+   *   {@link protos.google.maps.addressvalidation.v1.ValidateAddressResponse.response_id|response_id}
    *   from the very first response in the validation sequence.
    * @param {boolean} request.enableUspsCass
    *   Enables USPS CASS compatible mode. This affects _only_ the
@@ -355,9 +355,8 @@ export class AddressValidationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.maps.addressvalidation.v1.ValidateAddressResponse | ValidateAddressResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.maps.addressvalidation.v1.ValidateAddressResponse|ValidateAddressResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/address_validation.validate_address.js</caption>
    * region_tag:addressvalidation_v1_generated_AddressValidation_ValidateAddress_async
@@ -455,14 +454,13 @@ export class AddressValidationClient {
    * @param {string} request.responseId
    *   Required. The ID of the response that this feedback is for. This should be
    *   the
-   *   {@link google.maps.addressvalidation.v1.ValidateAddressRequest.response_id|response_id}
+   *   {@link protos.google.maps.addressvalidation.v1.ValidateAddressRequest.response_id|response_id}
    *   from the first response in a series of address validation attempts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse | ProvideValidationFeedbackResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse|ProvideValidationFeedbackResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/address_validation.provide_validation_feedback.js</caption>
    * region_tag:addressvalidation_v1_generated_AddressValidation_ProvideValidationFeedback_async

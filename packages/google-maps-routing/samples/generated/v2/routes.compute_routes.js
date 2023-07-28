@@ -41,7 +41,7 @@ function main(origin, destination) {
    *  for either stopping at or passing by. Up to 25 intermediate waypoints are
    *  supported.
    */
-  // const intermediates = 1234
+  // const intermediates = [1,2,3,4]
   /**
    *  Optional. Specifies the mode of transportation.
    */
@@ -133,14 +133,14 @@ function main(origin, destination) {
    *  a `FUEL_EFFICIENT` reference route calculation takes into account various
    *  parameters that would generate an optimal fuel efficient route.
    */
-  // const requestedReferenceRoutes = 1234
+  // const requestedReferenceRoutes = [1,2,3,4]
   /**
    *  Optional. A list of extra computations which may be used to complete the
    *  request. Note: These extra computations may return extra fields on the
    *  response. These extra fields must also be specified in the field mask to be
    *  returned in the response.
    */
-  // const extraComputations = 1234
+  // const extraComputations = [1,2,3,4]
   /**
    *  Optional. Specifies the assumptions to use when calculating time in
    *  traffic. This setting affects the value returned in the duration field in
