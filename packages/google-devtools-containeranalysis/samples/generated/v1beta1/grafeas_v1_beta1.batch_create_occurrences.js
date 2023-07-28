@@ -36,7 +36,7 @@ function main() {
   /**
    *  The occurrences to create.
    */
-  // const occurrences = 1234
+  // const occurrences = [1,2,3,4]
 
   // Imports the Containeranalysis library
   const {GrafeasV1Beta1Client} = require('@google-cloud/containeranalysis').v1beta1;

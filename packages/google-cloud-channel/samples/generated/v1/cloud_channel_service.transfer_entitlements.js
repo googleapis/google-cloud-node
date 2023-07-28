@@ -37,7 +37,7 @@ function main(parent, entitlements) {
   /**
    *  Required. The new entitlements to create or transfer.
    */
-  // const entitlements = 1234
+  // const entitlements = [1,2,3,4]
   /**
    *  The super admin of the resold customer generates this token to
    *  authorize a reseller to access their Cloud Identity and purchase

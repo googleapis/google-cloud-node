@@ -224,6 +224,136 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
   });
 
+  describe('getDocument', () => {
+    it('invokes getDocument without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.GetDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.GetDocumentRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.GetDocumentResponse()
+      );
+      client.innerApiCalls.getDocument = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDocument(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDocument without error using callback', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.GetDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.GetDocumentRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.GetDocumentResponse()
+      );
+      client.innerApiCalls.getDocument =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDocument(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.documentai.v1beta3.IGetDocumentResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDocument with error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.GetDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.GetDocumentRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDocument = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getDocument(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDocument with closed client', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.GetDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.GetDocumentRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDocument(request), expectedError);
+    });
+  });
+
   describe('getDatasetSchema', () => {
     it('invokes getDatasetSchema without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
@@ -681,6 +811,394 @@ describe('v1beta3.DocumentServiceClient', () => {
       );
       await assert.rejects(
         client.checkUpdateDatasetProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('importDocuments', () => {
+    it('invokes importDocuments without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importDocuments =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importDocuments(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importDocuments without error using callback', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importDocuments =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importDocuments(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+              protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importDocuments with call error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importDocuments = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importDocuments(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importDocuments with LRO error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importDocuments = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importDocuments(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkImportDocumentsProgress without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportDocumentsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportDocumentsProgress with error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportDocumentsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('batchDeleteDocuments', () => {
+    it('invokes batchDeleteDocuments without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.batchDeleteDocuments =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.batchDeleteDocuments(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteDocuments without error using callback', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.batchDeleteDocuments =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeleteDocuments(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+              protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteDocuments with call error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteDocuments = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.batchDeleteDocuments(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteDocuments with LRO error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteDocuments = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.batchDeleteDocuments(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkBatchDeleteDocumentsProgress without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkBatchDeleteDocumentsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBatchDeleteDocumentsProgress with error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBatchDeleteDocumentsProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

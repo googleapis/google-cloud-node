@@ -42,12 +42,12 @@ function main() {
    *  The dimensions requested and displayed in the response. Requests are
    *  allowed up to 9 dimensions.
    */
-  // const dimensions = 1234
+  // const dimensions = [1,2,3,4]
   /**
    *  The metrics requested and displayed in the response. Requests are allowed
    *  up to 10 metrics.
    */
-  // const metrics = 1234
+  // const metrics = [1,2,3,4]
   /**
    *  Date ranges of access records to read. If multiple date ranges are
    *  requested, each response row will contain a zero based date range index. If
@@ -55,7 +55,7 @@ function main() {
    *  included in the response rows for both date ranges. Requests are allowed up
    *  to 2 date ranges.
    */
-  // const dateRanges = 1234
+  // const dateRanges = [1,2,3,4]
   /**
    *  Dimension filters let you restrict report response to specific
    *  dimension values which match the filter. For example, filtering on access
@@ -104,7 +104,7 @@ function main() {
   /**
    *  Specifies how rows are ordered in the response.
    */
-  // const orderBys = 1234
+  // const orderBys = [1,2,3,4]
   /**
    *  Toggles whether to return the current state of this Analytics Property's
    *  quota. Quota is returned in AccessQuota (#AccessQuota). For account-level

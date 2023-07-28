@@ -318,9 +318,8 @@ export class ImageAnnotatorClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse | BatchAnnotateImagesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse|BatchAnnotateImagesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js</caption>
    * region_tag:vision_v1p1beta1_generated_ImageAnnotator_BatchAnnotateImages_async

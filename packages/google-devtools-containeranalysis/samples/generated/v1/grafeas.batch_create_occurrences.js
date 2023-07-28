@@ -36,7 +36,7 @@ function main(parent, occurrences) {
   /**
    *  The occurrences to create. Max allowed length is 1000.
    */
-  // const occurrences = 1234
+  // const occurrences = [1,2,3,4]
 
   // Imports the Containeranalysis library
   const {GrafeasClient} = require('@google-cloud/containeranalysis').v1;

@@ -91,7 +91,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
    *  See https://cloud.google.com/translate/docs/advanced/labels for more
    *  information.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
   /**
    *  Optional. This flag is to support user customized attribution.
    *  If not provided, the default is `Machine Translated by Google`.

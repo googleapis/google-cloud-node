@@ -48,7 +48,7 @@ function main() {
    *  than 20 services are specified, the request will fail, and no state changes
    *  will occur.
    */
-  // const serviceIds = 'abc123'
+  // const serviceIds = ['abc','def']
 
   // Imports the Serviceusage library
   const {ServiceUsageClient} = require('@google-cloud/service-usage').v1beta1;

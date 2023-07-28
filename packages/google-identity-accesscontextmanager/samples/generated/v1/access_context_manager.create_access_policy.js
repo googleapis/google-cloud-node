@@ -59,7 +59,7 @@ function main() {
    *  Currently, policies can only have a single scope.
    *  Format: list of `folders/{folder_number}` or `projects/{project_number}`
    */
-  // const scopes = 'abc123'
+  // const scopes = ['abc','def']
   /**
    *  Output only. Time the `AccessPolicy` was created in UTC.
    */

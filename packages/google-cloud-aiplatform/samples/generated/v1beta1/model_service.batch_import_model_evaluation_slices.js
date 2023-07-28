@@ -37,7 +37,7 @@ function main(parent, modelEvaluationSlices) {
   /**
    *  Required. Model evaluation slice resource to be imported.
    */
-  // const modelEvaluationSlices = 1234
+  // const modelEvaluationSlices = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;

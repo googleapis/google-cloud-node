@@ -34,12 +34,12 @@ function main(threatTypes) {
    *  Note that if this parameter is provided by a URI, it must be encoded using
    *  the web safe base64 variant (RFC 4648).
    */
-  // const hashPrefix = 'Buffer.from('string')'
+  // const hashPrefix = Buffer.from('string')
   /**
    *  Required. The ThreatLists to search in. Multiple ThreatLists may be
    *  specified.
    */
-  // const threatTypes = 1234
+  // const threatTypes = [1,2,3,4]
 
   // Imports the Webrisk library
   const {WebRiskServiceClient} = require('@google-cloud/web-risk').v1;

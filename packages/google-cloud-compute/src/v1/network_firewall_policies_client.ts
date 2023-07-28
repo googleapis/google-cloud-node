@@ -358,8 +358,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -485,8 +484,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -608,8 +606,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -729,8 +726,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -846,9 +842,8 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.FirewallPolicy | FirewallPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.FirewallPolicy|FirewallPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.get.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_Get_async
@@ -948,9 +943,8 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.FirewallPolicyAssociation | FirewallPolicyAssociation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.FirewallPolicyAssociation|FirewallPolicyAssociation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.get_association.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_GetAssociation_async
@@ -1050,9 +1044,8 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.get_iam_policy.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_GetIamPolicy_async
@@ -1152,9 +1145,8 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.FirewallPolicyRule | FirewallPolicyRule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.FirewallPolicyRule|FirewallPolicyRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.get_rule.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_GetRule_async
@@ -1256,8 +1248,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -1378,8 +1369,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -1503,8 +1493,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -1626,8 +1615,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -1749,8 +1737,7 @@ export class NetworkFirewallPoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -1868,9 +1855,8 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.set_iam_policy.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_SetIamPolicy_async
@@ -1970,9 +1956,8 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.TestPermissionsResponse | TestPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.test_iam_permissions.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_TestIamPermissions_async
@@ -2079,14 +2064,13 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.compute.v1.FirewallPolicy | FirewallPolicy}.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.FirewallPolicy|FirewallPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   list(
@@ -2175,13 +2159,12 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.compute.v1.FirewallPolicy | FirewallPolicy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.FirewallPolicy|FirewallPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listStream(
@@ -2227,12 +2210,11 @@ export class NetworkFirewallPoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.compute.v1.FirewallPolicy | FirewallPolicy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.compute.v1.FirewallPolicy|FirewallPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/network_firewall_policies.list.js</caption>
    * region_tag:compute_v1_generated_NetworkFirewallPolicies_List_async

@@ -735,11 +735,49 @@
                         }
                       }
                     },
+                    "Predeploy": {
+                      "fields": {
+                        "actions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Postdeploy": {
+                      "fields": {
+                        "actions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Standard": {
                       "fields": {
                         "verify": {
                           "type": "bool",
                           "id": 1
+                        },
+                        "predeploy": {
+                          "type": "Predeploy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "postdeploy": {
+                          "type": "Postdeploy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -783,6 +821,20 @@
                         "verify": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "predeploy": {
+                          "type": "Predeploy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "postdeploy": {
+                          "type": "Postdeploy",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -822,6 +874,20 @@
                             "verify": {
                               "type": "bool",
                               "id": 4
+                            },
+                            "predeploy": {
+                              "type": "Predeploy",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "postdeploy": {
+                              "type": "Postdeploy",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -1377,7 +1443,9 @@
                             "EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED": 0,
                             "RENDER": 1,
                             "DEPLOY": 2,
-                            "VERIFY": 3
+                            "VERIFY": 3,
+                            "PREDEPLOY": 4,
+                            "POSTDEPLOY": 5
                           }
                         }
                       }
@@ -1867,7 +1935,8 @@
                                 "FAILURE_CAUSE_UNSPECIFIED": 0,
                                 "CLOUD_BUILD_UNAVAILABLE": 1,
                                 "EXECUTION_FAILED": 2,
-                                "CLOUD_BUILD_REQUEST_FAILED": 3
+                                "CLOUD_BUILD_REQUEST_FAILED": 3,
+                                "CUSTOM_ACTION_NOT_FOUND": 5
                               }
                             }
                           }
@@ -2447,6 +2516,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "predeployJob": {
+                          "type": "Job",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "postdeployJob": {
+                          "type": "Job",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2476,6 +2559,8 @@
                           "oneof": [
                             "deployJob",
                             "verifyJob",
+                            "predeployJob",
+                            "postdeployJob",
                             "createChildRolloutJob",
                             "advanceChildRolloutJob"
                           ]
@@ -2525,6 +2610,20 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "predeployJob": {
+                          "type": "PredeployJob",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "postdeployJob": {
+                          "type": "PostdeployJob",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "createChildRolloutJob": {
                           "type": "CreateChildRolloutJob",
                           "id": 6,
@@ -2561,6 +2660,30 @@
                     },
                     "VerifyJob": {
                       "fields": {}
+                    },
+                    "PredeployJob": {
+                      "fields": {
+                        "actions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PostdeployJob": {
+                      "fields": {
+                        "actions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     },
                     "CreateChildRolloutJob": {
                       "fields": {}
@@ -2880,6 +3003,8 @@
                           "oneof": [
                             "deployJobRun",
                             "verifyJobRun",
+                            "predeployJobRun",
+                            "postdeployJobRun",
                             "createChildRolloutJobRun",
                             "advanceChildRolloutJobRun"
                           ]
@@ -2952,6 +3077,20 @@
                         "verifyJobRun": {
                           "type": "VerifyJobRun",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "predeployJobRun": {
+                          "type": "PredeployJobRun",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "postdeployJobRun": {
+                          "type": "PostdeployJobRun",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3091,6 +3230,80 @@
                             "DEADLINE_EXCEEDED": 3,
                             "VERIFICATION_CONFIG_NOT_FOUND": 4,
                             "CLOUD_BUILD_REQUEST_FAILED": 5
+                          }
+                        }
+                      }
+                    },
+                    "PredeployJobRun": {
+                      "fields": {
+                        "build": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Build"
+                          }
+                        },
+                        "failureCause": {
+                          "type": "FailureCause",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failureMessage": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FailureCause": {
+                          "values": {
+                            "FAILURE_CAUSE_UNSPECIFIED": 0,
+                            "CLOUD_BUILD_UNAVAILABLE": 1,
+                            "EXECUTION_FAILED": 2,
+                            "DEADLINE_EXCEEDED": 3,
+                            "CLOUD_BUILD_REQUEST_FAILED": 4
+                          }
+                        }
+                      }
+                    },
+                    "PostdeployJobRun": {
+                      "fields": {
+                        "build": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Build"
+                          }
+                        },
+                        "failureCause": {
+                          "type": "FailureCause",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failureMessage": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FailureCause": {
+                          "values": {
+                            "FAILURE_CAUSE_UNSPECIFIED": 0,
+                            "CLOUD_BUILD_UNAVAILABLE": 1,
+                            "EXECUTION_FAILED": 2,
+                            "DEADLINE_EXCEEDED": 3,
+                            "CLOUD_BUILD_REQUEST_FAILED": 4
                           }
                         }
                       }

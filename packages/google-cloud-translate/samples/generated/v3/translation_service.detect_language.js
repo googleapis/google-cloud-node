@@ -66,7 +66,7 @@ function main(parent) {
    *  See https://cloud.google.com/translate/docs/advanced/labels for more
    *  information.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;

@@ -1728,6 +1728,9 @@ export namespace google {
 
                     /** BuildStep script */
                     script?: (string|null);
+
+                    /** BuildStep automapSubstitutions */
+                    automapSubstitutions?: (boolean|null);
                 }
 
                 /** Represents a BuildStep. */
@@ -1789,6 +1792,12 @@ export namespace google {
 
                     /** BuildStep script. */
                     public script: string;
+
+                    /** BuildStep automapSubstitutions. */
+                    public automapSubstitutions?: (boolean|null);
+
+                    /** BuildStep _automapSubstitutions. */
+                    public _automapSubstitutions?: "automapSubstitutions";
 
                     /**
                      * Creates a new BuildStep instance using the specified properties.
@@ -7136,6 +7145,9 @@ export namespace google {
                     /** BuildOptions dynamicSubstitutions */
                     dynamicSubstitutions?: (boolean|null);
 
+                    /** BuildOptions automapSubstitutions */
+                    automapSubstitutions?: (boolean|null);
+
                     /** BuildOptions logStreamingOption */
                     logStreamingOption?: (google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|null);
 
@@ -7187,6 +7199,9 @@ export namespace google {
 
                     /** BuildOptions dynamicSubstitutions. */
                     public dynamicSubstitutions: boolean;
+
+                    /** BuildOptions automapSubstitutions. */
+                    public automapSubstitutions: boolean;
 
                     /** BuildOptions logStreamingOption. */
                     public logStreamingOption: (google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption);

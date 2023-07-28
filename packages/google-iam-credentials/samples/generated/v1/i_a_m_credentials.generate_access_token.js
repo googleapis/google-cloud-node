@@ -46,14 +46,14 @@ function main(name, scope) {
    *  `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
    *  character is required; replacing it with a project ID is invalid.
    */
-  // const delegates = 'abc123'
+  // const delegates = ['abc','def']
   /**
    *  Required. Code to identify the scopes to be included in the OAuth 2.0 access token.
    *  See https://developers.google.com/identity/protocols/googlescopes for more
    *  information.
    *  At least one value required.
    */
-  // const scope = 'abc123'
+  // const scope = ['abc','def']
   /**
    *  The desired lifetime duration of the access token in seconds.
    *  Must be set to a value less than or equal to 3600 (1 hour). If a value is

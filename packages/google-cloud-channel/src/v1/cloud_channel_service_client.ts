@@ -50,14 +50,14 @@ const version = require('../../../package.json').version;
  *  3. Resellers and distributors can manage customer entitlements.
  *
  *  CloudChannelService exposes the following resources:
- *  - {@link google.cloud.channel.v1.Customer|Customer}s: An entity-usually an
+ *  - {@link protos.google.cloud.channel.v1.Customer|Customer}s: An entity-usually an
  *  enterprise-managed by a reseller or distributor.
  *
- *  - {@link google.cloud.channel.v1.Entitlement|Entitlement}s: An entity that
+ *  - {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}s: An entity that
  *  provides a customer with the means to use a service. Entitlements are created
  *  or updated as a result of a successful fulfillment.
  *
- *  - {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s: An
+ *  - {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s: An
  *  entity that identifies links between distributors and their indirect
  *  resellers in a channel.
  * @class
@@ -675,7 +675,7 @@ export class CloudChannelServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the requested {@link google.cloud.channel.v1.Customer|Customer}
+   * Returns the requested {@link protos.google.cloud.channel.v1.Customer|Customer}
    * resource.
    *
    * Possible error codes:
@@ -687,7 +687,7 @@ export class CloudChannelServiceClient {
    * invalid name parameter.
    *
    * Return value:
-   * The {@link google.cloud.channel.v1.Customer|Customer} resource.
+   * The {@link protos.google.cloud.channel.v1.Customer|Customer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -697,9 +697,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.Customer | Customer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.Customer|Customer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.get_customer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_GetCustomer_async
@@ -783,12 +782,12 @@ export class CloudChannelServiceClient {
    *
    * Return value:
    * A list of
-   * {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount}
+   * {@link protos.google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount}
    * resources for the domain (may be empty)
    *
    * Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
    * no
-   * {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount}
+   * {@link protos.google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount}
    * resources match the domain.
    *
    * @param {Object} request
@@ -801,9 +800,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse | CheckCloudIdentityAccountsExistResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse|CheckCloudIdentityAccountsExistResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.check_cloud_identity_accounts_exist.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CheckCloudIdentityAccountsExist_async
@@ -893,7 +891,7 @@ export class CloudChannelServiceClient {
     );
   }
   /**
-   * Creates a new {@link google.cloud.channel.v1.Customer|Customer} resource under
+   * Creates a new {@link protos.google.cloud.channel.v1.Customer|Customer} resource under
    * the reseller or distributor account.
    *
    * Possible error codes:
@@ -905,7 +903,7 @@ export class CloudChannelServiceClient {
    *     * Domain field value doesn't match the primary email domain.
    *
    * Return value:
-   * The newly created {@link google.cloud.channel.v1.Customer|Customer} resource.
+   * The newly created {@link protos.google.cloud.channel.v1.Customer|Customer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -917,9 +915,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.Customer | Customer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.Customer|Customer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.create_customer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateCustomer_async
@@ -993,7 +990,7 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.createCustomer(request, options, callback);
   }
   /**
-   * Updates an existing {@link google.cloud.channel.v1.Customer|Customer} resource
+   * Updates an existing {@link protos.google.cloud.channel.v1.Customer|Customer} resource
    * for the reseller or distributor.
    *
    * Possible error codes:
@@ -1001,11 +998,11 @@ export class CloudChannelServiceClient {
    * * PERMISSION_DENIED: The reseller account making the request is different
    * from the reseller account in the API request.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found
+   * * NOT_FOUND: No {@link protos.google.cloud.channel.v1.Customer|Customer} resource found
    * for the name in the request.
    *
    * Return value:
-   * The updated {@link google.cloud.channel.v1.Customer|Customer} resource.
+   * The updated {@link protos.google.cloud.channel.v1.Customer|Customer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1017,9 +1014,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.Customer | Customer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.Customer|Customer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.update_customer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_async
@@ -1093,7 +1089,7 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.updateCustomer(request, options, callback);
   }
   /**
-   * Deletes the given {@link google.cloud.channel.v1.Customer|Customer} permanently.
+   * Deletes the given {@link protos.google.cloud.channel.v1.Customer|Customer} permanently.
    *
    * Possible error codes:
    *
@@ -1101,7 +1097,7 @@ export class CloudChannelServiceClient {
    * this customer.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * FAILED_PRECONDITION: The customer has existing entitlements.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found
+   * * NOT_FOUND: No {@link protos.google.cloud.channel.v1.Customer|Customer} resource found
    * for the name in the request.
    *
    * @param {Object} request
@@ -1111,9 +1107,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.delete_customer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_async
@@ -1187,7 +1182,7 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.deleteCustomer(request, options, callback);
   }
   /**
-   * Imports a {@link google.cloud.channel.v1.Customer|Customer} from the Cloud
+   * Imports a {@link protos.google.cloud.channel.v1.Customer|Customer} from the Cloud
    * Identity associated with the provided Cloud Identity ID or domain before a
    * TransferEntitlements call. If a linked Customer already exists and
    * overwrite_if_exists is true, it will update that Customer's data.
@@ -1203,7 +1198,7 @@ export class CloudChannelServiceClient {
    * fields. Requires an overwrite.
    *
    * Return value:
-   * The {@link google.cloud.channel.v1.Customer|Customer}.
+   * The {@link protos.google.cloud.channel.v1.Customer|Customer}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1236,9 +1231,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.Customer | Customer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.Customer|Customer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.import_customer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ImportCustomer_async
@@ -1312,7 +1306,7 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.importCustomer(request, options, callback);
   }
   /**
-   * Returns the requested {@link google.cloud.channel.v1.Entitlement|Entitlement}
+   * Returns the requested {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}
    * resource.
    *
    * Possible error codes:
@@ -1322,7 +1316,7 @@ export class CloudChannelServiceClient {
    * * NOT_FOUND: The customer entitlement was not found.
    *
    * Return value:
-   * The requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
+   * The requested {@link protos.google.cloud.channel.v1.Entitlement|Entitlement} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1333,9 +1327,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.Entitlement | Entitlement}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.get_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_GetEntitlement_async
@@ -1410,7 +1403,7 @@ export class CloudChannelServiceClient {
   }
   /**
    * Returns the requested
-   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    * You must be a distributor to call this method.
    *
    * Possible error codes:
@@ -1422,7 +1415,7 @@ export class CloudChannelServiceClient {
    * invalid channel partner link name.
    *
    * Return value:
-   * The {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}
+   * The {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}
    * resource.
    *
    * @param {Object} request
@@ -1436,9 +1429,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.ChannelPartnerLink | ChannelPartnerLink}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.get_channel_partner_link.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerLink_async
@@ -1539,7 +1531,7 @@ export class CloudChannelServiceClient {
    * Contact Cloud Channel support.
    *
    * Return value:
-   * The new {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}
+   * The new {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}
    * resource.
    *
    * @param {Object} request
@@ -1555,9 +1547,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.ChannelPartnerLink | ChannelPartnerLink}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.create_channel_partner_link.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerLink_async
@@ -1668,7 +1659,7 @@ export class CloudChannelServiceClient {
    *
    * Return value:
    * The updated
-   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1686,9 +1677,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.ChannelPartnerLink | ChannelPartnerLink}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.update_channel_partner_link.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_async
@@ -1786,14 +1776,14 @@ export class CloudChannelServiceClient {
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * was not found.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * resource, otherwise returns an error.
    *
    * @param {Object} request
@@ -1805,9 +1795,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.CustomerRepricingConfig | CustomerRepricingConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.get_customer_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_GetCustomerRepricingConfig_async
@@ -1899,13 +1888,13 @@ export class CloudChannelServiceClient {
   /**
    * Creates a CustomerRepricingConfig. Call this method to set modifications
    * for a specific customer's bill. You can only create configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * is a future month. If needed, you can create a config for the current
    * month, with some restrictions.
    *
    * When creating a config for a future month, make sure there are no existing
    * configs for that
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    *
    * The following restrictions are for creating configs in the current month.
    *
@@ -1914,13 +1903,13 @@ export class CloudChannelServiceClient {
    * * The new config will not modify exports used with other configs.
    * Changes to the config may be immediate, but may take up to 24 hours.
    * * There is a limit of ten configs for any
-   * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
    * or
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    * * The contained
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig.repricing_config|CustomerRepricingConfig.repricing_config}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig.repricing_config|CustomerRepricingConfig.repricing_config}
    * vaule must be different from the value used in the current config for a
-   * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}.
    *
    * Possible Error Codes:
    *
@@ -1930,14 +1919,14 @@ export class CloudChannelServiceClient {
    * request. Also displays if the updated config is for the current month or
    * past months.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the updated
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * resource, otherwise returns an error.
    *
    * @param {Object} request
@@ -1951,9 +1940,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.CustomerRepricingConfig | CustomerRepricingConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.create_customer_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateCustomerRepricingConfig_async
@@ -2048,11 +2036,11 @@ export class CloudChannelServiceClient {
    * CustomerRepricingConfig.
    *
    * You can only update configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * is a future month. To make changes to configs for the current month, use
-   * {@link google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig|CreateCustomerRepricingConfig},
+   * {@link protos.google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig|CreateCustomerRepricingConfig},
    * taking note of its restrictions. You cannot update the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    *
    * When updating a config in the future:
    *
@@ -2066,14 +2054,14 @@ export class CloudChannelServiceClient {
    * request. Also displays if the updated config is for the current month or
    * past months.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the updated
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * resource, otherwise returns an error.
    *
    * @param {Object} request
@@ -2083,9 +2071,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.CustomerRepricingConfig | CustomerRepricingConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.update_customer_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateCustomerRepricingConfig_async
@@ -2177,9 +2164,9 @@ export class CloudChannelServiceClient {
   }
   /**
    * Deletes the given
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * permanently. You can only delete configs if their
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * is set to a date after the current month.
    *
    * Possible error codes:
@@ -2188,10 +2175,10 @@ export class CloudChannelServiceClient {
    * this customer.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * FAILED_PRECONDITION: The
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * is active or in the past.
    * * NOT_FOUND: No
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * found for the name in the request.
    *
    * @param {Object} request
@@ -2203,9 +2190,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.delete_customer_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_DeleteCustomerRepricingConfig_async
@@ -2303,14 +2289,14 @@ export class CloudChannelServiceClient {
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * was not found.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * resource, otherwise returns an error.
    *
    * @param {Object} request
@@ -2322,9 +2308,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig | ChannelPartnerRepricingConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.get_channel_partner_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerRepricingConfig_async
@@ -2417,13 +2402,13 @@ export class CloudChannelServiceClient {
    * Creates a ChannelPartnerRepricingConfig. Call this method to set
    * modifications for a specific ChannelPartner's bill. You can only create
    * configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * is a future month. If needed, you can create a config for the current
    * month, with some restrictions.
    *
    * When creating a config for a future month, make sure there are no existing
    * configs for that
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    *
    * The following restrictions are for creating configs in the current month.
    *
@@ -2432,9 +2417,9 @@ export class CloudChannelServiceClient {
    * * The new config will not modify exports used with other configs.
    * Changes to the config may be immediate, but may take up to 24 hours.
    * * There is a limit of ten configs for any ChannelPartner or
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    * * The contained
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config|ChannelPartnerRepricingConfig.repricing_config}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config|ChannelPartnerRepricingConfig.repricing_config}
    * vaule must be different from the value used in the current config for a
    * ChannelPartner.
    *
@@ -2446,14 +2431,14 @@ export class CloudChannelServiceClient {
    * request. Also displays if the updated config is for the current month or
    * past months.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the updated
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * resource, otherwise returns an error.
    *
    * @param {Object} request
@@ -2467,9 +2452,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig | ChannelPartnerRepricingConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.create_channel_partner_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_async
@@ -2564,11 +2548,11 @@ export class CloudChannelServiceClient {
    * the existing CustomerRepricingConfig.
    *
    * You can only update configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * is a future month. To make changes to configs for the current month, use
-   * {@link google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig|CreateChannelPartnerRepricingConfig},
+   * {@link protos.google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig|CreateChannelPartnerRepricingConfig},
    * taking note of its restrictions. You cannot update the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    *
    * When updating a config in the future:
    *
@@ -2582,14 +2566,14 @@ export class CloudChannelServiceClient {
    * request. Also displays if the updated config is for the current month or
    * past months.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the updated
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * resource, otherwise returns an error.
    *
    * @param {Object} request
@@ -2599,9 +2583,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig | ChannelPartnerRepricingConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.update_channel_partner_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerRepricingConfig_async
@@ -2693,9 +2676,9 @@ export class CloudChannelServiceClient {
   }
   /**
    * Deletes the given
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * permanently. You can only delete configs if their
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * is set to a date after the current month.
    *
    * Possible error codes:
@@ -2704,10 +2687,10 @@ export class CloudChannelServiceClient {
    * this customer.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * FAILED_PRECONDITION: The
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * is active or in the past.
    * * NOT_FOUND: No
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * found for the name in the request.
    *
    * @param {Object} request
@@ -2718,9 +2701,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.delete_channel_partner_repricing_config.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_DeleteChannelPartnerRepricingConfig_async
@@ -2810,7 +2792,7 @@ export class CloudChannelServiceClient {
     );
   }
   /**
-   * Returns the requested {@link google.cloud.channel.v1.Offer|Offer} resource.
+   * Returns the requested {@link protos.google.cloud.channel.v1.Offer|Offer} resource.
    *
    * Possible error codes:
    *
@@ -2819,7 +2801,7 @@ export class CloudChannelServiceClient {
    * * NOT_FOUND: Entitlement or offer was not found.
    *
    * Return value:
-   * The {@link google.cloud.channel.v1.Offer|Offer} resource.
+   * The {@link protos.google.cloud.channel.v1.Offer|Offer} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2830,9 +2812,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.Offer | Offer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.Offer|Offer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.lookup_offer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_LookupOffer_async
@@ -2907,7 +2888,7 @@ export class CloudChannelServiceClient {
    * Registers a service account with subscriber privileges on the Cloud Pub/Sub
    * topic for this Channel Services account. After you create a
    * subscriber, you get the events through
-   * {@link google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
+   * {@link protos.google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
    *
    * Possible error codes:
    *
@@ -2933,9 +2914,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.RegisterSubscriberResponse | RegisterSubscriberResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.RegisterSubscriberResponse|RegisterSubscriberResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.register_subscriber.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_async
@@ -3047,9 +3027,8 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.channel.v1.UnregisterSubscriberResponse | UnregisterSubscriberResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.UnregisterSubscriberResponse|UnregisterSubscriberResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.unregister_subscriber.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_async
@@ -3150,7 +3129,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata contains an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3169,8 +3148,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.provision_cloud_identity.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_async
@@ -3269,8 +3247,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.provision_cloud_identity.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_async
@@ -3334,7 +3311,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3363,8 +3340,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.create_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_async
@@ -3459,8 +3435,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.create_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_async
@@ -3511,7 +3486,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3524,7 +3499,7 @@ export class CloudChannelServiceClient {
    *   parameters.
    *
    *   To view the available Parameters for a request, refer to the
-   *   {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions}
+   *   {@link protos.google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions}
    *   from the desired offer.
    * @param {string} [request.requestId]
    *   Optional. You can specify an optional unique request ID, and if you need to
@@ -3547,8 +3522,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.change_parameters.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeParameters_async
@@ -3643,8 +3617,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.change_parameters.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeParameters_async
@@ -3695,7 +3668,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3724,8 +3697,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.change_renewal_settings.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_async
@@ -3820,8 +3792,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.change_renewal_settings.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_async
@@ -3870,7 +3841,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3884,7 +3855,7 @@ export class CloudChannelServiceClient {
    * @param {number[]} [request.parameters]
    *   Optional. Parameters needed to purchase the Offer. To view the available
    *   Parameters refer to the
-   *   {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions}
+   *   {@link protos.google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions}
    *   from the desired offer.
    * @param {string} [request.purchaseOrderId]
    *   Optional. Purchase order id provided by the reseller.
@@ -3907,8 +3878,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.change_offer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeOffer_async
@@ -4003,8 +3973,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.change_offer.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeOffer_async
@@ -4056,7 +4025,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4083,8 +4052,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.start_paid_service.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_StartPaidService_async
@@ -4179,8 +4147,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.start_paid_service.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_StartPaidService_async
@@ -4229,7 +4196,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4256,8 +4223,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.suspend_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_async
@@ -4352,8 +4318,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.suspend_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_async
@@ -4407,7 +4372,7 @@ export class CloudChannelServiceClient {
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The response will contain
    * google.protobuf.Empty on success. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4434,8 +4399,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.cancel_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_async
@@ -4530,8 +4494,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.cancel_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_async
@@ -4586,7 +4549,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4613,8 +4576,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.activate_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_async
@@ -4709,8 +4671,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.activate_entitlement.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_async
@@ -4767,7 +4728,7 @@ export class CloudChannelServiceClient {
    *
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4801,8 +4762,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_async
@@ -4897,8 +4857,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_async
@@ -4955,7 +4914,7 @@ export class CloudChannelServiceClient {
    * To get the results of the operation, call the GetOperation method of
    * CloudChannelOperationsService. The response will contain
    * google.protobuf.Empty on success. The Operation metadata will contain an
-   * instance of {@link google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
+   * instance of {@link protos.google.cloud.channel.v1.OperationMetadata|OperationMetadata}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4984,8 +4943,7 @@ export class CloudChannelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_async
@@ -5084,8 +5042,7 @@ export class CloudChannelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_async
@@ -5114,7 +5071,7 @@ export class CloudChannelServiceClient {
     >;
   }
   /**
-   * List {@link google.cloud.channel.v1.Customer|Customer}s.
+   * List {@link protos.google.cloud.channel.v1.Customer|Customer}s.
    *
    * Possible error codes:
    *
@@ -5123,7 +5080,7 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * List of {@link google.cloud.channel.v1.Customer|Customer}s, or an empty list if
+   * List of {@link protos.google.cloud.channel.v1.Customer|Customer}s, or an empty list if
    * there are no customers.
    *
    * @param {Object} request
@@ -5138,9 +5095,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results other than the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
    *   call.
    * @param {string} [request.filter]
    *   Optional. Filters applied to the [CloudChannelService.ListCustomers]
@@ -5150,14 +5107,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.Customer | Customer}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.Customer|Customer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listCustomersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCustomers(
@@ -5243,9 +5199,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results other than the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
    *   call.
    * @param {string} [request.filter]
    *   Optional. Filters applied to the [CloudChannelService.ListCustomers]
@@ -5255,13 +5211,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.Customer | Customer} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.Customer|Customer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCustomersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCustomersStream(
@@ -5302,9 +5257,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results other than the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
    *   call.
    * @param {string} [request.filter]
    *   Optional. Filters applied to the [CloudChannelService.ListCustomers]
@@ -5314,12 +5269,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.Customer | Customer}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.Customer|Customer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_customers.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListCustomers_async
@@ -5346,7 +5300,7 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.ICustomer>;
   }
   /**
-   * Lists {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a
+   * Lists {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a
    * customer.
    *
    * Possible error codes:
@@ -5356,7 +5310,7 @@ export class CloudChannelServiceClient {
    *
    * Return value:
    * A list of the customer's
-   * {@link google.cloud.channel.v1.Entitlement|Entitlement}s.
+   * {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5371,21 +5325,20 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.Entitlement | Entitlement}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEntitlementsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntitlements(
@@ -5478,20 +5431,19 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.Entitlement | Entitlement} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.Entitlement|Entitlement} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntitlementsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntitlementsStream(
@@ -5533,19 +5485,18 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.Entitlement | Entitlement}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_entitlements.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListEntitlements_async
@@ -5572,7 +5523,7 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.IEntitlement>;
   }
   /**
-   * List {@link google.cloud.channel.v1.TransferableSku|TransferableSku}s of a
+   * List {@link protos.google.cloud.channel.v1.TransferableSku|TransferableSku}s of a
    * customer based on the Cloud Identity ID or Customer Name in the request.
    *
    * Use this method to list the entitlements information of an
@@ -5590,7 +5541,7 @@ export class CloudChannelServiceClient {
    *
    * Return value:
    * A list of the customer's
-   * {@link google.cloud.channel.v1.TransferableSku|TransferableSku}.
+   * {@link protos.google.cloud.channel.v1.TransferableSku|TransferableSku}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5612,9 +5563,9 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
    *   call. Optional.
    * @param {string} [request.authToken]
    *   Optional. The super admin of the resold customer generates this token to
@@ -5629,14 +5580,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.TransferableSku | TransferableSku}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.TransferableSku|TransferableSku}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTransferableSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTransferableSkus(
@@ -5736,9 +5686,9 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
    *   call. Optional.
    * @param {string} [request.authToken]
    *   Optional. The super admin of the resold customer generates this token to
@@ -5753,13 +5703,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.TransferableSku | TransferableSku} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.TransferableSku|TransferableSku} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTransferableSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTransferableSkusStream(
@@ -5808,9 +5757,9 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
    *   call. Optional.
    * @param {string} [request.authToken]
    *   Optional. The super admin of the resold customer generates this token to
@@ -5825,12 +5774,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.TransferableSku | TransferableSku}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.TransferableSku|TransferableSku}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_transferable_skus.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListTransferableSkus_async
@@ -5857,7 +5805,7 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableSku>;
   }
   /**
-   * List {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer}s of a
+   * List {@link protos.google.cloud.channel.v1.TransferableOffer|TransferableOffer}s of a
    * customer based on Cloud Identity ID or Customer Name in the request.
    *
    * Use this method when a reseller gets the entitlement information of an
@@ -5875,7 +5823,7 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * List of {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer} for
+   * List of {@link protos.google.cloud.channel.v1.TransferableOffer|TransferableOffer} for
    * the given customer and SKU.
    *
    * @param {Object} request
@@ -5894,9 +5842,9 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
    *   call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
@@ -5907,14 +5855,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.TransferableOffer | TransferableOffer}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.TransferableOffer|TransferableOffer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTransferableOffersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTransferableOffers(
@@ -6014,9 +5961,9 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
    *   call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
@@ -6027,13 +5974,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.TransferableOffer | TransferableOffer} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.TransferableOffer|TransferableOffer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTransferableOffersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTransferableOffersStream(
@@ -6078,9 +6024,9 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
    *   call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
@@ -6091,12 +6037,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.TransferableOffer | TransferableOffer}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.TransferableOffer|TransferableOffer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_transferable_offers.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_async
@@ -6123,7 +6068,7 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableOffer>;
   }
   /**
-   * List {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s
+   * List {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s
    * belonging to a distributor. You must be a distributor to call this method.
    *
    * Possible error codes:
@@ -6134,7 +6079,7 @@ export class CloudChannelServiceClient {
    *
    * Return value:
    * The list of the distributor account's
-   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resources.
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resources.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -6148,23 +6093,22 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
    *   call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.ChannelPartnerLink | ChannelPartnerLink}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listChannelPartnerLinksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listChannelPartnerLinks(
@@ -6260,22 +6204,21 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
    *   call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.ChannelPartnerLink | ChannelPartnerLink} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listChannelPartnerLinksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listChannelPartnerLinksStream(
@@ -6316,21 +6259,20 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
    *   call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.ChannelPartnerLink | ChannelPartnerLink}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_channel_partner_links.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerLinks_async
@@ -6365,21 +6307,21 @@ export class CloudChannelServiceClient {
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the
-   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * resources. The data for each resource is displayed in the ascending order
    * of:
    *
    * * Customer ID
-   * * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
-   * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
-   * * {@link google.cloud.channel.v1.CustomerRepricingConfig.update_time|CustomerRepricingConfig.update_time}
+   * * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
+   * * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig.update_time|CustomerRepricingConfig.update_time}
    *
    * If unsuccessful, returns an error.
    *
@@ -6397,9 +6339,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
    *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
@@ -6412,14 +6354,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.CustomerRepricingConfig | CustomerRepricingConfig}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listCustomerRepricingConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCustomerRepricingConfigs(
@@ -6517,9 +6458,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
    *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
@@ -6532,13 +6473,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.CustomerRepricingConfig | CustomerRepricingConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCustomerRepricingConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCustomerRepricingConfigsStream(
@@ -6581,9 +6521,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
    *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
@@ -6596,12 +6536,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.CustomerRepricingConfig | CustomerRepricingConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_customer_repricing_configs.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListCustomerRepricingConfigs_async
@@ -6636,20 +6575,20 @@ export class CloudChannelServiceClient {
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
    * * NOT_FOUND: The
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
    * If successful, the
-   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * resources. The data for each resource is displayed in the ascending order
    * of:
    *
    * * Channel Partner ID
-   * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
-   * * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time|ChannelPartnerRepricingConfig.update_time}
+   * * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time|ChannelPartnerRepricingConfig.update_time}
    *
    * If unsuccessful, returns an error.
    *
@@ -6657,7 +6596,7 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the account's
-   *   {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
+   *   {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
    *   uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
@@ -6669,9 +6608,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
    *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for
@@ -6686,14 +6625,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig | ChannelPartnerRepricingConfig}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listChannelPartnerRepricingConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listChannelPartnerRepricingConfigs(
@@ -6781,7 +6719,7 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the account's
-   *   {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
+   *   {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
    *   uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
@@ -6793,9 +6731,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
    *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for
@@ -6810,13 +6748,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig | ChannelPartnerRepricingConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listChannelPartnerRepricingConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listChannelPartnerRepricingConfigsStream(
@@ -6850,7 +6787,7 @@ export class CloudChannelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the account's
-   *   {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
+   *   {@link protos.google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
    *   uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
@@ -6862,9 +6799,9 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
+   *   {@link protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
    *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for
@@ -6879,12 +6816,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig | ChannelPartnerRepricingConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_channel_partner_repricing_configs.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerRepricingConfigs_async
@@ -6924,11 +6860,11 @@ export class CloudChannelServiceClient {
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the {@link google.cloud.channel.v1.SkuGroup|SkuGroup} resources.
+   * If successful, the {@link protos.google.cloud.channel.v1.SkuGroup|SkuGroup} resources.
    * The data for each resource is displayed in the alphabetical order of SKU
    * group display name.
    * The data for each resource is displayed in the ascending order of
-   * {@link google.cloud.channel.v1.SkuGroup.display_name|SkuGroup.display_name}
+   * {@link protos.google.cloud.channel.v1.SkuGroup.display_name|SkuGroup.display_name}
    *
    * If unsuccessful, returns an error.
    *
@@ -6945,20 +6881,19 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link |ListSkuGroups.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
+   *   {@link protos.|ListSkuGroups.next_page_token} of the previous
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.SkuGroup | SkuGroup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.SkuGroup|SkuGroup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSkuGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSkuGroups(
@@ -7045,19 +6980,18 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link |ListSkuGroups.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
+   *   {@link protos.|ListSkuGroups.next_page_token} of the previous
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.SkuGroup | SkuGroup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.SkuGroup|SkuGroup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSkuGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSkuGroupsStream(
@@ -7099,18 +7033,17 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link |ListSkuGroups.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
+   *   {@link protos.|ListSkuGroups.next_page_token} of the previous
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroups|CloudChannelService.ListSkuGroups}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.SkuGroup | SkuGroup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.SkuGroup|SkuGroup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_sku_groups.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSkuGroups_async
@@ -7148,12 +7081,12 @@ export class CloudChannelServiceClient {
    * backend. In this case, contact cloud channel support.
    *
    * Return Value:
-   * If successful, the {@link google.cloud.channel.v1.BillableSku|BillableSku}
+   * If successful, the {@link protos.google.cloud.channel.v1.BillableSku|BillableSku}
    * resources. The data for each resource is displayed in the ascending order
    * of:
    *
-   * * {@link google.cloud.channel.v1.BillableSku.service_display_name|BillableSku.service_display_name}
-   * * {@link google.cloud.channel.v1.BillableSku.sku_display_name|BillableSku.sku_display_name}
+   * * {@link protos.google.cloud.channel.v1.BillableSku.service_display_name|BillableSku.service_display_name}
+   * * {@link protos.google.cloud.channel.v1.BillableSku.sku_display_name|BillableSku.sku_display_name}
    *
    * If unsuccessful, returns an error.
    *
@@ -7169,20 +7102,19 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link |ListSkuGroupBillableSkus.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
+   *   {@link protos.|ListSkuGroupBillableSkus.next_page_token} of the previous
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.BillableSku | BillableSku}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.BillableSku|BillableSku}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSkuGroupBillableSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSkuGroupBillableSkus(
@@ -7278,19 +7210,18 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link |ListSkuGroupBillableSkus.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
+   *   {@link protos.|ListSkuGroupBillableSkus.next_page_token} of the previous
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.BillableSku | BillableSku} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.BillableSku|BillableSku} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSkuGroupBillableSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSkuGroupBillableSkusStream(
@@ -7331,18 +7262,17 @@ export class CloudChannelServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link |ListSkuGroupBillableSkus.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
+   *   {@link protos.|ListSkuGroupBillableSkus.next_page_token} of the previous
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus|CloudChannelService.ListSkuGroupBillableSkus}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.BillableSku | BillableSku}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.BillableSku|BillableSku}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSkuGroupBillableSkus_async
@@ -7393,14 +7323,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.Product | Product}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.Product|Product}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listProductsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listProducts(
@@ -7488,13 +7417,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.Product | Product} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.Product|Product} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listProductsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listProductsStream(
@@ -7537,12 +7465,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.Product | Product}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.Product|Product}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_products.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListProducts_async
@@ -7594,14 +7521,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.Sku | Sku}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.Sku|Sku}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSkus(
@@ -7696,13 +7622,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.Sku | Sku} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.Sku|Sku} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSkusStream(
@@ -7754,12 +7679,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.Sku | Sku}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.Sku|Sku}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_skus.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSkus_async
@@ -7821,14 +7745,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.Offer | Offer}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.Offer|Offer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listOffersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOffers(
@@ -7929,13 +7852,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.Offer | Offer} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.Offer|Offer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listOffersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOffersStream(
@@ -7993,12 +7915,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.Offer | Offer}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.Offer|Offer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_offers.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListOffers_async
@@ -8057,14 +7978,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.PurchasableSku | PurchasableSku}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.PurchasableSku|PurchasableSku}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPurchasableSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPurchasableSkus(
@@ -8166,13 +8086,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.PurchasableSku | PurchasableSku} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.PurchasableSku|PurchasableSku} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPurchasableSkusAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPurchasableSkusStream(
@@ -8223,12 +8142,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.PurchasableSku | PurchasableSku}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.PurchasableSku|PurchasableSku}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_purchasable_skus.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListPurchasableSkus_async
@@ -8287,14 +8205,13 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.PurchasableOffer | PurchasableOffer}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.PurchasableOffer|PurchasableOffer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPurchasableOffersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPurchasableOffers(
@@ -8396,13 +8313,12 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.PurchasableOffer | PurchasableOffer} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.PurchasableOffer|PurchasableOffer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPurchasableOffersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPurchasableOffersStream(
@@ -8453,12 +8369,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.PurchasableOffer | PurchasableOffer}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.PurchasableOffer|PurchasableOffer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_purchasable_offers.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListPurchasableOffers_async
@@ -8527,8 +8442,7 @@ export class CloudChannelServiceClient {
    *   Note that it can affect your quota.
    *   We recommend using `listSubscribersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSubscribers(
@@ -8631,8 +8545,7 @@ export class CloudChannelServiceClient {
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSubscribersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSubscribersStream(
@@ -8679,12 +8592,11 @@ export class CloudChannelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   string. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_subscribers.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSubscribers_async
@@ -8726,7 +8638,7 @@ export class CloudChannelServiceClient {
    * In this case, contact Cloud Channel support.
    *
    * Return value:
-   * List of {@link google.cloud.channel.v1.EntitlementChange|EntitlementChange}s.
+   * List of {@link protos.google.cloud.channel.v1.EntitlementChange|EntitlementChange}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -8744,25 +8656,24 @@ export class CloudChannelServiceClient {
    *   above 50.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filters applied to the list results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.channel.v1.EntitlementChange | EntitlementChange}.
+   *   The first element of the array is Array of {@link protos.google.cloud.channel.v1.EntitlementChange|EntitlementChange}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEntitlementChangesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntitlementChanges(
@@ -8862,24 +8773,23 @@ export class CloudChannelServiceClient {
    *   above 50.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filters applied to the list results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.channel.v1.EntitlementChange | EntitlementChange} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.channel.v1.EntitlementChange|EntitlementChange} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntitlementChangesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntitlementChangesStream(
@@ -8924,23 +8834,22 @@ export class CloudChannelServiceClient {
    *   above 50.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   {@link protos.google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filters applied to the list results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.channel.v1.EntitlementChange | EntitlementChange}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.channel.v1.EntitlementChange|EntitlementChange}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_channel_service.list_entitlement_changes.js</caption>
    * region_tag:cloudchannel_v1_generated_CloudChannelService_ListEntitlementChanges_async

@@ -1929,6 +1929,11 @@
               "methods": [
                 "explain"
               ]
+            },
+            "ServerStreamingPredict": {
+              "methods": [
+                "serverStreamingPredict"
+              ]
             }
           }
         },
@@ -1948,6 +1953,94 @@
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ScheduleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ScheduleServiceClient",
+          "rpcs": {
+            "CreateSchedule": {
+              "methods": [
+                "createSchedule"
+              ]
+            },
+            "GetSchedule": {
+              "methods": [
+                "getSchedule"
+              ]
+            },
+            "PauseSchedule": {
+              "methods": [
+                "pauseSchedule"
+              ]
+            },
+            "ResumeSchedule": {
+              "methods": [
+                "resumeSchedule"
+              ]
+            },
+            "UpdateSchedule": {
+              "methods": [
+                "updateSchedule"
+              ]
+            },
+            "DeleteSchedule": {
+              "methods": [
+                "deleteSchedule"
+              ]
+            },
+            "ListSchedules": {
+              "methods": [
+                "listSchedules",
+                "listSchedulesStream",
+                "listSchedulesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ScheduleServiceClient",
+          "rpcs": {
+            "CreateSchedule": {
+              "methods": [
+                "createSchedule"
+              ]
+            },
+            "GetSchedule": {
+              "methods": [
+                "getSchedule"
+              ]
+            },
+            "PauseSchedule": {
+              "methods": [
+                "pauseSchedule"
+              ]
+            },
+            "ResumeSchedule": {
+              "methods": [
+                "resumeSchedule"
+              ]
+            },
+            "UpdateSchedule": {
+              "methods": [
+                "updateSchedule"
+              ]
+            },
+            "DeleteSchedule": {
+              "methods": [
+                "deleteSchedule"
+              ]
+            },
+            "ListSchedules": {
+              "methods": [
+                "listSchedules",
+                "listSchedulesStream",
+                "listSchedulesAsync"
               ]
             }
           }

@@ -44,6 +44,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "Patch": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SetIamPolicy": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

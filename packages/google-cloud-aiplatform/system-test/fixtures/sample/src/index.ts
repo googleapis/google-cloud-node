@@ -31,6 +31,7 @@ import {
   ModelServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
+  ScheduleServiceClient,
   SpecialistPoolServiceClient,
   TensorboardServiceClient,
   VizierServiceClient,
@@ -83,6 +84,9 @@ function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
   client.close();
 }
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
+  client.close();
+}
+function doStuffWithScheduleServiceClient(client: ScheduleServiceClient) {
   client.close();
 }
 function doStuffWithSpecialistPoolServiceClient(
@@ -143,6 +147,9 @@ function main() {
   // check that the client instance can be created
   const predictionServiceClient = new PredictionServiceClient();
   doStuffWithPredictionServiceClient(predictionServiceClient);
+  // check that the client instance can be created
+  const scheduleServiceClient = new ScheduleServiceClient();
+  doStuffWithScheduleServiceClient(scheduleServiceClient);
   // check that the client instance can be created
   const specialistPoolServiceClient = new SpecialistPoolServiceClient();
   doStuffWithSpecialistPoolServiceClient(specialistPoolServiceClient);
