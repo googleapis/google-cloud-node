@@ -55,7 +55,7 @@ function main(endpoint, deployedModel) {
    *  traffic_split google.cloud.aiplatform.v1.Endpoint.traffic_split  is not
    *  updated.
    */
-  // const trafficSplit = 1234
+  // const trafficSplit = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {EndpointServiceClient} = require('@google-cloud/aiplatform').v1;

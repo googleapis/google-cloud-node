@@ -55,7 +55,7 @@ function main(entityType, destination, featureSelector) {
   /**
    *  Per-Feature export settings.
    */
-  // const settings = 1234
+  // const settings = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1;

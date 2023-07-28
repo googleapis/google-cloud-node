@@ -38,7 +38,7 @@ function main(parent, migrateResourceRequests) {
    *  They must be in the same location as the destination.
    *  Up to 50 resources can be migrated in one batch.
    */
-  // const migrateResourceRequests = 1234
+  // const migrateResourceRequests = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {MigrationServiceClient} = require('@google-cloud/aiplatform').v1beta1;

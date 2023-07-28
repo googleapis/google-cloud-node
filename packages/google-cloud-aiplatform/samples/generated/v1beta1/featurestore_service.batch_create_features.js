@@ -41,7 +41,7 @@ function main(parent, requests) {
    *  child request, then the value must match the `parent` value in this request
    *  message.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1beta1;

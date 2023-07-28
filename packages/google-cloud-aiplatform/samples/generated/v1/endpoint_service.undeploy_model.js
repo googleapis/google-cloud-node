@@ -47,7 +47,7 @@ function main(endpoint, deployedModelId) {
    *  doesn't have any traffic assigned to it when this method executes, or if
    *  this field unassigns any traffic to it.
    */
-  // const trafficSplit = 1234
+  // const trafficSplit = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {EndpointServiceClient} = require('@google-cloud/aiplatform').v1;

@@ -46,7 +46,7 @@ function main(endpoint, instances) {
    *  PredictSchemata's google.cloud.aiplatform.v1beta1.Model.predict_schemata 
    *  instance_schema_uri google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri.
    */
-  // const instances = 1234
+  // const instances = [1,2,3,4]
   /**
    *  The parameters that govern the prediction. The schema of the parameters may
    *  be specified via Endpoint's DeployedModels' Model's

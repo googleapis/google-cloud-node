@@ -28,6 +28,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ServerStreamingPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Explain": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

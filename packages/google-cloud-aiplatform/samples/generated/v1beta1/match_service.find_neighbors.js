@@ -46,7 +46,7 @@ function main(indexEndpoint) {
   /**
    *  The list of queries.
    */
-  // const queries = 1234
+  // const queries = [1,2,3,4]
   /**
    *  If set to true, the full datapoints (including all vector values and
    *  restricts) of the nearest neighbors are returned.

@@ -63,7 +63,7 @@ function main(entityType, featureSpecs) {
    *  entity. The request fails if no feature_specs are provided, and having
    *  multiple feature_specs for one Feature is not allowed.
    */
-  // const featureSpecs = 1234
+  // const featureSpecs = [1,2,3,4]
   /**
    *  If set, data will not be imported for online serving. This
    *  is typically used for backfilling, where Feature generation timestamps are

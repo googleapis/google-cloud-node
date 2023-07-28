@@ -37,7 +37,7 @@ function main(parent, evaluatedAnnotations) {
   /**
    *  Required. Evaluated annotations resource to be imported.
    */
-  // const evaluatedAnnotations = 1234
+  // const evaluatedAnnotations = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1;

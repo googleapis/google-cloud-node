@@ -5275,6 +5275,97 @@
                         }
                       }
                     },
+                    "Tensor": {
+                      "fields": {
+                        "dtype": {
+                          "type": "DataType",
+                          "id": 1
+                        },
+                        "shape": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "boolVal": {
+                          "rule": "repeated",
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "stringVal": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
+                        "bytesVal": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 15
+                        },
+                        "floatVal": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 5
+                        },
+                        "doubleVal": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 6
+                        },
+                        "intVal": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "int64Val": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "uintVal": {
+                          "rule": "repeated",
+                          "type": "uint32",
+                          "id": 9
+                        },
+                        "uint64Val": {
+                          "rule": "repeated",
+                          "type": "uint64",
+                          "id": 10
+                        },
+                        "listVal": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 11
+                        },
+                        "structVal": {
+                          "keyType": "string",
+                          "type": "Tensor",
+                          "id": 12
+                        },
+                        "tensorVal": {
+                          "type": "bytes",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "BOOL": 1,
+                            "STRING": 2,
+                            "FLOAT": 3,
+                            "DOUBLE": 4,
+                            "INT8": 5,
+                            "INT16": 6,
+                            "INT32": 7,
+                            "INT64": 8,
+                            "UINT8": 9,
+                            "UINT16": 10,
+                            "UINT32": 11,
+                            "UINT64": 12
+                          }
+                        }
+                      }
+                    },
                     "FeaturestoreService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -16125,6 +16216,29 @@
                             }
                           ]
                         },
+                        "ServerStreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "Explain": {
                           "requestType": "ExplainRequest",
                           "responseType": "ExplainResponse",
@@ -16203,6 +16317,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -16218,6 +16339,40 @@
                         },
                         "httpBody": {
                           "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
                           "id": 2
                         }
                       }
@@ -16269,6 +16424,454 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Value",
                           "id": 3
+                        }
+                      }
+                    },
+                    "Schedule": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Schedule",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/schedules/{schedule}"
+                      },
+                      "oneofs": {
+                        "timeSpecification": {
+                          "oneof": [
+                            "cron"
+                          ]
+                        },
+                        "request": {
+                          "oneof": [
+                            "createPipelineJobRequest"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cron": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "createPipelineJobRequest": {
+                          "type": "CreatePipelineJobRequest",
+                          "id": 14
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxRunCount": {
+                          "type": "int64",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "startedRunCount": {
+                          "type": "int64",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextRunTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastPauseTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastResumeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "maxConcurrentRunCount": {
+                          "type": "int64",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "allowQueueing": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "catchUp": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastScheduledRunResponse": {
+                          "type": "RunResponse",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RunResponse": {
+                          "fields": {
+                            "scheduledRunTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "runResponse": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "PAUSED": 2,
+                            "COMPLETED": 3
+                          }
+                        }
+                      }
+                    },
+                    "ScheduleService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateSchedule": {
+                          "requestType": "CreateScheduleRequest",
+                          "responseType": "Schedule",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/schedules",
+                            "(google.api.http).body": "schedule",
+                            "(google.api.method_signature)": "parent,schedule"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/schedules",
+                                "body": "schedule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,schedule"
+                            }
+                          ]
+                        },
+                        "DeleteSchedule": {
+                          "requestType": "DeleteScheduleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/schedules/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/schedules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetSchedule": {
+                          "requestType": "GetScheduleRequest",
+                          "responseType": "Schedule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/schedules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/schedules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSchedules": {
+                          "requestType": "ListSchedulesRequest",
+                          "responseType": "ListSchedulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/schedules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/schedules"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "PauseSchedule": {
+                          "requestType": "PauseScheduleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/schedules/*}:pause",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/schedules/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ResumeSchedule": {
+                          "requestType": "ResumeScheduleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/schedules/*}:resume",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,catch_up"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/schedules/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,catch_up"
+                            }
+                          ]
+                        },
+                        "UpdateSchedule": {
+                          "requestType": "UpdateScheduleRequest",
+                          "responseType": "Schedule",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{schedule.name=projects/*/locations/*/schedules/*}",
+                            "(google.api.http).body": "schedule",
+                            "(google.api.method_signature)": "schedule,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{schedule.name=projects/*/locations/*/schedules/*}",
+                                "body": "schedule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "schedule,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateScheduleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "schedule": {
+                          "type": "Schedule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
+                          }
+                        }
+                      }
+                    },
+                    "ListSchedulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListSchedulesResponse": {
+                      "fields": {
+                        "schedules": {
+                          "rule": "repeated",
+                          "type": "Schedule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
+                          }
+                        }
+                      }
+                    },
+                    "PauseScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
+                          }
+                        }
+                      }
+                    },
+                    "ResumeScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
+                          }
+                        },
+                        "catchUp": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateScheduleRequest": {
+                      "fields": {
+                        "schedule": {
+                          "type": "Schedule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26129,6 +26732,97 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Tensor": {
+                      "fields": {
+                        "dtype": {
+                          "type": "DataType",
+                          "id": 1
+                        },
+                        "shape": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "boolVal": {
+                          "rule": "repeated",
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "stringVal": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
+                        "bytesVal": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 15
+                        },
+                        "floatVal": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 5
+                        },
+                        "doubleVal": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 6
+                        },
+                        "intVal": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "int64Val": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "uintVal": {
+                          "rule": "repeated",
+                          "type": "uint32",
+                          "id": 9
+                        },
+                        "uint64Val": {
+                          "rule": "repeated",
+                          "type": "uint64",
+                          "id": 10
+                        },
+                        "listVal": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 11
+                        },
+                        "structVal": {
+                          "keyType": "string",
+                          "type": "Tensor",
+                          "id": 12
+                        },
+                        "tensorVal": {
+                          "type": "bytes",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "BOOL": 1,
+                            "STRING": 2,
+                            "FLOAT": 3,
+                            "DOUBLE": 4,
+                            "INT8": 5,
+                            "INT16": 6,
+                            "INT32": 7,
+                            "INT64": 8,
+                            "UINT8": 9,
+                            "UINT16": 10,
+                            "UINT32": 11,
+                            "UINT64": 12
+                          }
                         }
                       }
                     },
@@ -36988,6 +37682,29 @@
                             }
                           ]
                         },
+                        "ServerStreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "Explain": {
                           "requestType": "ExplainRequest",
                           "responseType": "ExplainResponse",
@@ -37066,6 +37783,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -37081,6 +37805,40 @@
                         },
                         "httpBody": {
                           "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
                           "id": 2
                         }
                       }
