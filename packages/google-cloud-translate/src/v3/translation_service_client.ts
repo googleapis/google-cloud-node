@@ -530,7 +530,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.ITranslateTextResponse,
       protos.google.cloud.translation.v3.ITranslateTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   translateText(
@@ -576,7 +576,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.ITranslateTextResponse,
       protos.google.cloud.translation.v3.ITranslateTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -655,7 +655,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.IDetectLanguageResponse,
       protos.google.cloud.translation.v3.IDetectLanguageRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   detectLanguage(
@@ -701,7 +701,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.IDetectLanguageResponse,
       protos.google.cloud.translation.v3.IDetectLanguageRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -778,7 +778,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getSupportedLanguages(
@@ -827,7 +827,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -941,7 +941,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.ITranslateDocumentResponse,
       protos.google.cloud.translation.v3.ITranslateDocumentRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   translateDocument(
@@ -987,7 +987,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.ITranslateDocumentResponse,
       protos.google.cloud.translation.v3.ITranslateDocumentRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1032,7 +1032,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.IGlossary,
       protos.google.cloud.translation.v3.IGetGlossaryRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getGlossary(
@@ -1072,7 +1072,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.IGlossary,
       protos.google.cloud.translation.v3.IGetGlossaryRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1178,7 +1178,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.IBatchTranslateMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   batchTranslateText(
@@ -1231,7 +1231,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.IBatchTranslateMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1378,7 +1378,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.IBatchTranslateDocumentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   batchTranslateDocument(
@@ -1431,7 +1431,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.IBatchTranslateDocumentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1521,7 +1521,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.ICreateGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createGlossary(
@@ -1574,7 +1574,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.ICreateGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1659,7 +1659,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.IDeleteGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteGlossary(
@@ -1712,7 +1712,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3.IDeleteGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1819,7 +1819,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.IGlossary[],
       protos.google.cloud.translation.v3.IListGlossariesRequest | null,
-      protos.google.cloud.translation.v3.IListGlossariesResponse,
+      protos.google.cloud.translation.v3.IListGlossariesResponse
     ]
   >;
   listGlossaries(
@@ -1865,7 +1865,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3.IGlossary[],
       protos.google.cloud.translation.v3.IListGlossariesRequest | null,
-      protos.google.cloud.translation.v3.IListGlossariesResponse,
+      protos.google.cloud.translation.v3.IListGlossariesResponse
     ]
   > | void {
     request = request || {};
