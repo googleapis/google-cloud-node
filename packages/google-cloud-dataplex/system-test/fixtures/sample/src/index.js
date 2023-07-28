@@ -23,6 +23,7 @@ function main() {
   const contentServiceClient = new dataplex.ContentServiceClient();
   const dataplexServiceClient = new dataplex.DataplexServiceClient();
   const dataScanServiceClient = new dataplex.DataScanServiceClient();
+  const dataTaxonomyServiceClient = new dataplex.DataTaxonomyServiceClient();
   const metadataServiceClient = new dataplex.MetadataServiceClient();
 }
 

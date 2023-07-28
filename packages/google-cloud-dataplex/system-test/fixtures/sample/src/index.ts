@@ -20,6 +20,7 @@ import {
   ContentServiceClient,
   DataplexServiceClient,
   DataScanServiceClient,
+  DataTaxonomyServiceClient,
   MetadataServiceClient,
 } from '@google-cloud/dataplex';
 
@@ -31,6 +32,11 @@ function doStuffWithDataplexServiceClient(client: DataplexServiceClient) {
   client.close();
 }
 function doStuffWithDataScanServiceClient(client: DataScanServiceClient) {
+  client.close();
+}
+function doStuffWithDataTaxonomyServiceClient(
+  client: DataTaxonomyServiceClient
+) {
   client.close();
 }
 function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
@@ -47,6 +53,9 @@ function main() {
   // check that the client instance can be created
   const dataScanServiceClient = new DataScanServiceClient();
   doStuffWithDataScanServiceClient(dataScanServiceClient);
+  // check that the client instance can be created
+  const dataTaxonomyServiceClient = new DataTaxonomyServiceClient();
+  doStuffWithDataTaxonomyServiceClient(dataTaxonomyServiceClient);
   // check that the client instance can be created
   const metadataServiceClient = new MetadataServiceClient();
   doStuffWithMetadataServiceClient(metadataServiceClient);

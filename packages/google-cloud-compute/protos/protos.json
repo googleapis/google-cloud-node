@@ -15908,6 +15908,7 @@
                           "values": {
                             "UNDEFINED_TARGET_SHAPE": 0,
                             "ANY": 64972,
+                            "ANY_SINGLE_ZONE": 61100880,
                             "BALANCED": 468409608,
                             "EVEN": 2140442
                           }
@@ -50308,6 +50309,66 @@
                         }
                       }
                     },
+                    "PatchResourcePolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        },
+                        "_updateMask": {
+                          "oneof": [
+                            "updateMask"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourcePolicy": {
+                          "type": "string",
+                          "id": 159240835,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resourcePolicyResource": {
+                          "type": "ResourcePolicy",
+                          "id": 76826186,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "string",
+                          "id": 500079778,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "PatchRouterRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -52530,6 +52591,11 @@
                     },
                     "QuotaExceededInfo": {
                       "oneofs": {
+                        "_futureLimit": {
+                          "oneof": [
+                            "futureLimit"
+                          ]
+                        },
                         "_limit": {
                           "oneof": [
                             "limit"
@@ -52544,6 +52610,11 @@
                           "oneof": [
                             "metricName"
                           ]
+                        },
+                        "_rolloutStatus": {
+                          "oneof": [
+                            "rolloutStatus"
+                          ]
                         }
                       },
                       "fields": {
@@ -52551,6 +52622,13 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 414334925
+                        },
+                        "futureLimit": {
+                          "type": "double",
+                          "id": 456564287,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "limit": {
                           "type": "double",
@@ -52571,6 +52649,22 @@
                           "id": 409881530,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "rolloutStatus": {
+                          "type": "string",
+                          "id": 476426816,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RolloutStatus": {
+                          "values": {
+                            "UNDEFINED_ROLLOUT_STATUS": 0,
+                            "IN_PROGRESS": 469193735,
+                            "ROLLOUT_STATUS_UNSPECIFIED": 26864568
                           }
                         }
                       }
@@ -58834,6 +58928,11 @@
                             "instanceTerminationAction"
                           ]
                         },
+                        "_localSsdRecoveryTimeout": {
+                          "oneof": [
+                            "localSsdRecoveryTimeout"
+                          ]
+                        },
                         "_locationHint": {
                           "oneof": [
                             "locationHint"
@@ -58871,6 +58970,13 @@
                         "instanceTerminationAction": {
                           "type": "string",
                           "id": 107380667,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "localSsdRecoveryTimeout": {
+                          "type": "Duration",
+                          "id": 268015590,
                           "options": {
                             "proto3_optional": true
                           }
@@ -60630,6 +60736,11 @@
                     },
                     "ServiceAttachmentConnectedEndpoint": {
                       "oneofs": {
+                        "_consumerNetwork": {
+                          "oneof": [
+                            "consumerNetwork"
+                          ]
+                        },
                         "_endpoint": {
                           "oneof": [
                             "endpoint"
@@ -60647,6 +60758,13 @@
                         }
                       },
                       "fields": {
+                        "consumerNetwork": {
+                          "type": "string",
+                          "id": 254357221,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "endpoint": {
                           "type": "string",
                           "id": 130489749,
@@ -86378,6 +86496,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchResourcePolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "resource_policy_resource",
+                            "(google.api.http).patch": "/compute/v1/projects/{project}/regions/{region}/resourcePolicies/{resource_policy}",
+                            "(google.api.method_signature)": "project,region,resource_policy,resource_policy_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "resource_policy_resource",
+                                "patch": "/compute/v1/projects/{project}/regions/{region}/resourcePolicies/{resource_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource_policy,resource_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
                             }
                           ]
                         },
