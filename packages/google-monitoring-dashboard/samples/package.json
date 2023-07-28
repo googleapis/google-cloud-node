@@ -16,7 +16,7 @@
     "@google-cloud/monitoring-dashboards": "^2.9.2"
   },
   "devDependencies": {
-    "c8": "^7.0.0",
+    "c8": "^8.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0"
   }

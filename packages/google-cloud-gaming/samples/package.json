@@ -16,7 +16,7 @@
     "@google-cloud/game-servers": "^3.2.2"
   },
   "devDependencies": {
-    "c8": "^7.2.1",
+    "c8": "^8.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
     "uuid": "^9.0.0"

@@ -17,7 +17,7 @@
     "@google-ai/generativelanguage": "^0.2.1"
   },
   "devDependencies": {
-    "c8": "^7.1.0",
+    "c8": "^8.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0"
   }
