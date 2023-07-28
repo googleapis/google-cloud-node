@@ -5275,6 +5275,97 @@
                         }
                       }
                     },
+                    "Tensor": {
+                      "fields": {
+                        "dtype": {
+                          "type": "DataType",
+                          "id": 1
+                        },
+                        "shape": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "boolVal": {
+                          "rule": "repeated",
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "stringVal": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
+                        "bytesVal": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 15
+                        },
+                        "floatVal": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 5
+                        },
+                        "doubleVal": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 6
+                        },
+                        "intVal": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "int64Val": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "uintVal": {
+                          "rule": "repeated",
+                          "type": "uint32",
+                          "id": 9
+                        },
+                        "uint64Val": {
+                          "rule": "repeated",
+                          "type": "uint64",
+                          "id": 10
+                        },
+                        "listVal": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 11
+                        },
+                        "structVal": {
+                          "keyType": "string",
+                          "type": "Tensor",
+                          "id": 12
+                        },
+                        "tensorVal": {
+                          "type": "bytes",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "BOOL": 1,
+                            "STRING": 2,
+                            "FLOAT": 3,
+                            "DOUBLE": 4,
+                            "INT8": 5,
+                            "INT16": 6,
+                            "INT32": 7,
+                            "INT64": 8,
+                            "UINT8": 9,
+                            "UINT16": 10,
+                            "UINT32": 11,
+                            "UINT64": 12
+                          }
+                        }
+                      }
+                    },
                     "FeaturestoreService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -16125,6 +16216,29 @@
                             }
                           ]
                         },
+                        "ServerStreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "Explain": {
                           "requestType": "ExplainRequest",
                           "responseType": "ExplainResponse",
@@ -16203,6 +16317,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -16218,6 +16339,40 @@
                         },
                         "httpBody": {
                           "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
                           "id": 2
                         }
                       }
@@ -26577,6 +26732,97 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Tensor": {
+                      "fields": {
+                        "dtype": {
+                          "type": "DataType",
+                          "id": 1
+                        },
+                        "shape": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "boolVal": {
+                          "rule": "repeated",
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "stringVal": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
+                        "bytesVal": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 15
+                        },
+                        "floatVal": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 5
+                        },
+                        "doubleVal": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 6
+                        },
+                        "intVal": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "int64Val": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "uintVal": {
+                          "rule": "repeated",
+                          "type": "uint32",
+                          "id": 9
+                        },
+                        "uint64Val": {
+                          "rule": "repeated",
+                          "type": "uint64",
+                          "id": 10
+                        },
+                        "listVal": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 11
+                        },
+                        "structVal": {
+                          "keyType": "string",
+                          "type": "Tensor",
+                          "id": 12
+                        },
+                        "tensorVal": {
+                          "type": "bytes",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "BOOL": 1,
+                            "STRING": 2,
+                            "FLOAT": 3,
+                            "DOUBLE": 4,
+                            "INT8": 5,
+                            "INT16": 6,
+                            "INT32": 7,
+                            "INT64": 8,
+                            "UINT8": 9,
+                            "UINT16": 10,
+                            "UINT32": 11,
+                            "UINT64": 12
+                          }
                         }
                       }
                     },
@@ -37436,6 +37682,29 @@
                             }
                           ]
                         },
+                        "ServerStreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "Explain": {
                           "requestType": "ExplainRequest",
                           "responseType": "ExplainResponse",
@@ -37514,6 +37783,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -37529,6 +37805,40 @@
                         },
                         "httpBody": {
                           "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
                           "id": 2
                         }
                       }

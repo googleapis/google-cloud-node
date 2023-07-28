@@ -7608,6 +7608,54 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_PredictionService_ServerStreamingPredict_async",
+            "title": "DatasetService serverStreamingPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a server-side streaming online prediction request for Vertex LLM streaming.",
+            "canonical": true,
+            "file": "prediction_service.server_streaming_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ServerStreamingPredict",
+                "fullName": "google.cloud.aiplatform.v1.PredictionService.ServerStreamingPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inputs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.cloud.aiplatform.v1.Tensor"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.StreamingPredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "ServerStreamingPredict",
+                    "fullName": "google.cloud.aiplatform.v1.PredictionService.ServerStreamingPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_PredictionService_Explain_async",
             "title": "DatasetService explain Sample",
             "origin": "API_DEFINITION",

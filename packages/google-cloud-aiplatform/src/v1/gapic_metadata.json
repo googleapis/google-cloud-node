@@ -1929,6 +1929,11 @@
               "methods": [
                 "explain"
               ]
+            },
+            "ServerStreamingPredict": {
+              "methods": [
+                "serverStreamingPredict"
+              ]
             }
           }
         },
