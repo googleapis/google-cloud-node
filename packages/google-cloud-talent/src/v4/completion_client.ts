@@ -356,16 +356,15 @@ export class CompletionClient {
    *   example, "projects/foo/tenants/bar/companies/baz".
    * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionScope} request.scope
    *   The scope of the completion. The defaults is
-   *   {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
+   *   {@link protos.google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
    * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionType} request.type
    *   The completion topic. The default is
-   *   {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
+   *   {@link protos.google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4.CompleteQueryResponse | CompleteQueryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.CompleteQueryResponse|CompleteQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/completion.complete_query.js</caption>
    * region_tag:jobs_v4_generated_Completion_CompleteQuery_async

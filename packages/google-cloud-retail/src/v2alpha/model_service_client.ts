@@ -451,14 +451,13 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the
-   *   {@link google.cloud.retail.v2alpha.Model|Model} to get. Format:
+   *   {@link protos.google.cloud.retail.v2alpha.Model|Model} to get. Format:
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog}/models/{model_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2alpha.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.get_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_GetModel_async
@@ -543,9 +542,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2alpha.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.pause_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_PauseModel_async
@@ -630,9 +628,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2alpha.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.resume_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_ResumeModel_async
@@ -712,14 +709,13 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the
-   *   {@link google.cloud.retail.v2alpha.Model|Model} to delete. Format:
+   *   {@link protos.google.cloud.retail.v2alpha.Model|Model} to delete. Format:
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.delete_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_DeleteModel_async
@@ -802,16 +798,15 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2alpha.Model} request.model
    *   Required. The body of the updated
-   *   {@link google.cloud.retail.v2alpha.Model|Model}.
+   *   {@link protos.google.cloud.retail.v2alpha.Model|Model}.
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. Indicates which fields in the provided 'model' to
    *   update. If not set, by default updates all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2alpha.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.update_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_UpdateModel_async
@@ -894,7 +889,7 @@ export class ModelServiceClient {
    *   Required. The parent resource under which to create the model. Format:
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {google.cloud.retail.v2alpha.Model} request.model
-   *   Required. The payload of the {@link google.cloud.retail.v2alpha.Model|Model}  to
+   *   Required. The payload of the {@link protos.google.cloud.retail.v2alpha.Model|Model}  to
    *   create.
    * @param {boolean} [request.dryRun]
    *   Optional. Whether to run a dry run to validate the request (without
@@ -905,8 +900,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.create_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_CreateModel_async
@@ -1001,8 +995,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.create_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_CreateModel_async
@@ -1045,8 +1038,7 @@ export class ModelServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.tune_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_TuneModel_async
@@ -1141,8 +1133,7 @@ export class ModelServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.tune_model.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_TuneModel_async
@@ -1188,14 +1179,13 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.retail.v2alpha.Model | Model}.
+   *   The first element of the array is Array of {@link protos.google.cloud.retail.v2alpha.Model|Model}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModels(
@@ -1284,13 +1274,12 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.retail.v2alpha.Model | Model} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2alpha.Model|Model} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelsStream(
@@ -1334,12 +1323,11 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.retail.v2alpha.Model | Model}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.retail.v2alpha.Model|Model}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/model_service.list_models.js</caption>
    * region_tag:retail_v2alpha_generated_ModelService_ListModels_async
@@ -1376,8 +1364,7 @@ export class ModelServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1423,12 +1410,11 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

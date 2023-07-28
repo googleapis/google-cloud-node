@@ -44,7 +44,7 @@ function main() {
   /**
    *  Public keys that should be added to the environment before it is started.
    */
-  // const publicKeys = 'abc123'
+  // const publicKeys = ['abc','def']
 
   // Imports the Shell library
   const {CloudShellServiceClient} = require('@google-cloud/shell').v1;

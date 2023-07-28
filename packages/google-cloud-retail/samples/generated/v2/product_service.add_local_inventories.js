@@ -42,7 +42,7 @@ function main(product, localInventories) {
    *  is identified by its place ID. At most 3000 inventories are allowed per
    *  request.
    */
-  // const localInventories = 1234
+  // const localInventories = [1,2,3,4]
   /**
    *  Indicates which inventory fields in the provided list of
    *  LocalInventory google.cloud.retail.v2.LocalInventory  to update. The
