@@ -43,7 +43,7 @@ function main(pipeline) {
    *  To associate labels with resources created while executing the operation,
    *  see the appropriate resource message (for example, `VirtualMachine`).
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
   /**
    *  The name of an existing Pub/Sub topic.  The server will publish
    *  messages to this topic whenever the status of the operation changes.

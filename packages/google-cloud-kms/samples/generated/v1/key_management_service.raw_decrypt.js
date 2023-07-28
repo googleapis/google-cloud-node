@@ -38,18 +38,18 @@ function main(name, ciphertext, initializationVector) {
    *  Required. The encrypted data originally returned in
    *  RawEncryptResponse.ciphertext google.cloud.kms.v1.RawEncryptResponse.ciphertext.
    */
-  // const ciphertext = 'Buffer.from('string')'
+  // const ciphertext = Buffer.from('string')
   /**
    *  Optional. Optional data that must match the data originally supplied in
    *  RawEncryptRequest.additional_authenticated_data google.cloud.kms.v1.RawEncryptRequest.additional_authenticated_data.
    */
-  // const additionalAuthenticatedData = 'Buffer.from('string')'
+  // const additionalAuthenticatedData = Buffer.from('string')
   /**
    *  Required. The initialization vector (IV) used during encryption, which must
    *  match the data originally provided in
    *  RawEncryptResponse.initialization_vector google.cloud.kms.v1.RawEncryptResponse.initialization_vector.
    */
-  // const initializationVector = 'Buffer.from('string')'
+  // const initializationVector = Buffer.from('string')
   /**
    *  The length of the authentication tag that is appended to the end of
    *  the ciphertext. If unspecified (0), the default value for the key's

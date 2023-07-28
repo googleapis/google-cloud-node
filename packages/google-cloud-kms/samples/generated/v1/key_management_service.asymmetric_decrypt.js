@@ -39,7 +39,7 @@ function main(name, ciphertext) {
    *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion's public key using
    *  OAEP.
    */
-  // const ciphertext = 'Buffer.from('string')'
+  // const ciphertext = Buffer.from('string')
   /**
    *  Optional. An optional CRC32C checksum of the
    *  AsymmetricDecryptRequest.ciphertext google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext.

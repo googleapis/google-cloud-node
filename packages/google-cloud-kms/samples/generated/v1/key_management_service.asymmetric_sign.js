@@ -71,7 +71,7 @@ function main(name) {
    *  AsymmetricSignRequest.digest google.cloud.kms.v1.AsymmetricSignRequest.digest 
    *  is supplied.
    */
-  // const data = 'Buffer.from('string')'
+  // const data = Buffer.from('string')
   /**
    *  Optional. An optional CRC32C checksum of the
    *  AsymmetricSignRequest.data google.cloud.kms.v1.AsymmetricSignRequest.data.

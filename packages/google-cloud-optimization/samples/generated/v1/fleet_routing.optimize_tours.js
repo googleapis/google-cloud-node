@@ -91,7 +91,7 @@ function main(parent) {
    *  necessarily returned and an error indicating infeasibility may be returned
    *  instead.
    */
-  // const injectedFirstSolutionRoutes = 1234
+  // const injectedFirstSolutionRoutes = [1,2,3,4]
   /**
    *  Constrain the optimization algorithm to find a final solution that is
    *  similar to a previous solution. For example, this may be used to freeze
@@ -116,7 +116,7 @@ function main(parent) {
    *  Polylines are still populated between all visits in all non-empty routes
    *  regardless of whether the related shipments or vehicles are ignored.
    */
-  // const refreshDetailsRoutes = 1234
+  // const refreshDetailsRoutes = [1,2,3,4]
   /**
    *  If true:
    *    * uses

@@ -334,9 +334,8 @@ export class PhishingProtectionServiceV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.phishingprotection.v1beta1.ReportPhishingResponse | ReportPhishingResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.phishingprotection.v1beta1.ReportPhishingResponse|ReportPhishingResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/phishing_protection_service_v1_beta1.report_phishing.js</caption>
    * region_tag:phishingprotection_v1beta1_generated_PhishingProtectionServiceV1Beta1_ReportPhishing_async

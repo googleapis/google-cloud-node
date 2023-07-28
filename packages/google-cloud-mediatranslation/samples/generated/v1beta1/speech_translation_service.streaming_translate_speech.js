@@ -44,7 +44,7 @@ function main() {
    *  all bytes fields, protobuffers use a pure binary representation (not
    *  base64).
    */
-  // const audioContent = 'Buffer.from('string')'
+  // const audioContent = Buffer.from('string')
 
   // Imports the Mediatranslation library
   const {SpeechTranslationServiceClient} = require('@google-cloud/media-translation').v1beta1;
