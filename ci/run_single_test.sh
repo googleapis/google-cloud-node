@@ -56,16 +56,16 @@ retval=0
 set +e
 case ${TEST_TYPE} in
 lint)
-    npm run prelint
-    npm run lint
+    pnpm prelint
+    pnpm lint
     retval=$?
     ;;
 samples)
-    npm run samples-test
+    pnpm samples-test
     retval=$?
     ;;
 system)
-    npm run system-test
+    pnpm system-test
     retval=$?
     ;;
 units)
