@@ -42,8 +42,8 @@ import * as gapicConfig from './test_cases_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3.TestCase|Test Cases} and
- *  {@link google.cloud.dialogflow.cx.v3.TestCaseResult|Test Case Results}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.cx.v3.TestCase|Test Cases} and
+ *  {@link protos.google.cloud.dialogflow.cx.v3.TestCaseResult|Test Case Results}.
  * @class
  * @memberof v3
  */
@@ -533,9 +533,8 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.batch_delete_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_BatchDeleteTestCases_async
@@ -632,9 +631,8 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TestCase | TestCase}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TestCase|TestCase}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.get_test_case.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_GetTestCase_async
@@ -726,9 +724,8 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TestCase | TestCase}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TestCase|TestCase}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.create_test_case.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_CreateTestCase_async
@@ -816,15 +813,14 @@ export class TestCasesClient {
    *   Required. The test case to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The mask to specify which fields should be updated. The
-   *   {@link google.cloud.dialogflow.cx.v3.TestCase.creation_time|`creationTime`} and
-   *   {@link google.cloud.dialogflow.cx.v3.TestCase.last_test_result|`lastTestResult`}
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TestCase.creation_time|`creationTime`} and
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TestCase.last_test_result|`lastTestResult`}
    *   cannot be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TestCase | TestCase}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TestCase|TestCase}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.update_test_case.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_UpdateTestCase_async
@@ -916,9 +912,8 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.CalculateCoverageResponse | CalculateCoverageResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.CalculateCoverageResponse|CalculateCoverageResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.calculate_coverage.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_CalculateCoverage_async
@@ -1015,9 +1010,8 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TestCaseResult | TestCaseResult}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TestCaseResult|TestCaseResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.get_test_case_result.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_GetTestCaseResult_async
@@ -1111,9 +1105,9 @@ export class TestCasesClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3.RunTestCaseMetadata|RunTestCaseMetadata}
+   * {@link protos.google.cloud.dialogflow.cx.v3.RunTestCaseMetadata|RunTestCaseMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.RunTestCaseResponse|RunTestCaseResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.RunTestCaseResponse|RunTestCaseResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1130,8 +1124,7 @@ export class TestCasesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.run_test_case.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_RunTestCase_async
@@ -1226,8 +1219,7 @@ export class TestCasesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.run_test_case.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_RunTestCase_async
@@ -1263,9 +1255,9 @@ export class TestCasesClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3.BatchRunTestCasesMetadata|BatchRunTestCasesMetadata}
+   * {@link protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesMetadata|BatchRunTestCasesMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.BatchRunTestCasesResponse|BatchRunTestCasesResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesResponse|BatchRunTestCasesResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1285,8 +1277,7 @@ export class TestCasesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.batch_run_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_BatchRunTestCases_async
@@ -1381,8 +1372,7 @@ export class TestCasesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.batch_run_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_BatchRunTestCases_async
@@ -1420,9 +1410,9 @@ export class TestCasesClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3.ImportTestCasesMetadata|ImportTestCasesMetadata}
+   * {@link protos.google.cloud.dialogflow.cx.v3.ImportTestCasesMetadata|ImportTestCasesMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.ImportTestCasesResponse|ImportTestCasesResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.ImportTestCasesResponse|ImportTestCasesResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1447,8 +1437,7 @@ export class TestCasesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.import_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_ImportTestCases_async
@@ -1543,8 +1532,7 @@ export class TestCasesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.import_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_ImportTestCases_async
@@ -1581,9 +1569,9 @@ export class TestCasesClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3.ExportTestCasesMetadata|ExportTestCasesMetadata}
+   * {@link protos.google.cloud.dialogflow.cx.v3.ExportTestCasesMetadata|ExportTestCasesMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.ExportTestCasesResponse|ExportTestCasesResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.ExportTestCasesResponse|ExportTestCasesResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1621,8 +1609,7 @@ export class TestCasesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.export_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_ExportTestCases_async
@@ -1717,8 +1704,7 @@ export class TestCasesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.export_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_ExportTestCases_async
@@ -1765,14 +1751,13 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.TestCase | TestCase}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.TestCase|TestCase}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTestCasesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTestCases(
@@ -1868,13 +1853,12 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.TestCase | TestCase} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.TestCase|TestCase} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTestCasesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTestCasesStream(
@@ -1919,12 +1903,11 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.TestCase | TestCase}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TestCase|TestCase}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.list_test_cases.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_ListTestCases_async
@@ -1994,14 +1977,13 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.TestCaseResult | TestCaseResult}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.TestCaseResult|TestCaseResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTestCaseResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTestCaseResults(
@@ -2121,13 +2103,12 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.TestCaseResult | TestCaseResult} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.TestCaseResult|TestCaseResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTestCaseResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTestCaseResultsStream(
@@ -2196,12 +2177,11 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.TestCaseResult | TestCaseResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TestCaseResult|TestCaseResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/test_cases.list_test_case_results.js</caption>
    * region_tag:dialogflow_v3_generated_TestCases_ListTestCaseResults_async
@@ -2238,8 +2218,7 @@ export class TestCasesClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2285,12 +2264,11 @@ export class TestCasesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

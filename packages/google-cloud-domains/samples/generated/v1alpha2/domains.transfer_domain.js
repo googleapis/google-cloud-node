@@ -47,7 +47,7 @@ function main(parent, registration, yearlyPrice) {
    *  needed here depend on the values specified in
    *  `registration.contact_settings`.
    */
-  // const contactNotices = 1234
+  // const contactNotices = [1,2,3,4]
   /**
    *  Required. Acknowledgement of the price to transfer or renew the domain for one year.
    *  Call `RetrieveTransferParameters` to obtain the price, which you must

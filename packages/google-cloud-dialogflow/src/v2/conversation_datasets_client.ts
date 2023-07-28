@@ -597,9 +597,8 @@ export class ConversationDatasetsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.ConversationDataset | ConversationDataset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.get_conversation_dataset.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_GetConversationDataset_async
@@ -697,9 +696,9 @@ export class ConversationDatasetsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata|CreateConversationDatasetOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata|CreateConversationDatasetOperationMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}
+   * {@link protos.google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -714,8 +713,7 @@ export class ConversationDatasetsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.create_conversation_dataset.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_CreateConversationDataset_async
@@ -814,8 +812,7 @@ export class ConversationDatasetsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.create_conversation_dataset.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_CreateConversationDataset_async
@@ -851,7 +848,7 @@ export class ConversationDatasetsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata|DeleteConversationDatasetOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata|DeleteConversationDatasetOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -867,8 +864,7 @@ export class ConversationDatasetsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.delete_conversation_dataset.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_DeleteConversationDataset_async
@@ -967,8 +963,7 @@ export class ConversationDatasetsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.delete_conversation_dataset.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_DeleteConversationDataset_async
@@ -1006,9 +1001,9 @@ export class ConversationDatasetsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata|ImportConversationDataOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata|ImportConversationDataOperationMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.v2.ImportConversationDataOperationResponse|ImportConversationDataOperationResponse}
+   * {@link protos.google.cloud.dialogflow.v2.ImportConversationDataOperationResponse|ImportConversationDataOperationResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1024,8 +1019,7 @@ export class ConversationDatasetsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.import_conversation_data.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_ImportConversationData_async
@@ -1124,8 +1118,7 @@ export class ConversationDatasetsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.import_conversation_data.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_ImportConversationData_async
@@ -1170,14 +1163,13 @@ export class ConversationDatasetsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.ConversationDataset | ConversationDataset}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConversationDatasetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationDatasets(
@@ -1274,13 +1266,12 @@ export class ConversationDatasetsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.ConversationDataset | ConversationDataset} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConversationDatasetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationDatasetsStream(
@@ -1322,12 +1313,11 @@ export class ConversationDatasetsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2.ConversationDataset | ConversationDataset}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_datasets.list_conversation_datasets.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationDatasets_ListConversationDatasets_async
@@ -1364,8 +1354,7 @@ export class ConversationDatasetsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1411,12 +1400,11 @@ export class ConversationDatasetsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

@@ -47,7 +47,7 @@ function main(registration, updateMask) {
    *  The list of contact notices that the caller acknowledges. The notices
    *  needed here depend on the values specified in `contact_settings`.
    */
-  // const contactNotices = 1234
+  // const contactNotices = [1,2,3,4]
   /**
    *  Validate the request without actually updating the contact settings.
    */

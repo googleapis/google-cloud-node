@@ -38,7 +38,7 @@ function main(parent, entityValues) {
    *  these are not fully-qualified names, i.e. they don't start with
    *  `projects/<Project ID>`.
    */
-  // const entityValues = 'abc123'
+  // const entityValues = ['abc','def']
   /**
    *  Optional. The language used to access language-specific data.
    *  If not specified, the agent's default language is used.
