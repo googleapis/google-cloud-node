@@ -28,12 +28,6 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-  let projectId;
-
-  before(async () => {
-    projectId = await cloudcommerceconsumerprocurementClient.getProjectId();
-  });
-
   it('should run quickstart', async () => {
     try {
       execSync('node quickstart.js billingAccounts/1234', {cwd});
