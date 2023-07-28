@@ -589,6 +589,182 @@
         }
       }
     },
+    "DataTaxonomyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataTaxonomyServiceClient",
+          "rpcs": {
+            "GetDataTaxonomy": {
+              "methods": [
+                "getDataTaxonomy"
+              ]
+            },
+            "GetDataAttributeBinding": {
+              "methods": [
+                "getDataAttributeBinding"
+              ]
+            },
+            "GetDataAttribute": {
+              "methods": [
+                "getDataAttribute"
+              ]
+            },
+            "CreateDataTaxonomy": {
+              "methods": [
+                "createDataTaxonomy"
+              ]
+            },
+            "UpdateDataTaxonomy": {
+              "methods": [
+                "updateDataTaxonomy"
+              ]
+            },
+            "DeleteDataTaxonomy": {
+              "methods": [
+                "deleteDataTaxonomy"
+              ]
+            },
+            "CreateDataAttributeBinding": {
+              "methods": [
+                "createDataAttributeBinding"
+              ]
+            },
+            "UpdateDataAttributeBinding": {
+              "methods": [
+                "updateDataAttributeBinding"
+              ]
+            },
+            "DeleteDataAttributeBinding": {
+              "methods": [
+                "deleteDataAttributeBinding"
+              ]
+            },
+            "CreateDataAttribute": {
+              "methods": [
+                "createDataAttribute"
+              ]
+            },
+            "UpdateDataAttribute": {
+              "methods": [
+                "updateDataAttribute"
+              ]
+            },
+            "DeleteDataAttribute": {
+              "methods": [
+                "deleteDataAttribute"
+              ]
+            },
+            "ListDataTaxonomies": {
+              "methods": [
+                "listDataTaxonomies",
+                "listDataTaxonomiesStream",
+                "listDataTaxonomiesAsync"
+              ]
+            },
+            "ListDataAttributeBindings": {
+              "methods": [
+                "listDataAttributeBindings",
+                "listDataAttributeBindingsStream",
+                "listDataAttributeBindingsAsync"
+              ]
+            },
+            "ListDataAttributes": {
+              "methods": [
+                "listDataAttributes",
+                "listDataAttributesStream",
+                "listDataAttributesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataTaxonomyServiceClient",
+          "rpcs": {
+            "GetDataTaxonomy": {
+              "methods": [
+                "getDataTaxonomy"
+              ]
+            },
+            "GetDataAttributeBinding": {
+              "methods": [
+                "getDataAttributeBinding"
+              ]
+            },
+            "GetDataAttribute": {
+              "methods": [
+                "getDataAttribute"
+              ]
+            },
+            "CreateDataTaxonomy": {
+              "methods": [
+                "createDataTaxonomy"
+              ]
+            },
+            "UpdateDataTaxonomy": {
+              "methods": [
+                "updateDataTaxonomy"
+              ]
+            },
+            "DeleteDataTaxonomy": {
+              "methods": [
+                "deleteDataTaxonomy"
+              ]
+            },
+            "CreateDataAttributeBinding": {
+              "methods": [
+                "createDataAttributeBinding"
+              ]
+            },
+            "UpdateDataAttributeBinding": {
+              "methods": [
+                "updateDataAttributeBinding"
+              ]
+            },
+            "DeleteDataAttributeBinding": {
+              "methods": [
+                "deleteDataAttributeBinding"
+              ]
+            },
+            "CreateDataAttribute": {
+              "methods": [
+                "createDataAttribute"
+              ]
+            },
+            "UpdateDataAttribute": {
+              "methods": [
+                "updateDataAttribute"
+              ]
+            },
+            "DeleteDataAttribute": {
+              "methods": [
+                "deleteDataAttribute"
+              ]
+            },
+            "ListDataTaxonomies": {
+              "methods": [
+                "listDataTaxonomies",
+                "listDataTaxonomiesStream",
+                "listDataTaxonomiesAsync"
+              ]
+            },
+            "ListDataAttributeBindings": {
+              "methods": [
+                "listDataAttributeBindings",
+                "listDataAttributeBindingsStream",
+                "listDataAttributeBindingsAsync"
+              ]
+            },
+            "ListDataAttributes": {
+              "methods": [
+                "listDataAttributes",
+                "listDataAttributesStream",
+                "listDataAttributesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
