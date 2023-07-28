@@ -41,6 +41,7 @@ describe('Quickstart', () => {
       output = execSync('node quickstart.js billingAccounts/1234', {cwd});
     } catch (err) {
       // We have to assert an error since we don't want to put in the actual billing account info
+      // A secret could still be console.log()
       assert.ok(err.message.toString().match(new RegExp("Permission 'consumerprocurement.orders.list' denied on resource '//cloudbilling.googleapis.com/billingAccounts/1234'")))
     }
   });
