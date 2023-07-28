@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -40,6 +40,10 @@
                         "type": ".google.cloud.documentai.v1.RawDocument"
                     },
                     {
+                        "name": "gcs_document",
+                        "type": ".google.cloud.documentai.v1.GcsDocument"
+                    },
+                    {
                         "name": "name",
                         "type": "TYPE_STRING"
                     },
@@ -50,6 +54,10 @@
                     {
                         "name": "field_mask",
                         "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "process_options",
+                        "type": ".google.cloud.documentai.v1.ProcessOptions"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1.ProcessResponse",
@@ -78,7 +86,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -102,6 +110,10 @@
                     {
                         "name": "skip_human_review",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "process_options",
+                        "type": ".google.cloud.documentai.v1.ProcessOptions"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -346,7 +358,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -355,6 +367,10 @@
                 "fullName": "google.cloud.documentai.v1.DocumentProcessorService.TrainProcessorVersion",
                 "async": true,
                 "parameters": [
+                    {
+                        "name": "custom_document_extraction_options",
+                        "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions"
+                    },
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
