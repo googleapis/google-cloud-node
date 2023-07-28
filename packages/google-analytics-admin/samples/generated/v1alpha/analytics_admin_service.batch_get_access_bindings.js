@@ -43,7 +43,7 @@ function main(parent, names) {
    *  - accounts/{account}/accessBindings/{accessBinding}
    *  - properties/{property}/accessBindings/{accessBinding}
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
