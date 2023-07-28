@@ -410,31 +410,30 @@ export class CatalogServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Updates the {@link google.cloud.retail.v2.Catalog|Catalog}s.
+   * Updates the {@link protos.google.cloud.retail.v2.Catalog|Catalog}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2.Catalog} request.catalog
-   *   Required. The {@link google.cloud.retail.v2.Catalog|Catalog} to update.
+   *   Required. The {@link protos.google.cloud.retail.v2.Catalog|Catalog} to update.
    *
    *   If the caller does not have permission to update the
-   *   {@link google.cloud.retail.v2.Catalog|Catalog}, regardless of whether or not it
+   *   {@link protos.google.cloud.retail.v2.Catalog|Catalog}, regardless of whether or not it
    *   exists, a PERMISSION_DENIED error is returned.
    *
-   *   If the {@link google.cloud.retail.v2.Catalog|Catalog} to update does not exist,
+   *   If the {@link protos.google.cloud.retail.v2.Catalog|Catalog} to update does not exist,
    *   a NOT_FOUND error is returned.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided
-   *   {@link google.cloud.retail.v2.Catalog|Catalog} to update.
+   *   {@link protos.google.cloud.retail.v2.Catalog|Catalog} to update.
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.Catalog | Catalog}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.Catalog|Catalog}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.update_catalog.js</caption>
    * region_tag:retail_v2_generated_CatalogService_UpdateCatalog_async
@@ -509,25 +508,25 @@ export class CatalogServiceClient {
   }
   /**
    * Set a specified branch id as default branch. API methods such as
-   * {@link google.cloud.retail.v2.SearchService.Search|SearchService.Search},
-   * {@link google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct},
-   * {@link google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}
+   * {@link protos.google.cloud.retail.v2.SearchService.Search|SearchService.Search},
+   * {@link protos.google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct},
+   * {@link protos.google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}
    * will treat requests using "default_branch" to the actual branch id set as
    * default.
    *
    * For example, if `projects/* /locations/* /catalogs/* /branches/1` is set as
    * default, setting
-   * {@link google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
+   * {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
    * `projects/* /locations/* /catalogs/* /branches/default_branch` is equivalent
    * to setting
-   * {@link google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
+   * {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
    * `projects/* /locations/* /catalogs/* /branches/1`.
    *
    * Using multiple branches can be useful when developers would like
    * to have a staging branch to test and verify for future usage. When it
    * becomes ready, developers switch on the staging branch using this API while
    * keeping using `projects/* /locations/* /catalogs/* /branches/default_branch`
-   * as {@link google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
+   * as {@link protos.google.cloud.retail.v2.SearchRequest.branch|SearchRequest.branch} to
    * route the traffic to this staging branch.
    *
    * CAUTION: If you have live predict/search traffic, switching the default
@@ -554,25 +553,24 @@ export class CatalogServiceClient {
    *   error is returned.
    *
    *   If there are no sufficient active products in the targeted branch and
-   *   {@link google.cloud.retail.v2.SetDefaultBranchRequest.force|force} is not set, a
+   *   {@link protos.google.cloud.retail.v2.SetDefaultBranchRequest.force|force} is not set, a
    *   FAILED_PRECONDITION error is returned.
    * @param {string} request.note
    *   Some note on this request, this can be retrieved by
-   *   {@link google.cloud.retail.v2.CatalogService.GetDefaultBranch|CatalogService.GetDefaultBranch}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.GetDefaultBranch|CatalogService.GetDefaultBranch}
    *   before next valid default branch set occurs.
    *
    *   This field must be a UTF-8 encoded string with a length limit of 1,000
    *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
    * @param {boolean} request.force
    *   If set to true, it permits switching to a branch with
-   *   {@link google.cloud.retail.v2.SetDefaultBranchRequest.branch_id|branch_id} even
+   *   {@link protos.google.cloud.retail.v2.SetDefaultBranchRequest.branch_id|branch_id} even
    *   if it has no sufficient active products.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.set_default_branch.js</caption>
    * region_tag:retail_v2_generated_CatalogService_SetDefaultBranch_async
@@ -647,7 +645,7 @@ export class CatalogServiceClient {
   }
   /**
    * Get which branch is currently default branch set by
-   * {@link google.cloud.retail.v2.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
+   * {@link protos.google.cloud.retail.v2.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
    * method under a specified parent catalog.
    *
    * @param {Object} request
@@ -658,9 +656,8 @@ export class CatalogServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.GetDefaultBranchResponse | GetDefaultBranchResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.GetDefaultBranchResponse|GetDefaultBranchResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.get_default_branch.js</caption>
    * region_tag:retail_v2_generated_CatalogService_GetDefaultBranch_async
@@ -734,7 +731,7 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getDefaultBranch(request, options, callback);
   }
   /**
-   * Gets a {@link google.cloud.retail.v2.CompletionConfig|CompletionConfig}.
+   * Gets a {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -744,9 +741,8 @@ export class CatalogServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.CompletionConfig | CompletionConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.get_completion_config.js</caption>
    * region_tag:retail_v2_generated_CatalogService_GetCompletionConfig_async
@@ -826,37 +822,36 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getCompletionConfig(request, options, callback);
   }
   /**
-   * Updates the {@link google.cloud.retail.v2.CompletionConfig|CompletionConfig}s.
+   * Updates the {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2.CompletionConfig} request.completionConfig
-   *   Required. The {@link google.cloud.retail.v2.CompletionConfig|CompletionConfig}
+   *   Required. The {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}
    *   to update.
    *
    *   If the caller does not have permission to update the
-   *   {@link google.cloud.retail.v2.CompletionConfig|CompletionConfig}, then a
+   *   {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}, then a
    *   PERMISSION_DENIED error is returned.
    *
-   *   If the {@link google.cloud.retail.v2.CompletionConfig|CompletionConfig} to
+   *   If the {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig} to
    *   update does not exist, a NOT_FOUND error is returned.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided
-   *   {@link google.cloud.retail.v2.CompletionConfig|CompletionConfig} to update. The
+   *   {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig} to update. The
    *   following are the only supported fields:
    *
-   *   * {@link google.cloud.retail.v2.CompletionConfig.matching_order|CompletionConfig.matching_order}
-   *   * {@link google.cloud.retail.v2.CompletionConfig.max_suggestions|CompletionConfig.max_suggestions}
-   *   * {@link google.cloud.retail.v2.CompletionConfig.min_prefix_length|CompletionConfig.min_prefix_length}
-   *   * {@link google.cloud.retail.v2.CompletionConfig.auto_learning|CompletionConfig.auto_learning}
+   *   * {@link protos.google.cloud.retail.v2.CompletionConfig.matching_order|CompletionConfig.matching_order}
+   *   * {@link protos.google.cloud.retail.v2.CompletionConfig.max_suggestions|CompletionConfig.max_suggestions}
+   *   * {@link protos.google.cloud.retail.v2.CompletionConfig.min_prefix_length|CompletionConfig.min_prefix_length}
+   *   * {@link protos.google.cloud.retail.v2.CompletionConfig.auto_learning|CompletionConfig.auto_learning}
    *
    *   If not set, all supported fields are updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.CompletionConfig | CompletionConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.CompletionConfig|CompletionConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.update_completion_config.js</caption>
    * region_tag:retail_v2_generated_CatalogService_UpdateCompletionConfig_async
@@ -940,7 +935,7 @@ export class CatalogServiceClient {
     );
   }
   /**
-   * Gets an {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   * Gets an {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -950,9 +945,8 @@ export class CatalogServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.AttributesConfig | AttributesConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.get_attributes_config.js</caption>
    * region_tag:retail_v2_generated_CatalogService_GetAttributesConfig_async
@@ -1032,7 +1026,7 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getAttributesConfig(request, options, callback);
   }
   /**
-   * Updates the {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   * Updates the {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
    *
    * The catalog attributes in the request will be updated in the catalog, or
    * inserted if they do not exist. Existing catalog attributes not included in
@@ -1044,22 +1038,21 @@ export class CatalogServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2.AttributesConfig} request.attributesConfig
-   *   Required. The {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig}
+   *   Required. The {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}
    *   to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided
-   *   {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig} to update. The
+   *   {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig} to update. The
    *   following is the only supported field:
    *
-   *   * {@link google.cloud.retail.v2.AttributesConfig.catalog_attributes|AttributesConfig.catalog_attributes}
+   *   * {@link protos.google.cloud.retail.v2.AttributesConfig.catalog_attributes|AttributesConfig.catalog_attributes}
    *
    *   If not set, all supported fields are updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.AttributesConfig | AttributesConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.update_attributes_config.js</caption>
    * region_tag:retail_v2_generated_CatalogService_UpdateAttributesConfig_async
@@ -1144,10 +1137,10 @@ export class CatalogServiceClient {
   }
   /**
    * Adds the specified
-   * {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to the
-   * {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   * {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to the
+   * {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
    *
-   * If the {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to add
+   * If the {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to add
    * already exists, an ALREADY_EXISTS error is returned.
    *
    * @param {Object} request
@@ -1156,14 +1149,13 @@ export class CatalogServiceClient {
    *   Required. Full AttributesConfig resource name. Format:
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
    * @param {google.cloud.retail.v2.CatalogAttribute} request.catalogAttribute
-   *   Required. The {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute}
+   *   Required. The {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute}
    *   to add.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.AttributesConfig | AttributesConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.add_catalog_attribute.js</caption>
    * region_tag:retail_v2_generated_CatalogService_AddCatalogAttribute_async
@@ -1244,10 +1236,10 @@ export class CatalogServiceClient {
   }
   /**
    * Removes the specified
-   * {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} from the
-   * {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   * {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} from the
+   * {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
    *
-   * If the {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to
+   * If the {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to
    * remove does not exist, a NOT_FOUND error is returned.
    *
    * @param {Object} request
@@ -1257,13 +1249,12 @@ export class CatalogServiceClient {
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
    * @param {string} request.key
    *   Required. The attribute name key of the
-   *   {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to remove.
+   *   {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to remove.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.AttributesConfig | AttributesConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.remove_catalog_attribute.js</caption>
    * region_tag:retail_v2_generated_CatalogService_RemoveCatalogAttribute_async
@@ -1348,12 +1339,12 @@ export class CatalogServiceClient {
   }
   /**
    * Replaces the specified
-   * {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} in the
-   * {@link google.cloud.retail.v2.AttributesConfig|AttributesConfig} by updating the
+   * {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} in the
+   * {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig} by updating the
    * catalog attribute with the same
-   * {@link google.cloud.retail.v2.CatalogAttribute.key|CatalogAttribute.key}.
+   * {@link protos.google.cloud.retail.v2.CatalogAttribute.key|CatalogAttribute.key}.
    *
-   * If the {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to
+   * If the {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to
    * replace does not exist, a NOT_FOUND error is returned.
    *
    * @param {Object} request
@@ -1363,21 +1354,20 @@ export class CatalogServiceClient {
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
    * @param {google.cloud.retail.v2.CatalogAttribute} request.catalogAttribute
    *   Required. The updated
-   *   {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute}.
+   *   {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute}.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided
-   *   {@link google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to update. The
+   *   {@link protos.google.cloud.retail.v2.CatalogAttribute|CatalogAttribute} to update. The
    *   following are NOT supported:
    *
-   *   * {@link google.cloud.retail.v2.CatalogAttribute.key|CatalogAttribute.key}
+   *   * {@link protos.google.cloud.retail.v2.CatalogAttribute.key|CatalogAttribute.key}
    *
    *   If not set, all supported fields are updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2.AttributesConfig | AttributesConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.AttributesConfig|AttributesConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.replace_catalog_attribute.js</caption>
    * region_tag:retail_v2_generated_CatalogService_ReplaceCatalogAttribute_async
@@ -1462,7 +1452,7 @@ export class CatalogServiceClient {
   }
 
   /**
-   * Lists all the {@link google.cloud.retail.v2.Catalog|Catalog}s associated with
+   * Lists all the {@link protos.google.cloud.retail.v2.Catalog|Catalog}s associated with
    * the project.
    *
    * @param {Object} request
@@ -1471,37 +1461,36 @@ export class CatalogServiceClient {
    *   Required. The account resource name with an associated location.
    *
    *   If the caller does not have permission to list
-   *   {@link google.cloud.retail.v2.Catalog|Catalog}s under this location, regardless
+   *   {@link protos.google.cloud.retail.v2.Catalog|Catalog}s under this location, regardless
    *   of whether or not this location exists, a PERMISSION_DENIED error is
    *   returned.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.retail.v2.Catalog|Catalog}s to return. If
+   *   Maximum number of {@link protos.google.cloud.retail.v2.Catalog|Catalog}s to return. If
    *   unspecified, defaults to 50. The maximum allowed value is 1000. Values
    *   above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an INVALID_ARGUMENT is returned.
    * @param {string} request.pageToken
    *   A page token
-   *   {@link google.cloud.retail.v2.ListCatalogsResponse.next_page_token|ListCatalogsResponse.next_page_token},
+   *   {@link protos.google.cloud.retail.v2.ListCatalogsResponse.next_page_token|ListCatalogsResponse.next_page_token},
    *   received from a previous
-   *   {@link google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
    *   must match the call that provided the page token. Otherwise, an
    *   INVALID_ARGUMENT error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.retail.v2.Catalog | Catalog}.
+   *   The first element of the array is Array of {@link protos.google.cloud.retail.v2.Catalog|Catalog}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listCatalogsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCatalogs(
@@ -1581,36 +1570,35 @@ export class CatalogServiceClient {
    *   Required. The account resource name with an associated location.
    *
    *   If the caller does not have permission to list
-   *   {@link google.cloud.retail.v2.Catalog|Catalog}s under this location, regardless
+   *   {@link protos.google.cloud.retail.v2.Catalog|Catalog}s under this location, regardless
    *   of whether or not this location exists, a PERMISSION_DENIED error is
    *   returned.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.retail.v2.Catalog|Catalog}s to return. If
+   *   Maximum number of {@link protos.google.cloud.retail.v2.Catalog|Catalog}s to return. If
    *   unspecified, defaults to 50. The maximum allowed value is 1000. Values
    *   above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an INVALID_ARGUMENT is returned.
    * @param {string} request.pageToken
    *   A page token
-   *   {@link google.cloud.retail.v2.ListCatalogsResponse.next_page_token|ListCatalogsResponse.next_page_token},
+   *   {@link protos.google.cloud.retail.v2.ListCatalogsResponse.next_page_token|ListCatalogsResponse.next_page_token},
    *   received from a previous
-   *   {@link google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
    *   must match the call that provided the page token. Otherwise, an
    *   INVALID_ARGUMENT error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.retail.v2.Catalog | Catalog} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2.Catalog|Catalog} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCatalogsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCatalogsStream(
@@ -1645,35 +1633,34 @@ export class CatalogServiceClient {
    *   Required. The account resource name with an associated location.
    *
    *   If the caller does not have permission to list
-   *   {@link google.cloud.retail.v2.Catalog|Catalog}s under this location, regardless
+   *   {@link protos.google.cloud.retail.v2.Catalog|Catalog}s under this location, regardless
    *   of whether or not this location exists, a PERMISSION_DENIED error is
    *   returned.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.retail.v2.Catalog|Catalog}s to return. If
+   *   Maximum number of {@link protos.google.cloud.retail.v2.Catalog|Catalog}s to return. If
    *   unspecified, defaults to 50. The maximum allowed value is 1000. Values
    *   above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an INVALID_ARGUMENT is returned.
    * @param {string} request.pageToken
    *   A page token
-   *   {@link google.cloud.retail.v2.ListCatalogsResponse.next_page_token|ListCatalogsResponse.next_page_token},
+   *   {@link protos.google.cloud.retail.v2.ListCatalogsResponse.next_page_token|ListCatalogsResponse.next_page_token},
    *   received from a previous
-   *   {@link google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
+   *   {@link protos.google.cloud.retail.v2.CatalogService.ListCatalogs|CatalogService.ListCatalogs}
    *   must match the call that provided the page token. Otherwise, an
    *   INVALID_ARGUMENT error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.retail.v2.Catalog | Catalog}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.retail.v2.Catalog|Catalog}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/catalog_service.list_catalogs.js</caption>
    * region_tag:retail_v2_generated_CatalogService_ListCatalogs_async
@@ -1710,8 +1697,7 @@ export class CatalogServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1757,12 +1743,11 @@ export class CatalogServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

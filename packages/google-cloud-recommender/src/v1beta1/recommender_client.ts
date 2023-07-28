@@ -431,9 +431,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.Insight | Insight}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.Insight|Insight}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.get_insight.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_GetInsight_async
@@ -532,9 +531,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.Insight | Insight}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.Insight|Insight}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.mark_insight_accepted.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_MarkInsightAccepted_async
@@ -630,9 +628,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.get_recommendation.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_GetRecommendation_async
@@ -736,16 +733,15 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex `/^{@link a-z0-9_.-|a-z0-9}{0,62}$/`.
+   *   Keys must match the regex `/^{@link protos.a-z0-9_.-|a-z0-9}{0,62}$/`.
    *   Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.mark_recommendation_claimed.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_MarkRecommendationClaimed_async
@@ -854,16 +850,15 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex `/^{@link a-z0-9_.-|a-z0-9}{0,62}$/`.
+   *   Keys must match the regex `/^{@link protos.a-z0-9_.-|a-z0-9}{0,62}$/`.
    *   Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.mark_recommendation_succeeded.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_MarkRecommendationSucceeded_async
@@ -972,16 +967,15 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex `/^{@link a-z0-9_.-|a-z0-9}{0,62}$/`.
+   *   Keys must match the regex `/^{@link protos.a-z0-9_.-|a-z0-9}{0,62}$/`.
    *   Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.mark_recommendation_failed.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_MarkRecommendationFailed_async
@@ -1089,9 +1083,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.RecommenderConfig | RecommenderConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.RecommenderConfig|RecommenderConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.get_recommender_config.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_GetRecommenderConfig_async
@@ -1192,9 +1185,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.RecommenderConfig | RecommenderConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.RecommenderConfig|RecommenderConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.update_recommender_config.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_UpdateRecommenderConfig_async
@@ -1302,9 +1294,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.InsightTypeConfig | InsightTypeConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.InsightTypeConfig|InsightTypeConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.get_insight_type_config.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_GetInsightTypeConfig_async
@@ -1405,9 +1396,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1beta1.InsightTypeConfig | InsightTypeConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1beta1.InsightTypeConfig|InsightTypeConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.update_insight_type_config.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_UpdateInsightTypeConfig_async
@@ -1555,14 +1545,13 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recommender.v1beta1.Insight | Insight}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recommender.v1beta1.Insight|Insight}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInsightsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInsights(
@@ -1696,13 +1685,12 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recommender.v1beta1.Insight | Insight} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recommender.v1beta1.Insight|Insight} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInsightsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInsightsStream(
@@ -1785,12 +1773,11 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recommender.v1beta1.Insight | Insight}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recommender.v1beta1.Insight|Insight}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.list_insights.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_ListInsights_async
@@ -1874,14 +1861,13 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRecommendationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRecommendations(
@@ -2015,13 +2001,12 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRecommendationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRecommendationsStream(
@@ -2104,12 +2089,11 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recommender.v1beta1.Recommendation | Recommendation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recommender.v1beta1.Recommendation|Recommendation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/recommender.list_recommendations.js</caption>
    * region_tag:recommender_v1beta1_generated_Recommender_ListRecommendations_async

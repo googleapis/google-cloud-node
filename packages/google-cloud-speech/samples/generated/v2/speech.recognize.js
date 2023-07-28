@@ -66,7 +66,7 @@ function main(recognizer) {
    *  with all bytes fields, proto buffers use a pure binary representation,
    *  whereas JSON representations use base64.
    */
-  // const content = 'Buffer.from('string')'
+  // const content = Buffer.from('string')
   /**
    *  URI that points to a file that contains audio data bytes as specified in
    *  RecognitionConfig google.cloud.speech.v2.RecognitionConfig. The file

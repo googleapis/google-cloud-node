@@ -58,7 +58,7 @@ function main(catalog, query) {
    *  Identifying Languages (https://tools.ietf.org/html/bcp47). The maximum
    *  number of language codes is 3.
    */
-  // const languageCodes = 'abc123'
+  // const languageCodes = ['abc','def']
   /**
    *  The device type context for completion suggestions. We recommend that you
    *  leave this field empty.

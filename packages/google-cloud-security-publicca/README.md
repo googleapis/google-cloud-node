@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Public Certificate Authority: Node.js Client](https://github.com/googleapis/google-cloud-node)
+# [Public Certificate Authority: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-security-publicca)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/publicca.svg)](https://www.npmjs.org/package/@google-cloud/publicca)
@@ -104,13 +104,12 @@ callCreateExternalAccountKey();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-security-publicca/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Public_certificate_authority_service.create_external_account_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-publicca/samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-publicca/samples/quickstart.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-publicca/samples/test/quickstart.js,samples/README.md) |
+| Public_certificate_authority_service.create_external_account_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-publicca/samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js,packages/google-cloud-security-publicca/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-publicca/samples/quickstart.js,packages/google-cloud-security-publicca/samples/README.md) |
 
 
 
