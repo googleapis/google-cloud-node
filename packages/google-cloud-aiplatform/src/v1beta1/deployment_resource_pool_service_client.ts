@@ -1731,7 +1731,7 @@ export class DeploymentResourcePoolServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetDeploymentResourcePoolRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeploymentResourcePool(
@@ -1780,7 +1780,7 @@ export class DeploymentResourcePoolServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetDeploymentResourcePoolRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1844,7 +1844,7 @@ export class DeploymentResourcePoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDeploymentResourcePool(
@@ -1897,7 +1897,7 @@ export class DeploymentResourcePoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateDeploymentResourcePoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1986,7 +1986,7 @@ export class DeploymentResourcePoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDeploymentResourcePool(
@@ -2039,7 +2039,7 @@ export class DeploymentResourcePoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2135,7 +2135,7 @@ export class DeploymentResourcePoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool[],
       protos.google.cloud.aiplatform.v1beta1.IListDeploymentResourcePoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDeploymentResourcePoolsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListDeploymentResourcePoolsResponse,
     ]
   >;
   listDeploymentResourcePools(
@@ -2181,7 +2181,7 @@ export class DeploymentResourcePoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool[],
       protos.google.cloud.aiplatform.v1beta1.IListDeploymentResourcePoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDeploymentResourcePoolsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListDeploymentResourcePoolsResponse,
     ]
   > | void {
     request = request || {};
@@ -2347,7 +2347,7 @@ export class DeploymentResourcePoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDeployedModel[],
       protos.google.cloud.aiplatform.v1beta1.IQueryDeployedModelsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IQueryDeployedModelsResponse
+      protos.google.cloud.aiplatform.v1beta1.IQueryDeployedModelsResponse,
     ]
   >;
   queryDeployedModels(
@@ -2393,7 +2393,7 @@ export class DeploymentResourcePoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDeployedModel[],
       protos.google.cloud.aiplatform.v1beta1.IQueryDeployedModelsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IQueryDeployedModelsResponse
+      protos.google.cloud.aiplatform.v1beta1.IQueryDeployedModelsResponse,
     ]
   > | void {
     request = request || {};

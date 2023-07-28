@@ -1673,7 +1673,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataStore,
       protos.google.cloud.aiplatform.v1.IGetMetadataStoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetadataStore(
@@ -1719,7 +1719,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataStore,
       protos.google.cloud.aiplatform.v1.IGetMetadataStoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1776,7 +1776,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact,
       protos.google.cloud.aiplatform.v1.ICreateArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createArtifact(
@@ -1822,7 +1822,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact,
       protos.google.cloud.aiplatform.v1.ICreateArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1868,7 +1868,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact,
       protos.google.cloud.aiplatform.v1.IGetArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getArtifact(
@@ -1908,7 +1908,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact,
       protos.google.cloud.aiplatform.v1.IGetArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1961,7 +1961,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact,
       protos.google.cloud.aiplatform.v1.IUpdateArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateArtifact(
@@ -2007,7 +2007,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact,
       protos.google.cloud.aiplatform.v1.IUpdateArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2063,7 +2063,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext,
       protos.google.cloud.aiplatform.v1.ICreateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createContext(
@@ -2109,7 +2109,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext,
       protos.google.cloud.aiplatform.v1.ICreateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2155,7 +2155,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext,
       protos.google.cloud.aiplatform.v1.IGetContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getContext(
@@ -2195,7 +2195,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext,
       protos.google.cloud.aiplatform.v1.IGetContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2247,7 +2247,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext,
       protos.google.cloud.aiplatform.v1.IUpdateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateContext(
@@ -2293,7 +2293,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext,
       protos.google.cloud.aiplatform.v1.IUpdateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2355,7 +2355,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addContextArtifactsAndExecutions(
@@ -2404,7 +2404,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2461,7 +2461,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAddContextChildrenResponse,
       protos.google.cloud.aiplatform.v1.IAddContextChildrenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addContextChildren(
@@ -2507,7 +2507,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAddContextChildrenResponse,
       protos.google.cloud.aiplatform.v1.IAddContextChildrenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2561,7 +2561,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeContextChildren(
@@ -2610,7 +2610,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2665,7 +2665,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IQueryContextLineageSubgraphRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   queryContextLineageSubgraph(
@@ -2714,7 +2714,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IQueryContextLineageSubgraphRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2776,7 +2776,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution,
       protos.google.cloud.aiplatform.v1.ICreateExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExecution(
@@ -2822,7 +2822,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution,
       protos.google.cloud.aiplatform.v1.ICreateExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2868,7 +2868,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution,
       protos.google.cloud.aiplatform.v1.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExecution(
@@ -2908,7 +2908,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution,
       protos.google.cloud.aiplatform.v1.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2961,7 +2961,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution,
       protos.google.cloud.aiplatform.v1.IUpdateExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateExecution(
@@ -3007,7 +3007,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution,
       protos.google.cloud.aiplatform.v1.IUpdateExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3059,7 +3059,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAddExecutionEventsResponse,
       protos.google.cloud.aiplatform.v1.IAddExecutionEventsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addExecutionEvents(
@@ -3105,7 +3105,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IAddExecutionEventsResponse,
       protos.google.cloud.aiplatform.v1.IAddExecutionEventsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3156,7 +3156,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IQueryExecutionInputsAndOutputsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   queryExecutionInputsAndOutputs(
@@ -3205,7 +3205,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IQueryExecutionInputsAndOutputsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3269,7 +3269,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateMetadataSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMetadataSchema(
@@ -3318,7 +3318,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateMetadataSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3364,7 +3364,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataSchema,
       protos.google.cloud.aiplatform.v1.IGetMetadataSchemaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetadataSchema(
@@ -3410,7 +3410,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataSchema,
       protos.google.cloud.aiplatform.v1.IGetMetadataSchemaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3496,7 +3496,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IQueryArtifactLineageSubgraphRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   queryArtifactLineageSubgraph(
@@ -3545,7 +3545,7 @@ export class MetadataServiceClient {
         | protos.google.cloud.aiplatform.v1.IQueryArtifactLineageSubgraphRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3612,7 +3612,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateMetadataStoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMetadataStore(
@@ -3665,7 +3665,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateMetadataStoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3753,7 +3753,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteMetadataStoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMetadataStore(
@@ -3806,7 +3806,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteMetadataStoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3895,7 +3895,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteArtifact(
@@ -3948,7 +3948,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4040,7 +4040,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IPurgeArtifactsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeArtifacts(
@@ -4093,7 +4093,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IPurgeArtifactsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4185,7 +4185,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteContext(
@@ -4238,7 +4238,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4330,7 +4330,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IPurgeContextsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeContexts(
@@ -4383,7 +4383,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IPurgeContextsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4472,7 +4472,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteExecution(
@@ -4525,7 +4525,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4617,7 +4617,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IPurgeExecutionsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeExecutions(
@@ -4670,7 +4670,7 @@ export class MetadataServiceClient {
         protos.google.cloud.aiplatform.v1.IPurgeExecutionsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4765,7 +4765,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataStore[],
       protos.google.cloud.aiplatform.v1.IListMetadataStoresRequest | null,
-      protos.google.cloud.aiplatform.v1.IListMetadataStoresResponse
+      protos.google.cloud.aiplatform.v1.IListMetadataStoresResponse,
     ]
   >;
   listMetadataStores(
@@ -4811,7 +4811,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataStore[],
       protos.google.cloud.aiplatform.v1.IListMetadataStoresRequest | null,
-      protos.google.cloud.aiplatform.v1.IListMetadataStoresResponse
+      protos.google.cloud.aiplatform.v1.IListMetadataStoresResponse,
     ]
   > | void {
     request = request || {};
@@ -5019,7 +5019,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact[],
       protos.google.cloud.aiplatform.v1.IListArtifactsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListArtifactsResponse
+      protos.google.cloud.aiplatform.v1.IListArtifactsResponse,
     ]
   >;
   listArtifacts(
@@ -5065,7 +5065,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IArtifact[],
       protos.google.cloud.aiplatform.v1.IListArtifactsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListArtifactsResponse
+      protos.google.cloud.aiplatform.v1.IListArtifactsResponse,
     ]
   > | void {
     request = request || {};
@@ -5353,7 +5353,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext[],
       protos.google.cloud.aiplatform.v1.IListContextsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListContextsResponse
+      protos.google.cloud.aiplatform.v1.IListContextsResponse,
     ]
   >;
   listContexts(
@@ -5399,7 +5399,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IContext[],
       protos.google.cloud.aiplatform.v1.IListContextsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListContextsResponse
+      protos.google.cloud.aiplatform.v1.IListContextsResponse,
     ]
   > | void {
     request = request || {};
@@ -5691,7 +5691,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution[],
       protos.google.cloud.aiplatform.v1.IListExecutionsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListExecutionsResponse
+      protos.google.cloud.aiplatform.v1.IListExecutionsResponse,
     ]
   >;
   listExecutions(
@@ -5737,7 +5737,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IExecution[],
       protos.google.cloud.aiplatform.v1.IListExecutionsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListExecutionsResponse
+      protos.google.cloud.aiplatform.v1.IListExecutionsResponse,
     ]
   > | void {
     request = request || {};
@@ -5985,7 +5985,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataSchema[],
       protos.google.cloud.aiplatform.v1.IListMetadataSchemasRequest | null,
-      protos.google.cloud.aiplatform.v1.IListMetadataSchemasResponse
+      protos.google.cloud.aiplatform.v1.IListMetadataSchemasResponse,
     ]
   >;
   listMetadataSchemas(
@@ -6031,7 +6031,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMetadataSchema[],
       protos.google.cloud.aiplatform.v1.IListMetadataSchemasRequest | null,
-      protos.google.cloud.aiplatform.v1.IListMetadataSchemasResponse
+      protos.google.cloud.aiplatform.v1.IListMetadataSchemasResponse,
     ]
   > | void {
     request = request || {};

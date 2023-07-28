@@ -1731,7 +1731,7 @@ export class SpecialistPoolServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSpecialistPool(
@@ -1780,7 +1780,7 @@ export class SpecialistPoolServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1833,7 +1833,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSpecialistPool(
@@ -1886,7 +1886,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1974,7 +1974,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSpecialistPool(
@@ -2027,7 +2027,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2112,7 +2112,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSpecialistPool(
@@ -2165,7 +2165,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2258,7 +2258,7 @@ export class SpecialistPoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[],
       protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse,
     ]
   >;
   listSpecialistPools(
@@ -2304,7 +2304,7 @@ export class SpecialistPoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[],
       protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse,
     ]
   > | void {
     request = request || {};

@@ -1593,7 +1593,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIndexEndpoint(
@@ -1639,7 +1639,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1686,7 +1686,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIndexEndpoint(
@@ -1732,7 +1732,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1785,7 +1785,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIndexEndpoint(
@@ -1838,7 +1838,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1923,7 +1923,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIndexEndpoint(
@@ -1976,7 +1976,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2065,7 +2065,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployIndex(
@@ -2118,7 +2118,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2207,7 +2207,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployIndex(
@@ -2260,7 +2260,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2349,7 +2349,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   mutateDeployedIndex(
@@ -2402,7 +2402,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2514,7 +2514,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
       protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse,
     ]
   >;
   listIndexEndpoints(
@@ -2560,7 +2560,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
       protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse,
     ]
   > | void {
     request = request || {};

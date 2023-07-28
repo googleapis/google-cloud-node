@@ -1746,7 +1746,7 @@ export class EndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IEndpoint,
       protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEndpoint(
@@ -1792,7 +1792,7 @@ export class EndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IEndpoint,
       protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1839,7 +1839,7 @@ export class EndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IEndpoint,
       protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEndpoint(
@@ -1885,7 +1885,7 @@ export class EndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IEndpoint,
       protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1953,7 +1953,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEndpoint(
@@ -2006,7 +2006,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2091,7 +2091,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEndpoint(
@@ -2144,7 +2144,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2249,7 +2249,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployModel(
@@ -2302,7 +2302,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2398,7 +2398,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployModel(
@@ -2451,7 +2451,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2555,7 +2555,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IMutateDeployedModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   mutateDeployedModel(
@@ -2608,7 +2608,7 @@ export class EndpointServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IMutateDeployedModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2718,7 +2718,7 @@ export class EndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IEndpoint[],
       protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse,
     ]
   >;
   listEndpoints(
@@ -2764,7 +2764,7 @@ export class EndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IEndpoint[],
       protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse,
     ]
   > | void {
     request = request || {};
