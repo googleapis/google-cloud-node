@@ -5,14 +5,14 @@
         "language": "TYPESCRIPT",
         "apis": [
             {
-                "id": "google.cloud.confidentialcomputing.v1",
-                "version": "v1"
+                "id": "google.cloud.confidentialcomputing.v1alpha1",
+                "version": "v1alpha1"
             }
         ]
     },
     "snippets": [
         {
-            "regionTag": "confidentialcomputing_v1_generated_ConfidentialComputing_CreateChallenge_async",
+            "regionTag": "confidentialcomputing_v1alpha1_generated_ConfidentialComputing_CreateChallenge_async",
             "title": "ConfidentialComputing createChallenge Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new Challenge in a given project and location.",
@@ -28,7 +28,7 @@
             ],
             "clientMethod": {
                 "shortName": "CreateChallenge",
-                "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.CreateChallenge",
+                "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing.CreateChallenge",
                 "async": true,
                 "parameters": [
                     {
@@ -37,26 +37,26 @@
                     },
                     {
                         "name": "challenge",
-                        "type": ".google.cloud.confidentialcomputing.v1.Challenge"
+                        "type": ".google.cloud.confidentialcomputing.v1alpha1.Challenge"
                     }
                 ],
-                "resultType": ".google.cloud.confidentialcomputing.v1.Challenge",
+                "resultType": ".google.cloud.confidentialcomputing.v1alpha1.Challenge",
                 "client": {
                     "shortName": "ConfidentialComputingClient",
-                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputingClient"
+                    "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputingClient"
                 },
                 "method": {
                     "shortName": "CreateChallenge",
-                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.CreateChallenge",
+                    "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing.CreateChallenge",
                     "service": {
                         "shortName": "ConfidentialComputing",
-                        "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"
+                        "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing"
                     }
                 }
             }
         },
         {
-            "regionTag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyAttestation_async",
+            "regionTag": "confidentialcomputing_v1alpha1_generated_ConfidentialComputing_VerifyAttestation_async",
             "title": "ConfidentialComputing verifyAttestation Sample",
             "origin": "API_DEFINITION",
             "description": " Verifies the provided attestation info, returning a signed OIDC token.",
@@ -66,13 +66,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "VerifyAttestation",
-                "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyAttestation",
+                "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing.VerifyAttestation",
                 "async": true,
                 "parameters": [
                     {
@@ -81,32 +81,24 @@
                     },
                     {
                         "name": "gcp_credentials",
-                        "type": ".google.cloud.confidentialcomputing.v1.GcpCredentials"
+                        "type": ".google.cloud.confidentialcomputing.v1alpha1.GcpCredentials"
                     },
                     {
                         "name": "tpm_attestation",
-                        "type": ".google.cloud.confidentialcomputing.v1.TpmAttestation"
-                    },
-                    {
-                        "name": "confidential_space_info",
-                        "type": ".google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo"
-                    },
-                    {
-                        "name": "token_options",
-                        "type": ".google.cloud.confidentialcomputing.v1.TokenOptions"
+                        "type": ".google.cloud.confidentialcomputing.v1alpha1.TpmAttestation"
                     }
                 ],
-                "resultType": ".google.cloud.confidentialcomputing.v1.VerifyAttestationResponse",
+                "resultType": ".google.cloud.confidentialcomputing.v1alpha1.VerifyAttestationResponse",
                 "client": {
                     "shortName": "ConfidentialComputingClient",
-                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputingClient"
+                    "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputingClient"
                 },
                 "method": {
                     "shortName": "VerifyAttestation",
-                    "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyAttestation",
+                    "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing.VerifyAttestation",
                     "service": {
                         "shortName": "ConfidentialComputing",
-                        "fullName": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"
+                        "fullName": "google.cloud.confidentialcomputing.v1alpha1.ConfidentialComputing"
                     }
                 }
             }
