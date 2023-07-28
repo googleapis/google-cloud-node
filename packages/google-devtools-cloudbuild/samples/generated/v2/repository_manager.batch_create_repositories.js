@@ -38,7 +38,7 @@ function main(parent, requests) {
   /**
    *  Required. The request messages specifying the repositories to create.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Cloudbuild library
   const {RepositoryManagerClient} = require('@google-cloud/cloudbuild').v2;
