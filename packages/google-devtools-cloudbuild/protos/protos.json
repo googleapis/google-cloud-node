@@ -916,6 +916,13 @@
                       }
                     },
                     "BuildStep": {
+                      "oneofs": {
+                        "_automapSubstitutions": {
+                          "oneof": [
+                            "automapSubstitutions"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1002,6 +1009,13 @@
                         "script": {
                           "type": "string",
                           "id": 19
+                        },
+                        "automapSubstitutions": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -2374,6 +2388,10 @@
                         "dynamicSubstitutions": {
                           "type": "bool",
                           "id": 17
+                        },
+                        "automapSubstitutions": {
+                          "type": "bool",
+                          "id": 22
                         },
                         "logStreamingOption": {
                           "type": "LogStreamingOption",
