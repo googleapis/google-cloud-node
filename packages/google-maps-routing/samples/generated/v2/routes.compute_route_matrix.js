@@ -39,12 +39,12 @@ function main(origins, destinations) {
    *  * The number of waypoints (origins + destinations) specified as `place_id`
    *  must be no greater than 50.
    */
-  // const origins = 1234
+  // const origins = [1,2,3,4]
   /**
    *  Required. Array of destinations, which determines the columns of the
    *  response matrix.
    */
-  // const destinations = 1234
+  // const destinations = [1,2,3,4]
   /**
    *  Optional. Specifies the mode of transportation.
    */
@@ -94,7 +94,7 @@ function main(origins, destinations) {
    *  response. These extra fields must also be specified in the field mask to be
    *  returned in the response.
    */
-  // const extraComputations = 1234
+  // const extraComputations = [1,2,3,4]
   /**
    *  Optional. Specifies the assumptions to use when calculating time in
    *  traffic. This setting affects the value returned in the duration field in
