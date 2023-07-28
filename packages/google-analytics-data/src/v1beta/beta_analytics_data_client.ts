@@ -410,9 +410,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.RunReportResponse | RunReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.RunReportResponse|RunReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_report.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunReport_async
@@ -544,9 +543,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.RunPivotReportResponse | RunPivotReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.RunPivotReportResponse|RunPivotReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_pivot_report.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunPivotReport_async
@@ -647,9 +645,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.BatchRunReportsResponse | BatchRunReportsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.BatchRunReportsResponse|BatchRunReportsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_reports.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async
@@ -750,9 +747,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.BatchRunPivotReportsResponse | BatchRunPivotReportsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.BatchRunPivotReportsResponse|BatchRunPivotReportsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunPivotReports_async
@@ -866,9 +862,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.Metadata | Metadata}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.Metadata|Metadata}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.get_metadata.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_GetMetadata_async
@@ -1003,9 +998,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.RunRealtimeReportResponse | RunRealtimeReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.RunRealtimeReportResponse|RunRealtimeReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_realtime_report.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunRealtimeReport_async
@@ -1128,9 +1122,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.CheckCompatibilityResponse | CheckCompatibilityResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.CheckCompatibilityResponse|CheckCompatibilityResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.check_compatibility.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_CheckCompatibility_async

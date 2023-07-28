@@ -53,7 +53,7 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  will result in nodes being either created or removed from the node pool,
    *  depending on whether locations are being added or removed.
    */
-  // const locations = 'abc123'
+  // const locations = ['abc','def']
   /**
    *  The desired workload metadata config for the node pool.
    */

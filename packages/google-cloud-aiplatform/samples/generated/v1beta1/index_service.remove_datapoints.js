@@ -37,7 +37,7 @@ function main(index) {
   /**
    *  A list of datapoint ids to be deleted.
    */
-  // const datapointIds = 'abc123'
+  // const datapointIds = ['abc','def']
 
   // Imports the Aiplatform library
   const {IndexServiceClient} = require('@google-cloud/aiplatform').v1beta1;

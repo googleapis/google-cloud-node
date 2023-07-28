@@ -44,6 +44,15 @@ function main(challenge, tpmAttestation) {
    *  populate any of the claims regarding platform state.
    */
   // const tpmAttestation = {}
+  /**
+   *  Optional. Optional information related to the Confidential Space TEE.
+   */
+  // const confidentialSpaceInfo = {}
+  /**
+   *  Optional. A collection of optional, workload-specified claims that modify
+   *  the token output.
+   */
+  // const tokenOptions = {}
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;

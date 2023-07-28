@@ -61,6 +61,14 @@
                         }
                       }
                     },
+                    "SigningAlgorithm": {
+                      "values": {
+                        "SIGNING_ALGORITHM_UNSPECIFIED": 0,
+                        "RSASSA_PSS_SHA256": 1,
+                        "RSASSA_PKCS1V15_SHA256": 2,
+                        "ECDSA_P256_SHA256": 3
+                      }
+                    },
                     "Challenge": {
                       "options": {
                         "(google.api.resource).type": "confidentialcomputing.googleapis.com/Challenge",
@@ -146,6 +154,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "confidentialSpaceInfo": {
+                          "type": "ConfidentialSpaceInfo",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tokenOptions": {
+                          "type": "TokenOptions",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -166,6 +188,25 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "TokenOptions": {
+                      "fields": {
+                        "audience": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nonce": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -214,6 +255,62 @@
                               "type": "bytes",
                               "id": 4
                             }
+                          }
+                        }
+                      }
+                    },
+                    "ConfidentialSpaceInfo": {
+                      "fields": {
+                        "signedEntities": {
+                          "rule": "repeated",
+                          "type": "SignedEntity",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SignedEntity": {
+                      "fields": {
+                        "containerImageSignatures": {
+                          "rule": "repeated",
+                          "type": "ContainerImageSignature",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ContainerImageSignature": {
+                      "fields": {
+                        "payload": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "signature": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "publicKey": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sigAlg": {
+                          "type": "SigningAlgorithm",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

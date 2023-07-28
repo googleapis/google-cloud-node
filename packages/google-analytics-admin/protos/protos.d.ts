@@ -28404,21 +28404,21 @@ export namespace google {
                     /** ReportingAttributionModel enum. */
                     enum ReportingAttributionModel {
                         REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED = 0,
-                        CROSS_CHANNEL_DATA_DRIVEN = 1,
-                        CROSS_CHANNEL_LAST_CLICK = 2,
-                        CROSS_CHANNEL_FIRST_CLICK = 3,
-                        CROSS_CHANNEL_LINEAR = 4,
-                        CROSS_CHANNEL_POSITION_BASED = 5,
-                        CROSS_CHANNEL_TIME_DECAY = 6,
-                        ADS_PREFERRED_LAST_CLICK = 7
+                        PAID_AND_ORGANIC_CHANNELS_DATA_DRIVEN = 1,
+                        PAID_AND_ORGANIC_CHANNELS_LAST_CLICK = 2,
+                        PAID_AND_ORGANIC_CHANNELS_FIRST_CLICK = 3,
+                        PAID_AND_ORGANIC_CHANNELS_LINEAR = 4,
+                        PAID_AND_ORGANIC_CHANNELS_POSITION_BASED = 5,
+                        PAID_AND_ORGANIC_CHANNELS_TIME_DECAY = 6,
+                        GOOGLE_PAID_CHANNELS_LAST_CLICK = 7
                     }
 
                     /** AdsWebConversionDataExportScope enum. */
                     enum AdsWebConversionDataExportScope {
                         ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED = 0,
                         NOT_SELECTED_YET = 1,
-                        CROSS_CHANNEL = 2,
-                        ADS_PREFERRED = 3
+                        PAID_AND_ORGANIC_CHANNELS = 2,
+                        GOOGLE_PAID_CHANNELS = 3
                     }
                 }
 

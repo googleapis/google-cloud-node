@@ -33,7 +33,7 @@ function main(contents, targetLanguageCode, parent) {
    *  We recommend the total content be less than 30,000 codepoints. The max
    *  length of this field is 1024. Use BatchTranslateText for larger text.
    */
-  // const contents = 'abc123'
+  // const contents = ['abc','def']
   /**
    *  Optional. The format of the source text, for example, "text/html",
    *   "text/plain". If left blank, the MIME type defaults to "text/html".
@@ -93,7 +93,7 @@ function main(contents, targetLanguageCode, parent) {
    *  See https://cloud.google.com/translate/docs/advanced/labels for more
    *  information.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;

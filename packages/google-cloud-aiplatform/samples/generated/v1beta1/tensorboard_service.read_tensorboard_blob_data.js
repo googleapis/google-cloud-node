@@ -37,7 +37,7 @@ function main(timeSeries) {
   /**
    *  IDs of the blobs to read.
    */
-  // const blobIds = 'abc123'
+  // const blobIds = ['abc','def']
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;

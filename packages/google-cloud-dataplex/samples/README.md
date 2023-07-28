@@ -28,6 +28,21 @@
   * [Data_scan_service.list_data_scans](#data_scan_service.list_data_scans)
   * [Data_scan_service.run_data_scan](#data_scan_service.run_data_scan)
   * [Data_scan_service.update_data_scan](#data_scan_service.update_data_scan)
+  * [Data_taxonomy_service.create_data_attribute](#data_taxonomy_service.create_data_attribute)
+  * [Data_taxonomy_service.create_data_attribute_binding](#data_taxonomy_service.create_data_attribute_binding)
+  * [Data_taxonomy_service.create_data_taxonomy](#data_taxonomy_service.create_data_taxonomy)
+  * [Data_taxonomy_service.delete_data_attribute](#data_taxonomy_service.delete_data_attribute)
+  * [Data_taxonomy_service.delete_data_attribute_binding](#data_taxonomy_service.delete_data_attribute_binding)
+  * [Data_taxonomy_service.delete_data_taxonomy](#data_taxonomy_service.delete_data_taxonomy)
+  * [Data_taxonomy_service.get_data_attribute](#data_taxonomy_service.get_data_attribute)
+  * [Data_taxonomy_service.get_data_attribute_binding](#data_taxonomy_service.get_data_attribute_binding)
+  * [Data_taxonomy_service.get_data_taxonomy](#data_taxonomy_service.get_data_taxonomy)
+  * [Data_taxonomy_service.list_data_attribute_bindings](#data_taxonomy_service.list_data_attribute_bindings)
+  * [Data_taxonomy_service.list_data_attributes](#data_taxonomy_service.list_data_attributes)
+  * [Data_taxonomy_service.list_data_taxonomies](#data_taxonomy_service.list_data_taxonomies)
+  * [Data_taxonomy_service.update_data_attribute](#data_taxonomy_service.update_data_attribute)
+  * [Data_taxonomy_service.update_data_attribute_binding](#data_taxonomy_service.update_data_attribute_binding)
+  * [Data_taxonomy_service.update_data_taxonomy](#data_taxonomy_service.update_data_taxonomy)
   * [Dataplex_service.cancel_job](#dataplex_service.cancel_job)
   * [Dataplex_service.create_asset](#dataplex_service.create_asset)
   * [Dataplex_service.create_environment](#dataplex_service.create_environment)
@@ -70,7 +85,6 @@
   * [Metadata_service.list_entities](#metadata_service.list_entities)
   * [Metadata_service.list_partitions](#metadata_service.list_partitions)
   * [Metadata_service.update_entity](#metadata_service.update_entity)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -353,6 +367,261 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.create_data_attribute
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.create_data_attribute_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_attribute_binding.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.create_data_taxonomy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.create_data_taxonomy.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.delete_data_attribute
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.delete_data_attribute_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_attribute_binding.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.delete_data_taxonomy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.delete_data_taxonomy.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.get_data_attribute
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.get_data_attribute_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_attribute_binding.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.get_data_taxonomy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.get_data_taxonomy.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.list_data_attribute_bindings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attribute_bindings.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.list_data_attributes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attributes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attributes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_attributes.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.list_data_taxonomies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.list_data_taxonomies.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.update_data_attribute
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.update_data_attribute_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_attribute_binding.js`
+
+
+-----
+
+
+
+
+### Data_taxonomy_service.update_data_taxonomy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_taxonomy_service.update_data_taxonomy.js`
 
 
 -----
@@ -1084,23 +1353,6 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-dataplex/samples/test/quickstart.js`
 
 
 

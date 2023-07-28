@@ -40,7 +40,7 @@ function main(parent, names) {
    *  A maximum of 1000 user links can be retrieved in a batch.
    *  Format: accounts/{accountId}/userLinks/{userLinkId}
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;

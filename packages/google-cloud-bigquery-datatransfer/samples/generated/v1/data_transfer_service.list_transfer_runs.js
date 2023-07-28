@@ -38,7 +38,7 @@ function main(parent) {
   /**
    *  When specified, only transfer runs with requested states are returned.
    */
-  // const states = 1234
+  // const states = [1,2,3,4]
   /**
    *  Pagination token, which can be used to request a specific page
    *  of `ListTransferRunsRequest` list results. For multiple-page

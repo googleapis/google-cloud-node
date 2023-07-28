@@ -50,7 +50,7 @@ function main() {
    *  'force_only' field ignores only the specified checks; other checks are
    *  still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  // const forceOnly = 1234
+  // const forceOnly = [1,2,3,4]
 
   // Imports the Serviceusage library
   const {ServiceUsageClient} = require('@google-cloud/service-usage').v1beta1;

@@ -36,7 +36,7 @@ function main() {
   /**
    *  The notes to create.
    */
-  // const notes = 1234
+  // const notes = [1,2,3,4]
 
   // Imports the Containeranalysis library
   const {GrafeasV1Beta1Client} = require('@google-cloud/containeranalysis').v1beta1;

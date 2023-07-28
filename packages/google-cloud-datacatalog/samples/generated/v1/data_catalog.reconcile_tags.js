@@ -48,7 +48,7 @@ function main(parent, tagTemplate) {
    *  `ReconcileTagsRequest`.
    *  The sole entry and each of its columns must be mentioned at most once.
    */
-  // const tags = 1234
+  // const tags = [1,2,3,4]
 
   // Imports the Datacatalog library
   const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;

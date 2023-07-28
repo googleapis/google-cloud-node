@@ -40,7 +40,7 @@ function main(name) {
   /**
    *  The input config for each single document in the batch process.
    */
-  // const inputConfigs = 1234
+  // const inputConfigs = [1,2,3,4]
   /**
    *  The overall output config for batch process.
    */

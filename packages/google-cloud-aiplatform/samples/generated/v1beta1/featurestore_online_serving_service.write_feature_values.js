@@ -41,7 +41,7 @@ function main(entityType, payloads) {
    *  Required. The entities to be written. Up to 100,000 feature values can be
    *  written across all `payloads`.
    */
-  // const payloads = 1234
+  // const payloads = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {FeaturestoreOnlineServingServiceClient} = require('@google-cloud/aiplatform').v1beta1;

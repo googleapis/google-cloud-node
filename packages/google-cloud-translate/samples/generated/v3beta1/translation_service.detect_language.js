@@ -65,7 +65,7 @@ function main(parent) {
    *  Label values are optional. Label keys must start with a letter.
    *  See https://cloud.google.com/translate/docs/labels for more information.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;

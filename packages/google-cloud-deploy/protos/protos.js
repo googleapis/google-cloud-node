@@ -2603,6 +2603,444 @@
                         return Strategy;
                     })();
     
+                    v1.Predeploy = (function() {
+    
+                        /**
+                         * Properties of a Predeploy.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPredeploy
+                         * @property {Array.<string>|null} [actions] Predeploy actions
+                         */
+    
+                        /**
+                         * Constructs a new Predeploy.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a Predeploy.
+                         * @implements IPredeploy
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPredeploy=} [properties] Properties to set
+                         */
+                        function Predeploy(properties) {
+                            this.actions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Predeploy actions.
+                         * @member {Array.<string>} actions
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @instance
+                         */
+                        Predeploy.prototype.actions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Predeploy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeploy=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.Predeploy} Predeploy instance
+                         */
+                        Predeploy.create = function create(properties) {
+                            return new Predeploy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Predeploy message. Does not implicitly {@link google.cloud.deploy.v1.Predeploy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeploy} message Predeploy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Predeploy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.actions != null && message.actions.length)
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Predeploy message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Predeploy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeploy} message Predeploy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Predeploy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Predeploy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.Predeploy} Predeploy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Predeploy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.Predeploy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.actions && message.actions.length))
+                                            message.actions = [];
+                                        message.actions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Predeploy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.Predeploy} Predeploy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Predeploy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Predeploy message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Predeploy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.actions != null && message.hasOwnProperty("actions")) {
+                                if (!Array.isArray(message.actions))
+                                    return "actions: array expected";
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    if (!$util.isString(message.actions[i]))
+                                        return "actions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Predeploy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.Predeploy} Predeploy
+                         */
+                        Predeploy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.Predeploy)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.Predeploy();
+                            if (object.actions) {
+                                if (!Array.isArray(object.actions))
+                                    throw TypeError(".google.cloud.deploy.v1.Predeploy.actions: array expected");
+                                message.actions = [];
+                                for (var i = 0; i < object.actions.length; ++i)
+                                    message.actions[i] = String(object.actions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Predeploy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.Predeploy} message Predeploy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Predeploy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.actions = [];
+                            if (message.actions && message.actions.length) {
+                                object.actions = [];
+                                for (var j = 0; j < message.actions.length; ++j)
+                                    object.actions[j] = message.actions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Predeploy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Predeploy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Predeploy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.Predeploy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Predeploy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.Predeploy";
+                        };
+    
+                        return Predeploy;
+                    })();
+    
+                    v1.Postdeploy = (function() {
+    
+                        /**
+                         * Properties of a Postdeploy.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPostdeploy
+                         * @property {Array.<string>|null} [actions] Postdeploy actions
+                         */
+    
+                        /**
+                         * Constructs a new Postdeploy.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a Postdeploy.
+                         * @implements IPostdeploy
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPostdeploy=} [properties] Properties to set
+                         */
+                        function Postdeploy(properties) {
+                            this.actions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Postdeploy actions.
+                         * @member {Array.<string>} actions
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @instance
+                         */
+                        Postdeploy.prototype.actions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Postdeploy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeploy=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.Postdeploy} Postdeploy instance
+                         */
+                        Postdeploy.create = function create(properties) {
+                            return new Postdeploy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Postdeploy message. Does not implicitly {@link google.cloud.deploy.v1.Postdeploy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeploy} message Postdeploy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Postdeploy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.actions != null && message.actions.length)
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Postdeploy message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Postdeploy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeploy} message Postdeploy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Postdeploy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Postdeploy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.Postdeploy} Postdeploy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Postdeploy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.Postdeploy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.actions && message.actions.length))
+                                            message.actions = [];
+                                        message.actions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Postdeploy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.Postdeploy} Postdeploy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Postdeploy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Postdeploy message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Postdeploy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.actions != null && message.hasOwnProperty("actions")) {
+                                if (!Array.isArray(message.actions))
+                                    return "actions: array expected";
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    if (!$util.isString(message.actions[i]))
+                                        return "actions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Postdeploy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.Postdeploy} Postdeploy
+                         */
+                        Postdeploy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.Postdeploy)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.Postdeploy();
+                            if (object.actions) {
+                                if (!Array.isArray(object.actions))
+                                    throw TypeError(".google.cloud.deploy.v1.Postdeploy.actions: array expected");
+                                message.actions = [];
+                                for (var i = 0; i < object.actions.length; ++i)
+                                    message.actions[i] = String(object.actions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Postdeploy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {google.cloud.deploy.v1.Postdeploy} message Postdeploy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Postdeploy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.actions = [];
+                            if (message.actions && message.actions.length) {
+                                object.actions = [];
+                                for (var j = 0; j < message.actions.length; ++j)
+                                    object.actions[j] = message.actions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Postdeploy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Postdeploy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Postdeploy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.Postdeploy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Postdeploy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.Postdeploy";
+                        };
+    
+                        return Postdeploy;
+                    })();
+    
                     v1.Standard = (function() {
     
                         /**
@@ -2610,6 +3048,8 @@
                          * @memberof google.cloud.deploy.v1
                          * @interface IStandard
                          * @property {boolean|null} [verify] Standard verify
+                         * @property {google.cloud.deploy.v1.IPredeploy|null} [predeploy] Standard predeploy
+                         * @property {google.cloud.deploy.v1.IPostdeploy|null} [postdeploy] Standard postdeploy
                          */
     
                         /**
@@ -2634,6 +3074,22 @@
                          * @instance
                          */
                         Standard.prototype.verify = false;
+    
+                        /**
+                         * Standard predeploy.
+                         * @member {google.cloud.deploy.v1.IPredeploy|null|undefined} predeploy
+                         * @memberof google.cloud.deploy.v1.Standard
+                         * @instance
+                         */
+                        Standard.prototype.predeploy = null;
+    
+                        /**
+                         * Standard postdeploy.
+                         * @member {google.cloud.deploy.v1.IPostdeploy|null|undefined} postdeploy
+                         * @memberof google.cloud.deploy.v1.Standard
+                         * @instance
+                         */
+                        Standard.prototype.postdeploy = null;
     
                         /**
                          * Creates a new Standard instance using the specified properties.
@@ -2661,6 +3117,10 @@
                                 writer = $Writer.create();
                             if (message.verify != null && Object.hasOwnProperty.call(message, "verify"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.verify);
+                            if (message.predeploy != null && Object.hasOwnProperty.call(message, "predeploy"))
+                                $root.google.cloud.deploy.v1.Predeploy.encode(message.predeploy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.postdeploy != null && Object.hasOwnProperty.call(message, "postdeploy"))
+                                $root.google.cloud.deploy.v1.Postdeploy.encode(message.postdeploy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -2697,6 +3157,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.verify = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.predeploy = $root.google.cloud.deploy.v1.Predeploy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -2737,6 +3205,16 @@
                             if (message.verify != null && message.hasOwnProperty("verify"))
                                 if (typeof message.verify !== "boolean")
                                     return "verify: boolean expected";
+                            if (message.predeploy != null && message.hasOwnProperty("predeploy")) {
+                                var error = $root.google.cloud.deploy.v1.Predeploy.verify(message.predeploy);
+                                if (error)
+                                    return "predeploy." + error;
+                            }
+                            if (message.postdeploy != null && message.hasOwnProperty("postdeploy")) {
+                                var error = $root.google.cloud.deploy.v1.Postdeploy.verify(message.postdeploy);
+                                if (error)
+                                    return "postdeploy." + error;
+                            }
                             return null;
                         };
     
@@ -2754,6 +3232,16 @@
                             var message = new $root.google.cloud.deploy.v1.Standard();
                             if (object.verify != null)
                                 message.verify = Boolean(object.verify);
+                            if (object.predeploy != null) {
+                                if (typeof object.predeploy !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Standard.predeploy: object expected");
+                                message.predeploy = $root.google.cloud.deploy.v1.Predeploy.fromObject(object.predeploy);
+                            }
+                            if (object.postdeploy != null) {
+                                if (typeof object.postdeploy !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Standard.postdeploy: object expected");
+                                message.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.fromObject(object.postdeploy);
+                            }
                             return message;
                         };
     
@@ -2770,10 +3258,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.verify = false;
+                                object.predeploy = null;
+                                object.postdeploy = null;
+                            }
                             if (message.verify != null && message.hasOwnProperty("verify"))
                                 object.verify = message.verify;
+                            if (message.predeploy != null && message.hasOwnProperty("predeploy"))
+                                object.predeploy = $root.google.cloud.deploy.v1.Predeploy.toObject(message.predeploy, options);
+                            if (message.postdeploy != null && message.hasOwnProperty("postdeploy"))
+                                object.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.toObject(message.postdeploy, options);
                             return object;
                         };
     
@@ -3105,6 +3600,8 @@
                          * @interface ICanaryDeployment
                          * @property {Array.<number>|null} [percentages] CanaryDeployment percentages
                          * @property {boolean|null} [verify] CanaryDeployment verify
+                         * @property {google.cloud.deploy.v1.IPredeploy|null} [predeploy] CanaryDeployment predeploy
+                         * @property {google.cloud.deploy.v1.IPostdeploy|null} [postdeploy] CanaryDeployment postdeploy
                          */
     
                         /**
@@ -3140,6 +3637,22 @@
                         CanaryDeployment.prototype.verify = false;
     
                         /**
+                         * CanaryDeployment predeploy.
+                         * @member {google.cloud.deploy.v1.IPredeploy|null|undefined} predeploy
+                         * @memberof google.cloud.deploy.v1.CanaryDeployment
+                         * @instance
+                         */
+                        CanaryDeployment.prototype.predeploy = null;
+    
+                        /**
+                         * CanaryDeployment postdeploy.
+                         * @member {google.cloud.deploy.v1.IPostdeploy|null|undefined} postdeploy
+                         * @memberof google.cloud.deploy.v1.CanaryDeployment
+                         * @instance
+                         */
+                        CanaryDeployment.prototype.postdeploy = null;
+    
+                        /**
                          * Creates a new CanaryDeployment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.CanaryDeployment
@@ -3171,6 +3684,10 @@
                             }
                             if (message.verify != null && Object.hasOwnProperty.call(message, "verify"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.verify);
+                            if (message.predeploy != null && Object.hasOwnProperty.call(message, "predeploy"))
+                                $root.google.cloud.deploy.v1.Predeploy.encode(message.predeploy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.postdeploy != null && Object.hasOwnProperty.call(message, "postdeploy"))
+                                $root.google.cloud.deploy.v1.Postdeploy.encode(message.postdeploy, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -3220,6 +3737,14 @@
                                         message.verify = reader.bool();
                                         break;
                                     }
+                                case 3: {
+                                        message.predeploy = $root.google.cloud.deploy.v1.Predeploy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3265,6 +3790,16 @@
                             if (message.verify != null && message.hasOwnProperty("verify"))
                                 if (typeof message.verify !== "boolean")
                                     return "verify: boolean expected";
+                            if (message.predeploy != null && message.hasOwnProperty("predeploy")) {
+                                var error = $root.google.cloud.deploy.v1.Predeploy.verify(message.predeploy);
+                                if (error)
+                                    return "predeploy." + error;
+                            }
+                            if (message.postdeploy != null && message.hasOwnProperty("postdeploy")) {
+                                var error = $root.google.cloud.deploy.v1.Postdeploy.verify(message.postdeploy);
+                                if (error)
+                                    return "postdeploy." + error;
+                            }
                             return null;
                         };
     
@@ -3289,6 +3824,16 @@
                             }
                             if (object.verify != null)
                                 message.verify = Boolean(object.verify);
+                            if (object.predeploy != null) {
+                                if (typeof object.predeploy !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CanaryDeployment.predeploy: object expected");
+                                message.predeploy = $root.google.cloud.deploy.v1.Predeploy.fromObject(object.predeploy);
+                            }
+                            if (object.postdeploy != null) {
+                                if (typeof object.postdeploy !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.CanaryDeployment.postdeploy: object expected");
+                                message.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.fromObject(object.postdeploy);
+                            }
                             return message;
                         };
     
@@ -3307,8 +3852,11 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.percentages = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.verify = false;
+                                object.predeploy = null;
+                                object.postdeploy = null;
+                            }
                             if (message.percentages && message.percentages.length) {
                                 object.percentages = [];
                                 for (var j = 0; j < message.percentages.length; ++j)
@@ -3316,6 +3864,10 @@
                             }
                             if (message.verify != null && message.hasOwnProperty("verify"))
                                 object.verify = message.verify;
+                            if (message.predeploy != null && message.hasOwnProperty("predeploy"))
+                                object.predeploy = $root.google.cloud.deploy.v1.Predeploy.toObject(message.predeploy, options);
+                            if (message.postdeploy != null && message.hasOwnProperty("postdeploy"))
+                                object.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.toObject(message.postdeploy, options);
                             return object;
                         };
     
@@ -3579,6 +4131,8 @@
                              * @property {number|null} [percentage] PhaseConfig percentage
                              * @property {Array.<string>|null} [profiles] PhaseConfig profiles
                              * @property {boolean|null} [verify] PhaseConfig verify
+                             * @property {google.cloud.deploy.v1.IPredeploy|null} [predeploy] PhaseConfig predeploy
+                             * @property {google.cloud.deploy.v1.IPostdeploy|null} [postdeploy] PhaseConfig postdeploy
                              */
     
                             /**
@@ -3630,6 +4184,22 @@
                             PhaseConfig.prototype.verify = false;
     
                             /**
+                             * PhaseConfig predeploy.
+                             * @member {google.cloud.deploy.v1.IPredeploy|null|undefined} predeploy
+                             * @memberof google.cloud.deploy.v1.CustomCanaryDeployment.PhaseConfig
+                             * @instance
+                             */
+                            PhaseConfig.prototype.predeploy = null;
+    
+                            /**
+                             * PhaseConfig postdeploy.
+                             * @member {google.cloud.deploy.v1.IPostdeploy|null|undefined} postdeploy
+                             * @memberof google.cloud.deploy.v1.CustomCanaryDeployment.PhaseConfig
+                             * @instance
+                             */
+                            PhaseConfig.prototype.postdeploy = null;
+    
+                            /**
                              * Creates a new PhaseConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.deploy.v1.CustomCanaryDeployment.PhaseConfig
@@ -3662,6 +4232,10 @@
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.profiles[i]);
                                 if (message.verify != null && Object.hasOwnProperty.call(message, "verify"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.verify);
+                                if (message.predeploy != null && Object.hasOwnProperty.call(message, "predeploy"))
+                                    $root.google.cloud.deploy.v1.Predeploy.encode(message.predeploy, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.postdeploy != null && Object.hasOwnProperty.call(message, "postdeploy"))
+                                    $root.google.cloud.deploy.v1.Postdeploy.encode(message.postdeploy, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3712,6 +4286,14 @@
                                         }
                                     case 4: {
                                             message.verify = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.predeploy = $root.google.cloud.deploy.v1.Predeploy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -3765,6 +4347,16 @@
                                 if (message.verify != null && message.hasOwnProperty("verify"))
                                     if (typeof message.verify !== "boolean")
                                         return "verify: boolean expected";
+                                if (message.predeploy != null && message.hasOwnProperty("predeploy")) {
+                                    var error = $root.google.cloud.deploy.v1.Predeploy.verify(message.predeploy);
+                                    if (error)
+                                        return "predeploy." + error;
+                                }
+                                if (message.postdeploy != null && message.hasOwnProperty("postdeploy")) {
+                                    var error = $root.google.cloud.deploy.v1.Postdeploy.verify(message.postdeploy);
+                                    if (error)
+                                        return "postdeploy." + error;
+                                }
                                 return null;
                             };
     
@@ -3793,6 +4385,16 @@
                                 }
                                 if (object.verify != null)
                                     message.verify = Boolean(object.verify);
+                                if (object.predeploy != null) {
+                                    if (typeof object.predeploy !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.CustomCanaryDeployment.PhaseConfig.predeploy: object expected");
+                                    message.predeploy = $root.google.cloud.deploy.v1.Predeploy.fromObject(object.predeploy);
+                                }
+                                if (object.postdeploy != null) {
+                                    if (typeof object.postdeploy !== "object")
+                                        throw TypeError(".google.cloud.deploy.v1.CustomCanaryDeployment.PhaseConfig.postdeploy: object expected");
+                                    message.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.fromObject(object.postdeploy);
+                                }
                                 return message;
                             };
     
@@ -3815,6 +4417,8 @@
                                     object.phaseId = "";
                                     object.percentage = 0;
                                     object.verify = false;
+                                    object.predeploy = null;
+                                    object.postdeploy = null;
                                 }
                                 if (message.phaseId != null && message.hasOwnProperty("phaseId"))
                                     object.phaseId = message.phaseId;
@@ -3827,6 +4431,10 @@
                                 }
                                 if (message.verify != null && message.hasOwnProperty("verify"))
                                     object.verify = message.verify;
+                                if (message.predeploy != null && message.hasOwnProperty("predeploy"))
+                                    object.predeploy = $root.google.cloud.deploy.v1.Predeploy.toObject(message.predeploy, options);
+                                if (message.postdeploy != null && message.hasOwnProperty("postdeploy"))
+                                    object.postdeploy = $root.google.cloud.deploy.v1.Postdeploy.toObject(message.postdeploy, options);
                                 return object;
                             };
     
@@ -8832,6 +9440,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                             }
@@ -8908,6 +9518,14 @@
                                     case "VERIFY":
                                     case 3:
                                         message.usages[i] = 3;
+                                        break;
+                                    case "PREDEPLOY":
+                                    case 4:
+                                        message.usages[i] = 4;
+                                        break;
+                                    case "POSTDEPLOY":
+                                    case 5:
+                                        message.usages[i] = 5;
                                         break;
                                     }
                             }
@@ -9016,6 +9634,8 @@
                          * @property {number} RENDER=1 RENDER value
                          * @property {number} DEPLOY=2 DEPLOY value
                          * @property {number} VERIFY=3 VERIFY value
+                         * @property {number} PREDEPLOY=4 PREDEPLOY value
+                         * @property {number} POSTDEPLOY=5 POSTDEPLOY value
                          */
                         ExecutionConfig.ExecutionEnvironmentUsage = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9023,6 +9643,8 @@
                             values[valuesById[1] = "RENDER"] = 1;
                             values[valuesById[2] = "DEPLOY"] = 2;
                             values[valuesById[3] = "VERIFY"] = 3;
+                            values[valuesById[4] = "PREDEPLOY"] = 4;
+                            values[valuesById[5] = "POSTDEPLOY"] = 5;
                             return values;
                         })();
     
@@ -13229,6 +13851,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 5:
                                         break;
                                     }
                                 if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
@@ -13302,6 +13925,10 @@
                                 case "CLOUD_BUILD_REQUEST_FAILED":
                                 case 3:
                                     message.failureCause = 3;
+                                    break;
+                                case "CUSTOM_ACTION_NOT_FOUND":
+                                case 5:
+                                    message.failureCause = 5;
                                     break;
                                 }
                                 if (object.failureMessage != null)
@@ -13394,6 +14021,7 @@
                              * @property {number} CLOUD_BUILD_UNAVAILABLE=1 CLOUD_BUILD_UNAVAILABLE value
                              * @property {number} EXECUTION_FAILED=2 EXECUTION_FAILED value
                              * @property {number} CLOUD_BUILD_REQUEST_FAILED=3 CLOUD_BUILD_REQUEST_FAILED value
+                             * @property {number} CUSTOM_ACTION_NOT_FOUND=5 CUSTOM_ACTION_NOT_FOUND value
                              */
                             TargetRender.FailureCause = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -13401,6 +14029,7 @@
                                 values[valuesById[1] = "CLOUD_BUILD_UNAVAILABLE"] = 1;
                                 values[valuesById[2] = "EXECUTION_FAILED"] = 2;
                                 values[valuesById[3] = "CLOUD_BUILD_REQUEST_FAILED"] = 3;
+                                values[valuesById[5] = "CUSTOM_ACTION_NOT_FOUND"] = 5;
                                 return values;
                             })();
     
@@ -18797,6 +19426,8 @@
                          * @interface IDeploymentJobs
                          * @property {google.cloud.deploy.v1.IJob|null} [deployJob] DeploymentJobs deployJob
                          * @property {google.cloud.deploy.v1.IJob|null} [verifyJob] DeploymentJobs verifyJob
+                         * @property {google.cloud.deploy.v1.IJob|null} [predeployJob] DeploymentJobs predeployJob
+                         * @property {google.cloud.deploy.v1.IJob|null} [postdeployJob] DeploymentJobs postdeployJob
                          */
     
                         /**
@@ -18831,6 +19462,22 @@
                         DeploymentJobs.prototype.verifyJob = null;
     
                         /**
+                         * DeploymentJobs predeployJob.
+                         * @member {google.cloud.deploy.v1.IJob|null|undefined} predeployJob
+                         * @memberof google.cloud.deploy.v1.DeploymentJobs
+                         * @instance
+                         */
+                        DeploymentJobs.prototype.predeployJob = null;
+    
+                        /**
+                         * DeploymentJobs postdeployJob.
+                         * @member {google.cloud.deploy.v1.IJob|null|undefined} postdeployJob
+                         * @memberof google.cloud.deploy.v1.DeploymentJobs
+                         * @instance
+                         */
+                        DeploymentJobs.prototype.postdeployJob = null;
+    
+                        /**
                          * Creates a new DeploymentJobs instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.DeploymentJobs
@@ -18858,6 +19505,10 @@
                                 $root.google.cloud.deploy.v1.Job.encode(message.deployJob, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.verifyJob != null && Object.hasOwnProperty.call(message, "verifyJob"))
                                 $root.google.cloud.deploy.v1.Job.encode(message.verifyJob, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.predeployJob != null && Object.hasOwnProperty.call(message, "predeployJob"))
+                                $root.google.cloud.deploy.v1.Job.encode(message.predeployJob, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.postdeployJob != null && Object.hasOwnProperty.call(message, "postdeployJob"))
+                                $root.google.cloud.deploy.v1.Job.encode(message.postdeployJob, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -18898,6 +19549,14 @@
                                     }
                                 case 2: {
                                         message.verifyJob = $root.google.cloud.deploy.v1.Job.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.predeployJob = $root.google.cloud.deploy.v1.Job.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.postdeployJob = $root.google.cloud.deploy.v1.Job.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18945,6 +19604,16 @@
                                 if (error)
                                     return "verifyJob." + error;
                             }
+                            if (message.predeployJob != null && message.hasOwnProperty("predeployJob")) {
+                                var error = $root.google.cloud.deploy.v1.Job.verify(message.predeployJob);
+                                if (error)
+                                    return "predeployJob." + error;
+                            }
+                            if (message.postdeployJob != null && message.hasOwnProperty("postdeployJob")) {
+                                var error = $root.google.cloud.deploy.v1.Job.verify(message.postdeployJob);
+                                if (error)
+                                    return "postdeployJob." + error;
+                            }
                             return null;
                         };
     
@@ -18970,6 +19639,16 @@
                                     throw TypeError(".google.cloud.deploy.v1.DeploymentJobs.verifyJob: object expected");
                                 message.verifyJob = $root.google.cloud.deploy.v1.Job.fromObject(object.verifyJob);
                             }
+                            if (object.predeployJob != null) {
+                                if (typeof object.predeployJob !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeploymentJobs.predeployJob: object expected");
+                                message.predeployJob = $root.google.cloud.deploy.v1.Job.fromObject(object.predeployJob);
+                            }
+                            if (object.postdeployJob != null) {
+                                if (typeof object.postdeployJob !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeploymentJobs.postdeployJob: object expected");
+                                message.postdeployJob = $root.google.cloud.deploy.v1.Job.fromObject(object.postdeployJob);
+                            }
                             return message;
                         };
     
@@ -18989,11 +19668,17 @@
                             if (options.defaults) {
                                 object.deployJob = null;
                                 object.verifyJob = null;
+                                object.predeployJob = null;
+                                object.postdeployJob = null;
                             }
                             if (message.deployJob != null && message.hasOwnProperty("deployJob"))
                                 object.deployJob = $root.google.cloud.deploy.v1.Job.toObject(message.deployJob, options);
                             if (message.verifyJob != null && message.hasOwnProperty("verifyJob"))
                                 object.verifyJob = $root.google.cloud.deploy.v1.Job.toObject(message.verifyJob, options);
+                            if (message.predeployJob != null && message.hasOwnProperty("predeployJob"))
+                                object.predeployJob = $root.google.cloud.deploy.v1.Job.toObject(message.predeployJob, options);
+                            if (message.postdeployJob != null && message.hasOwnProperty("postdeployJob"))
+                                object.postdeployJob = $root.google.cloud.deploy.v1.Job.toObject(message.postdeployJob, options);
                             return object;
                         };
     
@@ -19307,6 +19992,8 @@
                          * @property {string|null} [jobRun] Job jobRun
                          * @property {google.cloud.deploy.v1.IDeployJob|null} [deployJob] Job deployJob
                          * @property {google.cloud.deploy.v1.IVerifyJob|null} [verifyJob] Job verifyJob
+                         * @property {google.cloud.deploy.v1.IPredeployJob|null} [predeployJob] Job predeployJob
+                         * @property {google.cloud.deploy.v1.IPostdeployJob|null} [postdeployJob] Job postdeployJob
                          * @property {google.cloud.deploy.v1.ICreateChildRolloutJob|null} [createChildRolloutJob] Job createChildRolloutJob
                          * @property {google.cloud.deploy.v1.IAdvanceChildRolloutJob|null} [advanceChildRolloutJob] Job advanceChildRolloutJob
                          */
@@ -19375,6 +20062,22 @@
                         Job.prototype.verifyJob = null;
     
                         /**
+                         * Job predeployJob.
+                         * @member {google.cloud.deploy.v1.IPredeployJob|null|undefined} predeployJob
+                         * @memberof google.cloud.deploy.v1.Job
+                         * @instance
+                         */
+                        Job.prototype.predeployJob = null;
+    
+                        /**
+                         * Job postdeployJob.
+                         * @member {google.cloud.deploy.v1.IPostdeployJob|null|undefined} postdeployJob
+                         * @memberof google.cloud.deploy.v1.Job
+                         * @instance
+                         */
+                        Job.prototype.postdeployJob = null;
+    
+                        /**
                          * Job createChildRolloutJob.
                          * @member {google.cloud.deploy.v1.ICreateChildRolloutJob|null|undefined} createChildRolloutJob
                          * @memberof google.cloud.deploy.v1.Job
@@ -19395,12 +20098,12 @@
     
                         /**
                          * Job jobType.
-                         * @member {"deployJob"|"verifyJob"|"createChildRolloutJob"|"advanceChildRolloutJob"|undefined} jobType
+                         * @member {"deployJob"|"verifyJob"|"predeployJob"|"postdeployJob"|"createChildRolloutJob"|"advanceChildRolloutJob"|undefined} jobType
                          * @memberof google.cloud.deploy.v1.Job
                          * @instance
                          */
                         Object.defineProperty(Job.prototype, "jobType", {
-                            get: $util.oneOfGetter($oneOfFields = ["deployJob", "verifyJob", "createChildRolloutJob", "advanceChildRolloutJob"]),
+                            get: $util.oneOfGetter($oneOfFields = ["deployJob", "verifyJob", "predeployJob", "postdeployJob", "createChildRolloutJob", "advanceChildRolloutJob"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -19444,6 +20147,10 @@
                                 $root.google.cloud.deploy.v1.AdvanceChildRolloutJob.encode(message.advanceChildRolloutJob, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.skipMessage != null && Object.hasOwnProperty.call(message, "skipMessage"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.skipMessage);
+                            if (message.predeployJob != null && Object.hasOwnProperty.call(message, "predeployJob"))
+                                $root.google.cloud.deploy.v1.PredeployJob.encode(message.predeployJob, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.postdeployJob != null && Object.hasOwnProperty.call(message, "postdeployJob"))
+                                $root.google.cloud.deploy.v1.PostdeployJob.encode(message.postdeployJob, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -19500,6 +20207,14 @@
                                     }
                                 case 5: {
                                         message.verifyJob = $root.google.cloud.deploy.v1.VerifyJob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.predeployJob = $root.google.cloud.deploy.v1.PredeployJob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.postdeployJob = $root.google.cloud.deploy.v1.PostdeployJob.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -19586,6 +20301,26 @@
                                     var error = $root.google.cloud.deploy.v1.VerifyJob.verify(message.verifyJob);
                                     if (error)
                                         return "verifyJob." + error;
+                                }
+                            }
+                            if (message.predeployJob != null && message.hasOwnProperty("predeployJob")) {
+                                if (properties.jobType === 1)
+                                    return "jobType: multiple values";
+                                properties.jobType = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.PredeployJob.verify(message.predeployJob);
+                                    if (error)
+                                        return "predeployJob." + error;
+                                }
+                            }
+                            if (message.postdeployJob != null && message.hasOwnProperty("postdeployJob")) {
+                                if (properties.jobType === 1)
+                                    return "jobType: multiple values";
+                                properties.jobType = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.PostdeployJob.verify(message.postdeployJob);
+                                    if (error)
+                                        return "postdeployJob." + error;
                                 }
                             }
                             if (message.createChildRolloutJob != null && message.hasOwnProperty("createChildRolloutJob")) {
@@ -19683,6 +20418,16 @@
                                     throw TypeError(".google.cloud.deploy.v1.Job.verifyJob: object expected");
                                 message.verifyJob = $root.google.cloud.deploy.v1.VerifyJob.fromObject(object.verifyJob);
                             }
+                            if (object.predeployJob != null) {
+                                if (typeof object.predeployJob !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Job.predeployJob: object expected");
+                                message.predeployJob = $root.google.cloud.deploy.v1.PredeployJob.fromObject(object.predeployJob);
+                            }
+                            if (object.postdeployJob != null) {
+                                if (typeof object.postdeployJob !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.Job.postdeployJob: object expected");
+                                message.postdeployJob = $root.google.cloud.deploy.v1.PostdeployJob.fromObject(object.postdeployJob);
+                            }
                             if (object.createChildRolloutJob != null) {
                                 if (typeof object.createChildRolloutJob !== "object")
                                     throw TypeError(".google.cloud.deploy.v1.Job.createChildRolloutJob: object expected");
@@ -19743,6 +20488,16 @@
                             }
                             if (message.skipMessage != null && message.hasOwnProperty("skipMessage"))
                                 object.skipMessage = message.skipMessage;
+                            if (message.predeployJob != null && message.hasOwnProperty("predeployJob")) {
+                                object.predeployJob = $root.google.cloud.deploy.v1.PredeployJob.toObject(message.predeployJob, options);
+                                if (options.oneofs)
+                                    object.jobType = "predeployJob";
+                            }
+                            if (message.postdeployJob != null && message.hasOwnProperty("postdeployJob")) {
+                                object.postdeployJob = $root.google.cloud.deploy.v1.PostdeployJob.toObject(message.postdeployJob, options);
+                                if (options.oneofs)
+                                    object.jobType = "postdeployJob";
+                            }
                             return object;
                         };
     
@@ -20151,6 +20906,444 @@
                         };
     
                         return VerifyJob;
+                    })();
+    
+                    v1.PredeployJob = (function() {
+    
+                        /**
+                         * Properties of a PredeployJob.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPredeployJob
+                         * @property {Array.<string>|null} [actions] PredeployJob actions
+                         */
+    
+                        /**
+                         * Constructs a new PredeployJob.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a PredeployJob.
+                         * @implements IPredeployJob
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPredeployJob=} [properties] Properties to set
+                         */
+                        function PredeployJob(properties) {
+                            this.actions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PredeployJob actions.
+                         * @member {Array.<string>} actions
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @instance
+                         */
+                        PredeployJob.prototype.actions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PredeployJob instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeployJob=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.PredeployJob} PredeployJob instance
+                         */
+                        PredeployJob.create = function create(properties) {
+                            return new PredeployJob(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredeployJob message. Does not implicitly {@link google.cloud.deploy.v1.PredeployJob.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeployJob} message PredeployJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredeployJob.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.actions != null && message.actions.length)
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredeployJob message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PredeployJob.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeployJob} message PredeployJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredeployJob.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredeployJob message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.PredeployJob} PredeployJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredeployJob.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.PredeployJob();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.actions && message.actions.length))
+                                            message.actions = [];
+                                        message.actions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredeployJob message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.PredeployJob} PredeployJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredeployJob.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredeployJob message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredeployJob.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.actions != null && message.hasOwnProperty("actions")) {
+                                if (!Array.isArray(message.actions))
+                                    return "actions: array expected";
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    if (!$util.isString(message.actions[i]))
+                                        return "actions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredeployJob message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.PredeployJob} PredeployJob
+                         */
+                        PredeployJob.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.PredeployJob)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.PredeployJob();
+                            if (object.actions) {
+                                if (!Array.isArray(object.actions))
+                                    throw TypeError(".google.cloud.deploy.v1.PredeployJob.actions: array expected");
+                                message.actions = [];
+                                for (var i = 0; i < object.actions.length; ++i)
+                                    message.actions[i] = String(object.actions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredeployJob message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.PredeployJob} message PredeployJob
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredeployJob.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.actions = [];
+                            if (message.actions && message.actions.length) {
+                                object.actions = [];
+                                for (var j = 0; j < message.actions.length; ++j)
+                                    object.actions[j] = message.actions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PredeployJob to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredeployJob.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PredeployJob
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.PredeployJob
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PredeployJob.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.PredeployJob";
+                        };
+    
+                        return PredeployJob;
+                    })();
+    
+                    v1.PostdeployJob = (function() {
+    
+                        /**
+                         * Properties of a PostdeployJob.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPostdeployJob
+                         * @property {Array.<string>|null} [actions] PostdeployJob actions
+                         */
+    
+                        /**
+                         * Constructs a new PostdeployJob.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a PostdeployJob.
+                         * @implements IPostdeployJob
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPostdeployJob=} [properties] Properties to set
+                         */
+                        function PostdeployJob(properties) {
+                            this.actions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostdeployJob actions.
+                         * @member {Array.<string>} actions
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @instance
+                         */
+                        PostdeployJob.prototype.actions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PostdeployJob instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeployJob=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.PostdeployJob} PostdeployJob instance
+                         */
+                        PostdeployJob.create = function create(properties) {
+                            return new PostdeployJob(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostdeployJob message. Does not implicitly {@link google.cloud.deploy.v1.PostdeployJob.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeployJob} message PostdeployJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostdeployJob.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.actions != null && message.actions.length)
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostdeployJob message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PostdeployJob.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeployJob} message PostdeployJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostdeployJob.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostdeployJob message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.PostdeployJob} PostdeployJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostdeployJob.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.PostdeployJob();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.actions && message.actions.length))
+                                            message.actions = [];
+                                        message.actions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostdeployJob message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.PostdeployJob} PostdeployJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostdeployJob.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostdeployJob message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostdeployJob.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.actions != null && message.hasOwnProperty("actions")) {
+                                if (!Array.isArray(message.actions))
+                                    return "actions: array expected";
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    if (!$util.isString(message.actions[i]))
+                                        return "actions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostdeployJob message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.PostdeployJob} PostdeployJob
+                         */
+                        PostdeployJob.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.PostdeployJob)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.PostdeployJob();
+                            if (object.actions) {
+                                if (!Array.isArray(object.actions))
+                                    throw TypeError(".google.cloud.deploy.v1.PostdeployJob.actions: array expected");
+                                message.actions = [];
+                                for (var i = 0; i < object.actions.length; ++i)
+                                    message.actions[i] = String(object.actions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostdeployJob message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {google.cloud.deploy.v1.PostdeployJob} message PostdeployJob
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostdeployJob.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.actions = [];
+                            if (message.actions && message.actions.length) {
+                                object.actions = [];
+                                for (var j = 0; j < message.actions.length; ++j)
+                                    object.actions[j] = message.actions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostdeployJob to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostdeployJob.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostdeployJob
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.PostdeployJob
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostdeployJob.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.PostdeployJob";
+                        };
+    
+                        return PostdeployJob;
                     })();
     
                     v1.CreateChildRolloutJob = (function() {
@@ -24392,6 +25585,8 @@
                          * @property {google.cloud.deploy.v1.JobRun.State|null} [state] JobRun state
                          * @property {google.cloud.deploy.v1.IDeployJobRun|null} [deployJobRun] JobRun deployJobRun
                          * @property {google.cloud.deploy.v1.IVerifyJobRun|null} [verifyJobRun] JobRun verifyJobRun
+                         * @property {google.cloud.deploy.v1.IPredeployJobRun|null} [predeployJobRun] JobRun predeployJobRun
+                         * @property {google.cloud.deploy.v1.IPostdeployJobRun|null} [postdeployJobRun] JobRun postdeployJobRun
                          * @property {google.cloud.deploy.v1.ICreateChildRolloutJobRun|null} [createChildRolloutJobRun] JobRun createChildRolloutJobRun
                          * @property {google.cloud.deploy.v1.IAdvanceChildRolloutJobRun|null} [advanceChildRolloutJobRun] JobRun advanceChildRolloutJobRun
                          * @property {string|null} [etag] JobRun etag
@@ -24493,6 +25688,22 @@
                         JobRun.prototype.verifyJobRun = null;
     
                         /**
+                         * JobRun predeployJobRun.
+                         * @member {google.cloud.deploy.v1.IPredeployJobRun|null|undefined} predeployJobRun
+                         * @memberof google.cloud.deploy.v1.JobRun
+                         * @instance
+                         */
+                        JobRun.prototype.predeployJobRun = null;
+    
+                        /**
+                         * JobRun postdeployJobRun.
+                         * @member {google.cloud.deploy.v1.IPostdeployJobRun|null|undefined} postdeployJobRun
+                         * @memberof google.cloud.deploy.v1.JobRun
+                         * @instance
+                         */
+                        JobRun.prototype.postdeployJobRun = null;
+    
+                        /**
                          * JobRun createChildRolloutJobRun.
                          * @member {google.cloud.deploy.v1.ICreateChildRolloutJobRun|null|undefined} createChildRolloutJobRun
                          * @memberof google.cloud.deploy.v1.JobRun
@@ -24521,12 +25732,12 @@
     
                         /**
                          * JobRun jobRun.
-                         * @member {"deployJobRun"|"verifyJobRun"|"createChildRolloutJobRun"|"advanceChildRolloutJobRun"|undefined} jobRun
+                         * @member {"deployJobRun"|"verifyJobRun"|"predeployJobRun"|"postdeployJobRun"|"createChildRolloutJobRun"|"advanceChildRolloutJobRun"|undefined} jobRun
                          * @memberof google.cloud.deploy.v1.JobRun
                          * @instance
                          */
                         Object.defineProperty(JobRun.prototype, "jobRun", {
-                            get: $util.oneOfGetter($oneOfFields = ["deployJobRun", "verifyJobRun", "createChildRolloutJobRun", "advanceChildRolloutJobRun"]),
+                            get: $util.oneOfGetter($oneOfFields = ["deployJobRun", "verifyJobRun", "predeployJobRun", "postdeployJobRun", "createChildRolloutJobRun", "advanceChildRolloutJobRun"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -24580,6 +25791,10 @@
                                 $root.google.cloud.deploy.v1.CreateChildRolloutJobRun.encode(message.createChildRolloutJobRun, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.advanceChildRolloutJobRun != null && Object.hasOwnProperty.call(message, "advanceChildRolloutJobRun"))
                                 $root.google.cloud.deploy.v1.AdvanceChildRolloutJobRun.encode(message.advanceChildRolloutJobRun, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.predeployJobRun != null && Object.hasOwnProperty.call(message, "predeployJobRun"))
+                                $root.google.cloud.deploy.v1.PredeployJobRun.encode(message.predeployJobRun, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.postdeployJobRun != null && Object.hasOwnProperty.call(message, "postdeployJobRun"))
+                                $root.google.cloud.deploy.v1.PostdeployJobRun.encode(message.postdeployJobRun, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -24652,6 +25867,14 @@
                                     }
                                 case 10: {
                                         message.verifyJobRun = $root.google.cloud.deploy.v1.VerifyJobRun.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.predeployJobRun = $root.google.cloud.deploy.v1.PredeployJobRun.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.postdeployJobRun = $root.google.cloud.deploy.v1.PostdeployJobRun.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -24759,6 +25982,26 @@
                                         return "verifyJobRun." + error;
                                 }
                             }
+                            if (message.predeployJobRun != null && message.hasOwnProperty("predeployJobRun")) {
+                                if (properties.jobRun === 1)
+                                    return "jobRun: multiple values";
+                                properties.jobRun = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.PredeployJobRun.verify(message.predeployJobRun);
+                                    if (error)
+                                        return "predeployJobRun." + error;
+                                }
+                            }
+                            if (message.postdeployJobRun != null && message.hasOwnProperty("postdeployJobRun")) {
+                                if (properties.jobRun === 1)
+                                    return "jobRun: multiple values";
+                                properties.jobRun = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.PostdeployJobRun.verify(message.postdeployJobRun);
+                                    if (error)
+                                        return "postdeployJobRun." + error;
+                                }
+                            }
                             if (message.createChildRolloutJobRun != null && message.hasOwnProperty("createChildRolloutJobRun")) {
                                 if (properties.jobRun === 1)
                                     return "jobRun: multiple values";
@@ -24862,6 +26105,16 @@
                                     throw TypeError(".google.cloud.deploy.v1.JobRun.verifyJobRun: object expected");
                                 message.verifyJobRun = $root.google.cloud.deploy.v1.VerifyJobRun.fromObject(object.verifyJobRun);
                             }
+                            if (object.predeployJobRun != null) {
+                                if (typeof object.predeployJobRun !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.JobRun.predeployJobRun: object expected");
+                                message.predeployJobRun = $root.google.cloud.deploy.v1.PredeployJobRun.fromObject(object.predeployJobRun);
+                            }
+                            if (object.postdeployJobRun != null) {
+                                if (typeof object.postdeployJobRun !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.JobRun.postdeployJobRun: object expected");
+                                message.postdeployJobRun = $root.google.cloud.deploy.v1.PostdeployJobRun.fromObject(object.postdeployJobRun);
+                            }
                             if (object.createChildRolloutJobRun != null) {
                                 if (typeof object.createChildRolloutJobRun !== "object")
                                     throw TypeError(".google.cloud.deploy.v1.JobRun.createChildRolloutJobRun: object expected");
@@ -24938,6 +26191,16 @@
                                 object.advanceChildRolloutJobRun = $root.google.cloud.deploy.v1.AdvanceChildRolloutJobRun.toObject(message.advanceChildRolloutJobRun, options);
                                 if (options.oneofs)
                                     object.jobRun = "advanceChildRolloutJobRun";
+                            }
+                            if (message.predeployJobRun != null && message.hasOwnProperty("predeployJobRun")) {
+                                object.predeployJobRun = $root.google.cloud.deploy.v1.PredeployJobRun.toObject(message.predeployJobRun, options);
+                                if (options.oneofs)
+                                    object.jobRun = "predeployJobRun";
+                            }
+                            if (message.postdeployJobRun != null && message.hasOwnProperty("postdeployJobRun")) {
+                                object.postdeployJobRun = $root.google.cloud.deploy.v1.PostdeployJobRun.toObject(message.postdeployJobRun, options);
+                                if (options.oneofs)
+                                    object.jobRun = "postdeployJobRun";
                             }
                             return object;
                         };
@@ -25715,6 +26978,614 @@
                         })();
     
                         return VerifyJobRun;
+                    })();
+    
+                    v1.PredeployJobRun = (function() {
+    
+                        /**
+                         * Properties of a PredeployJobRun.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPredeployJobRun
+                         * @property {string|null} [build] PredeployJobRun build
+                         * @property {google.cloud.deploy.v1.PredeployJobRun.FailureCause|null} [failureCause] PredeployJobRun failureCause
+                         * @property {string|null} [failureMessage] PredeployJobRun failureMessage
+                         */
+    
+                        /**
+                         * Constructs a new PredeployJobRun.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a PredeployJobRun.
+                         * @implements IPredeployJobRun
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPredeployJobRun=} [properties] Properties to set
+                         */
+                        function PredeployJobRun(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PredeployJobRun build.
+                         * @member {string} build
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @instance
+                         */
+                        PredeployJobRun.prototype.build = "";
+    
+                        /**
+                         * PredeployJobRun failureCause.
+                         * @member {google.cloud.deploy.v1.PredeployJobRun.FailureCause} failureCause
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @instance
+                         */
+                        PredeployJobRun.prototype.failureCause = 0;
+    
+                        /**
+                         * PredeployJobRun failureMessage.
+                         * @member {string} failureMessage
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @instance
+                         */
+                        PredeployJobRun.prototype.failureMessage = "";
+    
+                        /**
+                         * Creates a new PredeployJobRun instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeployJobRun=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.PredeployJobRun} PredeployJobRun instance
+                         */
+                        PredeployJobRun.create = function create(properties) {
+                            return new PredeployJobRun(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredeployJobRun message. Does not implicitly {@link google.cloud.deploy.v1.PredeployJobRun.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeployJobRun} message PredeployJobRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredeployJobRun.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.build != null && Object.hasOwnProperty.call(message, "build"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.build);
+                            if (message.failureCause != null && Object.hasOwnProperty.call(message, "failureCause"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.failureCause);
+                            if (message.failureMessage != null && Object.hasOwnProperty.call(message, "failureMessage"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.failureMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredeployJobRun message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PredeployJobRun.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPredeployJobRun} message PredeployJobRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredeployJobRun.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredeployJobRun message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.PredeployJobRun} PredeployJobRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredeployJobRun.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.PredeployJobRun();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.build = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.failureCause = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.failureMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredeployJobRun message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.PredeployJobRun} PredeployJobRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredeployJobRun.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredeployJobRun message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredeployJobRun.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.build != null && message.hasOwnProperty("build"))
+                                if (!$util.isString(message.build))
+                                    return "build: string expected";
+                            if (message.failureCause != null && message.hasOwnProperty("failureCause"))
+                                switch (message.failureCause) {
+                                default:
+                                    return "failureCause: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
+                                if (!$util.isString(message.failureMessage))
+                                    return "failureMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredeployJobRun message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.PredeployJobRun} PredeployJobRun
+                         */
+                        PredeployJobRun.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.PredeployJobRun)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.PredeployJobRun();
+                            if (object.build != null)
+                                message.build = String(object.build);
+                            switch (object.failureCause) {
+                            default:
+                                if (typeof object.failureCause === "number") {
+                                    message.failureCause = object.failureCause;
+                                    break;
+                                }
+                                break;
+                            case "FAILURE_CAUSE_UNSPECIFIED":
+                            case 0:
+                                message.failureCause = 0;
+                                break;
+                            case "CLOUD_BUILD_UNAVAILABLE":
+                            case 1:
+                                message.failureCause = 1;
+                                break;
+                            case "EXECUTION_FAILED":
+                            case 2:
+                                message.failureCause = 2;
+                                break;
+                            case "DEADLINE_EXCEEDED":
+                            case 3:
+                                message.failureCause = 3;
+                                break;
+                            case "CLOUD_BUILD_REQUEST_FAILED":
+                            case 4:
+                                message.failureCause = 4;
+                                break;
+                            }
+                            if (object.failureMessage != null)
+                                message.failureMessage = String(object.failureMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredeployJobRun message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.PredeployJobRun} message PredeployJobRun
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredeployJobRun.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.build = "";
+                                object.failureCause = options.enums === String ? "FAILURE_CAUSE_UNSPECIFIED" : 0;
+                                object.failureMessage = "";
+                            }
+                            if (message.build != null && message.hasOwnProperty("build"))
+                                object.build = message.build;
+                            if (message.failureCause != null && message.hasOwnProperty("failureCause"))
+                                object.failureCause = options.enums === String ? $root.google.cloud.deploy.v1.PredeployJobRun.FailureCause[message.failureCause] === undefined ? message.failureCause : $root.google.cloud.deploy.v1.PredeployJobRun.FailureCause[message.failureCause] : message.failureCause;
+                            if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
+                                object.failureMessage = message.failureMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PredeployJobRun to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredeployJobRun.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PredeployJobRun
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.PredeployJobRun
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PredeployJobRun.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.PredeployJobRun";
+                        };
+    
+                        /**
+                         * FailureCause enum.
+                         * @name google.cloud.deploy.v1.PredeployJobRun.FailureCause
+                         * @enum {number}
+                         * @property {number} FAILURE_CAUSE_UNSPECIFIED=0 FAILURE_CAUSE_UNSPECIFIED value
+                         * @property {number} CLOUD_BUILD_UNAVAILABLE=1 CLOUD_BUILD_UNAVAILABLE value
+                         * @property {number} EXECUTION_FAILED=2 EXECUTION_FAILED value
+                         * @property {number} DEADLINE_EXCEEDED=3 DEADLINE_EXCEEDED value
+                         * @property {number} CLOUD_BUILD_REQUEST_FAILED=4 CLOUD_BUILD_REQUEST_FAILED value
+                         */
+                        PredeployJobRun.FailureCause = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAILURE_CAUSE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLOUD_BUILD_UNAVAILABLE"] = 1;
+                            values[valuesById[2] = "EXECUTION_FAILED"] = 2;
+                            values[valuesById[3] = "DEADLINE_EXCEEDED"] = 3;
+                            values[valuesById[4] = "CLOUD_BUILD_REQUEST_FAILED"] = 4;
+                            return values;
+                        })();
+    
+                        return PredeployJobRun;
+                    })();
+    
+                    v1.PostdeployJobRun = (function() {
+    
+                        /**
+                         * Properties of a PostdeployJobRun.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IPostdeployJobRun
+                         * @property {string|null} [build] PostdeployJobRun build
+                         * @property {google.cloud.deploy.v1.PostdeployJobRun.FailureCause|null} [failureCause] PostdeployJobRun failureCause
+                         * @property {string|null} [failureMessage] PostdeployJobRun failureMessage
+                         */
+    
+                        /**
+                         * Constructs a new PostdeployJobRun.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a PostdeployJobRun.
+                         * @implements IPostdeployJobRun
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IPostdeployJobRun=} [properties] Properties to set
+                         */
+                        function PostdeployJobRun(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PostdeployJobRun build.
+                         * @member {string} build
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @instance
+                         */
+                        PostdeployJobRun.prototype.build = "";
+    
+                        /**
+                         * PostdeployJobRun failureCause.
+                         * @member {google.cloud.deploy.v1.PostdeployJobRun.FailureCause} failureCause
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @instance
+                         */
+                        PostdeployJobRun.prototype.failureCause = 0;
+    
+                        /**
+                         * PostdeployJobRun failureMessage.
+                         * @member {string} failureMessage
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @instance
+                         */
+                        PostdeployJobRun.prototype.failureMessage = "";
+    
+                        /**
+                         * Creates a new PostdeployJobRun instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeployJobRun=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.PostdeployJobRun} PostdeployJobRun instance
+                         */
+                        PostdeployJobRun.create = function create(properties) {
+                            return new PostdeployJobRun(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostdeployJobRun message. Does not implicitly {@link google.cloud.deploy.v1.PostdeployJobRun.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeployJobRun} message PostdeployJobRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostdeployJobRun.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.build != null && Object.hasOwnProperty.call(message, "build"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.build);
+                            if (message.failureCause != null && Object.hasOwnProperty.call(message, "failureCause"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.failureCause);
+                            if (message.failureMessage != null && Object.hasOwnProperty.call(message, "failureMessage"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.failureMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostdeployJobRun message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PostdeployJobRun.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.IPostdeployJobRun} message PostdeployJobRun message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostdeployJobRun.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostdeployJobRun message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.PostdeployJobRun} PostdeployJobRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostdeployJobRun.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.PostdeployJobRun();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.build = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.failureCause = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.failureMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostdeployJobRun message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.PostdeployJobRun} PostdeployJobRun
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostdeployJobRun.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostdeployJobRun message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostdeployJobRun.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.build != null && message.hasOwnProperty("build"))
+                                if (!$util.isString(message.build))
+                                    return "build: string expected";
+                            if (message.failureCause != null && message.hasOwnProperty("failureCause"))
+                                switch (message.failureCause) {
+                                default:
+                                    return "failureCause: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
+                                if (!$util.isString(message.failureMessage))
+                                    return "failureMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostdeployJobRun message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.PostdeployJobRun} PostdeployJobRun
+                         */
+                        PostdeployJobRun.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.PostdeployJobRun)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.PostdeployJobRun();
+                            if (object.build != null)
+                                message.build = String(object.build);
+                            switch (object.failureCause) {
+                            default:
+                                if (typeof object.failureCause === "number") {
+                                    message.failureCause = object.failureCause;
+                                    break;
+                                }
+                                break;
+                            case "FAILURE_CAUSE_UNSPECIFIED":
+                            case 0:
+                                message.failureCause = 0;
+                                break;
+                            case "CLOUD_BUILD_UNAVAILABLE":
+                            case 1:
+                                message.failureCause = 1;
+                                break;
+                            case "EXECUTION_FAILED":
+                            case 2:
+                                message.failureCause = 2;
+                                break;
+                            case "DEADLINE_EXCEEDED":
+                            case 3:
+                                message.failureCause = 3;
+                                break;
+                            case "CLOUD_BUILD_REQUEST_FAILED":
+                            case 4:
+                                message.failureCause = 4;
+                                break;
+                            }
+                            if (object.failureMessage != null)
+                                message.failureMessage = String(object.failureMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostdeployJobRun message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {google.cloud.deploy.v1.PostdeployJobRun} message PostdeployJobRun
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostdeployJobRun.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.build = "";
+                                object.failureCause = options.enums === String ? "FAILURE_CAUSE_UNSPECIFIED" : 0;
+                                object.failureMessage = "";
+                            }
+                            if (message.build != null && message.hasOwnProperty("build"))
+                                object.build = message.build;
+                            if (message.failureCause != null && message.hasOwnProperty("failureCause"))
+                                object.failureCause = options.enums === String ? $root.google.cloud.deploy.v1.PostdeployJobRun.FailureCause[message.failureCause] === undefined ? message.failureCause : $root.google.cloud.deploy.v1.PostdeployJobRun.FailureCause[message.failureCause] : message.failureCause;
+                            if (message.failureMessage != null && message.hasOwnProperty("failureMessage"))
+                                object.failureMessage = message.failureMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PostdeployJobRun to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostdeployJobRun.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostdeployJobRun
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.PostdeployJobRun
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostdeployJobRun.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.PostdeployJobRun";
+                        };
+    
+                        /**
+                         * FailureCause enum.
+                         * @name google.cloud.deploy.v1.PostdeployJobRun.FailureCause
+                         * @enum {number}
+                         * @property {number} FAILURE_CAUSE_UNSPECIFIED=0 FAILURE_CAUSE_UNSPECIFIED value
+                         * @property {number} CLOUD_BUILD_UNAVAILABLE=1 CLOUD_BUILD_UNAVAILABLE value
+                         * @property {number} EXECUTION_FAILED=2 EXECUTION_FAILED value
+                         * @property {number} DEADLINE_EXCEEDED=3 DEADLINE_EXCEEDED value
+                         * @property {number} CLOUD_BUILD_REQUEST_FAILED=4 CLOUD_BUILD_REQUEST_FAILED value
+                         */
+                        PostdeployJobRun.FailureCause = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAILURE_CAUSE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLOUD_BUILD_UNAVAILABLE"] = 1;
+                            values[valuesById[2] = "EXECUTION_FAILED"] = 2;
+                            values[valuesById[3] = "DEADLINE_EXCEEDED"] = 3;
+                            values[valuesById[4] = "CLOUD_BUILD_REQUEST_FAILED"] = 4;
+                            return values;
+                        })();
+    
+                        return PostdeployJobRun;
                     })();
     
                     v1.CreateChildRolloutJobRun = (function() {

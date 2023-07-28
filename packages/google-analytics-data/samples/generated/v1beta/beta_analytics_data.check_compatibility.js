@@ -43,12 +43,12 @@ function main() {
    *  The dimensions in this report. `dimensions` should be the same value as in
    *  your `runReport` request.
    */
-  // const dimensions = 1234
+  // const dimensions = [1,2,3,4]
   /**
    *  The metrics in this report. `metrics` should be the same value as in your
    *  `runReport` request.
    */
-  // const metrics = 1234
+  // const metrics = [1,2,3,4]
   /**
    *  The filter clause of dimensions. `dimensionFilter` should be the same value
    *  as in your `runReport` request.

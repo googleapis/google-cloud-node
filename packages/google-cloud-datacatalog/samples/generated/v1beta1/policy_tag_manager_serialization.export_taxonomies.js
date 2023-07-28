@@ -36,7 +36,7 @@ function main(parent, taxonomies) {
   /**
    *  Required. Resource names of the taxonomies to be exported.
    */
-  // const taxonomies = 'abc123'
+  // const taxonomies = ['abc','def']
   /**
    *  Export taxonomies as serialized taxonomies.
    */

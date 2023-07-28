@@ -42,7 +42,7 @@ function main(entityType, entityIds, featureSelector) {
    *  IDs is 100. For example, for a machine learning model predicting user
    *  clicks on a website, an entity ID could be `user_123`.
    */
-  // const entityIds = 'abc123'
+  // const entityIds = ['abc','def']
   /**
    *  Required. Selector choosing Features of the target EntityType. Feature IDs
    *  will be deduplicated.

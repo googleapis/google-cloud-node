@@ -41,7 +41,7 @@ function main(indexEndpoint) {
   /**
    *  IDs of the datapoints to be searched for.
    */
-  // const ids = 'abc123'
+  // const ids = ['abc','def']
 
   // Imports the Aiplatform library
   const {MatchServiceClient} = require('@google-cloud/aiplatform').v1;

@@ -39,7 +39,7 @@ function main(resource, permissions) {
    *  information see
    *  IAM Overview (https://cloud.google.com/iam/docs/overview#permissions).
    */
-  // const permissions = 'abc123'
+  // const permissions = ['abc','def']
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;

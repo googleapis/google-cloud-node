@@ -37,6 +37,10 @@ function main(name) {
    */
   // const rawDocument = {}
   /**
+   *  A raw document on Google Cloud Storage.
+   */
+  // const gcsDocument = {}
+  /**
    *  Required. The resource name of the
    *  Processor google.cloud.documentai.v1beta3.Processor  or
    *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion 
