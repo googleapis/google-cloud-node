@@ -525,7 +525,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocument(
@@ -574,7 +574,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -643,7 +643,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocument(
@@ -692,7 +692,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -753,7 +753,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDocument(
@@ -802,7 +802,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -858,7 +858,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocument(
@@ -907,7 +907,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1029,7 +1029,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importDocuments(
@@ -1082,7 +1082,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1189,7 +1189,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeDocuments(
@@ -1242,7 +1242,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1348,7 +1348,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1beta.IDocument[],
       protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse,
     ]
   >;
   listDocuments(
@@ -1394,7 +1394,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1beta.IDocument[],
       protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse,
     ]
   > | void {
     request = request || {};

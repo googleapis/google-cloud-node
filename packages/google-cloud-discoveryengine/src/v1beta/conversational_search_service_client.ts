@@ -414,7 +414,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   converseConversation(
@@ -463,7 +463,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IConverseConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -516,7 +516,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversation(
@@ -565,7 +565,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICreateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -616,7 +616,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversation(
@@ -665,7 +665,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IDeleteConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -725,7 +725,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConversation(
@@ -774,7 +774,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IUpdateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -822,7 +822,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversation(
@@ -871,7 +871,7 @@ export class ConversationalSearchServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IGetConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -944,7 +944,7 @@ export class ConversationalSearchServiceClient {
     [
       protos.google.cloud.discoveryengine.v1beta.IConversation[],
       protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse,
     ]
   >;
   listConversations(
@@ -990,7 +990,7 @@ export class ConversationalSearchServiceClient {
     [
       protos.google.cloud.discoveryengine.v1beta.IConversation[],
       protos.google.cloud.discoveryengine.v1beta.IListConversationsRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListConversationsResponse,
     ]
   > | void {
     request = request || {};

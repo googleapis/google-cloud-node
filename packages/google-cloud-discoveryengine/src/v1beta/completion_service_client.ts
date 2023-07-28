@@ -411,7 +411,7 @@ export class CompletionServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeQuery(
@@ -460,7 +460,7 @@ export class CompletionServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

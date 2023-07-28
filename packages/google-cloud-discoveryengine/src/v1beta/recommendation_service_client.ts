@@ -461,7 +461,7 @@ export class RecommendationServiceClient {
     [
       protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
       protos.google.cloud.discoveryengine.v1beta.IRecommendRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   recommend(
@@ -507,7 +507,7 @@ export class RecommendationServiceClient {
     [
       protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
       protos.google.cloud.discoveryengine.v1beta.IRecommendRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

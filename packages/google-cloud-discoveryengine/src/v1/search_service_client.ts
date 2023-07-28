@@ -476,7 +476,7 @@ export class SearchServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[],
       protos.google.cloud.discoveryengine.v1.ISearchRequest | null,
-      protos.google.cloud.discoveryengine.v1.ISearchResponse
+      protos.google.cloud.discoveryengine.v1.ISearchResponse,
     ]
   >;
   search(
@@ -516,7 +516,7 @@ export class SearchServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[],
       protos.google.cloud.discoveryengine.v1.ISearchRequest | null,
-      protos.google.cloud.discoveryengine.v1.ISearchResponse
+      protos.google.cloud.discoveryengine.v1.ISearchResponse,
     ]
   > | void {
     request = request || {};

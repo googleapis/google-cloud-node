@@ -495,7 +495,7 @@ export class SchemaServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.ISchema,
       protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSchema(
@@ -541,7 +541,7 @@ export class SchemaServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.ISchema,
       protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -603,7 +603,7 @@ export class SchemaServiceClient {
         protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSchema(
@@ -656,7 +656,7 @@ export class SchemaServiceClient {
         protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -743,7 +743,7 @@ export class SchemaServiceClient {
         protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSchema(
@@ -796,7 +796,7 @@ export class SchemaServiceClient {
         protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -880,7 +880,7 @@ export class SchemaServiceClient {
         protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSchema(
@@ -933,7 +933,7 @@ export class SchemaServiceClient {
         protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1031,7 +1031,7 @@ export class SchemaServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.ISchema[],
       protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      protos.google.cloud.discoveryengine.v1.IListSchemasResponse,
     ]
   >;
   listSchemas(
@@ -1077,7 +1077,7 @@ export class SchemaServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.ISchema[],
       protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      protos.google.cloud.discoveryengine.v1.IListSchemasResponse,
     ]
   > | void {
     request = request || {};

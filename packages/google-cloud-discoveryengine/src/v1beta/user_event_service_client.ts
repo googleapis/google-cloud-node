@@ -485,7 +485,7 @@ export class UserEventServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeUserEvent(
@@ -534,7 +534,7 @@ export class UserEventServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.IWriteUserEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -598,7 +598,7 @@ export class UserEventServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   collectUserEvent(
@@ -647,7 +647,7 @@ export class UserEventServiceClient {
         | protos.google.cloud.discoveryengine.v1beta.ICollectUserEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -713,7 +713,7 @@ export class UserEventServiceClient {
         protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importUserEvents(
@@ -766,7 +766,7 @@ export class UserEventServiceClient {
         protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

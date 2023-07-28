@@ -496,7 +496,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument,
       protos.google.cloud.discoveryengine.v1.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocument(
@@ -542,7 +542,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument,
       protos.google.cloud.discoveryengine.v1.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -608,7 +608,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument,
       protos.google.cloud.discoveryengine.v1.ICreateDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocument(
@@ -654,7 +654,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument,
       protos.google.cloud.discoveryengine.v1.ICreateDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -711,7 +711,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument,
       protos.google.cloud.discoveryengine.v1.IUpdateDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDocument(
@@ -757,7 +757,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument,
       protos.google.cloud.discoveryengine.v1.IUpdateDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -810,7 +810,7 @@ export class DocumentServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.discoveryengine.v1.IDeleteDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocument(
@@ -856,7 +856,7 @@ export class DocumentServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.discoveryengine.v1.IDeleteDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -975,7 +975,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1.IImportDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importDocuments(
@@ -1028,7 +1028,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1.IImportDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1134,7 +1134,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1.IPurgeDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeDocuments(
@@ -1187,7 +1187,7 @@ export class DocumentServiceClient {
         protos.google.cloud.discoveryengine.v1.IPurgeDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1292,7 +1292,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument[],
       protos.google.cloud.discoveryengine.v1.IListDocumentsRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1.IListDocumentsResponse,
     ]
   >;
   listDocuments(
@@ -1338,7 +1338,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IDocument[],
       protos.google.cloud.discoveryengine.v1.IListDocumentsRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1.IListDocumentsResponse,
     ]
   > | void {
     request = request || {};
