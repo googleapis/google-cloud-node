@@ -551,6 +551,7 @@
   * [Resource_policies.get_iam_policy](#resource_policies.get_iam_policy)
   * [Resource_policies.insert](#resource_policies.insert)
   * [Resource_policies.list](#resource_policies.list)
+  * [Resource_policies.patch](#resource_policies.patch)
   * [Resource_policies.set_iam_policy](#resource_policies.set_iam_policy)
   * [Resource_policies.test_iam_permissions](#resource_policies.test_iam_permissions)
   * [Routers.aggregated_list](#routers.aggregated_list)
@@ -9889,6 +9890,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/resource_policies.list.js`
+
+
+-----
+
+
+
+
+### Resource_policies.patch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/resource_policies.patch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/resource_policies.patch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/resource_policies.patch.js`
 
 
 -----

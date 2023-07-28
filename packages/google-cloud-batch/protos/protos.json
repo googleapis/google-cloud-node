@@ -1424,7 +1424,10 @@
                         },
                         "orderBy": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1969,7 +1972,10 @@
                             },
                             "driverVersion": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },

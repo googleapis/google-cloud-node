@@ -7839,6 +7839,164 @@ describe('v1.DataplexServiceClient', () => {
       });
     });
 
+    describe('dataAttribute', () => {
+      const fakePath = '/rendered/path/dataAttribute';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataTaxonomy: 'dataTaxonomyValue',
+        data_attribute_id: 'dataAttributeIdValue',
+      };
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.dataAttributePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAttributePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAttributePath', () => {
+        const result = client.dataAttributePath(
+          'projectValue',
+          'locationValue',
+          'dataTaxonomyValue',
+          'dataAttributeIdValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAttributePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataAttributeName', () => {
+        const result = client.matchProjectFromDataAttributeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataAttributeName', () => {
+        const result = client.matchLocationFromDataAttributeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataTaxonomyFromDataAttributeName', () => {
+        const result = client.matchDataTaxonomyFromDataAttributeName(fakePath);
+        assert.strictEqual(result, 'dataTaxonomyValue');
+        assert(
+          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataAttributeIdFromDataAttributeName', () => {
+        const result =
+          client.matchDataAttributeIdFromDataAttributeName(fakePath);
+        assert.strictEqual(result, 'dataAttributeIdValue');
+        assert(
+          (client.pathTemplates.dataAttributePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataAttributeBinding', () => {
+      const fakePath = '/rendered/path/dataAttributeBinding';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_attribute_binding_id: 'dataAttributeBindingIdValue',
+      };
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.dataAttributeBindingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAttributeBindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAttributeBindingPath', () => {
+        const result = client.dataAttributeBindingPath(
+          'projectValue',
+          'locationValue',
+          'dataAttributeBindingIdValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dataAttributeBindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataAttributeBindingName', () => {
+        const result =
+          client.matchProjectFromDataAttributeBindingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.dataAttributeBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataAttributeBindingName', () => {
+        const result =
+          client.matchLocationFromDataAttributeBindingName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.dataAttributeBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataAttributeBindingIdFromDataAttributeBindingName', () => {
+        const result =
+          client.matchDataAttributeBindingIdFromDataAttributeBindingName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataAttributeBindingIdValue');
+        assert(
+          (
+            client.pathTemplates.dataAttributeBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('dataScan', () => {
       const fakePath = '/rendered/path/dataScan';
       const expectedParameters = {
@@ -7973,6 +8131,70 @@ describe('v1.DataplexServiceClient', () => {
         assert.strictEqual(result, 'jobValue');
         assert(
           (client.pathTemplates.dataScanJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataTaxonomy', () => {
+      const fakePath = '/rendered/path/dataTaxonomy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_taxonomy_id: 'dataTaxonomyIdValue',
+      };
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.dataTaxonomyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTaxonomyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTaxonomyPath', () => {
+        const result = client.dataTaxonomyPath(
+          'projectValue',
+          'locationValue',
+          'dataTaxonomyIdValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTaxonomyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataTaxonomyName', () => {
+        const result = client.matchProjectFromDataTaxonomyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataTaxonomyName', () => {
+        const result = client.matchLocationFromDataTaxonomyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataTaxonomyIdFromDataTaxonomyName', () => {
+        const result = client.matchDataTaxonomyIdFromDataTaxonomyName(fakePath);
+        assert.strictEqual(result, 'dataTaxonomyIdValue');
+        assert(
+          (client.pathTemplates.dataTaxonomyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
