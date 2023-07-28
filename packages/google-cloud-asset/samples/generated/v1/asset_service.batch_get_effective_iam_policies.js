@@ -46,7 +46,7 @@ function main(scope, names) {
    *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
    *  A maximum of 20 resources' effective policies can be retrieved in a batch.
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1;

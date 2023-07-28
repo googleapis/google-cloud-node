@@ -115,7 +115,7 @@ function main(scope) {
    *  regular expression syntax. If the regular expression does not match any
    *  supported asset type, an INVALID_ARGUMENT error will be returned.
    */
-  // const assetTypes = 'abc123'
+  // const assetTypes = ['abc','def']
   /**
    *  Optional. A comma-separated list of fields specifying the sorting order of
    *  the results. The default order is ascending. Add " DESC" after the field

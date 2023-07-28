@@ -362,10 +362,10 @@ export class AssetServiceClient {
    * Exports assets with time and resource types to a given Cloud Storage
    * location/BigQuery table. For Cloud Storage location destinations, the
    * output format is newline-delimited JSON. Each line represents a
-   * {@link google.cloud.asset.v1p7beta1.Asset|google.cloud.asset.v1p7beta1.Asset} in
+   * {@link protos.google.cloud.asset.v1p7beta1.Asset|google.cloud.asset.v1p7beta1.Asset} in
    * the JSON format; for BigQuery table destinations, the output table stores
    * the fields in asset proto as columns. This API implements the
-   * {@link google.longrunning.Operation|google.longrunning.Operation} API , which
+   * {@link protos.google.longrunning.Operation|google.longrunning.Operation} API , which
    * allows you to keep track of the export. We recommend intervals of at least
    * 2 seconds with exponential retry to poll the export operation result. For
    * regular-size resource parent, the export operation usually finishes within
@@ -426,8 +426,7 @@ export class AssetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p7beta1/asset_service.export_assets.js</caption>
    * region_tag:cloudasset_v1p7beta1_generated_AssetService_ExportAssets_async
@@ -522,8 +521,7 @@ export class AssetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p7beta1/asset_service.export_assets.js</caption>
    * region_tag:cloudasset_v1p7beta1_generated_AssetService_ExportAssets_async

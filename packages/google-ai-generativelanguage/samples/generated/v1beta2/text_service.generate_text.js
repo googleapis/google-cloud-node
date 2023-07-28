@@ -90,13 +90,13 @@ function main(model, prompt) {
    *  `SafetyCategory` provided in the list, the API will use the default safety
    *  setting for that category.
    */
-  // const safetySettings = 1234
+  // const safetySettings = [1,2,3,4]
   /**
    *  The set of character sequences (up to 5) that will stop output generation.
    *  If specified, the API will stop at the first appearance of a stop
    *  sequence. The stop sequence will not be included as part of the response.
    */
-  // const stopSequences = 'abc123'
+  // const stopSequences = ['abc','def']
 
   // Imports the Generativelanguage library
   const {TextServiceClient} = require('@google-ai/generativelanguage').v1beta2;

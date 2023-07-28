@@ -39,7 +39,7 @@ function main(parent, names) {
    *  in a batch.
    *  Format: tables/{table}/rows/{row}
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Tables library
   const {TablesServiceClient} = require('@google/area120-tables').v1alpha1;

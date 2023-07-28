@@ -41,11 +41,11 @@ function main() {
   /**
    *  The dimensions requested and displayed.
    */
-  // const dimensions = 1234
+  // const dimensions = [1,2,3,4]
   /**
    *  The metrics requested and displayed.
    */
-  // const metrics = 1234
+  // const metrics = [1,2,3,4]
   /**
    *  Date ranges of data to read. If multiple date ranges are requested, each
    *  response row will contain a zero based date range index. If two date
@@ -53,7 +53,7 @@ function main() {
    *  response rows for both date ranges. In a cohort request, this `dateRanges`
    *  must be unspecified.
    */
-  // const dateRanges = 1234
+  // const dateRanges = [1,2,3,4]
   /**
    *  Dimension filters allow you to ask for only specific dimension values in
    *  the report. To learn more, see Fundamentals of Dimension
@@ -93,11 +93,11 @@ function main() {
    *  Aggregation of metrics. Aggregated metric values will be shown in rows
    *  where the dimension_values are set to "RESERVED_(MetricAggregation)".
    */
-  // const metricAggregations = 1234
+  // const metricAggregations = [1,2,3,4]
   /**
    *  Specifies how rows are ordered in the response.
    */
-  // const orderBys = 1234
+  // const orderBys = [1,2,3,4]
   /**
    *  A currency code in ISO4217 format, such as "AED", "USD", "JPY".
    *  If the field is empty, the report uses the property's default currency.

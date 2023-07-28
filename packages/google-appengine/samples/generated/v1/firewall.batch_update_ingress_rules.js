@@ -36,7 +36,7 @@ function main() {
   /**
    *  A list of FirewallRules to replace the existing set.
    */
-  // const ingressRules = 1234
+  // const ingressRules = [1,2,3,4]
 
   // Imports the Appengine library
   const {FirewallClient} = require('@google-cloud/appengine-admin').v1;
