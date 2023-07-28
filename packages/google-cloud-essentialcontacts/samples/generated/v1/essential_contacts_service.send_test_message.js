@@ -34,7 +34,7 @@ function main(contacts, resource, notificationCategory) {
    *  folders/{folder_id}/contacts/{contact_id} or
    *  projects/{project_id}/contacts/{contact_id}
    */
-  // const contacts = 'abc123'
+  // const contacts = ['abc','def']
   /**
    *  Required. The name of the resource to send the test message for. All
    *  contacts must either be set directly on this resource or inherited from

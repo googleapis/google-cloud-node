@@ -37,7 +37,7 @@ function main(parent, entityTypeNames) {
    *  Required. The names entity types to delete. All names must point to the
    *  same agent as `parent`.
    */
-  // const entityTypeNames = 'abc123'
+  // const entityTypeNames = ['abc','def']
 
   // Imports the Dialogflow library
   const {EntityTypesClient} = require('@google-cloud/dialogflow').v2;

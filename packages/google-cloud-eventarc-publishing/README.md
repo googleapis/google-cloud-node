@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Eventarc Publishing API: Node.js Client](https://github.com/googleapis/google-cloud-node)
+# [Eventarc Publishing API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-eventarc-publishing)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/eventarc-publishing.svg)](https://www.npmjs.org/package/@google-cloud/eventarc-publishing)
@@ -58,14 +58,13 @@ npm install @google-cloud/eventarc-publishing
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-eventarc-publishing/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Publisher.publish_channel_connection_events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js,samples/README.md) |
-| Publisher.publish_events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/quickstart.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/test/quickstart.js,samples/README.md) |
+| Publisher.publish_channel_connection_events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js,packages/google-cloud-eventarc-publishing/samples/README.md) |
+| Publisher.publish_events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js,packages/google-cloud-eventarc-publishing/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/quickstart.js,packages/google-cloud-eventarc-publishing/samples/README.md) |
 
 
 

@@ -55,7 +55,7 @@ function main(name) {
   /**
    *  Optional. The image pull secret content for the registry, if not public.
    */
-  // const imagePullSecretContent = 'Buffer.from('string')'
+  // const imagePullSecretContent = Buffer.from('string')
 
   // Imports the Gkehub library
   const {GkeHubMembershipServiceClient} = require('@google-cloud/gke-hub').v1beta1;

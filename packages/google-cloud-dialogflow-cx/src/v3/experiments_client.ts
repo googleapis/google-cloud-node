@@ -41,7 +41,7 @@ import * as gapicConfig from './experiments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3.Experiment|Experiments}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiments}.
  * @class
  * @memberof v3
  */
@@ -461,21 +461,20 @@ export class ExperimentsClient {
   // -------------------
   /**
    * Retrieves the specified
-   * {@link google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.get_experiment.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_GetExperiment_async
@@ -555,14 +554,14 @@ export class ExperimentsClient {
     return this.innerApiCalls.getExperiment(request, options, callback);
   }
   /**
-   * Creates an {@link google.cloud.dialogflow.cx.v3.Experiment|Experiment} in the
-   * specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Creates an {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment} in the
+   * specified {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
-   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {google.cloud.dialogflow.cx.v3.Experiment} request.experiment
@@ -570,9 +569,8 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.create_experiment.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_CreateExperiment_async
@@ -653,7 +651,7 @@ export class ExperimentsClient {
   }
   /**
    * Updates the specified
-   * {@link google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -664,9 +662,8 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.update_experiment.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_UpdateExperiment_async
@@ -747,21 +744,20 @@ export class ExperimentsClient {
   }
   /**
    * Deletes the specified
-   * {@link google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.delete_experiment.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_DeleteExperiment_async
@@ -842,7 +838,7 @@ export class ExperimentsClient {
   }
   /**
    * Starts the specified
-   * {@link google.cloud.dialogflow.cx.v3.Experiment|Experiment}. This rpc only
+   * {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}. This rpc only
    * changes the state of experiment from PENDING to RUNNING.
    *
    * @param {Object} request
@@ -854,9 +850,8 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.start_experiment.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_StartExperiment_async
@@ -936,7 +931,7 @@ export class ExperimentsClient {
     return this.innerApiCalls.startExperiment(request, options, callback);
   }
   /**
-   * Stops the specified {@link google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   * Stops the specified {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
    * This rpc only changes the state of experiment from RUNNING to DONE.
    *
    * @param {Object} request
@@ -948,9 +943,8 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.stop_experiment.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_StopExperiment_async
@@ -1032,12 +1026,12 @@ export class ExperimentsClient {
 
   /**
    * Returns the list of all experiments in the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to
    *   list all environments for. Format: `projects/<Project
    *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
    *   ID>`.
@@ -1049,14 +1043,13 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listExperimentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listExperiments(
@@ -1139,7 +1132,7 @@ export class ExperimentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to
    *   list all environments for. Format: `projects/<Project
    *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
    *   ID>`.
@@ -1151,13 +1144,12 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listExperimentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listExperimentsStream(
@@ -1189,7 +1181,7 @@ export class ExperimentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to
    *   list all environments for. Format: `projects/<Project
    *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
    *   ID>`.
@@ -1201,12 +1193,11 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.Experiment | Experiment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Experiment|Experiment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/experiments.list_experiments.js</caption>
    * region_tag:dialogflow_v3_generated_Experiments_ListExperiments_async
@@ -1243,8 +1234,7 @@ export class ExperimentsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1290,12 +1280,11 @@ export class ExperimentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
