@@ -270,6 +270,11 @@
         "grpc": {
           "libraryClient": "DocumentServiceClient",
           "rpcs": {
+            "GetDocument": {
+              "methods": [
+                "getDocument"
+              ]
+            },
             "GetDatasetSchema": {
               "methods": [
                 "getDatasetSchema"
@@ -283,6 +288,16 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
+            "BatchDeleteDocuments": {
+              "methods": [
+                "batchDeleteDocuments"
               ]
             }
           }
@@ -290,6 +305,11 @@
         "grpc-fallback": {
           "libraryClient": "DocumentServiceClient",
           "rpcs": {
+            "GetDocument": {
+              "methods": [
+                "getDocument"
+              ]
+            },
             "GetDatasetSchema": {
               "methods": [
                 "getDatasetSchema"
@@ -303,6 +323,16 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
+            "BatchDeleteDocuments": {
+              "methods": [
+                "batchDeleteDocuments"
               ]
             }
           }

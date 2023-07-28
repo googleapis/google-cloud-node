@@ -38,7 +38,7 @@ function main(name) {
    *  first specified worker ID. Future implementations may support firing on
    *  multiple workers.
    */
-  // const workerIds = 'abc123'
+  // const workerIds = ['abc','def']
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
