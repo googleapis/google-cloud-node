@@ -109,7 +109,7 @@ function main(parent) {
    *  * For schema id, abc123, get the counts for MORTGAGE_TYPE:
    *    count('abc123.MORTGAGE_TYPE')
    */
-  // const histogramQueries = 1234
+  // const histogramQueries = [1,2,3,4]
   /**
    *  Controls if the search document request requires the return of a total size
    *  of matched documents. See

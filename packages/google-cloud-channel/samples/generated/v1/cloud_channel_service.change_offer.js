@@ -45,7 +45,7 @@ function main(name, offer) {
    *  Offer.parameter_definitions google.cloud.channel.v1.Offer.parameter_definitions 
    *  from the desired offer.
    */
-  // const parameters = 1234
+  // const parameters = [1,2,3,4]
   /**
    *  Optional. Purchase order id provided by the reseller.
    */

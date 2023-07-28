@@ -40,7 +40,7 @@ function main() {
    *  ID is the last portion of capacity commitment name e.g., 'abc' for
    *  projects/myproject/locations/US/capacityCommitments/abc
    */
-  // const capacityCommitmentIds = 'abc123'
+  // const capacityCommitmentIds = ['abc','def']
 
   // Imports the Reservation library
   const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;

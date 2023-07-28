@@ -36,7 +36,7 @@ function main(name) {
    *  Optional. Full file paths to reset back to their committed state including filename,
    *  rooted at workspace root. If left empty, all files will be reset.
    */
-  // const paths = 'abc123'
+  // const paths = ['abc','def']
   /**
    *  Optional. If set to true, untracked files will be deleted.
    */

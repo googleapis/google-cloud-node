@@ -39,7 +39,7 @@ function main(workspace, path, contents) {
   /**
    *  Required. The file's contents.
    */
-  // const contents = 'Buffer.from('string')'
+  // const contents = Buffer.from('string')
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1alpha2;

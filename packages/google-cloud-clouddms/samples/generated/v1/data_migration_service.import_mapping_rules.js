@@ -41,7 +41,7 @@ function main(parent) {
   /**
    *  One or more rules files.
    */
-  // const rulesFiles = 1234
+  // const rulesFiles = [1,2,3,4]
   /**
    *  Should the conversion workspace be committed automatically after the
    *  import operation.

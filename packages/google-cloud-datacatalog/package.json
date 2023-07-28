@@ -30,15 +30,16 @@
     "Google Cloud Data Catalog API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.8"
+    "google-gax": "^4.0.3"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.4.5",
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
-    "gts": "^3.1.0",
+    "gapic-tools": "^0.1.8",
+    "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
@@ -47,7 +48,7 @@
     "mocha": "^9.2.2",
     "pack-n-play": "^1.0.0-2",
     "sinon": "^15.0.0",
-    "typescript": "^4.6.4"
+    "typescript": "^5.1.6"
   },
   "scripts": {
     "clean": "gts clean",
@@ -67,7 +68,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog"
 }

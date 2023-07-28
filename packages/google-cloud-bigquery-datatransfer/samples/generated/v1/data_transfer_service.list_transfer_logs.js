@@ -50,7 +50,7 @@ function main(parent) {
    *  Message types to return. If not populated - INFO, WARNING and ERROR
    *  messages are returned.
    */
-  // const messageTypes = 1234
+  // const messageTypes = [1,2,3,4]
 
   // Imports the Datatransfer library
   const {DataTransferServiceClient} = require('@google-cloud/bigquery-data-transfer').v1;

@@ -36,7 +36,7 @@ function main() {
    *  Data sources that are enrolled. It is required to provide at least one
    *  data source id.
    */
-  // const dataSourceIds = 'abc123'
+  // const dataSourceIds = ['abc','def']
 
   // Imports the Datatransfer library
   const {DataTransferServiceClient} = require('@google-cloud/bigquery-data-transfer').v1;

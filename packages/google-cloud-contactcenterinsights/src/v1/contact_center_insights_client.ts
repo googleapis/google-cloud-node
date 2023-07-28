@@ -559,13 +559,12 @@ export class ContactCenterInsightsClient {
    *   server-generated ID will be used.
    *
    *   This value should be 4-64 characters and must match the regular
-   *   expression `^{@link 0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
+   *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Conversation | Conversation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_conversation.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateConversation_async
@@ -662,9 +661,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Conversation | Conversation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.update_conversation.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async
@@ -761,9 +759,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Conversation | Conversation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_conversation.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetConversation_async
@@ -862,9 +859,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_conversation.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteConversation_async
@@ -959,9 +955,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Analysis | Analysis}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Analysis|Analysis}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_analysis.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetAnalysis_async
@@ -1056,9 +1051,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_analysis.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteAnalysis_async
@@ -1155,9 +1149,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.IssueModel | IssueModel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.IssueModel|IssueModel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.update_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateIssueModel_async
@@ -1252,9 +1245,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.IssueModel | IssueModel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.IssueModel|IssueModel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetIssueModel_async
@@ -1349,9 +1341,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.ListIssueModelsResponse | ListIssueModelsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse|ListIssueModelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.list_issue_models.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListIssueModels_async
@@ -1446,9 +1437,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Issue | Issue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Issue|Issue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_issue.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetIssue_async
@@ -1537,9 +1527,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.ListIssuesResponse | ListIssuesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse|ListIssuesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.list_issues.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListIssues_async
@@ -1636,9 +1625,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Issue | Issue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Issue|Issue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.update_issue.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateIssue_async
@@ -1733,9 +1721,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_issue.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssue_async
@@ -1830,9 +1817,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse | CalculateIssueModelStatsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse|CalculateIssueModelStatsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.calculate_issue_model_stats.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CalculateIssueModelStats_async
@@ -1936,9 +1922,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.PhraseMatcher | PhraseMatcher}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.PhraseMatcher|PhraseMatcher}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_phrase_matcher.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreatePhraseMatcher_async
@@ -2033,9 +2018,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.PhraseMatcher | PhraseMatcher}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.PhraseMatcher|PhraseMatcher}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_phrase_matcher.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetPhraseMatcher_async
@@ -2130,9 +2114,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_phrase_matcher.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeletePhraseMatcher_async
@@ -2229,9 +2212,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.PhraseMatcher | PhraseMatcher}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.PhraseMatcher|PhraseMatcher}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.update_phrase_matcher.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdatePhraseMatcher_async
@@ -2329,9 +2311,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse | CalculateStatsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse|CalculateStatsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.calculate_stats.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CalculateStats_async
@@ -2426,9 +2407,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Settings | Settings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Settings|Settings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_settings.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetSettings_async
@@ -2525,9 +2505,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.Settings | Settings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.Settings|Settings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.update_settings.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateSettings_async
@@ -2627,9 +2606,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.View | View}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.View|View}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_view.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateView_async
@@ -2724,9 +2702,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.View | View}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.View|View}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.get_view.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetView_async
@@ -2817,9 +2794,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contactcenterinsights.v1.View | View}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.View|View}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.update_view.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UpdateView_async
@@ -2914,9 +2890,8 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_view.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteView_async
@@ -3019,7 +2994,7 @@ export class ContactCenterInsightsClient {
    *   a server-generated ID will be used.
    *
    *   This value should be 4-64 characters and must match the regular
-   *   expression `^{@link 0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
+   *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
    * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} [request.redactionConfig]
    *   Optional. DLP settings for transcript redaction. Optional, will default to
    *   the config specified in Settings.
@@ -3029,8 +3004,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.upload_conversation.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_async
@@ -3125,8 +3099,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.upload_conversation.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_async
@@ -3170,8 +3143,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_analysis.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateAnalysis_async
@@ -3266,8 +3238,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_analysis.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateAnalysis_async
@@ -3316,8 +3287,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkAnalyzeConversations_async
@@ -3416,8 +3386,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkAnalyzeConversations_async
@@ -3465,8 +3434,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.ingest_conversations.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_async
@@ -3561,8 +3529,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.ingest_conversations.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_async
@@ -3614,8 +3581,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.export_insights_data.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async
@@ -3710,8 +3676,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.export_insights_data.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async
@@ -3754,8 +3719,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateIssueModel_async
@@ -3850,8 +3814,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.create_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_CreateIssueModel_async
@@ -3892,8 +3855,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssueModel_async
@@ -3988,8 +3950,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.delete_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssueModel_async
@@ -4031,8 +3992,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.deploy_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeployIssueModel_async
@@ -4127,8 +4087,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.deploy_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_DeployIssueModel_async
@@ -4170,8 +4129,7 @@ export class ContactCenterInsightsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.undeploy_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UndeployIssueModel_async
@@ -4266,8 +4224,7 @@ export class ContactCenterInsightsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.undeploy_issue_model.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UndeployIssueModel_async
@@ -4319,14 +4276,13 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.contactcenterinsights.v1.Conversation | Conversation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.Conversation|Conversation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConversationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversations(
@@ -4427,13 +4383,12 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.contactcenterinsights.v1.Conversation | Conversation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.Conversation|Conversation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConversationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationsStream(
@@ -4483,12 +4438,11 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.contactcenterinsights.v1.Conversation | Conversation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.contactcenterinsights.v1.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.list_conversations.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListConversations_async
@@ -4536,14 +4490,13 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.contactcenterinsights.v1.Analysis | Analysis}.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.Analysis|Analysis}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAnalysesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAnalyses(
@@ -4642,13 +4595,12 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.contactcenterinsights.v1.Analysis | Analysis} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.Analysis|Analysis} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAnalysesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAnalysesStream(
@@ -4696,12 +4648,11 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.contactcenterinsights.v1.Analysis | Analysis}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.contactcenterinsights.v1.Analysis|Analysis}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.list_analyses.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListAnalyses_async
@@ -4749,14 +4700,13 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.contactcenterinsights.v1.PhraseMatcher | PhraseMatcher}.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.PhraseMatcher|PhraseMatcher}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPhraseMatchersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPhraseMatchers(
@@ -4855,13 +4805,12 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.contactcenterinsights.v1.PhraseMatcher | PhraseMatcher} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.PhraseMatcher|PhraseMatcher} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPhraseMatchersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPhraseMatchersStream(
@@ -4909,12 +4858,11 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.contactcenterinsights.v1.PhraseMatcher | PhraseMatcher}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.contactcenterinsights.v1.PhraseMatcher|PhraseMatcher}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.list_phrase_matchers.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListPhraseMatchers_async
@@ -4959,14 +4907,13 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.contactcenterinsights.v1.View | View}.
+   *   The first element of the array is Array of {@link protos.google.cloud.contactcenterinsights.v1.View|View}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listViewsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listViews(
@@ -5062,13 +5009,12 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.contactcenterinsights.v1.View | View} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.contactcenterinsights.v1.View|View} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listViewsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listViewsStream(
@@ -5113,12 +5059,11 @@ export class ContactCenterInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.contactcenterinsights.v1.View | View}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.contactcenterinsights.v1.View|View}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/contact_center_insights.list_views.js</caption>
    * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ListViews_async

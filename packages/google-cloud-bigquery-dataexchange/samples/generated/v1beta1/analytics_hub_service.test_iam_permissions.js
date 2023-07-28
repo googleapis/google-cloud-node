@@ -39,7 +39,7 @@ function main(resource, permissions) {
    *  information see
    *  IAM Overview (https://cloud.google.com/iam/docs/overview#permissions).
    */
-  // const permissions = 'abc123'
+  // const permissions = ['abc','def']
 
   // Imports the Dataexchange library
   const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-data-exchange').v1beta1;
