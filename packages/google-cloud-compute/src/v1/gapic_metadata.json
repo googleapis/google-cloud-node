@@ -6724,6 +6724,11 @@
                 "insert"
               ]
             },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "setIamPolicy"
@@ -6771,6 +6776,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
               ]
             },
             "SetIamPolicy": {
