@@ -39,7 +39,7 @@ function main(parent, links) {
    *  `INVALID_ARGUMENT` error.
    *  Format: `projects/{project}/locations/{location}/links/{link}`.
    */
-  // const links = 'abc123'
+  // const links = ['abc','def']
   /**
    *  The maximum number of processes to return in a single page of the response.
    *  A page may contain fewer results than this value.

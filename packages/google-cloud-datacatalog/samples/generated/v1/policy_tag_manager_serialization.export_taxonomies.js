@@ -36,7 +36,7 @@ function main(parent, taxonomies) {
   /**
    *  Required. Resource names of the taxonomies to export.
    */
-  // const taxonomies = 'abc123'
+  // const taxonomies = ['abc','def']
   /**
    *  Serialized export taxonomies that contain all the policy
    *  tags as nested protocol buffers.

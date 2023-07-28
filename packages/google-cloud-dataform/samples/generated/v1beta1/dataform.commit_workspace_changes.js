@@ -44,7 +44,7 @@ function main(name, author) {
    *  Optional. Full file paths to commit including filename, rooted at workspace root. If
    *  left empty, all files will be committed.
    */
-  // const paths = 'abc123'
+  // const paths = ['abc','def']
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;

@@ -56,7 +56,7 @@ function main(reportJob) {
    *  Optional. List of keys specifying which report partitions to return.
    *  If empty, returns all partitions.
    */
-  // const partitionKeys = 'abc123'
+  // const partitionKeys = ['abc','def']
 
   // Imports the Channel library
   const {CloudChannelReportsServiceClient} = require('@google-cloud/channel').v1;

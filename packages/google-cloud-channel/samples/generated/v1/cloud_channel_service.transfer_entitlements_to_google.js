@@ -37,7 +37,7 @@ function main(parent, entitlements) {
   /**
    *  Required. The entitlements to transfer to Google.
    */
-  // const entitlements = 1234
+  // const entitlements = [1,2,3,4]
   /**
    *  Optional. You can specify an optional unique request ID, and if you need to
    *  retry your request, the server will know to ignore the request if it's
