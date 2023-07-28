@@ -107,7 +107,7 @@ function main(scope) {
    *  regular expression syntax. If the regular expression does not match any
    *  supported asset type, an INVALID_ARGUMENT error will be returned.
    */
-  // const assetTypes = 'abc123'
+  // const assetTypes = ['abc','def']
   /**
    *  Optional. The page size for search result pagination. Page size is capped
    *  at 500 even if a larger value is given. If set to zero, server will pick an

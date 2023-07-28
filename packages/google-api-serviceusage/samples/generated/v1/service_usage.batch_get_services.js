@@ -43,7 +43,7 @@ function main() {
    *  project number.
    *  A single request can get a maximum of 30 services at a time.
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Serviceusage library
   const {ServiceUsageClient} = require('@google-cloud/service-usage').v1;

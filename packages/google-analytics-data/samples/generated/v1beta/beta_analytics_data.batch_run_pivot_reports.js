@@ -43,7 +43,7 @@ function main() {
    *  Individual requests. Each request has a separate pivot report response.
    *  Each batch request is allowed up to 5 requests.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Data library
   const {BetaAnalyticsDataClient} = require('@google-analytics/data').v1beta;

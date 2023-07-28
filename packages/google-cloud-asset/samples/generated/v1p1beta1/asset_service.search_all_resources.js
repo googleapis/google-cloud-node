@@ -45,7 +45,7 @@ function main(scope) {
    *  Optional. A list of asset types that this request searches for. If empty,
    *  it will search all the supported asset types.
    */
-  // const assetTypes = 'abc123'
+  // const assetTypes = ['abc','def']
   /**
    *  Optional. The page size for search result pagination. Page size is capped
    *  at 500 even if a larger value is given. If set to zero, server will pick an

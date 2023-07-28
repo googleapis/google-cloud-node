@@ -19,7 +19,6 @@
   * [App_connections_service.resolve_app_connections](#app_connections_service.resolve_app_connections)
   * [App_connections_service.update_app_connection](#app_connections_service.update_app_connection)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -148,23 +147,6 @@ __Usage:__
 
 
 `node packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-beyondcorp-appconnections/samples/test/quickstart.js`
 
 
 

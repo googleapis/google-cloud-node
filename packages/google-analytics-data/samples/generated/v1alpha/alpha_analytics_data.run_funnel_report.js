@@ -44,7 +44,7 @@ function main() {
    *  ranges overlap, the event data for the overlapping days is included in the
    *  response rows for both date ranges.
    */
-  // const dateRanges = 1234
+  // const dateRanges = [1,2,3,4]
   /**
    *  The configuration of this request's funnel. This funnel configuration is
    *  required.
@@ -82,7 +82,7 @@ function main() {
    *  identified by its name.
    *  The segments parameter is optional. Requests are limited to 4 segments.
    */
-  // const segments = 1234
+  // const segments = [1,2,3,4]
   /**
    *  The number of rows to return. If unspecified, 10,000 rows are returned. The
    *  API returns a maximum of 250,000 rows per request, no matter how many you

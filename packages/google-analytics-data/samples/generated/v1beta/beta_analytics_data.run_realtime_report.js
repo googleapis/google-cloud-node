@@ -39,11 +39,11 @@ function main() {
   /**
    *  The dimensions requested and displayed.
    */
-  // const dimensions = 1234
+  // const dimensions = [1,2,3,4]
   /**
    *  The metrics requested and displayed.
    */
-  // const metrics = 1234
+  // const metrics = [1,2,3,4]
   /**
    *  The filter clause of dimensions. Metrics cannot be used in this filter.
    */
@@ -68,11 +68,11 @@ function main() {
    *  Aggregation of metrics. Aggregated metric values will be shown in rows
    *  where the dimension_values are set to "RESERVED_(MetricAggregation)".
    */
-  // const metricAggregations = 1234
+  // const metricAggregations = [1,2,3,4]
   /**
    *  Specifies how rows are ordered in the response.
    */
-  // const orderBys = 1234
+  // const orderBys = [1,2,3,4]
   /**
    *  Toggles whether to return the current state of this Analytics Property's
    *  Realtime quota. Quota is returned in PropertyQuota (#PropertyQuota).
@@ -85,7 +85,7 @@ function main() {
    *  If two minute ranges overlap, the event data for the overlapping minutes is
    *  included in the response rows for both minute ranges.
    */
-  // const minuteRanges = 1234
+  // const minuteRanges = [1,2,3,4]
 
   // Imports the Data library
   const {BetaAnalyticsDataClient} = require('@google-analytics/data').v1beta;

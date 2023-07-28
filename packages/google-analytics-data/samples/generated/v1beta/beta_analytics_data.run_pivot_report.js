@@ -42,13 +42,13 @@ function main() {
    *  The dimensions requested. All defined dimensions must be used by one of the
    *  following: dimension_expression, dimension_filter, pivots, order_bys.
    */
-  // const dimensions = 1234
+  // const dimensions = [1,2,3,4]
   /**
    *  The metrics requested, at least one metric needs to be specified. All
    *  defined metrics must be used by one of the following: metric_expression,
    *  metric_filter, order_bys.
    */
-  // const metrics = 1234
+  // const metrics = [1,2,3,4]
   /**
    *  The date range to retrieve event data for the report. If multiple date
    *  ranges are specified, event data from each date range is used in the
@@ -56,14 +56,14 @@ function main() {
    *  a Pivot's field names; if included, the report compares between date
    *  ranges. In a cohort request, this `dateRanges` must be unspecified.
    */
-  // const dateRanges = 1234
+  // const dateRanges = [1,2,3,4]
   /**
    *  Describes the visual format of the report's dimensions in columns or rows.
    *  The union of the fieldNames (dimension names) in all pivots must be a
    *  subset of dimension names defined in Dimensions. No two pivots can share a
    *  dimension. A dimension is only visible if it appears in a pivot.
    */
-  // const pivots = 1234
+  // const pivots = [1,2,3,4]
   /**
    *  The filter clause of dimensions. Dimensions must be requested to be used in
    *  this filter. Metrics cannot be used in this filter.

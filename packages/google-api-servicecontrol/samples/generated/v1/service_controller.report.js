@@ -47,7 +47,7 @@ function main() {
    *  ReportResponse.report_errors google.api.servicecontrol.v1.ReportResponse.report_errors 
    *  for partial failure behavior.
    */
-  // const operations = 1234
+  // const operations = [1,2,3,4]
   /**
    *  Specifies which version of service config should be used to process the
    *  request.
