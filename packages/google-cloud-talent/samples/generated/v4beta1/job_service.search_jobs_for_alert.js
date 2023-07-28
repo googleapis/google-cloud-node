@@ -164,7 +164,7 @@ function main(parent, requestMetadata) {
    *  * `count(numeric_custom_attribute"some-numeric-custom-attribute",
    *    bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"))`
    */
-  // const histogramQueries = 1234
+  // const histogramQueries = [1,2,3,4]
   /**
    *  The desired job attributes returned for jobs in the search response.
    *  Defaults to

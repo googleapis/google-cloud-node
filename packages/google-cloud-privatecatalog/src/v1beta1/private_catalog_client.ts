@@ -41,24 +41,24 @@ const version = require('../../../package.json').version;
  *  `PrivateCatalog` allows catalog consumers to retrieve `Catalog`, `Product`
  *  and `Version` resources under a target resource context.
  *
- *  `Catalog` is computed based on the {@link |Association}s linked to the target
+ *  `Catalog` is computed based on the {@link protos.|Association}s linked to the target
  *  resource and its ancestors. Each association's
- *  {@link |google.cloud.privatecatalogproducer.v1beta.Catalog} is transformed into a
+ *  {@link protos.|google.cloud.privatecatalogproducer.v1beta.Catalog} is transformed into a
  *  `Catalog`. If multiple associations have the same parent
- *  {@link |google.cloud.privatecatalogproducer.v1beta.Catalog}, they are
+ *  {@link protos.|google.cloud.privatecatalogproducer.v1beta.Catalog}, they are
  *  de-duplicated into one `Catalog`. Users must have
  *  `cloudprivatecatalog.catalogTargets.get` IAM permission on the resource
  *  context in order to access catalogs. `Catalog` contains the resource name and
  *  a subset of data of the original
- *  {@link |google.cloud.privatecatalogproducer.v1beta.Catalog}.
+ *  {@link protos.|google.cloud.privatecatalogproducer.v1beta.Catalog}.
  *
  *  `Product` is child resource of the catalog. A `Product` contains the resource
  *  name and a subset of the data of the original
- *  {@link |google.cloud.privatecatalogproducer.v1beta.Product}.
+ *  {@link protos.|google.cloud.privatecatalogproducer.v1beta.Product}.
  *
  *  `Version` is child resource of the product. A `Version` contains the resource
  *  name and a subset of the data of the original
- *  {@link |google.cloud.privatecatalogproducer.v1beta.Version}.
+ *  {@link protos.|google.cloud.privatecatalogproducer.v1beta.Version}.
  * @class
  * @memberof v1beta1
  */
@@ -369,7 +369,7 @@ export class PrivateCatalogClient {
   // -------------------
 
   /**
-   * Search {@link google.cloud.privatecatalog.v1beta1.Catalog|Catalog} resources that consumers have access to, within the
+   * Search {@link protos.google.cloud.privatecatalog.v1beta1.Catalog|Catalog} resources that consumers have access to, within the
    * scope of the consumer cloud resource hierarchy context.
    *
    * @param {Object} request
@@ -392,14 +392,13 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.privatecatalog.v1beta1.Catalog | Catalog}.
+   *   The first element of the array is Array of {@link protos.google.cloud.privatecatalog.v1beta1.Catalog|Catalog}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchCatalogsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchCatalogs(
@@ -499,13 +498,12 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.privatecatalog.v1beta1.Catalog | Catalog} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.privatecatalog.v1beta1.Catalog|Catalog} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchCatalogsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchCatalogsStream(
@@ -554,12 +552,11 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.privatecatalog.v1beta1.Catalog | Catalog}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.privatecatalog.v1beta1.Catalog|Catalog}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/private_catalog.search_catalogs.js</caption>
    * region_tag:cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchCatalogs_async
@@ -586,13 +583,13 @@ export class PrivateCatalogClient {
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.ICatalog>;
   }
   /**
-   * Search {@link google.cloud.privatecatalog.v1beta1.Product|Product} resources that consumers have access to, within the
+   * Search {@link protos.google.cloud.privatecatalog.v1beta1.Product|Product} resources that consumers have access to, within the
    * scope of the consumer cloud resource hierarchy context.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   Required. The name of the resource context. See {@link google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
+   *   Required. The name of the resource context. See {@link protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
    *   for details.
    * @param {string} request.query
    *   The query to filter the products.
@@ -610,14 +607,13 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.privatecatalog.v1beta1.Product | Product}.
+   *   The first element of the array is Array of {@link protos.google.cloud.privatecatalog.v1beta1.Product|Product}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchProductsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchProducts(
@@ -700,7 +696,7 @@ export class PrivateCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   Required. The name of the resource context. See {@link google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
+   *   Required. The name of the resource context. See {@link protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
    *   for details.
    * @param {string} request.query
    *   The query to filter the products.
@@ -718,13 +714,12 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.privatecatalog.v1beta1.Product | Product} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.privatecatalog.v1beta1.Product|Product} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchProductsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchProductsStream(
@@ -756,7 +751,7 @@ export class PrivateCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   Required. The name of the resource context. See {@link google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
+   *   Required. The name of the resource context. See {@link protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
    *   for details.
    * @param {string} request.query
    *   The query to filter the products.
@@ -774,12 +769,11 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.privatecatalog.v1beta1.Product | Product}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.privatecatalog.v1beta1.Product|Product}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/private_catalog.search_products.js</caption>
    * region_tag:cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchProducts_async
@@ -806,13 +800,13 @@ export class PrivateCatalogClient {
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.IProduct>;
   }
   /**
-   * Search {@link google.cloud.privatecatalog.v1beta1.Version|Version} resources that consumers have access to, within the
+   * Search {@link protos.google.cloud.privatecatalog.v1beta1.Version|Version} resources that consumers have access to, within the
    * scope of the consumer cloud resource hierarchy context.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   Required. The name of the resource context. See {@link google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
+   *   Required. The name of the resource context. See {@link protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
    *   for details.
    * @param {string} request.query
    *   Required. The query to filter the versions.
@@ -830,14 +824,13 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.privatecatalog.v1beta1.Version | Version}.
+   *   The first element of the array is Array of {@link protos.google.cloud.privatecatalog.v1beta1.Version|Version}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchVersions(
@@ -920,7 +913,7 @@ export class PrivateCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   Required. The name of the resource context. See {@link google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
+   *   Required. The name of the resource context. See {@link protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
    *   for details.
    * @param {string} request.query
    *   Required. The query to filter the versions.
@@ -938,13 +931,12 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.privatecatalog.v1beta1.Version | Version} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.privatecatalog.v1beta1.Version|Version} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchVersionsStream(
@@ -976,7 +968,7 @@ export class PrivateCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
-   *   Required. The name of the resource context. See {@link google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
+   *   Required. The name of the resource context. See {@link protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource|SearchCatalogsRequest.resource}
    *   for details.
    * @param {string} request.query
    *   Required. The query to filter the versions.
@@ -994,12 +986,11 @@ export class PrivateCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.privatecatalog.v1beta1.Version | Version}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.privatecatalog.v1beta1.Version|Version}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/private_catalog.search_versions.js</caption>
    * region_tag:cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchVersions_async

@@ -43,8 +43,8 @@ const version = require('../../../package.json').version;
  *  Manages secrets and operations using those secrets. Implements a REST
  *  model with the following objects:
  *
- *  * {@link google.cloud.secretmanager.v1.Secret|Secret}
- *  * {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}
+ *  * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}
+ *  * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}
  * @class
  * @memberof v1
  */
@@ -364,13 +364,13 @@ export class SecretManagerServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new {@link google.cloud.secretmanager.v1.Secret|Secret} containing no {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersions}.
+   * Creates a new {@link protos.google.cloud.secretmanager.v1.Secret|Secret} containing no {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project to associate with the
-   *   {@link google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/*`.
    * @param {string} request.secretId
    *   Required. This must be unique within the project.
    *
@@ -378,13 +378,12 @@ export class SecretManagerServiceClient {
    *   contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
    *   underscore (`_`) characters.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
-   *   Required. A {@link google.cloud.secretmanager.v1.Secret|Secret} with initial field values.
+   *   Required. A {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with initial field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.Secret | Secret}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.create_secret.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_CreateSecret_async
@@ -464,22 +463,21 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.createSecret(request, options, callback);
   }
   /**
-   * Creates a new {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} containing secret data and attaches
-   * it to an existing {@link google.cloud.secretmanager.v1.Secret|Secret}.
+   * Creates a new {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} containing secret data and attaches
+   * it to an existing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret} to associate with the
-   *   {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format `projects/* /secrets/*`.
    * @param {google.cloud.secretmanager.v1.SecretPayload} request.payload
-   *   Required. The secret payload of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Required. The secret payload of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.add_secret_version.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_AddSecretVersion_async
@@ -559,18 +557,17 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.addSecretVersion(request, options, callback);
   }
   /**
-   * Gets metadata for a given {@link google.cloud.secretmanager.v1.Secret|Secret}.
+   * Gets metadata for a given {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/* /secrets/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.Secret | Secret}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.get_secret.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_GetSecret_async
@@ -644,20 +641,19 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.getSecret(request, options, callback);
   }
   /**
-   * Updates metadata of an existing {@link google.cloud.secretmanager.v1.Secret|Secret}.
+   * Updates metadata of an existing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
-   *   Required. {@link google.cloud.secretmanager.v1.Secret|Secret} with updated field values.
+   *   Required. {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with updated field values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Specifies the fields to be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.Secret | Secret}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.update_secret.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_UpdateSecret_async
@@ -737,23 +733,22 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.updateSecret(request, options, callback);
   }
   /**
-   * Deletes a {@link google.cloud.secretmanager.v1.Secret|Secret}.
+   * Deletes a {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
    *   `projects/* /secrets/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.Secret|Secret}. The request succeeds if it matches
+   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. The request succeeds if it matches
    *   the etag of the currently stored secret object. If the etag is omitted,
    *   the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.delete_secret.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_DeleteSecret_async
@@ -833,25 +828,24 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.deleteSecret(request, options, callback);
   }
   /**
-   * Gets metadata for a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * Gets metadata for a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   * created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
    *
    *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   *   created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.get_secret_version.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_GetSecretVersion_async
@@ -931,25 +925,24 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.getSecretVersion(request, options, callback);
   }
   /**
-   * Accesses a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. This call returns the secret data.
+   * Accesses a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. This call returns the secret data.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   * created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
    *
    *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   *   created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.AccessSecretVersionResponse | AccessSecretVersionResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.AccessSecretVersionResponse|AccessSecretVersionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.access_secret_version.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_AccessSecretVersion_async
@@ -1035,26 +1028,25 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.accessSecretVersion(request, options, callback);
   }
   /**
-   * Disables a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * Disables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
-   * {@link google.cloud.secretmanager.v1.SecretVersion.State.DISABLED|DISABLED}.
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DISABLED|DISABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
+   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
    *   the etag of the currently stored secret version object. If the etag is
    *   omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.disable_secret_version.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_DisableSecretVersion_async
@@ -1140,26 +1132,25 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.disableSecretVersion(request, options, callback);
   }
   /**
-   * Enables a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * Enables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
-   * {@link google.cloud.secretmanager.v1.SecretVersion.State.ENABLED|ENABLED}.
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.ENABLED|ENABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
+   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
    *   the etag of the currently stored secret version object. If the etag is
    *   omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.enable_secret_version.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_EnableSecretVersion_async
@@ -1245,27 +1236,26 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.enableSecretVersion(request, options, callback);
   }
   /**
-   * Destroys a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * Destroys a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
-   * {@link google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED|DESTROYED} and irrevocably destroys the
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED|DESTROYED} and irrevocably destroys the
    * secret data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in the format
    *   `projects/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
+   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
    *   the etag of the currently stored secret version object. If the etag is
    *   omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.destroy_secret_version.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_DestroySecretVersion_async
@@ -1354,8 +1344,8 @@ export class SecretManagerServiceClient {
    * Sets the access control policy on the specified secret. Replaces any
    * existing policy.
    *
-   * Permissions on {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersions} are enforced according
-   * to the policy set on the associated {@link google.cloud.secretmanager.v1.Secret|Secret}.
+   * Permissions on {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} are enforced according
+   * to the policy set on the associated {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1376,9 +1366,8 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.set_iam_policy.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_SetIamPolicy_async
@@ -1464,9 +1453,8 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.get_iam_policy.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_GetIamPolicy_async
@@ -1559,9 +1547,8 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.test_iam_permissions.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_TestIamPermissions_async
@@ -1634,20 +1621,20 @@ export class SecretManagerServiceClient {
   }
 
   /**
-   * Lists {@link google.cloud.secretmanager.v1.Secret|Secrets}.
+   * Lists {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
    *   number is greater than 25000, it is capped at 25000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
-   *   {@link google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
+   *   {@link protos.google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Filter string, adhering to the rules in
    *   [List-operation
@@ -1657,14 +1644,13 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.secretmanager.v1.Secret | Secret}.
+   *   The first element of the array is Array of {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSecretsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSecrets(
@@ -1748,14 +1734,14 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
    *   number is greater than 25000, it is capped at 25000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
-   *   {@link google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
+   *   {@link protos.google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Filter string, adhering to the rules in
    *   [List-operation
@@ -1765,13 +1751,12 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.secretmanager.v1.Secret | Secret} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.secretmanager.v1.Secret|Secret} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSecretsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSecretsStream(
@@ -1804,14 +1789,14 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
    *   number is greater than 25000, it is capped at 25000.
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
-   *   {@link google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
+   *   {@link protos.google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
    * @param {string} [request.filter]
    *   Optional. Filter string, adhering to the rules in
    *   [List-operation
@@ -1821,12 +1806,11 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.secretmanager.v1.Secret | Secret}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.list_secrets.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_ListSecrets_async
@@ -1853,14 +1837,14 @@ export class SecretManagerServiceClient {
     ) as AsyncIterable<protos.google.cloud.secretmanager.v1.ISecret>;
   }
   /**
-   * Lists {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersions}. This call does not return secret
+   * Lists {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}. This call does not return secret
    * data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
    *   `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
@@ -1878,14 +1862,13 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}.
+   *   The first element of the array is Array of {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSecretVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSecretVersions(
@@ -1968,8 +1951,8 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
    *   `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
@@ -1987,13 +1970,12 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSecretVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSecretVersionsStream(
@@ -2025,8 +2007,8 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
+   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
    *   `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
@@ -2044,12 +2026,11 @@ export class SecretManagerServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.secretmanager.v1.SecretVersion | SecretVersion}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/secret_manager_service.list_secret_versions.js</caption>
    * region_tag:secretmanager_v1_generated_SecretManagerService_ListSecretVersions_async

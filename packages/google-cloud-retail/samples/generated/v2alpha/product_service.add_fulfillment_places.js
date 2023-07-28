@@ -71,7 +71,7 @@ function main(product, type, placeIds) {
    *  type google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type  after
    *  adding, then the update will be rejected.
    */
-  // const placeIds = 'abc123'
+  // const placeIds = ['abc','def']
   /**
    *  The time when the fulfillment updates are issued, used to prevent
    *  out-of-order updates on fulfillment information. If not provided, the

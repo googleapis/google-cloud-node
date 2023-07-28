@@ -326,7 +326,7 @@ export class PublicCertificateAuthorityServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new {@link google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
+   * Creates a new {@link protos.google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -342,9 +342,8 @@ export class PublicCertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.security.publicca.v1beta1.ExternalAccountKey | ExternalAccountKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js</caption>
    * region_tag:publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_async
