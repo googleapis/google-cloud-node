@@ -559,7 +559,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuild,
       protos.google.devtools.cloudbuild.v1.IGetBuildRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getBuild(
@@ -599,7 +599,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuild,
       protos.google.devtools.cloudbuild.v1.IGetBuildRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -661,7 +661,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuild,
       protos.google.devtools.cloudbuild.v1.ICancelBuildRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   cancelBuild(
@@ -707,7 +707,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuild,
       protos.google.devtools.cloudbuild.v1.ICancelBuildRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -774,7 +774,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createBuildTrigger(
@@ -823,7 +823,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -885,7 +885,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuildTrigger,
       protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getBuildTrigger(
@@ -931,7 +931,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuildTrigger,
       protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -998,7 +998,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteBuildTrigger(
@@ -1047,7 +1047,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1113,7 +1113,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   updateBuildTrigger(
@@ -1162,7 +1162,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1232,7 +1232,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   receiveTriggerWebhook(
@@ -1281,7 +1281,7 @@ export class CloudBuildClient {
         | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1328,7 +1328,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IWorkerPool,
       protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getWorkerPool(
@@ -1374,7 +1374,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IWorkerPool,
       protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1448,7 +1448,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createBuild(
@@ -1501,7 +1501,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1626,7 +1626,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   retryBuild(
@@ -1679,7 +1679,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1783,7 +1783,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   approveBuild(
@@ -1836,7 +1836,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1946,7 +1946,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   runBuildTrigger(
@@ -1999,7 +1999,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2107,7 +2107,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createWorkerPool(
@@ -2160,7 +2160,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2265,7 +2265,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteWorkerPool(
@@ -2318,7 +2318,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2424,7 +2424,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   updateWorkerPool(
@@ -2477,7 +2477,7 @@ export class CloudBuildClient {
         protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -2593,7 +2593,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuild[],
       protos.google.devtools.cloudbuild.v1.IListBuildsRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListBuildsResponse,
+      protos.google.devtools.cloudbuild.v1.IListBuildsResponse
     ]
   >;
   listBuilds(
@@ -2639,7 +2639,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuild[],
       protos.google.devtools.cloudbuild.v1.IListBuildsRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListBuildsResponse,
+      protos.google.devtools.cloudbuild.v1.IListBuildsResponse
     ]
   > | void {
     request = request || {};
@@ -2843,7 +2843,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuildTrigger[],
       protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse,
+      protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse
     ]
   >;
   listBuildTriggers(
@@ -2889,7 +2889,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IBuildTrigger[],
       protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse,
+      protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse
     ]
   > | void {
     request = request || {};
@@ -3071,7 +3071,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IWorkerPool[],
       protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
     ]
   >;
   listWorkerPools(
@@ -3117,7 +3117,7 @@ export class CloudBuildClient {
     [
       protos.google.devtools.cloudbuild.v1.IWorkerPool[],
       protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
     ]
   > | void {
     request = request || {};

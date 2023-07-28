@@ -521,7 +521,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IConnection,
       protos.google.devtools.cloudbuild.v2.IGetConnectionRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getConnection(
@@ -567,7 +567,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IConnection,
       protos.google.devtools.cloudbuild.v2.IGetConnectionRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -612,7 +612,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IRepository,
       protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   getRepository(
@@ -658,7 +658,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IRepository,
       protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -706,7 +706,7 @@ export class RepositoryManagerClient {
         | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   fetchReadWriteToken(
@@ -755,7 +755,7 @@ export class RepositoryManagerClient {
         | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -800,7 +800,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
       protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   fetchReadToken(
@@ -846,7 +846,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
       protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -893,7 +893,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
       protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   fetchGitRefs(
@@ -939,7 +939,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
       protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -997,7 +997,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createConnection(
@@ -1050,7 +1050,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1145,7 +1145,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   updateConnection(
@@ -1198,7 +1198,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1288,7 +1288,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteConnection(
@@ -1341,7 +1341,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1433,7 +1433,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   createRepository(
@@ -1486,7 +1486,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1574,7 +1574,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   batchCreateRepositories(
@@ -1627,7 +1627,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1721,7 +1721,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   deleteRepository(
@@ -1774,7 +1774,7 @@ export class RepositoryManagerClient {
         protos.google.devtools.cloudbuild.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1860,7 +1860,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IConnection[],
       protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
+      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
     ]
   >;
   listConnections(
@@ -1906,7 +1906,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IConnection[],
       protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
+      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
     ]
   > | void {
     request = request || {};
@@ -2054,7 +2054,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IRepository[],
       protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
+      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
     ]
   >;
   listRepositories(
@@ -2100,7 +2100,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IRepository[],
       protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
+      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
     ]
   > | void {
     request = request || {};
@@ -2254,7 +2254,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IRepository[],
       protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
+      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
     ]
   >;
   fetchLinkableRepositories(
@@ -2300,7 +2300,7 @@ export class RepositoryManagerClient {
     [
       protos.google.devtools.cloudbuild.v2.IRepository[],
       protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
+      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
     ]
   > | void {
     request = request || {};
