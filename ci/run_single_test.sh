@@ -65,7 +65,7 @@ samples)
     retval=$?
     ;;
 system)
-    npm system-test
+    npm run system-test
     retval=$?
     ;;
 units)
