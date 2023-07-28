@@ -47,7 +47,7 @@ function main(parent) {
   /**
    *  Uncompressed raw byte content for test cases.
    */
-  // const content = 'Buffer.from('string')'
+  // const content = Buffer.from('string')
 
   // Imports the Cx library
   const {TestCasesClient} = require('@google-cloud/dialogflow-cx').v3beta1;

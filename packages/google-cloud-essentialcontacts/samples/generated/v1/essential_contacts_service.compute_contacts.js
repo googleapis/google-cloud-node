@@ -39,7 +39,7 @@ function main(parent) {
    *  in this list, contacts subscribed to any notification category will be
    *  returned.
    */
-  // const notificationCategories = 1234
+  // const notificationCategories = [1,2,3,4]
   /**
    *  Optional. The maximum number of results to return from this request.
    *  Non-positive values are ignored. The presence of `next_page_token` in the
