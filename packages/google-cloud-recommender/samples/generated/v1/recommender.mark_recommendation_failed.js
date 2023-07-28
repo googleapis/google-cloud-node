@@ -38,7 +38,7 @@ function main(name, etag) {
    *  Keys must match the regex `/^[a-z0-9][a-z0-9_.-]{0,62}$/`.
    *  Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    */
-  // const stateMetadata = 1234
+  // const stateMetadata = [1,2,3,4]
   /**
    *  Required. Fingerprint of the Recommendation. Provides optimistic locking.
    */

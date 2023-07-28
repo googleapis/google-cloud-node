@@ -430,9 +430,8 @@ export class JobServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.create_job.js</caption>
    * region_tag:jobs_v4_generated_JobService_CreateJob_async
@@ -518,9 +517,8 @@ export class JobServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.get_job.js</caption>
    * region_tag:jobs_v4_generated_JobService_GetJob_async
@@ -604,19 +602,18 @@ export class JobServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Strongly recommended for the best service experience.
    *
-   *   If {@link google.cloud.talent.v4.UpdateJobRequest.update_mask|update_mask} is
+   *   If {@link protos.google.cloud.talent.v4.UpdateJobRequest.update_mask|update_mask} is
    *   provided, only the specified fields in
-   *   {@link google.cloud.talent.v4.UpdateJobRequest.job|job} are updated. Otherwise
+   *   {@link protos.google.cloud.talent.v4.UpdateJobRequest.job|job} are updated. Otherwise
    *   all the fields are updated.
    *
    *   A field mask to restrict the fields that are updated. Only
-   *   top level fields of {@link google.cloud.talent.v4.Job|Job} are supported.
+   *   top level fields of {@link protos.google.cloud.talent.v4.Job|Job} are supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.update_job.js</caption>
    * region_tag:jobs_v4_generated_JobService_UpdateJob_async
@@ -704,9 +701,8 @@ export class JobServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.delete_job.js</caption>
    * region_tag:jobs_v4_generated_JobService_DeleteJob_async
@@ -779,10 +775,10 @@ export class JobServiceClient {
   }
   /**
    * Searches for jobs using the provided
-   * {@link google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
+   * {@link protos.google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
    *
    * This call constrains the
-   * {@link google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
+   * {@link protos.google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
    * database, and only returns jobs that the caller has permission to search
    * against.
    *
@@ -797,7 +793,7 @@ export class JobServiceClient {
    *   Mode of a search.
    *
    *   Defaults to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
    * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
    *   Required. The meta information collected about the job searcher, used to
    *   improve the search quality of the service. The identifiers (such as
@@ -826,7 +822,7 @@ export class JobServiceClient {
    *
    *   Data types:
    *
-   *   * Histogram facet: facet names with format `{@link a-zA-Z0-9_|a-zA-Z}+`.
+   *   * Histogram facet: facet names with format `{@link protos.a-zA-Z0-9_|a-zA-Z}+`.
    *   * String: string like "any string with backslash escape for quote(\")."
    *   * Number: whole number and floating point number like 10, -1 and -0.01.
    *   * List: list of elements with comma(,) separator surrounded by square
@@ -846,31 +842,31 @@ export class JobServiceClient {
    *   Job histogram facets:
    *
    *   * company_display_name: histogram by
-   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
+   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
    *   * employment_type: histogram by
-   *   {@link google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
+   *   {@link protos.google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
    *   example,
    *     "FULL_TIME", "PART_TIME".
    *   * company_size (DEPRECATED): histogram by
-   *   {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
+   *   {@link protos.google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
    *   "MEDIUM", "BIG".
    *   * publish_time_in_day: histogram by the
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in days.
    *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_month: histogram by the
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_year: histogram by the
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in years.
    *     Must specify list of numeric buckets in spec.
    *   * degree_types: histogram by the
-   *   {@link google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
+   *   {@link protos.google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
    *     "Bachelors", "Masters".
    *   * job_level: histogram by the
-   *   {@link google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
+   *   {@link protos.google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
    *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
@@ -886,17 +882,17 @@ export class JobServiceClient {
    *     coordinates of a city center can change, customers may need to refresh
    *     them periodically.
    *   * locale: histogram by the
-   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
+   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
    *   "en-US",
    *     "fr-FR".
    *   * language: histogram by the language subtag of the
-   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code},
+   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code},
    *     for example, "en", "fr".
    *   * category: histogram by the
-   *   {@link google.cloud.talent.v4.JobCategory|JobCategory}, for example,
+   *   {@link protos.google.cloud.talent.v4.JobCategory|JobCategory}, for example,
    *     "COMPUTER_AND_IT", "HEALTHCARE".
    *   * base_compensation_unit: histogram by the
-   *     {@link google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
    *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
    *     numeric buckets to group results by.
@@ -905,11 +901,11 @@ export class JobServiceClient {
    *   * annualized_total_compensation: histogram by the total annualized salary.
    *     Must specify list of numeric buckets to group results by.
    *   * string_custom_attribute: histogram by string
-   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     string_custom_attribute["key1"].
    *   * numeric_custom_attribute: histogram by numeric
-   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
    *     group results by.
@@ -925,13 +921,13 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
    *   Defaults to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
    *   no value is specified.
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -946,7 +942,7 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The token specifying the current offset within
    *   search results. See
-   *   {@link google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
    *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. Default is
@@ -958,34 +954,34 @@ export class JobServiceClient {
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
    *   * `"posting_publish_time desc"`: By
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     descending.
    *   * `"posting_update_time desc"`: By
-   *   {@link google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
    *     descending.
-   *   * `"title"`: By {@link google.cloud.talent.v4.Job.title|Job.title} ascending.
-   *   * `"title desc"`: By {@link google.cloud.talent.v4.Job.title|Job.title}
+   *   * `"title"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title} ascending.
+   *   * `"title desc"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title}
    *   descending.
    *   * `"annualized_base_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
    *   * `"annualized_base_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
    *   * `"annualized_total_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
    *   * `"annualized_total_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
    *   * `"custom_ranking desc"`: By the relevance score adjusted to the
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
+   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
    *     with weight factor assigned by
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
+   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
    *     in descending order.
    *   * Location sorting: Use the special syntax to order jobs by distance:<br>
    *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
@@ -1001,7 +997,7 @@ export class JobServiceClient {
    *     don't have locations will be ranked at the bottom. Distance is calculated
    *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
    *     still applied unless explicitly disabled in
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
+   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
    * @param {google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
    *   Controls whether highly similar jobs are returned next to each other in
    *   the search results. Jobs are identified as highly similar based on
@@ -1011,30 +1007,30 @@ export class JobServiceClient {
    *   being displayed lower down in the results.
    *
    *   Defaults to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
    *   if no value is specified.
    * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
    *   This field is deprecated. Please use
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
    *   going forward.
    *
    *   To migrate, disable_keyword_match set to false maps to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
    *   and disable_keyword_match set to true maps to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
    *   If
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
    *   is set, this field is ignored.
    *
    *   Controls whether to disable exact keyword match on
-   *   {@link google.cloud.talent.v4.Job.title|Job.title},
-   *   {@link google.cloud.talent.v4.Job.description|Job.description},
-   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
-   *   {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
-   *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
+   *   {@link protos.google.cloud.talent.v4.Job.title|Job.title},
+   *   {@link protos.google.cloud.talent.v4.Job.description|Job.description},
+   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
+   *   {@link protos.google.cloud.talent.v4.Job.addresses|Job.addresses},
+   *   {@link protos.google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
    *   disable keyword match is turned off, a keyword match returns jobs that do
    *   not match given category filters when there are matching keywords. For
    *   example, for the query "program manager," a result is returned even if the
@@ -1047,7 +1043,7 @@ export class JobServiceClient {
    *   regardless of this flag's value.
    *
    *   Use
-   *   {@link google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
+   *   {@link protos.google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
    *   if company-specific globally matched custom field/attribute string values
    *   are needed. Enabling keyword match improves recall of subsequent search
    *   requests.
@@ -1058,14 +1054,13 @@ export class JobServiceClient {
    *   disable_keyword_match are set, keyword_match_mode will take precedence.
    *
    *   Defaults to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
    *   if no value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4.SearchJobsResponse | SearchJobsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.SearchJobsResponse|SearchJobsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.search_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_SearchJobs_async
@@ -1138,7 +1133,7 @@ export class JobServiceClient {
   }
   /**
    * Searches for jobs using the provided
-   * {@link google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
+   * {@link protos.google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
    *
    * This API call is intended for the use case of targeting passive job
    * seekers (for example, job seekers who have signed up to receive email
@@ -1146,7 +1141,7 @@ export class JobServiceClient {
    * adjustments that are designed to specifically target passive job seekers.
    *
    * This call constrains the
-   * {@link google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
+   * {@link protos.google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
    * database, and only returns jobs the caller has permission to search
    * against.
    *
@@ -1161,7 +1156,7 @@ export class JobServiceClient {
    *   Mode of a search.
    *
    *   Defaults to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
    * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
    *   Required. The meta information collected about the job searcher, used to
    *   improve the search quality of the service. The identifiers (such as
@@ -1190,7 +1185,7 @@ export class JobServiceClient {
    *
    *   Data types:
    *
-   *   * Histogram facet: facet names with format `{@link a-zA-Z0-9_|a-zA-Z}+`.
+   *   * Histogram facet: facet names with format `{@link protos.a-zA-Z0-9_|a-zA-Z}+`.
    *   * String: string like "any string with backslash escape for quote(\")."
    *   * Number: whole number and floating point number like 10, -1 and -0.01.
    *   * List: list of elements with comma(,) separator surrounded by square
@@ -1210,31 +1205,31 @@ export class JobServiceClient {
    *   Job histogram facets:
    *
    *   * company_display_name: histogram by
-   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
+   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
    *   * employment_type: histogram by
-   *   {@link google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
+   *   {@link protos.google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
    *   example,
    *     "FULL_TIME", "PART_TIME".
    *   * company_size (DEPRECATED): histogram by
-   *   {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
+   *   {@link protos.google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
    *   "MEDIUM", "BIG".
    *   * publish_time_in_day: histogram by the
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in days.
    *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_month: histogram by the
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_year: histogram by the
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in years.
    *     Must specify list of numeric buckets in spec.
    *   * degree_types: histogram by the
-   *   {@link google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
+   *   {@link protos.google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
    *     "Bachelors", "Masters".
    *   * job_level: histogram by the
-   *   {@link google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
+   *   {@link protos.google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
    *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
@@ -1250,17 +1245,17 @@ export class JobServiceClient {
    *     coordinates of a city center can change, customers may need to refresh
    *     them periodically.
    *   * locale: histogram by the
-   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
+   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
    *   "en-US",
    *     "fr-FR".
    *   * language: histogram by the language subtag of the
-   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code},
+   *   {@link protos.google.cloud.talent.v4.Job.language_code|Job.language_code},
    *     for example, "en", "fr".
    *   * category: histogram by the
-   *   {@link google.cloud.talent.v4.JobCategory|JobCategory}, for example,
+   *   {@link protos.google.cloud.talent.v4.JobCategory|JobCategory}, for example,
    *     "COMPUTER_AND_IT", "HEALTHCARE".
    *   * base_compensation_unit: histogram by the
-   *     {@link google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
    *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
    *     numeric buckets to group results by.
@@ -1269,11 +1264,11 @@ export class JobServiceClient {
    *   * annualized_total_compensation: histogram by the total annualized salary.
    *     Must specify list of numeric buckets to group results by.
    *   * string_custom_attribute: histogram by string
-   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     string_custom_attribute["key1"].
    *   * numeric_custom_attribute: histogram by numeric
-   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   {@link protos.google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
    *     group results by.
@@ -1289,13 +1284,13 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
    *   Defaults to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
    *   no value is specified.
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -1310,7 +1305,7 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The token specifying the current offset within
    *   search results. See
-   *   {@link google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
    *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. Default is
@@ -1322,34 +1317,34 @@ export class JobServiceClient {
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
    *   * `"posting_publish_time desc"`: By
-   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     descending.
    *   * `"posting_update_time desc"`: By
-   *   {@link google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
+   *   {@link protos.google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
    *     descending.
-   *   * `"title"`: By {@link google.cloud.talent.v4.Job.title|Job.title} ascending.
-   *   * `"title desc"`: By {@link google.cloud.talent.v4.Job.title|Job.title}
+   *   * `"title"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title} ascending.
+   *   * `"title desc"`: By {@link protos.google.cloud.talent.v4.Job.title|Job.title}
    *   descending.
    *   * `"annualized_base_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
    *   * `"annualized_base_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
    *   * `"annualized_total_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
    *   * `"annualized_total_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     {@link protos.google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
    *   * `"custom_ranking desc"`: By the relevance score adjusted to the
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
+   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
    *     with weight factor assigned by
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
+   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
    *     in descending order.
    *   * Location sorting: Use the special syntax to order jobs by distance:<br>
    *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
@@ -1365,7 +1360,7 @@ export class JobServiceClient {
    *     don't have locations will be ranked at the bottom. Distance is calculated
    *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
    *     still applied unless explicitly disabled in
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
+   *     {@link protos.google.cloud.talent.v4.SearchJobsRequest.diversification_level|diversification_level}.
    * @param {google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel} request.diversificationLevel
    *   Controls whether highly similar jobs are returned next to each other in
    *   the search results. Jobs are identified as highly similar based on
@@ -1375,30 +1370,30 @@ export class JobServiceClient {
    *   being displayed lower down in the results.
    *
    *   Defaults to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
    *   if no value is specified.
    * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
    *   This field is deprecated. Please use
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
    *   going forward.
    *
    *   To migrate, disable_keyword_match set to false maps to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
    *   and disable_keyword_match set to true maps to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
    *   If
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
    *   is set, this field is ignored.
    *
    *   Controls whether to disable exact keyword match on
-   *   {@link google.cloud.talent.v4.Job.title|Job.title},
-   *   {@link google.cloud.talent.v4.Job.description|Job.description},
-   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
-   *   {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
-   *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
+   *   {@link protos.google.cloud.talent.v4.Job.title|Job.title},
+   *   {@link protos.google.cloud.talent.v4.Job.description|Job.description},
+   *   {@link protos.google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
+   *   {@link protos.google.cloud.talent.v4.Job.addresses|Job.addresses},
+   *   {@link protos.google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
    *   disable keyword match is turned off, a keyword match returns jobs that do
    *   not match given category filters when there are matching keywords. For
    *   example, for the query "program manager," a result is returned even if the
@@ -1411,7 +1406,7 @@ export class JobServiceClient {
    *   regardless of this flag's value.
    *
    *   Use
-   *   {@link google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
+   *   {@link protos.google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
    *   if company-specific globally matched custom field/attribute string values
    *   are needed. Enabling keyword match improves recall of subsequent search
    *   requests.
@@ -1422,14 +1417,13 @@ export class JobServiceClient {
    *   disable_keyword_match are set, keyword_match_mode will take precedence.
    *
    *   Defaults to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
+   *   {@link protos.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
    *   if no value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4.SearchJobsResponse | SearchJobsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.SearchJobsResponse|SearchJobsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.search_jobs_for_alert.js</caption>
    * region_tag:jobs_v4_generated_JobService_SearchJobsForAlert_async
@@ -1520,8 +1514,7 @@ export class JobServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.batch_create_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_BatchCreateJobs_async
@@ -1616,8 +1609,7 @@ export class JobServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.batch_create_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_BatchCreateJobs_async
@@ -1662,18 +1654,18 @@ export class JobServiceClient {
    *   Strongly recommended for the best service experience. Be aware that it will
    *   also increase latency when checking the status of a batch operation.
    *
-   *   If {@link google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
-   *   is provided, only the specified fields in {@link google.cloud.talent.v4.Job|Job}
+   *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
+   *   is provided, only the specified fields in {@link protos.google.cloud.talent.v4.Job|Job}
    *   are updated. Otherwise all the fields are updated.
    *
    *   A field mask to restrict the fields that are updated. Only
-   *   top level fields of {@link google.cloud.talent.v4.Job|Job} are supported.
+   *   top level fields of {@link protos.google.cloud.talent.v4.Job|Job} are supported.
    *
-   *   If {@link google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
-   *   is provided, The {@link google.cloud.talent.v4.Job|Job} inside
-   *   {@link JobOperationResult.JobResult|JobResult}
+   *   If {@link protos.google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
+   *   is provided, The {@link protos.google.cloud.talent.v4.Job|Job} inside
+   *   {@link protos.JobOperationResult.JobResult|JobResult}
    *   will only contains fields that is updated, plus the Id of the Job.
-   *   Otherwise,  {@link google.cloud.talent.v4.Job|Job} will include all fields,
+   *   Otherwise,  {@link protos.google.cloud.talent.v4.Job|Job} will include all fields,
    *   which can yield a very large response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1681,8 +1673,7 @@ export class JobServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.batch_update_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_BatchUpdateJobs_async
@@ -1777,8 +1768,7 @@ export class JobServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.batch_update_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_BatchUpdateJobs_async
@@ -1831,8 +1821,7 @@ export class JobServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.batch_delete_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_BatchDeleteJobs_async
@@ -1927,8 +1916,7 @@ export class JobServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.batch_delete_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_BatchDeleteJobs_async
@@ -1995,8 +1983,8 @@ export class JobServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of jobs to be returned per page of results.
    *
-   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+   *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
    *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
    *   size is 100.
    *
@@ -2004,19 +1992,18 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the
    *   search response. Defaults to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
    *   value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.talent.v4.Job | Job}.
+   *   The first element of the array is Array of {@link protos.google.cloud.talent.v4.Job|Job}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobs(
@@ -2124,8 +2111,8 @@ export class JobServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of jobs to be returned per page of results.
    *
-   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+   *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
    *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
    *   size is 100.
    *
@@ -2133,18 +2120,17 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the
    *   search response. Defaults to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
    *   value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.talent.v4.Job | Job} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.talent.v4.Job|Job} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobsStream(
@@ -2209,8 +2195,8 @@ export class JobServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of jobs to be returned per page of results.
    *
-   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+   *   If {@link protos.google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
    *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
    *   size is 100.
    *
@@ -2218,17 +2204,16 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the
    *   search response. Defaults to
-   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+   *   {@link protos.google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
    *   value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.talent.v4.Job | Job}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.talent.v4.Job|Job}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4/job_service.list_jobs.js</caption>
    * region_tag:jobs_v4_generated_JobService_ListJobs_async

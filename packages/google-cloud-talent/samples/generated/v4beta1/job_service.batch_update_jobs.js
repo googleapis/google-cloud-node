@@ -38,7 +38,7 @@ function main(parent, jobs) {
   /**
    *  Required. The jobs to be updated.
    */
-  // const jobs = 1234
+  // const jobs = [1,2,3,4]
   /**
    *  Strongly recommended for the best service experience. Be aware that it will
    *  also increase latency when checking the status of a batch operation.

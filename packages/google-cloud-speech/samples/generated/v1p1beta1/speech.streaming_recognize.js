@@ -44,7 +44,7 @@ function main() {
    *  pure binary representation (not base64). See
    *  content limits (https://cloud.google.com/speech-to-text/quotas#content).
    */
-  // const audioContent = 'Buffer.from('string')'
+  // const audioContent = Buffer.from('string')
 
   // Imports the Speech library
   const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;

@@ -130,7 +130,7 @@ function main(placement, visitorId) {
    *  A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *  is returned.
    */
-  // const facetSpecs = 1234
+  // const facetSpecs = [1,2,3,4]
   /**
    *  Boost specification to boost certain products. See more details at this
    *  user guide (https://cloud.google.com/retail/docs/boosting).
@@ -217,7 +217,7 @@ function main(placement, visitorId) {
    *  If this field is set to an invalid value other than these, an
    *  INVALID_ARGUMENT error is returned.
    */
-  // const variantRollupKeys = 'abc123'
+  // const variantRollupKeys = ['abc','def']
   /**
    *  The categories associated with a category page. Must be set for category
    *  navigation queries to achieve good search quality. The format should be
@@ -230,7 +230,7 @@ function main(placement, visitorId) {
    *  instance, a special sale page may have the category hierarchy:
    *  "pageCategories" : "Sales > 2017 Black Friday Deals".
    */
-  // const pageCategories = 'abc123'
+  // const pageCategories = ['abc','def']
   /**
    *  The search mode of the search request. If not specified, a single search
    *  request triggers both product search and faceted search.
@@ -265,7 +265,7 @@ function main(placement, visitorId) {
    *  Document (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *  for more details.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
   /**
    *  The spell correction specification that specifies the mode under
    *  which spell correction will take effect.
