@@ -94,7 +94,8 @@ npm install @google-cloud/procurement
 // const filter = 'abc123'
 
 // Imports the Procurement library
-const {ConsumerProcurementServiceClient} = require('@google-cloud/procurement').v1alpha1;
+const {ConsumerProcurementServiceClient} =
+  require('@google-cloud/procurement').v1alpha1;
 
 // Instantiates a client
 const procurementClient = new ConsumerProcurementServiceClient();
@@ -108,7 +109,7 @@ async function callListOrders() {
   // Run request
   const iterable = await procurementClient.listOrdersAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
