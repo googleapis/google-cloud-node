@@ -55,6 +55,8 @@ const MatchServiceClient = v1.MatchServiceClient;
 type MatchServiceClient = v1.MatchServiceClient;
 const ModelGardenServiceClient = v1.ModelGardenServiceClient;
 type ModelGardenServiceClient = v1.ModelGardenServiceClient;
+const scheduleServiceClient = v1.ScheduleServiceClient;
+type scheduleServiceClient = v1.ScheduleServiceClient;
 
 export {
   v1beta1,
@@ -76,6 +78,7 @@ export {
   TensorboardServiceClient,
   MatchServiceClient,
   ModelGardenServiceClient,
+  scheduleServiceClient,
 };
 export default {
   v1beta1,
@@ -97,6 +100,7 @@ export default {
   TensorboardServiceClient,
   MatchServiceClient,
   ModelGardenServiceClient,
+  scheduleServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};
