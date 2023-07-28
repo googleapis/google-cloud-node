@@ -514,16 +514,16 @@ export class AzureClustersClient {
   // -------------------
   /**
    * Describes a specific
-   * {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource to
    *   describe.
    *
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
    *   formatted as
    *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
    *
@@ -532,9 +532,8 @@ export class AzureClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AzureClient | AzureClient}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_client.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureClient_async
@@ -615,13 +614,13 @@ export class AzureClustersClient {
   }
   /**
    * Describes a specific
-   * {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
    *   describe.
    *
    *   `AzureCluster` names are formatted as
@@ -632,9 +631,8 @@ export class AzureClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AzureCluster | AzureCluster}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureCluster_async
@@ -715,13 +713,13 @@ export class AzureClustersClient {
   }
   /**
    * Generates a short-lived access token to authenticate to a given
-   * {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.azureCluster
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource to
    *   authenticate to.
    *
    *   `AzureCluster` names are formatted as
@@ -732,9 +730,8 @@ export class AzureClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenResponse | GenerateAzureAccessTokenResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenResponse|GenerateAzureAccessTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.generate_azure_access_token.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_async
@@ -825,13 +822,13 @@ export class AzureClustersClient {
   }
   /**
    * Describes a specific
-   * {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource to
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource to
    *   describe.
    *
    *   `AzureNodePool` names are formatted as
@@ -842,9 +839,8 @@ export class AzureClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AzureNodePool | AzureNodePool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_async
@@ -931,7 +927,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}
    *   resource to describe.
    *
    *   `AzureServerConfig` names are formatted as
@@ -942,9 +938,8 @@ export class AzureClustersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkemulticloud.v1.AzureServerConfig | AzureServerConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureServerConfig|AzureServerConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.get_azure_server_config.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_GetAzureServerConfig_async
@@ -1031,7 +1026,7 @@ export class AzureClustersClient {
   }
 
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
    * resource on a given Google Cloud project and region.
    *
    * `AzureClient` resources hold client authentication
@@ -1039,14 +1034,14 @@ export class AzureClustersClient {
    * on your Azure subscription on your behalf.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location where this
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource will be
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource will be
    *   created.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
@@ -1055,17 +1050,17 @@ export class AzureClustersClient {
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AzureClient} request.azureClient
    *   Required. The specification of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to create.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to create.
    * @param {string} request.azureClientId
    *   Required. A client provided ID the resource. Must be unique within the
    *   parent resource.
    *
    *   The provided ID will be part of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource name
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource name
    *   formatted as
    *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the client.
    * @param {object} [options]
@@ -1074,8 +1069,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
@@ -1170,8 +1164,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_client.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async
@@ -1200,23 +1193,23 @@ export class AzureClustersClient {
     >;
   }
   /**
-   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
+   * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
    * resource.
    *
    * If the client is used by one or more clusters, deletion will
    * fail and a `FAILED_PRECONDITION` error will be returned.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name the
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to delete.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} to delete.
    *
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} names are
    *   formatted as
    *   `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
    *
@@ -1224,9 +1217,9 @@ export class AzureClustersClient {
    *   for more details on Google Cloud resource names.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource is not
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resource is not
    *   found, the request will succeed but no action will be taken on the server
-   *   and a completed {@link google.longrunning.Operation|Operation} will be returned.
+   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
    *
    *   Useful for idempotent deletion.
    * @param {boolean} request.validateOnly
@@ -1237,8 +1230,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
@@ -1333,8 +1325,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_client.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureClient_async
@@ -1363,18 +1354,18 @@ export class AzureClustersClient {
     >;
   }
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
    * resource on a given Google Cloud Platform project and region.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location where this
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will be
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will be
    *   created.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
@@ -1383,17 +1374,17 @@ export class AzureClustersClient {
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AzureCluster} request.azureCluster
    *   Required. The specification of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to create.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to create.
    * @param {string} request.azureClusterId
    *   Required. A client provided ID the resource. Must be unique within the
    *   parent resource.
    *
    *   The provided ID will be part of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource name
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource name
    *   formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the cluster.
    * @param {object} [options]
@@ -1402,8 +1393,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
@@ -1498,8 +1488,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async
@@ -1528,19 +1517,19 @@ export class AzureClustersClient {
     >;
   }
   /**
-   * Updates an {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkemulticloud.v1.AzureCluster} request.azureCluster
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
    *   resource to update.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually update the cluster.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. The elements of the repeated paths field can only include these
-   *   fields from {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}:
+   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}:
    *
    *    *   `description`.
    *    *   `azureClient`.
@@ -1564,8 +1553,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
@@ -1660,8 +1648,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureCluster_async
@@ -1691,20 +1678,20 @@ export class AzureClustersClient {
   }
   /**
    * Deletes a specific
-   * {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource.
    *
    * Fails if the cluster has one or more associated
-   * {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to delete.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} to delete.
    *
    *   `AzureCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
@@ -1713,16 +1700,16 @@ export class AzureClustersClient {
    *   for more details on Google Cloud Platform resource names.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource is not
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource is not
    *   found, the request will succeed but no action will be taken on the server
-   *   and a completed {@link google.longrunning.Operation|Operation} will be returned.
+   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
    *
    *   Useful for idempotent deletion.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually delete the resource.
    * @param {string} request.etag
    *   The current etag of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
    *
    *   Allows clients to perform deletions through optimistic concurrency control.
    *
@@ -1734,8 +1721,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
@@ -1830,8 +1816,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_cluster.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async
@@ -1860,18 +1845,18 @@ export class AzureClustersClient {
     >;
   }
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool},
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool},
    * attached to a given
-   * {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
    *   resource where this node pool will be created.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
@@ -1880,17 +1865,17 @@ export class AzureClustersClient {
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AzureNodePool} request.azureNodePool
    *   Required. The specification of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to create.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to create.
    * @param {string} request.azureNodePoolId
    *   Required. A client provided ID the resource. Must be unique within the
    *   parent resource.
    *
    *   The provided ID will be part of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource name
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource name
    *   formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the node
    *   pool.
@@ -1900,8 +1885,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
@@ -1996,8 +1980,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.create_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_CreateAzureNodePool_async
@@ -2026,19 +2009,19 @@ export class AzureClustersClient {
     >;
   }
   /**
-   * Updates an {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkemulticloud.v1.AzureNodePool} request.azureNodePool
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
    *   resource to update.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but don't actually update the node pool.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. The elements of the repeated paths field can only include these
-   *   fields from {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}:
+   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}:
    *
    *    *.  `annotations`.
    *    *   `version`.
@@ -2051,8 +2034,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
@@ -2147,8 +2129,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.update_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_UpdateAzureNodePool_async
@@ -2178,17 +2159,17 @@ export class AzureClustersClient {
   }
   /**
    * Deletes a specific
-   * {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource.
    *
    * If successful, the response contains a newly created
-   * {@link google.longrunning.Operation|Operation} resource that can be
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
    * described to track the status of the operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name the
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to delete.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} to delete.
    *
    *   `AzureNodePool` names are formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>/azureNodePools/<node-pool-id>`.
@@ -2200,15 +2181,15 @@ export class AzureClustersClient {
    *   pool.
    * @param {boolean} request.allowMissing
    *   If set to true, and the
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource is
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource is
    *   not found, the request will succeed but no action will be taken on the
-   *   server and a completed {@link google.longrunning.Operation|Operation} will be
+   *   server and a completed {@link protos.google.longrunning.Operation|Operation} will be
    *   returned.
    *
    *   Useful for idempotent deletion.
    * @param {string} request.etag
    *   The current ETag of the
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
    *
    *   Allows clients to perform deletions through optimistic concurrency control.
    *
@@ -2220,8 +2201,7 @@ export class AzureClustersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
@@ -2316,8 +2296,7 @@ export class AzureClustersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.delete_azure_node_pool.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_DeleteAzureNodePool_async
@@ -2346,14 +2325,14 @@ export class AzureClustersClient {
     >;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}
    * resources on a given Google Cloud project and region.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2365,23 +2344,22 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkemulticloud.v1.AzureClient | AzureClient}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAzureClientsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAzureClients(
@@ -2465,7 +2443,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2477,22 +2455,21 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkemulticloud.v1.AzureClient | AzureClient} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAzureClientsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAzureClientsStream(
@@ -2525,7 +2502,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2537,21 +2514,20 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClientsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClients|azureClients.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkemulticloud.v1.AzureClient | AzureClient}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClient|AzureClient}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clients.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClients_async
@@ -2578,14 +2554,14 @@ export class AzureClustersClient {
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureClient>;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}
    * resources on a given Google Cloud project and region.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2597,23 +2573,22 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkemulticloud.v1.AzureCluster | AzureCluster}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAzureClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAzureClusters(
@@ -2697,7 +2672,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2709,22 +2684,21 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkemulticloud.v1.AzureCluster | AzureCluster} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAzureClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAzureClustersStream(
@@ -2757,7 +2731,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resources.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
@@ -2769,21 +2743,20 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureClustersResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureClusters|azureClusters.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkemulticloud.v1.AzureCluster | AzureCluster}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_clusters.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureClusters_async
@@ -2810,15 +2783,15 @@ export class AzureClustersClient {
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAzureCluster>;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}
    * resources on a given
-   * {@link google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
+   * {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent `AzureCluster` which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
    *
    *   `AzureCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
@@ -2831,23 +2804,22 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkemulticloud.v1.AzureNodePool | AzureNodePool}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAzureNodePoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAzureNodePools(
@@ -2931,7 +2903,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent `AzureCluster` which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
    *
    *   `AzureCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
@@ -2944,22 +2916,21 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkemulticloud.v1.AzureNodePool | AzureNodePool} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAzureNodePoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAzureNodePoolsStream(
@@ -2992,7 +2963,7 @@ export class AzureClustersClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent `AzureCluster` which owns this collection of
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resources.
    *
    *   `AzureCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
@@ -3005,21 +2976,20 @@ export class AzureClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsResponse.next_page_token|nextPageToken}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureClusters.ListAzureNodePools|azureNodePools.list}
    *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkemulticloud.v1.AzureNodePool | AzureNodePool}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/azure_clusters.list_azure_node_pools.js</caption>
    * region_tag:gkemulticloud_v1_generated_AzureClusters_ListAzureNodePools_async

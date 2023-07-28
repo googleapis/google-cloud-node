@@ -22,7 +22,6 @@
   * [G_suite_add_ons.replace_deployment](#g_suite_add_ons.replace_deployment)
   * [G_suite_add_ons.uninstall_deployment](#g_suite_add_ons.uninstall_deployment)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -202,23 +201,6 @@ __Usage:__
 
 
 `node packages/google-cloud-gsuiteaddons/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gsuiteaddons/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gsuiteaddons/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-gsuiteaddons/samples/test/quickstart.js`
 
 
 

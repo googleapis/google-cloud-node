@@ -40,7 +40,7 @@ function main(parent, requests) {
    *  messages will have identical
    *  Message.create_time google.cloud.dialogflow.v2beta1.Message.create_time.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Dialogflow library
   const {ConversationsClient} = require('@google-cloud/dialogflow').v2beta1;

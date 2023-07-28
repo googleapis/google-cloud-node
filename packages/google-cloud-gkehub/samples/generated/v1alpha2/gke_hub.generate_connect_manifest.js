@@ -47,7 +47,7 @@ function main(name) {
    *  supported by the proxy. This will direct the connect agent's outbound
    *  traffic through a HTTP(S) proxy.
    */
-  // const proxy = 'Buffer.from('string')'
+  // const proxy = Buffer.from('string')
   /**
    *  Optional. The Connect agent version to use. Defaults to the most current version.
    */
@@ -65,7 +65,7 @@ function main(name) {
   /**
    *  Optional. The image pull secret content for the registry, if not public.
    */
-  // const imagePullSecretContent = 'Buffer.from('string')'
+  // const imagePullSecretContent = Buffer.from('string')
 
   // Imports the Gkehub library
   const {GkeHubClient} = require('@google-cloud/gke-hub').v1alpha2;

@@ -17,7 +17,6 @@
   * [I_d_s.get_endpoint](#i_d_s.get_endpoint)
   * [I_d_s.list_endpoints](#i_d_s.list_endpoints)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -112,23 +111,6 @@ __Usage:__
 
 
 `node packages/google-cloud-ids/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ids/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-ids/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-ids/samples/test/quickstart.js`
 
 
 
