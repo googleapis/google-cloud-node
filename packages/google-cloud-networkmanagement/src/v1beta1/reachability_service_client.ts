@@ -475,9 +475,8 @@ export class ReachabilityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.networkmanagement.v1beta1.ConnectivityTest | ConnectivityTest}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.get_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_GetConnectivityTest_async
@@ -600,8 +599,7 @@ export class ReachabilityServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.create_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_CreateConnectivityTest_async
@@ -700,8 +698,7 @@ export class ReachabilityServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.create_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_CreateConnectivityTest_async
@@ -758,8 +755,7 @@ export class ReachabilityServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.update_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_UpdateConnectivityTest_async
@@ -858,8 +854,7 @@ export class ReachabilityServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.update_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_UpdateConnectivityTest_async
@@ -912,8 +907,7 @@ export class ReachabilityServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_RerunConnectivityTest_async
@@ -1008,8 +1002,7 @@ export class ReachabilityServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_RerunConnectivityTest_async
@@ -1051,8 +1044,7 @@ export class ReachabilityServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.delete_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_DeleteConnectivityTest_async
@@ -1151,8 +1143,7 @@ export class ReachabilityServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.delete_connectivity_test.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_DeleteConnectivityTest_async
@@ -1216,14 +1207,13 @@ export class ReachabilityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.networkmanagement.v1beta1.ConnectivityTest | ConnectivityTest}.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConnectivityTestsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConnectivityTests(
@@ -1336,13 +1326,12 @@ export class ReachabilityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.networkmanagement.v1beta1.ConnectivityTest | ConnectivityTest} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConnectivityTestsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConnectivityTestsStream(
@@ -1404,12 +1393,11 @@ export class ReachabilityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.networkmanagement.v1beta1.ConnectivityTest | ConnectivityTest}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/reachability_service.list_connectivity_tests.js</caption>
    * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_ListConnectivityTests_async

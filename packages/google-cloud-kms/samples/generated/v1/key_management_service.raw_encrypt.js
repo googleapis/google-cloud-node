@@ -44,7 +44,7 @@ function main(name, plaintext) {
    *  the plaintext and additional_authenticated_data fields must be no larger
    *  than 8KiB.
    */
-  // const plaintext = 'Buffer.from('string')'
+  // const plaintext = Buffer.from('string')
   /**
    *  Optional. Optional data that, if specified, must also be provided during
    *  decryption through
@@ -60,7 +60,7 @@ function main(name, plaintext) {
    *  the plaintext and additional_authenticated_data fields must be no larger
    *  than 8KiB.
    */
-  // const additionalAuthenticatedData = 'Buffer.from('string')'
+  // const additionalAuthenticatedData = Buffer.from('string')
   /**
    *  Optional. An optional CRC32C checksum of the
    *  RawEncryptRequest.plaintext google.cloud.kms.v1.RawEncryptRequest.plaintext.
@@ -104,7 +104,7 @@ function main(name, plaintext) {
    *  generated. It will be returned in
    *  RawEncryptResponse.initialization_vector google.cloud.kms.v1.RawEncryptResponse.initialization_vector.
    */
-  // const initializationVector = 'Buffer.from('string')'
+  // const initializationVector = Buffer.from('string')
   /**
    *  Optional. An optional CRC32C checksum of the
    *  RawEncryptRequest.initialization_vector google.cloud.kms.v1.RawEncryptRequest.initialization_vector.

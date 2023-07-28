@@ -318,9 +318,8 @@ export class IamCheckerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse | TroubleshootIamPolicyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse|TroubleshootIamPolicyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/iam_checker.troubleshoot_iam_policy.js</caption>
    * region_tag:policytroubleshooter_v1_generated_IamChecker_TroubleshootIamPolicy_async

@@ -36,7 +36,7 @@ function main(parent, requests) {
    *  Required. The request message specifying the resources to update.
    *  A maximum of 1000 assets can be modified in a batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Migrationcenter library
   const {MigrationCenterClient} = require('@google-cloud/migrationcenter').v1;

@@ -42,7 +42,7 @@ function main(name, targetDomainName, targetDnsIpAddresses) {
    *  Required. The target DNS server IP addresses to resolve the remote domain involved
    *  in the trust.
    */
-  // const targetDnsIpAddresses = 'abc123'
+  // const targetDnsIpAddresses = ['abc','def']
 
   // Imports the Managedidentities library
   const {ManagedIdentitiesServiceClient} = require('@google-cloud/managed-identities').v1;
