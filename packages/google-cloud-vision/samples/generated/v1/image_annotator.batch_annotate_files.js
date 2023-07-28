@@ -32,7 +32,7 @@ function main(requests) {
    *  Required. The list of file annotation requests. Right now we support only one
    *  AnnotateFileRequest in BatchAnnotateFilesRequest.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
   /**
    *  Optional. Target project and location to make a call.
    *  Format: `projects/{project-id}/locations/{location-id}`.

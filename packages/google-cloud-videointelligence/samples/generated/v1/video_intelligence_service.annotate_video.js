@@ -47,11 +47,11 @@ function main(features) {
    *  If unset, the input video(s) should be specified via the `input_uri`.
    *  If set, `input_uri` must be unset.
    */
-  // const inputContent = 'Buffer.from('string')'
+  // const inputContent = Buffer.from('string')
   /**
    *  Required. Requested video annotation features.
    */
-  // const features = 1234
+  // const features = [1,2,3,4]
   /**
    *  Additional video context and/or feature-specific parameters.
    */

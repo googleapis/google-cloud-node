@@ -338,10 +338,9 @@ export class StreamingVideoIntelligenceServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest | StreamingAnnotateVideoRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse | StreamingAnnotateVideoResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest|StreamingAnnotateVideoRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoResponse|StreamingAnnotateVideoResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js</caption>
    * region_tag:videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_async

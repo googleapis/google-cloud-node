@@ -31,7 +31,7 @@ function main(requests) {
   /**
    *  Required. Individual async file annotation requests for this batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
   /**
    *  Optional. Target project and location to make a call.
    *  Format: `projects/{project-id}/locations/{location-id}`.

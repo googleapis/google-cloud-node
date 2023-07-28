@@ -36,7 +36,7 @@ function main(threatType, constraints) {
    *  The current version token of the client for the requested list (the
    *  client version that was received from the last successful diff).
    */
-  // const versionToken = 'Buffer.from('string')'
+  // const versionToken = Buffer.from('string')
   /**
    *  Required. The constraints associated with this request.
    */

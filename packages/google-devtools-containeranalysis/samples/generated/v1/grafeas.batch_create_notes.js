@@ -36,7 +36,7 @@ function main(parent, notes) {
   /**
    *  The notes to create. Max allowed length is 1000.
    */
-  // const notes = 1234
+  // const notes = [1,2,3,4]
 
   // Imports the Containeranalysis library
   const {GrafeasClient} = require('@google-cloud/containeranalysis').v1;
