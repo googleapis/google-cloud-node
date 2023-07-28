@@ -67,7 +67,7 @@ function main(scope, cryptoKey) {
    *  regular expression syntax. If the regular expression does not match any
    *  supported resource type, an INVALID_ARGUMENT error will be returned.
    */
-  // const resourceTypes = 'abc123'
+  // const resourceTypes = ['abc','def']
 
   // Imports the Inventory library
   const {KeyTrackingServiceClient} = require('@google-cloud/kms-inventory').v1;

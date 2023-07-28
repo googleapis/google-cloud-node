@@ -36,7 +36,7 @@ function main(name) {
   /**
    *  Metadata items to add/update for the instance.
    */
-  // const items = 1234
+  // const items = [1,2,3,4]
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1;

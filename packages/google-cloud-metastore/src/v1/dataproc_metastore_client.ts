@@ -639,9 +639,8 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.metastore.v1.Service | Service}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.get_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_GetService_async
@@ -727,9 +726,8 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.metastore.v1.MetadataImport | MetadataImport}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1.MetadataImport|MetadataImport}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.get_metadata_import.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_GetMetadataImport_async
@@ -821,9 +819,8 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.metastore.v1.Backup | Backup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.metastore.v1.Backup|Backup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.get_backup.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_GetBackup_async
@@ -935,8 +932,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.create_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_CreateService_async
@@ -1031,8 +1027,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.create_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_CreateService_async
@@ -1095,8 +1090,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.update_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_UpdateService_async
@@ -1191,8 +1185,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.update_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_UpdateService_async
@@ -1249,8 +1242,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_DeleteService_async
@@ -1345,8 +1337,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_DeleteService_async
@@ -1414,8 +1405,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.create_metadata_import.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_CreateMetadataImport_async
@@ -1510,8 +1500,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.create_metadata_import.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_CreateMetadataImport_async
@@ -1575,8 +1564,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.update_metadata_import.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_UpdateMetadataImport_async
@@ -1671,8 +1659,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.update_metadata_import.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_UpdateMetadataImport_async
@@ -1736,8 +1723,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.export_metadata.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_ExportMetadata_async
@@ -1832,8 +1818,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.export_metadata.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_ExportMetadata_async
@@ -1897,8 +1882,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.restore_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_RestoreService_async
@@ -1993,8 +1977,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.restore_service.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_RestoreService_async
@@ -2061,8 +2044,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.create_backup.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_CreateBackup_async
@@ -2157,8 +2139,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.create_backup.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_CreateBackup_async
@@ -2215,8 +2196,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_backup.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_DeleteBackup_async
@@ -2311,8 +2291,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.delete_backup.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_DeleteBackup_async
@@ -2359,8 +2338,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.query_metadata.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_QueryMetadata_async
@@ -2455,8 +2433,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.query_metadata.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_QueryMetadata_async
@@ -2506,8 +2483,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.move_table_to_database.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_MoveTableToDatabase_async
@@ -2602,8 +2578,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.move_table_to_database.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_MoveTableToDatabase_async
@@ -2660,8 +2635,7 @@ export class DataprocMetastoreClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.alter_metadata_resource_location.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_AlterMetadataResourceLocation_async
@@ -2760,8 +2734,7 @@ export class DataprocMetastoreClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.alter_metadata_resource_location.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_AlterMetadataResourceLocation_async
@@ -2806,13 +2779,13 @@ export class DataprocMetastoreClient {
    *   changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -2823,14 +2796,13 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.metastore.v1.Service | Service}.
+   *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1.Service|Service}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listServicesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listServices(
@@ -2918,13 +2890,13 @@ export class DataprocMetastoreClient {
    *   changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -2935,13 +2907,12 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.metastore.v1.Service | Service} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1.Service|Service} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listServicesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listServicesStream(
@@ -2984,13 +2955,13 @@ export class DataprocMetastoreClient {
    *   changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3001,12 +2972,11 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.metastore.v1.Service | Service}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.metastore.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.list_services.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_ListServices_async
@@ -3048,13 +3018,13 @@ export class DataprocMetastoreClient {
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3065,14 +3035,13 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.metastore.v1.MetadataImport | MetadataImport}.
+   *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1.MetadataImport|MetadataImport}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listMetadataImportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMetadataImports(
@@ -3165,13 +3134,13 @@ export class DataprocMetastoreClient {
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3182,13 +3151,12 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.metastore.v1.MetadataImport | MetadataImport} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1.MetadataImport|MetadataImport} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMetadataImportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMetadataImportsStream(
@@ -3230,13 +3198,13 @@ export class DataprocMetastoreClient {
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3247,12 +3215,11 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.metastore.v1.MetadataImport | MetadataImport}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.metastore.v1.MetadataImport|MetadataImport}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.list_metadata_imports.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_ListMetadataImports_async
@@ -3294,13 +3261,13 @@ export class DataprocMetastoreClient {
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3311,14 +3278,13 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.metastore.v1.Backup | Backup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.metastore.v1.Backup|Backup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackups(
@@ -3405,13 +3371,13 @@ export class DataprocMetastoreClient {
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3422,13 +3388,12 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.metastore.v1.Backup | Backup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.metastore.v1.Backup|Backup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackupsStream(
@@ -3470,13 +3435,13 @@ export class DataprocMetastoreClient {
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   {@link protos.google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
@@ -3487,12 +3452,11 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.metastore.v1.Backup | Backup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.metastore.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dataproc_metastore.list_backups.js</caption>
    * region_tag:metastore_v1_generated_DataprocMetastore_ListBackups_async
@@ -3557,7 +3521,7 @@ export class DataprocMetastoreClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -3578,8 +3542,7 @@ export class DataprocMetastoreClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -3605,7 +3568,7 @@ export class DataprocMetastoreClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -3626,8 +3589,7 @@ export class DataprocMetastoreClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -3654,7 +3616,7 @@ export class DataprocMetastoreClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -3669,8 +3631,7 @@ export class DataprocMetastoreClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3716,12 +3677,11 @@ export class DataprocMetastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

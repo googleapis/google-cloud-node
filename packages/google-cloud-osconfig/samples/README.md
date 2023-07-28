@@ -69,7 +69,6 @@
   * [Os_config_service.update_guest_policy](#os_config_service.update_guest_policy)
   * [Os_config_service.update_patch_deployment](#os_config_service.update_patch_deployment)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -1048,23 +1047,6 @@ __Usage:__
 
 
 `node packages/google-cloud-osconfig/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-osconfig/samples/test/quickstart.test.js`
 
 
 

@@ -37,7 +37,7 @@ function main(parent, names) {
    *  A maximum of 1000 assets can be deleted in a batch.
    *  Format: projects/{project}/locations/{location}/assets/{name}.
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
   /**
    *  Optional. When this value is set to `true` the request is a no-op for
    *  non-existing assets. See https://google.aip.dev/135#delete-if-existing for

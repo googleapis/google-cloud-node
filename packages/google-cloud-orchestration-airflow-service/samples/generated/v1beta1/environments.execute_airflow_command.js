@@ -47,7 +47,7 @@ function main() {
    *  parameters like `["--foo=bar"]` or `["--foo","bar"]`,
    *  or other flags like `["-f"]`.
    */
-  // const parameters = 'abc123'
+  // const parameters = ['abc','def']
 
   // Imports the Service library
   const {EnvironmentsClient} = require('@google-cloud/orchestration-airflow').v1beta1;

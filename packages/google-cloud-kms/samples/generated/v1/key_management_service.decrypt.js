@@ -38,12 +38,12 @@ function main(name, ciphertext) {
    *  Required. The encrypted data originally returned in
    *  EncryptResponse.ciphertext google.cloud.kms.v1.EncryptResponse.ciphertext.
    */
-  // const ciphertext = 'Buffer.from('string')'
+  // const ciphertext = Buffer.from('string')
   /**
    *  Optional. Optional data that must match the data originally supplied in
    *  EncryptRequest.additional_authenticated_data google.cloud.kms.v1.EncryptRequest.additional_authenticated_data.
    */
-  // const additionalAuthenticatedData = 'Buffer.from('string')'
+  // const additionalAuthenticatedData = Buffer.from('string')
   /**
    *  Optional. An optional CRC32C checksum of the
    *  DecryptRequest.ciphertext google.cloud.kms.v1.DecryptRequest.ciphertext.

@@ -400,7 +400,7 @@ export class FleetRoutingClient {
    *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
    *   error detail (https://cloud.google.com/apis/design/errors#error_details),
    *   unless solving_mode=VALIDATE_ONLY: see the
-   *   {@link google.cloud.optimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
+   *   {@link protos.google.cloud.optimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
    *   field.
    *   This defaults to 100 and is capped at 10,000.
    * @param {google.cloud.optimization.v1.OptimizeToursRequest.SearchMode} request.searchMode
@@ -428,9 +428,9 @@ export class FleetRoutingClient {
    *       <= vehicle_end_time`).
    *     * a shipment may only be performed on a vehicle that is allowed. A
    *       vehicle is allowed if
-   *       {@link google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
+   *       {@link protos.google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
    *       is empty or its `vehicle_index` is included in
-   *       {@link google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
+   *       {@link protos.google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
    *
    *   If the injected solution is not feasible, a validation error is not
    *   necessarily returned and an error indicating infeasibility may be returned
@@ -465,25 +465,25 @@ export class FleetRoutingClient {
    *   If true:
    *
    *     * uses
-   *     {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
+   *     {@link protos.google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
    *     instead of `vehicle_index` to
    *       match routes in an injected solution with vehicles in the request;
    *       reuses the mapping of original
-   *       {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       {@link protos.google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
    *       to new
-   *       {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       {@link protos.google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
    *       to update
-   *       {@link google.cloud.optimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
+   *       {@link protos.google.cloud.optimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
    *       if non-empty, but the mapping must be unambiguous (i.e., multiple
    *       `ShipmentRoute`s must not share the same original `vehicle_index`).
    *     * uses
-   *     {@link google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
+   *     {@link protos.google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
    *     instead of `shipment_index`
    *       to match visits in an injected solution with shipments in the request;
    *     * uses
-   *     {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *     {@link protos.google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label}
    *     instead of
-   *     {@link google.cloud.optimization.v1.SkippedShipment.index|SkippedShipment.index}
+   *     {@link protos.google.cloud.optimization.v1.SkippedShipment.index|SkippedShipment.index}
    *     to
    *       match skipped shipments in the injected solution with request
    *       shipments.
@@ -497,12 +497,12 @@ export class FleetRoutingClient {
    *   If true, labels in the following categories must appear at most once in
    *   their category:
    *
-   *     * {@link google.cloud.optimization.v1.Vehicle.label|Vehicle.label} in the
+   *     * {@link protos.google.cloud.optimization.v1.Vehicle.label|Vehicle.label} in the
    *     request;
-   *     * {@link google.cloud.optimization.v1.Shipment.label|Shipment.label} in the
+   *     * {@link protos.google.cloud.optimization.v1.Shipment.label|Shipment.label} in the
    *     request;
-   *     * {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
-   *     * {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
+   *     * {@link protos.google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
+   *     * {@link protos.google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link protos.google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
    *       the injected solution (except pickup/delivery visit pairs, whose
    *       `shipment_label` must appear twice).
    *
@@ -511,7 +511,7 @@ export class FleetRoutingClient {
    *   along with its visits. If a `shipment_label` in the injected solution does
    *   not correspond to a request shipment, the corresponding visit is removed
    *   from the solution. If a
-   *   {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *   {@link protos.google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label}
    *   in the injected solution does not correspond to a request shipment, the
    *   `SkippedShipment` is removed from the solution.
    *
@@ -520,8 +520,8 @@ export class FleetRoutingClient {
    *   solution, validation errors, or infeasibility.
    *
    *   NOTE: The caller must ensure that each
-   *   {@link google.cloud.optimization.v1.Vehicle.label|Vehicle.label} (resp.
-   *   {@link google.cloud.optimization.v1.Shipment.label|Shipment.label}) uniquely
+   *   {@link protos.google.cloud.optimization.v1.Vehicle.label|Vehicle.label} (resp.
+   *   {@link protos.google.cloud.optimization.v1.Shipment.label|Shipment.label}) uniquely
    *   identifies a vehicle (resp. shipment) entity used across the two relevant
    *   requests: the past request that produced the `OptimizeToursResponse` used
    *   in the injected solution and the current request that includes the injected
@@ -529,18 +529,18 @@ export class FleetRoutingClient {
    *   this requirement.
    * @param {boolean} request.considerRoadTraffic
    *   Consider traffic estimation in calculating `ShipmentRoute` fields
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
+   *   {@link protos.google.cloud.optimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
+   *   {@link protos.google.cloud.optimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
    *   and `vehicle_end_time`; in setting the
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
+   *   {@link protos.google.cloud.optimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
    *   field, and in calculating the
-   *   {@link google.cloud.optimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
+   *   {@link protos.google.cloud.optimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
    *   field.
    * @param {boolean} request.populatePolylines
    *   If true, polylines will be populated in response `ShipmentRoute`s.
    * @param {boolean} request.populateTransitionPolylines
    *   If true, polylines will be populated in response
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
+   *   {@link protos.google.cloud.optimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
    *   Note that in this case, the polylines will also be populated in the
    *   deprecated `travel_steps`.
    * @param {boolean} request.allowLargeDeadlineDespiteInterruptionRisk
@@ -559,20 +559,19 @@ export class FleetRoutingClient {
    *   meters/seconds.
    * @param {string} request.label
    *   Label that may be used to identify this request, reported back in the
-   *   {@link google.cloud.optimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
+   *   {@link protos.google.cloud.optimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
    * @param {boolean} request.populateTravelStepPolylines
    *   Deprecated: Use
-   *   {@link google.cloud.optimization.v1.OptimizeToursRequest.populate_transition_polylines|OptimizeToursRequest.populate_transition_polylines}
+   *   {@link protos.google.cloud.optimization.v1.OptimizeToursRequest.populate_transition_polylines|OptimizeToursRequest.populate_transition_polylines}
    *   instead. If true, polylines will be populated in response
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
+   *   {@link protos.google.cloud.optimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
    *   Note that in this case, the polylines will also be populated in the
    *   deprecated `travel_steps`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.optimization.v1.OptimizeToursResponse | OptimizeToursResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.optimization.v1.OptimizeToursResponse|OptimizeToursResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/fleet_routing.optimize_tours.js</caption>
    * region_tag:cloudoptimization_v1_generated_FleetRouting_OptimizeTours_async
@@ -681,8 +680,7 @@ export class FleetRoutingClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/fleet_routing.batch_optimize_tours.js</caption>
    * region_tag:cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_async
@@ -777,8 +775,7 @@ export class FleetRoutingClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/fleet_routing.batch_optimize_tours.js</caption>
    * region_tag:cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_async

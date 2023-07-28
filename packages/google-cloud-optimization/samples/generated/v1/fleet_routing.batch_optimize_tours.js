@@ -38,7 +38,7 @@ function main(parent, modelConfigs) {
    *  Required. Input/Output information each purchase model, such as file paths
    *  and data formats.
    */
-  // const modelConfigs = 1234
+  // const modelConfigs = [1,2,3,4]
 
   // Imports the Optimization library
   const {FleetRoutingClient} = require('@google-cloud/optimization').v1;
