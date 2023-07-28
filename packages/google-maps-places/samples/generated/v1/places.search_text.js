@@ -86,7 +86,7 @@ function main(textQuery) {
    *  levels. Users can choose any combinations of price levels. Default to
    *  select all price levels.
    */
-  // const priceLevels = 1234
+  // const priceLevels = [1,2,3,4]
   /**
    *  Used to set strict type filtering for included_type. If set to true, only
    *  results of the same type will be returned. Default to false.

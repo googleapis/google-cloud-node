@@ -387,12 +387,12 @@ export class RoutesClient {
    *   Optional. The departure time. If you don't set this value, then this value
    *   defaults to the time that you made the request.
    *   NOTE: You can only specify a `departure_time` in the past when
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
    *   `TRANSIT`.
    * @param {google.protobuf.Timestamp} [request.arrivalTime]
    *   Optional. The arrival time.
    *   NOTE: Can only be set when
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
    *   `TRANSIT`. You can specify either departure_time or arrival_time, but not
    *   both.
    * @param {boolean} [request.computeAlternativeRoutes]
@@ -416,7 +416,7 @@ export class RoutesClient {
    * @param {google.maps.routing.v2.Units} [request.units]
    *   Optional. Specifies the units of measure for the display fields. These
    *   fields include the `instruction` field in
-   *   {@link google.maps.routing.v2.NavigationInstruction|NavigationInstruction}. The
+   *   {@link protos.google.maps.routing.v2.NavigationInstruction|NavigationInstruction}. The
    *   units of measure used for the route, leg, step distance, and duration are
    *   not affected by this value. If you don't provide this value, then the
    *   display units are inferred from the location of the first origin.
@@ -445,26 +445,25 @@ export class RoutesClient {
    * @param {google.maps.routing.v2.TrafficModel} [request.trafficModel]
    *   Optional. Specifies the assumptions to use when calculating time in
    *   traffic. This setting affects the value returned in the duration field in
-   *   the {@link google.maps.routing.v2.Route|Route} and
-   *   {@link google.maps.routing.v2.RouteLeg|RouteLeg} which contains the predicted
+   *   the {@link protos.google.maps.routing.v2.Route|Route} and
+   *   {@link protos.google.maps.routing.v2.RouteLeg|RouteLeg} which contains the predicted
    *   time in traffic based on historical averages.
    *   `TrafficModel` is only available for requests that have set
-   *   {@link google.maps.routing.v2.RoutingPreference|RoutingPreference} to
+   *   {@link protos.google.maps.routing.v2.RoutingPreference|RoutingPreference} to
    *   `TRAFFIC_AWARE_OPTIMAL` and
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.
    *   Defaults to `BEST_GUESS` if traffic is requested and `TrafficModel` is not
    *   specified.
    * @param {google.maps.routing.v2.TransitPreferences} [request.transitPreferences]
    *   Optional. Specifies preferences that influence the route returned for
    *   `TRANSIT` routes. NOTE: You can only specify a `transit_preferences` when
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
    *   `TRANSIT`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.maps.routing.v2.ComputeRoutesResponse | ComputeRoutesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.maps.routing.v2.ComputeRoutesResponse|ComputeRoutesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/routes.compute_routes.js</caption>
    * region_tag:routes_v2_generated_Routes_ComputeRoutes_async
@@ -599,12 +598,12 @@ export class RoutesClient {
    *   Optional. The departure time. If you don't set this value, then this value
    *   defaults to the time that you made the request.
    *   NOTE: You can only specify a `departure_time` in the past when
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
    *   `TRANSIT`.
    * @param {google.protobuf.Timestamp} [request.arrivalTime]
    *   Optional. The arrival time.
    *   NOTE: Can only be set when
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
    *   `TRANSIT`. You can specify either departure_time or arrival_time, but not
    *   both.
    * @param {string} [request.languageCode]
@@ -626,24 +625,23 @@ export class RoutesClient {
    * @param {google.maps.routing.v2.TrafficModel} [request.trafficModel]
    *   Optional. Specifies the assumptions to use when calculating time in
    *   traffic. This setting affects the value returned in the duration field in
-   *   the {@link google.maps.routing.v2.RouteMatrixElement|RouteMatrixElement} which
+   *   the {@link protos.google.maps.routing.v2.RouteMatrixElement|RouteMatrixElement} which
    *   contains the predicted time in traffic based on historical averages.
-   *   {@link google.maps.routing.v2.RoutingPreference|RoutingPreference} to
+   *   {@link protos.google.maps.routing.v2.RoutingPreference|RoutingPreference} to
    *   `TRAFFIC_AWARE_OPTIMAL` and
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} to `DRIVE`.
    *   Defaults to `BEST_GUESS` if traffic is requested and `TrafficModel` is not
    *   specified.
    * @param {google.maps.routing.v2.TransitPreferences} [request.transitPreferences]
    *   Optional. Specifies preferences that influence the route returned for
    *   `TRANSIT` routes. NOTE: You can only specify a `transit_preferences` when
-   *   {@link google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
+   *   {@link protos.google.maps.routing.v2.RouteTravelMode|RouteTravelMode} is set to
    *   `TRANSIT`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits {@link google.maps.routing.v2.RouteMatrixElement | RouteMatrixElement} on 'data' event.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
+   *   An object stream which emits {@link protos.google.maps.routing.v2.RouteMatrixElement|RouteMatrixElement} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/routes.compute_route_matrix.js</caption>
    * region_tag:routes_v2_generated_Routes_ComputeRouteMatrix_async

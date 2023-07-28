@@ -1,6 +1,0 @@
-[
-  "../../protos/google/maps/mapsplatformdatasets/v1alpha/data_source.proto",
-  "../../protos/google/maps/mapsplatformdatasets/v1alpha/dataset.proto",
-  "../../protos/google/maps/mapsplatformdatasets/v1alpha/maps_platform_datasets.proto",
-  "../../protos/google/maps/mapsplatformdatasets/v1alpha/maps_platform_datasets_alpha_service.proto"
-]
