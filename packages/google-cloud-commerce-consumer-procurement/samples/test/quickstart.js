@@ -21,7 +21,6 @@ const {describe, it} = require('mocha');
 const {ConsumerProcurementServiceClient} =
   require('@google-cloud/procurement').v1;
 
-
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
