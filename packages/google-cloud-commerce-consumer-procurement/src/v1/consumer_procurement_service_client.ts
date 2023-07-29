@@ -412,7 +412,7 @@ export class ConsumerProcurementServiceClient {
         | protos.google.cloud.commerce.consumer.procurement.v1.IGetOrderRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOrder(
@@ -461,7 +461,7 @@ export class ConsumerProcurementServiceClient {
         | protos.google.cloud.commerce.consumer.procurement.v1.IGetOrderRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -533,7 +533,7 @@ export class ConsumerProcurementServiceClient {
         protos.google.cloud.commerce.consumer.procurement.v1.IPlaceOrderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   placeOrder(
@@ -586,7 +586,7 @@ export class ConsumerProcurementServiceClient {
         protos.google.cloud.commerce.consumer.procurement.v1.IPlaceOrderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -692,7 +692,7 @@ export class ConsumerProcurementServiceClient {
     [
       protos.google.cloud.commerce.consumer.procurement.v1.IOrder[],
       protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersRequest | null,
-      protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersResponse
+      protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersResponse,
     ]
   >;
   listOrders(
@@ -738,7 +738,7 @@ export class ConsumerProcurementServiceClient {
     [
       protos.google.cloud.commerce.consumer.procurement.v1.IOrder[],
       protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersRequest | null,
-      protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersResponse
+      protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersResponse,
     ]
   > | void {
     request = request || {};
