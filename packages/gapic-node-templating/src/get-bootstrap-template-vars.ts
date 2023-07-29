@@ -115,11 +115,13 @@ export async function compileVars(
 
 export function getServiceName(serviceConfig: ServiceConfig) {
   let serviceName = '';
+  if (serviceConfig?.apis) {
   for (const api of serviceConfig?.apis) {
     if (api.name.endsWith('Service')) {
       serviceName = api.name.split('.')[api.name.split('.').length - 1];
     }
   }
+}
 
   return serviceName;
 }
