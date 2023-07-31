@@ -1,0 +1,47 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.advisorynotifications.v1",
+  "libraryPackage": "@google-cloud/advisorynotifications",
+  "services": {
+    "AdvisoryNotificationsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AdvisoryNotificationsServiceClient",
+          "rpcs": {
+            "GetNotification": {
+              "methods": [
+                "getNotification"
+              ]
+            },
+            "ListNotifications": {
+              "methods": [
+                "listNotifications",
+                "listNotificationsStream",
+                "listNotificationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AdvisoryNotificationsServiceClient",
+          "rpcs": {
+            "GetNotification": {
+              "methods": [
+                "getNotification"
+              ]
+            },
+            "ListNotifications": {
+              "methods": [
+                "listNotifications",
+                "listNotificationsStream",
+                "listNotificationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
