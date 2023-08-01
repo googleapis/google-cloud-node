@@ -469,7 +469,7 @@ export class ConversationsClient {
  *   auto-generated one to you.
  *
  *   The conversation ID must be compliant with the regression fomula
- *   "{@link protos.a-zA-Z0-9_-|a-zA-Z}*" with the characters length in range of [3,64].
+ *   `{@link protos.a-zA-Z0-9_-|a-zA-Z}*` with the characters length in range of [3,64].
  *   If the field is provided, the caller is resposible for
  *   1. the uniqueness of the ID, otherwise the request will be rejected.
  *   2. the consistency for whether to use custom ID or not under a project to
