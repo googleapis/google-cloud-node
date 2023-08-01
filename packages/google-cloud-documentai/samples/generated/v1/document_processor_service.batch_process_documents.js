@@ -54,6 +54,10 @@ function main(name) {
    *  `false`.
    */
   // const skipHumanReview = true
+  /**
+   *  Inference-time options for the process API
+   */
+  // const processOptions = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1;

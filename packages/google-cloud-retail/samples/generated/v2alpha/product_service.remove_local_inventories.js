@@ -41,7 +41,7 @@ function main(product, placeIds) {
    *  Required. A list of place IDs to have their inventory deleted.
    *  At most 3000 place IDs are allowed per request.
    */
-  // const placeIds = 'abc123'
+  // const placeIds = ['abc','def']
   /**
    *  The time when the inventory deletions are issued. Used to prevent
    *  out-of-order updates and deletions on local inventory fields. If not

@@ -462,9 +462,8 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.resourcemanager.v3.Folder | Folder}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.Folder|Folder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.get_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_GetFolder_async
@@ -561,9 +560,8 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.get_iam_policy.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_GetIamPolicy_async
@@ -660,9 +658,8 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.set_iam_policy.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_SetIamPolicy_async
@@ -753,9 +750,8 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.test_iam_permissions.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_TestIamPermissions_async
@@ -867,8 +863,7 @@ export class FoldersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.create_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_CreateFolder_async
@@ -959,8 +954,7 @@ export class FoldersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.create_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_CreateFolder_async
@@ -993,13 +987,13 @@ export class FoldersClient {
    * Changes to the folder `display_name` will be rejected if they violate
    * either the `display_name` formatting rules or the naming constraints
    * described in the
-   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
+   * {@link protos.google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
    * documentation.
    *
    * The folder's `display_name` must start and end with a letter or digit,
    * may contain letters, digits, spaces, hyphens and underscores and can be
    * between 3 and 30 characters. This is captured by the regular expression:
-   * `{@link \p{L}\p{N}_- |\p{L}\p{N}}{1,28}[\p{L}\p{N}]`.
+   * `{@link protos.\p{L}\p{N}_- |\p{L}\p{N}}{1,28}[\p{L}\p{N}]`.
    * The caller must have `resourcemanager.folders.update` permission on the
    * identified folder.
    *
@@ -1021,8 +1015,7 @@ export class FoldersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.update_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_UpdateFolder_async
@@ -1117,8 +1110,7 @@ export class FoldersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.update_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_UpdateFolder_async
@@ -1161,7 +1153,7 @@ export class FoldersClient {
    * `FolderOperation` message as an aid to stateless clients.
    * Folder moves will be rejected if they violate either the naming, height,
    * or fanout constraints described in the
-   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
+   * {@link protos.google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
    * documentation. The caller must have `resourcemanager.folders.move`
    * permission on the folder's current and proposed new parent.
    *
@@ -1180,8 +1172,7 @@ export class FoldersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.move_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_MoveFolder_async
@@ -1276,8 +1267,7 @@ export class FoldersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.move_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_MoveFolder_async
@@ -1307,13 +1297,13 @@ export class FoldersClient {
   }
   /**
    * Requests deletion of a folder. The folder is moved into the
-   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   * {@link protos.google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
    * state immediately, and is deleted approximately 30 days later. This method
    * may only be called on an empty folder, where a folder is empty if it
    * doesn't contain any folders or projects in the
-   * {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. If
+   * {@link protos.google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. If
    * called on a folder in
-   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   * {@link protos.google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
    * state the operation will result in a no-op success.
    * The caller must have `resourcemanager.folders.delete` permission on the
    * identified folder.
@@ -1329,8 +1319,7 @@ export class FoldersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.delete_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_DeleteFolder_async
@@ -1425,8 +1414,7 @@ export class FoldersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.delete_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_DeleteFolder_async
@@ -1457,13 +1445,13 @@ export class FoldersClient {
   /**
    * Cancels the deletion request for a folder. This method may be called on a
    * folder in any state. If the folder is in the
-   * {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state the
+   * {@link protos.google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state the
    * result will be a no-op success. In order to succeed, the folder's parent
    * must be in the
-   * {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. In
+   * {@link protos.google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. In
    * addition, reintroducing the folder into the tree must not violate folder
    * naming, height, and fanout constraints described in the
-   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
+   * {@link protos.google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder}
    * documentation. The caller must have `resourcemanager.folders.undelete`
    * permission on the identified folder.
    *
@@ -1478,8 +1466,7 @@ export class FoldersClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.undelete_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_UndeleteFolder_async
@@ -1574,8 +1561,7 @@ export class FoldersClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.undelete_folder.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_UndeleteFolder_async
@@ -1633,19 +1619,18 @@ export class FoldersClient {
    *   that indicates where this listing should continue from.
    * @param {boolean} [request.showDeleted]
    *   Optional. Controls whether folders in the
-   *   {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   *   {@link protos.google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
    *   state should be returned. Defaults to false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.Folder | Folder}.
+   *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.Folder|Folder}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listFoldersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFolders(
@@ -1742,18 +1727,17 @@ export class FoldersClient {
    *   that indicates where this listing should continue from.
    * @param {boolean} [request.showDeleted]
    *   Optional. Controls whether folders in the
-   *   {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   *   {@link protos.google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
    *   state should be returned. Defaults to false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.Folder | Folder} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.Folder|Folder} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listFoldersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFoldersStream(
@@ -1799,17 +1783,16 @@ export class FoldersClient {
    *   that indicates where this listing should continue from.
    * @param {boolean} [request.showDeleted]
    *   Optional. Controls whether folders in the
-   *   {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   *   {@link protos.google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
    *   state should be returned. Defaults to false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.resourcemanager.v3.Folder | Folder}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.resourcemanager.v3.Folder|Folder}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.list_folders.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_ListFolders_async
@@ -1883,14 +1866,13 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.Folder | Folder}.
+   *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.Folder|Folder}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchFoldersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchFolders(
@@ -2010,13 +1992,12 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.Folder | Folder} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.Folder|Folder} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchFoldersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchFoldersStream(
@@ -2085,12 +2066,11 @@ export class FoldersClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.resourcemanager.v3.Folder | Folder}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.resourcemanager.v3.Folder|Folder}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/folders.search_folders.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Folders_SearchFolders_async

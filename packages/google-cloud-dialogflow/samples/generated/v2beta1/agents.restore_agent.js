@@ -47,7 +47,7 @@ function main(parent) {
   /**
    *  Zip compressed raw byte content for agent.
    */
-  // const agentContent = 'Buffer.from('string')'
+  // const agentContent = Buffer.from('string')
 
   // Imports the Dialogflow library
   const {AgentsClient} = require('@google-cloud/dialogflow').v2beta1;

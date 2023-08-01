@@ -1715,9 +1715,8 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.TrainingPipeline | TrainingPipeline}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.create_training_pipeline.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async
@@ -1818,9 +1817,8 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.TrainingPipeline | TrainingPipeline}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.get_training_pipeline.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_GetTrainingPipeline_async
@@ -1910,15 +1908,15 @@ export class PipelineServiceClient {
    * Starts asynchronous cancellation on the TrainingPipeline. The server
    * makes a best effort to cancel the pipeline, but success is not
    * guaranteed. Clients can use
-   * {@link google.cloud.aiplatform.v1beta1.PipelineService.GetTrainingPipeline|PipelineService.GetTrainingPipeline}
+   * {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.GetTrainingPipeline|PipelineService.GetTrainingPipeline}
    * or other methods to check whether the cancellation succeeded or whether the
    * pipeline completed despite cancellation. On successful cancellation,
    * the TrainingPipeline is not deleted; instead it becomes a pipeline with
    * a
-   * {@link google.cloud.aiplatform.v1beta1.TrainingPipeline.error|TrainingPipeline.error}
-   * value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline.error|TrainingPipeline.error}
+   * value with a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1,
    * corresponding to `Code.CANCELLED`, and
-   * {@link google.cloud.aiplatform.v1beta1.TrainingPipeline.state|TrainingPipeline.state}
+   * {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline.state|TrainingPipeline.state}
    * is set to `CANCELLED`.
    *
    * @param {Object} request
@@ -1930,9 +1928,8 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.cancel_training_pipeline.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_CancelTrainingPipeline_async
@@ -2037,13 +2034,12 @@ export class PipelineServiceClient {
    *   generated.
    *
    *   This value should be less than 128 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
+   *   are /{@link protos.0-9|a-z}-/.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.PipelineJob | PipelineJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.create_pipeline_job.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_CreatePipelineJob_async
@@ -2140,9 +2136,8 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.PipelineJob | PipelineJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.get_pipeline_job.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_GetPipelineJob_async
@@ -2226,14 +2221,14 @@ export class PipelineServiceClient {
    * Starts asynchronous cancellation on the PipelineJob. The server
    * makes a best effort to cancel the pipeline, but success is not
    * guaranteed. Clients can use
-   * {@link google.cloud.aiplatform.v1beta1.PipelineService.GetPipelineJob|PipelineService.GetPipelineJob}
+   * {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.GetPipelineJob|PipelineService.GetPipelineJob}
    * or other methods to check whether the cancellation succeeded or whether the
    * pipeline completed despite cancellation. On successful cancellation,
    * the PipelineJob is not deleted; instead it becomes a pipeline with
-   * a {@link google.cloud.aiplatform.v1beta1.PipelineJob.error|PipelineJob.error}
-   * value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * a {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob.error|PipelineJob.error}
+   * value with a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1,
    * corresponding to `Code.CANCELLED`, and
-   * {@link google.cloud.aiplatform.v1beta1.PipelineJob.state|PipelineJob.state} is
+   * {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob.state|PipelineJob.state} is
    * set to `CANCELLED`.
    *
    * @param {Object} request
@@ -2245,9 +2240,8 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_CancelPipelineJob_async
@@ -2348,8 +2342,7 @@ export class PipelineServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_DeleteTrainingPipeline_async
@@ -2448,8 +2441,7 @@ export class PipelineServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_DeleteTrainingPipeline_async
@@ -2492,8 +2484,7 @@ export class PipelineServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_DeletePipelineJob_async
@@ -2588,8 +2579,7 @@ export class PipelineServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_DeletePipelineJob_async
@@ -2651,23 +2641,22 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.TrainingPipeline | TrainingPipeline}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTrainingPipelinesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTrainingPipelines(
@@ -2778,22 +2767,21 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.TrainingPipeline | TrainingPipeline} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTrainingPipelinesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTrainingPipelinesStream(
@@ -2853,21 +2841,20 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
    *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.TrainingPipeline | TrainingPipeline}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_training_pipelines.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_ListTrainingPipelines_async
@@ -2941,9 +2928,9 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
    *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
@@ -2964,14 +2951,13 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.PipelineJob | PipelineJob}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPipelineJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPipelineJobs(
@@ -3096,9 +3082,9 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
    *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
@@ -3119,13 +3105,12 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.PipelineJob | PipelineJob} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPipelineJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPipelineJobsStream(
@@ -3199,9 +3184,9 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
    *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
@@ -3222,12 +3207,11 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.PipelineJob | PipelineJob}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js</caption>
    * region_tag:aiplatform_v1beta1_generated_PipelineService_ListPipelineJobs_async
@@ -3292,7 +3276,7 @@ export class PipelineServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -3313,8 +3297,7 @@ export class PipelineServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -3340,7 +3323,7 @@ export class PipelineServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -3361,8 +3344,7 @@ export class PipelineServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -3389,7 +3371,7 @@ export class PipelineServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -3404,8 +3386,7 @@ export class PipelineServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3451,12 +3432,11 @@ export class PipelineServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

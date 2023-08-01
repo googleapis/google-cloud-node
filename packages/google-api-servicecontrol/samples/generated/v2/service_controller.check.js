@@ -49,7 +49,7 @@ function main() {
   /**
    *  Describes the resources and the policies applied to each resource.
    */
-  // const resources = 1234
+  // const resources = [1,2,3,4]
   /**
    *  Optional. Contains a comma-separated list of flags.
    */

@@ -41,7 +41,7 @@ function main(parent) {
    *  For example, "projects/foo/tenants/bar/jobs/baz".
    *  A maximum of 200 jobs can be deleted in a batch.
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4;

@@ -47,14 +47,14 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  Required. The ISO-639 language code to use for translation of the input
    *  document. Specify up to 10 language codes here.
    */
-  // const targetLanguageCodes = 'abc123'
+  // const targetLanguageCodes = ['abc','def']
   /**
    *  Required. Input configurations.
    *  The total number of files matched should be <= 100.
    *  The total content size to translate should be <= 100M Unicode codepoints.
    *  The files must use UTF-8 encoding.
    */
-  // const inputConfigs = 1234
+  // const inputConfigs = [1,2,3,4]
   /**
    *  Required. Output configuration.
    *  If 2 input configs match to the same file (that is, same input path),
@@ -73,11 +73,11 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  If the map is empty or a specific model is
    *  not requested for a language pair, then default google model (nmt) is used.
    */
-  // const models = 1234
+  // const models = [1,2,3,4]
   /**
    *  Optional. Glossaries to be applied. It's keyed by target language code.
    */
-  // const glossaries = 1234
+  // const glossaries = [1,2,3,4]
   /**
    *  Optional. File format conversion map to be applied to all input files.
    *  Map's key is the original mime_type. Map's value is the target mime_type of
@@ -88,7 +88,7 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  If nothing specified, output files will be in the same format as the
    *  original file.
    */
-  // const formatConversions = 1234
+  // const formatConversions = [1,2,3,4]
   /**
    *  Optional. This flag is to support user customized attribution.
    *  If not provided, the default is `Machine Translated by Google`.

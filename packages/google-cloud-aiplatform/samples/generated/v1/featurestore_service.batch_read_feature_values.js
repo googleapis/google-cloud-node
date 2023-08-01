@@ -70,12 +70,12 @@ function main(featurestore, destination, entityTypeSpecs) {
    *  automatically inferred. For CSV source, the pass-through values will be
    *  passed as opaque bytes.
    */
-  // const passThroughFields = 1234
+  // const passThroughFields = [1,2,3,4]
   /**
    *  Required. Specifies EntityType grouping Features to read values of and
    *  settings.
    */
-  // const entityTypeSpecs = 1234
+  // const entityTypeSpecs = [1,2,3,4]
   /**
    *  Optional. Excludes Feature values with feature generation timestamp before
    *  this timestamp. If not set, retrieve oldest values kept in Feature Store.

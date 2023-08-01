@@ -1,6 +1,8 @@
 [
   "../../protos/google/cloud/discoveryengine/v1beta/common.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/completion_service.proto",
+  "../../protos/google/cloud/discoveryengine/v1beta/conversation.proto",
+  "../../protos/google/cloud/discoveryengine/v1beta/conversational_search_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/document.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/document_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/import_config.proto",

@@ -41,13 +41,13 @@ function main(parent, registration, yearlyPrice) {
    *  The list of domain notices that you acknowledge. Call
    *  `RetrieveRegisterParameters` to see the notices that need acknowledgement.
    */
-  // const domainNotices = 1234
+  // const domainNotices = [1,2,3,4]
   /**
    *  The list of contact notices that the caller acknowledges. The notices
    *  needed here depend on the values specified in
    *  `registration.contact_settings`.
    */
-  // const contactNotices = 1234
+  // const contactNotices = [1,2,3,4]
   /**
    *  Required. Yearly price to register or renew the domain.
    *  The value that should be put here can be obtained from

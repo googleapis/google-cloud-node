@@ -386,7 +386,7 @@ export class VideoIntelligenceServiceClient {
    *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
    *   supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
-   *   {@link google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For more information, see
+   *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For more information, see
    *   [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
    *   A video URI may include wildcards in `object-id`, and thus identify
    *   multiple videos. Supported wildcards: '*' to match 0 or more characters;
@@ -405,7 +405,7 @@ export class VideoIntelligenceServiceClient {
    *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
    *   URIs are supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
-   *   {@link google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For more information, see
+   *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT}). For more information, see
    *   [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
    * @param {string} [request.locationId]
    *   Optional. Cloud region where annotation should take place. Supported cloud
@@ -417,8 +417,7 @@ export class VideoIntelligenceServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js</caption>
    * region_tag:videointelligence_v1p2beta1_generated_VideoIntelligenceService_AnnotateVideo_async
@@ -509,8 +508,7 @@ export class VideoIntelligenceServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js</caption>
    * region_tag:videointelligence_v1p2beta1_generated_VideoIntelligenceService_AnnotateVideo_async

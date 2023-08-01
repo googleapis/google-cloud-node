@@ -79,7 +79,7 @@ function main(session, queryInput) {
    *  should be populated iff `query_input` is set to an input audio config.
    *  A single request can contain up to 1 minute of speech audio data.
    */
-  // const inputAudio = 'Buffer.from('string')'
+  // const inputAudio = Buffer.from('string')
 
   // Imports the Dialogflow library
   const {SessionsClient} = require('@google-cloud/dialogflow').v2;

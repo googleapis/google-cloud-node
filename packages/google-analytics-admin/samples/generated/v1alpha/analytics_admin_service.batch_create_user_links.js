@@ -45,7 +45,7 @@ function main(parent, requests) {
    *  Required. The requests specifying the user links to create.
    *  A maximum of 1000 user links can be created in a batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;

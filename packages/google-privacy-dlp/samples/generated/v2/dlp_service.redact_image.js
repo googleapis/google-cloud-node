@@ -50,7 +50,7 @@ function main() {
   /**
    *  The configuration for specifying what content to redact from images.
    */
-  // const imageRedactionConfigs = 1234
+  // const imageRedactionConfigs = [1,2,3,4]
   /**
    *  Whether the response should include findings along with the redacted
    *  image.

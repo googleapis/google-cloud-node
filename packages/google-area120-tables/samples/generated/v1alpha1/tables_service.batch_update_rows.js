@@ -37,7 +37,7 @@ function main(parent, requests) {
    *  Required. The request messages specifying the rows to update.
    *  A maximum of 500 rows can be modified in a single batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Tables library
   const {TablesServiceClient} = require('@google/area120-tables').v1alpha1;

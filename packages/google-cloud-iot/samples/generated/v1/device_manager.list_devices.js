@@ -37,12 +37,12 @@ function main(parent) {
    *  A list of device numeric IDs. If empty, this field is ignored. Maximum
    *  IDs: 10,000.
    */
-  // const deviceNumIds = 1234
+  // const deviceNumIds = [1,2,3,4]
   /**
    *  A list of device string IDs. For example, `['device0', 'device12']`.
    *  If empty, this field is ignored. Maximum IDs: 10,000
    */
-  // const deviceIds = 'abc123'
+  // const deviceIds = ['abc','def']
   /**
    *  The fields of the `Device` resource to be returned in the response. The
    *  fields `id` and `num_id` are always returned, along with any

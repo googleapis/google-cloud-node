@@ -32,7 +32,7 @@ function main(requests) {
    *  Required. The list of file annotation requests. Right now we support only
    *  one AnnotateFileRequest in BatchAnnotateFilesRequest.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
 
   // Imports the Vision library
   const {ImageAnnotatorClient} = require('@google-cloud/vision').v1p4beta1;

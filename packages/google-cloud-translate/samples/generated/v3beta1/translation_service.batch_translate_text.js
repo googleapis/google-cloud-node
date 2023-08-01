@@ -44,7 +44,7 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
   /**
    *  Required. Specify up to 10 language codes here.
    */
-  // const targetLanguageCodes = 'abc123'
+  // const targetLanguageCodes = ['abc','def']
   /**
    *  Optional. The models to use for translation. Map's key is target language
    *  code. Map's value is model name. Value can be a built-in general model,
@@ -57,14 +57,14 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  If the map is empty or a specific model is
    *  not requested for a language pair, then default google model (nmt) is used.
    */
-  // const models = 1234
+  // const models = [1,2,3,4]
   /**
    *  Required. Input configurations.
    *  The total number of files matched should be <= 100.
    *  The total content size should be <= 100M Unicode codepoints.
    *  The files must use UTF-8 encoding.
    */
-  // const inputConfigs = 1234
+  // const inputConfigs = [1,2,3,4]
   /**
    *  Required. Output configuration.
    *  If 2 input configs match to the same file (that is, same input path),
@@ -75,7 +75,7 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  Optional. Glossaries to be applied for translation.
    *  It's keyed by target language code.
    */
-  // const glossaries = 1234
+  // const glossaries = [1,2,3,4]
   /**
    *  Optional. The labels with user-defined metadata for the request.
    *  Label keys and values can be no longer than 63 characters
@@ -84,7 +84,7 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  Label values are optional. Label keys must start with a letter.
    *  See https://cloud.google.com/translate/docs/labels for more information.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;

@@ -60,7 +60,7 @@ function main(parent) {
    *  Inventory (https://cloud.google.com/asset-inventory/docs/overview)
    *  for all supported asset types.
    */
-  // const assetTypes = 'abc123'
+  // const assetTypes = ['abc','def']
   /**
    *  Asset content type. If not specified, no content but the asset name will
    *  be returned.
@@ -94,7 +94,7 @@ function main(parent) {
    *  Inventory (https://cloud.google.com/asset-inventory/docs/overview)
    *  for all supported asset types and relationship types.
    */
-  // const relationshipTypes = 'abc123'
+  // const relationshipTypes = ['abc','def']
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1;

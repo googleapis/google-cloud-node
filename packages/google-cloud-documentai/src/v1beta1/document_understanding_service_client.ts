@@ -362,8 +362,7 @@ export class DocumentUnderstandingServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/document_understanding_service.batch_process_documents.js</caption>
    * region_tag:documentai_v1beta1_generated_DocumentUnderstandingService_BatchProcessDocuments_async
@@ -458,8 +457,7 @@ export class DocumentUnderstandingServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/document_understanding_service.batch_process_documents.js</caption>
    * region_tag:documentai_v1beta1_generated_DocumentUnderstandingService_BatchProcessDocuments_async

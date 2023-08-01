@@ -47,7 +47,7 @@ function main(name, versionAliases) {
    *  alias in the request is not recommended, and the 2 operations will be
    *  cancelled out.
    */
-  // const versionAliases = 'abc123'
+  // const versionAliases = ['abc','def']
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;

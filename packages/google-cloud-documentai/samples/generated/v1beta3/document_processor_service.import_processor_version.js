@@ -34,6 +34,11 @@ function main(parent) {
    */
   // const processorVersionSource = 'abc123'
   /**
+   *  The source processor version to import from, and can be from different
+   *  environment and region than the destination processor.
+   */
+  // const externalProcessorVersionSource = {}
+  /**
    *  Required. The destination processor name to create the processor version
    *  in. Format:
    *  `projects/{project}/locations/{location}/processors/{processor}`

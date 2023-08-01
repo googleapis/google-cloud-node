@@ -91,7 +91,7 @@ function main(session, queryInput) {
    *  `query_input` was set to a streaming input audio config. The complete audio
    *  over all streaming messages must not exceed 1 minute.
    */
-  // const inputAudio = 'Buffer.from('string')'
+  // const inputAudio = Buffer.from('string')
   /**
    *  if true, `StreamingDetectIntentResponse.debugging_info` will get populated.
    */

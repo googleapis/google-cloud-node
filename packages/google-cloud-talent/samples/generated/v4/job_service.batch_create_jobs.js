@@ -38,7 +38,7 @@ function main(parent, jobs) {
    *  Required. The jobs to be created.
    *  A maximum of 200 jobs can be created in a batch.
    */
-  // const jobs = 1234
+  // const jobs = [1,2,3,4]
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4;

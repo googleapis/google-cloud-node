@@ -47,7 +47,7 @@ function main(parent) {
   /**
    *  Uncompressed raw byte content for flow.
    */
-  // const flowContent = 'Buffer.from('string')'
+  // const flowContent = Buffer.from('string')
   /**
    *  Flow import mode. If not specified, `KEEP` is assumed.
    */

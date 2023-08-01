@@ -24,6 +24,8 @@ const DataplexServiceClient = v1.DataplexServiceClient;
 type DataplexServiceClient = v1.DataplexServiceClient;
 const DataScanServiceClient = v1.DataScanServiceClient;
 type DataScanServiceClient = v1.DataScanServiceClient;
+const DataTaxonomyServiceClient = v1.DataTaxonomyServiceClient;
+type DataTaxonomyServiceClient = v1.DataTaxonomyServiceClient;
 const MetadataServiceClient = v1.MetadataServiceClient;
 type MetadataServiceClient = v1.MetadataServiceClient;
 
@@ -32,6 +34,7 @@ export {
   ContentServiceClient,
   DataplexServiceClient,
   DataScanServiceClient,
+  DataTaxonomyServiceClient,
   MetadataServiceClient,
 };
 export default {
@@ -39,6 +42,7 @@ export default {
   ContentServiceClient,
   DataplexServiceClient,
   DataScanServiceClient,
+  DataTaxonomyServiceClient,
   MetadataServiceClient,
 };
 import * as protos from '../protos/protos';

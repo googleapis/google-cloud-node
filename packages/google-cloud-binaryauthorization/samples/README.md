@@ -30,7 +30,6 @@
   * [Binauthz_management_service_v1_beta1.update_policy](#binauthz_management_service_v1_beta1.update_policy)
   * [System_policy_v1_beta1.get_system_policy](#system_policy_v1_beta1.get_system_policy)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -346,23 +345,6 @@ __Usage:__
 
 
 `node packages/google-cloud-binaryauthorization/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-binaryauthorization/samples/test/quickstart.js`
 
 
 

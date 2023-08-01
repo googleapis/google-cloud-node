@@ -45,7 +45,7 @@ function main(recognizer) {
    *  Inline audio bytes to be Recognized.
    *  Maximum size for this field is 15 KB per request.
    */
-  // const audio = 'Buffer.from('string')'
+  // const audio = Buffer.from('string')
 
   // Imports the Speech library
   const {SpeechClient} = require('@google-cloud/speech').v2;

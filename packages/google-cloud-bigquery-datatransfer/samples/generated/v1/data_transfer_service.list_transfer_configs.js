@@ -37,7 +37,7 @@ function main(parent) {
   /**
    *  When specified, only configurations of requested data sources are returned.
    */
-  // const dataSourceIds = 'abc123'
+  // const dataSourceIds = ['abc','def']
   /**
    *  Pagination token, which can be used to request a specific page
    *  of `ListTransfersRequest` list results. For multiple-page

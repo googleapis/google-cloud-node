@@ -37,7 +37,7 @@ function main(context) {
   /**
    *  The resource names of the child Contexts.
    */
-  // const childContexts = 'abc123'
+  // const childContexts = ['abc','def']
 
   // Imports the Aiplatform library
   const {MetadataServiceClient} = require('@google-cloud/aiplatform').v1;

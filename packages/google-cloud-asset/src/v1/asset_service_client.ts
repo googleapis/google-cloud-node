@@ -519,9 +519,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.BatchGetAssetsHistoryResponse | BatchGetAssetsHistoryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse|BatchGetAssetsHistoryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.batch_get_assets_history.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_async
@@ -623,9 +622,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.Feed | Feed}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.create_feed.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_CreateFeed_async
@@ -709,9 +707,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.Feed | Feed}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.get_feed.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_GetFeed_async
@@ -794,9 +791,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.ListFeedsResponse | ListFeedsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.ListFeedsResponse|ListFeedsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.list_feeds.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_ListFeeds_async
@@ -885,9 +881,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.Feed | Feed}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.Feed|Feed}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.update_feed.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_UpdateFeed_async
@@ -971,9 +966,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.delete_feed.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_DeleteFeed_async
@@ -1084,9 +1078,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.AnalyzeIamPolicyResponse | AnalyzeIamPolicyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicy_async
@@ -1185,9 +1178,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.AnalyzeMoveResponse | AnalyzeMoveResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.AnalyzeMoveResponse|AnalyzeMoveResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_move.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeMove_async
@@ -1335,9 +1327,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.QueryAssetsResponse | QueryAssetsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.QueryAssetsResponse|QueryAssetsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.query_assets.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_QueryAssets_async
@@ -1428,16 +1419,15 @@ export class AssetServiceClient {
    *   resource name.
    *
    *   This value should be 4-63 characters, and valid characters
-   *   are `{@link 0-9|a-z}-`.
+   *   are `{@link protos.0-9|a-z}-`.
    *
    *   Notice that this field is required in the saved query creation, and the
    *   `name` field of the `saved_query` will be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.create_saved_query.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_CreateSavedQuery_async
@@ -1524,9 +1514,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.get_saved_query.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_GetSavedQuery_async
@@ -1616,9 +1605,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.update_saved_query.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_UpdateSavedQuery_async
@@ -1706,9 +1694,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.delete_saved_query.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_DeleteSavedQuery_async
@@ -1807,9 +1794,8 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse | BatchGetEffectiveIamPoliciesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse|BatchGetEffectiveIamPoliciesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.batch_get_effective_iam_policies.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_async
@@ -1903,10 +1889,10 @@ export class AssetServiceClient {
    * Exports assets with time and resource types to a given Cloud Storage
    * location/BigQuery table. For Cloud Storage location destinations, the
    * output format is newline-delimited JSON. Each line represents a
-   * {@link google.cloud.asset.v1.Asset|google.cloud.asset.v1.Asset} in the JSON
+   * {@link protos.google.cloud.asset.v1.Asset|google.cloud.asset.v1.Asset} in the JSON
    * format; for BigQuery table destinations, the output table stores the fields
    * in asset Protobuf as columns. This API implements the
-   * {@link google.longrunning.Operation|google.longrunning.Operation} API, which
+   * {@link protos.google.longrunning.Operation|google.longrunning.Operation} API, which
    * allows you to keep track of the export. We recommend intervals of at least
    * 2 seconds with exponential retry to poll the export operation result. For
    * regular-size resource parent, the export operation usually finishes within
@@ -1972,8 +1958,7 @@ export class AssetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.export_assets.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_ExportAssets_async
@@ -2068,8 +2053,7 @@ export class AssetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.export_assets.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_ExportAssets_async
@@ -2102,9 +2086,9 @@ export class AssetServiceClient {
    * accesses on which resources, and writes the analysis results to a Google
    * Cloud Storage or a BigQuery destination. For Cloud Storage destination, the
    * output format is the JSON format that represents a
-   * {@link google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
+   * {@link protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse|AnalyzeIamPolicyResponse}.
    * This method implements the
-   * {@link google.longrunning.Operation|google.longrunning.Operation}, which allows
+   * {@link protos.google.longrunning.Operation|google.longrunning.Operation}, which allows
    * you to track the operation status. We recommend intervals of at least 2
    * seconds with exponential backoff retry to poll the operation result. The
    * metadata contains the metadata for the long-running operation.
@@ -2139,8 +2123,7 @@ export class AssetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy_longrunning.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_async
@@ -2239,8 +2222,7 @@ export class AssetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_iam_policy_longrunning.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeIamPolicyLongrunning_async
@@ -2334,14 +2316,13 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.Asset | Asset}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.Asset|Asset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAssetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAssets(
@@ -2475,13 +2456,12 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.Asset | Asset} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.Asset|Asset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAssetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAssetsStream(
@@ -2572,12 +2552,11 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.Asset | Asset}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.list_assets.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_ListAssets_async
@@ -2762,14 +2741,13 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.ResourceSearchResult | ResourceSearchResult}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchAllResourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchAllResources(
@@ -3002,13 +2980,12 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.ResourceSearchResult | ResourceSearchResult} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllResourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchAllResourcesStream(
@@ -3190,12 +3167,11 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.ResourceSearchResult | ResourceSearchResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.ResourceSearchResult|ResourceSearchResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.search_all_resources.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_SearchAllResources_async
@@ -3328,14 +3304,13 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.IamPolicySearchResult | IamPolicySearchResult}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchAllIamPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchAllIamPolicies(
@@ -3516,13 +3491,12 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.IamPolicySearchResult | IamPolicySearchResult} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllIamPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchAllIamPoliciesStream(
@@ -3652,12 +3626,11 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.IamPolicySearchResult | IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.IamPolicySearchResult|IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.search_all_iam_policies.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_SearchAllIamPolicies_async
@@ -3714,14 +3687,13 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSavedQueriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSavedQueries(
@@ -3823,13 +3795,12 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSavedQueriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSavedQueriesStream(
@@ -3886,12 +3857,11 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.SavedQuery | SavedQuery}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.SavedQuery|SavedQuery}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.list_saved_queries.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_ListSavedQueries_async
@@ -3933,7 +3903,7 @@ export class AssetServiceClient {
    *   constraint.
    * @param {string} request.filter
    *   The expression to filter
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
    *   The only supported field is `consolidated_policy.attached_resource`, and
    *   the only supported operator is `=`.
    *
@@ -3942,21 +3912,20 @@ export class AssetServiceClient {
    *   will return the org policy results of"folders/001".
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
    *   will contain 20 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult | OrgPolicyResult}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `analyzeOrgPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   analyzeOrgPolicies(
@@ -4049,7 +4018,7 @@ export class AssetServiceClient {
    *   constraint.
    * @param {string} request.filter
    *   The expression to filter
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
    *   The only supported field is `consolidated_policy.attached_resource`, and
    *   the only supported operator is `=`.
    *
@@ -4058,20 +4027,19 @@ export class AssetServiceClient {
    *   will return the org policy results of"folders/001".
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
    *   will contain 20 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult | OrgPolicyResult} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `analyzeOrgPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   analyzeOrgPoliciesStream(
@@ -4113,7 +4081,7 @@ export class AssetServiceClient {
    *   constraint.
    * @param {string} request.filter
    *   The expression to filter
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}.
    *   The only supported field is `consolidated_policy.attached_resource`, and
    *   the only supported operator is `=`.
    *
@@ -4122,19 +4090,18 @@ export class AssetServiceClient {
    *   will return the org policy results of"folders/001".
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.org_policy_results|AnalyzeOrgPoliciesResponse.org_policy_results}
    *   will contain 20 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult | OrgPolicyResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult|OrgPolicyResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policies.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicies_async
@@ -4187,21 +4154,20 @@ export class AssetServiceClient {
    *   containers under "folders/001".
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
    *   will contain 100 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer | GovernedContainer}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   analyzeOrgPolicyGovernedContainers(
@@ -4308,20 +4274,19 @@ export class AssetServiceClient {
    *   containers under "folders/001".
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
    *   will contain 100 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer | GovernedContainer} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   analyzeOrgPolicyGovernedContainersStream(
@@ -4374,19 +4339,18 @@ export class AssetServiceClient {
    *   containers under "folders/001".
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers|AnalyzeOrgPolicyGovernedContainersResponse.governed_containers}
    *   will contain 100 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer | GovernedContainer}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer|GovernedContainer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policy_governed_containers.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedContainers_async
@@ -4462,21 +4426,20 @@ export class AssetServiceClient {
    *   return all governed iam policies under folders/12345678, if applicable.
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
    *   will contain 100 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset | GovernedAsset}.
+   *   The first element of the array is Array of {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   analyzeOrgPolicyGovernedAssets(
@@ -4588,20 +4551,19 @@ export class AssetServiceClient {
    *   return all governed iam policies under folders/12345678, if applicable.
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
    *   will contain 100 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset | GovernedAsset} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   analyzeOrgPolicyGovernedAssetsStream(
@@ -4659,19 +4621,18 @@ export class AssetServiceClient {
    *   return all governed iam policies under folders/12345678, if applicable.
    * @param {number} request.pageSize
    *   The maximum number of items to return per page. If unspecified,
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets|AnalyzeOrgPolicyGovernedAssetsResponse.governed_assets}
    *   will contain 100 items with a maximum of 200.
    * @param {string} request.pageToken
    *   The pagination token to retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset | GovernedAsset}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset|GovernedAsset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/asset_service.analyze_org_policy_governed_assets.js</caption>
    * region_tag:cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedAssets_async

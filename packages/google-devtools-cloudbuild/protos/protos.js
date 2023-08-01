@@ -3823,6 +3823,7 @@
                          * @property {number|null} [exitCode] BuildStep exitCode
                          * @property {Array.<number>|null} [allowExitCodes] BuildStep allowExitCodes
                          * @property {string|null} [script] BuildStep script
+                         * @property {boolean|null} [automapSubstitutions] BuildStep automapSubstitutions
                          */
     
                         /**
@@ -3983,6 +3984,28 @@
                         BuildStep.prototype.script = "";
     
                         /**
+                         * BuildStep automapSubstitutions.
+                         * @member {boolean|null|undefined} automapSubstitutions
+                         * @memberof google.devtools.cloudbuild.v1.BuildStep
+                         * @instance
+                         */
+                        BuildStep.prototype.automapSubstitutions = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BuildStep _automapSubstitutions.
+                         * @member {"automapSubstitutions"|undefined} _automapSubstitutions
+                         * @memberof google.devtools.cloudbuild.v1.BuildStep
+                         * @instance
+                         */
+                        Object.defineProperty(BuildStep.prototype, "_automapSubstitutions", {
+                            get: $util.oneOfGetter($oneOfFields = ["automapSubstitutions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new BuildStep instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.BuildStep
@@ -4049,6 +4072,8 @@
                             }
                             if (message.script != null && Object.hasOwnProperty.call(message, "script"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.script);
+                            if (message.automapSubstitutions != null && Object.hasOwnProperty.call(message, "automapSubstitutions"))
+                                writer.uint32(/* id 20, wireType 0 =*/160).bool(message.automapSubstitutions);
                             return writer;
                         };
     
@@ -4168,6 +4193,10 @@
                                         message.script = reader.string();
                                         break;
                                     }
+                                case 20: {
+                                        message.automapSubstitutions = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4203,6 +4232,7 @@
                         BuildStep.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -4299,6 +4329,11 @@
                             if (message.script != null && message.hasOwnProperty("script"))
                                 if (!$util.isString(message.script))
                                     return "script: string expected";
+                            if (message.automapSubstitutions != null && message.hasOwnProperty("automapSubstitutions")) {
+                                properties._automapSubstitutions = 1;
+                                if (typeof message.automapSubstitutions !== "boolean")
+                                    return "automapSubstitutions: boolean expected";
+                            }
                             return null;
                         };
     
@@ -4436,6 +4471,8 @@
                             }
                             if (object.script != null)
                                 message.script = String(object.script);
+                            if (object.automapSubstitutions != null)
+                                message.automapSubstitutions = Boolean(object.automapSubstitutions);
                             return message;
                         };
     
@@ -4525,6 +4562,11 @@
                             }
                             if (message.script != null && message.hasOwnProperty("script"))
                                 object.script = message.script;
+                            if (message.automapSubstitutions != null && message.hasOwnProperty("automapSubstitutions")) {
+                                object.automapSubstitutions = message.automapSubstitutions;
+                                if (options.oneofs)
+                                    object._automapSubstitutions = "automapSubstitutions";
+                            }
                             return object;
                         };
     
@@ -18493,6 +18535,7 @@
                          * @property {number|Long|null} [diskSizeGb] BuildOptions diskSizeGb
                          * @property {google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption|null} [substitutionOption] BuildOptions substitutionOption
                          * @property {boolean|null} [dynamicSubstitutions] BuildOptions dynamicSubstitutions
+                         * @property {boolean|null} [automapSubstitutions] BuildOptions automapSubstitutions
                          * @property {google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption|null} [logStreamingOption] BuildOptions logStreamingOption
                          * @property {string|null} [workerPool] BuildOptions workerPool
                          * @property {google.devtools.cloudbuild.v1.BuildOptions.IPoolOption|null} [pool] BuildOptions pool
@@ -18569,6 +18612,14 @@
                          * @instance
                          */
                         BuildOptions.prototype.dynamicSubstitutions = false;
+    
+                        /**
+                         * BuildOptions automapSubstitutions.
+                         * @member {boolean} automapSubstitutions
+                         * @memberof google.devtools.cloudbuild.v1.BuildOptions
+                         * @instance
+                         */
+                        BuildOptions.prototype.automapSubstitutions = false;
     
                         /**
                          * BuildOptions logStreamingOption.
@@ -18693,6 +18744,8 @@
                                 $root.google.devtools.cloudbuild.v1.BuildOptions.PoolOption.encode(message.pool, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.defaultLogsBucketBehavior != null && Object.hasOwnProperty.call(message, "defaultLogsBucketBehavior"))
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.defaultLogsBucketBehavior);
+                            if (message.automapSubstitutions != null && Object.hasOwnProperty.call(message, "automapSubstitutions"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).bool(message.automapSubstitutions);
                             return writer;
                         };
     
@@ -18756,6 +18809,10 @@
                                     }
                                 case 17: {
                                         message.dynamicSubstitutions = reader.bool();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.automapSubstitutions = reader.bool();
                                         break;
                                     }
                                 case 5: {
@@ -18879,6 +18936,9 @@
                             if (message.dynamicSubstitutions != null && message.hasOwnProperty("dynamicSubstitutions"))
                                 if (typeof message.dynamicSubstitutions !== "boolean")
                                     return "dynamicSubstitutions: boolean expected";
+                            if (message.automapSubstitutions != null && message.hasOwnProperty("automapSubstitutions"))
+                                if (typeof message.automapSubstitutions !== "boolean")
+                                    return "automapSubstitutions: boolean expected";
                             if (message.logStreamingOption != null && message.hasOwnProperty("logStreamingOption"))
                                 switch (message.logStreamingOption) {
                                 default:
@@ -19058,6 +19118,8 @@
                             }
                             if (object.dynamicSubstitutions != null)
                                 message.dynamicSubstitutions = Boolean(object.dynamicSubstitutions);
+                            if (object.automapSubstitutions != null)
+                                message.automapSubstitutions = Boolean(object.automapSubstitutions);
                             switch (object.logStreamingOption) {
                             default:
                                 if (typeof object.logStreamingOption === "number") {
@@ -19194,6 +19256,7 @@
                                 object.dynamicSubstitutions = false;
                                 object.pool = null;
                                 object.defaultLogsBucketBehavior = options.enums === String ? "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED" : 0;
+                                object.automapSubstitutions = false;
                             }
                             if (message.sourceProvenanceHash && message.sourceProvenanceHash.length) {
                                 object.sourceProvenanceHash = [];
@@ -19238,6 +19301,8 @@
                                 object.pool = $root.google.devtools.cloudbuild.v1.BuildOptions.PoolOption.toObject(message.pool, options);
                             if (message.defaultLogsBucketBehavior != null && message.hasOwnProperty("defaultLogsBucketBehavior"))
                                 object.defaultLogsBucketBehavior = options.enums === String ? $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] === undefined ? message.defaultLogsBucketBehavior : $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] : message.defaultLogsBucketBehavior;
+                            if (message.automapSubstitutions != null && message.hasOwnProperty("automapSubstitutions"))
+                                object.automapSubstitutions = message.automapSubstitutions;
                             return object;
                         };
     

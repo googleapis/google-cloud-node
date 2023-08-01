@@ -410,8 +410,8 @@ export class MerchantCenterAccountLinkServiceClient {
   // -------------------
   /**
    * Lists all
-   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}s
-   * under the specified parent {@link google.cloud.retail.v2alpha.Catalog|Catalog}.
+   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}s
+   * under the specified parent {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -422,9 +422,8 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse | ListMerchantCenterAccountLinksResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse|ListMerchantCenterAccountLinksResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js</caption>
    * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_ListMerchantCenterAccountLinks_async
@@ -515,9 +514,9 @@ export class MerchantCenterAccountLinkServiceClient {
   }
   /**
    * Deletes a
-   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
+   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
    * If the
-   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
    * to delete does not exist, a NOT_FOUND error is returned.
    *
    * @param {Object} request
@@ -528,9 +527,8 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js</caption>
    * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_DeleteMerchantCenterAccountLink_async
@@ -622,7 +620,7 @@ export class MerchantCenterAccountLinkServiceClient {
 
   /**
    * Creates a
-   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
+   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -632,11 +630,11 @@ export class MerchantCenterAccountLinkServiceClient {
    *   projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}}
    * @param {google.cloud.retail.v2alpha.MerchantCenterAccountLink} request.merchantCenterAccountLink
    *   Required. The
-   *   {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+   *   {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
    *   to create.
    *
    *   If the caller does not have permission to create the
-   *   {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink},
+   *   {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink},
    *   regardless of whether or not it exists, a PERMISSION_DENIED error is
    *   returned.
    * @param {object} [options]
@@ -645,8 +643,7 @@ export class MerchantCenterAccountLinkServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
    * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
@@ -745,8 +742,7 @@ export class MerchantCenterAccountLinkServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
    * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
@@ -785,8 +781,7 @@ export class MerchantCenterAccountLinkServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -832,12 +827,11 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

@@ -108,7 +108,7 @@ function main(servingConfig, userEvent) {
    *     This gives request-level control and adjusts recommendation results
    *     based on Document category.
    */
-  // const params = 1234
+  // const params = [1,2,3,4]
   /**
    *  The user labels applied to a resource must meet the following requirements:
    *  * Each resource can have multiple labels, up to a maximum of 64.
@@ -126,7 +126,7 @@ function main(servingConfig, userEvent) {
    *  labels (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *  for more details.
    */
-  // const userLabels = 1234
+  // const userLabels = [1,2,3,4]
 
   // Imports the Discoveryengine library
   const {RecommendationServiceClient} = require('@google-cloud/discoveryengine').v1beta;

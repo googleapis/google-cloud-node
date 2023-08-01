@@ -285,6 +285,9 @@ export class FeaturestoreServiceClient {
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
+      schedulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/schedules/{schedule}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
@@ -1687,9 +1690,8 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Featurestore | Featurestore}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Featurestore|Featurestore}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.get_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_GetFeaturestore_async
@@ -1780,9 +1782,8 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.EntityType | EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.EntityType|EntityType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.get_entity_type.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_GetEntityType_async
@@ -1894,9 +1895,8 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.EntityType | EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.EntityType|EntityType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.update_entity_type.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_UpdateEntityType_async
@@ -1987,9 +1987,8 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Feature | Feature}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Feature|Feature}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.get_feature.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_GetFeature_async
@@ -2089,9 +2088,8 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Feature | Feature}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.Feature|Feature}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.update_feature.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_UpdateFeature_async
@@ -2196,8 +2194,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.create_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_CreateFeaturestore_async
@@ -2292,8 +2289,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.create_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_CreateFeaturestore_async
@@ -2351,8 +2347,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.update_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_UpdateFeaturestore_async
@@ -2447,8 +2442,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.update_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_UpdateFeaturestore_async
@@ -2496,8 +2490,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeaturestore_async
@@ -2592,8 +2585,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_featurestore.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeaturestore_async
@@ -2646,8 +2638,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.create_entity_type.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_CreateEntityType_async
@@ -2742,8 +2733,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.create_entity_type.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_CreateEntityType_async
@@ -2790,8 +2780,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_entity_type.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteEntityType_async
@@ -2886,8 +2875,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_entity_type.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteEntityType_async
@@ -2940,8 +2928,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.create_feature.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_CreateFeature_async
@@ -3036,8 +3023,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.create_feature.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_CreateFeature_async
@@ -3086,8 +3072,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.batch_create_features.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_BatchCreateFeatures_async
@@ -3182,8 +3167,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.batch_create_features.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_BatchCreateFeatures_async
@@ -3226,8 +3210,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_feature.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeature_async
@@ -3322,8 +3305,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_feature.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeature_async
@@ -3414,8 +3396,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.import_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ImportFeatureValues_async
@@ -3510,8 +3491,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.import_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ImportFeatureValues_async
@@ -3603,8 +3583,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.batch_read_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_BatchReadFeatureValues_async
@@ -3703,8 +3682,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.batch_read_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_BatchReadFeatureValues_async
@@ -3759,8 +3737,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.export_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ExportFeatureValues_async
@@ -3855,8 +3832,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.export_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ExportFeatureValues_async
@@ -3913,8 +3889,7 @@ export class FeaturestoreServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeatureValues_async
@@ -4009,8 +3984,7 @@ export class FeaturestoreServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.delete_feature_values.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeatureValues_async
@@ -4074,11 +4048,11 @@ export class FeaturestoreServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4093,14 +4067,13 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Featurestore | Featurestore}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.Featurestore|Featurestore}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listFeaturestoresAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFeaturestores(
@@ -4213,11 +4186,11 @@ export class FeaturestoreServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4232,13 +4205,12 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Featurestore | Featurestore} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.Featurestore|Featurestore} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listFeaturestoresAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFeaturestoresStream(
@@ -4300,11 +4272,11 @@ export class FeaturestoreServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4319,12 +4291,11 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.Featurestore | Featurestore}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.Featurestore|Featurestore}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.list_featurestores.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ListFeaturestores_async
@@ -4385,11 +4356,11 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4405,14 +4376,13 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.EntityType | EntityType}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.EntityType|EntityType}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEntityTypesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntityTypes(
@@ -4524,11 +4494,11 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4544,13 +4514,12 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.EntityType | EntityType} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.EntityType|EntityType} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntityTypesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntityTypesStream(
@@ -4611,11 +4580,11 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4631,12 +4600,11 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.EntityType | EntityType}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.EntityType|EntityType}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.list_entity_types.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ListEntityTypes_async
@@ -4699,11 +4667,11 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4718,22 +4686,21 @@ export class FeaturestoreServiceClient {
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
    *   If set, return the most recent
-   *   {@link google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
+   *   {@link protos.google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
    *   stats exists <
-   *   {@link google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
+   *   {@link protos.google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
    *   return all existing stats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Feature | Feature}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.Feature|Feature}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listFeaturesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFeatures(
@@ -4847,11 +4814,11 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4866,21 +4833,20 @@ export class FeaturestoreServiceClient {
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
    *   If set, return the most recent
-   *   {@link google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
+   *   {@link protos.google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
    *   stats exists <
-   *   {@link google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
+   *   {@link protos.google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
    *   return all existing stats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Feature | Feature} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.Feature|Feature} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listFeaturesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFeaturesStream(
@@ -4943,11 +4909,11 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
    *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
@@ -4962,20 +4928,19 @@ export class FeaturestoreServiceClient {
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
    *   If set, return the most recent
-   *   {@link google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
+   *   {@link protos.google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
    *   stats exists <
-   *   {@link google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
+   *   {@link protos.google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
    *   return all existing stats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.Feature | Feature}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.Feature|Feature}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.list_features.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_ListFeatures_async
@@ -5078,23 +5043,22 @@ export class FeaturestoreServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
    *   except `page_size`, must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Feature | Feature}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.Feature|Feature}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchFeaturesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchFeatures(
@@ -5248,22 +5212,21 @@ export class FeaturestoreServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
    *   except `page_size`, must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Feature | Feature} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.Feature|Feature} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchFeaturesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchFeaturesStream(
@@ -5366,21 +5329,20 @@ export class FeaturestoreServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
+   *   {@link protos.google.cloud.aiplatform.v1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
    *   except `page_size`, must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.Feature | Feature}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.Feature|Feature}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/featurestore_service.search_features.js</caption>
    * region_tag:aiplatform_v1_generated_FeaturestoreService_SearchFeatures_async
@@ -5445,7 +5407,7 @@ export class FeaturestoreServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -5466,8 +5428,7 @@ export class FeaturestoreServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5493,7 +5454,7 @@ export class FeaturestoreServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -5514,8 +5475,7 @@ export class FeaturestoreServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5542,7 +5502,7 @@ export class FeaturestoreServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -5557,8 +5517,7 @@ export class FeaturestoreServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -5604,12 +5563,11 @@ export class FeaturestoreServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -7735,6 +7693,55 @@ export class FeaturestoreServiceClient {
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
     return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
       .saved_query;
+  }
+
+  /**
+   * Return a fully-qualified schedule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} schedule
+   * @returns {string} Resource name string.
+   */
+  schedulePath(project: string, location: string, schedule: string) {
+    return this.pathTemplates.schedulePathTemplate.render({
+      project: project,
+      location: location,
+      schedule: schedule,
+    });
+  }
+
+  /**
+   * Parse the project from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).project;
+  }
+
+  /**
+   * Parse the location from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).location;
+  }
+
+  /**
+   * Parse the schedule from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the schedule.
+   */
+  matchScheduleFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).schedule;
   }
 
   /**

@@ -196,11 +196,20 @@ export class DataScanServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAttributePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
+      ),
+      dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
       ),
       dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+      ),
+      dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
@@ -305,6 +314,15 @@ export class DataScanServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -344,6 +362,18 @@ export class DataScanServiceClient {
               post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -381,6 +411,18 @@ export class DataScanServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -603,9 +645,8 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.DataScan | DataScan}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.get_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_GetDataScan_async
@@ -693,9 +734,8 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.RunDataScanResponse | RunDataScanResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.RunDataScanResponse|RunDataScanResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.run_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_RunDataScan_async
@@ -783,9 +823,8 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.DataScanJob | DataScanJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.get_data_scan_job.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_GetDataScanJob_async
@@ -888,8 +927,7 @@ export class DataScanServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.create_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_CreateDataScan_async
@@ -984,8 +1022,7 @@ export class DataScanServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.create_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_CreateDataScan_async
@@ -1033,8 +1070,7 @@ export class DataScanServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.update_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_UpdateDataScan_async
@@ -1129,8 +1165,7 @@ export class DataScanServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.update_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_UpdateDataScan_async
@@ -1174,8 +1209,7 @@ export class DataScanServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.delete_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_DeleteDataScan_async
@@ -1270,8 +1304,7 @@ export class DataScanServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.delete_data_scan.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_DeleteDataScan_async
@@ -1326,14 +1359,13 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataplex.v1.DataScan | DataScan}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDataScansAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataScans(
@@ -1431,13 +1463,12 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataplex.v1.DataScan | DataScan} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.DataScan|DataScan} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDataScansAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataScansStream(
@@ -1490,12 +1521,11 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataplex.v1.DataScan | DataScan}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.list_data_scans.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_ListDataScans_async
@@ -1541,17 +1571,34 @@ export class DataScanServiceClient {
    *   Provide this to retrieve the subsequent page. When paginating, all other
    *   parameters provided to `ListDataScanJobs` must match the call that provided
    *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the ListDataScanJobs
+   *   request.
+   *
+   *   If unspecified, all datascan jobs will be returned. Multiple filters can be
+   *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+   *
+   *   Allowed fields are:
+   *
+   *   - `start_time`
+   *   - `end_time`
+   *
+   *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+   *   2018-10-08T18:30:00-07:00).
+   *
+   *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+   *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+   *   specified start and end times.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataplex.v1.DataScanJob | DataScanJob}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDataScanJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataScanJobs(
@@ -1648,16 +1695,33 @@ export class DataScanServiceClient {
    *   Provide this to retrieve the subsequent page. When paginating, all other
    *   parameters provided to `ListDataScanJobs` must match the call that provided
    *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the ListDataScanJobs
+   *   request.
+   *
+   *   If unspecified, all datascan jobs will be returned. Multiple filters can be
+   *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+   *
+   *   Allowed fields are:
+   *
+   *   - `start_time`
+   *   - `end_time`
+   *
+   *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+   *   2018-10-08T18:30:00-07:00).
+   *
+   *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+   *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+   *   specified start and end times.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataplex.v1.DataScanJob | DataScanJob} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDataScanJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataScanJobsStream(
@@ -1703,15 +1767,32 @@ export class DataScanServiceClient {
    *   Provide this to retrieve the subsequent page. When paginating, all other
    *   parameters provided to `ListDataScanJobs` must match the call that provided
    *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the ListDataScanJobs
+   *   request.
+   *
+   *   If unspecified, all datascan jobs will be returned. Multiple filters can be
+   *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+   *
+   *   Allowed fields are:
+   *
+   *   - `start_time`
+   *   - `end_time`
+   *
+   *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+   *   2018-10-08T18:30:00-07:00).
+   *
+   *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+   *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+   *   specified start and end times.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataplex.v1.DataScanJob | DataScanJob}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_scan_service.list_data_scan_jobs.js</caption>
    * region_tag:dataplex_v1_generated_DataScanService_ListDataScanJobs_async
@@ -1748,8 +1829,7 @@ export class DataScanServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1795,12 +1875,11 @@ export class DataScanServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2145,6 +2224,138 @@ export class DataScanServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAttribute resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataTaxonomy
+   * @param {string} data_attribute_id
+   * @returns {string} Resource name string.
+   */
+  dataAttributePath(
+    project: string,
+    location: string,
+    dataTaxonomy: string,
+    dataAttributeId: string
+  ) {
+    return this.pathTemplates.dataAttributePathTemplate.render({
+      project: project,
+      location: location,
+      dataTaxonomy: dataTaxonomy,
+      data_attribute_id: dataAttributeId,
+    });
+  }
+
+  /**
+   * Parse the project from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .location;
+  }
+
+  /**
+   * Parse the dataTaxonomy from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the dataTaxonomy.
+   */
+  matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .dataTaxonomy;
+  }
+
+  /**
+   * Parse the data_attribute_id from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the data_attribute_id.
+   */
+  matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .data_attribute_id;
+  }
+
+  /**
+   * Return a fully-qualified dataAttributeBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_attribute_binding_id
+   * @returns {string} Resource name string.
+   */
+  dataAttributeBindingPath(
+    project: string,
+    location: string,
+    dataAttributeBindingId: string
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.render({
+      project: project,
+      location: location,
+      data_attribute_binding_id: dataAttributeBindingId,
+    });
+  }
+
+  /**
+   * Parse the project from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).location;
+  }
+
+  /**
+   * Parse the data_attribute_binding_id from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the data_attribute_binding_id.
+   */
+  matchDataAttributeBindingIdFromDataAttributeBindingName(
+    dataAttributeBindingName: string
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).data_attribute_binding_id;
+  }
+
+  /**
    * Return a fully-qualified dataScan resource name string.
    *
    * @param {string} project
@@ -2262,6 +2473,58 @@ export class DataScanServiceClient {
   matchJobFromDataScanJobName(dataScanJobName: string) {
     return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
       .job;
+  }
+
+  /**
+   * Return a fully-qualified dataTaxonomy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_taxonomy_id
+   * @returns {string} Resource name string.
+   */
+  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.render({
+      project: project,
+      location: location,
+      data_taxonomy_id: dataTaxonomyId,
+    });
+  }
+
+  /**
+   * Parse the project from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .location;
+  }
+
+  /**
+   * Parse the data_taxonomy_id from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the data_taxonomy_id.
+   */
+  matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .data_taxonomy_id;
   }
 
   /**
