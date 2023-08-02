@@ -9,10 +9,12 @@ jobs:
         node: [14]
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
       - uses: pnpm/action-setup@v2
         with:
           version: 7.32.2
-          node-version: ${{ matrix.node }}
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Check lint
