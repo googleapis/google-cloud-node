@@ -17,6 +17,7 @@
  */
 
 import {
+  BaseMetadata,
   DecorateRequestOptions,
   ServiceObject,
   ServiceObjectConfig,
@@ -34,7 +35,7 @@ const fakePromisify = {
   },
 };
 
-class FakeServiceObject extends ServiceObject {
+class FakeServiceObject extends ServiceObject<FakeServiceObject, BaseMetadata> {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);

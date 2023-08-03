@@ -15,7 +15,12 @@
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {ServiceObject, ServiceObjectConfig, util} from '../src/nodejs-common';
+import {
+  BaseMetadata,
+  ServiceObject,
+  ServiceObjectConfig,
+  util,
+} from '../src/nodejs-common';
 import * as pLimit from 'p-limit';
 import * as proxyquire from 'proxyquire';
 import {
@@ -33,15 +38,15 @@ import {
 import * as assert from 'assert';
 import * as path from 'path';
 import * as stream from 'stream';
-import * as extend from 'extend';
 import * as fs from 'fs';
 import * as sinon from 'sinon';
 import {GaxiosResponse} from 'gaxios';
+import {FileMetadata} from '../src/file';
 
 const fakeUtil = Object.assign({}, util);
 fakeUtil.noop = util.noop;
 
-class FakeServiceObject extends ServiceObject {
+class FakeServiceObject extends ServiceObject<FakeServiceObject, BaseMetadata> {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
@@ -62,7 +67,7 @@ class FakeFile {
   bucket: Bucket;
   name: string;
   options: FileOptions;
-  metadata: {};
+  metadata: FileMetadata;
   createWriteStream: Function;
   isSameFile = () => false;
   constructor(bucket: Bucket, name: string, options?: FileOptions) {
@@ -74,7 +79,7 @@ class FakeFile {
     this.metadata = {};
 
     this.createWriteStream = (options: CreateWriteStreamOptions) => {
-      this.metadata = options.metadata;
+      this.metadata = options.metadata!;
       const ws = new stream.Writable();
       ws.write = () => {
         ws.emit('complete');
@@ -96,11 +101,8 @@ class HTTPError extends Error {
 
 let pLimitOverride: Function | null;
 const fakePLimit = (limit: number) => (pLimitOverride || pLimit)(limit);
-const fakeFs = extend(true, {}, fs, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  createReadStream(path: string, _options: {}): stream.Stream {
-    return new stream.PassThrough();
-  },
+const fakeFs = {
+  ...fs,
   get promises() {
     return {
       open: () => {
@@ -120,7 +122,7 @@ const fakeFs = extend(true, {}, fs, {
       },
     };
   },
-});
+};
 
 describe('Transfer Manager', () => {
   let TransferManager: any;
@@ -348,7 +350,7 @@ describe('Transfer Manager', () => {
       sandbox = sinon.createSandbox();
       readStreamStub = sandbox
         .stub(fakeFs, 'createReadStream')
-        .returns(pThrough);
+        .returns(pThrough as unknown as fs.ReadStream);
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
         fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
         fakeHelper.uploadId = uploadId || '';

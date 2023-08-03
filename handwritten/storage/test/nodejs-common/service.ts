@@ -16,7 +16,6 @@
 
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after} from 'mocha';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {Request} from 'teeny-request';
 import {AuthClient, GoogleAuth, OAuth2Client} from 'google-auth-library';
@@ -102,7 +101,8 @@ describe('Service', () => {
       makeAuthenticatedRequestFactoryOverride = (
         config: MakeAuthenticatedRequestFactoryConfig
       ) => {
-        const expectedConfig = extend({}, CONFIG, {
+        const expectedConfig = {
+          ...CONFIG,
           authClient: OPTIONS.authClient,
           credentials: OPTIONS.credentials,
           keyFile: OPTIONS.keyFilename,
@@ -110,7 +110,7 @@ describe('Service', () => {
           projectIdRequired: CONFIG.projectIdRequired,
           projectId: OPTIONS.projectId,
           token: OPTIONS.token,
-        });
+        };
 
         assert.deepStrictEqual(config, expectedConfig);
 
@@ -186,7 +186,7 @@ describe('Service', () => {
 
     it('should localize the timeout', () => {
       const timeout = 10000;
-      const options = extend({}, OPTIONS, {timeout});
+      const options = {...OPTIONS, timeout};
       const service = new Service(fakeCfg, options);
       assert.strictEqual(service.timeout, timeout);
     });
@@ -212,7 +212,7 @@ describe('Service', () => {
 
     it('should preserve the original global interceptors', () => {
       const globalInterceptors: Interceptor[] = [];
-      const options = extend({}, OPTIONS);
+      const options = {...OPTIONS};
       options.interceptors_ = globalInterceptors;
       const service = new Service(fakeCfg, options);
       assert.strictEqual(service.globalInterceptors, globalInterceptors);
@@ -460,8 +460,8 @@ describe('Service', () => {
 
     it('should set reqOpt.timeout', done => {
       const timeout = 10000;
-      const config = extend({}, CONFIG);
-      const options = extend({}, OPTIONS, {timeout});
+      const config = {...CONFIG};
+      const options = {...OPTIONS, timeout};
       const service = new Service(config, options);
 
       service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
@@ -529,7 +529,7 @@ describe('Service', () => {
     describe('projectIdRequired', () => {
       describe('false', () => {
         it('should include the projectId', done => {
-          const config = extend({}, CONFIG, {projectIdRequired: false});
+          const config = {...CONFIG, projectIdRequired: false};
           const service = new Service(config, OPTIONS);
 
           const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
@@ -548,7 +548,7 @@ describe('Service', () => {
 
       describe('true', () => {
         it('should not include the projectId', done => {
-          const config = extend({}, CONFIG, {projectIdRequired: true});
+          const config = {...CONFIG, projectIdRequired: true};
           const service = new Service(config, OPTIONS);
 
           const expectedUri = [
@@ -570,7 +570,7 @@ describe('Service', () => {
         });
 
         it('should use projectId override', done => {
-          const config = extend({}, CONFIG, {projectIdRequired: true});
+          const config = {...CONFIG, projectIdRequired: true};
           const service = new Service(config, OPTIONS);
           const projectOverride = 'turing';
 
@@ -727,7 +727,7 @@ describe('Service', () => {
       const fakeStream = {};
 
       Service.prototype.request_ = async (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts, fakeOpts);
+        assert.deepStrictEqual(reqOpts, {shouldReturnStream: true});
         return fakeStream;
       };
 

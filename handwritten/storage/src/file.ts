@@ -17,7 +17,6 @@ import {
   DecorateRequestOptions,
   GetConfig,
   Interceptor,
-  Metadata,
   MetadataCallback,
   ServiceObject,
   SetMetadataResponse,
@@ -27,7 +26,6 @@ import {promisifyAll} from '@google-cloud/promisify';
 
 import compressible = require('compressible');
 import * as crypto from 'crypto';
-import * as extend from 'extend';
 import * as fs from 'fs';
 import * as mime from 'mime';
 import * as resumableUpload from './resumable-upload';
@@ -42,7 +40,7 @@ import {
   Storage,
 } from './storage';
 import {AvailableServiceObjectMethods, Bucket} from './bucket';
-import {Acl} from './acl';
+import {Acl, AclMetadata} from './acl';
 import {
   GetSignedUrlResponse,
   SigningError,
@@ -72,8 +70,10 @@ import {URL} from 'url';
 
 import retry = require('async-retry');
 import {
+  BaseMetadata,
   DeleteCallback,
   DeleteOptions,
+  RequestResponse,
   SetMetadataOptions,
 } from './nodejs-common/service-object';
 import * as r from 'teeny-request';
@@ -83,7 +83,7 @@ export interface GetExpirationDateCallback {
   (
     err: Error | null,
     expirationDate?: Date | null,
-    apiResponse?: Metadata
+    apiResponse?: unknown
   ): void;
 }
 
@@ -152,20 +152,20 @@ export interface GetFileMetadataOptions {
   userProject?: string;
 }
 
-export type GetFileMetadataResponse = [Metadata, Metadata];
+export type GetFileMetadataResponse = [FileMetadata, unknown];
 
 export interface GetFileMetadataCallback {
-  (err: Error | null, metadata?: Metadata, apiResponse?: Metadata): void;
+  (err: Error | null, metadata?: FileMetadata, apiResponse?: unknown): void;
 }
 
 export interface GetFileOptions extends GetConfig {
   userProject?: string;
 }
 
-export type GetFileResponse = [File, Metadata];
+export type GetFileResponse = [File, unknown];
 
 export interface GetFileCallback {
-  (err: Error | null, file?: File, apiResponse?: Metadata): void;
+  (err: Error | null, file?: File, apiResponse?: unknown): void;
 }
 
 export interface FileExistsOptions {
@@ -183,10 +183,10 @@ export interface DeleteFileOptions {
   userProject?: string;
 }
 
-export type DeleteFileResponse = [Metadata];
+export type DeleteFileResponse = [unknown];
 
 export interface DeleteFileCallback {
-  (err: Error | null, apiResponse?: Metadata): void;
+  (err: Error | null, apiResponse?: unknown): void;
 }
 
 export type PredefinedAcl =
@@ -200,7 +200,7 @@ export type PredefinedAcl =
 export interface CreateResumableUploadOptions {
   chunkSize?: number;
   highWaterMark?: number;
-  metadata?: Metadata;
+  metadata?: FileMetadata;
   origin?: string;
   offset?: number;
   predefinedAcl?: PredefinedAcl;
@@ -226,13 +226,13 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
 }
 
 export interface MakeFilePrivateOptions {
-  metadata?: Metadata;
+  metadata?: FileMetadata;
   strict?: boolean;
   userProject?: string;
   preconditionOpts?: PreconditionOptions;
 }
 
-export type MakeFilePrivateResponse = [Metadata];
+export type MakeFilePrivateResponse = [unknown];
 
 export type MakeFilePrivateCallback = SetFileMetadataCallback;
 
@@ -242,19 +242,19 @@ export interface IsPublicCallback {
 
 export type IsPublicResponse = [boolean];
 
-export type MakeFilePublicResponse = [Metadata];
+export type MakeFilePublicResponse = [unknown];
 
 export interface MakeFilePublicCallback {
-  (err?: Error | null, apiResponse?: Metadata): void;
+  (err?: Error | null, apiResponse?: unknown): void;
 }
 
-export type MoveResponse = [Metadata];
+export type MoveResponse = [unknown];
 
 export interface MoveCallback {
   (
     err: Error | null,
     destinationFile?: File | null,
-    apiResponse?: Metadata
+    apiResponse?: unknown
   ): void;
 }
 
@@ -311,17 +311,17 @@ export interface CopyOptions {
   contentType?: string;
   contentDisposition?: string;
   destinationKmsKeyName?: string;
-  metadata?: Metadata;
+  metadata?: FileMetadata;
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
   preconditionOpts?: PreconditionOptions;
 }
 
-export type CopyResponse = [File, Metadata];
+export type CopyResponse = [File, unknown];
 
 export interface CopyCallback {
-  (err: Error | null, file?: File | null, apiResponse?: Metadata): void;
+  (err: Error | null, file?: File | null, apiResponse?: unknown): void;
 }
 
 export type DownloadResponse = [Buffer];
@@ -341,10 +341,10 @@ interface CopyQuery {
   userProject?: string;
   destinationKmsKeyName?: string;
   destinationPredefinedAcl?: string;
-  ifGenerationMatch?: number;
-  ifGenerationNotMatch?: number;
-  ifMetagenerationMatch?: number;
-  ifMetagenerationNotMatch?: number;
+  ifGenerationMatch?: number | string;
+  ifGenerationNotMatch?: number | string;
+  ifMetagenerationMatch?: number | string;
+  ifMetagenerationNotMatch?: number | string;
 }
 
 interface FileQuery {
@@ -375,24 +375,59 @@ export interface SetFileMetadataOptions {
 }
 
 export interface SetFileMetadataCallback {
-  (err?: Error | null, apiResponse?: Metadata): void;
+  (err?: Error | null, apiResponse?: unknown): void;
 }
 
-export type SetFileMetadataResponse = [Metadata];
+export type SetFileMetadataResponse = [unknown];
 
-export type SetStorageClassResponse = [Metadata];
+export type SetStorageClassResponse = [unknown];
 
 export interface SetStorageClassOptions {
   userProject?: string;
   preconditionOpts?: PreconditionOptions;
 }
 
-interface SetStorageClassRequest extends SetStorageClassOptions {
-  storageClass?: string;
+export interface SetStorageClassCallback {
+  (err?: Error | null, apiResponse?: unknown): void;
 }
 
-export interface SetStorageClassCallback {
-  (err?: Error | null, apiResponse?: Metadata): void;
+export interface FileMetadata extends BaseMetadata {
+  acl?: AclMetadata[] | null;
+  bucket?: string;
+  cacheControl?: string;
+  componentCount?: number;
+  contentDisposition?: string;
+  contentEncoding?: string;
+  contentLanguage?: string;
+  contentType?: string;
+  crc32c?: string;
+  customerEncryption?: {
+    encryptionAlgorithm?: string;
+    keySha256?: string;
+  };
+  customTime?: string;
+  eventBasedHold?: boolean | null;
+  generation?: string | number;
+  kmsKeyName?: string;
+  md5Hash?: string;
+  mediaLink?: string;
+  metadata?: {
+    [key: string]: string;
+  };
+  metageneration?: string | number;
+  name?: string;
+  owner?: {
+    entity?: string;
+    entityId?: string;
+  };
+  retentionExpirationTime?: string;
+  size?: string | number;
+  storageClass?: string;
+  temporaryHold?: boolean | null;
+  timeCreated?: string;
+  timeDeleted?: string;
+  timeStorageClassUpdated?: string;
+  updated?: string;
 }
 
 export class RequestError extends Error {
@@ -427,7 +462,7 @@ export enum FileExceptionMessages {
  *
  * @class
  */
-class File extends ServiceObject<File> {
+class File extends ServiceObject<File, FileMetadata> {
   acl: Acl;
   crc32cGenerator: CRC32CValidatorGenerator;
   bucket: Bucket;
@@ -435,7 +470,6 @@ class File extends ServiceObject<File> {
   kmsKeyName?: string;
   userProject?: string;
   signer?: URLSigner;
-  metadata: Metadata;
   name: string;
 
   generation?: number;
@@ -1158,10 +1192,9 @@ class File extends ServiceObject<File> {
     if (typeof optionsOrCallback === 'function') {
       callback = optionsOrCallback;
     } else if (optionsOrCallback) {
-      options = optionsOrCallback;
+      options = {...optionsOrCallback};
     }
 
-    options = extend(true, {}, options);
     callback = callback || util.noop;
 
     let destBucket: Bucket;
@@ -1432,11 +1465,11 @@ class File extends ServiceObject<File> {
     const onResponse = (
       err: Error | null,
       _body: ResponseBody,
-      rawResponseStream: Metadata
+      rawResponseStream: unknown
     ) => {
       if (err) {
         // Get error message from the body.
-        this.getBufferFromReadable(rawResponseStream).then(body => {
+        this.getBufferFromReadable(rawResponseStream as Readable).then(body => {
           err.message = body.toString('utf8');
           throughStream.destroy(err);
         });
@@ -1444,7 +1477,7 @@ class File extends ServiceObject<File> {
         return;
       }
 
-      const headers = rawResponseStream.toJSON().headers;
+      const headers = (rawResponseStream as ResponseBody).toJSON().headers;
       const isCompressed = headers['content-encoding'] === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
 
@@ -1499,7 +1532,7 @@ class File extends ServiceObject<File> {
       }
 
       pipeline(
-        rawResponseStream,
+        rawResponseStream as Readable,
         ...(transformStreams as [Transform]),
         throughStream,
         onComplete
@@ -1848,30 +1881,30 @@ class File extends ServiceObject<File> {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createWriteStream(options: CreateWriteStreamOptions = {}): Writable {
-    options = extend(true, {metadata: {}}, options);
+    options.metadata ??= {};
 
     if (options.contentType) {
-      options.metadata.contentType = options.contentType;
+      options!.metadata!.contentType = options.contentType;
     }
 
     if (
-      !options.metadata.contentType ||
-      options.metadata.contentType === 'auto'
+      !options!.metadata!.contentType ||
+      options!.metadata!.contentType === 'auto'
     ) {
       const detectedContentType = mime.getType(this.name);
       if (detectedContentType) {
-        options.metadata.contentType = detectedContentType;
+        options!.metadata!.contentType = detectedContentType;
       }
     }
 
     let gzip = options.gzip;
 
     if (gzip === 'auto') {
-      gzip = compressible(options.metadata.contentType);
+      gzip = compressible(options!.metadata!.contentType || '');
     }
 
     if (gzip) {
-      options.metadata.contentEncoding = 'gzip';
+      options!.metadata!.contentEncoding = 'gzip';
     }
 
     let crc32c = true;
@@ -2232,7 +2265,7 @@ class File extends ServiceObject<File> {
     callback?: GetExpirationDateCallback
   ): void | Promise<GetExpirationDateResponse> {
     this.getMetadata(
-      (err: ApiError | null, metadata: Metadata, apiResponse: Metadata) => {
+      (err: ApiError | null, metadata: FileMetadata, apiResponse: unknown) => {
         if (err) {
           callback!(err, null, apiResponse);
           return;
@@ -2833,9 +2866,6 @@ class File extends ServiceObject<File> {
     callback?: GetSignedUrlCallback
   ): void | Promise<GetSignedUrlResponse> {
     const method = ActionToHTTPMethod[cfg.action];
-    if (!method) {
-      throw new Error(ExceptionMessages.INVALID_ACTION);
-    }
     const extensionHeaders = objectKeyToLowercase(cfg.extensionHeaders || {});
     if (cfg.action === 'resumable') {
       extensionHeaders['x-goog-resumable'] = 'start';
@@ -3069,7 +3099,7 @@ class File extends ServiceObject<File> {
     // You aren't allowed to set both predefinedAcl & acl properties on a file,
     // so acl must explicitly be nullified, destroying all previous acls on the
     // file.
-    const metadata = extend({}, options.metadata, {acl: null});
+    const metadata = {...options.metadata, acl: null};
 
     this.setMetadata(metadata, query, callback!);
   }
@@ -3439,7 +3469,7 @@ class File extends ServiceObject<File> {
     this.move(destinationFile, options, callback);
   }
 
-  request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, Metadata]>;
+  request(reqOpts: DecorateRequestOptions): Promise<RequestResponse>;
   request(
     reqOpts: DecorateRequestOptions,
     callback: BodyResponseCallback
@@ -3455,7 +3485,7 @@ class File extends ServiceObject<File> {
   request(
     reqOpts: DecorateRequestOptions,
     callback?: BodyResponseCallback
-  ): void | Promise<[ResponseBody, Metadata]> {
+  ): void | Promise<RequestResponse> {
     return this.parent.request.call(this, reqOpts, callback!);
   }
 
@@ -3653,25 +3683,28 @@ class File extends ServiceObject<File> {
   }
 
   setMetadata(
-    metadata: Metadata,
+    metadata: FileMetadata,
     options?: SetMetadataOptions
-  ): Promise<SetMetadataResponse>;
-  setMetadata(metadata: Metadata, callback: MetadataCallback): void;
+  ): Promise<SetMetadataResponse<FileMetadata>>;
   setMetadata(
-    metadata: Metadata,
-    options: SetMetadataOptions,
-    callback: MetadataCallback
+    metadata: FileMetadata,
+    callback: MetadataCallback<FileMetadata>
   ): void;
   setMetadata(
-    metadata: Metadata,
-    optionsOrCallback: SetMetadataOptions | MetadataCallback,
-    cb?: MetadataCallback
-  ): Promise<SetMetadataResponse> | void {
+    metadata: FileMetadata,
+    options: SetMetadataOptions,
+    callback: MetadataCallback<FileMetadata>
+  ): void;
+  setMetadata(
+    metadata: FileMetadata,
+    optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
+    cb?: MetadataCallback<FileMetadata>
+  ): Promise<SetMetadataResponse<FileMetadata>> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     cb =
       typeof optionsOrCallback === 'function'
-        ? (optionsOrCallback as MetadataCallback)
+        ? (optionsOrCallback as MetadataCallback<FileMetadata>)
         : cb;
 
     this.disableAutoRetryConditionallyIdempotent_(
@@ -3757,19 +3790,17 @@ class File extends ServiceObject<File> {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    const req = extend<SetStorageClassRequest, SetStorageClassOptions>(
-      true,
-      {},
-      options
-    );
 
-    // In case we get input like `storageClass`, convert to `storage_class`.
-    req.storageClass = storageClass
-      .replace(/-/g, '_')
-      .replace(/([a-z])([A-Z])/g, (_, low, up) => {
-        return low + '_' + up;
-      })
-      .toUpperCase();
+    const req = {
+      ...options,
+      // In case we get input like `storageClass`, convert to `storage_class`.
+      storageClass: storageClass
+        .replace(/-/g, '_')
+        .replace(/([a-z])([A-Z])/g, (_, low, up) => {
+          return low + '_' + up;
+        })
+        .toUpperCase(),
+    };
 
     this.copy(this, req, (err, file, apiResponse) => {
       if (err) {
@@ -3813,20 +3844,14 @@ class File extends ServiceObject<File> {
    */
   startResumableUpload_(
     dup: Duplexify,
-    options: CreateResumableUploadOptions
+    options: CreateResumableUploadOptions = {}
   ): void {
-    options = extend(
-      true,
-      {
-        metadata: {},
-      },
-      options
-    );
+    options.metadata ??= {};
 
     const retryOptions = this.storage.retryOptions;
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts
+        options.preconditionOpts
       )
     ) {
       retryOptions.autoRetry = false;
@@ -3884,14 +3909,11 @@ class File extends ServiceObject<File> {
    *
    * @private
    */
-  startSimpleUpload_(dup: Duplexify, options?: CreateWriteStreamOptions): void {
-    options = extend(
-      true,
-      {
-        metadata: {},
-      },
-      options
-    );
+  startSimpleUpload_(
+    dup: Duplexify,
+    options: CreateWriteStreamOptions = {}
+  ): void {
+    options.metadata ??= {};
 
     const apiEndpoint = this.storage.apiEndpoint;
     const bucketName = this.bucket.name;

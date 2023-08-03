@@ -18,7 +18,6 @@ import {Bucket, UploadOptions, UploadResponse} from './bucket';
 import {DownloadOptions, DownloadResponse, File} from './file';
 import * as pLimit from 'p-limit';
 import * as path from 'path';
-import * as extend from 'extend';
 import {createReadStream, promises as fsp} from 'fs';
 import {CRC32C} from './crc32c';
 import {GoogleAuth} from 'google-auth-library';
@@ -257,7 +256,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const sortedMap = new Map(
       [...this.partsMap.entries()].sort((a, b) => a[0] - b[0])
     );
-    const parts = [];
+    const parts: {}[] = [];
     for (const entry of sortedMap.entries()) {
       parts.push({PartNumber: entry[0], ETag: entry[1]});
     }
@@ -375,7 +374,7 @@ export class TransferManager {
     const limit = pLimit(
       options.concurrencyLimit || DEFAULT_PARALLEL_UPLOAD_LIMIT
     );
-    const promises = [];
+    const promises: Promise<UploadResponse>[] = [];
     let allPaths: string[] = [];
     if (!Array.isArray(filePathsOrDirectory)) {
       for await (const curPath of this.getPathsFromDirectory(
@@ -392,11 +391,11 @@ export class TransferManager {
       if (stat.isDirectory()) {
         continue;
       }
-      const passThroughOptionsCopy: UploadOptions = extend(
-        true,
-        {},
-        options.passthroughOptions
-      );
+
+      const passThroughOptionsCopy: UploadOptions = {
+        ...options.passthroughOptions,
+      };
+
       passThroughOptionsCopy.destination = filePath;
       if (options.prefix) {
         passThroughOptionsCopy.destination = path.join(
@@ -405,7 +404,9 @@ export class TransferManager {
         );
       }
       promises.push(
-        limit(() => this.bucket.upload(filePath, passThroughOptionsCopy))
+        limit(() =>
+          this.bucket.upload(filePath, passThroughOptionsCopy as UploadOptions)
+        )
       );
     }
 
@@ -461,7 +462,7 @@ export class TransferManager {
     const limit = pLimit(
       options.concurrencyLimit || DEFAULT_PARALLEL_DOWNLOAD_LIMIT
     );
-    const promises = [];
+    const promises: Promise<DownloadResponse>[] = [];
     let files: File[] = [];
 
     if (!Array.isArray(filesOrFolder)) {
@@ -484,11 +485,10 @@ export class TransferManager {
     const regex = new RegExp(stripRegexString, 'g');
 
     for (const file of files) {
-      const passThroughOptionsCopy = extend(
-        true,
-        {},
-        options.passthroughOptions
-      );
+      const passThroughOptionsCopy = {
+        ...options.passthroughOptions,
+      };
+
       if (options.prefix) {
         passThroughOptionsCopy.destination = path.join(
           options.prefix || '',
@@ -553,7 +553,7 @@ export class TransferManager {
         : fileOrName;
 
     const fileInfo = await file.get();
-    const size = parseInt(fileInfo[0].metadata.size);
+    const size = parseInt(fileInfo[0].metadata.size!.toString());
     // If the file size does not meet the threshold download it as a single chunk.
     if (size < DOWNLOAD_IN_CHUNKS_FILE_SIZE_THRESHOLD) {
       limit = pLimit(1);
@@ -662,7 +662,7 @@ export class TransferManager {
       options.partsMap
     );
     let partNumber = 1;
-    let promises = [];
+    let promises: Promise<void>[] = [];
     try {
       if (options.uploadId === undefined) {
         await mpuHelper.initiateUpload();

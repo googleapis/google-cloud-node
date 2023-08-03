@@ -23,12 +23,12 @@ export {
 } from './service';
 
 export {
+  BaseMetadata,
   DeleteCallback,
   ExistsCallback,
   GetConfig,
   InstanceResponseCallback,
   Interceptor,
-  Metadata,
   MetadataCallback,
   MetadataResponse,
   Methods,

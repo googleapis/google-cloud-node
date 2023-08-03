@@ -35,7 +35,9 @@ function main(bucketName = 'my-bucket') {
 
   async function enableBucketLifecycleManagement() {
     const [metadata] = await storage.bucket(bucketName).addLifecycleRule({
-      action: 'delete',
+      action: {
+        type: 'Delete',
+      },
       condition: {age: 100},
     });
 

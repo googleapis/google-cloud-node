@@ -48,7 +48,7 @@ function main(
   };
 
   async function addBucketLabel() {
-    await storage.bucket(bucketName).setLabels(labels);
+    await storage.bucket(bucketName).setMetadata({labels});
     console.log(`Added label to bucket ${bucketName}`);
   }
 

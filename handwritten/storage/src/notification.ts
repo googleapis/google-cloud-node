@@ -12,13 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  ApiError,
-  Metadata,
-  MetadataCallback,
-  ServiceObject,
-  util,
-} from './nodejs-common';
+import {BaseMetadata, ServiceObject} from './nodejs-common';
 import {ResponseBody} from './nodejs-common/util';
 import {promisifyAll} from '@google-cloud/promisify';
 
@@ -37,7 +31,7 @@ export interface GetNotificationMetadataOptions {
  * @property {object} 0 The notification metadata.
  * @property {object} 1 The full API response.
  */
-export type GetNotificationMetadataResponse = [ResponseBody, Metadata];
+export type GetNotificationMetadataResponse = [ResponseBody, unknown];
 
 /**
  * @callback GetNotificationMetadataCallback
@@ -46,7 +40,7 @@ export type GetNotificationMetadataResponse = [ResponseBody, Metadata];
  * @param {object} apiResponse The full API response.
  */
 export interface GetNotificationMetadataCallback {
-  (err: Error | null, metadata?: ResponseBody, apiResponse?: Metadata): void;
+  (err: Error | null, metadata?: ResponseBody, apiResponse?: unknown): void;
 }
 
 /**
@@ -54,7 +48,7 @@ export interface GetNotificationMetadataCallback {
  * @property {Notification} 0 The {@link Notification}
  * @property {object} 1 The full API response.
  */
-export type GetNotificationResponse = [Notification, Metadata];
+export type GetNotificationResponse = [Notification, unknown];
 
 export interface GetNotificationOptions {
   /**
@@ -78,7 +72,7 @@ export interface GetNotificationCallback {
   (
     err: Error | null,
     notification?: Notification | null,
-    apiResponse?: Metadata
+    apiResponse?: unknown
   ): void;
 }
 
@@ -88,7 +82,17 @@ export interface GetNotificationCallback {
  * @param {object} apiResponse The full API response.
  */
 export interface DeleteNotificationCallback {
-  (err: Error | null, apiResponse?: Metadata): void;
+  (err: Error | null, apiResponse?: unknown): void;
+}
+
+export interface NotificationMetadata extends BaseMetadata {
+  custom_attributes?: {
+    [key: string]: string;
+  };
+  event_types?: string[];
+  object_name_prefix?: string;
+  payload_format?: 'JSON_API_V1' | 'NONE';
+  topic?: string;
 }
 
 /**
@@ -122,8 +126,15 @@ export interface DeleteNotificationCallback {
  * const notification = myBucket.notification('1');
  * ```
  */
-class Notification extends ServiceObject {
+class Notification extends ServiceObject<Notification, NotificationMetadata> {
   constructor(bucket: Bucket, id: string) {
+    const requestQueryObject: {
+      ifGenerationMatch?: number;
+      ifGenerationNotMatch?: number;
+      ifMetagenerationMatch?: number;
+      ifMetagenerationNotMatch?: number;
+    } = {};
+
     const methods = {
       /**
        * Creates a notification subscription for the bucket.
@@ -170,6 +181,127 @@ class Notification extends ServiceObject {
       create: true,
 
       /**
+       * @typedef {array} DeleteNotificationResponse
+       * @property {object} 0 The full API response.
+       */
+      /**
+       * Permanently deletes a notification subscription.
+       *
+       * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/delete| Notifications: delete API Documentation}
+       *
+       * @param {object} [options] Configuration options.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {DeleteNotificationCallback} [callback] Callback function.
+       * @returns {Promise<DeleteNotificationResponse>}
+       *
+       * @example
+       * ```
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       * const notification = myBucket.notification('1');
+       *
+       * notification.delete(function(err, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * notification.delete().then(function(data) {
+       *   const apiResponse = data[0];
+       * });
+       *
+       * ```
+       * @example <caption>include:samples/deleteNotification.js</caption>
+       * region_tag:storage_delete_bucket_notification
+       * Another example:
+       */
+      delete: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+
+      /**
+       * Get a notification and its metadata if it exists.
+       *
+       * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get| Notifications: get API Documentation}
+       *
+       * @param {object} [options] Configuration options.
+       *     See {@link Bucket#createNotification} for create options.
+       * @param {boolean} [options.autoCreate] Automatically create the object if
+       *     it does not exist. Default: `false`.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {GetNotificationCallback} [callback] Callback function.
+       * @return {Promise<GetNotificationCallback>}
+       *
+       * @example
+       * ```
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       * const notification = myBucket.notification('1');
+       *
+       * notification.get(function(err, notification, apiResponse) {
+       *   // `notification.metadata` has been populated.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * notification.get().then(function(data) {
+       *   const notification = data[0];
+       *   const apiResponse = data[1];
+       * });
+       * ```
+       */
+      get: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+
+      /**
+       * Get the notification's metadata.
+       *
+       * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get| Notifications: get API Documentation}
+       *
+       * @param {object} [options] Configuration options.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {GetNotificationMetadataCallback} [callback] Callback function.
+       * @returns {Promise<GetNotificationMetadataResponse>}
+       *
+       * @example
+       * ```
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       * const notification = myBucket.notification('1');
+       *
+       * notification.getMetadata(function(err, metadata, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * notification.getMetadata().then(function(data) {
+       *   const metadata = data[0];
+       *   const apiResponse = data[1];
+       * });
+       *
+       * ```
+       * @example <caption>include:samples/getMetadataNotifications.js</caption>
+       * region_tag:storage_print_pubsub_bucket_notification
+       * Another example:
+       */
+      getMetadata: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+
+      /**
        * @typedef {array} NotificationExistsResponse
        * @property {boolean} 0 Whether the notification exists or not.
        */
@@ -212,222 +344,6 @@ class Notification extends ServiceObject {
       createMethod: bucket.createNotification.bind(bucket),
       methods,
     });
-  }
-
-  delete(options?: DeleteNotificationOptions): Promise<[Metadata]>;
-  delete(
-    options: DeleteNotificationOptions,
-    callback: DeleteNotificationCallback
-  ): void;
-  delete(callback: DeleteNotificationCallback): void;
-  /**
-   * @typedef {array} DeleteNotificationResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * Permanently deletes a notification subscription.
-   *
-   * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/delete| Notifications: delete API Documentation}
-   *
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {DeleteNotificationCallback} [callback] Callback function.
-   * @returns {Promise<DeleteNotificationResponse>}
-   *
-   * @example
-   * ```
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   * const notification = myBucket.notification('1');
-   *
-   * notification.delete(function(err, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * notification.delete().then(function(data) {
-   *   const apiResponse = data[0];
-   * });
-   *
-   * ```
-   * @example <caption>include:samples/deleteNotification.js</caption>
-   * region_tag:storage_delete_bucket_notification
-   * Another example:
-   */
-  delete(
-    optionsOrCallback?: DeleteNotificationOptions | DeleteNotificationCallback,
-    callback?: DeleteNotificationCallback
-  ): void | Promise<[Metadata]> {
-    const options =
-      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    this.request(
-      {
-        method: 'DELETE',
-        uri: '',
-        qs: options,
-      },
-      callback || util.noop
-    );
-  }
-
-  get(options?: GetNotificationOptions): Promise<GetNotificationResponse>;
-  get(options: GetNotificationOptions, callback: GetNotificationCallback): void;
-  get(callback: GetNotificationCallback): void;
-  /**
-   * Get a notification and its metadata if it exists.
-   *
-   * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get| Notifications: get API Documentation}
-   *
-   * @param {object} [options] Configuration options.
-   *     See {@link Bucket#createNotification} for create options.
-   * @param {boolean} [options.autoCreate] Automatically create the object if
-   *     it does not exist. Default: `false`.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {GetNotificationCallback} [callback] Callback function.
-   * @return {Promise<GetNotificationCallback>}
-   *
-   * @example
-   * ```
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   * const notification = myBucket.notification('1');
-   *
-   * notification.get(function(err, notification, apiResponse) {
-   *   // `notification.metadata` has been populated.
-   * });
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * notification.get().then(function(data) {
-   *   const notification = data[0];
-   *   const apiResponse = data[1];
-   * });
-   * ```
-   */
-  get(
-    optionsOrCallback?: GetNotificationOptions | GetNotificationCallback,
-    callback?: GetNotificationCallback
-  ): void | Promise<GetNotificationResponse> {
-    const options =
-      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-
-    const autoCreate = options.autoCreate;
-    delete options.autoCreate;
-
-    const onCreate = (
-      err: ApiError | null,
-      notification: Notification,
-      apiResponse: Metadata
-    ) => {
-      if (err) {
-        if (err.code === 409) {
-          this.get(options, callback!);
-          return;
-        }
-
-        callback!(err, null, apiResponse);
-        return;
-      }
-
-      callback!(null, notification, apiResponse);
-    };
-
-    this.getMetadata(options, (err, metadata) => {
-      if (err) {
-        if ((err as ApiError).code === 404 && autoCreate) {
-          const args = [] as object[];
-
-          if (Object.keys(options).length > 0) {
-            args.push(options);
-          }
-
-          args.push(onCreate);
-
-          // eslint-disable-next-line
-          this.create.apply(this, args as any);
-          return;
-        }
-
-        callback!(err, null, metadata);
-        return;
-      }
-
-      callback!(null, this, metadata);
-    });
-  }
-
-  getMetadata(
-    options?: GetNotificationMetadataOptions
-  ): Promise<GetNotificationMetadataResponse>;
-  getMetadata(
-    options: GetNotificationMetadataOptions,
-    callback: MetadataCallback
-  ): void;
-  getMetadata(callback: MetadataCallback): void;
-  /**
-   * Get the notification's metadata.
-   *
-   * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/get| Notifications: get API Documentation}
-   *
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {GetNotificationMetadataCallback} [callback] Callback function.
-   * @returns {Promise<GetNotificationMetadataResponse>}
-   *
-   * @example
-   * ```
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   * const notification = myBucket.notification('1');
-   *
-   * notification.getMetadata(function(err, metadata, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * notification.getMetadata().then(function(data) {
-   *   const metadata = data[0];
-   *   const apiResponse = data[1];
-   * });
-   *
-   * ```
-   * @example <caption>include:samples/getMetadataNotifications.js</caption>
-   * region_tag:storage_print_pubsub_bucket_notification
-   * Another example:
-   */
-  getMetadata(
-    optionsOrCallback?: GetNotificationMetadataOptions | MetadataCallback,
-    callback?: MetadataCallback
-  ): void | Promise<GetNotificationMetadataResponse> {
-    const options =
-      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    this.request(
-      {
-        uri: '',
-        qs: options,
-      },
-      (err, resp) => {
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
-        this.metadata = resp;
-        callback!(null, this.metadata, resp);
-      }
-    );
   }
 }
 

@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ApiError, Metadata, Service, ServiceOptions} from './nodejs-common';
+import {ApiError, Service, ServiceOptions} from './nodejs-common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import {Readable} from 'stream';
 
-import {Bucket} from './bucket';
+import {Bucket, BucketMetadata} from './bucket';
 import {Channel} from './channel';
 import {File} from './file';
 import {normalize} from './util';
@@ -33,12 +33,12 @@ export interface GetServiceAccountOptions {
 export interface ServiceAccount {
   emailAddress?: string;
 }
-export type GetServiceAccountResponse = [ServiceAccount, Metadata];
+export type GetServiceAccountResponse = [ServiceAccount, unknown];
 export interface GetServiceAccountCallback {
   (
     err: Error | null,
     serviceAccount?: ServiceAccount,
-    apiResponse?: Metadata
+    apiResponse?: unknown
   ): void;
 }
 
@@ -64,10 +64,10 @@ export interface RetryOptions {
 }
 
 export interface PreconditionOptions {
-  ifGenerationMatch?: number;
-  ifGenerationNotMatch?: number;
-  ifMetagenerationMatch?: number;
-  ifMetagenerationNotMatch?: number;
+  ifGenerationMatch?: number | string;
+  ifGenerationNotMatch?: number | string;
+  ifMetagenerationMatch?: number | string;
+  ifMetagenerationNotMatch?: number | string;
 }
 
 export interface StorageOptions extends ServiceOptions {
@@ -130,19 +130,19 @@ export interface CreateBucketRequest {
   versioning?: Versioning;
 }
 
-export type CreateBucketResponse = [Bucket, Metadata];
+export type CreateBucketResponse = [Bucket, unknown];
 
 export interface BucketCallback {
-  (err: Error | null, bucket?: Bucket | null, apiResponse?: Metadata): void;
+  (err: Error | null, bucket?: Bucket | null, apiResponse?: unknown): void;
 }
 
-export type GetBucketsResponse = [Bucket[], {}, Metadata];
+export type GetBucketsResponse = [Bucket[], {}, unknown];
 export interface GetBucketsCallback {
   (
     err: Error | null,
     buckets: Bucket[],
     nextQuery?: {},
-    apiResponse?: Metadata
+    apiResponse?: unknown
   ): void;
 }
 export interface GetBucketsRequest {
@@ -192,14 +192,13 @@ export interface GetHmacKeysCallback {
     err: Error | null,
     hmacKeys: HmacKey[] | null,
     nextQuery?: {},
-    apiResponse?: Metadata
+    apiResponse?: unknown
   ): void;
 }
 
 export enum ExceptionMessages {
   EXPIRATION_DATE_INVALID = 'The expiration date provided was invalid.',
   EXPIRATION_DATE_PAST = 'An expiration date cannot be in the past.',
-  INVALID_ACTION = 'The action is not provided or invalid.',
 }
 
 export enum StorageExceptionMessages {
@@ -1156,7 +1155,7 @@ export class Storage extends Service {
         }
 
         const metadata = resp.metadata;
-        const hmacKey = this.hmacKey(metadata.accessId, {
+        const hmacKey = this.hmacKey(metadata.accessId!, {
           projectId: metadata.projectId,
         });
         hmacKey.metadata = resp.metadata;
@@ -1276,8 +1275,8 @@ export class Storage extends Service {
         }
 
         const itemsArray = resp.items ? resp.items : [];
-        const buckets = itemsArray.map((bucket: Metadata) => {
-          const bucketInstance = this.bucket(bucket.id);
+        const buckets = itemsArray.map((bucket: BucketMetadata) => {
+          const bucketInstance = this.bucket(bucket.id!);
           bucketInstance.metadata = bucket;
           return bucketInstance;
         });
@@ -1399,7 +1398,7 @@ export class Storage extends Service {
 
         const itemsArray = resp.items ? resp.items : [];
         const hmacKeys = itemsArray.map((hmacKey: HmacKeyMetadata) => {
-          const hmacKeyInstance = this.hmacKey(hmacKey.accessId, {
+          const hmacKeyInstance = this.hmacKey(hmacKey.accessId!, {
             projectId: hmacKey.projectId,
           });
           hmacKeyInstance.metadata = hmacKey;

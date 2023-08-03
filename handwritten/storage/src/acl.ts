@@ -15,7 +15,7 @@
 import {
   BodyResponseCallback,
   DecorateRequestOptions,
-  Metadata,
+  BaseMetadata,
 } from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
 
@@ -29,13 +29,13 @@ export interface AclOptions {
 
 export type GetAclResponse = [
   AccessControlObject | AccessControlObject[],
-  Metadata
+  AclMetadata
 ];
 export interface GetAclCallback {
   (
     err: Error | null,
     acl?: AccessControlObject | AccessControlObject[] | null,
-    apiResponse?: Metadata
+    apiResponse?: AclMetadata
   ): void;
 }
 export interface GetAclOptions {
@@ -50,12 +50,12 @@ export interface UpdateAclOptions {
   generation?: number;
   userProject?: string;
 }
-export type UpdateAclResponse = [AccessControlObject, Metadata];
+export type UpdateAclResponse = [AccessControlObject, AclMetadata];
 export interface UpdateAclCallback {
   (
     err: Error | null,
     acl?: AccessControlObject | null,
-    apiResponse?: Metadata
+    apiResponse?: AclMetadata
   ): void;
 }
 
@@ -65,17 +65,17 @@ export interface AddAclOptions {
   generation?: number;
   userProject?: string;
 }
-export type AddAclResponse = [AccessControlObject, Metadata];
+export type AddAclResponse = [AccessControlObject, AclMetadata];
 export interface AddAclCallback {
   (
     err: Error | null,
     acl?: AccessControlObject | null,
-    apiResponse?: Metadata
+    apiResponse?: AclMetadata
   ): void;
 }
-export type RemoveAclResponse = [Metadata];
+export type RemoveAclResponse = [AclMetadata];
 export interface RemoveAclCallback {
-  (err: Error | null, apiResponse?: Metadata): void;
+  (err: Error | null, apiResponse?: AclMetadata): void;
 }
 export interface RemoveAclOptions {
   entity: string;
@@ -92,6 +92,21 @@ export interface AccessControlObject {
   entity: string;
   role: string;
   projectTeam: string;
+}
+
+export interface AclMetadata extends BaseMetadata {
+  bucket?: string;
+  domain?: string;
+  entity?: string;
+  entityId?: string;
+  generation?: string;
+  object?: string;
+  projectTeam?: {
+    projectNumber?: string;
+    team?: 'editors' | 'owners' | 'viewers';
+  };
+  role?: 'OWNER' | 'READER' | 'WRITER' | 'FULL_CONTROL';
+  [key: string]: unknown;
 }
 
 /**

@@ -57,6 +57,7 @@
  * Full quickstart example:
  */
 export {
+  AclMetadata,
   AccessControlObject,
   AclOptions,
   AddAclCallback,
@@ -79,6 +80,7 @@ export {
   BucketExistsResponse,
   BucketLockCallback,
   BucketLockResponse,
+  BucketMetadata,
   CombineCallback,
   CombineOptions,
   CombineResponse,
@@ -157,6 +159,7 @@ export {
   FileExistsCallback,
   FileExistsOptions,
   FileExistsResponse,
+  FileMetadata,
   FileOptions,
   GetExpirationDateCallback,
   GetExpirationDateResponse,

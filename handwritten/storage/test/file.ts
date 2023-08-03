@@ -16,7 +16,6 @@ import {
   ApiError,
   BodyResponseCallback,
   DecorateRequestOptions,
-  Metadata,
   MetadataCallback,
   ServiceObject,
   ServiceObjectConfig,
@@ -28,7 +27,6 @@ import {Readable, PassThrough, Stream, Duplex, Transform} from 'stream';
 import * as assert from 'assert';
 import * as crypto from 'crypto';
 import * as duplexify from 'duplexify';
-import * as extend from 'extend';
 import * as fs from 'fs';
 import * as proxyquire from 'proxyquire';
 import * as resumableUpload from '../src/resumable-upload';
@@ -53,10 +51,14 @@ import {
   STORAGE_POST_POLICY_BASE_URL,
   MoveOptions,
   FileExceptionMessages,
+  FileMetadata,
 } from '../src/file';
 import {ExceptionMessages, IdempotencyStrategy} from '../src/storage';
 import {formatAsUTCISO} from '../src/util';
-import {SetMetadataOptions} from '../src/nodejs-common/service-object';
+import {
+  BaseMetadata,
+  SetMetadataOptions,
+} from '../src/nodejs-common/service-object';
 
 class HTTPError extends Error {
   code: number;
@@ -105,20 +107,21 @@ const fakePromisify = {
   },
 };
 
-const fsCached = extend(true, {}, fs);
-const fakeFs = extend(true, {}, fsCached);
+const fsCached = fs;
+const fakeFs = {...fsCached};
 
-const zlibCached = extend(true, {}, zlib);
+const zlibCached = zlib;
 let createGunzipOverride: Function | null;
-const fakeZlib = extend(true, {}, zlib, {
+const fakeZlib = {
+  ...zlib,
   createGunzip(...args: Array<{}>) {
     return (createGunzipOverride || zlibCached.createGunzip)(...args);
   },
-});
+};
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const osCached = extend(true, {}, require('os'));
-const fakeOs = extend(true, {}, osCached);
+const osCached = require('os');
+const fakeOs = {...osCached};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let resumableUploadOverride: any;
@@ -150,7 +153,7 @@ Object.assign(fakeResumableUpload, {
   },
 });
 
-class FakeServiceObject extends ServiceObject {
+class FakeServiceObject extends ServiceObject<FakeServiceObject, BaseMetadata> {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
@@ -210,8 +213,8 @@ describe('File', () => {
   });
 
   beforeEach(() => {
-    extend(true, fakeFs, fsCached);
-    extend(true, fakeOs, osCached);
+    Object.assign(fakeFs, fsCached);
+    Object.assign(fakeOs, osCached);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     FakeServiceObject.prototype.request = util.noop as any;
 
@@ -2084,19 +2087,6 @@ describe('File', () => {
       writable.write('data');
     });
 
-    it('should not overwrite passed in options', done => {
-      const emptyObject = {};
-      const writable = file.createWriteStream(emptyObject);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      file.startResumableUpload_ = (stream: {}, options: any) => {
-        assert.strictEqual(options.metadata.contentType, 'image/png');
-        assert.deepStrictEqual(emptyObject, {});
-        done();
-      };
-
-      writable.write('data');
-    });
-
     it('should not set a contentType if mime lookup failed', done => {
       const file = new File('file-without-ext');
       const writable = file.createWriteStream();
@@ -3562,35 +3552,6 @@ describe('File', () => {
       });
     });
 
-    it('should error if action is null', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      SIGNED_URL_CONFIG.action = null as any;
-
-      assert.throws(() => {
-        file.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
-          ExceptionMessages.INVALID_ACTION;
-      });
-    });
-
-    it('should error if action is undefined', () => {
-      const urlConfig = {...SIGNED_URL_CONFIG} as Partial<GetSignedUrlConfig>;
-      delete urlConfig.action;
-      assert.throws(() => {
-        file.getSignedUrl(urlConfig, () => {}),
-          ExceptionMessages.INVALID_ACTION;
-      });
-    });
-
-    it('should error for an invalid action', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      SIGNED_URL_CONFIG.action = 'watch' as any;
-
-      assert.throws(() => {
-        file.getSignedUrl(SIGNED_URL_CONFIG, () => {}),
-          ExceptionMessages.INVALID_ACTION;
-      });
-    });
-
     it('should add "x-goog-resumable: start" header if action is resumable', done => {
       SIGNED_URL_CONFIG.action = 'resumable';
       SIGNED_URL_CONFIG.extensionHeaders = {
@@ -3683,9 +3644,9 @@ describe('File', () => {
       const apiResponse = {};
 
       file.setMetadata = (
-        metadata: Metadata,
-        optionsOrCallback: SetMetadataOptions | MetadataCallback,
-        cb: MetadataCallback
+        metadata: FileMetadata,
+        optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
+        cb: MetadataCallback<FileMetadata>
       ) => {
         Promise.resolve([apiResponse]).then(resp => cb(null, ...resp));
       };

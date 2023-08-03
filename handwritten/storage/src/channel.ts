@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Metadata, ServiceObject, util} from './nodejs-common';
+import {BaseMetadata, ServiceObject, util} from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
 
 import {Storage} from './storage';
 
 export interface StopCallback {
-  (err: Error | null, apiResponse?: Metadata): void;
+  (err: Error | null, apiResponse?: unknown): void;
 }
 
 /**
@@ -38,7 +38,7 @@ export interface StopCallback {
  * const channel = storage.channel('id', 'resource-id');
  * ```
  */
-class Channel extends ServiceObject {
+class Channel extends ServiceObject<Channel, BaseMetadata> {
   constructor(storage: Storage, id: string, resourceId: string) {
     const config = {
       parent: storage,
@@ -60,7 +60,7 @@ class Channel extends ServiceObject {
     this.metadata.resourceId = resourceId;
   }
 
-  stop(): Promise<Metadata>;
+  stop(): Promise<unknown>;
   stop(callback: StopCallback): void;
   /**
    * @typedef {array} StopResponse
@@ -96,7 +96,7 @@ class Channel extends ServiceObject {
    * });
    * ```
    */
-  stop(callback?: StopCallback): Promise<Metadata> | void {
+  stop(callback?: StopCallback): Promise<unknown> | void {
     callback = callback || util.noop;
     this.request(
       {

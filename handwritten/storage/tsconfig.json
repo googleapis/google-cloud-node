@@ -4,6 +4,7 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
+    "sourceMap": false
   },
   "include": [
     "src/*.ts",

@@ -57,7 +57,7 @@ describe('Bucket lifecycle management', () => {
   it('should disable all lifecycle rules', async () => {
     // Add a lifecycle rule in order for the sample to delete.
     await bucket.addLifecycleRule({
-      action: 'delete',
+      action: {type: 'Delete'},
       condition: {age: 100},
     });
 

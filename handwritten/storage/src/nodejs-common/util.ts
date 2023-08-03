@@ -23,7 +23,6 @@ import {
   MissingProjectIdError,
 } from '@google-cloud/projectify';
 import * as ent from 'ent';
-import * as extend from 'extend';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {CredentialBody} from 'google-auth-library';
 import * as r from 'teeny-request';
@@ -401,12 +400,12 @@ export class Util {
   ) {
     callback = callback || util.noop;
 
-    const parsedResp = extend(
-      true,
-      {err: err || null},
-      resp && util.parseHttpRespMessage(resp),
-      body && util.parseHttpRespBody(body)
-    );
+    const parsedResp = {
+      err: err || null,
+      ...(resp && util.parseHttpRespMessage(resp)),
+      ...(body && util.parseHttpRespBody(body)),
+    };
+
     // Assign the parsed body to resp.body, even if { json: false } was passed
     // as a request option.
     // We assume that nobody uses the previously unparsed value of resp.body.
@@ -514,7 +513,13 @@ export class Util {
 
     const metadata = options.metadata || {};
 
-    const reqOpts = extend(true, defaultReqOpts, options.request, {
+    const reqOpts = {
+      ...defaultReqOpts,
+      ...options.request,
+      qs: {
+        ...defaultReqOpts.qs,
+        ...options.request?.qs,
+      },
       multipart: [
         {
           'Content-Type': 'application/json',
@@ -525,7 +530,7 @@ export class Util {
           body: writeStream,
         },
       ],
-    }) as r.OptionsWithUri;
+    } as {} as r.OptionsWithUri;
 
     options.makeAuthenticatedRequest(reqOpts, {
       onAuthenticated(err, authenticatedReqOpts) {
@@ -602,7 +607,7 @@ export class Util {
   makeAuthenticatedRequestFactory(
     config: MakeAuthenticatedRequestFactoryConfig
   ) {
-    const googleAutoAuthConfig = extend({}, config);
+    const googleAutoAuthConfig = {...config};
     if (googleAutoAuthConfig.projectId === DEFAULT_PROJECT_ID_TOKEN) {
       delete googleAutoAuthConfig.projectId;
     }
@@ -648,7 +653,7 @@ export class Util {
     ): void | Abortable | Duplexify {
       let stream: Duplexify;
       let projectId: string;
-      const reqConfig = extend({}, config);
+      const reqConfig = {...config};
       let activeRequest_: void | Abortable | null;
 
       if (!optionsOrCallback) {

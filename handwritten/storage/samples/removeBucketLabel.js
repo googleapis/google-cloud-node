@@ -19,7 +19,7 @@
 //   description: Removes bucket label.
 //   usage: node removeBucketLabel.js <BUCKET_NAME> labelone)
 
-function main(bucketName = 'my-bucket', labelKey = ['label1', 'label2']) {
+function main(bucketName = 'my-bucket', labelKey = 'labelone') {
   // [START storage_remove_bucket_label]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
@@ -37,7 +37,10 @@ function main(bucketName = 'my-bucket', labelKey = ['label1', 'label2']) {
   const storage = new Storage();
 
   async function removeBucketLabel() {
-    await storage.bucket(bucketName).deleteLabels(labelKey);
+    const labels = {};
+    // To remove a label set the value of the key to null.
+    labels[labelKey] = null;
+    await storage.bucket(bucketName).setMetadata({labels});
     console.log(`Removed labels from bucket ${bucketName}`);
   }
 

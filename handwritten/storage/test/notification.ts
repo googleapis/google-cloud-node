@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {
+  BaseMetadata,
   DecorateRequestOptions,
   ServiceObject,
   ServiceObjectConfig,
@@ -24,7 +25,7 @@ import * as proxyquire from 'proxyquire';
 
 import {Bucket} from '../src';
 
-class FakeServiceObject extends ServiceObject {
+class FakeServiceObject extends ServiceObject<FakeServiceObject, BaseMetadata> {
   calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
@@ -51,6 +52,10 @@ describe('Notification', () => {
 
   const BUCKET = {
     createNotification: fakeUtil.noop,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    request(_reqOpts: DecorateRequestOptions, _callback: Function) {
+      return fakeUtil.noop();
+    },
   };
 
   const ID = '123';
@@ -67,6 +72,7 @@ describe('Notification', () => {
 
   beforeEach(() => {
     BUCKET.createNotification = fakeUtil.noop = () => {};
+    BUCKET.request = fakeUtil.noop = () => {};
     notification = new Notification(BUCKET, ID);
   });
 
@@ -86,6 +92,21 @@ describe('Notification', () => {
 
       assert.deepStrictEqual(calledWith.methods, {
         create: true,
+        delete: {
+          reqOpts: {
+            qs: {},
+          },
+        },
+        get: {
+          reqOpts: {
+            qs: {},
+          },
+        },
+        getMetadata: {
+          reqOpts: {
+            qs: {},
+          },
+        },
         exists: true,
       });
     });
@@ -117,13 +138,13 @@ describe('Notification', () => {
     it('should make the correct request', done => {
       const options = {};
 
-      notification.request = (
+      BUCKET.request = (
         reqOpts: DecorateRequestOptions,
         callback: Function
       ) => {
         assert.strictEqual(reqOpts.method, 'DELETE');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.qs, options);
+        assert.strictEqual(reqOpts.uri, 'notificationConfigs/123');
+        assert.deepStrictEqual(reqOpts.qs, options);
         callback(); // the done fn
       };
 
@@ -131,7 +152,7 @@ describe('Notification', () => {
     });
 
     it('should optionally accept options', done => {
-      notification.request = (
+      BUCKET.request = (
         reqOpts: DecorateRequestOptions,
         callback: Function
       ) => {
@@ -143,16 +164,14 @@ describe('Notification', () => {
     });
 
     it('should optionally accept a callback', done => {
-      fakeUtil.noop = done;
-
-      notification.request = (
-        reqOpts: DecorateRequestOptions,
+      BUCKET.request = (
+        _reqOpts: DecorateRequestOptions,
         callback: Function
       ) => {
         callback(); // the done fn
       };
 
-      notification.delete();
+      notification.delete(done);
     });
   });
 
@@ -169,7 +188,7 @@ describe('Notification', () => {
       const options = {};
 
       notification.getMetadata = (options_: {}) => {
-        assert.strictEqual(options_, options);
+        assert.deepStrictEqual(options_, options);
         done();
       };
 
@@ -180,7 +199,7 @@ describe('Notification', () => {
       const error = new Error('Error.');
       const metadata = {};
 
-      notification.getMetadata = (options: {}, callback: Function) => {
+      notification.getMetadata = (_options: {}, callback: Function) => {
         callback(error, metadata);
       };
 
@@ -196,7 +215,7 @@ describe('Notification', () => {
     it('should execute callback with instance & metadata', done => {
       const metadata = {};
 
-      notification.getMetadata = (options: {}, callback: Function) => {
+      notification.getMetadata = (_options: {}, callback: Function) => {
         callback(null, metadata);
       };
 
@@ -221,22 +240,25 @@ describe('Notification', () => {
           autoCreate: true,
         };
 
-        notification.getMetadata = (options: {}, callback: Function) => {
+        notification.getMetadata = (_options: {}, callback: Function) => {
           callback(ERROR, METADATA);
         };
       });
 
       it('should pass config to create if it was provided', done => {
-        const config = Object.assign({}, AUTO_CREATE_CONFIG, {
-          maxResults: 5,
-        });
+        const config = Object.assign(
+          {},
+          {
+            maxResults: 5,
+          }
+        );
 
-        notification.create = (config_: {}) => {
-          assert.strictEqual(config_, config);
+        notification.get = (config_: {}) => {
+          assert.deepStrictEqual(config_, config);
           done();
         };
 
-        notification.get(config, assert.ifError);
+        notification.get(config);
       });
 
       it('should pass only a callback to create if no config', done => {
@@ -296,9 +318,9 @@ describe('Notification', () => {
     it('should make the correct request', done => {
       const options = {};
 
-      notification.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.qs, options);
+      BUCKET.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.uri, 'notificationConfigs/123');
+        assert.deepStrictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -306,7 +328,7 @@ describe('Notification', () => {
     });
 
     it('should optionally accept options', done => {
-      notification.request = (reqOpts: DecorateRequestOptions) => {
+      BUCKET.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -318,16 +340,16 @@ describe('Notification', () => {
       const error = new Error('err');
       const response = {};
 
-      notification.request = (
-        reqOpts: DecorateRequestOptions,
+      BUCKET.request = (
+        _reqOpts: DecorateRequestOptions,
         callback: Function
       ) => {
-        callback(error, response);
+        callback(error, response, response);
       };
 
       notification.getMetadata((err: Error, metadata: {}, resp: {}) => {
         assert.strictEqual(err, error);
-        assert.strictEqual(metadata, null);
+        assert.strictEqual(metadata, response);
         assert.strictEqual(resp, response);
         done();
       });
@@ -336,11 +358,11 @@ describe('Notification', () => {
     it('should set and return the metadata', done => {
       const response = {};
 
-      notification.request = (
-        reqOpts: DecorateRequestOptions,
+      BUCKET.request = (
+        _reqOpts: DecorateRequestOptions,
         callback: Function
       ) => {
-        callback(null, response);
+        callback(null, response, response);
       };
 
       notification.getMetadata((err: Error, metadata: {}, resp: {}) => {

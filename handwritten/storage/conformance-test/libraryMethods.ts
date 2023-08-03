@@ -42,7 +42,9 @@ export async function addLifecycleRuleInstancePrecondition(
   options: ConformanceTestOptions
 ) {
   await options.bucket!.addLifecycleRule({
-    action: 'delete',
+    action: {
+      type: 'Delete',
+    },
     condition: {
       age: 365 * 3, // Specified in days.
     },
@@ -53,7 +55,9 @@ export async function addLifecycleRule(options: ConformanceTestOptions) {
   if (options.preconditionRequired) {
     await options.bucket!.addLifecycleRule(
       {
-        action: 'delete',
+        action: {
+          type: 'Delete',
+        },
         condition: {
           age: 365 * 3, // Specified in days.
         },
@@ -64,7 +68,9 @@ export async function addLifecycleRule(options: ConformanceTestOptions) {
     );
   } else {
     await options.bucket!.addLifecycleRule({
-      action: 'delete',
+      action: {
+        type: 'Delete',
+      },
       condition: {
         age: 365 * 3, // Specified in days.
       },
@@ -104,7 +110,7 @@ export async function combine(options: ConformanceTestOptions) {
   await allFiles.save('allfiles contents');
   if (options.preconditionRequired) {
     await options.bucket!.combine(sources, allFiles, {
-      ifGenerationMatch: allFiles.metadata.generation,
+      ifGenerationMatch: allFiles.metadata.generation!,
     });
   } else {
     await options.bucket!.combine(sources, allFiles);
@@ -468,7 +474,9 @@ export async function copy(options: ConformanceTestOptions) {
 
   if (options.preconditionRequired) {
     await options.file!.copy('a-different-file.png', {
-      preconditionOpts: {ifGenerationMatch: newFile.metadata.generation},
+      preconditionOpts: {
+        ifGenerationMatch: newFile.metadata.generation!,
+      },
     });
   } else {
     await options.file!.copy('a-different-file.png');

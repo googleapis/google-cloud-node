@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {DecorateRequestOptions, Metadata, util} from '../src/nodejs-common';
+import {DecorateRequestOptions, util} from '../src/nodejs-common';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
@@ -147,7 +147,7 @@ describe('storage/acl', () => {
 
       acl.add(
         {entity: ENTITY, role: ROLE},
-        (err: Error, acls: {}, apiResponse: Metadata) => {
+        (err: Error, acls: {}, apiResponse: unknown) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
         }
@@ -214,7 +214,7 @@ describe('storage/acl', () => {
         callback(null, resp);
       };
 
-      acl.delete({entity: ENTITY}, (err: Error, apiResponse: Metadata) => {
+      acl.delete({entity: ENTITY}, (err: Error, apiResponse: unknown) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
@@ -351,7 +351,7 @@ describe('storage/acl', () => {
         callback(null, resp);
       };
 
-      acl.get((err: Error, acls: Array<{}>, apiResponse: Metadata) => {
+      acl.get((err: Error, acls: Array<{}>, apiResponse: unknown) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
@@ -441,7 +441,7 @@ describe('storage/acl', () => {
       const config = {entity: ENTITY, role: ROLE};
       acl.update(
         config,
-        (err: Error, acls: Array<{}>, apiResponse: Metadata) => {
+        (err: Error, acls: Array<{}>, apiResponse: unknown) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
         }

@@ -14,7 +14,6 @@
 
 import AbortController from 'abort-controller';
 import {createHash} from 'crypto';
-import * as extend from 'extend';
 import {
   GaxiosOptions,
   GaxiosPromise,
@@ -38,6 +37,7 @@ export const PROTOCOL_REGEX = /^(\w*):\/\//;
 
 export interface ErrorWithCode extends Error {
   code: number;
+  status?: number | string;
 }
 
 export type CreateUriCallback = (err: Error | null, uri?: string) => void;
@@ -963,12 +963,15 @@ export class Upload extends Writable {
       );
     };
 
-    const combinedReqOpts = extend(
-      true,
-      {},
-      this.customRequestOptions,
-      reqOpts
-    );
+    const combinedReqOpts = {
+      ...this.customRequestOptions,
+      ...reqOpts,
+      headers: {
+        ...this.customRequestOptions.headers,
+        ...reqOpts.headers,
+      },
+    };
+
     const res = await this.authClient.request<{error?: object}>(
       combinedReqOpts
     );
@@ -990,12 +993,14 @@ export class Upload extends Writable {
     reqOpts.signal = controller.signal;
     reqOpts.validateStatus = () => true;
 
-    const combinedReqOpts = extend(
-      true,
-      {},
-      this.customRequestOptions,
-      reqOpts
-    );
+    const combinedReqOpts = {
+      ...this.customRequestOptions,
+      ...reqOpts,
+      headers: {
+        ...this.customRequestOptions.headers,
+        ...reqOpts.headers,
+      },
+    };
     const res = await this.authClient.request(combinedReqOpts);
     const successfulRequest = this.onResponse(res);
     this.removeListener('error', errorCallback);

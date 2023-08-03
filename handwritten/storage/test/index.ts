@@ -15,7 +15,6 @@
 import {
   ApiError,
   DecorateRequestOptions,
-  Metadata,
   Service,
   ServiceConfig,
   util,
@@ -835,7 +834,7 @@ describe('Storage', () => {
       };
       storage.createBucket(
         BUCKET_NAME,
-        (err: Error, bucket: Bucket, apiResponse: Metadata) => {
+        (err: Error, bucket: Bucket, apiResponse: unknown) => {
           assert.strictEqual(resp, apiResponse);
           done();
         }
@@ -1026,7 +1025,7 @@ describe('Storage', () => {
 
       storage.getBuckets(
         {},
-        (err: Error, buckets: Bucket[], nextQuery: {}, resp: Metadata) => {
+        (err: Error, buckets: Bucket[], nextQuery: {}, resp: unknown) => {
           assert.strictEqual(err, error);
           assert.strictEqual(buckets, null);
           assert.strictEqual(nextQuery, null);
@@ -1193,7 +1192,7 @@ describe('Storage', () => {
 
       storage.getHmacKeys(
         {},
-        (err: Error, hmacKeys: HmacKey[], nextQuery: {}, resp: Metadata) => {
+        (err: Error, hmacKeys: HmacKey[], nextQuery: {}, resp: unknown) => {
           assert.strictEqual(err, error);
           assert.strictEqual(hmacKeys, null);
           assert.strictEqual(nextQuery, null);
@@ -1244,7 +1243,7 @@ describe('Storage', () => {
       });
 
       storage.getHmacKeys(
-        (err: Error, _hmacKeys: [], _nextQuery: {}, apiResponse: Metadata) => {
+        (err: Error, _hmacKeys: [], _nextQuery: {}, apiResponse: unknown) => {
           assert.ifError(err);
           assert.deepStrictEqual(resp, apiResponse);
           done();
@@ -1310,7 +1309,7 @@ describe('Storage', () => {
 
       it('should return the error and apiResponse', done => {
         storage.getServiceAccount(
-          (err: Error, serviceAccount: {}, apiResponse: Metadata) => {
+          (err: Error, serviceAccount: {}, apiResponse: unknown) => {
             assert.strictEqual(err, ERROR);
             assert.strictEqual(serviceAccount, null);
             assert.strictEqual(apiResponse, API_RESPONSE);
