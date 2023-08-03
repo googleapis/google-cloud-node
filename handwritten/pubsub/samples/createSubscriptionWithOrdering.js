@@ -55,7 +55,6 @@ async function createSubscriptionWithOrdering(
   console.log(
     `Created subscription ${subscriptionNameOrId} with ordering enabled.`
   );
-
   console.log(
     'To process messages in order, remember to add an ordering key to your messages.'
   );
