@@ -689,7 +689,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan,
       protos.google.cloud.gkebackup.v1.IGetBackupPlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackupPlan(
@@ -729,7 +729,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan,
       protos.google.cloud.gkebackup.v1.IGetBackupPlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -774,7 +774,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup,
       protos.google.cloud.gkebackup.v1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -812,7 +812,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup,
       protos.google.cloud.gkebackup.v1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -857,7 +857,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup,
       protos.google.cloud.gkebackup.v1.IGetVolumeBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVolumeBackup(
@@ -903,7 +903,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup,
       protos.google.cloud.gkebackup.v1.IGetVolumeBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -948,7 +948,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan,
       protos.google.cloud.gkebackup.v1.IGetRestorePlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRestorePlan(
@@ -994,7 +994,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan,
       protos.google.cloud.gkebackup.v1.IGetRestorePlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1039,7 +1039,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore,
       protos.google.cloud.gkebackup.v1.IGetRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRestore(
@@ -1079,7 +1079,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore,
       protos.google.cloud.gkebackup.v1.IGetRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1124,7 +1124,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore,
       protos.google.cloud.gkebackup.v1.IGetVolumeRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVolumeRestore(
@@ -1170,7 +1170,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore,
       protos.google.cloud.gkebackup.v1.IGetVolumeRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1232,7 +1232,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackupPlan(
@@ -1285,7 +1285,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1379,7 +1379,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackupPlan(
@@ -1432,7 +1432,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1520,7 +1520,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackupPlan(
@@ -1573,7 +1573,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1642,11 +1642,11 @@ export class BackupForGKEClient {
    *   The client-provided short name for the Backup resource.
    *   This name must:
    *
-   *    - be between 1 and 63 characters long (inclusive)
-   *    - consist of only lower-case ASCII letters, numbers, and dashes
-   *    - start with a lower-case letter
-   *    - end with a lower-case letter or number
-   *    - be unique within the set of Backups in this BackupPlan
+   *   - be between 1 and 63 characters long (inclusive)
+   *   - consist of only lower-case ASCII letters, numbers, and dashes
+   *   - start with a lower-case letter
+   *   - end with a lower-case letter or number
+   *   - be unique within the set of Backups in this BackupPlan
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1668,7 +1668,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -1721,7 +1721,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1814,7 +1814,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackup(
@@ -1867,7 +1867,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1959,7 +1959,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -2012,7 +2012,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2081,11 +2081,11 @@ export class BackupForGKEClient {
    *   Required. The client-provided short name for the RestorePlan resource.
    *   This name must:
    *
-   *    - be between 1 and 63 characters long (inclusive)
-   *    - consist of only lower-case ASCII letters, numbers, and dashes
-   *    - start with a lower-case letter
-   *    - end with a lower-case letter or number
-   *    - be unique within the set of RestorePlans in this location
+   *   - be between 1 and 63 characters long (inclusive)
+   *   - consist of only lower-case ASCII letters, numbers, and dashes
+   *   - start with a lower-case letter
+   *   - end with a lower-case letter or number
+   *   - be unique within the set of RestorePlans in this location
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2107,7 +2107,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRestorePlan(
@@ -2160,7 +2160,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2253,7 +2253,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRestorePlan(
@@ -2306,7 +2306,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2398,7 +2398,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRestorePlan(
@@ -2451,7 +2451,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2520,11 +2520,11 @@ export class BackupForGKEClient {
    *   Required. The client-provided short name for the Restore resource.
    *   This name must:
    *
-   *    - be between 1 and 63 characters long (inclusive)
-   *    - consist of only lower-case ASCII letters, numbers, and dashes
-   *    - start with a lower-case letter
-   *    - end with a lower-case letter or number
-   *    - be unique within the set of Restores in this RestorePlan.
+   *   - be between 1 and 63 characters long (inclusive)
+   *   - consist of only lower-case ASCII letters, numbers, and dashes
+   *   - start with a lower-case letter
+   *   - end with a lower-case letter or number
+   *   - be unique within the set of Restores in this RestorePlan.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2546,7 +2546,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRestore(
@@ -2599,7 +2599,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2692,7 +2692,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRestore(
@@ -2745,7 +2745,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2837,7 +2837,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRestore(
@@ -2890,7 +2890,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2990,7 +2990,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan[],
       protos.google.cloud.gkebackup.v1.IListBackupPlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse
+      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse,
     ]
   >;
   listBackupPlans(
@@ -3036,7 +3036,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan[],
       protos.google.cloud.gkebackup.v1.IListBackupPlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse
+      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse,
     ]
   > | void {
     request = request || {};
@@ -3221,7 +3221,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup[],
       protos.google.cloud.gkebackup.v1.IListBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -3261,7 +3261,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup[],
       protos.google.cloud.gkebackup.v1.IListBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3446,7 +3446,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup[],
       protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse,
     ]
   >;
   listVolumeBackups(
@@ -3492,7 +3492,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup[],
       protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3677,7 +3677,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan[],
       protos.google.cloud.gkebackup.v1.IListRestorePlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse
+      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse,
     ]
   >;
   listRestorePlans(
@@ -3723,7 +3723,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan[],
       protos.google.cloud.gkebackup.v1.IListRestorePlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse
+      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse,
     ]
   > | void {
     request = request || {};
@@ -3908,7 +3908,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore[],
       protos.google.cloud.gkebackup.v1.IListRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListRestoresResponse,
     ]
   >;
   listRestores(
@@ -3948,7 +3948,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore[],
       protos.google.cloud.gkebackup.v1.IListRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListRestoresResponse,
     ]
   > | void {
     request = request || {};
@@ -4133,7 +4133,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore[],
       protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse,
     ]
   >;
   listVolumeRestores(
@@ -4179,7 +4179,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore[],
       protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse,
     ]
   > | void {
     request = request || {};

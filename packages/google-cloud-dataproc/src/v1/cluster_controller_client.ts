@@ -603,7 +603,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster,
       protos.google.cloud.dataproc.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -641,7 +641,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster,
       protos.google.cloud.dataproc.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -715,7 +715,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -768,7 +768,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -939,7 +939,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -992,7 +992,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1098,7 +1098,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopCluster(
@@ -1151,7 +1151,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1257,7 +1257,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startCluster(
@@ -1310,7 +1310,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1418,7 +1418,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -1471,7 +1471,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1567,7 +1567,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   diagnoseCluster(
@@ -1620,7 +1620,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1730,7 +1730,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster[],
       protos.google.cloud.dataproc.v1.IListClustersRequest | null,
-      protos.google.cloud.dataproc.v1.IListClustersResponse
+      protos.google.cloud.dataproc.v1.IListClustersResponse,
     ]
   >;
   listClusters(
@@ -1770,7 +1770,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster[],
       protos.google.cloud.dataproc.v1.IListClustersRequest | null,
-      protos.google.cloud.dataproc.v1.IListClustersResponse
+      protos.google.cloud.dataproc.v1.IListClustersResponse,
     ]
   > | void {
     request = request || {};
