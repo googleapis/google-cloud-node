@@ -174,7 +174,6 @@ describe('resumable-upload', () => {
         })
       )
       .on('error', (err: ErrorWithCode) => {
-        console.log(err);
         assert.strictEqual(err.status, 400);
         done();
       });
