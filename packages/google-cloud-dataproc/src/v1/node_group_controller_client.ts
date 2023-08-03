@@ -542,7 +542,7 @@ export class NodeGroupControllerClient {
     [
       protos.google.cloud.dataproc.v1.INodeGroup,
       protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNodeGroup(
@@ -582,7 +582,7 @@ export class NodeGroupControllerClient {
     [
       protos.google.cloud.dataproc.v1.INodeGroup,
       protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -656,7 +656,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNodeGroup(
@@ -709,7 +709,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -826,7 +826,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resizeNodeGroup(
@@ -879,7 +879,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
