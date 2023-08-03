@@ -590,7 +590,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent,
       protos.google.cloud.dialogflow.v2.IGetIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIntent(
@@ -630,7 +630,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent,
       protos.google.cloud.dialogflow.v2.IGetIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -689,7 +689,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent,
       protos.google.cloud.dialogflow.v2.ICreateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIntent(
@@ -729,7 +729,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent,
       protos.google.cloud.dialogflow.v2.ICreateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -787,7 +787,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent,
       protos.google.cloud.dialogflow.v2.IUpdateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIntent(
@@ -827,7 +827,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent,
       protos.google.cloud.dialogflow.v2.IUpdateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -877,7 +877,7 @@ export class IntentsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIntent(
@@ -917,7 +917,7 @@ export class IntentsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -997,7 +997,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateIntents(
@@ -1050,7 +1050,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1150,7 +1150,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteIntents(
@@ -1203,7 +1203,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1303,7 +1303,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent[],
       protos.google.cloud.dialogflow.v2.IListIntentsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListIntentsResponse
+      protos.google.cloud.dialogflow.v2.IListIntentsResponse,
     ]
   >;
   listIntents(
@@ -1343,7 +1343,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2.IIntent[],
       protos.google.cloud.dialogflow.v2.IListIntentsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListIntentsResponse
+      protos.google.cloud.dialogflow.v2.IListIntentsResponse,
     ]
   > | void {
     request = request || {};
