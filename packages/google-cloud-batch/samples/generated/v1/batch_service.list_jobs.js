@@ -37,6 +37,11 @@ function main() {
    */
   // const filter = 'abc123'
   /**
+   *  Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *  and "create_time desc".
+   */
+  // const orderBy = 'abc123'
+  /**
    *  Page size.
    */
   // const pageSize = 1234
