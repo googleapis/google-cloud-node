@@ -37,20 +37,23 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function removeDeadLetterPolicy(topicNameOrId, subscriptionNameOrId) {
+async function removeDeadLetterPolicy(
+topicNameOrId,
+subscriptionNameOrId)
+{
   const metadata = {
-    deadLetterPolicy: null,
+    deadLetterPolicy: null
   };
 
-  await pubSubClient
-    .topic(topicNameOrId)
-    .subscription(subscriptionNameOrId)
-    .setMetadata(metadata);
+  await pubSubClient.
+  topic(topicNameOrId).
+  subscription(subscriptionNameOrId).
+  setMetadata(metadata);
 
   console.log(
     `Removed dead letter topic from ${subscriptionNameOrId} subscription.`
@@ -59,10 +62,10 @@ async function removeDeadLetterPolicy(topicNameOrId, subscriptionNameOrId) {
 // [END pubsub_dead_letter_remove]
 
 function main(
-  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
-) {
-  removeDeadLetterPolicy(topicNameOrId, subscriptionNameOrId).catch(err => {
+topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
+{
+  removeDeadLetterPolicy(topicNameOrId, subscriptionNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

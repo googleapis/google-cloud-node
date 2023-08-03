@@ -38,23 +38,26 @@
 
 // Imports the Google Cloud client library. v1 is for the lower level
 // proto access.
-const {v1} = require('@google-cloud/pubsub');
+const { v1 } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use.
 const subClient = new v1.SubscriberClient();
 
-async function synchronousPull(projectId, subscriptionNameOrId) {
+async function synchronousPull(
+projectId,
+subscriptionNameOrId)
+{
   // The low level API client requires a name only.
   const formattedSubscription =
-    subscriptionNameOrId.indexOf('/') >= 0
-      ? subscriptionNameOrId
-      : subClient.subscriptionPath(projectId, subscriptionNameOrId);
+  subscriptionNameOrId.indexOf('/') >= 0 ?
+  subscriptionNameOrId :
+  subClient.subscriptionPath(projectId, subscriptionNameOrId);
 
   // The maximum number of messages returned for this request.
   // Pub/Sub may return fewer than the number specified.
   const request = {
     subscription: formattedSubscription,
-    maxMessages: 10,
+    maxMessages: 10
   };
 
   // The subscriber pulls a specified number of messages.
@@ -74,7 +77,7 @@ async function synchronousPull(projectId, subscriptionNameOrId) {
     // these individually, but this is more efficient.
     const ackRequest = {
       subscription: formattedSubscription,
-      ackIds: ackIds,
+      ackIds: ackIds
     };
 
     await subClient.acknowledge(ackRequest);
@@ -85,10 +88,10 @@ async function synchronousPull(projectId, subscriptionNameOrId) {
 // [END pubsub_subscriber_sync_pull]
 
 function main(
-  projectId = 'YOUR_PROJECT_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
-) {
-  synchronousPull(projectId, subscriptionNameOrId).catch(err => {
+projectId = 'YOUR_PROJECT_ID',
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
+{
+  synchronousPull(projectId, subscriptionNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

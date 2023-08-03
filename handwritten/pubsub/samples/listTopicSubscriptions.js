@@ -36,24 +36,26 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function listTopicSubscriptions(topicNameOrId) {
   // Lists all subscriptions for the topic
-  const [subscriptions] = await pubSubClient
-    .topic(topicNameOrId)
-    .getSubscriptions();
+  const [subscriptions] = await pubSubClient.
+  topic(topicNameOrId).
+  getSubscriptions();
 
   console.log(`Subscriptions for ${topicNameOrId}:`);
-  subscriptions.forEach(subscription => console.log(subscription.name));
+  subscriptions.forEach((subscription) =>
+  console.log(subscription.name)
+  );
 }
 // [END pubsub_list_topic_subscriptions]
 
 function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  listTopicSubscriptions(topicNameOrId).catch(err => {
+  listTopicSubscriptions(topicNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

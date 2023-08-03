@@ -37,9 +37,9 @@
 // const protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers';
 
 // Imports the Google Cloud client library
-const {PubSub, SchemaTypes} = require('@google-cloud/pubsub');
+const { PubSub, SchemaTypes } = require("@google-cloud/pubsub");
 
-const fs = require('fs');
+const fs = require("fs");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -58,10 +58,10 @@ async function createProtoSchema(schemaNameOrId, protoFile) {
 // [END pubsub_create_proto_schema]
 
 function main(
-  schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers'
-) {
-  createProtoSchema(schemaNameOrId, protoFile).catch(err => {
+schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
+protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers')
+{
+  createProtoSchema(schemaNameOrId, protoFile).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

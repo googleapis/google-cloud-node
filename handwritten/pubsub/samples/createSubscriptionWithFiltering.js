@@ -38,22 +38,22 @@
 // const filterString = 'YOUR_FILTER_STRING';   // e.g. 'attributes.author="unknown"'
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function createSubscriptionWithFilter(
-  topicNameOrId,
-  subscriptionNameOrId,
-  filterString
-) {
+topicNameOrId,
+subscriptionNameOrId,
+filterString)
+{
   // Creates a new subscription
-  await pubSubClient
-    .topic(topicNameOrId)
-    .createSubscription(subscriptionNameOrId, {
-      filter: filterString,
-    });
+  await pubSubClient.
+  topic(topicNameOrId).
+  createSubscription(subscriptionNameOrId, {
+    filter: filterString
+  });
   console.log(
     `Created subscription ${subscriptionNameOrId} with filter ${filterString}.`
   );
@@ -61,15 +61,15 @@ async function createSubscriptionWithFilter(
 // [END pubsub_create_subscription_with_filter]
 
 function main(
-  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  filterString = 'YOUR_FILTER_STRING'
-) {
+topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+filterString = 'YOUR_FILTER_STRING')
+{
   createSubscriptionWithFilter(
     topicNameOrId,
     subscriptionNameOrId,
     filterString
-  ).catch(err => {
+  ).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

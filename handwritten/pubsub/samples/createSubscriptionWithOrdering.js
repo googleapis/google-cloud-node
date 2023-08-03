@@ -37,21 +37,21 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function createSubscriptionWithOrdering(
-  topicNameOrId,
-  subscriptionNameOrId
-) {
+topicNameOrId,
+subscriptionNameOrId)
+{
   // Creates a new subscription
-  await pubSubClient
-    .topic(topicNameOrId)
-    .createSubscription(subscriptionNameOrId, {
-      enableMessageOrdering: true,
-    });
+  await pubSubClient.
+  topic(topicNameOrId).
+  createSubscription(subscriptionNameOrId, {
+    enableMessageOrdering: true
+  });
   console.log(
     `Created subscription ${subscriptionNameOrId} with ordering enabled.`
   );
@@ -62,11 +62,11 @@ async function createSubscriptionWithOrdering(
 // [END pubsub_enable_subscription_ordering]
 
 function main(
-  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
-) {
+topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
+{
   createSubscriptionWithOrdering(topicNameOrId, subscriptionNameOrId).catch(
-    err => {
+    (err) => {
       console.error(err.message);
       process.exitCode = 1;
     }

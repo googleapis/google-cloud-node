@@ -31,7 +31,7 @@
 
 // [START pubsub_list_subscriptions]
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -40,7 +40,9 @@ async function listSubscriptions() {
   // Lists all subscriptions in the current project
   const [subscriptions] = await pubSubClient.getSubscriptions();
   console.log('Subscriptions:');
-  subscriptions.forEach(subscription => console.log(subscription.name));
+  subscriptions.forEach((subscription) =>
+  console.log(subscription.name)
+  );
 }
 // [END pubsub_list_subscriptions]
 

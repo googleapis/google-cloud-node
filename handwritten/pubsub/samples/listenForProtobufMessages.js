@@ -37,15 +37,18 @@
 // const timeout = 60;
 
 // Imports the Google Cloud client library
-const {PubSub, Schema, Encodings} = require('@google-cloud/pubsub');
+const { PubSub, Schema, Encodings } = require("@google-cloud/pubsub");
 
 // And the protobufjs library
-const protobuf = require('protobufjs');
+const protobuf = require("protobufjs");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function listenForProtobufMessages(subscriptionNameOrId, timeout) {
+async function listenForProtobufMessages(
+subscriptionNameOrId,
+timeout)
+{
   // References an existing subscription
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
@@ -58,7 +61,7 @@ async function listenForProtobufMessages(subscriptionNameOrId, timeout) {
 
   // Create an event handler to handle messages
   let messageCount = 0;
-  const messageHandler = async message => {
+  const messageHandler = async (message) => {
     // "Ack" (acknowledge receipt of) the message
     message.ack();
 
@@ -99,12 +102,12 @@ async function listenForProtobufMessages(subscriptionNameOrId, timeout) {
 // [END pubsub_subscribe_proto_messages]
 
 function main(
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 60
-) {
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+timeout = 60)
+{
   timeout = Number(timeout);
 
-  listenForProtobufMessages(subscriptionNameOrId, timeout).catch(err => {
+  listenForProtobufMessages(subscriptionNameOrId, timeout).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

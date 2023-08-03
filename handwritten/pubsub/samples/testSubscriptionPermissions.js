@@ -36,28 +36,28 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function testSubscriptionPermissions(subscriptionNameOrId) {
   const permissionsToTest = [
-    'pubsub.subscriptions.consume',
-    'pubsub.subscriptions.update',
-  ];
+  'pubsub.subscriptions.consume',
+  'pubsub.subscriptions.update'];
+
 
   // Tests the IAM policy for the specified subscription
-  const [permissions] = await pubSubClient
-    .subscription(subscriptionNameOrId)
-    .iam.testPermissions(permissionsToTest);
+  const [permissions] = await pubSubClient.
+  subscription(subscriptionNameOrId).
+  iam.testPermissions(permissionsToTest);
 
   console.log('Tested permissions for subscription: %j', permissions);
 }
 // [END pubsub_test_subscription_permissions]
 
 function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
-  testSubscriptionPermissions(subscriptionNameOrId).catch(err => {
+  testSubscriptionPermissions(subscriptionNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

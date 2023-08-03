@@ -36,23 +36,23 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function getSubscriptionPolicy(subscriptionNameOrId) {
   // Retrieves the IAM policy for the subscription
-  const [policy] = await pubSubClient
-    .subscription(subscriptionNameOrId)
-    .iam.getPolicy();
+  const [policy] = await pubSubClient.
+  subscription(subscriptionNameOrId).
+  iam.getPolicy();
 
   console.log(`Policy for subscription: ${JSON.stringify(policy.bindings)}.`);
 }
 // [END pubsub_get_subscription_policy]
 
 function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
-  getSubscriptionPolicy(subscriptionNameOrId).catch(err => {
+  getSubscriptionPolicy(subscriptionNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

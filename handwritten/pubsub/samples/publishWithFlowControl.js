@@ -36,7 +36,7 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -46,8 +46,8 @@ async function publishWithFlowControl(topicNameOrId) {
   const options = {
     flowControlOptions: {
       maxOutstandingMessages: 50,
-      maxOutstandingBytes: 10 * 1024 * 1024, // 10 MB
-    },
+      maxOutstandingBytes: 10 * 1024 * 1024 // 10 MB
+    }
   };
 
   // Get a publisher.
@@ -58,7 +58,7 @@ async function publishWithFlowControl(topicNameOrId) {
   const flow = topic.flowControlled();
 
   // Publish messages in a fast loop.
-  const testMessage = {data: Buffer.from('test!')};
+  const testMessage = { data: Buffer.from('test!') };
   for (let i = 0; i < 1000; i++) {
     // You can also just `await` on `publish()` unconditionally, but if
     // you want to avoid pausing to the event loop on each iteration,
@@ -78,7 +78,7 @@ async function publishWithFlowControl(topicNameOrId) {
 // [END pubsub_publisher_flow_control]
 
 function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  publishWithFlowControl(topicNameOrId).catch(err => {
+  publishWithFlowControl(topicNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

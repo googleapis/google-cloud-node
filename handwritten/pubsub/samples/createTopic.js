@@ -36,7 +36,7 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -49,7 +49,7 @@ async function createTopic(topicNameOrId) {
 // [END pubsub_create_topic]
 
 async function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  createTopic(topicNameOrId).catch(err => {
+  createTopic(topicNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

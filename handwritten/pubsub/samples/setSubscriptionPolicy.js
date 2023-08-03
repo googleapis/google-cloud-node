@@ -36,7 +36,7 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -45,30 +45,30 @@ async function setSubscriptionPolicy(subscriptionNameOrId) {
   // The new IAM policy
   const newPolicy = {
     bindings: [
-      {
-        // Add a group as editors
-        role: 'roles/pubsub.editor',
-        members: ['group:cloud-logs@google.com'],
-      },
-      {
-        // Add all users as viewers
-        role: 'roles/pubsub.viewer',
-        members: ['allUsers'],
-      },
-    ],
+    {
+      // Add a group as editors
+      role: 'roles/pubsub.editor',
+      members: ['group:cloud-logs@google.com']
+    },
+    {
+      // Add all users as viewers
+      role: 'roles/pubsub.viewer',
+      members: ['allUsers']
+    }]
+
   };
 
   // Updates the IAM policy for the subscription
-  const [updatedPolicy] = await pubSubClient
-    .subscription(subscriptionNameOrId)
-    .iam.setPolicy(newPolicy);
+  const [updatedPolicy] = await pubSubClient.
+  subscription(subscriptionNameOrId).
+  iam.setPolicy(newPolicy);
 
   console.log('Updated policy for subscription: %j', updatedPolicy.bindings);
 }
 // [END pubsub_set_subscription_policy]
 
 function main(subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID') {
-  setSubscriptionPolicy(subscriptionNameOrId).catch(err => {
+  setSubscriptionPolicy(subscriptionNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

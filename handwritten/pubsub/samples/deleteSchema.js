@@ -36,7 +36,7 @@
 // const schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -50,7 +50,7 @@ async function deleteSchema(schemaNameOrId) {
 // [END pubsub_delete_schema]
 
 function main(schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID') {
-  deleteSchema(schemaNameOrId).catch(err => {
+  deleteSchema(schemaNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

@@ -37,13 +37,13 @@
 // const timeout = 60;
 
 // Imports the Google Cloud client library
-const {PubSub, Schema, Encodings} = require('@google-cloud/pubsub');
+const { PubSub, Schema, Encodings } = require("@google-cloud/pubsub");
 
 // Node FS library, to load definitions
-const fs = require('fs');
+const fs = require("fs");
 
 // And the Apache Avro library
-const avro = require('avro-js');
+const avro = require("avro-js");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -53,14 +53,14 @@ function listenForAvroRecords(subscriptionNameOrId, timeout) {
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Make an encoder using the official avro-js library.
-  const definition = fs
-    .readFileSync('system-test/fixtures/provinces.avsc')
-    .toString();
+  const definition = fs.
+  readFileSync('system-test/fixtures/provinces.avsc').
+  toString();
   const type = avro.parse(definition);
 
   // Create an event handler to handle messages
   let messageCount = 0;
-  const messageHandler = async message => {
+  const messageHandler = async (message) => {
     // "Ack" (acknowledge receipt of) the message
     message.ack();
 
@@ -97,9 +97,9 @@ function listenForAvroRecords(subscriptionNameOrId, timeout) {
 // [END pubsub_subscribe_avro_records]
 
 function main(
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 60
-) {
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+timeout = 60)
+{
   timeout = Number(timeout);
 
   try {

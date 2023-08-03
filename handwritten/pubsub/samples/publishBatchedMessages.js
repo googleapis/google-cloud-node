@@ -39,25 +39,25 @@
 // const maxWaitTime = 10;
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function publishBatchedMessages(
-  topicNameOrId,
-  data,
-  maxMessages,
-  maxWaitTime
-) {
+topicNameOrId,
+data,
+maxMessages,
+maxWaitTime)
+{
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
   const publishOptions = {
     batching: {
       maxMessages: maxMessages,
-      maxMilliseconds: maxWaitTime * 1000,
-    },
+      maxMilliseconds: maxWaitTime * 1000
+    }
   };
   const batchPublisher = pubSubClient.topic(topicNameOrId, publishOptions);
 
@@ -66,7 +66,7 @@ async function publishBatchedMessages(
     promises.push(
       (async () => {
         const messageId = await batchPublisher.publishMessage({
-          data: dataBuffer,
+          data: dataBuffer
         });
         console.log(`Message ${messageId} published.`);
       })()
@@ -77,15 +77,15 @@ async function publishBatchedMessages(
 // [END pubsub_publisher_batch_settings]
 
 function main(
-  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  data = JSON.stringify({foo: 'bar'}),
-  maxMessages = 10,
-  maxWaitTime = 10
-) {
+topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+data = JSON.stringify({ foo: 'bar' }),
+maxMessages = 10,
+maxWaitTime = 10)
+{
   maxMessages = Number(maxMessages);
   maxWaitTime = Number(maxWaitTime);
   publishBatchedMessages(topicNameOrId, data, maxMessages, maxWaitTime).catch(
-    err => {
+    (err) => {
       console.error(err.message);
       process.exitCode = 1;
     }

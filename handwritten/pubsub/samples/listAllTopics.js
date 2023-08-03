@@ -31,7 +31,7 @@
 
 // [START pubsub_list_topics]
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -40,12 +40,12 @@ async function listAllTopics() {
   // Lists all topics in the current project
   const [topics] = await pubSubClient.getTopics();
   console.log('Topics:');
-  topics.forEach(topic => console.log(topic.name));
+  topics.forEach((topic) => console.log(topic.name));
 }
 // [END pubsub_list_topics]
 
 function main() {
-  listAllTopics().catch(err => {
+  listAllTopics().catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

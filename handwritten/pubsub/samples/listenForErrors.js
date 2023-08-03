@@ -37,7 +37,7 @@
 // const timeout = 10;
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -47,7 +47,7 @@ function listenForErrors(subscriptionNameOrId, timeout) {
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Create an event handler to handle messages
-  const messageHandler = message => {
+  const messageHandler = (message) => {
     // Do something with the message
     console.log(`Message: ${message}`);
 
@@ -56,7 +56,7 @@ function listenForErrors(subscriptionNameOrId, timeout) {
   };
 
   // Create an event handler to handle errors
-  const errorHandler = error => {
+  const errorHandler = (error) => {
     // Do something with the error
     console.error(`ERROR: ${error}`);
     throw error;
@@ -75,9 +75,9 @@ function listenForErrors(subscriptionNameOrId, timeout) {
 // [END pubsub_subscriber_error_listener]
 
 function main(
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 10
-) {
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+timeout = 10)
+{
   timeout = Number(timeout);
   listenForErrors(subscriptionNameOrId, timeout);
 }

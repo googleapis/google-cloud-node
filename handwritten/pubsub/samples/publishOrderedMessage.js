@@ -41,16 +41,20 @@
 // const orderingKey = 'key1';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub({
   // Sending messages to the same region ensures they are received in order
   // even when multiple publishers are used.
-  apiEndpoint: 'us-east1-pubsub.googleapis.com:443',
+  apiEndpoint: 'us-east1-pubsub.googleapis.com:443'
 });
 
-async function publishOrderedMessage(topicNameOrId, data, orderingKey) {
+async function publishOrderedMessage(
+topicNameOrId,
+data,
+orderingKey)
+{
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
@@ -58,17 +62,17 @@ async function publishOrderedMessage(topicNameOrId, data, orderingKey) {
   // you want to receive in order, relative to each other.
   const message = {
     data: dataBuffer,
-    orderingKey: orderingKey,
+    orderingKey: orderingKey
   };
 
   const publishOptions = {
-    messageOrdering: true,
+    messageOrdering: true
   };
 
   // Publishes the message
-  const messageId = await pubSubClient
-    .topic(topicNameOrId, publishOptions)
-    .publishMessage(message);
+  const messageId = await pubSubClient.
+  topic(topicNameOrId, publishOptions).
+  publishMessage(message);
 
   console.log(`Message ${messageId} published.`);
 
@@ -77,11 +81,11 @@ async function publishOrderedMessage(topicNameOrId, data, orderingKey) {
 // [END pubsub_publish_with_ordering_keys]
 
 async function main(
-  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  data = JSON.stringify({foo: 'bar'}),
-  orderingKey = 'key1'
-) {
-  await publishOrderedMessage(topicNameOrId, data, orderingKey).catch(err => {
+topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+data = JSON.stringify({ foo: 'bar' }),
+orderingKey = 'key1')
+{
+  await publishOrderedMessage(topicNameOrId, data, orderingKey).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

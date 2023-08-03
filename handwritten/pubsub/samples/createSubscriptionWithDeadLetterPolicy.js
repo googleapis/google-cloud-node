@@ -38,26 +38,26 @@
 // const deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function createSubscriptionWithDeadLetterPolicy(
-  topicNameOrId,
-  subscriptionNameOrId,
-  deadLetterTopicNameOrId
-) {
+topicNameOrId,
+subscriptionNameOrId,
+deadLetterTopicNameOrId)
+{
   // Creates a new subscription
   const options = {
     deadLetterPolicy: {
       deadLetterTopic: pubSubClient.topic(deadLetterTopicNameOrId).name,
-      maxDeliveryAttempts: 10,
-    },
+      maxDeliveryAttempts: 10
+    }
   };
-  await pubSubClient
-    .topic(topicNameOrId)
-    .createSubscription(subscriptionNameOrId, options);
+  await pubSubClient.
+  topic(topicNameOrId).
+  createSubscription(subscriptionNameOrId, options);
   console.log(
     `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`
   );
@@ -68,15 +68,15 @@ async function createSubscriptionWithDeadLetterPolicy(
 // [END pubsub_dead_letter_create_subscription]
 
 function main(
-  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID'
-) {
+topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID')
+{
   createSubscriptionWithDeadLetterPolicy(
     topicNameOrId,
     subscriptionNameOrId,
     deadLetterTopicNameOrId
-  ).catch(err => {
+  ).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });

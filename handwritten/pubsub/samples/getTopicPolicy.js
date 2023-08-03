@@ -36,20 +36,22 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+const { PubSub } = require("@google-cloud/pubsub");
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function getTopicPolicy(topicNameOrId) {
   // Retrieves the IAM policy for the topic
-  const [policy] = await pubSubClient.topic(topicNameOrId).iam.getPolicy();
+  const [policy] = await pubSubClient.
+  topic(topicNameOrId).
+  iam.getPolicy();
   console.log('Policy for topic: %j.', policy.bindings);
 }
 // [END pubsub_get_topic_policy]
 
 function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  getTopicPolicy(topicNameOrId).catch(err => {
+  getTopicPolicy(topicNameOrId).catch((err) => {
     console.error(err.message);
     process.exitCode = 1;
   });
