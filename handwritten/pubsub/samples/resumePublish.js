@@ -39,21 +39,17 @@
 // const orderingKey = 'key1';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function resumePublish(
-topicNameOrId,
-data,
-orderingKey)
-{
+async function resumePublish(topicNameOrId, data, orderingKey) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
   const publishOptions = {
-    messageOrdering: true
+    messageOrdering: true,
   };
 
   // Publishes the message
@@ -61,7 +57,7 @@ orderingKey)
   try {
     const message = {
       data: dataBuffer,
-      orderingKey: orderingKey
+      orderingKey: orderingKey,
     };
     const messageId = await publisher.publishMessage(message);
     console.log(`Message ${messageId} published.`);
@@ -76,11 +72,11 @@ orderingKey)
 // [END pubsub_resume_publish_with_ordering_keys]
 
 async function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-data = JSON.stringify({ foo: 'bar' }),
-orderingKey = 'key1')
-{
-  return await resumePublish(topicNameOrId, data, orderingKey).catch((err) => {
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  data = JSON.stringify({foo: 'bar'}),
+  orderingKey = 'key1'
+) {
+  return await resumePublish(topicNameOrId, data, orderingKey).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

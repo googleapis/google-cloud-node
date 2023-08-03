@@ -36,19 +36,14 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub, Encodings } = require("@google-cloud/pubsub");
+const {PubSub, Encodings} = require('@google-cloud/pubsub');
 
 // And the Apache Avro library
-const avro = require("avro-js");
-const fs = require("fs");
+const avro = require('avro-js');
+const fs = require('fs');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
-
-
-
-
-
 
 async function publishAvroRecords(topicNameOrId) {
   // Get the topic metadata to learn about its schema encoding.
@@ -63,15 +58,15 @@ async function publishAvroRecords(topicNameOrId) {
   const schemaEncoding = topicSchemaMetadata.encoding;
 
   // Make an encoder using the official avro-js library.
-  const definition = fs.
-  readFileSync('system-test/fixtures/provinces.avsc').
-  toString();
+  const definition = fs
+    .readFileSync('system-test/fixtures/provinces.avsc')
+    .toString();
   const type = avro.parse(definition);
 
   // Encode the message.
   const province = {
     name: 'Ontario',
-    post_abbr: 'ON'
+    post_abbr: 'ON',
   };
   let dataBuffer;
   switch (schemaEncoding) {
@@ -85,6 +80,7 @@ async function publishAvroRecords(topicNameOrId) {
       console.log(`Unknown schema encoding: ${schemaEncoding}`);
       break;
   }
+
   if (!dataBuffer) {
     console.log(`Invalid encoding ${schemaEncoding} on the topic.`);
     return;
@@ -96,7 +92,7 @@ async function publishAvroRecords(topicNameOrId) {
 // [END pubsub_publish_avro_records]
 
 function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  publishAvroRecords(topicNameOrId).catch((err) => {
+  publishAvroRecords(topicNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

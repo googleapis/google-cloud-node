@@ -38,16 +38,16 @@
 // const encodingType = 'BINARY';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function createTopicWithSchema(
-topicNameOrId,
-schemaNameOrId,
-encodingType)
-{
+  topicNameOrId,
+  schemaNameOrId,
+  encodingType
+) {
   // Get the fully qualified schema name.
   const schema = pubSubClient.schema(schemaNameOrId);
   const fullName = await schema.getName();
@@ -58,20 +58,20 @@ encodingType)
     name: topicNameOrId,
     schemaSettings: {
       schema: fullName,
-      encoding: encodingType
-    }
+      encoding: encodingType,
+    },
   });
   console.log(`Topic ${topicNameOrId} created with schema ${fullName}.`);
 }
 // [END pubsub_create_topic_with_schema]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-encodingType = 'BINARY')
-{
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
+  encodingType = 'BINARY'
+) {
   createTopicWithSchema(topicNameOrId, schemaNameOrId, encodingType).catch(
-    (err) => {
+    err => {
       console.error(err.message);
       process.exitCode = 1;
     }

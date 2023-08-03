@@ -36,7 +36,7 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -45,29 +45,29 @@ async function setTopicPolicy(topicNameOrId) {
   // The new IAM policy
   const newPolicy = {
     bindings: [
-    {
-      // Add a group as editors
-      role: 'roles/pubsub.editor',
-      members: ['group:cloud-logs@google.com']
-    },
-    {
-      // Add all users as viewers
-      role: 'roles/pubsub.viewer',
-      members: ['allUsers']
-    }]
-
+      {
+        // Add a group as editors
+        role: 'roles/pubsub.editor',
+        members: ['group:cloud-logs@google.com'],
+      },
+      {
+        // Add all users as viewers
+        role: 'roles/pubsub.viewer',
+        members: ['allUsers'],
+      },
+    ],
   };
 
   // Updates the IAM policy for the topic
-  const [updatedPolicy] = await pubSubClient.
-  topic(topicNameOrId).
-  iam.setPolicy(newPolicy);
+  const [updatedPolicy] = await pubSubClient
+    .topic(topicNameOrId)
+    .iam.setPolicy(newPolicy);
   console.log('Updated policy for topic: %j', updatedPolicy.bindings);
 }
 // [END pubsub_set_topic_policy]
 
 function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  setTopicPolicy(topicNameOrId).catch((err) => {
+  setTopicPolicy(topicNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

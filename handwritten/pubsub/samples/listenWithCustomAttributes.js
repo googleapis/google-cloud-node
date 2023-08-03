@@ -37,23 +37,20 @@
 // const timeout = 60;
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function listenWithCustomAttributes(
-subscriptionNameOrId,
-timeout)
-{
+async function listenWithCustomAttributes(subscriptionNameOrId, timeout) {
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Create an event handler to handle messages
-  const messageHandler = (message) => {
+  const messageHandler = message => {
     console.log(
       `Received message: id ${message.id}, data ${
-      message.data
+        message.data
       }, attributes: ${JSON.stringify(message.attributes)}`
     );
 
@@ -70,11 +67,11 @@ timeout)
 // [END pubsub_subscriber_async_pull_custom_attributes]
 
 async function main(
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-timeout = 60)
-{
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   timeout = Number(timeout);
-  listenWithCustomAttributes(subscriptionNameOrId, timeout).catch((err) => {
+  listenWithCustomAttributes(subscriptionNameOrId, timeout).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

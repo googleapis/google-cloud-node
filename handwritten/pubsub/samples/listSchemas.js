@@ -32,7 +32,7 @@
 // [START pubsub_list_schemas]
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -46,7 +46,7 @@ async function listSchemas() {
 // [END pubsub_list_schemas]
 
 function main() {
-  listSchemas().catch((err) => {
+  listSchemas().catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

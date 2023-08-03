@@ -37,35 +37,32 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function createPushSubscription(
-topicNameOrId,
-subscriptionNameOrId)
-{
+async function createPushSubscription(topicNameOrId, subscriptionNameOrId) {
   const options = {
     pushConfig: {
       // Set to an HTTPS endpoint of your choice. If necessary, register
       // (authorize) the domain on which the server is hosted.
-      pushEndpoint: `https://${pubSubClient.projectId}.appspot.com/push`
-    }
+      pushEndpoint: `https://${pubSubClient.projectId}.appspot.com/push`,
+    },
   };
 
-  await pubSubClient.
-  topic(topicNameOrId).
-  createSubscription(subscriptionNameOrId, options);
+  await pubSubClient
+    .topic(topicNameOrId)
+    .createSubscription(subscriptionNameOrId, options);
   console.log(`Subscription ${subscriptionNameOrId} created.`);
 }
 // [END pubsub_create_push_subscription]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
-{
-  createPushSubscription(topicNameOrId, subscriptionNameOrId).catch((err) => {
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+) {
+  createPushSubscription(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

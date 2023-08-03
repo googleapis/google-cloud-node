@@ -38,7 +38,7 @@
 // const timeout = 60;
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -49,7 +49,7 @@ function listenForMessages(subscriptionNameOrId, timeout) {
 
   // Create an event handler to handle messages
   let messageCount = 0;
-  const messageHandler = (message) => {
+  const messageHandler = message => {
     console.log(`Received message ${message.id}:`);
     console.log(`\tData: ${message.data}`);
     console.log(`\tAttributes: ${message.attributes}`);
@@ -72,9 +72,9 @@ function listenForMessages(subscriptionNameOrId, timeout) {
 // [END pubsub_quickstart_subscriber]
 
 function main(
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-timeout = 60)
-{
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   timeout = Number(timeout);
   listenForMessages(subscriptionNameOrId, timeout);
 }

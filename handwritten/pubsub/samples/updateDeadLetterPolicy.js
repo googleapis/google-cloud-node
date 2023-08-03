@@ -37,36 +37,33 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function updateDeadLetterPolicy(
-topicNameOrId,
-subscriptionNameOrId)
-{
+async function updateDeadLetterPolicy(topicNameOrId, subscriptionNameOrId) {
   const metadata = {
     deadLetterPolicy: {
       deadLetterTopic: pubSubClient.topic(topicNameOrId).name,
-      maxDeliveryAttempts: 15
-    }
+      maxDeliveryAttempts: 15,
+    },
   };
 
-  await pubSubClient.
-  topic(topicNameOrId).
-  subscription(subscriptionNameOrId).
-  setMetadata(metadata);
+  await pubSubClient
+    .topic(topicNameOrId)
+    .subscription(subscriptionNameOrId)
+    .setMetadata(metadata);
 
   console.log('Max delivery attempts updated successfully.');
 }
 // [END pubsub_dead_letter_update_subscription]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
-{
-  updateDeadLetterPolicy(topicNameOrId, subscriptionNameOrId).catch((err) => {
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+) {
+  updateDeadLetterPolicy(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

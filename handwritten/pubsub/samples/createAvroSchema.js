@@ -37,9 +37,9 @@
 // const avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json';
 
 // Imports the Google Cloud client library
-const { PubSub, SchemaTypes } = require("@google-cloud/pubsub");
+const {PubSub, SchemaTypes} = require('@google-cloud/pubsub');
 
-const fs = require("fs");
+const fs = require('fs');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -58,10 +58,10 @@ async function createAvroSchema(schemaNameOrId, avscFile) {
 // [END pubsub_create_avro_schema]
 
 function main(
-schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json')
-{
-  createAvroSchema(schemaNameOrId, avscFile).catch((err) => {
+  schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
+  avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json'
+) {
+  createAvroSchema(schemaNameOrId, avscFile).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

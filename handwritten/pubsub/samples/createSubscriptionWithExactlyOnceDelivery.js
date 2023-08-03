@@ -37,24 +37,25 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function createSubscriptionWithExactlyOnceDelivery(
-topicNameOrId,
-subscriptionNameOrId)
-{
+  topicNameOrId,
+  subscriptionNameOrId
+) {
   // Creates a new subscription
-  await pubSubClient.
-  topic(topicNameOrId).
-  createSubscription(subscriptionNameOrId, {
-    enableExactlyOnceDelivery: true
-  });
+  await pubSubClient
+    .topic(topicNameOrId)
+    .createSubscription(subscriptionNameOrId, {
+      enableExactlyOnceDelivery: true,
+    });
   console.log(
     `Created subscription ${subscriptionNameOrId} with exactly-once delivery.`
   );
+
   console.log(
     'To process messages, remember to check the return value of ackWithResponse().'
   );
@@ -62,13 +63,13 @@ subscriptionNameOrId)
 // [END pubsub_create_subscription_with_exactly_once_delivery]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
-{
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+) {
   createSubscriptionWithExactlyOnceDelivery(
     topicNameOrId,
     subscriptionNameOrId
-  ).catch((err) => {
+  ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

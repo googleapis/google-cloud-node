@@ -36,18 +36,13 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub, Encodings } = require("@google-cloud/pubsub");
+const {PubSub, Encodings} = require('@google-cloud/pubsub');
 
 // And the protobufjs library
-const protobuf = require("protobufjs");
+const protobuf = require('protobufjs');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
-
-
-
-
-
 
 async function publishProtobufMessages(topicNameOrId) {
   // Get the topic metadata to learn about its schema.
@@ -64,7 +59,7 @@ async function publishProtobufMessages(topicNameOrId) {
   // Encode the message.
   const province = {
     name: 'Ontario',
-    postAbbr: 'ON'
+    postAbbr: 'ON',
   };
 
   // Make an encoder using the protobufjs library.
@@ -87,6 +82,7 @@ async function publishProtobufMessages(topicNameOrId) {
       console.log(`Unknown schema encoding: ${schemaEncoding}`);
       break;
   }
+
   if (!dataBuffer) {
     console.log(`Invalid encoding ${schemaEncoding} on the topic.`);
     return;
@@ -98,7 +94,7 @@ async function publishProtobufMessages(topicNameOrId) {
 // [END pubsub_publish_proto_messages]
 
 function main(topicName = 'YOUR_TOPIC_NAME') {
-  publishProtobufMessages(topicName).catch((err) => {
+  publishProtobufMessages(topicName).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

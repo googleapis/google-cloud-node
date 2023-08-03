@@ -36,29 +36,29 @@
 // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function testTopicPermissions(topicNameOrId) {
   const permissionsToTest = [
-  'pubsub.topics.attachSubscription',
-  'pubsub.topics.publish',
-  'pubsub.topics.update'];
-
+    'pubsub.topics.attachSubscription',
+    'pubsub.topics.publish',
+    'pubsub.topics.update',
+  ];
 
   // Tests the IAM policy for the specified topic
-  const [permissions] = await pubSubClient.
-  topic(topicNameOrId).
-  iam.testPermissions(permissionsToTest);
+  const [permissions] = await pubSubClient
+    .topic(topicNameOrId)
+    .iam.testPermissions(permissionsToTest);
 
   console.log('Tested permissions for topic: %j', permissions);
 }
 // [END pubsub_test_topic_permissions]
 
 function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
-  testTopicPermissions(topicNameOrId).catch((err) => {
+  testTopicPermissions(topicNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

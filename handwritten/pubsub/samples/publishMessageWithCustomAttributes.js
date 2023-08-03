@@ -37,39 +37,32 @@
 // const data = JSON.stringify({foo: 'bar'});
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-
-
-
-
-async function publishMessageWithCustomAttributes(
-topicNameOrId,
-data)
-{
+async function publishMessageWithCustomAttributes(topicNameOrId, data) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
   // Add two custom attributes, origin and username, to the message
   const customAttributes = {
     origin: 'nodejs-sample',
-    username: 'gcp'
+    username: 'gcp',
   };
 
-  const messageId = await pubSubClient.
-  topic(topicNameOrId).
-  publishMessage({ data: dataBuffer, attributes: customAttributes });
+  const messageId = await pubSubClient
+    .topic(topicNameOrId)
+    .publishMessage({data: dataBuffer, attributes: customAttributes});
   console.log(`Message ${messageId} published.`);
 }
 // [END pubsub_publish_custom_attributes]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-data = JSON.stringify({ foo: 'bar' }))
-{
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  data = JSON.stringify({foo: 'bar'})
+) {
   publishMessageWithCustomAttributes(topicNameOrId, data).catch(console.error);
 }
 

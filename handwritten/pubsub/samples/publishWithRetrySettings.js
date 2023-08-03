@@ -39,18 +39,14 @@
 
 // Imports the Google Cloud client library. v1 is for the lower level
 // proto access.
-const { v1 } = require("@google-cloud/pubsub");
+const {v1} = require('@google-cloud/pubsub');
 
 // Creates a publisher client.
 const publisherClient = new v1.PublisherClient({
-
   // optional auth parameters
 });
-async function publishWithRetrySettings(
-projectId,
-topicNameOrId,
-data)
-{
+
+async function publishWithRetrySettings(projectId, topicNameOrId, data) {
   const formattedTopic = publisherClient.projectTopicPath(
     projectId,
     topicNameOrId
@@ -59,14 +55,14 @@ data)
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
   const messagesElement = {
-    data: dataBuffer
+    data: dataBuffer,
   };
   const messages = [messagesElement];
 
   // Build the request
   const request = {
     topic: formattedTopic,
-    messages: messages
+    messages: messages,
   };
 
   // Retry settings control how the publisher handles retryable failures. Default values are shown.
@@ -74,13 +70,13 @@ data)
   // The `backoffSettings` object lets you specify the behaviour of retries over time.
   const retrySettings = {
     retryCodes: [
-    10, // 'ABORTED'
-    1, // 'CANCELLED',
-    4, // 'DEADLINE_EXCEEDED'
-    13, // 'INTERNAL'
-    8, // 'RESOURCE_EXHAUSTED'
-    14, // 'UNAVAILABLE'
-    2 // 'UNKNOWN'
+      10, // 'ABORTED'
+      1, // 'CANCELLED',
+      4, // 'DEADLINE_EXCEEDED'
+      13, // 'INTERNAL'
+      8, // 'RESOURCE_EXHAUSTED'
+      14, // 'UNAVAILABLE'
+      2, // 'UNKNOWN'
     ],
     backoffSettings: {
       // The initial delay time, in milliseconds, between the completion
@@ -101,23 +97,23 @@ data)
       maxRpcTimeoutMillis: 600000,
       // The total time, in milliseconds, starting from when the initial request is sent,
       // after which an error will be returned, regardless of the retrying attempts made meanwhile.
-      totalTimeoutMillis: 600000
-    }
+      totalTimeoutMillis: 600000,
+    },
   };
 
   const [response] = await publisherClient.publish(request, {
-    retry: retrySettings
+    retry: retrySettings,
   });
   console.log(`Message ${response.messageIds} published.`);
 }
 // [END pubsub_publisher_retry_settings]
 
 function main(
-projectId = 'YOUR_PROJECT_ID',
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-data = JSON.stringify({ foo: 'bar' }))
-{
-  publishWithRetrySettings(projectId, topicNameOrId, data).catch((err) => {
+  projectId = 'YOUR_PROJECT_ID',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  data = JSON.stringify({foo: 'bar'})
+) {
+  publishWithRetrySettings(projectId, topicNameOrId, data).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

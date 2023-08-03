@@ -40,20 +40,20 @@
 // const timeout = 10;
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function subscribeWithFlowControlSettings(
-subscriptionNameOrId,
-maxInProgress,
-timeout)
-{
+  subscriptionNameOrId,
+  maxInProgress,
+  timeout
+) {
   const subscriberOptions = {
     flowControl: {
-      maxMessages: maxInProgress
-    }
+      maxMessages: maxInProgress,
+    },
   };
 
   // References an existing subscription.
@@ -67,7 +67,7 @@ timeout)
     `Subscriber to subscription ${subscription.name} is ready to receive messages at a controlled volume of ${maxInProgress} messages.`
   );
 
-  const messageHandler = (message) => {
+  const messageHandler = message => {
     console.log(`Received message: ${message.id}`);
     console.log(`\tData: ${message.data}`);
     console.log(`\tAttributes: ${message.attributes}`);
@@ -86,10 +86,10 @@ timeout)
 // [END pubsub_subscriber_flow_settings]
 
 function main(
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-maxInProgress = 1,
-timeout = 10)
-{
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  maxInProgress = 1,
+  timeout = 10
+) {
   maxInProgress = Number(maxInProgress);
   timeout = Number(timeout);
 
@@ -97,7 +97,7 @@ timeout = 10)
     subscriptionNameOrId,
     maxInProgress,
     timeout
-  ).catch((err) => {
+  ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

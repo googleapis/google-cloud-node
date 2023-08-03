@@ -38,41 +38,41 @@
 // const bigqueryTableId = 'YOUR_TABLE_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function createBigQuerySubscription(
-topicNameOrId,
-subscriptionNameOrId,
-bigqueryTableId)
-{
+  topicNameOrId,
+  subscriptionNameOrId,
+  bigqueryTableId
+) {
   const options = {
     bigqueryConfig: {
       table: bigqueryTableId,
-      writeMetadata: true
-    }
+      writeMetadata: true,
+    },
   };
 
-  await pubSubClient.
-  topic(topicNameOrId).
-  createSubscription(subscriptionNameOrId, options);
+  await pubSubClient
+    .topic(topicNameOrId)
+    .createSubscription(subscriptionNameOrId, options);
 
   console.log(`Subscription ${subscriptionNameOrId} created.`);
 }
 // [END pubsub_create_bigquery_subscription]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-bigqueryTableId = 'YOUR_TABLE_ID')
-{
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  bigqueryTableId = 'YOUR_TABLE_ID'
+) {
   createBigQuerySubscription(
     topicNameOrId,
     subscriptionNameOrId,
     bigqueryTableId
-  ).catch((err) => {
+  ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

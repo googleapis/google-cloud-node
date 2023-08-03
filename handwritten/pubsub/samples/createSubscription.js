@@ -37,28 +37,25 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require('@google-cloud/pubsub');
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function createSubscription(
-topicNameOrId,
-subscriptionNameOrId)
-{
+async function createSubscription(topicNameOrId, subscriptionNameOrId) {
   // Creates a new subscription
-  await pubSubClient.
-  topic(topicNameOrId).
-  createSubscription(subscriptionNameOrId);
+  await pubSubClient
+    .topic(topicNameOrId)
+    .createSubscription(subscriptionNameOrId);
   console.log(`Subscription ${subscriptionNameOrId} created.`);
 }
 // [END pubsub_create_pull_subscription]
 
 function main(
-topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID')
-{
-  createSubscription(topicNameOrId, subscriptionNameOrId).catch((err) => {
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+) {
+  createSubscription(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

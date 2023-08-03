@@ -36,7 +36,7 @@
 // const subscriptionNameOrId = 'YOUR_EXISTING_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
@@ -60,7 +60,7 @@ async function detachSubscription(subscriptionNameOrId) {
 // [END pubsub_detach_subscription]
 
 function main(subscriptionNameOrId = 'YOUR_EXISTING_SUBSCRIPTION_NAME_OR_ID') {
-  detachSubscription(subscriptionNameOrId).catch((err) => {
+  detachSubscription(subscriptionNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

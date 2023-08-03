@@ -36,21 +36,21 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const { PubSub } = require("@google-cloud/pubsub");
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 async function listenForMessagesWithExactlyOnceDelivery(
-subscriptionNameOrId,
-timeout)
-{
+  subscriptionNameOrId,
+  timeout
+) {
   // References an existing subscription
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Create an event handler to handle messages
   let messageCount = 0;
-  const messageHandler = async (message) => {
+  const messageHandler = async message => {
     console.log(`Received message ${message.id}:`);
     console.log(`\tData: ${message.data}`);
     console.log(`\tAttributes: ${message.attributes}`);
@@ -88,13 +88,13 @@ timeout)
 // [END pubsub_subscriber_exactly_once]
 
 function main(
-subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-timeout = 60)
-{
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  timeout = 60
+) {
   listenForMessagesWithExactlyOnceDelivery(
     subscriptionNameOrId,
     Number(timeout)
-  ).catch((err) => {
+  ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });
