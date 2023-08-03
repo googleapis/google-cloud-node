@@ -481,7 +481,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFulfillment(
@@ -527,7 +527,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -574,7 +574,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFulfillment(
@@ -620,7 +620,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
