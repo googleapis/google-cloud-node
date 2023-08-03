@@ -653,20 +653,18 @@ describe('ServiceObject', () => {
 
   describe('getMetadata', () => {
     it('should make the correct request', done => {
-      sandbox
-        .stub(ServiceObject.prototype, 'request')
-        .callsFake(function (
-          this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
-          reqOpts,
-          callback
-        ) {
-          const opts = reqOpts as r.OptionsWithUri;
-          const cb = callback as BodyResponseCallback;
-          assert.strictEqual(this, serviceObject);
-          assert.strictEqual(opts.uri, '');
-          done();
-          cb(null, null, {} as r.Response);
-        });
+      sandbox.stub(ServiceObject.prototype, 'request').callsFake(function (
+        this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
+        reqOpts,
+        callback
+      ) {
+        const opts = reqOpts as r.OptionsWithUri;
+        const cb = callback as BodyResponseCallback;
+        assert.strictEqual(this, serviceObject);
+        assert.strictEqual(opts.uri, '');
+        done();
+        cb(null, null, {} as r.Response);
+      });
       serviceObject.getMetadata(() => {});
     });
 
@@ -881,22 +879,20 @@ describe('ServiceObject', () => {
   describe('setMetadata', () => {
     it('should make the correct request', done => {
       const metadata = {metadataProperty: true};
-      sandbox
-        .stub(ServiceObject.prototype, 'request')
-        .callsFake(function (
-          this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
-          reqOpts,
-          callback
-        ) {
-          const opts = reqOpts as r.OptionsWithUri;
-          const cb = callback as BodyResponseCallback;
-          assert.strictEqual(this, serviceObject);
-          assert.strictEqual(opts.method, 'PATCH');
-          assert.strictEqual(opts.uri, '');
-          assert.deepStrictEqual(opts.json, metadata);
-          done();
-          cb(null, null, {} as r.Response);
-        });
+      sandbox.stub(ServiceObject.prototype, 'request').callsFake(function (
+        this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
+        reqOpts,
+        callback
+      ) {
+        const opts = reqOpts as r.OptionsWithUri;
+        const cb = callback as BodyResponseCallback;
+        assert.strictEqual(this, serviceObject);
+        assert.strictEqual(opts.method, 'PATCH');
+        assert.strictEqual(opts.uri, '');
+        assert.deepStrictEqual(opts.json, metadata);
+        done();
+        cb(null, null, {} as r.Response);
+      });
       serviceObject.setMetadata(metadata, () => {});
     });
 

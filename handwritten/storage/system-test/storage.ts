@@ -1740,7 +1740,7 @@ describe('storage', () => {
          */
         type requesterPaysFunction<
           T = {} | typeof USER_PROJECT_OPTIONS,
-          R = {} | void
+          R = {} | void,
         > = (options: T) => Promise<R>;
 
         /**
