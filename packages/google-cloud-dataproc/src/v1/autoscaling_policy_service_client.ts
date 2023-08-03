@@ -401,7 +401,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAutoscalingPolicy(
@@ -450,7 +450,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -504,7 +504,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAutoscalingPolicy(
@@ -553,7 +553,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -610,7 +610,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
       protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAutoscalingPolicy(
@@ -656,7 +656,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
       protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -713,7 +713,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAutoscalingPolicy(
@@ -762,7 +762,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,7 +829,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
       protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse,
     ]
   >;
   listAutoscalingPolicies(
@@ -875,7 +875,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
       protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse,
     ]
   > | void {
     request = request || {};
