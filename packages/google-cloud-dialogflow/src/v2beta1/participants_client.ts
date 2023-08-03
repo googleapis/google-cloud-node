@@ -527,7 +527,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateParticipantRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createParticipant(
@@ -576,7 +576,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateParticipantRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -622,7 +622,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IParticipant,
       protos.google.cloud.dialogflow.v2beta1.IGetParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getParticipant(
@@ -668,7 +668,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IParticipant,
       protos.google.cloud.dialogflow.v2beta1.IGetParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -717,7 +717,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateParticipantRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateParticipant(
@@ -766,7 +766,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateParticipantRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -847,12 +847,12 @@ export class ParticipantsClient {
    *   participant.
    *
    *   Given two messages under the same participant:
-   *    - If send time are different regardless of whether the content of the
-   *    messages are exactly the same, the conversation will regard them as
-   *    two distinct messages sent by the participant.
-   *    - If send time is the same regardless of whether the content of the
-   *    messages are exactly the same, the conversation will regard them as
-   *    same message, and ignore the message received later.
+   *   * If send time are different regardless of whether the content of the
+   *   messages are exactly the same, the conversation will regard them as
+   *   two distinct messages sent by the participant.
+   *   * If send time is the same regardless of whether the content of the
+   *   messages are exactly the same, the conversation will regard them as
+   *   same message, and ignore the message received later.
    *
    *   If the value is not provided, a new request will always be regarded as a
    *   new message without any de-duplication.
@@ -876,7 +876,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentResponse,
       protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeContent(
@@ -922,7 +922,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentResponse,
       protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -992,7 +992,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ISuggestArticlesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestArticles(
@@ -1041,7 +1041,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ISuggestArticlesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1103,7 +1103,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ISuggestFaqAnswersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestFaqAnswers(
@@ -1152,7 +1152,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ISuggestFaqAnswersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1216,7 +1216,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ISuggestSmartRepliesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestSmartReplies(
@@ -1265,7 +1265,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ISuggestSmartRepliesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1339,7 +1339,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ICompileSuggestionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   compileSuggestion(
@@ -1388,7 +1388,7 @@ export class ParticipantsClient {
         | protos.google.cloud.dialogflow.v2beta1.ICompileSuggestionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1481,7 +1481,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IParticipant[],
       protos.google.cloud.dialogflow.v2beta1.IListParticipantsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListParticipantsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListParticipantsResponse,
     ]
   >;
   listParticipants(
@@ -1527,7 +1527,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IParticipant[],
       protos.google.cloud.dialogflow.v2beta1.IListParticipantsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListParticipantsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListParticipantsResponse,
     ]
   > | void {
     request = request || {};
@@ -1705,7 +1705,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.ISuggestion[],
       protos.google.cloud.dialogflow.v2beta1.IListSuggestionsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListSuggestionsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListSuggestionsResponse,
     ]
   >;
   listSuggestions(
@@ -1751,7 +1751,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.ISuggestion[],
       protos.google.cloud.dialogflow.v2beta1.IListSuggestionsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListSuggestionsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListSuggestionsResponse,
     ]
   > | void {
     request = request || {};

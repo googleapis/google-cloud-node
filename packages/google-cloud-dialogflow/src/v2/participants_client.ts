@@ -534,7 +534,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant,
       protos.google.cloud.dialogflow.v2.ICreateParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createParticipant(
@@ -580,7 +580,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant,
       protos.google.cloud.dialogflow.v2.ICreateParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -626,7 +626,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant,
       protos.google.cloud.dialogflow.v2.IGetParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getParticipant(
@@ -672,7 +672,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant,
       protos.google.cloud.dialogflow.v2.IGetParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -718,7 +718,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant,
       protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateParticipant(
@@ -764,7 +764,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant,
       protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -840,7 +840,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
       protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeContent(
@@ -886,7 +886,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
       protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -946,7 +946,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.ISuggestArticlesResponse,
       protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestArticles(
@@ -992,7 +992,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.ISuggestArticlesResponse,
       protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1051,7 +1051,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersResponse,
       protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestFaqAnswers(
@@ -1097,7 +1097,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersResponse,
       protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1158,7 +1158,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
       protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestSmartReplies(
@@ -1204,7 +1204,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesResponse,
       protos.google.cloud.dialogflow.v2.ISuggestSmartRepliesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1292,7 +1292,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant[],
       protos.google.cloud.dialogflow.v2.IListParticipantsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListParticipantsResponse
+      protos.google.cloud.dialogflow.v2.IListParticipantsResponse,
     ]
   >;
   listParticipants(
@@ -1338,7 +1338,7 @@ export class ParticipantsClient {
     [
       protos.google.cloud.dialogflow.v2.IParticipant[],
       protos.google.cloud.dialogflow.v2.IListParticipantsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListParticipantsResponse
+      protos.google.cloud.dialogflow.v2.IListParticipantsResponse,
     ]
   > | void {
     request = request || {};

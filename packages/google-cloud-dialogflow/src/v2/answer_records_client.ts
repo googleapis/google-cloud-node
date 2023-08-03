@@ -502,7 +502,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord,
       protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAnswerRecord(
@@ -548,7 +548,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord,
       protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -615,7 +615,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord[],
       protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse
+      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse,
     ]
   >;
   listAnswerRecords(
@@ -661,7 +661,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord[],
       protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse
+      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse,
     ]
   > | void {
     request = request || {};
