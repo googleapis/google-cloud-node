@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/nodejs-storage/compare/v6.12.0...v7.0.0) (2023-08-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* Make node 14 the minimum supported version ([#2244](https://github.com/googleapis/nodejs-storage/issues/2244))
+
+### Features
+
+* Make node 14 the minimum supported version ([#2244](https://github.com/googleapis/nodejs-storage/issues/2244)) ([f48dcd2](https://github.com/googleapis/nodejs-storage/commit/f48dcd2d00081aea8990f35b68a91248f3862abe))
+
 ## [6.12.0](https://github.com/googleapis/nodejs-storage/compare/v6.11.0...v6.12.0) (2023-07-13)
 
 
