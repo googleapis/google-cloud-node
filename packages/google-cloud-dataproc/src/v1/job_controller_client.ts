@@ -556,7 +556,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitJob(
@@ -594,7 +594,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -644,7 +644,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -682,7 +682,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -742,7 +742,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -780,7 +780,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -835,7 +835,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelJob(
@@ -873,7 +873,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -925,7 +925,7 @@ export class JobControllerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -963,7 +963,7 @@ export class JobControllerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1033,7 +1033,7 @@ export class JobControllerClient {
         protos.google.cloud.dataproc.v1.IJobMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitJobAsOperation(
@@ -1086,7 +1086,7 @@ export class JobControllerClient {
         protos.google.cloud.dataproc.v1.IJobMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1199,7 +1199,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob[],
       protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protos.google.cloud.dataproc.v1.IListJobsResponse
+      protos.google.cloud.dataproc.v1.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -1237,7 +1237,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob[],
       protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protos.google.cloud.dataproc.v1.IListJobsResponse
+      protos.google.cloud.dataproc.v1.IListJobsResponse,
     ]
   > | void {
     request = request || {};

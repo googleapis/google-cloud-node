@@ -543,7 +543,7 @@ export class BatchControllerClient {
     [
       protos.google.cloud.dataproc.v1.IBatch,
       protos.google.cloud.dataproc.v1.IGetBatchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBatch(
@@ -581,7 +581,7 @@ export class BatchControllerClient {
     [
       protos.google.cloud.dataproc.v1.IBatch,
       protos.google.cloud.dataproc.v1.IGetBatchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -628,7 +628,7 @@ export class BatchControllerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataproc.v1.IDeleteBatchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBatch(
@@ -668,7 +668,7 @@ export class BatchControllerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataproc.v1.IDeleteBatchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -738,7 +738,7 @@ export class BatchControllerClient {
         protos.google.cloud.dataproc.v1.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBatch(
@@ -791,7 +791,7 @@ export class BatchControllerClient {
         protos.google.cloud.dataproc.v1.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -899,7 +899,7 @@ export class BatchControllerClient {
     [
       protos.google.cloud.dataproc.v1.IBatch[],
       protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
-      protos.google.cloud.dataproc.v1.IListBatchesResponse
+      protos.google.cloud.dataproc.v1.IListBatchesResponse,
     ]
   >;
   listBatches(
@@ -939,7 +939,7 @@ export class BatchControllerClient {
     [
       protos.google.cloud.dataproc.v1.IBatch[],
       protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
-      protos.google.cloud.dataproc.v1.IListBatchesResponse
+      protos.google.cloud.dataproc.v1.IListBatchesResponse,
     ]
   > | void {
     request = request || {};
