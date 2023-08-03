@@ -3007,6 +3007,12 @@ export class DataCatalogClient {
  *   `default`.
  *
  *   If this parameter is omitted, it defaults to the descending `relevance`.
+ * @param {boolean} [request.adminSearch]
+ *   Optional. If set, uses searchAll permission granted on organizations from
+ *   `include_org_ids` and projects from `include_project_ids` instead of the
+ *   fine grained per resource permissions when filtering the search results.
+ *   The only allowed `order_by` criteria for admin_search mode is `default`.
+ *   Using this flags guarantees a full recall of the search results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -3126,6 +3132,12 @@ export class DataCatalogClient {
  *   `default`.
  *
  *   If this parameter is omitted, it defaults to the descending `relevance`.
+ * @param {boolean} [request.adminSearch]
+ *   Optional. If set, uses searchAll permission granted on organizations from
+ *   `include_org_ids` and projects from `include_project_ids` instead of the
+ *   fine grained per resource permissions when filtering the search results.
+ *   The only allowed `order_by` criteria for admin_search mode is `default`.
+ *   Using this flags guarantees a full recall of the search results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -3212,6 +3224,12 @@ export class DataCatalogClient {
  *   `default`.
  *
  *   If this parameter is omitted, it defaults to the descending `relevance`.
+ * @param {boolean} [request.adminSearch]
+ *   Optional. If set, uses searchAll permission granted on organizations from
+ *   `include_org_ids` and projects from `include_project_ids` instead of the
+ *   fine grained per resource permissions when filtering the search results.
+ *   The only allowed `order_by` criteria for admin_search mode is `default`.
+ *   Using this flags guarantees a full recall of the search results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
