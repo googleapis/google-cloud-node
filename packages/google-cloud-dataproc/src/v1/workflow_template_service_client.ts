@@ -581,7 +581,7 @@ export class WorkflowTemplateServiceClient {
         | protos.google.cloud.dataproc.v1.ICreateWorkflowTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkflowTemplate(
@@ -630,7 +630,7 @@ export class WorkflowTemplateServiceClient {
         | protos.google.cloud.dataproc.v1.ICreateWorkflowTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -695,7 +695,7 @@ export class WorkflowTemplateServiceClient {
     [
       protos.google.cloud.dataproc.v1.IWorkflowTemplate,
       protos.google.cloud.dataproc.v1.IGetWorkflowTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkflowTemplate(
@@ -741,7 +741,7 @@ export class WorkflowTemplateServiceClient {
     [
       protos.google.cloud.dataproc.v1.IWorkflowTemplate,
       protos.google.cloud.dataproc.v1.IGetWorkflowTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,7 +791,7 @@ export class WorkflowTemplateServiceClient {
         | protos.google.cloud.dataproc.v1.IUpdateWorkflowTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWorkflowTemplate(
@@ -840,7 +840,7 @@ export class WorkflowTemplateServiceClient {
         | protos.google.cloud.dataproc.v1.IUpdateWorkflowTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,7 +904,7 @@ export class WorkflowTemplateServiceClient {
         | protos.google.cloud.dataproc.v1.IDeleteWorkflowTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkflowTemplate(
@@ -953,7 +953,7 @@ export class WorkflowTemplateServiceClient {
         | protos.google.cloud.dataproc.v1.IDeleteWorkflowTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1055,7 +1055,7 @@ export class WorkflowTemplateServiceClient {
         protos.google.cloud.dataproc.v1.IWorkflowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   instantiateWorkflowTemplate(
@@ -1108,7 +1108,7 @@ export class WorkflowTemplateServiceClient {
         protos.google.cloud.dataproc.v1.IWorkflowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1240,7 +1240,7 @@ export class WorkflowTemplateServiceClient {
         protos.google.cloud.dataproc.v1.IWorkflowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   instantiateInlineWorkflowTemplate(
@@ -1293,7 +1293,7 @@ export class WorkflowTemplateServiceClient {
         protos.google.cloud.dataproc.v1.IWorkflowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1392,7 +1392,7 @@ export class WorkflowTemplateServiceClient {
     [
       protos.google.cloud.dataproc.v1.IWorkflowTemplate[],
       protos.google.cloud.dataproc.v1.IListWorkflowTemplatesRequest | null,
-      protos.google.cloud.dataproc.v1.IListWorkflowTemplatesResponse
+      protos.google.cloud.dataproc.v1.IListWorkflowTemplatesResponse,
     ]
   >;
   listWorkflowTemplates(
@@ -1438,7 +1438,7 @@ export class WorkflowTemplateServiceClient {
     [
       protos.google.cloud.dataproc.v1.IWorkflowTemplate[],
       protos.google.cloud.dataproc.v1.IListWorkflowTemplatesRequest | null,
-      protos.google.cloud.dataproc.v1.IListWorkflowTemplatesResponse
+      protos.google.cloud.dataproc.v1.IListWorkflowTemplatesResponse,
     ]
   > | void {
     request = request || {};
