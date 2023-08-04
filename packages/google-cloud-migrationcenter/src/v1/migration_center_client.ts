@@ -773,9 +773,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.Asset | Asset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_asset.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetAsset_async
@@ -787,7 +786,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAsset(
@@ -833,7 +832,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -885,9 +884,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.Asset | Asset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_asset.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateAsset_async
@@ -899,7 +897,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAsset(
@@ -945,7 +943,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -979,9 +977,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse | BatchUpdateAssetsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse|BatchUpdateAssetsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.batch_update_assets.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_async
@@ -996,7 +993,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateAssets(
@@ -1045,7 +1042,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1090,9 +1087,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_asset.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteAsset_async
@@ -1104,7 +1100,7 @@ export class MigrationCenterClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAsset(
@@ -1150,7 +1146,7 @@ export class MigrationCenterClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1189,9 +1185,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.batch_delete_assets.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_async
@@ -1206,7 +1201,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteAssets(
@@ -1255,7 +1250,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1290,9 +1285,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.ReportAssetFramesResponse | ReportAssetFramesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ReportAssetFramesResponse|ReportAssetFramesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.report_asset_frames.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_async
@@ -1307,7 +1301,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportAssetFrames(
@@ -1356,7 +1350,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1392,9 +1386,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse | AggregateAssetsValuesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse|AggregateAssetsValuesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.aggregate_assets_values.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_async
@@ -1409,7 +1402,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   aggregateAssetsValues(
@@ -1458,7 +1451,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1492,9 +1485,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.ImportJob | ImportJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetImportJob_async
@@ -1506,7 +1498,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob,
       protos.google.cloud.migrationcenter.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getImportJob(
@@ -1552,7 +1544,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob,
       protos.google.cloud.migrationcenter.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1583,9 +1575,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.ImportDataFile | ImportDataFile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_import_data_file.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_async
@@ -1600,7 +1591,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getImportDataFile(
@@ -1649,7 +1640,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1680,9 +1671,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.Group | Group}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Group|Group}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetGroup_async
@@ -1694,7 +1684,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup,
       protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGroup(
@@ -1740,7 +1730,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup,
       protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1776,9 +1766,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.ErrorFrame | ErrorFrame}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_error_frame.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_async
@@ -1790,7 +1779,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame,
       protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getErrorFrame(
@@ -1836,7 +1825,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame,
       protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1867,9 +1856,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.Source | Source}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Source|Source}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetSource_async
@@ -1881,7 +1869,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource,
       protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSource(
@@ -1927,7 +1915,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource,
       protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1958,9 +1946,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.PreferenceSet | PreferenceSet}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_async
@@ -1975,7 +1962,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPreferenceSet(
@@ -2024,7 +2011,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2055,9 +2042,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.Settings | Settings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Settings|Settings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_settings.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetSettings_async
@@ -2069,7 +2055,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISettings,
       protos.google.cloud.migrationcenter.v1.IGetSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSettings(
@@ -2115,7 +2101,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISettings,
       protos.google.cloud.migrationcenter.v1.IGetSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2146,9 +2132,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.ReportConfig | ReportConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_report_config.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetReportConfig_async
@@ -2163,7 +2148,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReportConfig(
@@ -2212,7 +2197,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2245,9 +2230,8 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.migrationcenter.v1.Report | Report}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.migrationcenter.v1.Report|Report}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.get_report.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_GetReport_async
@@ -2259,7 +2243,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport,
       protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReport(
@@ -2305,7 +2289,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport,
       protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2358,8 +2342,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async
@@ -2374,7 +2357,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createImportJob(
@@ -2427,7 +2410,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2454,8 +2437,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async
@@ -2514,8 +2496,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async
@@ -2530,7 +2511,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteImportJob(
@@ -2583,7 +2564,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2610,8 +2591,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async
@@ -2673,8 +2653,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async
@@ -2689,7 +2668,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateImportJob(
@@ -2742,7 +2721,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2769,8 +2748,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async
@@ -2825,8 +2803,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.validate_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async
@@ -2841,7 +2818,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateImportJob(
@@ -2894,7 +2871,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2921,8 +2898,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.validate_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async
@@ -2977,8 +2953,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.run_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_RunImportJob_async
@@ -2993,7 +2968,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runImportJob(
@@ -3046,7 +3021,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3073,8 +3048,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.run_import_job.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_RunImportJob_async
@@ -3133,8 +3107,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_import_data_file.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async
@@ -3149,7 +3122,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createImportDataFile(
@@ -3202,7 +3175,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3229,8 +3202,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_import_data_file.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async
@@ -3285,8 +3257,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_import_data_file.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async
@@ -3301,7 +3272,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteImportDataFile(
@@ -3354,7 +3325,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3381,8 +3352,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_import_data_file.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async
@@ -3445,8 +3415,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateGroup_async
@@ -3461,7 +3430,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGroup(
@@ -3514,7 +3483,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3541,8 +3510,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateGroup_async
@@ -3603,8 +3571,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async
@@ -3619,7 +3586,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGroup(
@@ -3672,7 +3639,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3699,8 +3666,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async
@@ -3755,8 +3721,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async
@@ -3771,7 +3736,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGroup(
@@ -3824,7 +3789,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3851,8 +3816,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async
@@ -3918,8 +3882,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.add_assets_to_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async
@@ -3934,7 +3897,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addAssetsToGroup(
@@ -3987,7 +3950,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4014,8 +3977,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.add_assets_to_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async
@@ -4080,8 +4042,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.remove_assets_from_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async
@@ -4096,7 +4057,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeAssetsFromGroup(
@@ -4149,7 +4110,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4176,8 +4137,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.remove_assets_from_group.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async
@@ -4240,8 +4200,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateSource_async
@@ -4256,7 +4215,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSource(
@@ -4309,7 +4268,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4336,8 +4295,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateSource_async
@@ -4399,8 +4357,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSource_async
@@ -4415,7 +4372,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSource(
@@ -4468,7 +4425,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4495,8 +4452,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSource_async
@@ -4551,8 +4507,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteSource_async
@@ -4567,7 +4522,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSource(
@@ -4620,7 +4575,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4647,8 +4602,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_source.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteSource_async
@@ -4712,8 +4666,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async
@@ -4728,7 +4681,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPreferenceSet(
@@ -4781,7 +4734,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4808,8 +4761,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async
@@ -4871,8 +4823,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async
@@ -4887,7 +4838,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePreferenceSet(
@@ -4940,7 +4891,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4967,8 +4918,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async
@@ -5023,8 +4973,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async
@@ -5039,7 +4988,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePreferenceSet(
@@ -5092,7 +5041,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5119,8 +5068,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_preference_set.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async
@@ -5182,8 +5130,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_settings.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async
@@ -5198,7 +5145,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSettings(
@@ -5251,7 +5198,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5278,8 +5225,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.update_settings.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async
@@ -5342,8 +5288,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_report_config.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async
@@ -5358,7 +5303,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReportConfig(
@@ -5411,7 +5356,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5438,8 +5383,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_report_config.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async
@@ -5498,8 +5442,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_report_config.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async
@@ -5514,7 +5457,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReportConfig(
@@ -5567,7 +5510,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5594,8 +5537,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_report_config.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async
@@ -5658,8 +5600,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_report.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReport_async
@@ -5674,7 +5615,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReport(
@@ -5727,7 +5668,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5754,8 +5695,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.create_report.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_CreateReport_async
@@ -5810,8 +5750,7 @@ export class MigrationCenterClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_report.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReport_async
@@ -5826,7 +5765,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReport(
@@ -5879,7 +5818,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5906,8 +5845,7 @@ export class MigrationCenterClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.delete_report.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_DeleteReport_async
@@ -5956,14 +5894,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.Asset | Asset}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAssetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAssets(
@@ -5973,7 +5910,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset[],
       protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -6019,7 +5956,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset[],
       protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};
@@ -6061,13 +5998,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.Asset | Asset} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Asset|Asset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAssetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAssetsStream(
@@ -6114,12 +6050,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.Asset | Asset}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_assets.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListAssets_async
@@ -6167,14 +6102,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.ImportJob | ImportJob}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listImportJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listImportJobs(
@@ -6184,7 +6118,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob[],
       protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
     ]
   >;
   listImportJobs(
@@ -6230,7 +6164,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob[],
       protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -6273,13 +6207,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.ImportJob | ImportJob} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listImportJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listImportJobsStream(
@@ -6327,12 +6260,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.ImportJob | ImportJob}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.ImportJob|ImportJob}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_import_jobs.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListImportJobs_async
@@ -6383,14 +6315,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.ImportDataFile | ImportDataFile}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listImportDataFilesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listImportDataFiles(
@@ -6400,7 +6331,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportDataFile[],
       protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
     ]
   >;
   listImportDataFiles(
@@ -6446,7 +6377,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportDataFile[],
       protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
     ]
   > | void {
     request = request || {};
@@ -6492,13 +6423,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.ImportDataFile | ImportDataFile} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listImportDataFilesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listImportDataFilesStream(
@@ -6549,12 +6479,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.ImportDataFile | ImportDataFile}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.ImportDataFile|ImportDataFile}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_import_data_files.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_async
@@ -6599,14 +6528,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.Group | Group}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Group|Group}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGroups(
@@ -6616,7 +6544,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup[],
       protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
     ]
   >;
   listGroups(
@@ -6662,7 +6590,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup[],
       protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -6702,13 +6630,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.Group | Group} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Group|Group} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGroupsStream(
@@ -6753,12 +6680,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.Group | Group}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.Group|Group}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_groups.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListGroups_async
@@ -6802,14 +6728,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.ErrorFrame | ErrorFrame}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listErrorFramesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listErrorFrames(
@@ -6819,7 +6744,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame[],
       protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
     ]
   >;
   listErrorFrames(
@@ -6865,7 +6790,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame[],
       protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
     ]
   > | void {
     request = request || {};
@@ -6904,13 +6829,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.ErrorFrame | ErrorFrame} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listErrorFramesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listErrorFramesStream(
@@ -6954,12 +6878,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.ErrorFrame | ErrorFrame}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.ErrorFrame|ErrorFrame}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_error_frames.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_async
@@ -7004,14 +6927,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.Source | Source}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Source|Source}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSources(
@@ -7021,7 +6943,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource[],
       protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
     ]
   >;
   listSources(
@@ -7067,7 +6989,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource[],
       protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -7107,13 +7029,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.Source | Source} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Source|Source} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSourcesStream(
@@ -7158,12 +7079,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.Source | Source}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.Source|Source}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_sources.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListSources_async
@@ -7207,14 +7127,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.PreferenceSet | PreferenceSet}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPreferenceSetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPreferenceSets(
@@ -7224,7 +7143,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
       protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
     ]
   >;
   listPreferenceSets(
@@ -7270,7 +7189,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
       protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
     ]
   > | void {
     request = request || {};
@@ -7309,13 +7228,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.PreferenceSet | PreferenceSet} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPreferenceSetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPreferenceSetsStream(
@@ -7359,12 +7277,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.PreferenceSet | PreferenceSet}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.PreferenceSet|PreferenceSet}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_preference_sets.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_async
@@ -7409,14 +7326,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.ReportConfig | ReportConfig}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listReportConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportConfigs(
@@ -7426,7 +7342,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReportConfig[],
       protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
     ]
   >;
   listReportConfigs(
@@ -7472,7 +7388,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReportConfig[],
       protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -7512,13 +7428,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.ReportConfig | ReportConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReportConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportConfigsStream(
@@ -7563,12 +7478,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.ReportConfig | ReportConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.ReportConfig|ReportConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_report_configs.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_async
@@ -7615,14 +7529,13 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.migrationcenter.v1.Report | Report}.
+   *   The first element of the array is Array of {@link protos.google.cloud.migrationcenter.v1.Report|Report}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listReportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReports(
@@ -7632,7 +7545,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport[],
       protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportsResponse,
     ]
   >;
   listReports(
@@ -7678,7 +7591,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport[],
       protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportsResponse,
     ]
   > | void {
     request = request || {};
@@ -7720,13 +7633,12 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.migrationcenter.v1.Report | Report} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.migrationcenter.v1.Report|Report} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportsStream(
@@ -7773,12 +7685,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.migrationcenter.v1.Report | Report}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.migrationcenter.v1.Report|Report}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/migration_center.list_reports.js</caption>
    * region_tag:migrationcenter_v1_generated_MigrationCenter_ListReports_async
@@ -7815,8 +7726,7 @@ export class MigrationCenterClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -7862,12 +7772,11 @@ export class MigrationCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
