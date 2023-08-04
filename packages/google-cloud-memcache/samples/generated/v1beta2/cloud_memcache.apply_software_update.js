@@ -37,7 +37,7 @@ function main(instance) {
    *  Nodes to which we should apply the update to. Note all the selected nodes
    *  are updated in parallel.
    */
-  // const nodeIds = 'abc123'
+  // const nodeIds = ['abc','def']
   /**
    *  Whether to apply the update to all nodes. If set to
    *  true, will explicitly restrict users from specifying any nodes, and apply
