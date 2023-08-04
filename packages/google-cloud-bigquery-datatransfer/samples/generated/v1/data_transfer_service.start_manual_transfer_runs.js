@@ -35,12 +35,17 @@ function main() {
    */
   // const parent = 'abc123'
   /**
-   *  Time range for the transfer runs that should be started.
+   *  A time_range start and end timestamp for historical data files or reports
+   *  that are scheduled to be transferred by the scheduled transfer run.
+   *  requested_time_range must be a past time and cannot include future time
+   *  values.
    */
   // const requestedTimeRange = {}
   /**
-   *  Specific run_time for a transfer run to be started. The
-   *  requested_run_time must not be in the future.
+   *  A run_time timestamp for historical data files or reports
+   *  that are scheduled to be transferred by the scheduled transfer run.
+   *  requested_run_time must be a past time and cannot include future time
+   *  values.
    */
   // const requestedRunTime = {}
 
