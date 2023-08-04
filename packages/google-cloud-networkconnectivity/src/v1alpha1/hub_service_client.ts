@@ -535,7 +535,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHub(
@@ -584,7 +584,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -631,7 +631,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSpoke(
@@ -680,7 +680,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -748,7 +748,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createHub(
@@ -801,7 +801,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,7 +904,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateHub(
@@ -957,7 +957,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1054,7 +1054,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteHub(
@@ -1107,7 +1107,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1208,7 +1208,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSpoke(
@@ -1261,7 +1261,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1364,7 +1364,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSpoke(
@@ -1417,7 +1417,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1514,7 +1514,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSpoke(
@@ -1567,7 +1567,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1656,7 +1656,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
     ]
   >;
   listHubs(
@@ -1702,7 +1702,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
     ]
   > | void {
     request = request || {};
@@ -1854,7 +1854,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
     ]
   >;
   listSpokes(
@@ -1900,7 +1900,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
     ]
   > | void {
     request = request || {};

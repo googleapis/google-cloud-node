@@ -577,7 +577,7 @@ export class ManagedIdentitiesServiceClient {
         | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetAdminPassword(
@@ -626,7 +626,7 @@ export class ManagedIdentitiesServiceClient {
         | protos.google.cloud.managedidentities.v1.IResetAdminPasswordRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -671,7 +671,7 @@ export class ManagedIdentitiesServiceClient {
     [
       protos.google.cloud.managedidentities.v1.IDomain,
       protos.google.cloud.managedidentities.v1.IGetDomainRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDomain(
@@ -717,7 +717,7 @@ export class ManagedIdentitiesServiceClient {
     [
       protos.google.cloud.managedidentities.v1.IDomain,
       protos.google.cloud.managedidentities.v1.IGetDomainRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -783,7 +783,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMicrosoftAdDomain(
@@ -836,7 +836,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -931,7 +931,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDomain(
@@ -984,7 +984,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1068,7 +1068,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDomain(
@@ -1121,7 +1121,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1207,7 +1207,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   attachTrust(
@@ -1260,7 +1260,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1350,7 +1350,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reconfigureTrust(
@@ -1403,7 +1403,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1489,7 +1489,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detachTrust(
@@ -1542,7 +1542,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1629,7 +1629,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateTrust(
@@ -1682,7 +1682,7 @@ export class ManagedIdentitiesServiceClient {
         protos.google.cloud.managedidentities.v1.IOpMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1782,7 +1782,7 @@ export class ManagedIdentitiesServiceClient {
     [
       protos.google.cloud.managedidentities.v1.IDomain[],
       protos.google.cloud.managedidentities.v1.IListDomainsRequest | null,
-      protos.google.cloud.managedidentities.v1.IListDomainsResponse
+      protos.google.cloud.managedidentities.v1.IListDomainsResponse,
     ]
   >;
   listDomains(
@@ -1828,7 +1828,7 @@ export class ManagedIdentitiesServiceClient {
     [
       protos.google.cloud.managedidentities.v1.IDomain[],
       protos.google.cloud.managedidentities.v1.IListDomainsRequest | null,
-      protos.google.cloud.managedidentities.v1.IListDomainsResponse
+      protos.google.cloud.managedidentities.v1.IListDomainsResponse,
     ]
   > | void {
     request = request || {};

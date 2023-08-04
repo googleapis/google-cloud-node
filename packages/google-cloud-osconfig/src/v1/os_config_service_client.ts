@@ -409,7 +409,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob,
       protos.google.cloud.osconfig.v1.IExecutePatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   executePatchJob(
@@ -455,7 +455,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob,
       protos.google.cloud.osconfig.v1.IExecutePatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -500,7 +500,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob,
       protos.google.cloud.osconfig.v1.IGetPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPatchJob(
@@ -540,7 +540,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob,
       protos.google.cloud.osconfig.v1.IGetPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +585,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob,
       protos.google.cloud.osconfig.v1.ICancelPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelPatchJob(
@@ -625,7 +625,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob,
       protos.google.cloud.osconfig.v1.ICancelPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -680,7 +680,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.ICreatePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPatchDeployment(
@@ -726,7 +726,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.ICreatePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -771,7 +771,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IGetPatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPatchDeployment(
@@ -817,7 +817,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IGetPatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -862,7 +862,7 @@ export class OsConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.osconfig.v1.IDeletePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePatchDeployment(
@@ -908,7 +908,7 @@ export class OsConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.osconfig.v1.IDeletePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -955,7 +955,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePatchDeployment(
@@ -1001,7 +1001,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IUpdatePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1047,7 +1047,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pausePatchDeployment(
@@ -1093,7 +1093,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IPausePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1139,7 +1139,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumePatchDeployment(
@@ -1185,7 +1185,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment,
       protos.google.cloud.osconfig.v1.IResumePatchDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1242,7 +1242,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob[],
       protos.google.cloud.osconfig.v1.IListPatchJobsRequest | null,
-      protos.google.cloud.osconfig.v1.IListPatchJobsResponse
+      protos.google.cloud.osconfig.v1.IListPatchJobsResponse,
     ]
   >;
   listPatchJobs(
@@ -1282,7 +1282,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJob[],
       protos.google.cloud.osconfig.v1.IListPatchJobsRequest | null,
-      protos.google.cloud.osconfig.v1.IListPatchJobsResponse
+      protos.google.cloud.osconfig.v1.IListPatchJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1438,7 +1438,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[],
       protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsRequest | null,
-      protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsResponse
+      protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsResponse,
     ]
   >;
   listPatchJobInstanceDetails(
@@ -1484,7 +1484,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchJobInstanceDetails[],
       protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsRequest | null,
-      protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsResponse
+      protos.google.cloud.osconfig.v1.IListPatchJobInstanceDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -1643,7 +1643,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment[],
       protos.google.cloud.osconfig.v1.IListPatchDeploymentsRequest | null,
-      protos.google.cloud.osconfig.v1.IListPatchDeploymentsResponse
+      protos.google.cloud.osconfig.v1.IListPatchDeploymentsResponse,
     ]
   >;
   listPatchDeployments(
@@ -1689,7 +1689,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1.IPatchDeployment[],
       protos.google.cloud.osconfig.v1.IListPatchDeploymentsRequest | null,
-      protos.google.cloud.osconfig.v1.IListPatchDeploymentsResponse
+      protos.google.cloud.osconfig.v1.IListPatchDeploymentsResponse,
     ]
   > | void {
     request = request || {};

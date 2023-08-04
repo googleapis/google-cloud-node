@@ -583,7 +583,7 @@ export class FleetRoutingClient {
     [
       protos.google.cloud.optimization.v1.IOptimizeToursResponse,
       protos.google.cloud.optimization.v1.IOptimizeToursRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   optimizeTours(
@@ -629,7 +629,7 @@ export class FleetRoutingClient {
     [
       protos.google.cloud.optimization.v1.IOptimizeToursResponse,
       protos.google.cloud.optimization.v1.IOptimizeToursRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -695,7 +695,7 @@ export class FleetRoutingClient {
         protos.google.cloud.optimization.v1.IAsyncModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchOptimizeTours(
@@ -748,7 +748,7 @@ export class FleetRoutingClient {
         protos.google.cloud.optimization.v1.IAsyncModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

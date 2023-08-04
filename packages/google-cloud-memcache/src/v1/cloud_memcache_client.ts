@@ -503,7 +503,7 @@ export class CloudMemcacheClient {
     [
       protos.google.cloud.memcache.v1.IInstance,
       protos.google.cloud.memcache.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -543,7 +543,7 @@ export class CloudMemcacheClient {
     [
       protos.google.cloud.memcache.v1.IInstance,
       protos.google.cloud.memcache.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -608,7 +608,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -661,7 +661,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -749,7 +749,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -802,7 +802,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -893,7 +893,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateParameters(
@@ -946,7 +946,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1031,7 +1031,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -1084,7 +1084,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1175,7 +1175,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   applyParameters(
@@ -1228,7 +1228,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1319,7 +1319,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rescheduleMaintenance(
@@ -1372,7 +1372,7 @@ export class CloudMemcacheClient {
         protos.google.cloud.memcache.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1470,7 +1470,7 @@ export class CloudMemcacheClient {
     [
       protos.google.cloud.memcache.v1.IInstance[],
       protos.google.cloud.memcache.v1.IListInstancesRequest | null,
-      protos.google.cloud.memcache.v1.IListInstancesResponse
+      protos.google.cloud.memcache.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -1510,7 +1510,7 @@ export class CloudMemcacheClient {
     [
       protos.google.cloud.memcache.v1.IInstance[],
       protos.google.cloud.memcache.v1.IListInstancesRequest | null,
-      protos.google.cloud.memcache.v1.IListInstancesResponse
+      protos.google.cloud.memcache.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};

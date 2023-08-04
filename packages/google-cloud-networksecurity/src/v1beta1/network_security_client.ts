@@ -616,7 +616,7 @@ export class NetworkSecurityClient {
         | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAuthorizationPolicy(
@@ -665,7 +665,7 @@ export class NetworkSecurityClient {
         | protos.google.cloud.networksecurity.v1beta1.IGetAuthorizationPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -717,7 +717,7 @@ export class NetworkSecurityClient {
         | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServerTlsPolicy(
@@ -766,7 +766,7 @@ export class NetworkSecurityClient {
         | protos.google.cloud.networksecurity.v1beta1.IGetServerTlsPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -814,7 +814,7 @@ export class NetworkSecurityClient {
         | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getClientTlsPolicy(
@@ -863,7 +863,7 @@ export class NetworkSecurityClient {
         | protos.google.cloud.networksecurity.v1beta1.IGetClientTlsPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -921,7 +921,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAuthorizationPolicy(
@@ -974,7 +974,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1067,7 +1067,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAuthorizationPolicy(
@@ -1120,7 +1120,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1208,7 +1208,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAuthorizationPolicy(
@@ -1261,7 +1261,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1356,7 +1356,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServerTlsPolicy(
@@ -1409,7 +1409,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1499,7 +1499,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateServerTlsPolicy(
@@ -1552,7 +1552,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1636,7 +1636,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteServerTlsPolicy(
@@ -1689,7 +1689,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1780,7 +1780,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createClientTlsPolicy(
@@ -1833,7 +1833,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1923,7 +1923,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateClientTlsPolicy(
@@ -1976,7 +1976,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2060,7 +2060,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteClientTlsPolicy(
@@ -2113,7 +2113,7 @@ export class NetworkSecurityClient {
         protos.google.cloud.networksecurity.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2203,7 +2203,7 @@ export class NetworkSecurityClient {
     [
       protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[],
       protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse,
     ]
   >;
   listAuthorizationPolicies(
@@ -2249,7 +2249,7 @@ export class NetworkSecurityClient {
     [
       protos.google.cloud.networksecurity.v1beta1.IAuthorizationPolicy[],
       protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse
+      protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -2407,7 +2407,7 @@ export class NetworkSecurityClient {
     [
       protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[],
       protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse,
     ]
   >;
   listServerTlsPolicies(
@@ -2453,7 +2453,7 @@ export class NetworkSecurityClient {
     [
       protos.google.cloud.networksecurity.v1beta1.IServerTlsPolicy[],
       protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -2605,7 +2605,7 @@ export class NetworkSecurityClient {
     [
       protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[],
       protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse,
     ]
   >;
   listClientTlsPolicies(
@@ -2651,7 +2651,7 @@ export class NetworkSecurityClient {
     [
       protos.google.cloud.networksecurity.v1beta1.IClientTlsPolicy[],
       protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest | null,
-      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse
+      protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesResponse,
     ]
   > | void {
     request = request || {};
