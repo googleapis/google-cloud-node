@@ -481,7 +481,7 @@ export class MatchServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IFindNeighborsResponse,
       protos.google.cloud.aiplatform.v1beta1.IFindNeighborsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   findNeighbors(
@@ -527,7 +527,7 @@ export class MatchServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IFindNeighborsResponse,
       protos.google.cloud.aiplatform.v1beta1.IFindNeighborsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -581,7 +581,7 @@ export class MatchServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadIndexDatapointsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   readIndexDatapoints(
@@ -630,7 +630,7 @@ export class MatchServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadIndexDatapointsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
