@@ -632,7 +632,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
       protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntityType(
@@ -678,7 +678,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
       protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -735,7 +735,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
       protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntityType(
@@ -781,7 +781,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
       protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -837,7 +837,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
       protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntityType(
@@ -883,7 +883,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType,
       protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -932,7 +932,7 @@ export class EntityTypesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntityType(
@@ -978,7 +978,7 @@ export class EntityTypesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1057,7 +1057,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateEntityTypes(
@@ -1110,7 +1110,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1214,7 +1214,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteEntityTypes(
@@ -1267,7 +1267,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1373,7 +1373,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateEntities(
@@ -1426,7 +1426,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1533,7 +1533,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateEntities(
@@ -1586,7 +1586,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1690,7 +1690,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteEntities(
@@ -1743,7 +1743,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1833,7 +1833,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType[],
       protos.google.cloud.dialogflow.v2.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.v2.IListEntityTypesResponse,
     ]
   >;
   listEntityTypes(
@@ -1879,7 +1879,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2.IEntityType[],
       protos.google.cloud.dialogflow.v2.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.v2.IListEntityTypesResponse,
     ]
   > | void {
     request = request || {};

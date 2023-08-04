@@ -21,6 +21,12 @@ set -eo pipefail
 
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 
+# Exit early if owl-bot-staging directory exists. The PR is not ready to merge.
+if test -d "${PROJECT_ROOT}/owl-bot-staging"; then
+  echo "Found owl-bot-staging directory, skipping all tests and failing the run."
+  exit 1
+fi
+
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 

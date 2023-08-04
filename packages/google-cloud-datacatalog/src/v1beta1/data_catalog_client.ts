@@ -438,7 +438,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntryGroup(
@@ -487,7 +487,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -544,7 +544,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntryGroup(
@@ -593,7 +593,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IUpdateEntryGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -640,7 +640,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
       protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntryGroup(
@@ -686,7 +686,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup,
       protos.google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -740,7 +740,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntryGroup(
@@ -789,7 +789,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -850,7 +850,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntry(
@@ -896,7 +896,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.ICreateEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -969,7 +969,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntry(
@@ -1015,7 +1015,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.IUpdateEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1067,7 +1067,7 @@ export class DataCatalogClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntry(
@@ -1113,7 +1113,7 @@ export class DataCatalogClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.datacatalog.v1beta1.IDeleteEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1159,7 +1159,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntry(
@@ -1205,7 +1205,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.IGetEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1272,7 +1272,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lookupEntry(
@@ -1318,7 +1318,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry,
       protos.google.cloud.datacatalog.v1beta1.ILookupEntryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1374,7 +1374,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTagTemplate(
@@ -1423,7 +1423,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1472,7 +1472,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTagTemplate(
@@ -1521,7 +1521,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IGetTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1581,7 +1581,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTagTemplate(
@@ -1630,7 +1630,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1687,7 +1687,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTagTemplate(
@@ -1736,7 +1736,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1800,7 +1800,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTagTemplateField(
@@ -1849,7 +1849,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.ICreateTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1925,7 +1925,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTagTemplateField(
@@ -1974,7 +1974,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IUpdateTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2034,7 +2034,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   renameTagTemplateField(
@@ -2083,7 +2083,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2141,7 +2141,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   renameTagTemplateFieldEnumValue(
@@ -2190,7 +2190,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IRenameTagTemplateFieldEnumValueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2251,7 +2251,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTagTemplateField(
@@ -2300,7 +2300,7 @@ export class DataCatalogClient {
         | protos.google.cloud.datacatalog.v1beta1.IDeleteTagTemplateFieldRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2362,7 +2362,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ITag,
       protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTag(
@@ -2408,7 +2408,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ITag,
       protos.google.cloud.datacatalog.v1beta1.ICreateTagRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2461,7 +2461,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ITag,
       protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTag(
@@ -2507,7 +2507,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ITag,
       protos.google.cloud.datacatalog.v1beta1.IUpdateTagRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2553,7 +2553,7 @@ export class DataCatalogClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTag(
@@ -2599,7 +2599,7 @@ export class DataCatalogClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.datacatalog.v1beta1.IDeleteTagRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2668,7 +2668,7 @@ export class DataCatalogClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -2706,7 +2706,7 @@ export class DataCatalogClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2769,7 +2769,7 @@ export class DataCatalogClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -2807,7 +2807,7 @@ export class DataCatalogClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2869,7 +2869,7 @@ export class DataCatalogClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -2907,7 +2907,7 @@ export class DataCatalogClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3006,7 +3006,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[],
       protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse
+      protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse,
     ]
   >;
   searchCatalog(
@@ -3052,7 +3052,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[],
       protos.google.cloud.datacatalog.v1beta1.ISearchCatalogRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse
+      protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResponse,
     ]
   > | void {
     request = request || {};
@@ -3249,7 +3249,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup[],
       protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+      protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse,
     ]
   >;
   listEntryGroups(
@@ -3295,7 +3295,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntryGroup[],
       protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse
+      protos.google.cloud.datacatalog.v1beta1.IListEntryGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3455,7 +3455,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry[],
       protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+      protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse,
     ]
   >;
   listEntries(
@@ -3501,7 +3501,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.IEntry[],
       protos.google.cloud.datacatalog.v1beta1.IListEntriesRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse
+      protos.google.cloud.datacatalog.v1beta1.IListEntriesResponse,
     ]
   > | void {
     request = request || {};
@@ -3671,7 +3671,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ITag[],
       protos.google.cloud.datacatalog.v1beta1.IListTagsRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.IListTagsResponse
+      protos.google.cloud.datacatalog.v1beta1.IListTagsResponse,
     ]
   >;
   listTags(
@@ -3717,7 +3717,7 @@ export class DataCatalogClient {
     [
       protos.google.cloud.datacatalog.v1beta1.ITag[],
       protos.google.cloud.datacatalog.v1beta1.IListTagsRequest | null,
-      protos.google.cloud.datacatalog.v1beta1.IListTagsResponse
+      protos.google.cloud.datacatalog.v1beta1.IListTagsResponse,
     ]
   > | void {
     request = request || {};
