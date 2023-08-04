@@ -385,7 +385,7 @@ export class KeyTrackingServiceClient {
         | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProtectedResourcesSummary(
@@ -434,7 +434,7 @@ export class KeyTrackingServiceClient {
         | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -519,7 +519,7 @@ export class KeyTrackingServiceClient {
     [
       protos.google.cloud.kms.inventory.v1.IProtectedResource[],
       protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
     ]
   >;
   searchProtectedResources(
@@ -565,7 +565,7 @@ export class KeyTrackingServiceClient {
     [
       protos.google.cloud.kms.inventory.v1.IProtectedResource[],
       protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
     ]
   > | void {
     request = request || {};
