@@ -1703,7 +1703,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeaturestore,
       protos.google.cloud.aiplatform.v1.IGetFeaturestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFeaturestore(
@@ -1749,7 +1749,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeaturestore,
       protos.google.cloud.aiplatform.v1.IGetFeaturestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1795,7 +1795,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IEntityType,
       protos.google.cloud.aiplatform.v1.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntityType(
@@ -1841,7 +1841,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IEntityType,
       protos.google.cloud.aiplatform.v1.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1908,7 +1908,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IEntityType,
       protos.google.cloud.aiplatform.v1.IUpdateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntityType(
@@ -1954,7 +1954,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IEntityType,
       protos.google.cloud.aiplatform.v1.IUpdateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2000,7 +2000,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature,
       protos.google.cloud.aiplatform.v1.IGetFeatureRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFeature(
@@ -2040,7 +2040,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature,
       protos.google.cloud.aiplatform.v1.IGetFeatureRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2101,7 +2101,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature,
       protos.google.cloud.aiplatform.v1.IUpdateFeatureRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFeature(
@@ -2147,7 +2147,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature,
       protos.google.cloud.aiplatform.v1.IUpdateFeatureRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2209,7 +2209,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateFeaturestoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFeaturestore(
@@ -2262,7 +2262,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateFeaturestoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2362,7 +2362,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IUpdateFeaturestoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFeaturestore(
@@ -2415,7 +2415,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IUpdateFeaturestoreOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2505,7 +2505,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFeaturestore(
@@ -2558,7 +2558,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2653,7 +2653,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateEntityTypeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntityType(
@@ -2706,7 +2706,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateEntityTypeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2795,7 +2795,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntityType(
@@ -2848,7 +2848,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2943,7 +2943,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFeature(
@@ -2996,7 +2996,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateFeatureOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3087,7 +3087,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateFeatures(
@@ -3140,7 +3140,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3225,7 +3225,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFeature(
@@ -3278,7 +3278,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3411,7 +3411,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IImportFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importFeatureValues(
@@ -3464,7 +3464,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IImportFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3598,7 +3598,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchReadFeatureValues(
@@ -3651,7 +3651,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3752,7 +3752,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IExportFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportFeatureValues(
@@ -3805,7 +3805,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IExportFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3904,7 +3904,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFeatureValues(
@@ -3957,7 +3957,7 @@ export class FeaturestoreServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4083,7 +4083,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeaturestore[],
       protos.google.cloud.aiplatform.v1.IListFeaturestoresRequest | null,
-      protos.google.cloud.aiplatform.v1.IListFeaturestoresResponse
+      protos.google.cloud.aiplatform.v1.IListFeaturestoresResponse,
     ]
   >;
   listFeaturestores(
@@ -4129,7 +4129,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeaturestore[],
       protos.google.cloud.aiplatform.v1.IListFeaturestoresRequest | null,
-      protos.google.cloud.aiplatform.v1.IListFeaturestoresResponse
+      protos.google.cloud.aiplatform.v1.IListFeaturestoresResponse,
     ]
   > | void {
     request = request || {};
@@ -4392,7 +4392,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IEntityType[],
       protos.google.cloud.aiplatform.v1.IListEntityTypesRequest | null,
-      protos.google.cloud.aiplatform.v1.IListEntityTypesResponse
+      protos.google.cloud.aiplatform.v1.IListEntityTypesResponse,
     ]
   >;
   listEntityTypes(
@@ -4438,7 +4438,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IEntityType[],
       protos.google.cloud.aiplatform.v1.IListEntityTypesRequest | null,
-      protos.google.cloud.aiplatform.v1.IListEntityTypesResponse
+      protos.google.cloud.aiplatform.v1.IListEntityTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -4710,7 +4710,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature[],
       protos.google.cloud.aiplatform.v1.IListFeaturesRequest | null,
-      protos.google.cloud.aiplatform.v1.IListFeaturesResponse
+      protos.google.cloud.aiplatform.v1.IListFeaturesResponse,
     ]
   >;
   listFeatures(
@@ -4756,7 +4756,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature[],
       protos.google.cloud.aiplatform.v1.IListFeaturesRequest | null,
-      protos.google.cloud.aiplatform.v1.IListFeaturesResponse
+      protos.google.cloud.aiplatform.v1.IListFeaturesResponse,
     ]
   > | void {
     request = request || {};
@@ -5068,7 +5068,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature[],
       protos.google.cloud.aiplatform.v1.ISearchFeaturesRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchFeaturesResponse
+      protos.google.cloud.aiplatform.v1.ISearchFeaturesResponse,
     ]
   >;
   searchFeatures(
@@ -5114,7 +5114,7 @@ export class FeaturestoreServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IFeature[],
       protos.google.cloud.aiplatform.v1.ISearchFeaturesRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchFeaturesResponse
+      protos.google.cloud.aiplatform.v1.ISearchFeaturesResponse,
     ]
   > | void {
     request = request || {};

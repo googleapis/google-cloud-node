@@ -1556,7 +1556,7 @@ export class MigrationServiceClient {
         protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchMigrateResources(
@@ -1609,7 +1609,7 @@ export class MigrationServiceClient {
         protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1713,7 +1713,7 @@ export class MigrationServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMigratableResource[],
       protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesResponse
+      protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesResponse,
     ]
   >;
   searchMigratableResources(
@@ -1759,7 +1759,7 @@ export class MigrationServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IMigratableResource[],
       protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesResponse
+      protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesResponse,
     ]
   > | void {
     request = request || {};
