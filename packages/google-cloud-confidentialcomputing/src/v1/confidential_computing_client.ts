@@ -358,7 +358,7 @@ export class ConfidentialComputingClient {
         | protos.google.cloud.confidentialcomputing.v1.ICreateChallengeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChallenge(
@@ -407,7 +407,7 @@ export class ConfidentialComputingClient {
         | protos.google.cloud.confidentialcomputing.v1.ICreateChallengeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -467,7 +467,7 @@ export class ConfidentialComputingClient {
         | protos.google.cloud.confidentialcomputing.v1.IVerifyAttestationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   verifyAttestation(
@@ -516,7 +516,7 @@ export class ConfidentialComputingClient {
         | protos.google.cloud.confidentialcomputing.v1.IVerifyAttestationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
