@@ -79,6 +79,14 @@ function main(scope) {
    *  If this parameter is omitted, it defaults to the descending `relevance`.
    */
   // const orderBy = 'abc123'
+  /**
+   *  Optional. If set, uses searchAll permission granted on organizations from
+   *  `include_org_ids` and projects from `include_project_ids` instead of the
+   *  fine grained per resource permissions when filtering the search results.
+   *  The only allowed `order_by` criteria for admin_search mode is `default`.
+   *  Using this flags guarantees a full recall of the search results.
+   */
+  // const adminSearch = true
 
   // Imports the Datacatalog library
   const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;

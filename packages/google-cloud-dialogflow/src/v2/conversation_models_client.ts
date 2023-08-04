@@ -646,7 +646,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversationModel(
@@ -695,7 +695,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -744,7 +744,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversationModelEvaluation(
@@ -793,7 +793,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -859,7 +859,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversationModel(
@@ -912,7 +912,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1009,7 +1009,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversationModel(
@@ -1062,7 +1062,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1162,7 +1162,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployConversationModel(
@@ -1215,7 +1215,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1315,7 +1315,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployConversationModel(
@@ -1368,7 +1368,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1459,7 +1459,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversationModelEvaluation(
@@ -1512,7 +1512,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1603,7 +1603,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModel[],
       protos.google.cloud.dialogflow.v2.IListConversationModelsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse,
     ]
   >;
   listConversationModels(
@@ -1649,7 +1649,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModel[],
       protos.google.cloud.dialogflow.v2.IListConversationModelsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse,
     ]
   > | void {
     request = request || {};
@@ -1799,7 +1799,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModelEvaluation[],
       protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse,
     ]
   >;
   listConversationModelEvaluations(
@@ -1845,7 +1845,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModelEvaluation[],
       protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse,
     ]
   > | void {
     request = request || {};
