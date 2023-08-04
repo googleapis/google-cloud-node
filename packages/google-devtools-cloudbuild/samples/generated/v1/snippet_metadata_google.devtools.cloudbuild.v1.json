@@ -510,7 +510,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -530,6 +530,10 @@
                     {
                         "name": "trigger",
                         "type": ".google.devtools.cloudbuild.v1.BuildTrigger"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
