@@ -493,7 +493,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getKnowledgeBase(
@@ -542,7 +542,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -595,7 +595,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createKnowledgeBase(
@@ -644,7 +644,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -699,7 +699,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteKnowledgeBase(
@@ -748,7 +748,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -802,7 +802,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateKnowledgeBase(
@@ -851,7 +851,7 @@ export class KnowledgeBasesClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -935,7 +935,7 @@ export class KnowledgeBasesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
       protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse,
     ]
   >;
   listKnowledgeBases(
@@ -981,7 +981,7 @@ export class KnowledgeBasesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
       protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse,
     ]
   > | void {
     request = request || {};

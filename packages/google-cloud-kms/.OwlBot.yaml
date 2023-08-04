@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/kms/v(.*)/.*-nodejs
+  - source: /google/cloud/kms/(v.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-kms/$1
 api-name: kms

@@ -613,7 +613,7 @@ export class ConversationDatasetsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversationDataset(
@@ -662,7 +662,7 @@ export class ConversationDatasetsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -728,7 +728,7 @@ export class ConversationDatasetsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversationDataset(
@@ -781,7 +781,7 @@ export class ConversationDatasetsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -879,7 +879,7 @@ export class ConversationDatasetsClient {
         protos.google.cloud.dialogflow.v2.IDeleteConversationDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversationDataset(
@@ -932,7 +932,7 @@ export class ConversationDatasetsClient {
         protos.google.cloud.dialogflow.v2.IDeleteConversationDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1034,7 +1034,7 @@ export class ConversationDatasetsClient {
         protos.google.cloud.dialogflow.v2.IImportConversationDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importConversationData(
@@ -1087,7 +1087,7 @@ export class ConversationDatasetsClient {
         protos.google.cloud.dialogflow.v2.IImportConversationDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1179,7 +1179,7 @@ export class ConversationDatasetsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationDataset[],
       protos.google.cloud.dialogflow.v2.IListConversationDatasetsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationDatasetsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationDatasetsResponse,
     ]
   >;
   listConversationDatasets(
@@ -1225,7 +1225,7 @@ export class ConversationDatasetsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationDataset[],
       protos.google.cloud.dialogflow.v2.IListConversationDatasetsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationDatasetsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationDatasetsResponse,
     ]
   > | void {
     request = request || {};

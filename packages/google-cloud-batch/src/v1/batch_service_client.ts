@@ -471,7 +471,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.IJob,
       protos.google.cloud.batch.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -509,7 +509,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.IJob,
       protos.google.cloud.batch.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -553,7 +553,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.IJob,
       protos.google.cloud.batch.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -591,7 +591,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.IJob,
       protos.google.cloud.batch.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -635,7 +635,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.ITask,
       protos.google.cloud.batch.v1.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTask(
@@ -673,7 +673,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.ITask,
       protos.google.cloud.batch.v1.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class BatchServiceClient {
         protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -792,7 +792,7 @@ export class BatchServiceClient {
         protos.google.cloud.batch.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -856,6 +856,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -879,7 +882,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.IJob[],
       protos.google.cloud.batch.v1.IListJobsRequest | null,
-      protos.google.cloud.batch.v1.IListJobsResponse
+      protos.google.cloud.batch.v1.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -917,7 +920,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.IJob[],
       protos.google.cloud.batch.v1.IListJobsRequest | null,
-      protos.google.cloud.batch.v1.IListJobsResponse
+      protos.google.cloud.batch.v1.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -947,6 +950,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -994,6 +1000,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1067,7 +1076,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.ITask[],
       protos.google.cloud.batch.v1.IListTasksRequest | null,
-      protos.google.cloud.batch.v1.IListTasksResponse
+      protos.google.cloud.batch.v1.IListTasksResponse,
     ]
   >;
   listTasks(
@@ -1105,7 +1114,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1.ITask[],
       protos.google.cloud.batch.v1.IListTasksRequest | null,
-      protos.google.cloud.batch.v1.IListTasksResponse
+      protos.google.cloud.batch.v1.IListTasksResponse,
     ]
   > | void {
     request = request || {};
