@@ -537,12 +537,12 @@ export class SessionsClient {
    * @param {google.cloud.dialogflow.v2.QueryInput} request.queryInput
    *   Required. The input specification. It can be set to:
    *
-   *   1.  an audio config
-   *       which instructs the speech recognizer how to process the speech audio,
+   *   1. an audio config which instructs the speech recognizer how to process
+   *   the speech audio,
    *
-   *   2.  a conversational query in the form of text, or
+   *   2. a conversational query in the form of text, or
    *
-   *   3.  an event that specifies which intent to trigger.
+   *   3. an event that specifies which intent to trigger.
    * @param {google.cloud.dialogflow.v2.OutputAudioConfig} request.outputAudioConfig
    *   Instructs the speech synthesizer how to generate the output
    *   audio. If this field is not set and agent-level speech synthesizer is not
@@ -576,7 +576,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
       protos.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detectIntent(
@@ -616,7 +616,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
       protos.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

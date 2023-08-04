@@ -1833,7 +1833,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboard,
       protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTensorboard(
@@ -1879,7 +1879,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboard,
       protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1928,7 +1928,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardUsageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   readTensorboardUsage(
@@ -1977,7 +1977,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardUsageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2026,7 +2026,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   readTensorboardSize(
@@ -2075,7 +2075,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardSizeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2132,7 +2132,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTensorboardExperiment(
@@ -2181,7 +2181,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2234,7 +2234,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTensorboardExperiment(
@@ -2283,7 +2283,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2343,7 +2343,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTensorboardExperiment(
@@ -2392,7 +2392,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2454,7 +2454,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTensorboardRun(
@@ -2503,7 +2503,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2557,7 +2557,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateTensorboardRuns(
@@ -2606,7 +2606,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2659,7 +2659,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTensorboardRun(
@@ -2708,7 +2708,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2764,7 +2764,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTensorboardRun(
@@ -2813,7 +2813,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2869,7 +2869,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateTensorboardTimeSeries(
@@ -2918,7 +2918,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2979,7 +2979,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTensorboardTimeSeries(
@@ -3028,7 +3028,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3081,7 +3081,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTensorboardTimeSeries(
@@ -3130,7 +3130,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3191,7 +3191,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTensorboardTimeSeries(
@@ -3240,7 +3240,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3305,7 +3305,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchReadTensorboardTimeSeriesData(
@@ -3354,7 +3354,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3418,7 +3418,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   readTensorboardTimeSeriesData(
@@ -3467,7 +3467,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3523,7 +3523,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeTensorboardExperimentData(
@@ -3572,7 +3572,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3632,7 +3632,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeTensorboardRunData(
@@ -3681,7 +3681,7 @@ export class TensorboardServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3777,7 +3777,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTensorboard(
@@ -3830,7 +3830,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3922,7 +3922,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTensorboard(
@@ -3975,7 +3975,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4060,7 +4060,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTensorboard(
@@ -4113,7 +4113,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4198,7 +4198,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTensorboardExperiment(
@@ -4251,7 +4251,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4340,7 +4340,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTensorboardRun(
@@ -4393,7 +4393,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4478,7 +4478,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTensorboardTimeSeries(
@@ -4531,7 +4531,7 @@ export class TensorboardServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4637,7 +4637,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboard[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse,
     ]
   >;
   listTensorboards(
@@ -4683,7 +4683,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboard[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse,
     ]
   > | void {
     request = request || {};
@@ -4874,7 +4874,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse,
     ]
   >;
   listTensorboardExperiments(
@@ -4920,7 +4920,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse,
     ]
   > | void {
     request = request || {};
@@ -5115,7 +5115,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse,
     ]
   >;
   listTensorboardRuns(
@@ -5161,7 +5161,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse,
     ]
   > | void {
     request = request || {};
@@ -5352,7 +5352,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse,
     ]
   >;
   listTensorboardTimeSeries(
@@ -5398,7 +5398,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[],
       protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse,
     ]
   > | void {
     request = request || {};
@@ -5593,7 +5593,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[],
       protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
+      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse,
     ]
   >;
   exportTensorboardTimeSeriesData(
@@ -5639,7 +5639,7 @@ export class TensorboardServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[],
       protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
+      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse,
     ]
   > | void {
     request = request || {};

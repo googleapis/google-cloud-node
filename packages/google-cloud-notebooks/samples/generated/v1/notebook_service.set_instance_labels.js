@@ -37,7 +37,7 @@ function main(name) {
    *  Labels to apply to this instance.
    *  These can be later modified by the setLabels method
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1;

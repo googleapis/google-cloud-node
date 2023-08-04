@@ -519,9 +519,8 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.networkconnectivity.v1alpha1.Hub | Hub}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.get_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetHub_async
@@ -536,7 +535,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHub(
@@ -585,7 +584,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetHubRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -616,9 +615,8 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.networkconnectivity.v1alpha1.Spoke | Spoke}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.get_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_GetSpoke_async
@@ -633,7 +631,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSpoke(
@@ -682,7 +680,7 @@ export class HubServiceClient {
         | protos.google.cloud.networkconnectivity.v1alpha1.IGetSpokeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -735,8 +733,7 @@ export class HubServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
@@ -751,7 +748,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createHub(
@@ -804,7 +801,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -831,8 +828,7 @@ export class HubServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.create_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateHub_async
@@ -893,8 +889,7 @@ export class HubServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
@@ -909,7 +904,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateHub(
@@ -962,7 +957,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -989,8 +984,7 @@ export class HubServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.update_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateHub_async
@@ -1045,8 +1039,7 @@ export class HubServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
@@ -1061,7 +1054,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteHub(
@@ -1114,7 +1107,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1141,8 +1134,7 @@ export class HubServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_hub.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteHub_async
@@ -1201,8 +1193,7 @@ export class HubServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
@@ -1217,7 +1208,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSpoke(
@@ -1270,7 +1261,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1297,8 +1288,7 @@ export class HubServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.create_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_async
@@ -1359,8 +1349,7 @@ export class HubServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
@@ -1375,7 +1364,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSpoke(
@@ -1428,7 +1417,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1455,8 +1444,7 @@ export class HubServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.update_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_UpdateSpoke_async
@@ -1511,8 +1499,7 @@ export class HubServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
@@ -1527,7 +1514,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSpoke(
@@ -1580,7 +1567,7 @@ export class HubServiceClient {
         protos.google.cloud.networkconnectivity.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1607,8 +1594,7 @@ export class HubServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.delete_spoke.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_DeleteSpoke_async
@@ -1654,14 +1640,13 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.networkconnectivity.v1alpha1.Hub | Hub}.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listHubsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listHubs(
@@ -1671,7 +1656,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
     ]
   >;
   listHubs(
@@ -1717,7 +1702,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.IHub[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListHubsResponse,
     ]
   > | void {
     request = request || {};
@@ -1756,13 +1741,12 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.networkconnectivity.v1alpha1.Hub | Hub} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listHubsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listHubsStream(
@@ -1806,12 +1790,11 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.networkconnectivity.v1alpha1.Hub | Hub}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.networkconnectivity.v1alpha1.Hub|Hub}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.list_hubs.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListHubs_async
@@ -1855,14 +1838,13 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.networkconnectivity.v1alpha1.Spoke | Spoke}.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSpokesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSpokes(
@@ -1872,7 +1854,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
     ]
   >;
   listSpokes(
@@ -1918,7 +1900,7 @@ export class HubServiceClient {
     [
       protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[],
       protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest | null,
-      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse
+      protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesResponse,
     ]
   > | void {
     request = request || {};
@@ -1957,13 +1939,12 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.networkconnectivity.v1alpha1.Spoke | Spoke} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSpokesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSpokesStream(
@@ -2007,12 +1988,11 @@ export class HubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.networkconnectivity.v1alpha1.Spoke | Spoke}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.networkconnectivity.v1alpha1.Spoke|Spoke}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/hub_service.list_spokes.js</caption>
    * region_tag:networkconnectivity_v1alpha1_generated_HubService_ListSpokes_async

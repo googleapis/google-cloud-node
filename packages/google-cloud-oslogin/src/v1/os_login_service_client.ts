@@ -345,9 +345,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.oslogin.common.SshPublicKey | SshPublicKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.create_ssh_public_key.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_CreateSshPublicKey_async
@@ -359,7 +358,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSshPublicKey(
@@ -405,7 +404,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -438,9 +437,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.delete_posix_account.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_DeletePosixAccount_async
@@ -452,7 +450,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePosixAccount(
@@ -498,7 +496,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -531,9 +529,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.delete_ssh_public_key.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_DeleteSshPublicKey_async
@@ -545,7 +542,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSshPublicKey(
@@ -591,7 +588,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -627,9 +624,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.oslogin.v1.LoginProfile | LoginProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1.LoginProfile|LoginProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.get_login_profile.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_GetLoginProfile_async
@@ -641,7 +637,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.ILoginProfile,
       protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLoginProfile(
@@ -681,7 +677,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.ILoginProfile,
       protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -714,9 +710,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.oslogin.common.SshPublicKey | SshPublicKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.get_ssh_public_key.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_GetSshPublicKey_async
@@ -728,7 +723,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSshPublicKey(
@@ -768,7 +763,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -805,9 +800,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.oslogin.v1.ImportSshPublicKeyResponse | ImportSshPublicKeyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1.ImportSshPublicKeyResponse|ImportSshPublicKeyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.import_ssh_public_key.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_ImportSshPublicKey_async
@@ -819,7 +813,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importSshPublicKey(
@@ -865,7 +859,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -903,9 +897,8 @@ export class OsLoginServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.oslogin.common.SshPublicKey | SshPublicKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.common.SshPublicKey|SshPublicKey}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_login_service.update_ssh_public_key.js</caption>
    * region_tag:oslogin_v1_generated_OsLoginService_UpdateSshPublicKey_async
@@ -917,7 +910,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSshPublicKey(
@@ -963,7 +956,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

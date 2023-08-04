@@ -1722,7 +1722,7 @@ export class PersistentResourceServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetPersistentResourceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPersistentResource(
@@ -1771,7 +1771,7 @@ export class PersistentResourceServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetPersistentResourceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1830,7 +1830,7 @@ export class PersistentResourceServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreatePersistentResourceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPersistentResource(
@@ -1883,7 +1883,7 @@ export class PersistentResourceServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreatePersistentResourceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1972,7 +1972,7 @@ export class PersistentResourceServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePersistentResource(
@@ -2025,7 +2025,7 @@ export class PersistentResourceServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2118,7 +2118,7 @@ export class PersistentResourceServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPersistentResource[],
       protos.google.cloud.aiplatform.v1beta1.IListPersistentResourcesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListPersistentResourcesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListPersistentResourcesResponse,
     ]
   >;
   listPersistentResources(
@@ -2164,7 +2164,7 @@ export class PersistentResourceServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IPersistentResource[],
       protos.google.cloud.aiplatform.v1beta1.IListPersistentResourcesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListPersistentResourcesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListPersistentResourcesResponse,
     ]
   > | void {
     request = request || {};

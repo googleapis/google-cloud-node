@@ -40,6 +40,12 @@ function main(projectId, triggerId, trigger) {
    *  Required. `BuildTrigger` to update.
    */
   // const trigger = {}
+  /**
+   *  Update mask for the resource. If this is set,
+   *  the server will only update the fields specified in the field mask.
+   *  Otherwise, a full update of the mutable resource fields will be performed.
+   */
+  // const updateMask = {}
 
   // Imports the Cloudbuild library
   const {CloudBuildClient} = require('@google-cloud/cloudbuild').v1;

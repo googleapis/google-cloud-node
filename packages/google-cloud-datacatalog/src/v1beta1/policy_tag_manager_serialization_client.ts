@@ -373,7 +373,7 @@ export class PolicyTagManagerSerializationClient {
         | protos.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importTaxonomies(
@@ -422,7 +422,7 @@ export class PolicyTagManagerSerializationClient {
         | protos.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -477,7 +477,7 @@ export class PolicyTagManagerSerializationClient {
         | protos.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportTaxonomies(
@@ -526,7 +526,7 @@ export class PolicyTagManagerSerializationClient {
         | protos.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
