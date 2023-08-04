@@ -682,7 +682,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IService,
       protos.google.cloud.metastore.v1beta.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -728,7 +728,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IService,
       protos.google.cloud.metastore.v1beta.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -778,7 +778,7 @@ export class DataprocMetastoreClient {
         | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetadataImport(
@@ -827,7 +827,7 @@ export class DataprocMetastoreClient {
         | protos.google.cloud.metastore.v1beta.IGetMetadataImportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -874,7 +874,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IBackup,
       protos.google.cloud.metastore.v1beta.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -914,7 +914,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IBackup,
       protos.google.cloud.metastore.v1beta.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -966,7 +966,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
       protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeIamPolicy(
@@ -1012,7 +1012,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
       protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1089,7 +1089,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createService(
@@ -1142,7 +1142,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1247,7 +1247,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateService(
@@ -1300,7 +1300,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1399,7 +1399,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteService(
@@ -1452,7 +1452,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1562,7 +1562,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMetadataImport(
@@ -1615,7 +1615,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1721,7 +1721,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMetadataImport(
@@ -1774,7 +1774,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1880,7 +1880,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportMetadata(
@@ -1933,7 +1933,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2039,7 +2039,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreService(
@@ -2092,7 +2092,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2201,7 +2201,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -2254,7 +2254,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2353,7 +2353,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -2406,7 +2406,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2495,7 +2495,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   queryMetadata(
@@ -2548,7 +2548,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2640,7 +2640,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveTableToDatabase(
@@ -2693,7 +2693,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2792,7 +2792,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   alterMetadataResourceLocation(
@@ -2845,7 +2845,7 @@ export class DataprocMetastoreClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2954,7 +2954,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IService[],
       protos.google.cloud.metastore.v1beta.IListServicesRequest | null,
-      protos.google.cloud.metastore.v1beta.IListServicesResponse
+      protos.google.cloud.metastore.v1beta.IListServicesResponse,
     ]
   >;
   listServices(
@@ -3000,7 +3000,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IService[],
       protos.google.cloud.metastore.v1beta.IListServicesRequest | null,
-      protos.google.cloud.metastore.v1beta.IListServicesResponse
+      protos.google.cloud.metastore.v1beta.IListServicesResponse,
     ]
   > | void {
     request = request || {};
@@ -3199,7 +3199,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IMetadataImport[],
       protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
+      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse,
     ]
   >;
   listMetadataImports(
@@ -3245,7 +3245,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IMetadataImport[],
       protos.google.cloud.metastore.v1beta.IListMetadataImportsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse
+      protos.google.cloud.metastore.v1beta.IListMetadataImportsResponse,
     ]
   > | void {
     request = request || {};
@@ -3442,7 +3442,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IBackup[],
       protos.google.cloud.metastore.v1beta.IListBackupsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListBackupsResponse
+      protos.google.cloud.metastore.v1beta.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -3488,7 +3488,7 @@ export class DataprocMetastoreClient {
     [
       protos.google.cloud.metastore.v1beta.IBackup[],
       protos.google.cloud.metastore.v1beta.IListBackupsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListBackupsResponse
+      protos.google.cloud.metastore.v1beta.IListBackupsResponse,
     ]
   > | void {
     request = request || {};

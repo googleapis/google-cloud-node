@@ -547,7 +547,7 @@ export class DataprocMetastoreFederationClient {
     [
       protos.google.cloud.metastore.v1beta.IFederation,
       protos.google.cloud.metastore.v1beta.IGetFederationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFederation(
@@ -593,7 +593,7 @@ export class DataprocMetastoreFederationClient {
     [
       protos.google.cloud.metastore.v1beta.IFederation,
       protos.google.cloud.metastore.v1beta.IGetFederationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -670,7 +670,7 @@ export class DataprocMetastoreFederationClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFederation(
@@ -723,7 +723,7 @@ export class DataprocMetastoreFederationClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -828,7 +828,7 @@ export class DataprocMetastoreFederationClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFederation(
@@ -881,7 +881,7 @@ export class DataprocMetastoreFederationClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -980,7 +980,7 @@ export class DataprocMetastoreFederationClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFederation(
@@ -1033,7 +1033,7 @@ export class DataprocMetastoreFederationClient {
         protos.google.cloud.metastore.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1136,7 +1136,7 @@ export class DataprocMetastoreFederationClient {
     [
       protos.google.cloud.metastore.v1beta.IFederation[],
       protos.google.cloud.metastore.v1beta.IListFederationsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListFederationsResponse
+      protos.google.cloud.metastore.v1beta.IListFederationsResponse,
     ]
   >;
   listFederations(
@@ -1182,7 +1182,7 @@ export class DataprocMetastoreFederationClient {
     [
       protos.google.cloud.metastore.v1beta.IFederation[],
       protos.google.cloud.metastore.v1beta.IListFederationsRequest | null,
-      protos.google.cloud.metastore.v1beta.IListFederationsResponse
+      protos.google.cloud.metastore.v1beta.IListFederationsResponse,
     ]
   > | void {
     request = request || {};

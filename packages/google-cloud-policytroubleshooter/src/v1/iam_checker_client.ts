@@ -334,7 +334,7 @@ export class IamCheckerClient {
         | protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   troubleshootIamPolicy(
@@ -383,7 +383,7 @@ export class IamCheckerClient {
         | protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -786,7 +786,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAsset(
@@ -832,7 +832,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -897,7 +897,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAsset(
@@ -943,7 +943,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset,
       protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -993,7 +993,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateAssets(
@@ -1042,7 +1042,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1100,7 +1100,7 @@ export class MigrationCenterClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAsset(
@@ -1146,7 +1146,7 @@ export class MigrationCenterClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1201,7 +1201,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteAssets(
@@ -1250,7 +1250,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1301,7 +1301,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportAssetFrames(
@@ -1350,7 +1350,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1402,7 +1402,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   aggregateAssetsValues(
@@ -1451,7 +1451,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1498,7 +1498,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob,
       protos.google.cloud.migrationcenter.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getImportJob(
@@ -1544,7 +1544,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob,
       protos.google.cloud.migrationcenter.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1591,7 +1591,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getImportDataFile(
@@ -1640,7 +1640,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1684,7 +1684,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup,
       protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGroup(
@@ -1730,7 +1730,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup,
       protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1779,7 +1779,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame,
       protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getErrorFrame(
@@ -1825,7 +1825,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame,
       protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1869,7 +1869,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource,
       protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSource(
@@ -1915,7 +1915,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource,
       protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1962,7 +1962,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPreferenceSet(
@@ -2011,7 +2011,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2055,7 +2055,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISettings,
       protos.google.cloud.migrationcenter.v1.IGetSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSettings(
@@ -2101,7 +2101,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISettings,
       protos.google.cloud.migrationcenter.v1.IGetSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2148,7 +2148,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReportConfig(
@@ -2197,7 +2197,7 @@ export class MigrationCenterClient {
         | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2243,7 +2243,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport,
       protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReport(
@@ -2289,7 +2289,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport,
       protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2357,7 +2357,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createImportJob(
@@ -2410,7 +2410,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2511,7 +2511,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteImportJob(
@@ -2564,7 +2564,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2668,7 +2668,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateImportJob(
@@ -2721,7 +2721,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2818,7 +2818,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateImportJob(
@@ -2871,7 +2871,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2968,7 +2968,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runImportJob(
@@ -3021,7 +3021,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3122,7 +3122,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createImportDataFile(
@@ -3175,7 +3175,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3272,7 +3272,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteImportDataFile(
@@ -3325,7 +3325,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3430,7 +3430,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGroup(
@@ -3483,7 +3483,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3586,7 +3586,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGroup(
@@ -3639,7 +3639,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3736,7 +3736,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGroup(
@@ -3789,7 +3789,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3897,7 +3897,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addAssetsToGroup(
@@ -3950,7 +3950,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4057,7 +4057,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeAssetsFromGroup(
@@ -4110,7 +4110,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4215,7 +4215,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSource(
@@ -4268,7 +4268,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4372,7 +4372,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSource(
@@ -4425,7 +4425,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4522,7 +4522,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSource(
@@ -4575,7 +4575,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4681,7 +4681,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPreferenceSet(
@@ -4734,7 +4734,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4838,7 +4838,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePreferenceSet(
@@ -4891,7 +4891,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4988,7 +4988,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePreferenceSet(
@@ -5041,7 +5041,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5145,7 +5145,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSettings(
@@ -5198,7 +5198,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5303,7 +5303,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReportConfig(
@@ -5356,7 +5356,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5457,7 +5457,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReportConfig(
@@ -5510,7 +5510,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5615,7 +5615,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReport(
@@ -5668,7 +5668,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5765,7 +5765,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReport(
@@ -5818,7 +5818,7 @@ export class MigrationCenterClient {
         protos.google.cloud.migrationcenter.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5910,7 +5910,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset[],
       protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -5956,7 +5956,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IAsset[],
       protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+      protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};
@@ -6118,7 +6118,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob[],
       protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
     ]
   >;
   listImportJobs(
@@ -6164,7 +6164,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportJob[],
       protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+      protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -6331,7 +6331,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportDataFile[],
       protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
     ]
   >;
   listImportDataFiles(
@@ -6377,7 +6377,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IImportDataFile[],
       protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+      protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
     ]
   > | void {
     request = request || {};
@@ -6544,7 +6544,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup[],
       protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
     ]
   >;
   listGroups(
@@ -6590,7 +6590,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IGroup[],
       protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+      protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -6744,7 +6744,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame[],
       protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
     ]
   >;
   listErrorFrames(
@@ -6790,7 +6790,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IErrorFrame[],
       protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+      protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
     ]
   > | void {
     request = request || {};
@@ -6943,7 +6943,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource[],
       protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
     ]
   >;
   listSources(
@@ -6989,7 +6989,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.ISource[],
       protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+      protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -7143,7 +7143,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
       protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
     ]
   >;
   listPreferenceSets(
@@ -7189,7 +7189,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
       protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+      protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
     ]
   > | void {
     request = request || {};
@@ -7342,7 +7342,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReportConfig[],
       protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
     ]
   >;
   listReportConfigs(
@@ -7388,7 +7388,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReportConfig[],
       protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -7545,7 +7545,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport[],
       protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportsResponse,
     ]
   >;
   listReports(
@@ -7591,7 +7591,7 @@ export class MigrationCenterClient {
     [
       protos.google.cloud.migrationcenter.v1.IReport[],
       protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
-      protos.google.cloud.migrationcenter.v1.IListReportsResponse
+      protos.google.cloud.migrationcenter.v1.IListReportsResponse,
     ]
   > | void {
     request = request || {};

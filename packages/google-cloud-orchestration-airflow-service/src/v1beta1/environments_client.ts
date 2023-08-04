@@ -495,7 +495,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IGetEnvironmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -544,7 +544,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IGetEnvironmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -601,7 +601,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   executeAirflowCommand(
@@ -650,7 +650,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -707,7 +707,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopAirflowCommand(
@@ -756,7 +756,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IStopAirflowCommandRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -812,7 +812,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pollAirflowCommand(
@@ -861,7 +861,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -909,7 +909,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchDatabaseProperties(
@@ -958,7 +958,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.orchestration.airflow.service.v1beta1.IFetchDatabasePropertiesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1015,7 +1015,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEnvironment(
@@ -1068,7 +1068,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1300,7 +1300,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEnvironment(
@@ -1353,7 +1353,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1437,7 +1437,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEnvironment(
@@ -1490,7 +1490,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1575,7 +1575,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restartWebServer(
@@ -1628,7 +1628,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1740,7 +1740,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkUpgrade(
@@ -1793,7 +1793,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1883,7 +1883,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   saveSnapshot(
@@ -1936,7 +1936,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2038,7 +2038,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   loadSnapshot(
@@ -2091,7 +2091,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2175,7 +2175,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   databaseFailover(
@@ -2228,7 +2228,7 @@ export class EnvironmentsClient {
         protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2314,7 +2314,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[],
       protos.google.cloud.orchestration.airflow.service.v1beta1.IListEnvironmentsRequest | null,
-      protos.google.cloud.orchestration.airflow.service.v1beta1.IListEnvironmentsResponse
+      protos.google.cloud.orchestration.airflow.service.v1beta1.IListEnvironmentsResponse,
     ]
   >;
   listEnvironments(
@@ -2360,7 +2360,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment[],
       protos.google.cloud.orchestration.airflow.service.v1beta1.IListEnvironmentsRequest | null,
-      protos.google.cloud.orchestration.airflow.service.v1beta1.IListEnvironmentsResponse
+      protos.google.cloud.orchestration.airflow.service.v1beta1.IListEnvironmentsResponse,
     ]
   > | void {
     request = request || {};
