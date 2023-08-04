@@ -583,7 +583,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.IGetConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversationProfile(
@@ -632,7 +632,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.IGetConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -691,7 +691,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversationProfile(
@@ -740,7 +740,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -798,7 +798,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConversationProfile(
@@ -847,7 +847,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -900,7 +900,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversationProfile(
@@ -949,7 +949,7 @@ export class ConversationProfilesClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteConversationProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1027,7 +1027,7 @@ export class ConversationProfilesClient {
         protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setSuggestionFeatureConfig(
@@ -1080,7 +1080,7 @@ export class ConversationProfilesClient {
         protos.google.cloud.dialogflow.v2beta1.ISetSuggestionFeatureConfigOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1184,7 +1184,7 @@ export class ConversationProfilesClient {
         protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   clearSuggestionFeatureConfig(
@@ -1237,7 +1237,7 @@ export class ConversationProfilesClient {
         protos.google.cloud.dialogflow.v2beta1.IClearSuggestionFeatureConfigOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1328,7 +1328,7 @@ export class ConversationProfilesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IConversationProfile[],
       protos.google.cloud.dialogflow.v2beta1.IListConversationProfilesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListConversationProfilesResponse
+      protos.google.cloud.dialogflow.v2beta1.IListConversationProfilesResponse,
     ]
   >;
   listConversationProfiles(
@@ -1374,7 +1374,7 @@ export class ConversationProfilesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IConversationProfile[],
       protos.google.cloud.dialogflow.v2beta1.IListConversationProfilesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListConversationProfilesResponse
+      protos.google.cloud.dialogflow.v2beta1.IListConversationProfilesResponse,
     ]
   > | void {
     request = request || {};

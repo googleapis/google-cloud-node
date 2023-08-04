@@ -604,7 +604,7 @@ export class DocumentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IDocument,
       protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocument(
@@ -650,7 +650,7 @@ export class DocumentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IDocument,
       protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -718,7 +718,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocument(
@@ -771,7 +771,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -879,7 +879,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importDocuments(
@@ -932,7 +932,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1029,7 +1029,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocument(
@@ -1082,7 +1082,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1180,7 +1180,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDocument(
@@ -1233,7 +1233,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1341,7 +1341,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reloadDocument(
@@ -1394,7 +1394,7 @@ export class DocumentsClient {
         protos.google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1507,7 +1507,7 @@ export class DocumentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IDocument[],
       protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse,
     ]
   >;
   listDocuments(
@@ -1553,7 +1553,7 @@ export class DocumentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IDocument[],
       protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListDocumentsResponse,
     ]
   > | void {
     request = request || {};
