@@ -125,7 +125,7 @@
     "test": "c8 node build/test/run.js"
   },
   "dependencies": {
-    "google-gax": "^4.0.1"
+    "google-gax": "^4.0.3"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -133,7 +133,7 @@
     "@types/sinon": "^10.0.2",
     "c8": "^7.7.3",
     "chai": "^4.3.4",
-    "gapic-tools": "^0.1.7",
+    "gapic-tools": "^0.1.8",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
@@ -146,9 +146,7 @@
     "sinon": "^15.0.0",
     "ts-loader": "^9.2.3",
     "typescript": "^5.1.6",
-    "uuid": "^9.0.0",
-    "webpack": "^5.39.1",
-    "webpack-cli": "^5.0.0"
+    "uuid": "^9.0.0"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-compute"
 }

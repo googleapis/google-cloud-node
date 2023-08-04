@@ -50,7 +50,7 @@
     "@types/node": "^20.4.5",
     "@types/sinon": "^10.0.13",
     "c8": "^8.0.1",
-    "gts": "^3.1.1",
+    "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.1",
     "jsdoc-region-tag": "^2.0.1",
@@ -61,9 +61,7 @@
     "pack-n-play": "^1.0.0-2",
     "sinon": "^15.0.1",
     "ts-loader": "^9.0.0",
-    "typescript": "^5.1.6",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^4.10.0"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -375,7 +375,7 @@ export class DiscussServiceClient {
         | protos.google.ai.generativelanguage.v1beta2.IGenerateMessageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateMessage(
@@ -424,7 +424,7 @@ export class DiscussServiceClient {
         | protos.google.ai.generativelanguage.v1beta2.IGenerateMessageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -478,7 +478,7 @@ export class DiscussServiceClient {
         | protos.google.ai.generativelanguage.v1beta2.ICountMessageTokensRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   countMessageTokens(
@@ -527,7 +527,7 @@ export class DiscussServiceClient {
         | protos.google.ai.generativelanguage.v1beta2.ICountMessageTokensRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

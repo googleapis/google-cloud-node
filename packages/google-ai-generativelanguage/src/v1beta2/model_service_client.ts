@@ -352,7 +352,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel,
       protos.google.ai.generativelanguage.v1beta2.IGetModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getModel(
@@ -398,7 +398,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel,
       protos.google.ai.generativelanguage.v1beta2.IGetModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -459,7 +459,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel[],
       protos.google.ai.generativelanguage.v1beta2.IListModelsRequest | null,
-      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse
+      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse,
     ]
   >;
   listModels(
@@ -505,7 +505,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel[],
       protos.google.ai.generativelanguage.v1beta2.IListModelsRequest | null,
-      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse
+      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse,
     ]
   > | void {
     request = request || {};
