@@ -411,7 +411,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IExecutePatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   executePatchJob(
@@ -457,7 +457,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IExecutePatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -502,7 +502,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IGetPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPatchJob(
@@ -548,7 +548,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IGetPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -593,7 +593,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.ICancelPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelPatchJob(
@@ -639,7 +639,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.ICancelPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -696,7 +696,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ICreatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPatchDeployment(
@@ -745,7 +745,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ICreatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -793,7 +793,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IGetPatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPatchDeployment(
@@ -842,7 +842,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IGetPatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -890,7 +890,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IDeletePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePatchDeployment(
@@ -939,7 +939,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IDeletePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -989,7 +989,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IUpdatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePatchDeployment(
@@ -1038,7 +1038,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IUpdatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1087,7 +1087,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IPausePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pausePatchDeployment(
@@ -1136,7 +1136,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IPausePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1185,7 +1185,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IResumePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumePatchDeployment(
@@ -1234,7 +1234,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IResumePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1290,7 +1290,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.ICreateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGuestPolicy(
@@ -1336,7 +1336,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.ICreateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1381,7 +1381,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IGetGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGuestPolicy(
@@ -1427,7 +1427,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IGetGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1474,7 +1474,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IUpdateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGuestPolicy(
@@ -1520,7 +1520,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IUpdateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1565,7 +1565,7 @@ export class OsConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.osconfig.v1beta.IDeleteGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGuestPolicy(
@@ -1611,7 +1611,7 @@ export class OsConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.osconfig.v1beta.IDeleteGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1671,7 +1671,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ILookupEffectiveGuestPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lookupEffectiveGuestPolicy(
@@ -1720,7 +1720,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ILookupEffectiveGuestPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1781,7 +1781,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse,
     ]
   >;
   listPatchJobs(
@@ -1827,7 +1827,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1982,7 +1982,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJobInstanceDetails[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse,
     ]
   >;
   listPatchJobInstanceDetails(
@@ -2028,7 +2028,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJobInstanceDetails[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -2183,7 +2183,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchDeployment[],
       protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse,
     ]
   >;
   listPatchDeployments(
@@ -2229,7 +2229,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchDeployment[],
       protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse,
     ]
   > | void {
     request = request || {};
@@ -2373,7 +2373,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy[],
       protos.google.cloud.osconfig.v1beta.IListGuestPoliciesRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse
+      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse,
     ]
   >;
   listGuestPolicies(
@@ -2419,7 +2419,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy[],
       protos.google.cloud.osconfig.v1beta.IListGuestPoliciesRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse
+      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse,
     ]
   > | void {
     request = request || {};

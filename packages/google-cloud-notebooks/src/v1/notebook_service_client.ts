@@ -775,7 +775,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance,
       protos.google.cloud.notebooks.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -815,7 +815,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance,
       protos.google.cloud.notebooks.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -865,7 +865,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstanceMetadataItems(
@@ -914,7 +914,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -969,7 +969,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IIsInstanceUpgradeableRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   isInstanceUpgradeable(
@@ -1018,7 +1018,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IIsInstanceUpgradeableRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1063,7 +1063,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IGetInstanceHealthResponse,
       protos.google.cloud.notebooks.v1.IGetInstanceHealthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstanceHealth(
@@ -1109,7 +1109,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IGetInstanceHealthResponse,
       protos.google.cloud.notebooks.v1.IGetInstanceHealthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1154,7 +1154,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment,
       protos.google.cloud.notebooks.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -1200,7 +1200,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment,
       protos.google.cloud.notebooks.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1245,7 +1245,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule,
       protos.google.cloud.notebooks.v1.IGetScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSchedule(
@@ -1285,7 +1285,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule,
       protos.google.cloud.notebooks.v1.IGetScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1330,7 +1330,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution,
       protos.google.cloud.notebooks.v1.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExecution(
@@ -1370,7 +1370,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution,
       protos.google.cloud.notebooks.v1.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1425,7 +1425,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -1478,7 +1478,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1570,7 +1570,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerInstance(
@@ -1623,7 +1623,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1714,7 +1714,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInstanceAccelerator(
@@ -1767,7 +1767,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1858,7 +1858,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInstanceMachineType(
@@ -1911,7 +1911,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2001,7 +2001,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstanceConfig(
@@ -2054,7 +2054,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2140,7 +2140,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateShieldedInstanceConfig(
@@ -2193,7 +2193,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2284,7 +2284,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInstanceLabels(
@@ -2337,7 +2337,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2421,7 +2421,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -2474,7 +2474,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2558,7 +2558,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startInstance(
@@ -2611,7 +2611,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2695,7 +2695,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopInstance(
@@ -2748,7 +2748,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2832,7 +2832,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetInstance(
@@ -2885,7 +2885,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2978,7 +2978,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportInstanceInfo(
@@ -3031,7 +3031,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3118,7 +3118,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeInstance(
@@ -3171,7 +3171,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3258,7 +3258,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackInstance(
@@ -3311,7 +3311,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3397,7 +3397,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   diagnoseInstance(
@@ -3450,7 +3450,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3541,7 +3541,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeInstanceInternal(
@@ -3594,7 +3594,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3688,7 +3688,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEnvironment(
@@ -3741,7 +3741,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3825,7 +3825,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEnvironment(
@@ -3878,7 +3878,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3962,7 +3962,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSchedule(
@@ -4015,7 +4015,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4103,7 +4103,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSchedule(
@@ -4156,7 +4156,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4240,7 +4240,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   triggerSchedule(
@@ -4293,7 +4293,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4377,7 +4377,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteExecution(
@@ -4430,7 +4430,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4518,7 +4518,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExecution(
@@ -4571,7 +4571,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4658,7 +4658,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance[],
       protos.google.cloud.notebooks.v1.IListInstancesRequest | null,
-      protos.google.cloud.notebooks.v1.IListInstancesResponse
+      protos.google.cloud.notebooks.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -4704,7 +4704,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance[],
       protos.google.cloud.notebooks.v1.IListInstancesRequest | null,
-      protos.google.cloud.notebooks.v1.IListInstancesResponse
+      protos.google.cloud.notebooks.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -4849,7 +4849,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment[],
       protos.google.cloud.notebooks.v1.IListEnvironmentsRequest | null,
-      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse
+      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse,
     ]
   >;
   listEnvironments(
@@ -4895,7 +4895,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment[],
       protos.google.cloud.notebooks.v1.IListEnvironmentsRequest | null,
-      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse
+      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -5043,7 +5043,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule[],
       protos.google.cloud.notebooks.v1.IListSchedulesRequest | null,
-      protos.google.cloud.notebooks.v1.IListSchedulesResponse
+      protos.google.cloud.notebooks.v1.IListSchedulesResponse,
     ]
   >;
   listSchedules(
@@ -5089,7 +5089,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule[],
       protos.google.cloud.notebooks.v1.IListSchedulesRequest | null,
-      protos.google.cloud.notebooks.v1.IListSchedulesResponse
+      protos.google.cloud.notebooks.v1.IListSchedulesResponse,
     ]
   > | void {
     request = request || {};
@@ -5249,7 +5249,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution[],
       protos.google.cloud.notebooks.v1.IListExecutionsRequest | null,
-      protos.google.cloud.notebooks.v1.IListExecutionsResponse
+      protos.google.cloud.notebooks.v1.IListExecutionsResponse,
     ]
   >;
   listExecutions(
@@ -5295,7 +5295,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution[],
       protos.google.cloud.notebooks.v1.IListExecutionsRequest | null,
-      protos.google.cloud.notebooks.v1.IListExecutionsResponse
+      protos.google.cloud.notebooks.v1.IListExecutionsResponse,
     ]
   > | void {
     request = request || {};

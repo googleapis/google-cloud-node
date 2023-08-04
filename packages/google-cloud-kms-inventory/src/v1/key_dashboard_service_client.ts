@@ -387,7 +387,7 @@ export class KeyDashboardServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey[],
       protos.google.cloud.kms.inventory.v1.IListCryptoKeysRequest | null,
-      protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse
+      protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse,
     ]
   >;
   listCryptoKeys(
@@ -433,7 +433,7 @@ export class KeyDashboardServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey[],
       protos.google.cloud.kms.inventory.v1.IListCryptoKeysRequest | null,
-      protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse
+      protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse,
     ]
   > | void {
     request = request || {};

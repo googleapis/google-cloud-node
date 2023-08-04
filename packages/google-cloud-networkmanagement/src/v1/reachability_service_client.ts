@@ -491,7 +491,7 @@ export class ReachabilityServiceClient {
         | protos.google.cloud.networkmanagement.v1.IGetConnectivityTestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnectivityTest(
@@ -540,7 +540,7 @@ export class ReachabilityServiceClient {
         | protos.google.cloud.networkmanagement.v1.IGetConnectivityTestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -614,7 +614,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnectivityTest(
@@ -667,7 +667,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -770,7 +770,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConnectivityTest(
@@ -823,7 +823,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -922,7 +922,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rerunConnectivityTest(
@@ -975,7 +975,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1059,7 +1059,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnectivityTest(
@@ -1112,7 +1112,7 @@ export class ReachabilityServiceClient {
         protos.google.cloud.networkmanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1223,7 +1223,7 @@ export class ReachabilityServiceClient {
     [
       protos.google.cloud.networkmanagement.v1.IConnectivityTest[],
       protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest | null,
-      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
+      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse,
     ]
   >;
   listConnectivityTests(
@@ -1269,7 +1269,7 @@ export class ReachabilityServiceClient {
     [
       protos.google.cloud.networkmanagement.v1.IConnectivityTest[],
       protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest | null,
-      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
+      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse,
     ]
   > | void {
     request = request || {};

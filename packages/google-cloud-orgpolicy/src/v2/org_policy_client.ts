@@ -404,7 +404,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPolicy(
@@ -442,7 +442,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -491,7 +491,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEffectivePolicy(
@@ -537,7 +537,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -593,7 +593,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPolicy(
@@ -633,7 +633,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -689,7 +689,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePolicy(
@@ -729,7 +729,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -777,7 +777,7 @@ export class OrgPolicyClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePolicy(
@@ -817,7 +817,7 @@ export class OrgPolicyClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -877,7 +877,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IConstraint[],
       protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
     ]
   >;
   listConstraints(
@@ -923,7 +923,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IConstraint[],
       protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
     ]
   > | void {
     request = request || {};
@@ -1088,7 +1088,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy[],
       protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
     ]
   >;
   listPolicies(
@@ -1128,7 +1128,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy[],
       protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
     ]
   > | void {
     request = request || {};

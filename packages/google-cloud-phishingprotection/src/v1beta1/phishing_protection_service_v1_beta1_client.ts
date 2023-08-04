@@ -350,7 +350,7 @@ export class PhishingProtectionServiceV1Beta1Client {
         | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportPhishing(
@@ -399,7 +399,7 @@ export class PhishingProtectionServiceV1Beta1Client {
         | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

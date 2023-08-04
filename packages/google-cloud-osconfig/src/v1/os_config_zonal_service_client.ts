@@ -487,7 +487,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
       protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOSPolicyAssignment(
@@ -533,7 +533,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
       protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -589,7 +589,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOSPolicyAssignmentReport(
@@ -638,7 +638,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -697,7 +697,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory,
       protos.google.cloud.osconfig.v1.IGetInventoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInventory(
@@ -737,7 +737,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory,
       protos.google.cloud.osconfig.v1.IGetInventoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -792,7 +792,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetVulnerabilityReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVulnerabilityReport(
@@ -841,7 +841,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetVulnerabilityReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -915,7 +915,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createOSPolicyAssignment(
@@ -968,7 +968,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1066,7 +1066,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateOSPolicyAssignment(
@@ -1119,7 +1119,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1217,7 +1217,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteOSPolicyAssignment(
@@ -1270,7 +1270,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1363,7 +1363,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse,
     ]
   >;
   listOSPolicyAssignments(
@@ -1409,7 +1409,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -1559,7 +1559,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse,
     ]
   >;
   listOSPolicyAssignmentRevisions(
@@ -1605,7 +1605,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse,
     ]
   > | void {
     request = request || {};
@@ -1781,7 +1781,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse,
     ]
   >;
   listOSPolicyAssignmentReports(
@@ -1827,7 +1827,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse,
     ]
   > | void {
     request = request || {};
@@ -2033,7 +2033,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory[],
       protos.google.cloud.osconfig.v1.IListInventoriesRequest | null,
-      protos.google.cloud.osconfig.v1.IListInventoriesResponse
+      protos.google.cloud.osconfig.v1.IListInventoriesResponse,
     ]
   >;
   listInventories(
@@ -2079,7 +2079,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory[],
       protos.google.cloud.osconfig.v1.IListInventoriesRequest | null,
-      protos.google.cloud.osconfig.v1.IListInventoriesResponse
+      protos.google.cloud.osconfig.v1.IListInventoriesResponse,
     ]
   > | void {
     request = request || {};
@@ -2252,7 +2252,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IVulnerabilityReport[],
       protos.google.cloud.osconfig.v1.IListVulnerabilityReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse
+      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse,
     ]
   >;
   listVulnerabilityReports(
@@ -2298,7 +2298,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IVulnerabilityReport[],
       protos.google.cloud.osconfig.v1.IListVulnerabilityReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse
+      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse,
     ]
   > | void {
     request = request || {};

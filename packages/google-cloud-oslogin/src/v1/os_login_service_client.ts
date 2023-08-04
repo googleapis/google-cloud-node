@@ -358,7 +358,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSshPublicKey(
@@ -404,7 +404,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -450,7 +450,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePosixAccount(
@@ -496,7 +496,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -542,7 +542,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSshPublicKey(
@@ -588,7 +588,7 @@ export class OsLoginServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -637,7 +637,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.ILoginProfile,
       protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLoginProfile(
@@ -677,7 +677,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.ILoginProfile,
       protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -723,7 +723,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSshPublicKey(
@@ -763,7 +763,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -813,7 +813,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importSshPublicKey(
@@ -859,7 +859,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
       protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -910,7 +910,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSshPublicKey(
@@ -956,7 +956,7 @@ export class OsLoginServiceClient {
     [
       protos.google.cloud.oslogin.common.ISshPublicKey,
       protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

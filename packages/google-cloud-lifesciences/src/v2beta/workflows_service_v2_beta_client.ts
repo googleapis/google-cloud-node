@@ -427,7 +427,7 @@ export class WorkflowsServiceV2BetaClient {
         protos.google.cloud.lifesciences.v2beta.IMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runPipeline(
@@ -480,7 +480,7 @@ export class WorkflowsServiceV2BetaClient {
         protos.google.cloud.lifesciences.v2beta.IMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

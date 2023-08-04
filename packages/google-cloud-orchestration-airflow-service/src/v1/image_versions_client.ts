@@ -361,7 +361,7 @@ export class ImageVersionsClient {
     [
       protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
       protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
+      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
     ]
   >;
   listImageVersions(
@@ -407,7 +407,7 @@ export class ImageVersionsClient {
     [
       protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
       protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
-      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
+      protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
     ]
   > | void {
     request = request || {};

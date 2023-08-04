@@ -589,7 +589,7 @@ export class ManagedNotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IRuntime,
       protos.google.cloud.notebooks.v1.IGetRuntimeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRuntime(
@@ -629,7 +629,7 @@ export class ManagedNotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IRuntime,
       protos.google.cloud.notebooks.v1.IGetRuntimeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -681,7 +681,7 @@ export class ManagedNotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   refreshRuntimeTokenInternal(
@@ -730,7 +730,7 @@ export class ManagedNotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,7 +791,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRuntime(
@@ -844,7 +844,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -953,7 +953,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRuntime(
@@ -1006,7 +1006,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1092,7 +1092,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRuntime(
@@ -1145,7 +1145,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1235,7 +1235,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startRuntime(
@@ -1288,7 +1288,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1378,7 +1378,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopRuntime(
@@ -1431,7 +1431,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1521,7 +1521,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   switchRuntime(
@@ -1574,7 +1574,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1660,7 +1660,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetRuntime(
@@ -1713,7 +1713,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1799,7 +1799,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeRuntime(
@@ -1852,7 +1852,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1941,7 +1941,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportRuntimeEvent(
@@ -1994,7 +1994,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2080,7 +2080,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   diagnoseRuntime(
@@ -2133,7 +2133,7 @@ export class ManagedNotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2220,7 +2220,7 @@ export class ManagedNotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IRuntime[],
       protos.google.cloud.notebooks.v1.IListRuntimesRequest | null,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse
+      protos.google.cloud.notebooks.v1.IListRuntimesResponse,
     ]
   >;
   listRuntimes(
@@ -2260,7 +2260,7 @@ export class ManagedNotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IRuntime[],
       protos.google.cloud.notebooks.v1.IListRuntimesRequest | null,
-      protos.google.cloud.notebooks.v1.IListRuntimesResponse
+      protos.google.cloud.notebooks.v1.IListRuntimesResponse,
     ]
   > | void {
     request = request || {};
