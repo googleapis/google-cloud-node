@@ -371,7 +371,7 @@ export class AdvisoryNotificationsServiceClient {
         | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNotification(
@@ -420,7 +420,7 @@ export class AdvisoryNotificationsServiceClient {
         | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -487,7 +487,7 @@ export class AdvisoryNotificationsServiceClient {
     [
       protos.google.cloud.advisorynotifications.v1.INotification[],
       protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest | null,
-      protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse,
     ]
   >;
   listNotifications(
@@ -533,7 +533,7 @@ export class AdvisoryNotificationsServiceClient {
     [
       protos.google.cloud.advisorynotifications.v1.INotification[],
       protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest | null,
-      protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse,
     ]
   > | void {
     request = request || {};

@@ -441,7 +441,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IKeyRing,
       protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getKeyRing(
@@ -479,7 +479,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IKeyRing,
       protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -526,7 +526,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey,
       protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCryptoKey(
@@ -564,7 +564,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey,
       protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -610,7 +610,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCryptoKeyVersion(
@@ -650,7 +650,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -700,7 +700,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IPublicKey,
       protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPublicKey(
@@ -738,7 +738,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IPublicKey,
       protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -783,7 +783,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IImportJob,
       protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getImportJob(
@@ -821,7 +821,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IImportJob,
       protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -874,7 +874,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IKeyRing,
       protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createKeyRing(
@@ -912,7 +912,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IKeyRing,
       protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -977,7 +977,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey,
       protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCryptoKey(
@@ -1015,7 +1015,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey,
       protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1069,7 +1069,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCryptoKeyVersion(
@@ -1115,7 +1115,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1250,7 +1250,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importCryptoKeyVersion(
@@ -1296,7 +1296,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1356,7 +1356,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IImportJob,
       protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createImportJob(
@@ -1394,7 +1394,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IImportJob,
       protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1440,7 +1440,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey,
       protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCryptoKey(
@@ -1478,7 +1478,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey,
       protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1536,7 +1536,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCryptoKeyVersion(
@@ -1582,7 +1582,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1642,7 +1642,7 @@ export class KeyManagementServiceClient {
         | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCryptoKeyPrimaryVersion(
@@ -1691,7 +1691,7 @@ export class KeyManagementServiceClient {
         | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1760,7 +1760,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   destroyCryptoKeyVersion(
@@ -1806,7 +1806,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1863,7 +1863,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreCryptoKeyVersion(
@@ -1909,7 +1909,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion,
       protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2032,7 +2032,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IEncryptResponse,
       protos.google.cloud.kms.v1.IEncryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   encrypt(
@@ -2070,7 +2070,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IEncryptResponse,
       protos.google.cloud.kms.v1.IEncryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2165,7 +2165,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IDecryptResponse,
       protos.google.cloud.kms.v1.IDecryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   decrypt(
@@ -2203,7 +2203,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IDecryptResponse,
       protos.google.cloud.kms.v1.IDecryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2335,7 +2335,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IRawEncryptResponse,
       protos.google.cloud.kms.v1.IRawEncryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rawEncrypt(
@@ -2373,7 +2373,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IRawEncryptResponse,
       protos.google.cloud.kms.v1.IRawEncryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2485,7 +2485,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IRawDecryptResponse,
       protos.google.cloud.kms.v1.IRawDecryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rawDecrypt(
@@ -2523,7 +2523,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IRawDecryptResponse,
       protos.google.cloud.kms.v1.IRawDecryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2626,7 +2626,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IAsymmetricSignResponse,
       protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asymmetricSign(
@@ -2664,7 +2664,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IAsymmetricSignResponse,
       protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2738,7 +2738,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
       protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asymmetricDecrypt(
@@ -2778,7 +2778,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
       protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2847,7 +2847,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IMacSignResponse,
       protos.google.cloud.kms.v1.IMacSignRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   macSign(
@@ -2885,7 +2885,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IMacSignResponse,
       protos.google.cloud.kms.v1.IMacSignRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2976,7 +2976,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IMacVerifyResponse,
       protos.google.cloud.kms.v1.IMacVerifyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   macVerify(
@@ -3014,7 +3014,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IMacVerifyResponse,
       protos.google.cloud.kms.v1.IMacVerifyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3068,7 +3068,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
       protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateRandomBytes(
@@ -3108,7 +3108,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
       protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3179,7 +3179,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IKeyRing[],
       protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse
+      protos.google.cloud.kms.v1.IListKeyRingsResponse,
     ]
   >;
   listKeyRings(
@@ -3217,7 +3217,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IKeyRing[],
       protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse
+      protos.google.cloud.kms.v1.IListKeyRingsResponse,
     ]
   > | void {
     request = request || {};
@@ -3415,7 +3415,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey[],
       protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse,
     ]
   >;
   listCryptoKeys(
@@ -3453,7 +3453,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKey[],
       protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse
+      protos.google.cloud.kms.v1.IListCryptoKeysResponse,
     ]
   > | void {
     request = request || {};
@@ -3654,7 +3654,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion[],
       protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse,
     ]
   >;
   listCryptoKeyVersions(
@@ -3700,7 +3700,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.ICryptoKeyVersion[],
       protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -3900,7 +3900,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IImportJob[],
       protos.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protos.google.cloud.kms.v1.IListImportJobsResponse
+      protos.google.cloud.kms.v1.IListImportJobsResponse,
     ]
   >;
   listImportJobs(
@@ -3938,7 +3938,7 @@ export class KeyManagementServiceClient {
     [
       protos.google.cloud.kms.v1.IImportJob[],
       protos.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protos.google.cloud.kms.v1.IListImportJobsResponse
+      protos.google.cloud.kms.v1.IListImportJobsResponse,
     ]
   > | void {
     request = request || {};

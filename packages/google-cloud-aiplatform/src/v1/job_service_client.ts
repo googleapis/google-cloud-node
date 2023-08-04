@@ -1703,7 +1703,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ICustomJob,
       protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomJob(
@@ -1749,7 +1749,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ICustomJob,
       protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1795,7 +1795,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ICustomJob,
       protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomJob(
@@ -1835,7 +1835,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ICustomJob,
       protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1893,7 +1893,7 @@ export class JobServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelCustomJob(
@@ -1939,7 +1939,7 @@ export class JobServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1989,7 +1989,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataLabelingJob(
@@ -2038,7 +2038,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2084,7 +2084,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataLabelingJob,
       protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataLabelingJob(
@@ -2130,7 +2130,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataLabelingJob,
       protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2179,7 +2179,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelDataLabelingJob(
@@ -2228,7 +2228,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2279,7 +2279,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createHyperparameterTuningJob(
@@ -2328,7 +2328,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2381,7 +2381,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHyperparameterTuningJob(
@@ -2430,7 +2430,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2496,7 +2496,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelHyperparameterTuningJob(
@@ -2545,7 +2545,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2596,7 +2596,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasJob,
       protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNasJob(
@@ -2636,7 +2636,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasJob,
       protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2682,7 +2682,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasJob,
       protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNasJob(
@@ -2722,7 +2722,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasJob,
       protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2780,7 +2780,7 @@ export class JobServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelNasJob(
@@ -2820,7 +2820,7 @@ export class JobServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2866,7 +2866,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasTrialDetail,
       protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNasTrialDetail(
@@ -2912,7 +2912,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasTrialDetail,
       protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2963,7 +2963,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBatchPredictionJob(
@@ -3012,7 +3012,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3065,7 +3065,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBatchPredictionJob(
@@ -3114,7 +3114,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3174,7 +3174,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelBatchPredictionJob(
@@ -3223,7 +3223,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3278,7 +3278,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createModelDeploymentMonitoringJob(
@@ -3327,7 +3327,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3380,7 +3380,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getModelDeploymentMonitoringJob(
@@ -3429,7 +3429,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3485,7 +3485,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseModelDeploymentMonitoringJob(
@@ -3534,7 +3534,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3589,7 +3589,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeModelDeploymentMonitoringJob(
@@ -3638,7 +3638,7 @@ export class JobServiceClient {
         | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3694,7 +3694,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCustomJob(
@@ -3747,7 +3747,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3832,7 +3832,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataLabelingJob(
@@ -3885,7 +3885,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3970,7 +3970,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteHyperparameterTuningJob(
@@ -4023,7 +4023,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4112,7 +4112,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNasJob(
@@ -4165,7 +4165,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4251,7 +4251,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBatchPredictionJob(
@@ -4304,7 +4304,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4419,7 +4419,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateModelDeploymentMonitoringJob(
@@ -4472,7 +4472,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4562,7 +4562,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteModelDeploymentMonitoringJob(
@@ -4615,7 +4615,7 @@ export class JobServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4733,7 +4733,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ICustomJob[],
       protos.google.cloud.aiplatform.v1.IListCustomJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse,
     ]
   >;
   listCustomJobs(
@@ -4779,7 +4779,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.ICustomJob[],
       protos.google.cloud.aiplatform.v1.IListCustomJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -5008,7 +5008,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
       protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse,
     ]
   >;
   listDataLabelingJobs(
@@ -5054,7 +5054,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
       protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -5286,7 +5286,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
       protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse,
     ]
   >;
   listHyperparameterTuningJobs(
@@ -5332,7 +5332,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
       protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -5565,7 +5565,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasJob[],
       protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse,
     ]
   >;
   listNasJobs(
@@ -5605,7 +5605,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasJob[],
       protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -5810,7 +5810,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasTrialDetail[],
       protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse,
     ]
   >;
   listNasTrialDetails(
@@ -5856,7 +5856,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.INasTrialDetail[],
       protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -6040,7 +6040,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
       protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse,
     ]
   >;
   listBatchPredictionJobs(
@@ -6086,7 +6086,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
       protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -6310,7 +6310,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
       protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse,
     ]
   >;
   searchModelDeploymentMonitoringStatsAnomalies(
@@ -6356,7 +6356,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
       protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
-      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse,
     ]
   > | void {
     request = request || {};
@@ -6572,7 +6572,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
       protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse,
     ]
   >;
   listModelDeploymentMonitoringJobs(
@@ -6618,7 +6618,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
       protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse,
     ]
   > | void {
     request = request || {};

@@ -399,7 +399,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection,
       protos.google.cloud.kms.v1.IGetEkmConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEkmConnection(
@@ -439,7 +439,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection,
       protos.google.cloud.kms.v1.IGetEkmConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -492,7 +492,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection,
       protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEkmConnection(
@@ -532,7 +532,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection,
       protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection,
       protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEkmConnection(
@@ -619,7 +619,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection,
       protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -665,7 +665,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConfig,
       protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEkmConfig(
@@ -703,7 +703,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConfig,
       protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -750,7 +750,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConfig,
       protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEkmConfig(
@@ -788,7 +788,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConfig,
       protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -837,7 +837,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
       protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   verifyConnectivity(
@@ -877,7 +877,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
       protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -948,7 +948,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection[],
       protos.google.cloud.kms.v1.IListEkmConnectionsRequest | null,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse
+      protos.google.cloud.kms.v1.IListEkmConnectionsResponse,
     ]
   >;
   listEkmConnections(
@@ -988,7 +988,7 @@ export class EkmServiceClient {
     [
       protos.google.cloud.kms.v1.IEkmConnection[],
       protos.google.cloud.kms.v1.IListEkmConnectionsRequest | null,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse
+      protos.google.cloud.kms.v1.IListEkmConnectionsResponse,
     ]
   > | void {
     request = request || {};

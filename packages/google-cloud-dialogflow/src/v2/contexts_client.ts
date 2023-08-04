@@ -511,7 +511,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext,
       protos.google.cloud.dialogflow.v2.IGetContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getContext(
@@ -551,7 +551,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext,
       protos.google.cloud.dialogflow.v2.IGetContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -604,7 +604,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext,
       protos.google.cloud.dialogflow.v2.ICreateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createContext(
@@ -650,7 +650,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext,
       protos.google.cloud.dialogflow.v2.ICreateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -696,7 +696,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext,
       protos.google.cloud.dialogflow.v2.IUpdateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateContext(
@@ -742,7 +742,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext,
       protos.google.cloud.dialogflow.v2.IUpdateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,7 +791,7 @@ export class ContextsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteContext(
@@ -837,7 +837,7 @@ export class ContextsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -886,7 +886,7 @@ export class ContextsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteAllContextsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAllContexts(
@@ -932,7 +932,7 @@ export class ContextsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2.IDeleteAllContextsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -990,7 +990,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext[],
       protos.google.cloud.dialogflow.v2.IListContextsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListContextsResponse
+      protos.google.cloud.dialogflow.v2.IListContextsResponse,
     ]
   >;
   listContexts(
@@ -1036,7 +1036,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2.IContext[],
       protos.google.cloud.dialogflow.v2.IListContextsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListContextsResponse
+      protos.google.cloud.dialogflow.v2.IListContextsResponse,
     ]
   > | void {
     request = request || {};
