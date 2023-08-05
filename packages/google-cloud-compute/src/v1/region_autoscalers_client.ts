@@ -361,7 +361,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -407,7 +407,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -434,7 +434,7 @@ export class RegionAutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -477,7 +477,7 @@ export class RegionAutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler,
       protos.google.cloud.compute.v1.IGetRegionAutoscalerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -523,7 +523,7 @@ export class RegionAutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler,
       protos.google.cloud.compute.v1.IGetRegionAutoscalerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -580,7 +580,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -626,7 +626,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -652,7 +652,7 @@ export class RegionAutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -704,7 +704,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -750,7 +750,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -776,7 +776,7 @@ export class RegionAutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -828,7 +828,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -874,7 +874,7 @@ export class RegionAutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -900,7 +900,7 @@ export class RegionAutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -955,7 +955,7 @@ export class RegionAutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler[],
       protos.google.cloud.compute.v1.IListRegionAutoscalersRequest | null,
-      protos.google.cloud.compute.v1.IRegionAutoscalerList
+      protos.google.cloud.compute.v1.IRegionAutoscalerList,
     ]
   >;
   list(
@@ -995,7 +995,7 @@ export class RegionAutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler[],
       protos.google.cloud.compute.v1.IListRegionAutoscalersRequest | null,
-      protos.google.cloud.compute.v1.IRegionAutoscalerList
+      protos.google.cloud.compute.v1.IRegionAutoscalerList,
     ]
   > | void {
     request = request || {};

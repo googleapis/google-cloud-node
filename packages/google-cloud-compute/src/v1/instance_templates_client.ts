@@ -366,7 +366,7 @@ export class InstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -412,7 +412,7 @@ export class InstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -438,7 +438,7 @@ export class InstanceTemplatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -479,7 +479,7 @@ export class InstanceTemplatesClient {
     [
       protos.google.cloud.compute.v1.IInstanceTemplate,
       protos.google.cloud.compute.v1.IGetInstanceTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -525,7 +525,7 @@ export class InstanceTemplatesClient {
     [
       protos.google.cloud.compute.v1.IInstanceTemplate,
       protos.google.cloud.compute.v1.IGetInstanceTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -577,7 +577,7 @@ export class InstanceTemplatesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -626,7 +626,7 @@ export class InstanceTemplatesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -680,7 +680,7 @@ export class InstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -726,7 +726,7 @@ export class InstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -751,7 +751,7 @@ export class InstanceTemplatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -797,7 +797,7 @@ export class InstanceTemplatesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -846,7 +846,7 @@ export class InstanceTemplatesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -898,7 +898,7 @@ export class InstanceTemplatesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -947,7 +947,7 @@ export class InstanceTemplatesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1063,7 +1063,7 @@ export class InstanceTemplatesClient {
     [
       protos.google.cloud.compute.v1.IInstanceTemplate[],
       protos.google.cloud.compute.v1.IListInstanceTemplatesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceTemplateList
+      protos.google.cloud.compute.v1.IInstanceTemplateList,
     ]
   >;
   list(
@@ -1103,7 +1103,7 @@ export class InstanceTemplatesClient {
     [
       protos.google.cloud.compute.v1.IInstanceTemplate[],
       protos.google.cloud.compute.v1.IListInstanceTemplatesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceTemplateList
+      protos.google.cloud.compute.v1.IInstanceTemplateList,
     ]
   > | void {
     request = request || {};

@@ -362,7 +362,7 @@ export class NetworkEdgeSecurityServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -408,7 +408,7 @@ export class NetworkEdgeSecurityServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -435,7 +435,7 @@ export class NetworkEdgeSecurityServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -481,7 +481,7 @@ export class NetworkEdgeSecurityServicesClient {
         | protos.google.cloud.compute.v1.IGetNetworkEdgeSecurityServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -530,7 +530,7 @@ export class NetworkEdgeSecurityServicesClient {
         | protos.google.cloud.compute.v1.IGetNetworkEdgeSecurityServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -589,7 +589,7 @@ export class NetworkEdgeSecurityServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -635,7 +635,7 @@ export class NetworkEdgeSecurityServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -661,7 +661,7 @@ export class NetworkEdgeSecurityServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -716,7 +716,7 @@ export class NetworkEdgeSecurityServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -762,7 +762,7 @@ export class NetworkEdgeSecurityServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -789,7 +789,7 @@ export class NetworkEdgeSecurityServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -844,7 +844,7 @@ export class NetworkEdgeSecurityServicesClient {
   ): AsyncIterable<
     [
       string,
-      protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList
+      protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList,
     ]
   > {
     request = request || {};
@@ -865,7 +865,7 @@ export class NetworkEdgeSecurityServicesClient {
     ) as AsyncIterable<
       [
         string,
-        protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList
+        protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList,
       ]
     >;
   }

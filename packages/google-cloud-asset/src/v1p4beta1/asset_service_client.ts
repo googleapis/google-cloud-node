@@ -352,7 +352,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
       protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeIamPolicy(
@@ -398,7 +398,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse,
       protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -456,7 +456,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportIamPolicyAnalysis(
@@ -509,7 +509,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

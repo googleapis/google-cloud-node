@@ -423,7 +423,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunReportResponse,
       protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runReport(
@@ -463,7 +463,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunReportResponse,
       protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -556,7 +556,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunPivotReportResponse,
       protos.google.analytics.data.v1beta.IRunPivotReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runPivotReport(
@@ -602,7 +602,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunPivotReportResponse,
       protos.google.analytics.data.v1beta.IRunPivotReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -658,7 +658,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
       protos.google.analytics.data.v1beta.IBatchRunReportsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRunReports(
@@ -704,7 +704,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
       protos.google.analytics.data.v1beta.IBatchRunReportsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -763,7 +763,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRunPivotReports(
@@ -812,7 +812,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -875,7 +875,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IMetadata,
       protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetadata(
@@ -921,7 +921,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IMetadata,
       protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1011,7 +1011,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
       protos.google.analytics.data.v1beta.IRunRealtimeReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runRealtimeReport(
@@ -1057,7 +1057,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
       protos.google.analytics.data.v1beta.IRunRealtimeReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1138,7 +1138,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkCompatibility(
@@ -1187,7 +1187,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

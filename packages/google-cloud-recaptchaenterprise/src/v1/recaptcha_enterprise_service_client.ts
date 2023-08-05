@@ -402,7 +402,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAssessment(
@@ -451,7 +451,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -516,7 +516,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   annotateAssessment(
@@ -565,7 +565,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -612,7 +612,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createKey(
@@ -658,7 +658,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -708,7 +708,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveLegacySecretKey(
@@ -757,7 +757,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -806,7 +806,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getKey(
@@ -852,7 +852,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -899,7 +899,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateKey(
@@ -945,7 +945,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -990,7 +990,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteKey(
@@ -1036,7 +1036,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1095,7 +1095,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   migrateKey(
@@ -1141,7 +1141,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1187,7 +1187,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IMetrics,
       protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetrics(
@@ -1233,7 +1233,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IMetrics,
       protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1288,7 +1288,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey[],
       protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
     ]
   >;
   listKeys(
@@ -1334,7 +1334,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey[],
       protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
     ]
   > | void {
     request = request || {};
@@ -1488,7 +1488,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
     ]
   >;
   listRelatedAccountGroups(
@@ -1534,7 +1534,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -1702,7 +1702,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
     ]
   >;
   listRelatedAccountGroupMemberships(
@@ -1748,7 +1748,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
     ]
   > | void {
     request = request || {};
@@ -1924,7 +1924,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
     ]
   >;
   searchRelatedAccountGroupMemberships(
@@ -1970,7 +1970,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
     ]
   > | void {
     request = request || {};

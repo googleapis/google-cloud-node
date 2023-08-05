@@ -847,7 +847,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IMigrationJob,
       protos.google.cloud.clouddms.v1.IGetMigrationJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMigrationJob(
@@ -893,7 +893,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IMigrationJob,
       protos.google.cloud.clouddms.v1.IGetMigrationJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -946,7 +946,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.ISshScript,
       protos.google.cloud.clouddms.v1.IGenerateSshScriptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateSshScript(
@@ -992,7 +992,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.ISshScript,
       protos.google.cloud.clouddms.v1.IGenerateSshScriptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1036,7 +1036,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IConnectionProfile,
       protos.google.cloud.clouddms.v1.IGetConnectionProfileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnectionProfile(
@@ -1082,7 +1082,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IConnectionProfile,
       protos.google.cloud.clouddms.v1.IGetConnectionProfileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1126,7 +1126,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IPrivateConnection,
       protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPrivateConnection(
@@ -1172,7 +1172,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IPrivateConnection,
       protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1219,7 +1219,7 @@ export class DataMigrationServiceClient {
         | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversionWorkspace(
@@ -1268,7 +1268,7 @@ export class DataMigrationServiceClient {
         | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1333,7 +1333,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
       protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchBackgroundJobs(
@@ -1379,7 +1379,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
       protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1431,7 +1431,7 @@ export class DataMigrationServiceClient {
         | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   describeConversionWorkspaceRevisions(
@@ -1480,7 +1480,7 @@ export class DataMigrationServiceClient {
         | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1548,7 +1548,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMigrationJob(
@@ -1601,7 +1601,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1695,7 +1695,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMigrationJob(
@@ -1748,7 +1748,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1843,7 +1843,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMigrationJob(
@@ -1896,7 +1896,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1979,7 +1979,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startMigrationJob(
@@ -2032,7 +2032,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2115,7 +2115,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopMigrationJob(
@@ -2168,7 +2168,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2252,7 +2252,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeMigrationJob(
@@ -2305,7 +2305,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2389,7 +2389,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   promoteMigrationJob(
@@ -2442,7 +2442,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2526,7 +2526,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   verifyMigrationJob(
@@ -2579,7 +2579,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2664,7 +2664,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restartMigrationJob(
@@ -2717,7 +2717,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2820,7 +2820,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnectionProfile(
@@ -2873,7 +2873,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2979,7 +2979,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConnectionProfile(
@@ -3032,7 +3032,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3132,7 +3132,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnectionProfile(
@@ -3185,7 +3185,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3286,7 +3286,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPrivateConnection(
@@ -3339,7 +3339,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3434,7 +3434,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePrivateConnection(
@@ -3487,7 +3487,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3586,7 +3586,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversionWorkspace(
@@ -3639,7 +3639,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3737,7 +3737,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConversionWorkspace(
@@ -3790,7 +3790,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3885,7 +3885,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversionWorkspace(
@@ -3938,7 +3938,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4035,7 +4035,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   seedConversionWorkspace(
@@ -4088,7 +4088,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4185,7 +4185,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importMappingRules(
@@ -4238,7 +4238,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4328,7 +4328,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   convertConversionWorkspace(
@@ -4381,7 +4381,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4470,7 +4470,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   commitConversionWorkspace(
@@ -4523,7 +4523,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4610,7 +4610,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackConversionWorkspace(
@@ -4663,7 +4663,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4757,7 +4757,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   applyConversionWorkspace(
@@ -4810,7 +4810,7 @@ export class DataMigrationServiceClient {
         protos.google.cloud.clouddms.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4919,7 +4919,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IMigrationJob[],
       protos.google.cloud.clouddms.v1.IListMigrationJobsRequest | null,
-      protos.google.cloud.clouddms.v1.IListMigrationJobsResponse
+      protos.google.cloud.clouddms.v1.IListMigrationJobsResponse,
     ]
   >;
   listMigrationJobs(
@@ -4965,7 +4965,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IMigrationJob[],
       protos.google.cloud.clouddms.v1.IListMigrationJobsRequest | null,
-      protos.google.cloud.clouddms.v1.IListMigrationJobsResponse
+      protos.google.cloud.clouddms.v1.IListMigrationJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -5165,7 +5165,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IConnectionProfile[],
       protos.google.cloud.clouddms.v1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.clouddms.v1.IListConnectionProfilesResponse
+      protos.google.cloud.clouddms.v1.IListConnectionProfilesResponse,
     ]
   >;
   listConnectionProfiles(
@@ -5211,7 +5211,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IConnectionProfile[],
       protos.google.cloud.clouddms.v1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.clouddms.v1.IListConnectionProfilesResponse
+      protos.google.cloud.clouddms.v1.IListConnectionProfilesResponse,
     ]
   > | void {
     request = request || {};
@@ -5409,7 +5409,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IPrivateConnection[],
       protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse,
     ]
   >;
   listPrivateConnections(
@@ -5455,7 +5455,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IPrivateConnection[],
       protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+      protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse,
     ]
   > | void {
     request = request || {};
@@ -5646,7 +5646,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IConversionWorkspace[],
       protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest | null,
-      protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse,
     ]
   >;
   listConversionWorkspaces(
@@ -5692,7 +5692,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IConversionWorkspace[],
       protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest | null,
-      protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+      protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse,
     ]
   > | void {
     request = request || {};
@@ -5889,7 +5889,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IDatabaseEntity[],
       protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest | null,
-      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse,
     ]
   >;
   describeDatabaseEntities(
@@ -5935,7 +5935,7 @@ export class DataMigrationServiceClient {
     [
       protos.google.cloud.clouddms.v1.IDatabaseEntity[],
       protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest | null,
-      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+      protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse,
     ]
   > | void {
     request = request || {};
@@ -6117,7 +6117,7 @@ export class DataMigrationServiceClient {
     [
       string[],
       protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse,
     ]
   >;
   fetchStaticIps(
@@ -6163,7 +6163,7 @@ export class DataMigrationServiceClient {
     [
       string[],
       protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+      protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse,
     ]
   > | void {
     request = request || {};

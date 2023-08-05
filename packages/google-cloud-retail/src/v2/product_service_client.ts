@@ -528,7 +528,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct,
       protos.google.cloud.retail.v2.ICreateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProduct(
@@ -568,7 +568,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct,
       protos.google.cloud.retail.v2.ICreateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -621,7 +621,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct,
       protos.google.cloud.retail.v2.IGetProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProduct(
@@ -659,7 +659,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct,
       protos.google.cloud.retail.v2.IGetProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -729,7 +729,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct,
       protos.google.cloud.retail.v2.IUpdateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProduct(
@@ -769,7 +769,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct,
       protos.google.cloud.retail.v2.IUpdateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -833,7 +833,7 @@ export class ProductServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2.IDeleteProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProduct(
@@ -873,7 +873,7 @@ export class ProductServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2.IDeleteProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -958,7 +958,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importProducts(
@@ -1011,7 +1011,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1218,7 +1218,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.ISetInventoryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInventory(
@@ -1271,7 +1271,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.ISetInventoryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1436,7 +1436,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IAddFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addFulfillmentPlaces(
@@ -1489,7 +1489,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IAddFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1649,7 +1649,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IRemoveFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeFulfillmentPlaces(
@@ -1702,7 +1702,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IRemoveFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1852,7 +1852,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IAddLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addLocalInventories(
@@ -1905,7 +1905,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IAddLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2033,7 +2033,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IRemoveLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeLocalInventories(
@@ -2086,7 +2086,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2.IRemoveLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2242,7 +2242,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct[],
       protos.google.cloud.retail.v2.IListProductsRequest | null,
-      protos.google.cloud.retail.v2.IListProductsResponse
+      protos.google.cloud.retail.v2.IListProductsResponse,
     ]
   >;
   listProducts(
@@ -2282,7 +2282,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2.IProduct[],
       protos.google.cloud.retail.v2.IListProductsRequest | null,
-      protos.google.cloud.retail.v2.IListProductsResponse
+      protos.google.cloud.retail.v2.IListProductsResponse,
     ]
   > | void {
     request = request || {};

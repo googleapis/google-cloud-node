@@ -368,7 +368,7 @@ export class NodeTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -414,7 +414,7 @@ export class NodeTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -441,7 +441,7 @@ export class NodeTemplatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -484,7 +484,7 @@ export class NodeTemplatesClient {
     [
       protos.google.cloud.compute.v1.INodeTemplate,
       protos.google.cloud.compute.v1.IGetNodeTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -524,7 +524,7 @@ export class NodeTemplatesClient {
     [
       protos.google.cloud.compute.v1.INodeTemplate,
       protos.google.cloud.compute.v1.IGetNodeTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class NodeTemplatesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyNodeTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -628,7 +628,7 @@ export class NodeTemplatesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyNodeTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -685,7 +685,7 @@ export class NodeTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -731,7 +731,7 @@ export class NodeTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -757,7 +757,7 @@ export class NodeTemplatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -805,7 +805,7 @@ export class NodeTemplatesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyNodeTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -854,7 +854,7 @@ export class NodeTemplatesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyNodeTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -909,7 +909,7 @@ export class NodeTemplatesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNodeTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -958,7 +958,7 @@ export class NodeTemplatesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNodeTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1077,7 +1077,7 @@ export class NodeTemplatesClient {
     [
       protos.google.cloud.compute.v1.INodeTemplate[],
       protos.google.cloud.compute.v1.IListNodeTemplatesRequest | null,
-      protos.google.cloud.compute.v1.INodeTemplateList
+      protos.google.cloud.compute.v1.INodeTemplateList,
     ]
   >;
   list(
@@ -1115,7 +1115,7 @@ export class NodeTemplatesClient {
     [
       protos.google.cloud.compute.v1.INodeTemplate[],
       protos.google.cloud.compute.v1.IListNodeTemplatesRequest | null,
-      protos.google.cloud.compute.v1.INodeTemplateList
+      protos.google.cloud.compute.v1.INodeTemplateList,
     ]
   > | void {
     request = request || {};

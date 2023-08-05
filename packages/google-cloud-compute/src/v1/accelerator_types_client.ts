@@ -355,7 +355,7 @@ export class AcceleratorTypesClient {
     [
       protos.google.cloud.compute.v1.IAcceleratorType,
       protos.google.cloud.compute.v1.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -401,7 +401,7 @@ export class AcceleratorTypesClient {
     [
       protos.google.cloud.compute.v1.IAcceleratorType,
       protos.google.cloud.compute.v1.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -520,7 +520,7 @@ export class AcceleratorTypesClient {
     [
       protos.google.cloud.compute.v1.IAcceleratorType[],
       protos.google.cloud.compute.v1.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.compute.v1.IAcceleratorTypeList
+      protos.google.cloud.compute.v1.IAcceleratorTypeList,
     ]
   >;
   list(
@@ -560,7 +560,7 @@ export class AcceleratorTypesClient {
     [
       protos.google.cloud.compute.v1.IAcceleratorType[],
       protos.google.cloud.compute.v1.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.compute.v1.IAcceleratorTypeList
+      protos.google.cloud.compute.v1.IAcceleratorTypeList,
     ]
   > | void {
     request = request || {};

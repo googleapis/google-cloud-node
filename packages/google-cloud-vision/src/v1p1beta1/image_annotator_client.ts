@@ -334,7 +334,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateImages(
@@ -383,7 +383,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

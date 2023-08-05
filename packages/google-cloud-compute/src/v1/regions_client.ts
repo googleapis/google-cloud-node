@@ -345,7 +345,7 @@ export class RegionsClient {
     [
       protos.google.cloud.compute.v1.IRegion,
       protos.google.cloud.compute.v1.IGetRegionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -383,7 +383,7 @@ export class RegionsClient {
     [
       protos.google.cloud.compute.v1.IRegion,
       protos.google.cloud.compute.v1.IGetRegionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class RegionsClient {
     [
       protos.google.cloud.compute.v1.IRegion[],
       protos.google.cloud.compute.v1.IListRegionsRequest | null,
-      protos.google.cloud.compute.v1.IRegionList
+      protos.google.cloud.compute.v1.IRegionList,
     ]
   >;
   list(
@@ -480,7 +480,7 @@ export class RegionsClient {
     [
       protos.google.cloud.compute.v1.IRegion[],
       protos.google.cloud.compute.v1.IListRegionsRequest | null,
-      protos.google.cloud.compute.v1.IRegionList
+      protos.google.cloud.compute.v1.IRegionList,
     ]
   > | void {
     request = request || {};

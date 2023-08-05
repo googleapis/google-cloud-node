@@ -438,7 +438,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl,
       protos.google.cloud.retail.v2alpha.ICreateControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createControl(
@@ -484,7 +484,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl,
       protos.google.cloud.retail.v2alpha.ICreateControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -532,7 +532,7 @@ export class ControlServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.IDeleteControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteControl(
@@ -578,7 +578,7 @@ export class ControlServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.IDeleteControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -635,7 +635,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl,
       protos.google.cloud.retail.v2alpha.IUpdateControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateControl(
@@ -681,7 +681,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl,
       protos.google.cloud.retail.v2alpha.IUpdateControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -726,7 +726,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl,
       protos.google.cloud.retail.v2alpha.IGetControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getControl(
@@ -766,7 +766,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl,
       protos.google.cloud.retail.v2alpha.IGetControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,7 +829,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl[],
       protos.google.cloud.retail.v2alpha.IListControlsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListControlsResponse
+      protos.google.cloud.retail.v2alpha.IListControlsResponse,
     ]
   >;
   listControls(
@@ -875,7 +875,7 @@ export class ControlServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IControl[],
       protos.google.cloud.retail.v2alpha.IListControlsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListControlsResponse
+      protos.google.cloud.retail.v2alpha.IListControlsResponse,
     ]
   > | void {
     request = request || {};

@@ -495,7 +495,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType,
       protos.google.cloud.dialogflow.cx.v3.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntityType(
@@ -541,7 +541,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType,
       protos.google.cloud.dialogflow.cx.v3.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -604,7 +604,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType,
       protos.google.cloud.dialogflow.cx.v3.ICreateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntityType(
@@ -650,7 +650,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType,
       protos.google.cloud.dialogflow.cx.v3.ICreateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -712,7 +712,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType,
       protos.google.cloud.dialogflow.cx.v3.IUpdateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntityType(
@@ -758,7 +758,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType,
       protos.google.cloud.dialogflow.cx.v3.IUpdateEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -821,7 +821,7 @@ export class EntityTypesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeleteEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntityType(
@@ -867,7 +867,7 @@ export class EntityTypesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeleteEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -934,7 +934,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType[],
       protos.google.cloud.dialogflow.cx.v3.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.cx.v3.IListEntityTypesResponse,
     ]
   >;
   listEntityTypes(
@@ -980,7 +980,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEntityType[],
       protos.google.cloud.dialogflow.cx.v3.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.cx.v3.IListEntityTypesResponse,
     ]
   > | void {
     request = request || {};

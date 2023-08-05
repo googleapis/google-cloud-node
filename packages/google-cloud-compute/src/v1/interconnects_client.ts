@@ -360,7 +360,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -406,7 +406,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -432,7 +432,7 @@ export class InterconnectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -473,7 +473,7 @@ export class InterconnectsClient {
     [
       protos.google.cloud.compute.v1.IInterconnect,
       protos.google.cloud.compute.v1.IGetInterconnectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -513,7 +513,7 @@ export class InterconnectsClient {
     [
       protos.google.cloud.compute.v1.IInterconnect,
       protos.google.cloud.compute.v1.IGetInterconnectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -563,7 +563,7 @@ export class InterconnectsClient {
         | protos.google.cloud.compute.v1.IGetDiagnosticsInterconnectRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDiagnostics(
@@ -612,7 +612,7 @@ export class InterconnectsClient {
         | protos.google.cloud.compute.v1.IGetDiagnosticsInterconnectRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -666,7 +666,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -712,7 +712,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -737,7 +737,7 @@ export class InterconnectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -787,7 +787,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -833,7 +833,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -859,7 +859,7 @@ export class InterconnectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -907,7 +907,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -953,7 +953,7 @@ export class InterconnectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -979,7 +979,7 @@ export class InterconnectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1032,7 +1032,7 @@ export class InterconnectsClient {
     [
       protos.google.cloud.compute.v1.IInterconnect[],
       protos.google.cloud.compute.v1.IListInterconnectsRequest | null,
-      protos.google.cloud.compute.v1.IInterconnectList
+      protos.google.cloud.compute.v1.IInterconnectList,
     ]
   >;
   list(
@@ -1070,7 +1070,7 @@ export class InterconnectsClient {
     [
       protos.google.cloud.compute.v1.IInterconnect[],
       protos.google.cloud.compute.v1.IListInterconnectsRequest | null,
-      protos.google.cloud.compute.v1.IInterconnectList
+      protos.google.cloud.compute.v1.IInterconnectList,
     ]
   > | void {
     request = request || {};

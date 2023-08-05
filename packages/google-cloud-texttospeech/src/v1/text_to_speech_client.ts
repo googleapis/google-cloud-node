@@ -343,7 +343,7 @@ export class TextToSpeechClient {
     [
       protos.google.cloud.texttospeech.v1.IListVoicesResponse,
       protos.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listVoices(
@@ -383,7 +383,7 @@ export class TextToSpeechClient {
     [
       protos.google.cloud.texttospeech.v1.IListVoicesResponse,
       protos.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -428,7 +428,7 @@ export class TextToSpeechClient {
     [
       protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
       protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   synthesizeSpeech(
@@ -474,7 +474,7 @@ export class TextToSpeechClient {
     [
       protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
       protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

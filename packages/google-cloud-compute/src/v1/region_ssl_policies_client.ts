@@ -361,7 +361,7 @@ export class RegionSslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -407,7 +407,7 @@ export class RegionSslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -434,7 +434,7 @@ export class RegionSslPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -477,7 +477,7 @@ export class RegionSslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy,
       protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -523,7 +523,7 @@ export class RegionSslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy,
       protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -580,7 +580,7 @@ export class RegionSslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -626,7 +626,7 @@ export class RegionSslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -652,7 +652,7 @@ export class RegionSslPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -706,7 +706,7 @@ export class RegionSslPoliciesClient {
         | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listAvailableFeatures(
@@ -755,7 +755,7 @@ export class RegionSslPoliciesClient {
         | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -813,7 +813,7 @@ export class RegionSslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -859,7 +859,7 @@ export class RegionSslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -886,7 +886,7 @@ export class RegionSslPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -941,7 +941,7 @@ export class RegionSslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy[],
       protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISslPoliciesList
+      protos.google.cloud.compute.v1.ISslPoliciesList,
     ]
   >;
   list(
@@ -979,7 +979,7 @@ export class RegionSslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy[],
       protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISslPoliciesList
+      protos.google.cloud.compute.v1.ISslPoliciesList,
     ]
   > | void {
     request = request || {};

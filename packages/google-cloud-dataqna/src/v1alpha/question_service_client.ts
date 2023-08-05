@@ -362,7 +362,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getQuestion(
@@ -408,7 +408,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -455,7 +455,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createQuestion(
@@ -501,7 +501,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -548,7 +548,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   executeQuestion(
@@ -594,7 +594,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -640,7 +640,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IUserFeedback,
       protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUserFeedback(
@@ -686,7 +686,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IUserFeedback,
       protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class QuestionServiceClient {
         | protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateUserFeedback(
@@ -788,7 +788,7 @@ export class QuestionServiceClient {
         | protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

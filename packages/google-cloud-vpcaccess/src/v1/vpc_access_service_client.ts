@@ -427,7 +427,7 @@ export class VpcAccessServiceClient {
     [
       protos.google.cloud.vpcaccess.v1.IConnector,
       protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnector(
@@ -467,7 +467,7 @@ export class VpcAccessServiceClient {
     [
       protos.google.cloud.vpcaccess.v1.IConnector,
       protos.google.cloud.vpcaccess.v1.IGetConnectorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -522,7 +522,7 @@ export class VpcAccessServiceClient {
         protos.google.cloud.vpcaccess.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnector(
@@ -575,7 +575,7 @@ export class VpcAccessServiceClient {
         protos.google.cloud.vpcaccess.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -659,7 +659,7 @@ export class VpcAccessServiceClient {
         protos.google.cloud.vpcaccess.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnector(
@@ -712,7 +712,7 @@ export class VpcAccessServiceClient {
         protos.google.cloud.vpcaccess.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -797,7 +797,7 @@ export class VpcAccessServiceClient {
     [
       protos.google.cloud.vpcaccess.v1.IConnector[],
       protos.google.cloud.vpcaccess.v1.IListConnectorsRequest | null,
-      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
+      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse,
     ]
   >;
   listConnectors(
@@ -843,7 +843,7 @@ export class VpcAccessServiceClient {
     [
       protos.google.cloud.vpcaccess.v1.IConnector[],
       protos.google.cloud.vpcaccess.v1.IListConnectorsRequest | null,
-      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse
+      protos.google.cloud.vpcaccess.v1.IListConnectorsResponse,
     ]
   > | void {
     request = request || {};

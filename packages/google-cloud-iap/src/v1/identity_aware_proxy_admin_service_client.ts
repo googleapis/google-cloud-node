@@ -383,7 +383,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -421,7 +421,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -472,7 +472,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -510,7 +510,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -563,7 +563,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -601,7 +601,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,7 +647,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.IIapSettings,
       protos.google.cloud.iap.v1.IGetIapSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIapSettings(
@@ -685,7 +685,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.IIapSettings,
       protos.google.cloud.iap.v1.IGetIapSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.IIapSettings,
       protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIapSettings(
@@ -779,7 +779,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.IIapSettings,
       protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -833,7 +833,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup,
       protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTunnelDestGroup(
@@ -879,7 +879,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup,
       protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -925,7 +925,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup,
       protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTunnelDestGroup(
@@ -965,7 +965,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup,
       protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1011,7 +1011,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTunnelDestGroup(
@@ -1057,7 +1057,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1105,7 +1105,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup,
       protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTunnelDestGroup(
@@ -1151,7 +1151,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup,
       protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1216,7 +1216,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup[],
       protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse,
     ]
   >;
   listTunnelDestGroups(
@@ -1262,7 +1262,7 @@ export class IdentityAwareProxyAdminServiceClient {
     [
       protos.google.cloud.iap.v1.ITunnelDestGroup[],
       protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse,
     ]
   > | void {
     request = request || {};

@@ -493,7 +493,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.servicemanagement.v1.IManagedService,
       protos.google.api.servicemanagement.v1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -539,7 +539,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.servicemanagement.v1.IManagedService,
       protos.google.api.servicemanagement.v1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -596,7 +596,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServiceConfig(
@@ -645,7 +645,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -704,7 +704,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServiceConfig(
@@ -753,7 +753,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -805,7 +805,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServiceRollout(
@@ -854,7 +854,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -922,7 +922,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateConfigReport(
@@ -971,7 +971,7 @@ export class ServiceManagerClient {
         | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1027,7 +1027,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createService(
@@ -1080,7 +1080,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1168,7 +1168,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteService(
@@ -1221,7 +1221,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1311,7 +1311,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteService(
@@ -1364,7 +1364,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1468,7 +1468,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitConfigSource(
@@ -1521,7 +1521,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1621,7 +1621,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServiceRollout(
@@ -1674,7 +1674,7 @@ export class ServiceManagerClient {
         protos.google.api.servicemanagement.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1771,7 +1771,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.servicemanagement.v1.IManagedService[],
       protos.google.api.servicemanagement.v1.IListServicesRequest | null,
-      protos.google.api.servicemanagement.v1.IListServicesResponse
+      protos.google.api.servicemanagement.v1.IListServicesResponse,
     ]
   >;
   listServices(
@@ -1817,7 +1817,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.servicemanagement.v1.IManagedService[],
       protos.google.api.servicemanagement.v1.IListServicesRequest | null,
-      protos.google.api.servicemanagement.v1.IListServicesResponse
+      protos.google.api.servicemanagement.v1.IListServicesResponse,
     ]
   > | void {
     request = request || {};
@@ -1965,7 +1965,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.IService[],
       protos.google.api.servicemanagement.v1.IListServiceConfigsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
+      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse,
     ]
   >;
   listServiceConfigs(
@@ -2011,7 +2011,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.IService[],
       protos.google.api.servicemanagement.v1.IListServiceConfigsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
+      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -2172,7 +2172,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.servicemanagement.v1.IRollout[],
       protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
+      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse,
     ]
   >;
   listServiceRollouts(
@@ -2218,7 +2218,7 @@ export class ServiceManagerClient {
     [
       protos.google.api.servicemanagement.v1.IRollout[],
       protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
+      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse,
     ]
   > | void {
     request = request || {};

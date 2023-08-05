@@ -468,7 +468,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
       protos.google.cloud.documentai.v1beta3.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocument(
@@ -514,7 +514,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
       protos.google.cloud.documentai.v1beta3.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -565,7 +565,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDatasetSchema(
@@ -614,7 +614,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -664,7 +664,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDatasetSchema(
@@ -713,7 +713,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -766,7 +766,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataset(
@@ -819,7 +819,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -907,7 +907,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importDocuments(
@@ -960,7 +960,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1050,7 +1050,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteDocuments(
@@ -1103,7 +1103,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

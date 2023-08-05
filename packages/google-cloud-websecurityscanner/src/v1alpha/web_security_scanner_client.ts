@@ -396,7 +396,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.ICreateScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createScanConfig(
@@ -445,7 +445,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.ICreateScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -493,7 +493,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IDeleteScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteScanConfig(
@@ -542,7 +542,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IDeleteScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -590,7 +590,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IGetScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getScanConfig(
@@ -639,7 +639,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IGetScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -692,7 +692,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IUpdateScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateScanConfig(
@@ -741,7 +741,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IUpdateScanConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -789,7 +789,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IStartScanRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startScanRun(
@@ -838,7 +838,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IStartScanRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -887,7 +887,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IGetScanRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getScanRun(
@@ -936,7 +936,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IGetScanRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -985,7 +985,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IStopScanRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopScanRun(
@@ -1034,7 +1034,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IStopScanRunRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1083,7 +1083,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IGetFindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFinding(
@@ -1132,7 +1132,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IGetFindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1181,7 +1181,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listFindingTypeStats(
@@ -1230,7 +1230,7 @@ export class WebSecurityScannerClient {
         | protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1287,7 +1287,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.IScanConfig[],
       protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse,
     ]
   >;
   listScanConfigs(
@@ -1333,7 +1333,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.IScanConfig[],
       protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -1489,7 +1489,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.IScanRun[],
       protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse,
     ]
   >;
   listScanRuns(
@@ -1535,7 +1535,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.IScanRun[],
       protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse,
     ]
   > | void {
     request = request || {};
@@ -1691,7 +1691,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.ICrawledUrl[],
       protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse,
     ]
   >;
   listCrawledUrls(
@@ -1737,7 +1737,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.ICrawledUrl[],
       protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse,
     ]
   > | void {
     request = request || {};
@@ -1900,7 +1900,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.IFinding[],
       protos.google.cloud.websecurityscanner.v1alpha.IListFindingsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse,
     ]
   >;
   listFindings(
@@ -1946,7 +1946,7 @@ export class WebSecurityScannerClient {
     [
       protos.google.cloud.websecurityscanner.v1alpha.IFinding[],
       protos.google.cloud.websecurityscanner.v1alpha.IListFindingsRequest | null,
-      protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse
+      protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse,
     ]
   > | void {
     request = request || {};

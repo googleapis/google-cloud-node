@@ -409,7 +409,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   computeThreatListDiff(
@@ -455,7 +455,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -502,7 +502,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchUris(
@@ -540,7 +540,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -590,7 +590,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchHashes(
@@ -630,7 +630,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -679,7 +679,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISubmission,
       protos.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSubmission(
@@ -725,7 +725,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISubmission,
       protos.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,7 +791,7 @@ export class WebRiskServiceClient {
         protos.google.cloud.webrisk.v1.ISubmitUriMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitUri(
@@ -844,7 +844,7 @@ export class WebRiskServiceClient {
         protos.google.cloud.webrisk.v1.ISubmitUriMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

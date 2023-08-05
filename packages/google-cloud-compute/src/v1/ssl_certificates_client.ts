@@ -363,7 +363,7 @@ export class SslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -409,7 +409,7 @@ export class SslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -435,7 +435,7 @@ export class SslCertificatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -476,7 +476,7 @@ export class SslCertificatesClient {
     [
       protos.google.cloud.compute.v1.ISslCertificate,
       protos.google.cloud.compute.v1.IGetSslCertificateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -522,7 +522,7 @@ export class SslCertificatesClient {
     [
       protos.google.cloud.compute.v1.ISslCertificate,
       protos.google.cloud.compute.v1.IGetSslCertificateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -576,7 +576,7 @@ export class SslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -622,7 +622,7 @@ export class SslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,7 +647,7 @@ export class SslCertificatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -757,7 +757,7 @@ export class SslCertificatesClient {
     [
       protos.google.cloud.compute.v1.ISslCertificate[],
       protos.google.cloud.compute.v1.IListSslCertificatesRequest | null,
-      protos.google.cloud.compute.v1.ISslCertificateList
+      protos.google.cloud.compute.v1.ISslCertificateList,
     ]
   >;
   list(
@@ -795,7 +795,7 @@ export class SslCertificatesClient {
     [
       protos.google.cloud.compute.v1.ISslCertificate[],
       protos.google.cloud.compute.v1.IListSslCertificatesRequest | null,
-      protos.google.cloud.compute.v1.ISslCertificateList
+      protos.google.cloud.compute.v1.ISslCertificateList,
     ]
   > | void {
     request = request || {};

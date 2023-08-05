@@ -519,7 +519,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectContentResponse,
       protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   inspectContent(
@@ -559,7 +559,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectContentResponse,
       protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -636,7 +636,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IRedactImageResponse,
       protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   redactImage(
@@ -674,7 +674,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IRedactImageResponse,
       protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -771,7 +771,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
       protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deidentifyContent(
@@ -811,7 +811,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
       protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,7 +904,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IReidentifyContentResponse,
       protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reidentifyContent(
@@ -944,7 +944,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IReidentifyContentResponse,
       protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1003,7 +1003,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IListInfoTypesResponse,
       protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listInfoTypes(
@@ -1041,7 +1041,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IListInfoTypesResponse,
       protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1115,7 +1115,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
       protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInspectTemplate(
@@ -1161,7 +1161,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
       protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1212,7 +1212,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
       protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInspectTemplate(
@@ -1258,7 +1258,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
       protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1305,7 +1305,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
       protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInspectTemplate(
@@ -1351,7 +1351,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate,
       protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1398,7 +1398,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInspectTemplate(
@@ -1444,7 +1444,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1519,7 +1519,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDeidentifyTemplate(
@@ -1565,7 +1565,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1621,7 +1621,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDeidentifyTemplate(
@@ -1667,7 +1667,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1719,7 +1719,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeidentifyTemplate(
@@ -1765,7 +1765,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate,
       protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1813,7 +1813,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDeidentifyTemplate(
@@ -1859,7 +1859,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1933,7 +1933,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJobTrigger(
@@ -1973,7 +1973,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2023,7 +2023,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJobTrigger(
@@ -2063,7 +2063,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2112,7 +2112,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
       protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   hybridInspectJobTrigger(
@@ -2158,7 +2158,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
       protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2208,7 +2208,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJobTrigger(
@@ -2246,7 +2246,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger,
       protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2292,7 +2292,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJobTrigger(
@@ -2332,7 +2332,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2378,7 +2378,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   activateJobTrigger(
@@ -2424,7 +2424,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2501,7 +2501,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDlpJob(
@@ -2539,7 +2539,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2585,7 +2585,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDlpJob(
@@ -2623,7 +2623,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob,
       protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2671,7 +2671,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDlpJob(
@@ -2709,7 +2709,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2757,7 +2757,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelDlpJob(
@@ -2795,7 +2795,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2869,7 +2869,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createStoredInfoType(
@@ -2915,7 +2915,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2970,7 +2970,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateStoredInfoType(
@@ -3016,7 +3016,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3064,7 +3064,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getStoredInfoType(
@@ -3104,7 +3104,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType,
       protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3152,7 +3152,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteStoredInfoType(
@@ -3198,7 +3198,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3247,7 +3247,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
       protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   hybridInspectDlpJob(
@@ -3293,7 +3293,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IHybridInspectResponse,
       protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3338,7 +3338,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   finishDlpJob(
@@ -3376,7 +3376,7 @@ export class DlpServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3466,7 +3466,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate[],
       protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse,
     ]
   >;
   listInspectTemplates(
@@ -3512,7 +3512,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IInspectTemplate[],
       protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse,
     ]
   > | void {
     request = request || {};
@@ -3765,7 +3765,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
       protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse,
     ]
   >;
   listDeidentifyTemplates(
@@ -3811,7 +3811,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
       protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse,
     ]
   > | void {
     request = request || {};
@@ -4092,7 +4092,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger[],
       protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse,
     ]
   >;
   listJobTriggers(
@@ -4132,7 +4132,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IJobTrigger[],
       protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse,
     ]
   > | void {
     request = request || {};
@@ -4460,7 +4460,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob[],
       protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse,
     ]
   >;
   listDlpJobs(
@@ -4498,7 +4498,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IDlpJob[],
       protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -4798,7 +4798,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType[],
       protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse,
     ]
   >;
   listStoredInfoTypes(
@@ -4844,7 +4844,7 @@ export class DlpServiceClient {
     [
       protos.google.privacy.dlp.v2.IStoredInfoType[],
       protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse,
     ]
   > | void {
     request = request || {};

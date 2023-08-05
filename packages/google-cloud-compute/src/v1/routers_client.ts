@@ -375,7 +375,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -415,7 +415,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class RoutersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -485,7 +485,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRouter,
       protos.google.cloud.compute.v1.IGetRouterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -523,7 +523,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRouter,
       protos.google.cloud.compute.v1.IGetRouterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -573,7 +573,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRouterStatusResponse,
       protos.google.cloud.compute.v1.IGetRouterStatusRouterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRouterStatus(
@@ -619,7 +619,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRouterStatusResponse,
       protos.google.cloud.compute.v1.IGetRouterStatusRouterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -676,7 +676,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -716,7 +716,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -742,7 +742,7 @@ export class RoutersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -794,7 +794,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -832,7 +832,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -859,7 +859,7 @@ export class RoutersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -904,7 +904,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRoutersPreviewResponse,
       protos.google.cloud.compute.v1.IPreviewRouterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   preview(
@@ -944,7 +944,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRoutersPreviewResponse,
       protos.google.cloud.compute.v1.IPreviewRouterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1003,7 +1003,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -1043,7 +1043,7 @@ export class RoutersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1070,7 +1070,7 @@ export class RoutersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1186,7 +1186,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IVmEndpointNatMappings[],
       protos.google.cloud.compute.v1.IGetNatMappingInfoRoutersRequest | null,
-      protos.google.cloud.compute.v1.IVmEndpointNatMappingsList
+      protos.google.cloud.compute.v1.IVmEndpointNatMappingsList,
     ]
   >;
   getNatMappingInfo(
@@ -1232,7 +1232,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IVmEndpointNatMappings[],
       protos.google.cloud.compute.v1.IGetNatMappingInfoRoutersRequest | null,
-      protos.google.cloud.compute.v1.IVmEndpointNatMappingsList
+      protos.google.cloud.compute.v1.IVmEndpointNatMappingsList,
     ]
   > | void {
     request = request || {};
@@ -1410,7 +1410,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRouter[],
       protos.google.cloud.compute.v1.IListRoutersRequest | null,
-      protos.google.cloud.compute.v1.IRouterList
+      protos.google.cloud.compute.v1.IRouterList,
     ]
   >;
   list(
@@ -1448,7 +1448,7 @@ export class RoutersClient {
     [
       protos.google.cloud.compute.v1.IRouter[],
       protos.google.cloud.compute.v1.IListRoutersRequest | null,
-      protos.google.cloud.compute.v1.IRouterList
+      protos.google.cloud.compute.v1.IRouterList,
     ]
   > | void {
     request = request || {};

@@ -420,7 +420,7 @@ export class NotificationChannelServiceClient {
         | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNotificationChannelDescriptor(
@@ -489,7 +489,7 @@ export class NotificationChannelServiceClient {
         | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -521,7 +521,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.IGetNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNotificationChannel(
@@ -590,7 +590,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.IGetNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -622,7 +622,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.ICreateNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNotificationChannel(
@@ -695,7 +695,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.ICreateNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -727,7 +727,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.IUpdateNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNotificationChannel(
@@ -796,7 +796,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.IUpdateNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -828,7 +828,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNotificationChannel(
@@ -898,7 +898,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -933,7 +933,7 @@ export class NotificationChannelServiceClient {
         | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   sendNotificationChannelVerificationCode(
@@ -1000,7 +1000,7 @@ export class NotificationChannelServiceClient {
         | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1035,7 +1035,7 @@ export class NotificationChannelServiceClient {
         | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNotificationChannelVerificationCode(
@@ -1133,7 +1133,7 @@ export class NotificationChannelServiceClient {
         | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1165,7 +1165,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.IVerifyNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   verifyNotificationChannel(
@@ -1238,7 +1238,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel,
       protos.google.monitoring.v3.IVerifyNotificationChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1271,7 +1271,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannelDescriptor[],
       protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
+      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse,
     ]
   >;
   listNotificationChannelDescriptors(
@@ -1354,7 +1354,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannelDescriptor[],
       protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
+      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse,
     ]
   > | void {
     request = request || {};
@@ -1503,7 +1503,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel[],
       protos.google.monitoring.v3.IListNotificationChannelsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelsResponse
+      protos.google.monitoring.v3.IListNotificationChannelsResponse,
     ]
   >;
   listNotificationChannels(
@@ -1599,7 +1599,7 @@ export class NotificationChannelServiceClient {
     [
       protos.google.monitoring.v3.INotificationChannel[],
       protos.google.monitoring.v3.IListNotificationChannelsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelsResponse
+      protos.google.monitoring.v3.IListNotificationChannelsResponse,
     ]
   > | void {
     request = request || {};

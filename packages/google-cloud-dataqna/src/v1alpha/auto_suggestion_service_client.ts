@@ -423,7 +423,7 @@ export class AutoSuggestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
       protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestQueries(
@@ -469,7 +469,7 @@ export class AutoSuggestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
       protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

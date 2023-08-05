@@ -376,7 +376,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addInstances(
@@ -422,7 +422,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -449,7 +449,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -499,7 +499,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -545,7 +545,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -572,7 +572,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -615,7 +615,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup,
       protos.google.cloud.compute.v1.IGetInstanceGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -661,7 +661,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup,
       protos.google.cloud.compute.v1.IGetInstanceGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -718,7 +718,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -764,7 +764,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -790,7 +790,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -842,7 +842,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeInstances(
@@ -888,7 +888,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -915,7 +915,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -967,7 +967,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNamedPorts(
@@ -1013,7 +1013,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1040,7 +1040,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1152,7 +1152,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup[],
       protos.google.cloud.compute.v1.IListInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupList
+      protos.google.cloud.compute.v1.IInstanceGroupList,
     ]
   >;
   list(
@@ -1190,7 +1190,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup[],
       protos.google.cloud.compute.v1.IListInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupList
+      protos.google.cloud.compute.v1.IInstanceGroupList,
     ]
   > | void {
     request = request || {};
@@ -1361,7 +1361,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
       protos.google.cloud.compute.v1.IListInstancesInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupsListInstances
+      protos.google.cloud.compute.v1.IInstanceGroupsListInstances,
     ]
   >;
   listInstances(
@@ -1407,7 +1407,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
       protos.google.cloud.compute.v1.IListInstancesInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupsListInstances
+      protos.google.cloud.compute.v1.IInstanceGroupsListInstances,
     ]
   > | void {
     request = request || {};

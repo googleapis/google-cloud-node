@@ -365,7 +365,7 @@ export class PublisherClient {
         | protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   publishChannelConnectionEvents(
@@ -414,7 +414,7 @@ export class PublisherClient {
         | protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -475,7 +475,7 @@ export class PublisherClient {
         | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   publishEvents(
@@ -524,7 +524,7 @@ export class PublisherClient {
         | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

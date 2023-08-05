@@ -461,7 +461,7 @@ export class ServicesClient {
     [
       protos.google.cloud.run.v2.IService,
       protos.google.cloud.run.v2.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -499,7 +499,7 @@ export class ServicesClient {
     [
       protos.google.cloud.run.v2.IService,
       protos.google.cloud.run.v2.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -559,7 +559,7 @@ export class ServicesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -597,7 +597,7 @@ export class ServicesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -654,7 +654,7 @@ export class ServicesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -692,7 +692,7 @@ export class ServicesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -744,7 +744,7 @@ export class ServicesClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -782,7 +782,7 @@ export class ServicesClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -843,7 +843,7 @@ export class ServicesClient {
         protos.google.cloud.run.v2.IService
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createService(
@@ -896,7 +896,7 @@ export class ServicesClient {
         protos.google.cloud.run.v2.IService
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -997,7 +997,7 @@ export class ServicesClient {
         protos.google.cloud.run.v2.IService
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateService(
@@ -1050,7 +1050,7 @@ export class ServicesClient {
         protos.google.cloud.run.v2.IService
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1154,7 +1154,7 @@ export class ServicesClient {
         protos.google.cloud.run.v2.IService
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteService(
@@ -1207,7 +1207,7 @@ export class ServicesClient {
         protos.google.cloud.run.v2.IService
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1309,7 +1309,7 @@ export class ServicesClient {
     [
       protos.google.cloud.run.v2.IService[],
       protos.google.cloud.run.v2.IListServicesRequest | null,
-      protos.google.cloud.run.v2.IListServicesResponse
+      protos.google.cloud.run.v2.IListServicesResponse,
     ]
   >;
   listServices(
@@ -1347,7 +1347,7 @@ export class ServicesClient {
     [
       protos.google.cloud.run.v2.IService[],
       protos.google.cloud.run.v2.IListServicesRequest | null,
-      protos.google.cloud.run.v2.IListServicesResponse
+      protos.google.cloud.run.v2.IListServicesResponse,
     ]
   > | void {
     request = request || {};

@@ -441,7 +441,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository,
       protos.google.cloud.dataform.v1alpha2.IGetRepositoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRepository(
@@ -487,7 +487,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository,
       protos.google.cloud.dataform.v1alpha2.IGetRepositoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -540,7 +540,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRepository(
@@ -589,7 +589,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -639,7 +639,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IUpdateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRepository(
@@ -688,7 +688,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IUpdateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRepository(
@@ -788,7 +788,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -835,7 +835,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchRemoteBranchesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchRemoteBranches(
@@ -884,7 +884,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchRemoteBranchesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -928,7 +928,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.IGetWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkspace(
@@ -974,7 +974,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.IGetWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1024,7 +1024,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.ICreateWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkspace(
@@ -1070,7 +1070,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.ICreateWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1114,7 +1114,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IDeleteWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkspace(
@@ -1160,7 +1160,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IDeleteWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1207,7 +1207,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IInstallNpmPackagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   installNpmPackages(
@@ -1256,7 +1256,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IInstallNpmPackagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1306,7 +1306,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPullGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pullGitCommits(
@@ -1352,7 +1352,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPullGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1399,7 +1399,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPushGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pushGitCommits(
@@ -1445,7 +1445,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPushGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1492,7 +1492,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchFileGitStatusesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchFileGitStatuses(
@@ -1541,7 +1541,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchFileGitStatusesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1592,7 +1592,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchGitAheadBehindRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchGitAheadBehind(
@@ -1641,7 +1641,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchGitAheadBehindRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1695,7 +1695,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICommitWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   commitWorkspaceChanges(
@@ -1744,7 +1744,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICommitWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1800,7 +1800,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IResetWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetWorkspaceChanges(
@@ -1849,7 +1849,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IResetWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1895,7 +1895,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffResponse,
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchFileDiff(
@@ -1941,7 +1941,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffResponse,
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1988,7 +1988,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   makeDirectory(
@@ -2034,7 +2034,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2081,7 +2081,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeDirectory(
@@ -2127,7 +2127,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2178,7 +2178,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveDirectory(
@@ -2224,7 +2224,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2270,7 +2270,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IReadFileResponse,
       protos.google.cloud.dataform.v1alpha2.IReadFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   readFile(
@@ -2310,7 +2310,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IReadFileResponse,
       protos.google.cloud.dataform.v1alpha2.IReadFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2356,7 +2356,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeFile(
@@ -2402,7 +2402,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2450,7 +2450,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveFileResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveFile(
@@ -2490,7 +2490,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveFileResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2538,7 +2538,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWriteFileResponse,
       protos.google.cloud.dataform.v1alpha2.IWriteFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeFile(
@@ -2584,7 +2584,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWriteFileResponse,
       protos.google.cloud.dataform.v1alpha2.IWriteFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2631,7 +2631,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCompilationResult(
@@ -2680,7 +2680,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2730,7 +2730,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCompilationResult(
@@ -2779,7 +2779,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2830,7 +2830,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkflowInvocation(
@@ -2879,7 +2879,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2928,7 +2928,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkflowInvocation(
@@ -2977,7 +2977,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3028,7 +3028,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkflowInvocation(
@@ -3077,7 +3077,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3128,7 +3128,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICancelWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelWorkflowInvocation(
@@ -3177,7 +3177,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICancelWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3246,7 +3246,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository[],
       protos.google.cloud.dataform.v1alpha2.IListRepositoriesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse
+      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse,
     ]
   >;
   listRepositories(
@@ -3292,7 +3292,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository[],
       protos.google.cloud.dataform.v1alpha2.IListRepositoriesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse
+      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse,
     ]
   > | void {
     request = request || {};
@@ -3471,7 +3471,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace[],
       protos.google.cloud.dataform.v1alpha2.IListWorkspacesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse,
     ]
   >;
   listWorkspaces(
@@ -3517,7 +3517,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace[],
       protos.google.cloud.dataform.v1alpha2.IListWorkspacesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse,
     ]
   > | void {
     request = request || {};
@@ -3693,7 +3693,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.IDirectoryEntry[],
       protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse,
     ]
   >;
   queryDirectoryContents(
@@ -3739,7 +3739,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.IDirectoryEntry[],
       protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse,
     ]
   > | void {
     request = request || {};
@@ -3910,7 +3910,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResult[],
       protos.google.cloud.dataform.v1alpha2.IListCompilationResultsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse
+      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse,
     ]
   >;
   listCompilationResults(
@@ -3956,7 +3956,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResult[],
       protos.google.cloud.dataform.v1alpha2.IListCompilationResultsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse
+      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse,
     ]
   > | void {
     request = request || {};
@@ -4124,7 +4124,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResultAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse,
     ]
   >;
   queryCompilationResultActions(
@@ -4170,7 +4170,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResultAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4341,7 +4341,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocation[],
       protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse,
     ]
   >;
   listWorkflowInvocations(
@@ -4387,7 +4387,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocation[],
       protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse,
     ]
   > | void {
     request = request || {};
@@ -4552,7 +4552,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocationAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse,
     ]
   >;
   queryWorkflowInvocationActions(
@@ -4598,7 +4598,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocationAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse,
     ]
   > | void {
     request = request || {};

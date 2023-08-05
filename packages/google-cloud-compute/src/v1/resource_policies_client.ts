@@ -369,7 +369,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -415,7 +415,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class ResourcePoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -485,7 +485,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy,
       protos.google.cloud.compute.v1.IGetResourcePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -531,7 +531,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy,
       protos.google.cloud.compute.v1.IGetResourcePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -586,7 +586,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -635,7 +635,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -692,7 +692,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -738,7 +738,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -764,7 +764,7 @@ export class ResourcePoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -818,7 +818,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -864,7 +864,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -891,7 +891,7 @@ export class ResourcePoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -939,7 +939,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -988,7 +988,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1043,7 +1043,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1092,7 +1092,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1211,7 +1211,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy[],
       protos.google.cloud.compute.v1.IListResourcePoliciesRequest | null,
-      protos.google.cloud.compute.v1.IResourcePolicyList
+      protos.google.cloud.compute.v1.IResourcePolicyList,
     ]
   >;
   list(
@@ -1249,7 +1249,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy[],
       protos.google.cloud.compute.v1.IListResourcePoliciesRequest | null,
-      protos.google.cloud.compute.v1.IResourcePolicyList
+      protos.google.cloud.compute.v1.IResourcePolicyList,
     ]
   > | void {
     request = request || {};

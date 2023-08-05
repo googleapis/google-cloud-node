@@ -366,7 +366,7 @@ export class VpnTunnelsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -406,7 +406,7 @@ export class VpnTunnelsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -433,7 +433,7 @@ export class VpnTunnelsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -476,7 +476,7 @@ export class VpnTunnelsClient {
     [
       protos.google.cloud.compute.v1.IVpnTunnel,
       protos.google.cloud.compute.v1.IGetVpnTunnelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -516,7 +516,7 @@ export class VpnTunnelsClient {
     [
       protos.google.cloud.compute.v1.IVpnTunnel,
       protos.google.cloud.compute.v1.IGetVpnTunnelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -573,7 +573,7 @@ export class VpnTunnelsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -613,7 +613,7 @@ export class VpnTunnelsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -639,7 +639,7 @@ export class VpnTunnelsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -691,7 +691,7 @@ export class VpnTunnelsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -737,7 +737,7 @@ export class VpnTunnelsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -764,7 +764,7 @@ export class VpnTunnelsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -876,7 +876,7 @@ export class VpnTunnelsClient {
     [
       protos.google.cloud.compute.v1.IVpnTunnel[],
       protos.google.cloud.compute.v1.IListVpnTunnelsRequest | null,
-      protos.google.cloud.compute.v1.IVpnTunnelList
+      protos.google.cloud.compute.v1.IVpnTunnelList,
     ]
   >;
   list(
@@ -914,7 +914,7 @@ export class VpnTunnelsClient {
     [
       protos.google.cloud.compute.v1.IVpnTunnel[],
       protos.google.cloud.compute.v1.IListVpnTunnelsRequest | null,
-      protos.google.cloud.compute.v1.IVpnTunnelList
+      protos.google.cloud.compute.v1.IVpnTunnelList,
     ]
   > | void {
     request = request || {};

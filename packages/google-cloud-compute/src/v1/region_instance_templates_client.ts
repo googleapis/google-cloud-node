@@ -360,7 +360,7 @@ export class RegionInstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -406,7 +406,7 @@ export class RegionInstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -433,7 +433,7 @@ export class RegionInstanceTemplatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -479,7 +479,7 @@ export class RegionInstanceTemplatesClient {
         | protos.google.cloud.compute.v1.IGetRegionInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -528,7 +528,7 @@ export class RegionInstanceTemplatesClient {
         | protos.google.cloud.compute.v1.IGetRegionInstanceTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +585,7 @@ export class RegionInstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -631,7 +631,7 @@ export class RegionInstanceTemplatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -657,7 +657,7 @@ export class RegionInstanceTemplatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -712,7 +712,7 @@ export class RegionInstanceTemplatesClient {
     [
       protos.google.cloud.compute.v1.IInstanceTemplate[],
       protos.google.cloud.compute.v1.IListRegionInstanceTemplatesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceTemplateList
+      protos.google.cloud.compute.v1.IInstanceTemplateList,
     ]
   >;
   list(
@@ -752,7 +752,7 @@ export class RegionInstanceTemplatesClient {
     [
       protos.google.cloud.compute.v1.IInstanceTemplate[],
       protos.google.cloud.compute.v1.IListRegionInstanceTemplatesRequest | null,
-      protos.google.cloud.compute.v1.IInstanceTemplateList
+      protos.google.cloud.compute.v1.IInstanceTemplateList,
     ]
   > | void {
     request = request || {};

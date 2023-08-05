@@ -441,7 +441,7 @@ export class TagKeysClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagKey,
       protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTagKey(
@@ -487,7 +487,7 @@ export class TagKeysClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagKey,
       protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -539,7 +539,7 @@ export class TagKeysClient {
         | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNamespacedTagKey(
@@ -588,7 +588,7 @@ export class TagKeysClient {
         | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -637,7 +637,7 @@ export class TagKeysClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -675,7 +675,7 @@ export class TagKeysClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -735,7 +735,7 @@ export class TagKeysClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -773,7 +773,7 @@ export class TagKeysClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -827,7 +827,7 @@ export class TagKeysClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -865,7 +865,7 @@ export class TagKeysClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -922,7 +922,7 @@ export class TagKeysClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTagKey(
@@ -975,7 +975,7 @@ export class TagKeysClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1064,7 +1064,7 @@ export class TagKeysClient {
         protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTagKey(
@@ -1117,7 +1117,7 @@ export class TagKeysClient {
         protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1209,7 +1209,7 @@ export class TagKeysClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTagKey(
@@ -1262,7 +1262,7 @@ export class TagKeysClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1352,7 +1352,7 @@ export class TagKeysClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagKey[],
       protos.google.cloud.resourcemanager.v3.IListTagKeysRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
+      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse,
     ]
   >;
   listTagKeys(
@@ -1398,7 +1398,7 @@ export class TagKeysClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagKey[],
       protos.google.cloud.resourcemanager.v3.IListTagKeysRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
+      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse,
     ]
   > | void {
     request = request || {};

@@ -339,7 +339,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getResource(
@@ -377,7 +377,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -422,7 +422,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   postResource(
@@ -460,7 +460,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -505,7 +505,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteResource(
@@ -543,7 +543,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -588,7 +588,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   putResource(
@@ -626,7 +626,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -671,7 +671,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patchResource(
@@ -709,7 +709,7 @@ export class GatewayServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.api.IHttpBody | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

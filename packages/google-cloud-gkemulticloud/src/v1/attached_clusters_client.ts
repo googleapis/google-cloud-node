@@ -494,7 +494,7 @@ export class AttachedClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAttachedCluster(
@@ -543,7 +543,7 @@ export class AttachedClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -599,7 +599,7 @@ export class AttachedClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAttachedServerConfig(
@@ -648,7 +648,7 @@ export class AttachedClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -728,7 +728,7 @@ export class AttachedClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateAttachedClusterInstallManifest(
@@ -777,7 +777,7 @@ export class AttachedClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -859,7 +859,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAttachedCluster(
@@ -912,7 +912,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1012,7 +1012,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAttachedCluster(
@@ -1065,7 +1065,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1178,7 +1178,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importAttachedCluster(
@@ -1231,7 +1231,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1349,7 +1349,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAttachedCluster(
@@ -1402,7 +1402,7 @@ export class AttachedClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1502,7 +1502,7 @@ export class AttachedClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
       protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
     ]
   >;
   listAttachedClusters(
@@ -1548,7 +1548,7 @@ export class AttachedClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
       protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+      protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
     ]
   > | void {
     request = request || {};

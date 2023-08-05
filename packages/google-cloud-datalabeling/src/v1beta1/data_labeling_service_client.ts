@@ -563,7 +563,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataset(
@@ -612,7 +612,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -657,7 +657,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset,
       protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataset(
@@ -703,7 +703,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset,
       protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -751,7 +751,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataset(
@@ -800,7 +800,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -846,7 +846,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataItem,
       protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataItem(
@@ -892,7 +892,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataItem,
       protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -941,7 +941,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAnnotatedDataset(
@@ -990,7 +990,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1039,7 +1039,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAnnotatedDataset(
@@ -1088,7 +1088,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1142,7 +1142,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IExample,
       protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExample(
@@ -1188,7 +1188,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IExample,
       protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1240,7 +1240,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAnnotationSpecSet(
@@ -1289,7 +1289,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1341,7 +1341,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAnnotationSpecSet(
@@ -1390,7 +1390,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1438,7 +1438,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAnnotationSpecSet(
@@ -1487,7 +1487,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1539,7 +1539,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstruction(
@@ -1588,7 +1588,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1636,7 +1636,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstruction(
@@ -1685,7 +1685,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1735,7 +1735,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEvaluation(
@@ -1784,7 +1784,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1834,7 +1834,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEvaluationJob(
@@ -1883,7 +1883,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1945,7 +1945,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEvaluationJob(
@@ -1994,7 +1994,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2043,7 +2043,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEvaluationJob(
@@ -2092,7 +2092,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2142,7 +2142,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseEvaluationJob(
@@ -2191,7 +2191,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2241,7 +2241,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeEvaluationJob(
@@ -2290,7 +2290,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2339,7 +2339,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEvaluationJob(
@@ -2388,7 +2388,7 @@ export class DataLabelingServiceClient {
         | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2448,7 +2448,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importData(
@@ -2501,7 +2501,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2598,7 +2598,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportData(
@@ -2651,7 +2651,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2756,7 +2756,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   labelImage(
@@ -2809,7 +2809,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2914,7 +2914,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   labelVideo(
@@ -2967,7 +2967,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3064,7 +3064,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   labelText(
@@ -3117,7 +3117,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3203,7 +3203,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstruction(
@@ -3256,7 +3256,7 @@ export class DataLabelingServiceClient {
         protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3349,7 +3349,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset[],
       protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse,
     ]
   >;
   listDatasets(
@@ -3395,7 +3395,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataset[],
       protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse,
     ]
   > | void {
     request = request || {};
@@ -3560,7 +3560,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataItem[],
       protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse,
     ]
   >;
   listDataItems(
@@ -3606,7 +3606,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IDataItem[],
       protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse,
     ]
   > | void {
     request = request || {};
@@ -3770,7 +3770,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
       protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse,
     ]
   >;
   listAnnotatedDatasets(
@@ -3816,7 +3816,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
       protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse,
     ]
   > | void {
     request = request || {};
@@ -3982,7 +3982,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IExample[],
       protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
+      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse,
     ]
   >;
   listExamples(
@@ -4028,7 +4028,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IExample[],
       protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
+      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse,
     ]
   > | void {
     request = request || {};
@@ -4196,7 +4196,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
       protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse,
     ]
   >;
   listAnnotationSpecSets(
@@ -4242,7 +4242,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
       protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse,
     ]
   > | void {
     request = request || {};
@@ -4410,7 +4410,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IInstruction[],
       protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse,
     ]
   >;
   listInstructions(
@@ -4456,7 +4456,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IInstruction[],
       protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4652,7 +4652,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
       protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
+      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse,
     ]
   >;
   searchEvaluations(
@@ -4698,7 +4698,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
       protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
+      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse,
     ]
   > | void {
     request = request || {};
@@ -4930,7 +4930,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
       protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
+      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse,
     ]
   >;
   searchExampleComparisons(
@@ -4976,7 +4976,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
       protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
+      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse,
     ]
   > | void {
     request = request || {};
@@ -5156,7 +5156,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
       protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse,
     ]
   >;
   listEvaluationJobs(
@@ -5202,7 +5202,7 @@ export class DataLabelingServiceClient {
     [
       protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
       protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
+      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse,
     ]
   > | void {
     request = request || {};

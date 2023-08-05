@@ -357,7 +357,7 @@ export class EventServiceClient {
     [
       protos.google.cloud.talent.v4.IClientEvent,
       protos.google.cloud.talent.v4.ICreateClientEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createClientEvent(
@@ -403,7 +403,7 @@ export class EventServiceClient {
     [
       protos.google.cloud.talent.v4.IClientEvent,
       protos.google.cloud.talent.v4.ICreateClientEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

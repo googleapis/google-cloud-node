@@ -683,7 +683,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.ICluster,
       protos.google.cloud.alloydb.v1beta.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -723,7 +723,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.ICluster,
       protos.google.cloud.alloydb.v1beta.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -770,7 +770,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IInstance,
       protos.google.cloud.alloydb.v1beta.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -810,7 +810,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IInstance,
       protos.google.cloud.alloydb.v1beta.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -854,7 +854,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IBackup,
       protos.google.cloud.alloydb.v1beta.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -894,7 +894,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IBackup,
       protos.google.cloud.alloydb.v1beta.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -970,7 +970,7 @@ export class AlloyDBAdminClient {
         | protos.google.cloud.alloydb.v1beta.IGenerateClientCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateClientCertificate(
@@ -1019,7 +1019,7 @@ export class AlloyDBAdminClient {
         | protos.google.cloud.alloydb.v1beta.IGenerateClientCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1082,7 +1082,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IConnectionInfo,
       protos.google.cloud.alloydb.v1beta.IGetConnectionInfoRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnectionInfo(
@@ -1128,7 +1128,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IConnectionInfo,
       protos.google.cloud.alloydb.v1beta.IGetConnectionInfoRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1173,7 +1173,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser,
       protos.google.cloud.alloydb.v1beta.IGetUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUser(
@@ -1211,7 +1211,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser,
       protos.google.cloud.alloydb.v1beta.IGetUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1276,7 +1276,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser,
       protos.google.cloud.alloydb.v1beta.ICreateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createUser(
@@ -1316,7 +1316,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser,
       protos.google.cloud.alloydb.v1beta.ICreateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1385,7 +1385,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser,
       protos.google.cloud.alloydb.v1beta.IUpdateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateUser(
@@ -1425,7 +1425,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser,
       protos.google.cloud.alloydb.v1beta.IUpdateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1487,7 +1487,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.alloydb.v1beta.IDeleteUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteUser(
@@ -1527,7 +1527,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.alloydb.v1beta.IDeleteUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1600,7 +1600,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -1653,7 +1653,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1763,7 +1763,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -1816,7 +1816,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1923,7 +1923,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -1976,7 +1976,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2084,7 +2084,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   promoteCluster(
@@ -2137,7 +2137,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2250,7 +2250,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreCluster(
@@ -2303,7 +2303,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2410,7 +2410,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecondaryCluster(
@@ -2463,7 +2463,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2573,7 +2573,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -2626,7 +2626,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2732,7 +2732,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecondaryInstance(
@@ -2785,7 +2785,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2897,7 +2897,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateInstances(
@@ -2950,7 +2950,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3060,7 +3060,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -3113,7 +3113,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3218,7 +3218,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -3271,7 +3271,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3374,7 +3374,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   failoverInstance(
@@ -3427,7 +3427,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3532,7 +3532,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   injectFault(
@@ -3585,7 +3585,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3687,7 +3687,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restartInstance(
@@ -3740,7 +3740,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3844,7 +3844,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -3897,7 +3897,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4006,7 +4006,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackup(
@@ -4059,7 +4059,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4164,7 +4164,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -4217,7 +4217,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4310,7 +4310,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.ICluster[],
       protos.google.cloud.alloydb.v1beta.IListClustersRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListClustersResponse
+      protos.google.cloud.alloydb.v1beta.IListClustersResponse,
     ]
   >;
   listClusters(
@@ -4356,7 +4356,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.ICluster[],
       protos.google.cloud.alloydb.v1beta.IListClustersRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListClustersResponse
+      protos.google.cloud.alloydb.v1beta.IListClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -4522,7 +4522,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IInstance[],
       protos.google.cloud.alloydb.v1beta.IListInstancesRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListInstancesResponse
+      protos.google.cloud.alloydb.v1beta.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -4568,7 +4568,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IInstance[],
       protos.google.cloud.alloydb.v1beta.IListInstancesRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListInstancesResponse
+      protos.google.cloud.alloydb.v1beta.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -4733,7 +4733,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IBackup[],
       protos.google.cloud.alloydb.v1beta.IListBackupsRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListBackupsResponse
+      protos.google.cloud.alloydb.v1beta.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -4779,7 +4779,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IBackup[],
       protos.google.cloud.alloydb.v1beta.IListBackupsRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListBackupsResponse
+      protos.google.cloud.alloydb.v1beta.IListBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -4936,7 +4936,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.ISupportedDatabaseFlag[],
       protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsResponse
+      protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsResponse,
     ]
   >;
   listSupportedDatabaseFlags(
@@ -4982,7 +4982,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.ISupportedDatabaseFlag[],
       protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsResponse
+      protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsResponse,
     ]
   > | void {
     request = request || {};
@@ -5145,7 +5145,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser[],
       protos.google.cloud.alloydb.v1beta.IListUsersRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListUsersResponse
+      protos.google.cloud.alloydb.v1beta.IListUsersResponse,
     ]
   >;
   listUsers(
@@ -5185,7 +5185,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1beta.IUser[],
       protos.google.cloud.alloydb.v1beta.IListUsersRequest | null,
-      protos.google.cloud.alloydb.v1beta.IListUsersResponse
+      protos.google.cloud.alloydb.v1beta.IListUsersResponse,
     ]
   > | void {
     request = request || {};

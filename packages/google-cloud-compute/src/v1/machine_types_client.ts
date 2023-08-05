@@ -352,7 +352,7 @@ export class MachineTypesClient {
     [
       protos.google.cloud.compute.v1.IMachineType,
       protos.google.cloud.compute.v1.IGetMachineTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -392,7 +392,7 @@ export class MachineTypesClient {
     [
       protos.google.cloud.compute.v1.IMachineType,
       protos.google.cloud.compute.v1.IGetMachineTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -511,7 +511,7 @@ export class MachineTypesClient {
     [
       protos.google.cloud.compute.v1.IMachineType[],
       protos.google.cloud.compute.v1.IListMachineTypesRequest | null,
-      protos.google.cloud.compute.v1.IMachineTypeList
+      protos.google.cloud.compute.v1.IMachineTypeList,
     ]
   >;
   list(
@@ -549,7 +549,7 @@ export class MachineTypesClient {
     [
       protos.google.cloud.compute.v1.IMachineType[],
       protos.google.cloud.compute.v1.IListMachineTypesRequest | null,
-      protos.google.cloud.compute.v1.IMachineTypeList
+      protos.google.cloud.compute.v1.IMachineTypeList,
     ]
   > | void {
     request = request || {};

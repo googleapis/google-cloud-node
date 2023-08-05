@@ -373,7 +373,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addHealthCheck(
@@ -419,7 +419,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -446,7 +446,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -498,7 +498,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addInstance(
@@ -544,7 +544,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,7 +571,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -621,7 +621,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -667,7 +667,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -694,7 +694,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -737,7 +737,7 @@ export class TargetPoolsClient {
     [
       protos.google.cloud.compute.v1.ITargetPool,
       protos.google.cloud.compute.v1.IGetTargetPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -777,7 +777,7 @@ export class TargetPoolsClient {
     [
       protos.google.cloud.compute.v1.ITargetPool,
       protos.google.cloud.compute.v1.IGetTargetPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,7 +829,7 @@ export class TargetPoolsClient {
     [
       protos.google.cloud.compute.v1.ITargetPoolInstanceHealth,
       protos.google.cloud.compute.v1.IGetHealthTargetPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHealth(
@@ -875,7 +875,7 @@ export class TargetPoolsClient {
     [
       protos.google.cloud.compute.v1.ITargetPoolInstanceHealth,
       protos.google.cloud.compute.v1.IGetHealthTargetPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -932,7 +932,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -978,7 +978,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1004,7 +1004,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1056,7 +1056,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeHealthCheck(
@@ -1102,7 +1102,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1129,7 +1129,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1181,7 +1181,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeInstance(
@@ -1227,7 +1227,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1254,7 +1254,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1308,7 +1308,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setBackup(
@@ -1354,7 +1354,7 @@ export class TargetPoolsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1381,7 +1381,7 @@ export class TargetPoolsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1493,7 +1493,7 @@ export class TargetPoolsClient {
     [
       protos.google.cloud.compute.v1.ITargetPool[],
       protos.google.cloud.compute.v1.IListTargetPoolsRequest | null,
-      protos.google.cloud.compute.v1.ITargetPoolList
+      protos.google.cloud.compute.v1.ITargetPoolList,
     ]
   >;
   list(
@@ -1531,7 +1531,7 @@ export class TargetPoolsClient {
     [
       protos.google.cloud.compute.v1.ITargetPool[],
       protos.google.cloud.compute.v1.IListTargetPoolsRequest | null,
-      protos.google.cloud.compute.v1.ITargetPoolList
+      protos.google.cloud.compute.v1.ITargetPoolList,
     ]
   > | void {
     request = request || {};

@@ -454,7 +454,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPage(
@@ -500,7 +500,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -569,7 +569,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage,
       protos.google.cloud.dialogflow.cx.v3beta1.ICreatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPage(
@@ -615,7 +615,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage,
       protos.google.cloud.dialogflow.cx.v3beta1.ICreatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -683,7 +683,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage,
       protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePage(
@@ -729,7 +729,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage,
       protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -786,7 +786,7 @@ export class PagesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3beta1.IDeletePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePage(
@@ -832,7 +832,7 @@ export class PagesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3beta1.IDeletePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -909,7 +909,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListPagesResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListPagesResponse,
     ]
   >;
   listPages(
@@ -955,7 +955,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IPage[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListPagesResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListPagesResponse,
     ]
   > | void {
     request = request || {};

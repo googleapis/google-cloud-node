@@ -393,7 +393,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet,
       protos.google.cloud.speech.v1.ICreatePhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPhraseSet(
@@ -433,7 +433,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet,
       protos.google.cloud.speech.v1.ICreatePhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -485,7 +485,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet,
       protos.google.cloud.speech.v1.IGetPhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPhraseSet(
@@ -523,7 +523,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet,
       protos.google.cloud.speech.v1.IGetPhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -580,7 +580,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet,
       protos.google.cloud.speech.v1.IUpdatePhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePhraseSet(
@@ -620,7 +620,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet,
       protos.google.cloud.speech.v1.IUpdatePhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -666,7 +666,7 @@ export class AdaptationClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.speech.v1.IDeletePhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePhraseSet(
@@ -706,7 +706,7 @@ export class AdaptationClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.speech.v1.IDeletePhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -767,7 +767,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass,
       protos.google.cloud.speech.v1.ICreateCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomClass(
@@ -813,7 +813,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass,
       protos.google.cloud.speech.v1.ICreateCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -859,7 +859,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass,
       protos.google.cloud.speech.v1.IGetCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomClass(
@@ -899,7 +899,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass,
       protos.google.cloud.speech.v1.IGetCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -956,7 +956,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass,
       protos.google.cloud.speech.v1.IUpdateCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomClass(
@@ -1002,7 +1002,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass,
       protos.google.cloud.speech.v1.IUpdateCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1054,7 +1054,7 @@ export class AdaptationClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.speech.v1.IDeleteCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCustomClass(
@@ -1100,7 +1100,7 @@ export class AdaptationClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.speech.v1.IDeleteCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1167,7 +1167,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet[],
       protos.google.cloud.speech.v1.IListPhraseSetRequest | null,
-      protos.google.cloud.speech.v1.IListPhraseSetResponse
+      protos.google.cloud.speech.v1.IListPhraseSetResponse,
     ]
   >;
   listPhraseSet(
@@ -1207,7 +1207,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.IPhraseSet[],
       protos.google.cloud.speech.v1.IListPhraseSetRequest | null,
-      protos.google.cloud.speech.v1.IListPhraseSetResponse
+      protos.google.cloud.speech.v1.IListPhraseSetResponse,
     ]
   > | void {
     request = request || {};
@@ -1392,7 +1392,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass[],
       protos.google.cloud.speech.v1.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v1.IListCustomClassesResponse
+      protos.google.cloud.speech.v1.IListCustomClassesResponse,
     ]
   >;
   listCustomClasses(
@@ -1438,7 +1438,7 @@ export class AdaptationClient {
     [
       protos.google.cloud.speech.v1.ICustomClass[],
       protos.google.cloud.speech.v1.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v1.IListCustomClassesResponse
+      protos.google.cloud.speech.v1.IListCustomClassesResponse,
     ]
   > | void {
     request = request || {};

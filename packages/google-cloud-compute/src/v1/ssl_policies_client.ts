@@ -365,7 +365,7 @@ export class SslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -405,7 +405,7 @@ export class SslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -431,7 +431,7 @@ export class SslPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -472,7 +472,7 @@ export class SslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy,
       protos.google.cloud.compute.v1.IGetSslPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -512,7 +512,7 @@ export class SslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy,
       protos.google.cloud.compute.v1.IGetSslPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -566,7 +566,7 @@ export class SslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -606,7 +606,7 @@ export class SslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -631,7 +631,7 @@ export class SslPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -683,7 +683,7 @@ export class SslPoliciesClient {
         | protos.google.cloud.compute.v1.IListAvailableFeaturesSslPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listAvailableFeatures(
@@ -732,7 +732,7 @@ export class SslPoliciesClient {
         | protos.google.cloud.compute.v1.IListAvailableFeaturesSslPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -787,7 +787,7 @@ export class SslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -827,7 +827,7 @@ export class SslPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -853,7 +853,7 @@ export class SslPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -963,7 +963,7 @@ export class SslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy[],
       protos.google.cloud.compute.v1.IListSslPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISslPoliciesList
+      protos.google.cloud.compute.v1.ISslPoliciesList,
     ]
   >;
   list(
@@ -1001,7 +1001,7 @@ export class SslPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISslPolicy[],
       protos.google.cloud.compute.v1.IListSslPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISslPoliciesList
+      protos.google.cloud.compute.v1.ISslPoliciesList,
     ]
   > | void {
     request = request || {};

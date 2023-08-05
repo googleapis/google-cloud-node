@@ -438,7 +438,7 @@ export class TagBindingsClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagBindingMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTagBinding(
@@ -491,7 +491,7 @@ export class TagBindingsClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagBindingMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -572,7 +572,7 @@ export class TagBindingsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagBindingMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTagBinding(
@@ -625,7 +625,7 @@ export class TagBindingsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagBindingMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -719,7 +719,7 @@ export class TagBindingsClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagBinding[],
       protos.google.cloud.resourcemanager.v3.IListTagBindingsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagBindingsResponse
+      protos.google.cloud.resourcemanager.v3.IListTagBindingsResponse,
     ]
   >;
   listTagBindings(
@@ -765,7 +765,7 @@ export class TagBindingsClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagBinding[],
       protos.google.cloud.resourcemanager.v3.IListTagBindingsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagBindingsResponse
+      protos.google.cloud.resourcemanager.v3.IListTagBindingsResponse,
     ]
   > | void {
     request = request || {};
@@ -909,7 +909,7 @@ export class TagBindingsClient {
     [
       protos.google.cloud.resourcemanager.v3.IEffectiveTag[],
       protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse,
     ]
   >;
   listEffectiveTags(
@@ -955,7 +955,7 @@ export class TagBindingsClient {
     [
       protos.google.cloud.resourcemanager.v3.IEffectiveTag[],
       protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse,
     ]
   > | void {
     request = request || {};

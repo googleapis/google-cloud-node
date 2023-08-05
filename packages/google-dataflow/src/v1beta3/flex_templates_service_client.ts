@@ -340,7 +340,7 @@ export class FlexTemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.ILaunchFlexTemplateResponse,
       protos.google.dataflow.v1beta3.ILaunchFlexTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   launchFlexTemplate(
@@ -386,7 +386,7 @@ export class FlexTemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.ILaunchFlexTemplateResponse,
       protos.google.dataflow.v1beta3.ILaunchFlexTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

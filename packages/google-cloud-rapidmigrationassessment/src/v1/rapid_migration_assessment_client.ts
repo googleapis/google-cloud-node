@@ -506,7 +506,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAnnotation(
@@ -555,7 +555,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -602,7 +602,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCollector(
@@ -651,7 +651,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -708,7 +708,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCollector(
@@ -761,7 +761,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -848,7 +848,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAnnotation(
@@ -901,7 +901,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1004,7 +1004,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCollector(
@@ -1057,7 +1057,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1154,7 +1154,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCollector(
@@ -1207,7 +1207,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1304,7 +1304,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeCollector(
@@ -1357,7 +1357,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1454,7 +1454,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerCollector(
@@ -1507,7 +1507,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1604,7 +1604,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseCollector(
@@ -1657,7 +1657,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1747,7 +1747,7 @@ export class RapidMigrationAssessmentClient {
     [
       protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
       protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
     ]
   >;
   listCollectors(
@@ -1793,7 +1793,7 @@ export class RapidMigrationAssessmentClient {
     [
       protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
       protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
     ]
   > | void {
     request = request || {};

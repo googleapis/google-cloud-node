@@ -351,7 +351,7 @@ export class QuotaControllerClient {
     [
       protos.google.api.servicecontrol.v1.IAllocateQuotaResponse,
       protos.google.api.servicecontrol.v1.IAllocateQuotaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   allocateQuota(
@@ -397,7 +397,7 @@ export class QuotaControllerClient {
     [
       protos.google.api.servicecontrol.v1.IAllocateQuotaResponse,
       protos.google.api.servicecontrol.v1.IAllocateQuotaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

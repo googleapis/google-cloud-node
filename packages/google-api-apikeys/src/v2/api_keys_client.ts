@@ -445,7 +445,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.IKey,
       protos.google.api.apikeys.v2.IGetKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getKey(
@@ -483,7 +483,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.IKey,
       protos.google.api.apikeys.v2.IGetKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -530,7 +530,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.IGetKeyStringResponse,
       protos.google.api.apikeys.v2.IGetKeyStringRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getKeyString(
@@ -568,7 +568,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.IGetKeyStringResponse,
       protos.google.api.apikeys.v2.IGetKeyStringRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -616,7 +616,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.ILookupKeyResponse,
       protos.google.api.apikeys.v2.ILookupKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lookupKey(
@@ -654,7 +654,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.ILookupKeyResponse,
       protos.google.api.apikeys.v2.ILookupKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -717,7 +717,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createKey(
@@ -770,7 +770,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -864,7 +864,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateKey(
@@ -917,7 +917,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1004,7 +1004,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteKey(
@@ -1057,7 +1057,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1140,7 +1140,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteKey(
@@ -1193,7 +1193,7 @@ export class ApiKeysClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1282,7 +1282,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.IKey[],
       protos.google.api.apikeys.v2.IListKeysRequest | null,
-      protos.google.api.apikeys.v2.IListKeysResponse
+      protos.google.api.apikeys.v2.IListKeysResponse,
     ]
   >;
   listKeys(
@@ -1320,7 +1320,7 @@ export class ApiKeysClient {
     [
       protos.google.api.apikeys.v2.IKey[],
       protos.google.api.apikeys.v2.IListKeysRequest | null,
-      protos.google.api.apikeys.v2.IListKeysResponse
+      protos.google.api.apikeys.v2.IListKeysResponse,
     ]
   > | void {
     request = request || {};

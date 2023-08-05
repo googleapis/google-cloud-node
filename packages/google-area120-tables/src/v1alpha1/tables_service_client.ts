@@ -395,7 +395,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.ITable,
       protos.google.area120.tables.v1alpha1.IGetTableRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTable(
@@ -435,7 +435,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.ITable,
       protos.google.area120.tables.v1alpha1.IGetTableRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -480,7 +480,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IWorkspace,
       protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkspace(
@@ -526,7 +526,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IWorkspace,
       protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -574,7 +574,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow,
       protos.google.area120.tables.v1alpha1.IGetRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRow(
@@ -614,7 +614,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow,
       protos.google.area120.tables.v1alpha1.IGetRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -664,7 +664,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow,
       protos.google.area120.tables.v1alpha1.ICreateRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRow(
@@ -710,7 +710,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow,
       protos.google.area120.tables.v1alpha1.ICreateRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -759,7 +759,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
       protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateRows(
@@ -805,7 +805,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
       protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -854,7 +854,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow,
       protos.google.area120.tables.v1alpha1.IUpdateRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRow(
@@ -900,7 +900,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow,
       protos.google.area120.tables.v1alpha1.IUpdateRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -949,7 +949,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
       protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateRows(
@@ -995,7 +995,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
       protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1040,7 +1040,7 @@ export class TablesServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.area120.tables.v1alpha1.IDeleteRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRow(
@@ -1086,7 +1086,7 @@ export class TablesServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.area120.tables.v1alpha1.IDeleteRowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1136,7 +1136,7 @@ export class TablesServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteRows(
@@ -1182,7 +1182,7 @@ export class TablesServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1240,7 +1240,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.ITable[],
       protos.google.area120.tables.v1alpha1.IListTablesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListTablesResponse
+      protos.google.area120.tables.v1alpha1.IListTablesResponse,
     ]
   >;
   listTables(
@@ -1286,7 +1286,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.ITable[],
       protos.google.area120.tables.v1alpha1.IListTablesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListTablesResponse
+      protos.google.area120.tables.v1alpha1.IListTablesResponse,
     ]
   > | void {
     request = request || {};
@@ -1432,7 +1432,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IWorkspace[],
       protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse,
     ]
   >;
   listWorkspaces(
@@ -1478,7 +1478,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IWorkspace[],
       protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
-      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+      protos.google.area120.tables.v1alpha1.IListWorkspacesResponse,
     ]
   > | void {
     request = request || {};
@@ -1634,7 +1634,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow[],
       protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
-      protos.google.area120.tables.v1alpha1.IListRowsResponse
+      protos.google.area120.tables.v1alpha1.IListRowsResponse,
     ]
   >;
   listRows(
@@ -1680,7 +1680,7 @@ export class TablesServiceClient {
     [
       protos.google.area120.tables.v1alpha1.IRow[],
       protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
-      protos.google.area120.tables.v1alpha1.IListRowsResponse
+      protos.google.area120.tables.v1alpha1.IListRowsResponse,
     ]
   > | void {
     request = request || {};

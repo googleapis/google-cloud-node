@@ -378,7 +378,7 @@ export class CaseAttachmentServiceClient {
     [
       protos.google.cloud.support.v2.IAttachment[],
       protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2.IListAttachmentsResponse,
     ]
   >;
   listAttachments(
@@ -424,7 +424,7 @@ export class CaseAttachmentServiceClient {
     [
       protos.google.cloud.support.v2.IAttachment[],
       protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2.IListAttachmentsResponse,
     ]
   > | void {
     request = request || {};
