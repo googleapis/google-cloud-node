@@ -426,7 +426,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApprovalRequest(
@@ -475,7 +475,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -527,7 +527,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   approveApprovalRequest(
@@ -576,7 +576,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -636,7 +636,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   dismissApprovalRequest(
@@ -685,7 +685,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -743,7 +743,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   invalidateApprovalRequest(
@@ -792,7 +792,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -844,7 +844,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessApprovalSettings(
@@ -893,7 +893,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -956,7 +956,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccessApprovalSettings(
@@ -1005,7 +1005,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1061,7 +1061,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccessApprovalSettings(
@@ -1110,7 +1110,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1162,7 +1162,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessApprovalServiceAccount(
@@ -1211,7 +1211,7 @@ export class AccessApprovalClient {
         | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1283,7 +1283,7 @@ export class AccessApprovalClient {
     [
       protos.google.cloud.accessapproval.v1.IApprovalRequest[],
       protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage | null,
-      protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse
+      protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse,
     ]
   >;
   listApprovalRequests(
@@ -1329,7 +1329,7 @@ export class AccessApprovalClient {
     [
       protos.google.cloud.accessapproval.v1.IApprovalRequest[],
       protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage | null,
-      protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse
+      protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse,
     ]
   > | void {
     request = request || {};

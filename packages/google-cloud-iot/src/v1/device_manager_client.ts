@@ -388,7 +388,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDeviceRegistry(
@@ -434,7 +434,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -479,7 +479,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeviceRegistry(
@@ -519,7 +519,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,7 +571,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDeviceRegistry(
@@ -617,7 +617,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry,
       protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -662,7 +662,7 @@ export class DeviceManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDeviceRegistry(
@@ -708,7 +708,7 @@ export class DeviceManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -758,7 +758,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.ICreateDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDevice(
@@ -796,7 +796,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.ICreateDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -846,7 +846,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.IGetDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDevice(
@@ -884,7 +884,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.IGetDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -936,7 +936,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.IUpdateDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDevice(
@@ -974,7 +974,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice,
       protos.google.cloud.iot.v1.IUpdateDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1020,7 +1020,7 @@ export class DeviceManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iot.v1.IDeleteDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDevice(
@@ -1058,7 +1058,7 @@ export class DeviceManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.iot.v1.IDeleteDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1114,7 +1114,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceConfig,
       protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   modifyCloudToDeviceConfig(
@@ -1160,7 +1160,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceConfig,
       protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1215,7 +1215,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
       protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listDeviceConfigVersions(
@@ -1261,7 +1261,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
       protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1316,7 +1316,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IListDeviceStatesResponse,
       protos.google.cloud.iot.v1.IListDeviceStatesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listDeviceStates(
@@ -1356,7 +1356,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IListDeviceStatesResponse,
       protos.google.cloud.iot.v1.IListDeviceStatesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1413,7 +1413,7 @@ export class DeviceManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1451,7 +1451,7 @@ export class DeviceManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1501,7 +1501,7 @@ export class DeviceManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1539,7 +1539,7 @@ export class DeviceManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1591,7 +1591,7 @@ export class DeviceManagerClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1629,7 +1629,7 @@ export class DeviceManagerClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1695,7 +1695,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
       protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   sendCommandToDevice(
@@ -1735,7 +1735,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
       protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1787,7 +1787,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
       protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   bindDeviceToGateway(
@@ -1827,7 +1827,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
       protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1879,7 +1879,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
       protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   unbindDeviceFromGateway(
@@ -1925,7 +1925,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
       protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1987,7 +1987,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry[],
       protos.google.cloud.iot.v1.IListDeviceRegistriesRequest | null,
-      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
+      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse,
     ]
   >;
   listDeviceRegistries(
@@ -2033,7 +2033,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDeviceRegistry[],
       protos.google.cloud.iot.v1.IListDeviceRegistriesRequest | null,
-      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
+      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse,
     ]
   > | void {
     request = request || {};
@@ -2204,7 +2204,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice[],
       protos.google.cloud.iot.v1.IListDevicesRequest | null,
-      protos.google.cloud.iot.v1.IListDevicesResponse
+      protos.google.cloud.iot.v1.IListDevicesResponse,
     ]
   >;
   listDevices(
@@ -2242,7 +2242,7 @@ export class DeviceManagerClient {
     [
       protos.google.cloud.iot.v1.IDevice[],
       protos.google.cloud.iot.v1.IListDevicesRequest | null,
-      protos.google.cloud.iot.v1.IListDevicesResponse
+      protos.google.cloud.iot.v1.IListDevicesResponse,
     ]
   > | void {
     request = request || {};

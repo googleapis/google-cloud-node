@@ -355,7 +355,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IDeleteGlobalOperationResponse,
       protos.google.cloud.compute.v1.IDeleteGlobalOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -401,7 +401,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IDeleteGlobalOperationResponse,
       protos.google.cloud.compute.v1.IDeleteGlobalOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -448,7 +448,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IGetGlobalOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -494,7 +494,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IGetGlobalOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -541,7 +541,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IWaitGlobalOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   wait(
@@ -587,7 +587,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IWaitGlobalOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -703,7 +703,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListGlobalOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   >;
   list(
@@ -741,7 +741,7 @@ export class GlobalOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListGlobalOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   > | void {
     request = request || {};

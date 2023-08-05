@@ -415,7 +415,7 @@ export class CloudShellServiceClient {
     [
       protos.google.cloud.shell.v1.IEnvironment,
       protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -455,7 +455,7 @@ export class CloudShellServiceClient {
     [
       protos.google.cloud.shell.v1.IEnvironment,
       protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -519,7 +519,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IStartEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startEnvironment(
@@ -572,7 +572,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IStartEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -667,7 +667,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   authorizeEnvironment(
@@ -720,7 +720,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -813,7 +813,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAddPublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addPublicKey(
@@ -866,7 +866,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAddPublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -955,7 +955,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removePublicKey(
@@ -1008,7 +1008,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

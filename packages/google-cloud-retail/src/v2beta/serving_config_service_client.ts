@@ -435,7 +435,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.ICreateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServingConfig(
@@ -481,7 +481,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.ICreateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -528,7 +528,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2beta.IDeleteServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteServingConfig(
@@ -574,7 +574,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2beta.IDeleteServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -626,7 +626,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IUpdateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateServingConfig(
@@ -672,7 +672,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IUpdateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -719,7 +719,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IGetServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServingConfig(
@@ -765,7 +765,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IGetServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -819,7 +819,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IAddControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addControl(
@@ -859,7 +859,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IAddControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -910,7 +910,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IRemoveControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeControl(
@@ -956,7 +956,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig,
       protos.google.cloud.retail.v2beta.IRemoveControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1012,7 +1012,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig[],
       protos.google.cloud.retail.v2beta.IListServingConfigsRequest | null,
-      protos.google.cloud.retail.v2beta.IListServingConfigsResponse
+      protos.google.cloud.retail.v2beta.IListServingConfigsResponse,
     ]
   >;
   listServingConfigs(
@@ -1058,7 +1058,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2beta.IServingConfig[],
       protos.google.cloud.retail.v2beta.IListServingConfigsRequest | null,
-      protos.google.cloud.retail.v2beta.IListServingConfigsResponse
+      protos.google.cloud.retail.v2beta.IListServingConfigsResponse,
     ]
   > | void {
     request = request || {};

@@ -434,7 +434,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReservation(
@@ -483,7 +483,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ICreateReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -531,7 +531,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReservation(
@@ -580,7 +580,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IGetReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -630,7 +630,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReservation(
@@ -679,7 +679,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IDeleteReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -728,7 +728,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateReservation(
@@ -777,7 +777,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -836,7 +836,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCapacityCommitment(
@@ -885,7 +885,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ICreateCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -937,7 +937,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCapacityCommitment(
@@ -986,7 +986,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IGetCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1040,7 +1040,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCapacityCommitment(
@@ -1089,7 +1089,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IDeleteCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1148,7 +1148,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCapacityCommitment(
@@ -1197,7 +1197,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1258,7 +1258,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   splitCapacityCommitment(
@@ -1307,7 +1307,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ISplitCapacityCommitmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1371,7 +1371,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   mergeCapacityCommitments(
@@ -1420,7 +1420,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IMergeCapacityCommitmentsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1513,7 +1513,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAssignment(
@@ -1562,7 +1562,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.ICreateAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1624,7 +1624,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAssignment(
@@ -1673,7 +1673,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IDeleteAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1735,7 +1735,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveAssignment(
@@ -1784,7 +1784,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IMoveAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1835,7 +1835,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAssignment(
@@ -1884,7 +1884,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateAssignmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1932,7 +1932,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBiReservation(
@@ -1981,7 +1981,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IGetBiReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2037,7 +2037,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBiReservation(
@@ -2086,7 +2086,7 @@ export class ReservationServiceClient {
         | protos.google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2139,7 +2139,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IReservation[],
       protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
+      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse,
     ]
   >;
   listReservations(
@@ -2185,7 +2185,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IReservation[],
       protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse
+      protos.google.cloud.bigquery.reservation.v1.IListReservationsResponse,
     ]
   > | void {
     request = request || {};
@@ -2328,7 +2328,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
       protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse,
     ]
   >;
   listCapacityCommitments(
@@ -2374,7 +2374,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.ICapacityCommitment[],
       protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -2546,7 +2546,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IAssignment[],
       protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse,
     ]
   >;
   listAssignments(
@@ -2592,7 +2592,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IAssignment[],
       protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.IListAssignmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -2777,7 +2777,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IAssignment[],
       protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse,
     ]
   >;
   searchAssignments(
@@ -2823,7 +2823,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IAssignment[],
       protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -3029,7 +3029,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IAssignment[],
       protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse,
     ]
   >;
   searchAllAssignments(
@@ -3075,7 +3075,7 @@ export class ReservationServiceClient {
     [
       protos.google.cloud.bigquery.reservation.v1.IAssignment[],
       protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
-      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse,
     ]
   > | void {
     request = request || {};

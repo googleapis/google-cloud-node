@@ -362,7 +362,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IFeed,
       protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFeed(
@@ -402,7 +402,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IFeed,
       protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -449,7 +449,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IFeed,
       protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFeed(
@@ -489,7 +489,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IFeed,
       protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -535,7 +535,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
       protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listFeeds(
@@ -575,7 +575,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
       protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -627,7 +627,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IFeed,
       protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFeed(
@@ -667,7 +667,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p2beta1.IFeed,
       protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -714,7 +714,7 @@ export class AssetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFeed(
@@ -754,7 +754,7 @@ export class AssetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

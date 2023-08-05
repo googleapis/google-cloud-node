@@ -546,7 +546,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct,
       protos.google.cloud.retail.v2alpha.ICreateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProduct(
@@ -592,7 +592,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct,
       protos.google.cloud.retail.v2alpha.ICreateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -645,7 +645,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct,
       protos.google.cloud.retail.v2alpha.IGetProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProduct(
@@ -685,7 +685,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct,
       protos.google.cloud.retail.v2alpha.IGetProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -755,7 +755,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct,
       protos.google.cloud.retail.v2alpha.IUpdateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProduct(
@@ -801,7 +801,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct,
       protos.google.cloud.retail.v2alpha.IUpdateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -875,7 +875,7 @@ export class ProductServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.IDeleteProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProduct(
@@ -921,7 +921,7 @@ export class ProductServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.IDeleteProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1034,7 +1034,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeProducts(
@@ -1087,7 +1087,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IPurgeProductsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1213,7 +1213,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importProducts(
@@ -1266,7 +1266,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1473,7 +1473,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInventory(
@@ -1526,7 +1526,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1691,7 +1691,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addFulfillmentPlaces(
@@ -1744,7 +1744,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1904,7 +1904,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeFulfillmentPlaces(
@@ -1957,7 +1957,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2108,7 +2108,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addLocalInventories(
@@ -2161,7 +2161,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2289,7 +2289,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeLocalInventories(
@@ -2342,7 +2342,7 @@ export class ProductServiceClient {
         protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2508,7 +2508,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct[],
       protos.google.cloud.retail.v2alpha.IListProductsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListProductsResponse
+      protos.google.cloud.retail.v2alpha.IListProductsResponse,
     ]
   >;
   listProducts(
@@ -2554,7 +2554,7 @@ export class ProductServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IProduct[],
       protos.google.cloud.retail.v2alpha.IListProductsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListProductsResponse
+      protos.google.cloud.retail.v2alpha.IListProductsResponse,
     ]
   > | void {
     request = request || {};

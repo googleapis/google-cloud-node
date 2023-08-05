@@ -357,7 +357,7 @@ export class RegionInstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup,
       protos.google.cloud.compute.v1.IGetRegionInstanceGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -403,7 +403,7 @@ export class RegionInstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup,
       protos.google.cloud.compute.v1.IGetRegionInstanceGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -462,7 +462,7 @@ export class RegionInstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNamedPorts(
@@ -508,7 +508,7 @@ export class RegionInstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -535,7 +535,7 @@ export class RegionInstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -590,7 +590,7 @@ export class RegionInstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup[],
       protos.google.cloud.compute.v1.IListRegionInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IRegionInstanceGroupList
+      protos.google.cloud.compute.v1.IRegionInstanceGroupList,
     ]
   >;
   list(
@@ -636,7 +636,7 @@ export class RegionInstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup[],
       protos.google.cloud.compute.v1.IListRegionInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IRegionInstanceGroupList
+      protos.google.cloud.compute.v1.IRegionInstanceGroupList,
     ]
   > | void {
     request = request || {};
@@ -807,7 +807,7 @@ export class RegionInstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
       protos.google.cloud.compute.v1.IListInstancesRegionInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IRegionInstanceGroupsListInstances
+      protos.google.cloud.compute.v1.IRegionInstanceGroupsListInstances,
     ]
   >;
   listInstances(
@@ -853,7 +853,7 @@ export class RegionInstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
       protos.google.cloud.compute.v1.IListInstancesRegionInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IRegionInstanceGroupsListInstances
+      protos.google.cloud.compute.v1.IRegionInstanceGroupsListInstances,
     ]
   > | void {
     request = request || {};

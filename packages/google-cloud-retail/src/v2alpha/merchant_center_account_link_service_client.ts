@@ -438,7 +438,7 @@ export class MerchantCenterAccountLinkServiceClient {
         | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listMerchantCenterAccountLinks(
@@ -487,7 +487,7 @@ export class MerchantCenterAccountLinkServiceClient {
         | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -543,7 +543,7 @@ export class MerchantCenterAccountLinkServiceClient {
         | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMerchantCenterAccountLink(
@@ -592,7 +592,7 @@ export class MerchantCenterAccountLinkServiceClient {
         | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -658,7 +658,7 @@ export class MerchantCenterAccountLinkServiceClient {
         protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMerchantCenterAccountLink(
@@ -711,7 +711,7 @@ export class MerchantCenterAccountLinkServiceClient {
         protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

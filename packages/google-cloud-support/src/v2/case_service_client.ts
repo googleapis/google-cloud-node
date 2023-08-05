@@ -387,7 +387,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.IGetCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCase(
@@ -425,7 +425,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.IGetCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -474,7 +474,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.ICreateCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCase(
@@ -512,7 +512,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.ICreateCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -566,7 +566,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.IUpdateCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCase(
@@ -604,7 +604,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.IUpdateCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -656,7 +656,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.IEscalateCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   escalateCase(
@@ -696,7 +696,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.IEscalateCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -740,7 +740,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.ICloseCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   closeCase(
@@ -778,7 +778,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase,
       protos.google.cloud.support.v2.ICloseCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -854,7 +854,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase[],
       protos.google.cloud.support.v2.IListCasesRequest | null,
-      protos.google.cloud.support.v2.IListCasesResponse
+      protos.google.cloud.support.v2.IListCasesResponse,
     ]
   >;
   listCases(
@@ -892,7 +892,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase[],
       protos.google.cloud.support.v2.IListCasesRequest | null,
-      protos.google.cloud.support.v2.IListCasesResponse
+      protos.google.cloud.support.v2.IListCasesResponse,
     ]
   > | void {
     request = request || {};
@@ -1108,7 +1108,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase[],
       protos.google.cloud.support.v2.ISearchCasesRequest | null,
-      protos.google.cloud.support.v2.ISearchCasesResponse
+      protos.google.cloud.support.v2.ISearchCasesResponse,
     ]
   >;
   searchCases(
@@ -1148,7 +1148,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICase[],
       protos.google.cloud.support.v2.ISearchCasesRequest | null,
-      protos.google.cloud.support.v2.ISearchCasesResponse
+      protos.google.cloud.support.v2.ISearchCasesResponse,
     ]
   > | void {
     request = request || {};
@@ -1370,7 +1370,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICaseClassification[],
       protos.google.cloud.support.v2.ISearchCaseClassificationsRequest | null,
-      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
+      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse,
     ]
   >;
   searchCaseClassifications(
@@ -1416,7 +1416,7 @@ export class CaseServiceClient {
     [
       protos.google.cloud.support.v2.ICaseClassification[],
       protos.google.cloud.support.v2.ISearchCaseClassificationsRequest | null,
-      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
+      protos.google.cloud.support.v2.ISearchCaseClassificationsResponse,
     ]
   > | void {
     request = request || {};

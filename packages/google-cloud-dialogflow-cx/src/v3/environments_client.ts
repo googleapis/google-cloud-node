@@ -548,7 +548,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment,
       protos.google.cloud.dialogflow.cx.v3.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -594,7 +594,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment,
       protos.google.cloud.dialogflow.cx.v3.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -645,7 +645,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteEnvironmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEnvironment(
@@ -694,7 +694,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteEnvironmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -757,7 +757,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEnvironment(
@@ -810,7 +810,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,7 +904,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEnvironment(
@@ -957,7 +957,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1051,7 +1051,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runContinuousTest(
@@ -1104,7 +1104,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1203,7 +1203,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployFlow(
@@ -1256,7 +1256,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1345,7 +1345,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse,
     ]
   >;
   listEnvironments(
@@ -1391,7 +1391,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -1541,7 +1541,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse
+      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse,
     ]
   >;
   lookupEnvironmentHistory(
@@ -1587,7 +1587,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse
+      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse,
     ]
   > | void {
     request = request || {};
@@ -1740,7 +1740,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult[],
       protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse,
     ]
   >;
   listContinuousTestResults(
@@ -1786,7 +1786,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult[],
       protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse,
     ]
   > | void {
     request = request || {};

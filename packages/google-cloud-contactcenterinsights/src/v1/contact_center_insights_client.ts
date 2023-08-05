@@ -579,7 +579,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICreateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversation(
@@ -628,7 +628,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICreateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -677,7 +677,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConversation(
@@ -726,7 +726,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -775,7 +775,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversation(
@@ -824,7 +824,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -875,7 +875,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversation(
@@ -924,7 +924,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -971,7 +971,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAnalysis(
@@ -1020,7 +1020,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetAnalysisRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1067,7 +1067,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAnalysis(
@@ -1116,7 +1116,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteAnalysisRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1165,7 +1165,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIssueModel(
@@ -1214,7 +1214,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1261,7 +1261,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetIssueModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIssueModel(
@@ -1310,7 +1310,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetIssueModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1357,7 +1357,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IListIssueModelsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listIssueModels(
@@ -1406,7 +1406,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IListIssueModelsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1450,7 +1450,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IIssue,
       protos.google.cloud.contactcenterinsights.v1.IGetIssueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIssue(
@@ -1496,7 +1496,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IIssue,
       protos.google.cloud.contactcenterinsights.v1.IGetIssueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1543,7 +1543,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IListIssuesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listIssues(
@@ -1592,7 +1592,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IListIssuesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1641,7 +1641,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIssue(
@@ -1690,7 +1690,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1737,7 +1737,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteIssueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIssue(
@@ -1786,7 +1786,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteIssueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1833,7 +1833,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   calculateIssueModelStats(
@@ -1882,7 +1882,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1938,7 +1938,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICreatePhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPhraseMatcher(
@@ -1987,7 +1987,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICreatePhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2034,7 +2034,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetPhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPhraseMatcher(
@@ -2083,7 +2083,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetPhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2130,7 +2130,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeletePhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePhraseMatcher(
@@ -2179,7 +2179,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeletePhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2228,7 +2228,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePhraseMatcher(
@@ -2277,7 +2277,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2327,7 +2327,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICalculateStatsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   calculateStats(
@@ -2376,7 +2376,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICalculateStatsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2423,7 +2423,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSettings(
@@ -2472,7 +2472,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IGetSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2521,7 +2521,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSettings(
@@ -2570,7 +2570,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2622,7 +2622,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createView(
@@ -2671,7 +2671,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.ICreateViewRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2715,7 +2715,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IView,
       protos.google.cloud.contactcenterinsights.v1.IGetViewRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getView(
@@ -2761,7 +2761,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IView,
       protos.google.cloud.contactcenterinsights.v1.IGetViewRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2810,7 +2810,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateView(
@@ -2859,7 +2859,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IUpdateViewRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2906,7 +2906,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteView(
@@ -2955,7 +2955,7 @@ export class ContactCenterInsightsClient {
         | protos.google.cloud.contactcenterinsights.v1.IDeleteViewRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3019,7 +3019,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   uploadConversation(
@@ -3072,7 +3072,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3158,7 +3158,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAnalysis(
@@ -3211,7 +3211,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.ICreateAnalysisOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3302,7 +3302,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   bulkAnalyzeConversations(
@@ -3355,7 +3355,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3449,7 +3449,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   ingestConversations(
@@ -3502,7 +3502,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3596,7 +3596,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IExportInsightsDataMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportInsightsData(
@@ -3649,7 +3649,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IExportInsightsDataMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3734,7 +3734,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIssueModel(
@@ -3787,7 +3787,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3870,7 +3870,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIssueModel(
@@ -3923,7 +3923,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4007,7 +4007,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployIssueModel(
@@ -4060,7 +4060,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4144,7 +4144,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployIssueModel(
@@ -4197,7 +4197,7 @@ export class ContactCenterInsightsClient {
         protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4292,7 +4292,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IConversation[],
       protos.google.cloud.contactcenterinsights.v1.IListConversationsRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListConversationsResponse
+      protos.google.cloud.contactcenterinsights.v1.IListConversationsResponse,
     ]
   >;
   listConversations(
@@ -4338,7 +4338,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IConversation[],
       protos.google.cloud.contactcenterinsights.v1.IListConversationsRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListConversationsResponse
+      protos.google.cloud.contactcenterinsights.v1.IListConversationsResponse,
     ]
   > | void {
     request = request || {};
@@ -4506,7 +4506,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IAnalysis[],
       protos.google.cloud.contactcenterinsights.v1.IListAnalysesRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListAnalysesResponse
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysesResponse,
     ]
   >;
   listAnalyses(
@@ -4552,7 +4552,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IAnalysis[],
       protos.google.cloud.contactcenterinsights.v1.IListAnalysesRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListAnalysesResponse
+      protos.google.cloud.contactcenterinsights.v1.IListAnalysesResponse,
     ]
   > | void {
     request = request || {};
@@ -4716,7 +4716,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher[],
       protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersResponse
+      protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersResponse,
     ]
   >;
   listPhraseMatchers(
@@ -4762,7 +4762,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher[],
       protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersResponse
+      protos.google.cloud.contactcenterinsights.v1.IListPhraseMatchersResponse,
     ]
   > | void {
     request = request || {};
@@ -4923,7 +4923,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IView[],
       protos.google.cloud.contactcenterinsights.v1.IListViewsRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+      protos.google.cloud.contactcenterinsights.v1.IListViewsResponse,
     ]
   >;
   listViews(
@@ -4969,7 +4969,7 @@ export class ContactCenterInsightsClient {
     [
       protos.google.cloud.contactcenterinsights.v1.IView[],
       protos.google.cloud.contactcenterinsights.v1.IListViewsRequest | null,
-      protos.google.cloud.contactcenterinsights.v1.IListViewsResponse
+      protos.google.cloud.contactcenterinsights.v1.IListViewsResponse,
     ]
   > | void {
     request = request || {};

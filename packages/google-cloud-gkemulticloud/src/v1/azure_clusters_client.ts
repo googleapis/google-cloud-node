@@ -545,7 +545,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureClient,
       protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAzureClient(
@@ -591,7 +591,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureClient,
       protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -644,7 +644,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureCluster,
       protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAzureCluster(
@@ -690,7 +690,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureCluster,
       protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -746,7 +746,7 @@ export class AzureClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateAzureAccessToken(
@@ -795,7 +795,7 @@ export class AzureClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -852,7 +852,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
       protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAzureNodePool(
@@ -898,7 +898,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
       protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -954,7 +954,7 @@ export class AzureClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAzureServerConfig(
@@ -1003,7 +1003,7 @@ export class AzureClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1084,7 +1084,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAzureClient(
@@ -1137,7 +1137,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1245,7 +1245,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAzureClient(
@@ -1298,7 +1298,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1408,7 +1408,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAzureCluster(
@@ -1461,7 +1461,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1568,7 +1568,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAzureCluster(
@@ -1621,7 +1621,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1736,7 +1736,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAzureCluster(
@@ -1789,7 +1789,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1900,7 +1900,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAzureNodePool(
@@ -1953,7 +1953,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2049,7 +2049,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAzureNodePool(
@@ -2102,7 +2102,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2216,7 +2216,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAzureNodePool(
@@ -2269,7 +2269,7 @@ export class AzureClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2369,7 +2369,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureClient[],
       protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
+      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
     ]
   >;
   listAzureClients(
@@ -2415,7 +2415,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureClient[],
       protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
+      protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
     ]
   > | void {
     request = request || {};
@@ -2598,7 +2598,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
       protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
+      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
     ]
   >;
   listAzureClusters(
@@ -2644,7 +2644,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
       protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
+      protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -2829,7 +2829,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
       protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
+      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
     ]
   >;
   listAzureNodePools(
@@ -2875,7 +2875,7 @@ export class AzureClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
       protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
+      protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
     ]
   > | void {
     request = request || {};

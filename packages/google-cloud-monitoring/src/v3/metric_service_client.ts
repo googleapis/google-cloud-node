@@ -448,7 +448,7 @@ export class MetricServiceClient {
         | protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMonitoredResourceDescriptor(
@@ -519,7 +519,7 @@ export class MetricServiceClient {
         | protos.google.monitoring.v3.IGetMonitoredResourceDescriptorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -551,7 +551,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMetricDescriptor,
       protos.google.monitoring.v3.IGetMetricDescriptorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetricDescriptor(
@@ -619,7 +619,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMetricDescriptor,
       protos.google.monitoring.v3.IGetMetricDescriptorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,7 +647,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMetricDescriptor,
       protos.google.monitoring.v3.ICreateMetricDescriptorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMetricDescriptor(
@@ -717,7 +717,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMetricDescriptor,
       protos.google.monitoring.v3.ICreateMetricDescriptorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -749,7 +749,7 @@ export class MetricServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteMetricDescriptorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMetricDescriptor(
@@ -819,7 +819,7 @@ export class MetricServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteMetricDescriptorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -851,7 +851,7 @@ export class MetricServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.ICreateTimeSeriesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTimeSeries(
@@ -921,7 +921,7 @@ export class MetricServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.ICreateTimeSeriesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -950,7 +950,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMonitoredResourceDescriptor[],
       protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListMonitoredResourceDescriptorsResponse
+      protos.google.monitoring.v3.IListMonitoredResourceDescriptorsResponse,
     ]
   >;
   listMonitoredResourceDescriptors(
@@ -1031,7 +1031,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMonitoredResourceDescriptor[],
       protos.google.monitoring.v3.IListMonitoredResourceDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListMonitoredResourceDescriptorsResponse
+      protos.google.monitoring.v3.IListMonitoredResourceDescriptorsResponse,
     ]
   > | void {
     request = request || {};
@@ -1178,7 +1178,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMetricDescriptor[],
       protos.google.monitoring.v3.IListMetricDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListMetricDescriptorsResponse
+      protos.google.monitoring.v3.IListMetricDescriptorsResponse,
     ]
   >;
   listMetricDescriptors(
@@ -1261,7 +1261,7 @@ export class MetricServiceClient {
     [
       protos.google.api.IMetricDescriptor[],
       protos.google.monitoring.v3.IListMetricDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListMetricDescriptorsResponse
+      protos.google.monitoring.v3.IListMetricDescriptorsResponse,
     ]
   > | void {
     request = request || {};
@@ -1408,7 +1408,7 @@ export class MetricServiceClient {
     [
       protos.google.monitoring.v3.ITimeSeries[],
       protos.google.monitoring.v3.IListTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IListTimeSeriesResponse
+      protos.google.monitoring.v3.IListTimeSeriesResponse,
     ]
   >;
   listTimeSeries(
@@ -1509,7 +1509,7 @@ export class MetricServiceClient {
     [
       protos.google.monitoring.v3.ITimeSeries[],
       protos.google.monitoring.v3.IListTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IListTimeSeriesResponse
+      protos.google.monitoring.v3.IListTimeSeriesResponse,
     ]
   > | void {
     request = request || {};

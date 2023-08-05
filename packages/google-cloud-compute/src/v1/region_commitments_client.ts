@@ -358,7 +358,7 @@ export class RegionCommitmentsClient {
     [
       protos.google.cloud.compute.v1.ICommitment,
       protos.google.cloud.compute.v1.IGetRegionCommitmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -404,7 +404,7 @@ export class RegionCommitmentsClient {
     [
       protos.google.cloud.compute.v1.ICommitment,
       protos.google.cloud.compute.v1.IGetRegionCommitmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -461,7 +461,7 @@ export class RegionCommitmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -507,7 +507,7 @@ export class RegionCommitmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -533,7 +533,7 @@ export class RegionCommitmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -588,7 +588,7 @@ export class RegionCommitmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -634,7 +634,7 @@ export class RegionCommitmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -661,7 +661,7 @@ export class RegionCommitmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -773,7 +773,7 @@ export class RegionCommitmentsClient {
     [
       protos.google.cloud.compute.v1.ICommitment[],
       protos.google.cloud.compute.v1.IListRegionCommitmentsRequest | null,
-      protos.google.cloud.compute.v1.ICommitmentList
+      protos.google.cloud.compute.v1.ICommitmentList,
     ]
   >;
   list(
@@ -811,7 +811,7 @@ export class RegionCommitmentsClient {
     [
       protos.google.cloud.compute.v1.ICommitment[],
       protos.google.cloud.compute.v1.IListRegionCommitmentsRequest | null,
-      protos.google.cloud.compute.v1.ICommitmentList
+      protos.google.cloud.compute.v1.ICommitmentList,
     ]
   > | void {
     request = request || {};

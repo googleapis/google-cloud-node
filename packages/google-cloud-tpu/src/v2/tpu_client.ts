@@ -499,7 +499,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.INode,
       protos.google.cloud.tpu.v2.IGetNodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNode(
@@ -537,7 +537,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.INode,
       protos.google.cloud.tpu.v2.IGetNodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -581,7 +581,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IGenerateServiceIdentityResponse,
       protos.google.cloud.tpu.v2.IGenerateServiceIdentityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateServiceIdentity(
@@ -627,7 +627,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IGenerateServiceIdentityResponse,
       protos.google.cloud.tpu.v2.IGenerateServiceIdentityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -675,7 +675,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IAcceleratorType,
       protos.google.cloud.tpu.v2.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAcceleratorType(
@@ -715,7 +715,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IAcceleratorType,
       protos.google.cloud.tpu.v2.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -759,7 +759,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IRuntimeVersion,
       protos.google.cloud.tpu.v2.IGetRuntimeVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRuntimeVersion(
@@ -799,7 +799,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IRuntimeVersion,
       protos.google.cloud.tpu.v2.IGetRuntimeVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -848,7 +848,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IGetGuestAttributesResponse,
       protos.google.cloud.tpu.v2.IGetGuestAttributesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGuestAttributes(
@@ -888,7 +888,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IGetGuestAttributesResponse,
       protos.google.cloud.tpu.v2.IGetGuestAttributesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -942,7 +942,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNode(
@@ -995,7 +995,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1078,7 +1078,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNode(
@@ -1131,7 +1131,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1214,7 +1214,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopNode(
@@ -1267,7 +1267,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1350,7 +1350,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startNode(
@@ -1403,7 +1403,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1490,7 +1490,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNode(
@@ -1543,7 +1543,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1628,7 +1628,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.INode[],
       protos.google.cloud.tpu.v2.IListNodesRequest | null,
-      protos.google.cloud.tpu.v2.IListNodesResponse
+      protos.google.cloud.tpu.v2.IListNodesResponse,
     ]
   >;
   listNodes(
@@ -1666,7 +1666,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.INode[],
       protos.google.cloud.tpu.v2.IListNodesRequest | null,
-      protos.google.cloud.tpu.v2.IListNodesResponse
+      protos.google.cloud.tpu.v2.IListNodesResponse,
     ]
   > | void {
     request = request || {};
@@ -1810,7 +1810,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IAcceleratorType[],
       protos.google.cloud.tpu.v2.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.tpu.v2.IListAcceleratorTypesResponse
+      protos.google.cloud.tpu.v2.IListAcceleratorTypesResponse,
     ]
   >;
   listAcceleratorTypes(
@@ -1856,7 +1856,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IAcceleratorType[],
       protos.google.cloud.tpu.v2.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.tpu.v2.IListAcceleratorTypesResponse
+      protos.google.cloud.tpu.v2.IListAcceleratorTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -2008,7 +2008,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IRuntimeVersion[],
       protos.google.cloud.tpu.v2.IListRuntimeVersionsRequest | null,
-      protos.google.cloud.tpu.v2.IListRuntimeVersionsResponse
+      protos.google.cloud.tpu.v2.IListRuntimeVersionsResponse,
     ]
   >;
   listRuntimeVersions(
@@ -2054,7 +2054,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2.IRuntimeVersion[],
       protos.google.cloud.tpu.v2.IListRuntimeVersionsRequest | null,
-      protos.google.cloud.tpu.v2.IListRuntimeVersionsResponse
+      protos.google.cloud.tpu.v2.IListRuntimeVersionsResponse,
     ]
   > | void {
     request = request || {};

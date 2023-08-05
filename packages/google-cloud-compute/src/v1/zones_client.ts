@@ -345,7 +345,7 @@ export class ZonesClient {
     [
       protos.google.cloud.compute.v1.IZone,
       protos.google.cloud.compute.v1.IGetZoneRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -383,7 +383,7 @@ export class ZonesClient {
     [
       protos.google.cloud.compute.v1.IZone,
       protos.google.cloud.compute.v1.IGetZoneRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class ZonesClient {
     [
       protos.google.cloud.compute.v1.IZone[],
       protos.google.cloud.compute.v1.IListZonesRequest | null,
-      protos.google.cloud.compute.v1.IZoneList
+      protos.google.cloud.compute.v1.IZoneList,
     ]
   >;
   list(
@@ -480,7 +480,7 @@ export class ZonesClient {
     [
       protos.google.cloud.compute.v1.IZone[],
       protos.google.cloud.compute.v1.IListZonesRequest | null,
-      protos.google.cloud.compute.v1.IZoneList
+      protos.google.cloud.compute.v1.IZoneList,
     ]
   > | void {
     request = request || {};

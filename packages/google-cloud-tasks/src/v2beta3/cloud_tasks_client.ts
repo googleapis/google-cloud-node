@@ -395,7 +395,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IGetQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getQueue(
@@ -433,7 +433,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IGetQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -498,7 +498,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createQueue(
@@ -538,7 +538,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -608,7 +608,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateQueue(
@@ -648,7 +648,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -705,7 +705,7 @@ export class CloudTasksClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteQueue(
@@ -745,7 +745,7 @@ export class CloudTasksClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -795,7 +795,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IPurgeQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeQueue(
@@ -835,7 +835,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IPurgeQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -887,7 +887,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IPauseQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseQueue(
@@ -927,7 +927,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IPauseQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -986,7 +986,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeQueue(
@@ -1026,7 +1026,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue,
       protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1082,7 +1082,7 @@ export class CloudTasksClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1120,7 +1120,7 @@ export class CloudTasksClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1186,7 +1186,7 @@ export class CloudTasksClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1224,7 +1224,7 @@ export class CloudTasksClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1281,7 +1281,7 @@ export class CloudTasksClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1319,7 +1319,7 @@ export class CloudTasksClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1378,7 +1378,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask,
       protos.google.cloud.tasks.v2beta3.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTask(
@@ -1416,7 +1416,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask,
       protos.google.cloud.tasks.v2beta3.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1515,7 +1515,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask,
       protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTask(
@@ -1555,7 +1555,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask,
       protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1604,7 +1604,7 @@ export class CloudTasksClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.tasks.v2beta3.IDeleteTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTask(
@@ -1644,7 +1644,7 @@ export class CloudTasksClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.tasks.v2beta3.IDeleteTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1729,7 +1729,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask,
       protos.google.cloud.tasks.v2beta3.IRunTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runTask(
@@ -1767,7 +1767,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask,
       protos.google.cloud.tasks.v2beta3.IRunTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1832,7 +1832,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
       protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   bufferTask(
@@ -1872,7 +1872,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
       protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1959,7 +1959,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue[],
       protos.google.cloud.tasks.v2beta3.IListQueuesRequest | null,
-      protos.google.cloud.tasks.v2beta3.IListQueuesResponse
+      protos.google.cloud.tasks.v2beta3.IListQueuesResponse,
     ]
   >;
   listQueues(
@@ -1999,7 +1999,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.IQueue[],
       protos.google.cloud.tasks.v2beta3.IListQueuesRequest | null,
-      protos.google.cloud.tasks.v2beta3.IListQueuesResponse
+      protos.google.cloud.tasks.v2beta3.IListQueuesResponse,
     ]
   > | void {
     request = request || {};
@@ -2241,7 +2241,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask[],
       protos.google.cloud.tasks.v2beta3.IListTasksRequest | null,
-      protos.google.cloud.tasks.v2beta3.IListTasksResponse
+      protos.google.cloud.tasks.v2beta3.IListTasksResponse,
     ]
   >;
   listTasks(
@@ -2281,7 +2281,7 @@ export class CloudTasksClient {
     [
       protos.google.cloud.tasks.v2beta3.ITask[],
       protos.google.cloud.tasks.v2beta3.IListTasksRequest | null,
-      protos.google.cloud.tasks.v2beta3.IListTasksResponse
+      protos.google.cloud.tasks.v2beta3.IListTasksResponse,
     ]
   > | void {
     request = request || {};

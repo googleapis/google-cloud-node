@@ -480,7 +480,7 @@ export class DataFusionClient {
     [
       protos.google.cloud.datafusion.v1.IInstance,
       protos.google.cloud.datafusion.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -520,7 +520,7 @@ export class DataFusionClient {
     [
       protos.google.cloud.datafusion.v1.IInstance,
       protos.google.cloud.datafusion.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -575,7 +575,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -628,7 +628,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -712,7 +712,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -765,7 +765,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -857,7 +857,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -910,7 +910,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -995,7 +995,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restartInstance(
@@ -1048,7 +1048,7 @@ export class DataFusionClient {
         protos.google.cloud.datafusion.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1140,7 +1140,7 @@ export class DataFusionClient {
     [
       protos.google.cloud.datafusion.v1.IVersion[],
       protos.google.cloud.datafusion.v1.IListAvailableVersionsRequest | null,
-      protos.google.cloud.datafusion.v1.IListAvailableVersionsResponse
+      protos.google.cloud.datafusion.v1.IListAvailableVersionsResponse,
     ]
   >;
   listAvailableVersions(
@@ -1186,7 +1186,7 @@ export class DataFusionClient {
     [
       protos.google.cloud.datafusion.v1.IVersion[],
       protos.google.cloud.datafusion.v1.IListAvailableVersionsRequest | null,
-      protos.google.cloud.datafusion.v1.IListAvailableVersionsResponse
+      protos.google.cloud.datafusion.v1.IListAvailableVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -1346,7 +1346,7 @@ export class DataFusionClient {
     [
       protos.google.cloud.datafusion.v1.IInstance[],
       protos.google.cloud.datafusion.v1.IListInstancesRequest | null,
-      protos.google.cloud.datafusion.v1.IListInstancesResponse
+      protos.google.cloud.datafusion.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -1392,7 +1392,7 @@ export class DataFusionClient {
     [
       protos.google.cloud.datafusion.v1.IInstance[],
       protos.google.cloud.datafusion.v1.IListInstancesRequest | null,
-      protos.google.cloud.datafusion.v1.IListInstancesResponse
+      protos.google.cloud.datafusion.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};

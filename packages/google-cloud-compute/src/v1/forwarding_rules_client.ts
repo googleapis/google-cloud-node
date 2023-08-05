@@ -368,7 +368,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -414,7 +414,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -441,7 +441,7 @@ export class ForwardingRulesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -484,7 +484,7 @@ export class ForwardingRulesClient {
     [
       protos.google.cloud.compute.v1.IForwardingRule,
       protos.google.cloud.compute.v1.IGetForwardingRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -530,7 +530,7 @@ export class ForwardingRulesClient {
     [
       protos.google.cloud.compute.v1.IForwardingRule,
       protos.google.cloud.compute.v1.IGetForwardingRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -587,7 +587,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -633,7 +633,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -659,7 +659,7 @@ export class ForwardingRulesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -711,7 +711,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -757,7 +757,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class ForwardingRulesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -836,7 +836,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -882,7 +882,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -909,7 +909,7 @@ export class ForwardingRulesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -961,7 +961,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setTarget(
@@ -1007,7 +1007,7 @@ export class ForwardingRulesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1034,7 +1034,7 @@ export class ForwardingRulesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1146,7 +1146,7 @@ export class ForwardingRulesClient {
     [
       protos.google.cloud.compute.v1.IForwardingRule[],
       protos.google.cloud.compute.v1.IListForwardingRulesRequest | null,
-      protos.google.cloud.compute.v1.IForwardingRuleList
+      protos.google.cloud.compute.v1.IForwardingRuleList,
     ]
   >;
   list(
@@ -1184,7 +1184,7 @@ export class ForwardingRulesClient {
     [
       protos.google.cloud.compute.v1.IForwardingRule[],
       protos.google.cloud.compute.v1.IListForwardingRulesRequest | null,
-      protos.google.cloud.compute.v1.IForwardingRuleList
+      protos.google.cloud.compute.v1.IForwardingRuleList,
     ]
   > | void {
     request = request || {};

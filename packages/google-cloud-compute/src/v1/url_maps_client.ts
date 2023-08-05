@@ -367,7 +367,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -407,7 +407,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -433,7 +433,7 @@ export class UrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -474,7 +474,7 @@ export class UrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap,
       protos.google.cloud.compute.v1.IGetUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -512,7 +512,7 @@ export class UrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap,
       protos.google.cloud.compute.v1.IGetUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -566,7 +566,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -606,7 +606,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -631,7 +631,7 @@ export class UrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -681,7 +681,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   invalidateCache(
@@ -727,7 +727,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -753,7 +753,7 @@ export class UrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -803,7 +803,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -841,7 +841,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -867,7 +867,7 @@ export class UrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -917,7 +917,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -957,7 +957,7 @@ export class UrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -983,7 +983,7 @@ export class UrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1026,7 +1026,7 @@ export class UrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMapsValidateResponse,
       protos.google.cloud.compute.v1.IValidateUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validate(
@@ -1066,7 +1066,7 @@ export class UrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMapsValidateResponse,
       protos.google.cloud.compute.v1.IValidateUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1182,7 +1182,7 @@ export class UrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap[],
       protos.google.cloud.compute.v1.IListUrlMapsRequest | null,
-      protos.google.cloud.compute.v1.IUrlMapList
+      protos.google.cloud.compute.v1.IUrlMapList,
     ]
   >;
   list(
@@ -1220,7 +1220,7 @@ export class UrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap[],
       protos.google.cloud.compute.v1.IListUrlMapsRequest | null,
-      protos.google.cloud.compute.v1.IUrlMapList
+      protos.google.cloud.compute.v1.IUrlMapList,
     ]
   > | void {
     request = request || {};

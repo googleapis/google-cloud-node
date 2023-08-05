@@ -499,7 +499,7 @@ export class CloudChannelReportsServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runReportJob(
@@ -552,7 +552,7 @@ export class CloudChannelReportsServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -654,7 +654,7 @@ export class CloudChannelReportsServiceClient {
     [
       protos.google.cloud.channel.v1.IRow[],
       protos.google.cloud.channel.v1.IFetchReportResultsRequest | null,
-      protos.google.cloud.channel.v1.IFetchReportResultsResponse
+      protos.google.cloud.channel.v1.IFetchReportResultsResponse,
     ]
   >;
   fetchReportResults(
@@ -700,7 +700,7 @@ export class CloudChannelReportsServiceClient {
     [
       protos.google.cloud.channel.v1.IRow[],
       protos.google.cloud.channel.v1.IFetchReportResultsRequest | null,
-      protos.google.cloud.channel.v1.IFetchReportResultsResponse
+      protos.google.cloud.channel.v1.IFetchReportResultsResponse,
     ]
   > | void {
     request = request || {};
@@ -886,7 +886,7 @@ export class CloudChannelReportsServiceClient {
     [
       protos.google.cloud.channel.v1.IReport[],
       protos.google.cloud.channel.v1.IListReportsRequest | null,
-      protos.google.cloud.channel.v1.IListReportsResponse
+      protos.google.cloud.channel.v1.IListReportsResponse,
     ]
   >;
   listReports(
@@ -926,7 +926,7 @@ export class CloudChannelReportsServiceClient {
     [
       protos.google.cloud.channel.v1.IReport[],
       protos.google.cloud.channel.v1.IListReportsRequest | null,
-      protos.google.cloud.channel.v1.IListReportsResponse
+      protos.google.cloud.channel.v1.IListReportsResponse,
     ]
   > | void {
     request = request || {};

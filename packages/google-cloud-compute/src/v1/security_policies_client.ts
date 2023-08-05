@@ -372,7 +372,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addRule(
@@ -418,7 +418,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -444,7 +444,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -492,7 +492,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -538,7 +538,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -564,7 +564,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -605,7 +605,7 @@ export class SecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicy,
       protos.google.cloud.compute.v1.IGetSecurityPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -651,7 +651,7 @@ export class SecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicy,
       protos.google.cloud.compute.v1.IGetSecurityPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -700,7 +700,7 @@ export class SecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicyRule,
       protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRule(
@@ -746,7 +746,7 @@ export class SecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicyRule,
       protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -802,7 +802,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -848,7 +848,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -873,7 +873,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -925,7 +925,7 @@ export class SecurityPoliciesClient {
         | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listPreconfiguredExpressionSets(
@@ -974,7 +974,7 @@ export class SecurityPoliciesClient {
         | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1033,7 +1033,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -1079,7 +1079,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1105,7 +1105,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1157,7 +1157,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patchRule(
@@ -1203,7 +1203,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1229,7 +1229,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1277,7 +1277,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeRule(
@@ -1323,7 +1323,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1349,7 +1349,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1397,7 +1397,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -1443,7 +1443,7 @@ export class SecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1469,7 +1469,7 @@ export class SecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1579,7 +1579,7 @@ export class SecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicy[],
       protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
     ]
   >;
   list(
@@ -1617,7 +1617,7 @@ export class SecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicy[],
       protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
     ]
   > | void {
     request = request || {};

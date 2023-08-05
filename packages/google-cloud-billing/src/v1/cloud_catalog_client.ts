@@ -374,7 +374,7 @@ export class CloudCatalogClient {
     [
       protos.google.cloud.billing.v1.IService[],
       protos.google.cloud.billing.v1.IListServicesRequest | null,
-      protos.google.cloud.billing.v1.IListServicesResponse
+      protos.google.cloud.billing.v1.IListServicesResponse,
     ]
   >;
   listServices(
@@ -414,7 +414,7 @@ export class CloudCatalogClient {
     [
       protos.google.cloud.billing.v1.IService[],
       protos.google.cloud.billing.v1.IListServicesRequest | null,
-      protos.google.cloud.billing.v1.IListServicesResponse
+      protos.google.cloud.billing.v1.IListServicesResponse,
     ]
   > | void {
     request = request || {};
@@ -563,7 +563,7 @@ export class CloudCatalogClient {
     [
       protos.google.cloud.billing.v1.ISku[],
       protos.google.cloud.billing.v1.IListSkusRequest | null,
-      protos.google.cloud.billing.v1.IListSkusResponse
+      protos.google.cloud.billing.v1.IListSkusResponse,
     ]
   >;
   listSkus(
@@ -601,7 +601,7 @@ export class CloudCatalogClient {
     [
       protos.google.cloud.billing.v1.ISku[],
       protos.google.cloud.billing.v1.IListSkusRequest | null,
-      protos.google.cloud.billing.v1.IListSkusResponse
+      protos.google.cloud.billing.v1.IListSkusResponse,
     ]
   > | void {
     request = request || {};

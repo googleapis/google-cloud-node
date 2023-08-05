@@ -381,7 +381,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createContact(
@@ -430,7 +430,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -483,7 +483,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateContact(
@@ -532,7 +532,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact,
       protos.google.cloud.essentialcontacts.v1.IGetContactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getContact(
@@ -625,7 +625,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact,
       protos.google.cloud.essentialcontacts.v1.IGetContactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -675,7 +675,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteContact(
@@ -724,7 +724,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   sendTestMessage(
@@ -833,7 +833,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -893,7 +893,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
     ]
   >;
   listContacts(
@@ -939,7 +939,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
     ]
   > | void {
     request = request || {};
@@ -1109,7 +1109,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
     ]
   >;
   computeContacts(
@@ -1155,7 +1155,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
     ]
   > | void {
     request = request || {};

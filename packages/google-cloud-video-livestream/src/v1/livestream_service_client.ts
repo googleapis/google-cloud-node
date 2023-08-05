@@ -590,7 +590,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IChannel,
       protos.google.cloud.video.livestream.v1.IGetChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChannel(
@@ -636,7 +636,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IChannel,
       protos.google.cloud.video.livestream.v1.IGetChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -681,7 +681,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IInput,
       protos.google.cloud.video.livestream.v1.IGetInputRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInput(
@@ -727,7 +727,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IInput,
       protos.google.cloud.video.livestream.v1.IGetInputRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -792,7 +792,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IEvent,
       protos.google.cloud.video.livestream.v1.ICreateEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEvent(
@@ -838,7 +838,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IEvent,
       protos.google.cloud.video.livestream.v1.ICreateEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -883,7 +883,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IEvent,
       protos.google.cloud.video.livestream.v1.IGetEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEvent(
@@ -929,7 +929,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IEvent,
       protos.google.cloud.video.livestream.v1.IGetEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -988,7 +988,7 @@ export class LivestreamServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.video.livestream.v1.IDeleteEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEvent(
@@ -1034,7 +1034,7 @@ export class LivestreamServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.video.livestream.v1.IDeleteEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1079,7 +1079,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IAsset,
       protos.google.cloud.video.livestream.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAsset(
@@ -1125,7 +1125,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IAsset,
       protos.google.cloud.video.livestream.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1170,7 +1170,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IPool,
       protos.google.cloud.video.livestream.v1.IGetPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPool(
@@ -1216,7 +1216,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IPool,
       protos.google.cloud.video.livestream.v1.IGetPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1288,7 +1288,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChannel(
@@ -1341,7 +1341,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1444,7 +1444,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteChannel(
@@ -1497,7 +1497,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1615,7 +1615,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateChannel(
@@ -1668,7 +1668,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1767,7 +1767,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startChannel(
@@ -1820,7 +1820,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1919,7 +1919,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopChannel(
@@ -1972,7 +1972,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2076,7 +2076,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInput(
@@ -2129,7 +2129,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2227,7 +2227,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInput(
@@ -2280,7 +2280,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2390,7 +2390,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInput(
@@ -2443,7 +2443,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2548,7 +2548,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAsset(
@@ -2601,7 +2601,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2699,7 +2699,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAsset(
@@ -2752,7 +2752,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2857,7 +2857,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePool(
@@ -2910,7 +2910,7 @@ export class LivestreamServiceClient {
         protos.google.cloud.video.livestream.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3005,7 +3005,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IChannel[],
       protos.google.cloud.video.livestream.v1.IListChannelsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListChannelsResponse
+      protos.google.cloud.video.livestream.v1.IListChannelsResponse,
     ]
   >;
   listChannels(
@@ -3051,7 +3051,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IChannel[],
       protos.google.cloud.video.livestream.v1.IListChannelsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListChannelsResponse
+      protos.google.cloud.video.livestream.v1.IListChannelsResponse,
     ]
   > | void {
     request = request || {};
@@ -3221,7 +3221,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IInput[],
       protos.google.cloud.video.livestream.v1.IListInputsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListInputsResponse
+      protos.google.cloud.video.livestream.v1.IListInputsResponse,
     ]
   >;
   listInputs(
@@ -3267,7 +3267,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IInput[],
       protos.google.cloud.video.livestream.v1.IListInputsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListInputsResponse
+      protos.google.cloud.video.livestream.v1.IListInputsResponse,
     ]
   > | void {
     request = request || {};
@@ -3437,7 +3437,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IEvent[],
       protos.google.cloud.video.livestream.v1.IListEventsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListEventsResponse
+      protos.google.cloud.video.livestream.v1.IListEventsResponse,
     ]
   >;
   listEvents(
@@ -3483,7 +3483,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IEvent[],
       protos.google.cloud.video.livestream.v1.IListEventsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListEventsResponse
+      protos.google.cloud.video.livestream.v1.IListEventsResponse,
     ]
   > | void {
     request = request || {};
@@ -3649,7 +3649,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IAsset[],
       protos.google.cloud.video.livestream.v1.IListAssetsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListAssetsResponse
+      protos.google.cloud.video.livestream.v1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -3695,7 +3695,7 @@ export class LivestreamServiceClient {
     [
       protos.google.cloud.video.livestream.v1.IAsset[],
       protos.google.cloud.video.livestream.v1.IListAssetsRequest | null,
-      protos.google.cloud.video.livestream.v1.IListAssetsResponse
+      protos.google.cloud.video.livestream.v1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};

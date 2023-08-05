@@ -368,7 +368,7 @@ export class NetworkAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -414,7 +414,7 @@ export class NetworkAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -441,7 +441,7 @@ export class NetworkAttachmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -484,7 +484,7 @@ export class NetworkAttachmentsClient {
     [
       protos.google.cloud.compute.v1.INetworkAttachment,
       protos.google.cloud.compute.v1.IGetNetworkAttachmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -530,7 +530,7 @@ export class NetworkAttachmentsClient {
     [
       protos.google.cloud.compute.v1.INetworkAttachment,
       protos.google.cloud.compute.v1.IGetNetworkAttachmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +585,7 @@ export class NetworkAttachmentsClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyNetworkAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -634,7 +634,7 @@ export class NetworkAttachmentsClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyNetworkAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -691,7 +691,7 @@ export class NetworkAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -737,7 +737,7 @@ export class NetworkAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -763,7 +763,7 @@ export class NetworkAttachmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -811,7 +811,7 @@ export class NetworkAttachmentsClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyNetworkAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -860,7 +860,7 @@ export class NetworkAttachmentsClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyNetworkAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -915,7 +915,7 @@ export class NetworkAttachmentsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNetworkAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -964,7 +964,7 @@ export class NetworkAttachmentsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNetworkAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1083,7 +1083,7 @@ export class NetworkAttachmentsClient {
     [
       protos.google.cloud.compute.v1.INetworkAttachment[],
       protos.google.cloud.compute.v1.IListNetworkAttachmentsRequest | null,
-      protos.google.cloud.compute.v1.INetworkAttachmentList
+      protos.google.cloud.compute.v1.INetworkAttachmentList,
     ]
   >;
   list(
@@ -1123,7 +1123,7 @@ export class NetworkAttachmentsClient {
     [
       protos.google.cloud.compute.v1.INetworkAttachment[],
       protos.google.cloud.compute.v1.IListNetworkAttachmentsRequest | null,
-      protos.google.cloud.compute.v1.INetworkAttachmentList
+      protos.google.cloud.compute.v1.INetworkAttachmentList,
     ]
   > | void {
     request = request || {};

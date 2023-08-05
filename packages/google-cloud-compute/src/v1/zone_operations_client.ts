@@ -346,7 +346,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IDeleteZoneOperationResponse,
       protos.google.cloud.compute.v1.IDeleteZoneOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -392,7 +392,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IDeleteZoneOperationResponse,
       protos.google.cloud.compute.v1.IDeleteZoneOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IGetZoneOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -488,7 +488,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IGetZoneOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -538,7 +538,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IWaitZoneOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   wait(
@@ -584,7 +584,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IWaitZoneOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -646,7 +646,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListZoneOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   >;
   list(
@@ -684,7 +684,7 @@ export class ZoneOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListZoneOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   > | void {
     request = request || {};

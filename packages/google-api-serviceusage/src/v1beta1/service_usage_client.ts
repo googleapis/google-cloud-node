@@ -569,7 +569,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IService,
       protos.google.api.serviceusage.v1beta1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -615,7 +615,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IService,
       protos.google.api.serviceusage.v1beta1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -672,7 +672,7 @@ export class ServiceUsageClient {
         | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConsumerQuotaMetric(
@@ -721,7 +721,7 @@ export class ServiceUsageClient {
         | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -777,7 +777,7 @@ export class ServiceUsageClient {
         | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaLimitRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConsumerQuotaLimit(
@@ -826,7 +826,7 @@ export class ServiceUsageClient {
         | protos.google.api.serviceusage.v1beta1.IGetConsumerQuotaLimitRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -889,7 +889,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableService(
@@ -942,7 +942,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1051,7 +1051,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableService(
@@ -1104,7 +1104,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1224,7 +1224,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchEnableServices(
@@ -1277,7 +1277,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1391,7 +1391,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAdminOverride(
@@ -1444,7 +1444,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1545,7 +1545,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAdminOverride(
@@ -1598,7 +1598,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1693,7 +1693,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAdminOverride(
@@ -1746,7 +1746,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1845,7 +1845,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importAdminOverrides(
@@ -1898,7 +1898,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IImportAdminOverridesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2000,7 +2000,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConsumerOverride(
@@ -2053,7 +2053,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2158,7 +2158,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConsumerOverride(
@@ -2211,7 +2211,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2310,7 +2310,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConsumerOverride(
@@ -2363,7 +2363,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2466,7 +2466,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importConsumerOverrides(
@@ -2519,7 +2519,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1beta1.IImportConsumerOverridesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2612,7 +2612,7 @@ export class ServiceUsageClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateServiceIdentity(
@@ -2665,7 +2665,7 @@ export class ServiceUsageClient {
         protos.google.protobuf.IEmpty
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2771,7 +2771,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IService[],
       protos.google.api.serviceusage.v1beta1.IListServicesRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListServicesResponse
+      protos.google.api.serviceusage.v1beta1.IListServicesResponse,
     ]
   >;
   listServices(
@@ -2817,7 +2817,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IService[],
       protos.google.api.serviceusage.v1beta1.IListServicesRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListServicesResponse
+      protos.google.api.serviceusage.v1beta1.IListServicesResponse,
     ]
   > | void {
     request = request || {};
@@ -3006,7 +3006,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[],
       protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsResponse
+      protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsResponse,
     ]
   >;
   listConsumerQuotaMetrics(
@@ -3052,7 +3052,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IConsumerQuotaMetric[],
       protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsResponse
+      protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsResponse,
     ]
   > | void {
     request = request || {};
@@ -3217,7 +3217,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IQuotaOverride[],
       protos.google.api.serviceusage.v1beta1.IListAdminOverridesRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListAdminOverridesResponse
+      protos.google.api.serviceusage.v1beta1.IListAdminOverridesResponse,
     ]
   >;
   listAdminOverrides(
@@ -3263,7 +3263,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IQuotaOverride[],
       protos.google.api.serviceusage.v1beta1.IListAdminOverridesRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListAdminOverridesResponse
+      protos.google.api.serviceusage.v1beta1.IListAdminOverridesResponse,
     ]
   > | void {
     request = request || {};
@@ -3418,7 +3418,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IQuotaOverride[],
       protos.google.api.serviceusage.v1beta1.IListConsumerOverridesRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListConsumerOverridesResponse
+      protos.google.api.serviceusage.v1beta1.IListConsumerOverridesResponse,
     ]
   >;
   listConsumerOverrides(
@@ -3464,7 +3464,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1beta1.IQuotaOverride[],
       protos.google.api.serviceusage.v1beta1.IListConsumerOverridesRequest | null,
-      protos.google.api.serviceusage.v1beta1.IListConsumerOverridesResponse
+      protos.google.api.serviceusage.v1beta1.IListConsumerOverridesResponse,
     ]
   > | void {
     request = request || {};

@@ -552,7 +552,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IBatchDeleteTestCasesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteTestCases(
@@ -601,7 +601,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IBatchDeleteTestCasesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,7 +647,7 @@ export class TestCasesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTestCase(
@@ -693,7 +693,7 @@ export class TestCasesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ITestCase,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -743,7 +743,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTestCaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTestCase(
@@ -792,7 +792,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTestCaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -845,7 +845,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateTestCaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTestCase(
@@ -894,7 +894,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateTestCaseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -944,7 +944,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   calculateCoverage(
@@ -993,7 +993,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICalculateCoverageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1042,7 +1042,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTestCaseResult(
@@ -1091,7 +1091,7 @@ export class TestCasesClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IGetTestCaseResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1155,7 +1155,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IRunTestCaseMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runTestCase(
@@ -1208,7 +1208,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IRunTestCaseMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1308,7 +1308,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IBatchRunTestCasesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRunTestCases(
@@ -1361,7 +1361,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IBatchRunTestCasesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1468,7 +1468,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IImportTestCasesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importTestCases(
@@ -1521,7 +1521,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IImportTestCasesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1640,7 +1640,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IExportTestCasesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportTestCases(
@@ -1693,7 +1693,7 @@ export class TestCasesClient {
         protos.google.cloud.dialogflow.cx.v3beta1.IExportTestCasesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1783,7 +1783,7 @@ export class TestCasesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ITestCase[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse,
     ]
   >;
   listTestCases(
@@ -1829,7 +1829,7 @@ export class TestCasesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ITestCase[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesResponse,
     ]
   > | void {
     request = request || {};
@@ -2009,7 +2009,7 @@ export class TestCasesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse,
     ]
   >;
   listTestCaseResults(
@@ -2055,7 +2055,7 @@ export class TestCasesClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ITestCaseResult[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsResponse,
     ]
   > | void {
     request = request || {};

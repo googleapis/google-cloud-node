@@ -377,7 +377,7 @@ export class MessagesV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJobMessage[],
       protos.google.dataflow.v1beta3.IListJobMessagesRequest | null,
-      protos.google.dataflow.v1beta3.IListJobMessagesResponse
+      protos.google.dataflow.v1beta3.IListJobMessagesResponse,
     ]
   >;
   listJobMessages(
@@ -423,7 +423,7 @@ export class MessagesV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJobMessage[],
       protos.google.dataflow.v1beta3.IListJobMessagesRequest | null,
-      protos.google.dataflow.v1beta3.IListJobMessagesResponse
+      protos.google.dataflow.v1beta3.IListJobMessagesResponse,
     ]
   > | void {
     request = request || {};

@@ -437,7 +437,7 @@ export class RevisionsClient {
     [
       protos.google.cloud.run.v2.IRevision,
       protos.google.cloud.run.v2.IGetRevisionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRevision(
@@ -475,7 +475,7 @@ export class RevisionsClient {
     [
       protos.google.cloud.run.v2.IRevision,
       protos.google.cloud.run.v2.IGetRevisionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -544,7 +544,7 @@ export class RevisionsClient {
         protos.google.cloud.run.v2.IRevision
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRevision(
@@ -597,7 +597,7 @@ export class RevisionsClient {
         protos.google.cloud.run.v2.IRevision
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -699,7 +699,7 @@ export class RevisionsClient {
     [
       protos.google.cloud.run.v2.IRevision[],
       protos.google.cloud.run.v2.IListRevisionsRequest | null,
-      protos.google.cloud.run.v2.IListRevisionsResponse
+      protos.google.cloud.run.v2.IListRevisionsResponse,
     ]
   >;
   listRevisions(
@@ -737,7 +737,7 @@ export class RevisionsClient {
     [
       protos.google.cloud.run.v2.IRevision[],
       protos.google.cloud.run.v2.IListRevisionsRequest | null,
-      protos.google.cloud.run.v2.IListRevisionsResponse
+      protos.google.cloud.run.v2.IListRevisionsResponse,
     ]
   > | void {
     request = request || {};

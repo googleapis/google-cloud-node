@@ -350,7 +350,7 @@ export class SystemPolicyV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSystemPolicy(
@@ -399,7 +399,7 @@ export class SystemPolicyV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

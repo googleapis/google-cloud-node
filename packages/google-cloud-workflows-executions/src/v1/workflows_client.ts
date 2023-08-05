@@ -440,7 +440,7 @@ export class WorkflowsClient {
     [
       protos.google.cloud.workflows.v1.IWorkflow,
       protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkflow(
@@ -480,7 +480,7 @@ export class WorkflowsClient {
     [
       protos.google.cloud.workflows.v1.IWorkflow,
       protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -544,7 +544,7 @@ export class WorkflowsClient {
         protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkflow(
@@ -597,7 +597,7 @@ export class WorkflowsClient {
         protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -683,7 +683,7 @@ export class WorkflowsClient {
         protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkflow(
@@ -736,7 +736,7 @@ export class WorkflowsClient {
         protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -826,7 +826,7 @@ export class WorkflowsClient {
         protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWorkflow(
@@ -879,7 +879,7 @@ export class WorkflowsClient {
         protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -980,7 +980,7 @@ export class WorkflowsClient {
     [
       protos.google.cloud.workflows.v1.IWorkflow[],
       protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      protos.google.cloud.workflows.v1.IListWorkflowsResponse,
     ]
   >;
   listWorkflows(
@@ -1026,7 +1026,7 @@ export class WorkflowsClient {
     [
       protos.google.cloud.workflows.v1.IWorkflow[],
       protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      protos.google.cloud.workflows.v1.IListWorkflowsResponse,
     ]
   > | void {
     request = request || {};

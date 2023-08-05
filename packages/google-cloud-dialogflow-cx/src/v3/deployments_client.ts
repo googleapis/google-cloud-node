@@ -478,7 +478,7 @@ export class DeploymentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDeployment,
       protos.google.cloud.dialogflow.cx.v3.IGetDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeployment(
@@ -524,7 +524,7 @@ export class DeploymentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDeployment,
       protos.google.cloud.dialogflow.cx.v3.IGetDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -581,7 +581,7 @@ export class DeploymentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDeployment[],
       protos.google.cloud.dialogflow.cx.v3.IListDeploymentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListDeploymentsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListDeploymentsResponse,
     ]
   >;
   listDeployments(
@@ -627,7 +627,7 @@ export class DeploymentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDeployment[],
       protos.google.cloud.dialogflow.cx.v3.IListDeploymentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListDeploymentsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListDeploymentsResponse,
     ]
   > | void {
     request = request || {};

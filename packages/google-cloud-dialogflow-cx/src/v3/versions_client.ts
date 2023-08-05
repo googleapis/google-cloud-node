@@ -511,7 +511,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IVersion,
       protos.google.cloud.dialogflow.cx.v3.IGetVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVersion(
@@ -557,7 +557,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IVersion,
       protos.google.cloud.dialogflow.cx.v3.IGetVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -604,7 +604,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IVersion,
       protos.google.cloud.dialogflow.cx.v3.IUpdateVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateVersion(
@@ -650,7 +650,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IVersion,
       protos.google.cloud.dialogflow.cx.v3.IUpdateVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -696,7 +696,7 @@ export class VersionsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeleteVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteVersion(
@@ -742,7 +742,7 @@ export class VersionsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeleteVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -803,7 +803,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ICompareVersionsResponse,
       protos.google.cloud.dialogflow.cx.v3.ICompareVersionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   compareVersions(
@@ -849,7 +849,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ICompareVersionsResponse,
       protos.google.cloud.dialogflow.cx.v3.ICompareVersionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -913,7 +913,7 @@ export class VersionsClient {
         protos.google.cloud.dialogflow.cx.v3.ICreateVersionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createVersion(
@@ -966,7 +966,7 @@ export class VersionsClient {
         protos.google.cloud.dialogflow.cx.v3.ICreateVersionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1065,7 +1065,7 @@ export class VersionsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   loadVersion(
@@ -1118,7 +1118,7 @@ export class VersionsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1204,7 +1204,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IVersion[],
       protos.google.cloud.dialogflow.cx.v3.IListVersionsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListVersionsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListVersionsResponse,
     ]
   >;
   listVersions(
@@ -1250,7 +1250,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IVersion[],
       protos.google.cloud.dialogflow.cx.v3.IListVersionsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListVersionsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListVersionsResponse,
     ]
   > | void {
     request = request || {};

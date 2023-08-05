@@ -476,7 +476,7 @@ export class ChangelogsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IChangelog,
       protos.google.cloud.dialogflow.cx.v3.IGetChangelogRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChangelog(
@@ -522,7 +522,7 @@ export class ChangelogsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IChangelog,
       protos.google.cloud.dialogflow.cx.v3.IGetChangelogRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -597,7 +597,7 @@ export class ChangelogsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IChangelog[],
       protos.google.cloud.dialogflow.cx.v3.IListChangelogsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListChangelogsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListChangelogsResponse,
     ]
   >;
   listChangelogs(
@@ -643,7 +643,7 @@ export class ChangelogsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IChangelog[],
       protos.google.cloud.dialogflow.cx.v3.IListChangelogsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListChangelogsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListChangelogsResponse,
     ]
   > | void {
     request = request || {};

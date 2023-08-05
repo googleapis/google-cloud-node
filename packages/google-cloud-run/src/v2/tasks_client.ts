@@ -379,7 +379,7 @@ export class TasksClient {
     [
       protos.google.cloud.run.v2.ITask,
       protos.google.cloud.run.v2.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTask(
@@ -417,7 +417,7 @@ export class TasksClient {
     [
       protos.google.cloud.run.v2.ITask,
       protos.google.cloud.run.v2.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -475,7 +475,7 @@ export class TasksClient {
     [
       protos.google.cloud.run.v2.ITask[],
       protos.google.cloud.run.v2.IListTasksRequest | null,
-      protos.google.cloud.run.v2.IListTasksResponse
+      protos.google.cloud.run.v2.IListTasksResponse,
     ]
   >;
   listTasks(
@@ -513,7 +513,7 @@ export class TasksClient {
     [
       protos.google.cloud.run.v2.ITask[],
       protos.google.cloud.run.v2.IListTasksRequest | null,
-      protos.google.cloud.run.v2.IListTasksResponse
+      protos.google.cloud.run.v2.IListTasksResponse,
     ]
   > | void {
     request = request || {};

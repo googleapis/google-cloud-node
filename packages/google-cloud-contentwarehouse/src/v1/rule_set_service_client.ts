@@ -374,7 +374,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet,
       protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRuleSet(
@@ -420,7 +420,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet,
       protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -466,7 +466,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet,
       protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRuleSet(
@@ -512,7 +512,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet,
       protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -561,7 +561,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet,
       protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRuleSet(
@@ -607,7 +607,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet,
       protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -653,7 +653,7 @@ export class RuleSetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRuleSet(
@@ -699,7 +699,7 @@ export class RuleSetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -759,7 +759,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet[],
       protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
+      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse,
     ]
   >;
   listRuleSets(
@@ -805,7 +805,7 @@ export class RuleSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IRuleSet[],
       protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
+      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse,
     ]
   > | void {
     request = request || {};

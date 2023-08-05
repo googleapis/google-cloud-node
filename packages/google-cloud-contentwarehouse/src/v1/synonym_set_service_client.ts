@@ -380,7 +380,7 @@ export class SynonymSetServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSynonymSet(
@@ -429,7 +429,7 @@ export class SynonymSetServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -477,7 +477,7 @@ export class SynonymSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.ISynonymSet,
       protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSynonymSet(
@@ -523,7 +523,7 @@ export class SynonymSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.ISynonymSet,
       protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -576,7 +576,7 @@ export class SynonymSetServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSynonymSet(
@@ -625,7 +625,7 @@ export class SynonymSetServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -675,7 +675,7 @@ export class SynonymSetServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSynonymSet(
@@ -724,7 +724,7 @@ export class SynonymSetServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class SynonymSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
       protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
+      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse,
     ]
   >;
   listSynonymSets(
@@ -830,7 +830,7 @@ export class SynonymSetServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
       protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
+      protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse,
     ]
   > | void {
     request = request || {};

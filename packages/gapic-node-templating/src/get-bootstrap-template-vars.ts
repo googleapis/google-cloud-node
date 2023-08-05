@@ -74,9 +74,11 @@ export async function getDistributionName(
   });
 
   const bazelLocation = join(__dirname, 'BUILD.bazel');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (isFile((file as any).data)) {
     writeFileSync(
       bazelLocation,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Buffer.from((file as any).data.content, 'base64').toString('utf8')
     );
   }
@@ -115,9 +117,11 @@ export async function compileVars(
 
 export function getServiceName(serviceConfig: ServiceConfig) {
   let serviceName = '';
-  for (const api of serviceConfig?.apis) {
-    if (api.name.endsWith('Service')) {
-      serviceName = api.name.split('.')[api.name.split('.').length - 1];
+  if (serviceConfig?.apis) {
+    for (const api of serviceConfig?.apis ?? []) {
+      if (api.name.endsWith('Service')) {
+        serviceName = api.name.split('.')[api.name.split('.').length - 1];
+      }
     }
   }
 

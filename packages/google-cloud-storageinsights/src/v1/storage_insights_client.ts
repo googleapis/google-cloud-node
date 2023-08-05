@@ -381,7 +381,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReportConfig(
@@ -430,7 +430,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -493,7 +493,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReportConfig(
@@ -542,7 +542,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -609,7 +609,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateReportConfig(
@@ -658,7 +658,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -721,7 +721,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReportConfig(
@@ -770,7 +770,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -817,7 +817,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReportDetail(
@@ -866,7 +866,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -923,7 +923,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportConfig[],
       protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
     ]
   >;
   listReportConfigs(
@@ -969,7 +969,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportConfig[],
       protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -1124,7 +1124,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportDetail[],
       protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
     ]
   >;
   listReportDetails(
@@ -1170,7 +1170,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportDetail[],
       protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
     ]
   > | void {
     request = request || {};

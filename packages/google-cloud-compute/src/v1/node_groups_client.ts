@@ -381,7 +381,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addNodes(
@@ -427,7 +427,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -454,7 +454,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -504,7 +504,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -544,7 +544,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,7 +571,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -623,7 +623,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNodes(
@@ -669,7 +669,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -696,7 +696,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -739,7 +739,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.INodeGroup,
       protos.google.cloud.compute.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -779,7 +779,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.INodeGroup,
       protos.google.cloud.compute.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -831,7 +831,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.IGetIamPolicyNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -877,7 +877,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.IGetIamPolicyNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -936,7 +936,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -976,7 +976,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1002,7 +1002,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1054,7 +1054,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -1094,7 +1094,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1121,7 +1121,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1166,7 +1166,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.ISetIamPolicyNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1212,7 +1212,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.ISetIamPolicyNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1271,7 +1271,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodeTemplate(
@@ -1317,7 +1317,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1344,7 +1344,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1396,7 +1396,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   simulateMaintenanceEvent(
@@ -1442,7 +1442,7 @@ export class NodeGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1469,7 +1469,7 @@ export class NodeGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1517,7 +1517,7 @@ export class NodeGroupsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNodeGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1566,7 +1566,7 @@ export class NodeGroupsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNodeGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1685,7 +1685,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.INodeGroup[],
       protos.google.cloud.compute.v1.IListNodeGroupsRequest | null,
-      protos.google.cloud.compute.v1.INodeGroupList
+      protos.google.cloud.compute.v1.INodeGroupList,
     ]
   >;
   list(
@@ -1723,7 +1723,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.INodeGroup[],
       protos.google.cloud.compute.v1.IListNodeGroupsRequest | null,
-      protos.google.cloud.compute.v1.INodeGroupList
+      protos.google.cloud.compute.v1.INodeGroupList,
     ]
   > | void {
     request = request || {};
@@ -1892,7 +1892,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.INodeGroupNode[],
       protos.google.cloud.compute.v1.IListNodesNodeGroupsRequest | null,
-      protos.google.cloud.compute.v1.INodeGroupsListNodes
+      protos.google.cloud.compute.v1.INodeGroupsListNodes,
     ]
   >;
   listNodes(
@@ -1932,7 +1932,7 @@ export class NodeGroupsClient {
     [
       protos.google.cloud.compute.v1.INodeGroupNode[],
       protos.google.cloud.compute.v1.IListNodesNodeGroupsRequest | null,
-      protos.google.cloud.compute.v1.INodeGroupsListNodes
+      protos.google.cloud.compute.v1.INodeGroupsListNodes,
     ]
   > | void {
     request = request || {};

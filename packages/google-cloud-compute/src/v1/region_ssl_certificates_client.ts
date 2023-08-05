@@ -360,7 +360,7 @@ export class RegionSslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -406,7 +406,7 @@ export class RegionSslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -433,7 +433,7 @@ export class RegionSslCertificatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -479,7 +479,7 @@ export class RegionSslCertificatesClient {
         | protos.google.cloud.compute.v1.IGetRegionSslCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -528,7 +528,7 @@ export class RegionSslCertificatesClient {
         | protos.google.cloud.compute.v1.IGetRegionSslCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +585,7 @@ export class RegionSslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -631,7 +631,7 @@ export class RegionSslCertificatesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -657,7 +657,7 @@ export class RegionSslCertificatesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -712,7 +712,7 @@ export class RegionSslCertificatesClient {
     [
       protos.google.cloud.compute.v1.ISslCertificate[],
       protos.google.cloud.compute.v1.IListRegionSslCertificatesRequest | null,
-      protos.google.cloud.compute.v1.ISslCertificateList
+      protos.google.cloud.compute.v1.ISslCertificateList,
     ]
   >;
   list(
@@ -750,7 +750,7 @@ export class RegionSslCertificatesClient {
     [
       protos.google.cloud.compute.v1.ISslCertificate[],
       protos.google.cloud.compute.v1.IListRegionSslCertificatesRequest | null,
-      protos.google.cloud.compute.v1.ISslCertificateList
+      protos.google.cloud.compute.v1.ISslCertificateList,
     ]
   > | void {
     request = request || {};

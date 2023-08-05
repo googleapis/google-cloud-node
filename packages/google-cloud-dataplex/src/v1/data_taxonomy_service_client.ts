@@ -743,7 +743,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataTaxonomy,
       protos.google.cloud.dataplex.v1.IGetDataTaxonomyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataTaxonomy(
@@ -789,7 +789,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataTaxonomy,
       protos.google.cloud.dataplex.v1.IGetDataTaxonomyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -837,7 +837,7 @@ export class DataTaxonomyServiceClient {
         | protos.google.cloud.dataplex.v1.IGetDataAttributeBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataAttributeBinding(
@@ -886,7 +886,7 @@ export class DataTaxonomyServiceClient {
         | protos.google.cloud.dataplex.v1.IGetDataAttributeBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -935,7 +935,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataAttribute,
       protos.google.cloud.dataplex.v1.IGetDataAttributeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataAttribute(
@@ -981,7 +981,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataAttribute,
       protos.google.cloud.dataplex.v1.IGetDataAttributeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1045,7 +1045,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataTaxonomy(
@@ -1098,7 +1098,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1186,7 +1186,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataTaxonomy(
@@ -1239,7 +1239,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1327,7 +1327,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataTaxonomy(
@@ -1380,7 +1380,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1476,7 +1476,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataAttributeBinding(
@@ -1529,7 +1529,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1621,7 +1621,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataAttributeBinding(
@@ -1674,7 +1674,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1769,7 +1769,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataAttributeBinding(
@@ -1822,7 +1822,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1922,7 +1922,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataAttribute(
@@ -1975,7 +1975,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2063,7 +2063,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataAttribute(
@@ -2116,7 +2116,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2203,7 +2203,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataAttribute(
@@ -2256,7 +2256,7 @@ export class DataTaxonomyServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2353,7 +2353,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataTaxonomy[],
       protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataTaxonomiesResponse
+      protos.google.cloud.dataplex.v1.IListDataTaxonomiesResponse,
     ]
   >;
   listDataTaxonomies(
@@ -2399,7 +2399,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataTaxonomy[],
       protos.google.cloud.dataplex.v1.IListDataTaxonomiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataTaxonomiesResponse
+      protos.google.cloud.dataplex.v1.IListDataTaxonomiesResponse,
     ]
   > | void {
     request = request || {};
@@ -2578,7 +2578,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataAttributeBinding[],
       protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataAttributeBindingsResponse
+      protos.google.cloud.dataplex.v1.IListDataAttributeBindingsResponse,
     ]
   >;
   listDataAttributeBindings(
@@ -2624,7 +2624,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataAttributeBinding[],
       protos.google.cloud.dataplex.v1.IListDataAttributeBindingsRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataAttributeBindingsResponse
+      protos.google.cloud.dataplex.v1.IListDataAttributeBindingsResponse,
     ]
   > | void {
     request = request || {};
@@ -2809,7 +2809,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataAttribute[],
       protos.google.cloud.dataplex.v1.IListDataAttributesRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataAttributesResponse
+      protos.google.cloud.dataplex.v1.IListDataAttributesResponse,
     ]
   >;
   listDataAttributes(
@@ -2855,7 +2855,7 @@ export class DataTaxonomyServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataAttribute[],
       protos.google.cloud.dataplex.v1.IListDataAttributesRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataAttributesResponse
+      protos.google.cloud.dataplex.v1.IListDataAttributesResponse,
     ]
   > | void {
     request = request || {};

@@ -484,7 +484,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha.IFeature,
       protos.google.cloud.gkehub.v1alpha.IGetFeatureRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFeature(
@@ -524,7 +524,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha.IFeature,
       protos.google.cloud.gkehub.v1alpha.IGetFeatureRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -593,7 +593,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFeature(
@@ -646,7 +646,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -748,7 +748,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFeature(
@@ -801,7 +801,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -910,7 +910,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFeature(
@@ -963,7 +963,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1073,7 +1073,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha.IFeature[],
       protos.google.cloud.gkehub.v1alpha.IListFeaturesRequest | null,
-      protos.google.cloud.gkehub.v1alpha.IListFeaturesResponse
+      protos.google.cloud.gkehub.v1alpha.IListFeaturesResponse,
     ]
   >;
   listFeatures(
@@ -1119,7 +1119,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha.IFeature[],
       protos.google.cloud.gkehub.v1alpha.IListFeaturesRequest | null,
-      protos.google.cloud.gkehub.v1alpha.IListFeaturesResponse
+      protos.google.cloud.gkehub.v1alpha.IListFeaturesResponse,
     ]
   > | void {
     request = request || {};

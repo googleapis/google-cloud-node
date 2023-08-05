@@ -373,7 +373,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addAssociation(
@@ -419,7 +419,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -444,7 +444,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -492,7 +492,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addRule(
@@ -538,7 +538,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -563,7 +563,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -611,7 +611,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cloneRules(
@@ -657,7 +657,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -682,7 +682,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -728,7 +728,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -774,7 +774,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -799,7 +799,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -838,7 +838,7 @@ export class FirewallPoliciesClient {
     [
       protos.google.cloud.compute.v1.IFirewallPolicy,
       protos.google.cloud.compute.v1.IGetFirewallPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -884,7 +884,7 @@ export class FirewallPoliciesClient {
     [
       protos.google.cloud.compute.v1.IFirewallPolicy,
       protos.google.cloud.compute.v1.IGetFirewallPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -933,7 +933,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAssociation(
@@ -982,7 +982,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1031,7 +1031,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1080,7 +1080,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1126,7 +1126,7 @@ export class FirewallPoliciesClient {
     [
       protos.google.cloud.compute.v1.IFirewallPolicyRule,
       protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRule(
@@ -1172,7 +1172,7 @@ export class FirewallPoliciesClient {
     [
       protos.google.cloud.compute.v1.IFirewallPolicyRule,
       protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1225,7 +1225,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -1271,7 +1271,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1292,7 +1292,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1334,7 +1334,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listAssociations(
@@ -1383,7 +1383,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1432,7 +1432,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   move(
@@ -1478,7 +1478,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1503,7 +1503,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1551,7 +1551,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -1597,7 +1597,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1622,7 +1622,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1672,7 +1672,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patchRule(
@@ -1718,7 +1718,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1743,7 +1743,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1791,7 +1791,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeAssociation(
@@ -1837,7 +1837,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1862,7 +1862,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1910,7 +1910,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeRule(
@@ -1956,7 +1956,7 @@ export class FirewallPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1981,7 +1981,7 @@ export class FirewallPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -2025,7 +2025,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -2074,7 +2074,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2123,7 +2123,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -2172,7 +2172,7 @@ export class FirewallPoliciesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2230,7 +2230,7 @@ export class FirewallPoliciesClient {
     [
       protos.google.cloud.compute.v1.IFirewallPolicy[],
       protos.google.cloud.compute.v1.IListFirewallPoliciesRequest | null,
-      protos.google.cloud.compute.v1.IFirewallPolicyList
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
     ]
   >;
   list(
@@ -2268,7 +2268,7 @@ export class FirewallPoliciesClient {
     [
       protos.google.cloud.compute.v1.IFirewallPolicy[],
       protos.google.cloud.compute.v1.IListFirewallPoliciesRequest | null,
-      protos.google.cloud.compute.v1.IFirewallPolicyList
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
     ]
   > | void {
     request = request || {};

@@ -494,7 +494,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSessionEntityType(
@@ -543,7 +543,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -597,7 +597,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSessionEntityType(
@@ -646,7 +646,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -705,7 +705,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSessionEntityType(
@@ -754,7 +754,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -811,7 +811,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSessionEntityType(
@@ -860,7 +860,7 @@ export class SessionEntityTypesClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteSessionEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -922,7 +922,7 @@ export class SessionEntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ISessionEntityType[],
       protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesResponse
+      protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesResponse,
     ]
   >;
   listSessionEntityTypes(
@@ -968,7 +968,7 @@ export class SessionEntityTypesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ISessionEntityType[],
       protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesResponse
+      protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesResponse,
     ]
   > | void {
     request = request || {};

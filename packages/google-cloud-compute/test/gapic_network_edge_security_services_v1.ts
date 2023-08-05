@@ -995,7 +995,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
       const responses: Array<
         [
           string,
-          protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList
+          protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList,
         ]
       > = [];
       const iterable = client.aggregatedListAsync(request);
@@ -1044,7 +1044,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         const responses: Array<
           [
             string,
-            protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList
+            protos.google.cloud.compute.v1.INetworkEdgeSecurityServicesScopedList,
           ]
         > = [];
         for await (const resource of iterable) {

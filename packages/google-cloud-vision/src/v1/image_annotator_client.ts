@@ -427,7 +427,7 @@ export class ImageAnnotatorClient {
     [
       protos.google.cloud.vision.v1.IBatchAnnotateImagesResponse,
       protos.google.cloud.vision.v1.IBatchAnnotateImagesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateImages(
@@ -473,7 +473,7 @@ export class ImageAnnotatorClient {
     [
       protos.google.cloud.vision.v1.IBatchAnnotateImagesResponse,
       protos.google.cloud.vision.v1.IBatchAnnotateImagesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -537,7 +537,7 @@ export class ImageAnnotatorClient {
     [
       protos.google.cloud.vision.v1.IBatchAnnotateFilesResponse,
       protos.google.cloud.vision.v1.IBatchAnnotateFilesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateFiles(
@@ -583,7 +583,7 @@ export class ImageAnnotatorClient {
     [
       protos.google.cloud.vision.v1.IBatchAnnotateFilesResponse,
       protos.google.cloud.vision.v1.IBatchAnnotateFilesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -656,7 +656,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asyncBatchAnnotateImages(
@@ -709,7 +709,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -814,7 +814,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asyncBatchAnnotateFiles(
@@ -867,7 +867,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

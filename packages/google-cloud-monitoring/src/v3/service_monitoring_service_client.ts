@@ -419,7 +419,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService,
       protos.google.monitoring.v3.ICreateServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createService(
@@ -481,7 +481,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService,
       protos.google.monitoring.v3.ICreateServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -509,7 +509,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService,
       protos.google.monitoring.v3.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -566,7 +566,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService,
       protos.google.monitoring.v3.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -594,7 +594,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService,
       protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateService(
@@ -652,7 +652,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService,
       protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -680,7 +680,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteService(
@@ -737,7 +737,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -768,7 +768,7 @@ export class ServiceMonitoringServiceClient {
         | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServiceLevelObjective(
@@ -844,7 +844,7 @@ export class ServiceMonitoringServiceClient {
         | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -876,7 +876,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IServiceLevelObjective,
       protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServiceLevelObjective(
@@ -946,7 +946,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IServiceLevelObjective,
       protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -981,7 +981,7 @@ export class ServiceMonitoringServiceClient {
         | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateServiceLevelObjective(
@@ -1050,7 +1050,7 @@ export class ServiceMonitoringServiceClient {
         | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1086,7 +1086,7 @@ export class ServiceMonitoringServiceClient {
         | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteServiceLevelObjective(
@@ -1154,7 +1154,7 @@ export class ServiceMonitoringServiceClient {
         | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1187,7 +1187,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService[],
       protos.google.monitoring.v3.IListServicesRequest | null,
-      protos.google.monitoring.v3.IListServicesResponse
+      protos.google.monitoring.v3.IListServicesResponse,
     ]
   >;
   listServices(
@@ -1276,7 +1276,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IService[],
       protos.google.monitoring.v3.IListServicesRequest | null,
-      protos.google.monitoring.v3.IListServicesResponse
+      protos.google.monitoring.v3.IListServicesResponse,
     ]
   > | void {
     request = request || {};
@@ -1451,7 +1451,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IServiceLevelObjective[],
       protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse,
     ]
   >;
   listServiceLevelObjectives(
@@ -1535,7 +1535,7 @@ export class ServiceMonitoringServiceClient {
     [
       protos.google.monitoring.v3.IServiceLevelObjective[],
       protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
-      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse,
     ]
   > | void {
     request = request || {};

@@ -365,7 +365,7 @@ export class ConnectionServiceClient {
     [
       protos.google.cloud.apigeeconnect.v1.IConnection[],
       protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest | null,
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
+      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse,
     ]
   >;
   listConnections(
@@ -411,7 +411,7 @@ export class ConnectionServiceClient {
     [
       protos.google.cloud.apigeeconnect.v1.IConnection[],
       protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest | null,
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
+      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse,
     ]
   > | void {
     request = request || {};

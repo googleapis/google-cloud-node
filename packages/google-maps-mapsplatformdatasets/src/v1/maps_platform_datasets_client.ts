@@ -362,7 +362,7 @@ export class MapsPlatformDatasetsClient {
         | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataset(
@@ -411,7 +411,7 @@ export class MapsPlatformDatasetsClient {
         | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -463,7 +463,7 @@ export class MapsPlatformDatasetsClient {
         | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDatasetMetadata(
@@ -512,7 +512,7 @@ export class MapsPlatformDatasetsClient {
         | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -556,7 +556,7 @@ export class MapsPlatformDatasetsClient {
     [
       protos.google.maps.mapsplatformdatasets.v1.IDataset,
       protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataset(
@@ -602,7 +602,7 @@ export class MapsPlatformDatasetsClient {
     [
       protos.google.maps.mapsplatformdatasets.v1.IDataset,
       protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -649,7 +649,7 @@ export class MapsPlatformDatasetsClient {
         | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataset(
@@ -698,7 +698,7 @@ export class MapsPlatformDatasetsClient {
         | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -752,7 +752,7 @@ export class MapsPlatformDatasetsClient {
     [
       protos.google.maps.mapsplatformdatasets.v1.IDataset[],
       protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest | null,
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
+      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse,
     ]
   >;
   listDatasets(
@@ -798,7 +798,7 @@ export class MapsPlatformDatasetsClient {
     [
       protos.google.maps.mapsplatformdatasets.v1.IDataset[],
       protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest | null,
-      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
+      protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse,
     ]
   > | void {
     request = request || {};

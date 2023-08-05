@@ -408,7 +408,7 @@ export class PrivateCatalogClient {
     [
       protos.google.cloud.privatecatalog.v1beta1.ICatalog[],
       protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest | null,
-      protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse
+      protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse,
     ]
   >;
   searchCatalogs(
@@ -454,7 +454,7 @@ export class PrivateCatalogClient {
     [
       protos.google.cloud.privatecatalog.v1beta1.ICatalog[],
       protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest | null,
-      protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse
+      protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse,
     ]
   > | void {
     request = request || {};
@@ -623,7 +623,7 @@ export class PrivateCatalogClient {
     [
       protos.google.cloud.privatecatalog.v1beta1.IProduct[],
       protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest | null,
-      protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse
+      protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse,
     ]
   >;
   searchProducts(
@@ -669,7 +669,7 @@ export class PrivateCatalogClient {
     [
       protos.google.cloud.privatecatalog.v1beta1.IProduct[],
       protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest | null,
-      protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse
+      protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse,
     ]
   > | void {
     request = request || {};
@@ -840,7 +840,7 @@ export class PrivateCatalogClient {
     [
       protos.google.cloud.privatecatalog.v1beta1.IVersion[],
       protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest | null,
-      protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse
+      protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse,
     ]
   >;
   searchVersions(
@@ -886,7 +886,7 @@ export class PrivateCatalogClient {
     [
       protos.google.cloud.privatecatalog.v1beta1.IVersion[],
       protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest | null,
-      protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse
+      protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse,
     ]
   > | void {
     request = request || {};
