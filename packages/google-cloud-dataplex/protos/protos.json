@@ -1762,8 +1762,7 @@
                                   "type": "string",
                                   "id": 1,
                                   "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL",
-                                    "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -2151,8 +2150,7 @@
                                   "type": "string",
                                   "id": 1,
                                   "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL",
-                                    "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
