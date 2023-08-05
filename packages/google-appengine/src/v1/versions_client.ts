@@ -439,7 +439,7 @@ export class VersionsClient {
     [
       protos.google.appengine.v1.IVersion,
       protos.google.appengine.v1.IGetVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVersion(
@@ -477,7 +477,7 @@ export class VersionsClient {
     [
       protos.google.appengine.v1.IVersion,
       protos.google.appengine.v1.IGetVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -530,7 +530,7 @@ export class VersionsClient {
         protos.google.appengine.v1.ICreateVersionMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createVersion(
@@ -583,7 +583,7 @@ export class VersionsClient {
         protos.google.appengine.v1.ICreateVersionMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -707,7 +707,7 @@ export class VersionsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateVersion(
@@ -760,7 +760,7 @@ export class VersionsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -844,7 +844,7 @@ export class VersionsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteVersion(
@@ -897,7 +897,7 @@ export class VersionsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -985,7 +985,7 @@ export class VersionsClient {
     [
       protos.google.appengine.v1.IVersion[],
       protos.google.appengine.v1.IListVersionsRequest | null,
-      protos.google.appengine.v1.IListVersionsResponse
+      protos.google.appengine.v1.IListVersionsResponse,
     ]
   >;
   listVersions(
@@ -1023,7 +1023,7 @@ export class VersionsClient {
     [
       protos.google.appengine.v1.IVersion[],
       protos.google.appengine.v1.IListVersionsRequest | null,
-      protos.google.appengine.v1.IListVersionsResponse
+      protos.google.appengine.v1.IListVersionsResponse,
     ]
   > | void {
     request = request || {};

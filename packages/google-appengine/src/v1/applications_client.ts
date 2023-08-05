@@ -417,7 +417,7 @@ export class ApplicationsClient {
     [
       protos.google.appengine.v1.IApplication,
       protos.google.appengine.v1.IGetApplicationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApplication(
@@ -455,7 +455,7 @@ export class ApplicationsClient {
     [
       protos.google.appengine.v1.IApplication,
       protos.google.appengine.v1.IGetApplicationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -511,7 +511,7 @@ export class ApplicationsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApplication(
@@ -564,7 +564,7 @@ export class ApplicationsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -652,7 +652,7 @@ export class ApplicationsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApplication(
@@ -705,7 +705,7 @@ export class ApplicationsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -797,7 +797,7 @@ export class ApplicationsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   repairApplication(
@@ -850,7 +850,7 @@ export class ApplicationsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -635,7 +635,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance,
       protos.google.cloud.filestore.v1beta1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -681,7 +681,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance,
       protos.google.cloud.filestore.v1beta1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -726,7 +726,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot,
       protos.google.cloud.filestore.v1beta1.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSnapshot(
@@ -772,7 +772,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot,
       protos.google.cloud.filestore.v1beta1.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -817,7 +817,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup,
       protos.google.cloud.filestore.v1beta1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -863,7 +863,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup,
       protos.google.cloud.filestore.v1beta1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -908,7 +908,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare,
       protos.google.cloud.filestore.v1beta1.IGetShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getShare(
@@ -948,7 +948,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare,
       protos.google.cloud.filestore.v1beta1.IGetShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1011,7 +1011,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -1064,7 +1064,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1155,7 +1155,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -1208,7 +1208,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1305,7 +1305,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreInstance(
@@ -1358,7 +1358,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1446,7 +1446,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   revertInstance(
@@ -1499,7 +1499,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1586,7 +1586,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -1639,7 +1639,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1731,7 +1731,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSnapshot(
@@ -1784,7 +1784,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1868,7 +1868,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSnapshot(
@@ -1921,7 +1921,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2007,7 +2007,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSnapshot(
@@ -2060,7 +2060,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2153,7 +2153,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -2206,7 +2206,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2290,7 +2290,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -2343,7 +2343,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2429,7 +2429,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackup(
@@ -2482,7 +2482,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2574,7 +2574,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createShare(
@@ -2627,7 +2627,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2711,7 +2711,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteShare(
@@ -2764,7 +2764,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2857,7 +2857,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateShare(
@@ -2910,7 +2910,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3005,7 +3005,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance[],
       protos.google.cloud.filestore.v1beta1.IListInstancesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListInstancesResponse
+      protos.google.cloud.filestore.v1beta1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -3051,7 +3051,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance[],
       protos.google.cloud.filestore.v1beta1.IListInstancesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListInstancesResponse
+      protos.google.cloud.filestore.v1beta1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -3217,7 +3217,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot[],
       protos.google.cloud.filestore.v1beta1.IListSnapshotsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse
+      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse,
     ]
   >;
   listSnapshots(
@@ -3263,7 +3263,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot[],
       protos.google.cloud.filestore.v1beta1.IListSnapshotsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse
+      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse,
     ]
   > | void {
     request = request || {};
@@ -3428,7 +3428,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup[],
       protos.google.cloud.filestore.v1beta1.IListBackupsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListBackupsResponse
+      protos.google.cloud.filestore.v1beta1.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -3474,7 +3474,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup[],
       protos.google.cloud.filestore.v1beta1.IListBackupsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListBackupsResponse
+      protos.google.cloud.filestore.v1beta1.IListBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3641,7 +3641,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare[],
       protos.google.cloud.filestore.v1beta1.IListSharesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSharesResponse
+      protos.google.cloud.filestore.v1beta1.IListSharesResponse,
     ]
   >;
   listShares(
@@ -3687,7 +3687,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare[],
       protos.google.cloud.filestore.v1beta1.IListSharesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSharesResponse
+      protos.google.cloud.filestore.v1beta1.IListSharesResponse,
     ]
   > | void {
     request = request || {};

@@ -434,7 +434,7 @@ export class StorageTransferServiceClient {
         | protos.google.storagetransfer.v1.IGetGoogleServiceAccountRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGoogleServiceAccount(
@@ -483,7 +483,7 @@ export class StorageTransferServiceClient {
         | protos.google.storagetransfer.v1.IGetGoogleServiceAccountRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -531,7 +531,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob,
       protos.google.storagetransfer.v1.ICreateTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTransferJob(
@@ -577,7 +577,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob,
       protos.google.storagetransfer.v1.ICreateTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -652,7 +652,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob,
       protos.google.storagetransfer.v1.IUpdateTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTransferJob(
@@ -698,7 +698,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob,
       protos.google.storagetransfer.v1.IUpdateTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -745,7 +745,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob,
       protos.google.storagetransfer.v1.IGetTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTransferJob(
@@ -791,7 +791,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob,
       protos.google.storagetransfer.v1.IGetTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -838,7 +838,7 @@ export class StorageTransferServiceClient {
         | protos.google.storagetransfer.v1.IPauseTransferOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseTransferOperation(
@@ -887,7 +887,7 @@ export class StorageTransferServiceClient {
         | protos.google.storagetransfer.v1.IPauseTransferOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -938,7 +938,7 @@ export class StorageTransferServiceClient {
         | protos.google.storagetransfer.v1.IResumeTransferOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeTransferOperation(
@@ -987,7 +987,7 @@ export class StorageTransferServiceClient {
         | protos.google.storagetransfer.v1.IResumeTransferOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1039,7 +1039,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.storagetransfer.v1.IDeleteTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTransferJob(
@@ -1085,7 +1085,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.storagetransfer.v1.IDeleteTransferJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1146,7 +1146,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool,
       protos.google.storagetransfer.v1.ICreateAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAgentPool(
@@ -1192,7 +1192,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool,
       protos.google.storagetransfer.v1.ICreateAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1254,7 +1254,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool,
       protos.google.storagetransfer.v1.IUpdateAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAgentPool(
@@ -1300,7 +1300,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool,
       protos.google.storagetransfer.v1.IUpdateAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1344,7 +1344,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool,
       protos.google.storagetransfer.v1.IGetAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAgentPool(
@@ -1384,7 +1384,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool,
       protos.google.storagetransfer.v1.IGetAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1428,7 +1428,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.storagetransfer.v1.IDeleteAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAgentPool(
@@ -1474,7 +1474,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.storagetransfer.v1.IDeleteAgentPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1530,7 +1530,7 @@ export class StorageTransferServiceClient {
         protos.google.storagetransfer.v1.ITransferOperation
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runTransferJob(
@@ -1583,7 +1583,7 @@ export class StorageTransferServiceClient {
         protos.google.storagetransfer.v1.ITransferOperation
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1679,7 +1679,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob[],
       protos.google.storagetransfer.v1.IListTransferJobsRequest | null,
-      protos.google.storagetransfer.v1.IListTransferJobsResponse
+      protos.google.storagetransfer.v1.IListTransferJobsResponse,
     ]
   >;
   listTransferJobs(
@@ -1725,7 +1725,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.ITransferJob[],
       protos.google.storagetransfer.v1.IListTransferJobsRequest | null,
-      protos.google.storagetransfer.v1.IListTransferJobsResponse
+      protos.google.storagetransfer.v1.IListTransferJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1884,7 +1884,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool[],
       protos.google.storagetransfer.v1.IListAgentPoolsRequest | null,
-      protos.google.storagetransfer.v1.IListAgentPoolsResponse
+      protos.google.storagetransfer.v1.IListAgentPoolsResponse,
     ]
   >;
   listAgentPools(
@@ -1930,7 +1930,7 @@ export class StorageTransferServiceClient {
     [
       protos.google.storagetransfer.v1.IAgentPool[],
       protos.google.storagetransfer.v1.IListAgentPoolsRequest | null,
-      protos.google.storagetransfer.v1.IListAgentPoolsResponse
+      protos.google.storagetransfer.v1.IListAgentPoolsResponse,
     ]
   > | void {
     request = request || {};

@@ -364,7 +364,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -402,7 +402,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -428,7 +428,7 @@ export class ImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -478,7 +478,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deprecate(
@@ -518,7 +518,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -544,7 +544,7 @@ export class ImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -585,7 +585,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IImage,
       protos.google.cloud.compute.v1.IGetImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -623,7 +623,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IImage,
       protos.google.cloud.compute.v1.IGetImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -670,7 +670,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IImage,
       protos.google.cloud.compute.v1.IGetFromFamilyImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFromFamily(
@@ -716,7 +716,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IImage,
       protos.google.cloud.compute.v1.IGetFromFamilyImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -765,7 +765,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.IGetIamPolicyImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -811,7 +811,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.IGetIamPolicyImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -867,7 +867,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -905,7 +905,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -930,7 +930,7 @@ export class ImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -980,7 +980,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -1018,7 +1018,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1044,7 +1044,7 @@ export class ImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1087,7 +1087,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.ISetIamPolicyImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1133,7 +1133,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.ISetIamPolicyImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1187,7 +1187,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -1227,7 +1227,7 @@ export class ImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1253,7 +1253,7 @@ export class ImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1299,7 +1299,7 @@ export class ImagesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1348,7 +1348,7 @@ export class ImagesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1407,7 +1407,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IImage[],
       protos.google.cloud.compute.v1.IListImagesRequest | null,
-      protos.google.cloud.compute.v1.IImageList
+      protos.google.cloud.compute.v1.IImageList,
     ]
   >;
   list(
@@ -1445,7 +1445,7 @@ export class ImagesClient {
     [
       protos.google.cloud.compute.v1.IImage[],
       protos.google.cloud.compute.v1.IListImagesRequest | null,
-      protos.google.cloud.compute.v1.IImageList
+      protos.google.cloud.compute.v1.IImageList,
     ]
   > | void {
     request = request || {};

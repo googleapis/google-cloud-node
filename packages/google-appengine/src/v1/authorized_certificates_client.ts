@@ -364,7 +364,7 @@ export class AuthorizedCertificatesClient {
     [
       protos.google.appengine.v1.IAuthorizedCertificate,
       protos.google.appengine.v1.IGetAuthorizedCertificateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAuthorizedCertificate(
@@ -410,7 +410,7 @@ export class AuthorizedCertificatesClient {
     [
       protos.google.appengine.v1.IAuthorizedCertificate,
       protos.google.appengine.v1.IGetAuthorizedCertificateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -463,7 +463,7 @@ export class AuthorizedCertificatesClient {
         | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAuthorizedCertificate(
@@ -512,7 +512,7 @@ export class AuthorizedCertificatesClient {
         | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -574,7 +574,7 @@ export class AuthorizedCertificatesClient {
         | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAuthorizedCertificate(
@@ -623,7 +623,7 @@ export class AuthorizedCertificatesClient {
         | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -675,7 +675,7 @@ export class AuthorizedCertificatesClient {
         | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAuthorizedCertificate(
@@ -724,7 +724,7 @@ export class AuthorizedCertificatesClient {
         | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -782,7 +782,7 @@ export class AuthorizedCertificatesClient {
     [
       protos.google.appengine.v1.IAuthorizedCertificate[],
       protos.google.appengine.v1.IListAuthorizedCertificatesRequest | null,
-      protos.google.appengine.v1.IListAuthorizedCertificatesResponse
+      protos.google.appengine.v1.IListAuthorizedCertificatesResponse,
     ]
   >;
   listAuthorizedCertificates(
@@ -828,7 +828,7 @@ export class AuthorizedCertificatesClient {
     [
       protos.google.appengine.v1.IAuthorizedCertificate[],
       protos.google.appengine.v1.IListAuthorizedCertificatesRequest | null,
-      protos.google.appengine.v1.IListAuthorizedCertificatesResponse
+      protos.google.appengine.v1.IListAuthorizedCertificatesResponse,
     ]
   > | void {
     request = request || {};

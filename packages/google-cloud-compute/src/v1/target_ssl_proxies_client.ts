@@ -362,7 +362,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -408,7 +408,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -434,7 +434,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -475,7 +475,7 @@ export class TargetSslProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetSslProxy,
       protos.google.cloud.compute.v1.IGetTargetSslProxyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -521,7 +521,7 @@ export class TargetSslProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetSslProxy,
       protos.google.cloud.compute.v1.IGetTargetSslProxyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -575,7 +575,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -621,7 +621,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -646,7 +646,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -696,7 +696,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setBackendService(
@@ -742,7 +742,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -768,7 +768,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -818,7 +818,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setCertificateMap(
@@ -864,7 +864,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -890,7 +890,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -940,7 +940,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setProxyHeader(
@@ -986,7 +986,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1012,7 +1012,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1062,7 +1062,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setSslCertificates(
@@ -1108,7 +1108,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1134,7 +1134,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1184,7 +1184,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setSslPolicy(
@@ -1230,7 +1230,7 @@ export class TargetSslProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1256,7 +1256,7 @@ export class TargetSslProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1309,7 +1309,7 @@ export class TargetSslProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetSslProxy[],
       protos.google.cloud.compute.v1.IListTargetSslProxiesRequest | null,
-      protos.google.cloud.compute.v1.ITargetSslProxyList
+      protos.google.cloud.compute.v1.ITargetSslProxyList,
     ]
   >;
   list(
@@ -1347,7 +1347,7 @@ export class TargetSslProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetSslProxy[],
       protos.google.cloud.compute.v1.IListTargetSslProxiesRequest | null,
-      protos.google.cloud.compute.v1.ITargetSslProxyList
+      protos.google.cloud.compute.v1.ITargetSslProxyList,
     ]
   > | void {
     request = request || {};

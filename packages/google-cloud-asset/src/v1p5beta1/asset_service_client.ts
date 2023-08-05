@@ -398,7 +398,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p5beta1.IAsset[],
       protos.google.cloud.asset.v1p5beta1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
+      protos.google.cloud.asset.v1p5beta1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -444,7 +444,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p5beta1.IAsset[],
       protos.google.cloud.asset.v1p5beta1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
+      protos.google.cloud.asset.v1p5beta1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};

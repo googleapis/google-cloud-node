@@ -362,7 +362,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -408,7 +408,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -435,7 +435,7 @@ export class RegionUrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -478,7 +478,7 @@ export class RegionUrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap,
       protos.google.cloud.compute.v1.IGetRegionUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -518,7 +518,7 @@ export class RegionUrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap,
       protos.google.cloud.compute.v1.IGetRegionUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -575,7 +575,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -621,7 +621,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,7 +647,7 @@ export class RegionUrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -699,7 +699,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -745,7 +745,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -772,7 +772,7 @@ export class RegionUrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -824,7 +824,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -870,7 +870,7 @@ export class RegionUrlMapsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -897,7 +897,7 @@ export class RegionUrlMapsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -942,7 +942,7 @@ export class RegionUrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMapsValidateResponse,
       protos.google.cloud.compute.v1.IValidateRegionUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validate(
@@ -988,7 +988,7 @@ export class RegionUrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMapsValidateResponse,
       protos.google.cloud.compute.v1.IValidateRegionUrlMapRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1050,7 +1050,7 @@ export class RegionUrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap[],
       protos.google.cloud.compute.v1.IListRegionUrlMapsRequest | null,
-      protos.google.cloud.compute.v1.IUrlMapList
+      protos.google.cloud.compute.v1.IUrlMapList,
     ]
   >;
   list(
@@ -1088,7 +1088,7 @@ export class RegionUrlMapsClient {
     [
       protos.google.cloud.compute.v1.IUrlMap[],
       protos.google.cloud.compute.v1.IListRegionUrlMapsRequest | null,
-      protos.google.cloud.compute.v1.IUrlMapList
+      protos.google.cloud.compute.v1.IUrlMapList,
     ]
   > | void {
     request = request || {};

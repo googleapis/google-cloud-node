@@ -337,7 +337,7 @@ export class RegionOperationsClient {
         | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -386,7 +386,7 @@ export class RegionOperationsClient {
         | protos.google.cloud.compute.v1small.IGetRegionOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -443,7 +443,7 @@ export class RegionOperationsClient {
         | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   wait(
@@ -492,7 +492,7 @@ export class RegionOperationsClient {
         | protos.google.cloud.compute.v1small.IWaitRegionOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

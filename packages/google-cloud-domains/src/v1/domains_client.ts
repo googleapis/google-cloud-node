@@ -526,7 +526,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.ISearchDomainsResponse,
       protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchDomains(
@@ -566,7 +566,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.ISearchDomainsResponse,
       protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -616,7 +616,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveRegisterParameters(
@@ -665,7 +665,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -723,7 +723,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveTransferParameters(
@@ -772,7 +772,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -821,7 +821,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration,
       protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRegistration(
@@ -861,7 +861,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration,
       protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -913,7 +913,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveAuthorizationCode(
@@ -962,7 +962,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1014,7 +1014,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IAuthorizationCode,
       protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetAuthorizationCode(
@@ -1060,7 +1060,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IAuthorizationCode,
       protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1144,7 +1144,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerDomain(
@@ -1197,7 +1197,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1322,7 +1322,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   transferDomain(
@@ -1375,7 +1375,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1467,7 +1467,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRegistration(
@@ -1520,7 +1520,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1610,7 +1610,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   configureManagementSettings(
@@ -1663,7 +1663,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1765,7 +1765,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   configureDnsSettings(
@@ -1818,7 +1818,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1914,7 +1914,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   configureContactSettings(
@@ -1967,7 +1967,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2063,7 +2063,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportRegistration(
@@ -2116,7 +2116,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2218,7 +2218,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRegistration(
@@ -2271,7 +2271,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2375,7 +2375,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration[],
       protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsResponse,
     ]
   >;
   listRegistrations(
@@ -2421,7 +2421,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration[],
       protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsResponse,
     ]
   > | void {
     request = request || {};

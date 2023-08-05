@@ -21,7 +21,7 @@
 set -eo pipefail
 
 NODE_VERSIONS=(
-    "14"
+    "16"
 )
 
 echo "change directory to the project root"

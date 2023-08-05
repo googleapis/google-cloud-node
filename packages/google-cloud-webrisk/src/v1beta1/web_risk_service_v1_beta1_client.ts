@@ -341,7 +341,7 @@ export class WebRiskServiceV1Beta1Client {
         | protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   computeThreatListDiff(
@@ -390,7 +390,7 @@ export class WebRiskServiceV1Beta1Client {
         | protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -432,7 +432,7 @@ export class WebRiskServiceV1Beta1Client {
     [
       protos.google.cloud.webrisk.v1beta1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchUris(
@@ -472,7 +472,7 @@ export class WebRiskServiceV1Beta1Client {
     [
       protos.google.cloud.webrisk.v1beta1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -519,7 +519,7 @@ export class WebRiskServiceV1Beta1Client {
     [
       protos.google.cloud.webrisk.v1beta1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchHashes(
@@ -565,7 +565,7 @@ export class WebRiskServiceV1Beta1Client {
     [
       protos.google.cloud.webrisk.v1beta1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -678,7 +678,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccount,
       protos.google.analytics.admin.v1alpha.IGetAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccount(
@@ -724,7 +724,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccount,
       protos.google.analytics.admin.v1alpha.IGetAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -780,7 +780,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.analytics.admin.v1alpha.IDeleteAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccount(
@@ -826,7 +826,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.analytics.admin.v1alpha.IDeleteAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -876,7 +876,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccount,
       protos.google.analytics.admin.v1alpha.IUpdateAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccount(
@@ -922,7 +922,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccount,
       protos.google.analytics.admin.v1alpha.IUpdateAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -972,7 +972,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   provisionAccountTicket(
@@ -1021,7 +1021,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1067,7 +1067,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IGetPropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProperty(
@@ -1113,7 +1113,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IGetPropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1158,7 +1158,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.ICreatePropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProperty(
@@ -1204,7 +1204,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.ICreatePropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1256,7 +1256,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IDeletePropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProperty(
@@ -1302,7 +1302,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IDeletePropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1353,7 +1353,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProperty(
@@ -1399,7 +1399,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty,
       protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1443,7 +1443,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink,
       protos.google.analytics.admin.v1alpha.IGetUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUserLink(
@@ -1489,7 +1489,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink,
       protos.google.analytics.admin.v1alpha.IGetUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1543,7 +1543,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchGetUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchGetUserLinks(
@@ -1592,7 +1592,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchGetUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1645,7 +1645,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink,
       protos.google.analytics.admin.v1alpha.ICreateUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createUserLink(
@@ -1691,7 +1691,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink,
       protos.google.analytics.admin.v1alpha.ICreateUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1751,7 +1751,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchCreateUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateUserLinks(
@@ -1800,7 +1800,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchCreateUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1844,7 +1844,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink,
       protos.google.analytics.admin.v1alpha.IUpdateUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateUserLink(
@@ -1890,7 +1890,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink,
       protos.google.analytics.admin.v1alpha.IUpdateUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1943,7 +1943,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchUpdateUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateUserLinks(
@@ -1992,7 +1992,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchUpdateUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2036,7 +2036,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.analytics.admin.v1alpha.IDeleteUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteUserLink(
@@ -2082,7 +2082,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.analytics.admin.v1alpha.IDeleteUserLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2135,7 +2135,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchDeleteUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteUserLinks(
@@ -2184,7 +2184,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchDeleteUserLinksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2236,7 +2236,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFirebaseLink(
@@ -2285,7 +2285,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2333,7 +2333,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFirebaseLink(
@@ -2382,7 +2382,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2433,7 +2433,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGlobalSiteTag(
@@ -2482,7 +2482,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2531,7 +2531,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGoogleAdsLink(
@@ -2580,7 +2580,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2632,7 +2632,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGoogleAdsLink(
@@ -2681,7 +2681,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2728,7 +2728,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGoogleAdsLink(
@@ -2777,7 +2777,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2827,7 +2827,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataSharingSettings(
@@ -2876,7 +2876,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2929,7 +2929,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMeasurementProtocolSecret(
@@ -2978,7 +2978,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3032,7 +3032,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMeasurementProtocolSecret(
@@ -3081,7 +3081,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3134,7 +3134,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMeasurementProtocolSecret(
@@ -3183,7 +3183,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3237,7 +3237,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMeasurementProtocolSecret(
@@ -3286,7 +3286,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3351,7 +3351,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   acknowledgeUserDataCollection(
@@ -3400,7 +3400,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3452,7 +3452,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGoogleSignalsSettings(
@@ -3501,7 +3501,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3558,7 +3558,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGoogleSignalsSettings(
@@ -3607,7 +3607,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3662,7 +3662,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversionEvent(
@@ -3711,7 +3711,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3760,7 +3760,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversionEvent(
@@ -3809,7 +3809,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3858,7 +3858,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversionEvent(
@@ -3907,7 +3907,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3955,7 +3955,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDisplayVideo360AdvertiserLink(
@@ -4004,7 +4004,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4061,7 +4061,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDisplayVideo360AdvertiserLink(
@@ -4110,7 +4110,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4162,7 +4162,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDisplayVideo360AdvertiserLink(
@@ -4211,7 +4211,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4266,7 +4266,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDisplayVideo360AdvertiserLink(
@@ -4315,7 +4315,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4368,7 +4368,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDisplayVideo360AdvertiserLinkProposal(
@@ -4417,7 +4417,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4470,7 +4470,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDisplayVideo360AdvertiserLinkProposal(
@@ -4519,7 +4519,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4572,7 +4572,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDisplayVideo360AdvertiserLinkProposal(
@@ -4621,7 +4621,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4675,7 +4675,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   approveDisplayVideo360AdvertiserLinkProposal(
@@ -4724,7 +4724,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4780,7 +4780,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelDisplayVideo360AdvertiserLinkProposal(
@@ -4829,7 +4829,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4882,7 +4882,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomDimension(
@@ -4931,7 +4931,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4982,7 +4982,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomDimension(
@@ -5031,7 +5031,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5079,7 +5079,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   archiveCustomDimension(
@@ -5128,7 +5128,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5180,7 +5180,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomDimension(
@@ -5229,7 +5229,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5278,7 +5278,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomMetric(
@@ -5327,7 +5327,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5378,7 +5378,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomMetric(
@@ -5427,7 +5427,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5475,7 +5475,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   archiveCustomMetric(
@@ -5524,7 +5524,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5569,7 +5569,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ICustomMetric,
       protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomMetric(
@@ -5615,7 +5615,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ICustomMetric,
       protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5665,7 +5665,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataRetentionSettings(
@@ -5714,7 +5714,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5771,7 +5771,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataRetentionSettings(
@@ -5820,7 +5820,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5874,7 +5874,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataStream(
@@ -5923,7 +5923,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5971,7 +5971,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataStream(
@@ -6020,7 +6020,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6071,7 +6071,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataStream(
@@ -6120,7 +6120,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6165,7 +6165,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDataStream,
       protos.google.analytics.admin.v1alpha.IGetDataStreamRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataStream(
@@ -6211,7 +6211,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDataStream,
       protos.google.analytics.admin.v1alpha.IGetDataStreamRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6258,7 +6258,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience,
       protos.google.analytics.admin.v1alpha.IGetAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAudience(
@@ -6304,7 +6304,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience,
       protos.google.analytics.admin.v1alpha.IGetAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6350,7 +6350,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience,
       protos.google.analytics.admin.v1alpha.ICreateAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAudience(
@@ -6396,7 +6396,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience,
       protos.google.analytics.admin.v1alpha.ICreateAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6446,7 +6446,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience,
       protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAudience(
@@ -6492,7 +6492,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience,
       protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6536,7 +6536,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   archiveAudience(
@@ -6582,7 +6582,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6630,7 +6630,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSearchAds360Link(
@@ -6679,7 +6679,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6728,7 +6728,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSearchAds360Link(
@@ -6777,7 +6777,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6829,7 +6829,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSearchAds360Link(
@@ -6878,7 +6878,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -6933,7 +6933,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSearchAds360Link(
@@ -6982,7 +6982,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7034,7 +7034,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAttributionSettings(
@@ -7083,7 +7083,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7140,7 +7140,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAttributionSettings(
@@ -7189,7 +7189,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7313,7 +7313,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
       protos.google.analytics.admin.v1alpha.IRunAccessReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runAccessReport(
@@ -7359,7 +7359,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
       protos.google.analytics.admin.v1alpha.IRunAccessReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7410,7 +7410,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAccessBinding(
@@ -7459,7 +7459,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7509,7 +7509,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessBinding(
@@ -7558,7 +7558,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7605,7 +7605,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccessBinding(
@@ -7654,7 +7654,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7703,7 +7703,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccessBinding(
@@ -7752,7 +7752,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7810,7 +7810,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateAccessBindings(
@@ -7859,7 +7859,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -7920,7 +7920,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchGetAccessBindings(
@@ -7969,7 +7969,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8029,7 +8029,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateAccessBindings(
@@ -8078,7 +8078,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8136,7 +8136,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteAccessBindings(
@@ -8185,7 +8185,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8237,7 +8237,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExpandedDataSet(
@@ -8286,7 +8286,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8335,7 +8335,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExpandedDataSet(
@@ -8384,7 +8384,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8438,7 +8438,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateExpandedDataSet(
@@ -8487,7 +8487,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8534,7 +8534,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteExpandedDataSet(
@@ -8583,7 +8583,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8628,7 +8628,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IChannelGroup,
       protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChannelGroup(
@@ -8674,7 +8674,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IChannelGroup,
       protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8724,7 +8724,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChannelGroup(
@@ -8773,7 +8773,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8827,7 +8827,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateChannelGroup(
@@ -8876,7 +8876,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -8924,7 +8924,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteChannelGroup(
@@ -8973,7 +8973,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9027,7 +9027,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setAutomatedGa4ConfigurationOptOut(
@@ -9076,7 +9076,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9128,7 +9128,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchAutomatedGa4ConfigurationOptOut(
@@ -9177,7 +9177,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9223,7 +9223,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IBigQueryLink,
       protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBigQueryLink(
@@ -9269,7 +9269,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IBigQueryLink,
       protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9321,7 +9321,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnhancedMeasurementSettings(
@@ -9370,7 +9370,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9429,7 +9429,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEnhancedMeasurementSettings(
@@ -9478,7 +9478,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9537,7 +9537,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnectedSiteTag(
@@ -9586,7 +9586,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9640,7 +9640,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnectedSiteTag(
@@ -9689,7 +9689,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9741,7 +9741,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listConnectedSiteTags(
@@ -9790,7 +9790,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9838,7 +9838,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchConnectedGa4Property(
@@ -9887,7 +9887,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -9933,7 +9933,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAdSenseLink,
       protos.google.analytics.admin.v1alpha.IGetAdSenseLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAdSenseLink(
@@ -9979,7 +9979,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAdSenseLink,
       protos.google.analytics.admin.v1alpha.IGetAdSenseLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10030,7 +10030,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateAdSenseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAdSenseLink(
@@ -10079,7 +10079,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateAdSenseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10128,7 +10128,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteAdSenseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAdSenseLink(
@@ -10177,7 +10177,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteAdSenseLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10225,7 +10225,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEventCreateRule(
@@ -10274,7 +10274,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IGetEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10323,7 +10323,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEventCreateRule(
@@ -10372,7 +10372,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.ICreateEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10426,7 +10426,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEventCreateRule(
@@ -10475,7 +10475,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IUpdateEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10523,7 +10523,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEventCreateRule(
@@ -10572,7 +10572,7 @@ export class AnalyticsAdminServiceClient {
         | protos.google.analytics.admin.v1alpha.IDeleteEventCreateRuleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -10636,7 +10636,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccount[],
       protos.google.analytics.admin.v1alpha.IListAccountsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAccountsResponse
+      protos.google.analytics.admin.v1alpha.IListAccountsResponse,
     ]
   >;
   listAccounts(
@@ -10682,7 +10682,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccount[],
       protos.google.analytics.admin.v1alpha.IListAccountsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAccountsResponse
+      protos.google.analytics.admin.v1alpha.IListAccountsResponse,
     ]
   > | void {
     request = request || {};
@@ -10830,7 +10830,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccountSummary[],
       protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse,
     ]
   >;
   listAccountSummaries(
@@ -10876,7 +10876,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccountSummary[],
       protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+      protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse,
     ]
   > | void {
     request = request || {};
@@ -11042,7 +11042,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty[],
       protos.google.analytics.admin.v1alpha.IListPropertiesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListPropertiesResponse
+      protos.google.analytics.admin.v1alpha.IListPropertiesResponse,
     ]
   >;
   listProperties(
@@ -11088,7 +11088,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IProperty[],
       protos.google.analytics.admin.v1alpha.IListPropertiesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListPropertiesResponse
+      protos.google.analytics.admin.v1alpha.IListPropertiesResponse,
     ]
   > | void {
     request = request || {};
@@ -11272,7 +11272,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink[],
       protos.google.analytics.admin.v1alpha.IListUserLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListUserLinksResponse
+      protos.google.analytics.admin.v1alpha.IListUserLinksResponse,
     ]
   >;
   listUserLinks(
@@ -11318,7 +11318,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IUserLink[],
       protos.google.analytics.admin.v1alpha.IListUserLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListUserLinksResponse
+      protos.google.analytics.admin.v1alpha.IListUserLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -11484,7 +11484,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAuditUserLink[],
       protos.google.analytics.admin.v1alpha.IAuditUserLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IAuditUserLinksResponse
+      protos.google.analytics.admin.v1alpha.IAuditUserLinksResponse,
     ]
   >;
   auditUserLinks(
@@ -11530,7 +11530,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAuditUserLink[],
       protos.google.analytics.admin.v1alpha.IAuditUserLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IAuditUserLinksResponse
+      protos.google.analytics.admin.v1alpha.IAuditUserLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -11690,7 +11690,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IFirebaseLink[],
       protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
     ]
   >;
   listFirebaseLinks(
@@ -11736,7 +11736,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IFirebaseLink[],
       protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+      protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -11896,7 +11896,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IGoogleAdsLink[],
       protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksResponse
+      protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksResponse,
     ]
   >;
   listGoogleAdsLinks(
@@ -11942,7 +11942,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IGoogleAdsLink[],
       protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksResponse
+      protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -12102,7 +12102,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret[],
       protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse,
     ]
   >;
   listMeasurementProtocolSecrets(
@@ -12148,7 +12148,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret[],
       protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse,
     ]
   > | void {
     request = request || {};
@@ -12333,7 +12333,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[],
       protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest | null,
-      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse,
     ]
   >;
   searchChangeHistoryEvents(
@@ -12379,7 +12379,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[],
       protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest | null,
-      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+      protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse,
     ]
   > | void {
     request = request || {};
@@ -12579,7 +12579,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IConversionEvent[],
       protos.google.analytics.admin.v1alpha.IListConversionEventsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+      protos.google.analytics.admin.v1alpha.IListConversionEventsResponse,
     ]
   >;
   listConversionEvents(
@@ -12625,7 +12625,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IConversionEvent[],
       protos.google.analytics.admin.v1alpha.IListConversionEventsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+      protos.google.analytics.admin.v1alpha.IListConversionEventsResponse,
     ]
   > | void {
     request = request || {};
@@ -12784,7 +12784,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[],
       protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse
+      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse,
     ]
   >;
   listDisplayVideo360AdvertiserLinks(
@@ -12830,7 +12830,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[],
       protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse
+      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -12998,7 +12998,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[],
       protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse
+      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse,
     ]
   >;
   listDisplayVideo360AdvertiserLinkProposals(
@@ -13044,7 +13044,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[],
       protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse
+      protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse,
     ]
   > | void {
     request = request || {};
@@ -13214,7 +13214,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ICustomDimension[],
       protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse,
     ]
   >;
   listCustomDimensions(
@@ -13260,7 +13260,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ICustomDimension[],
       protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse,
     ]
   > | void {
     request = request || {};
@@ -13418,7 +13418,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ICustomMetric[],
       protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse,
     ]
   >;
   listCustomMetrics(
@@ -13464,7 +13464,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ICustomMetric[],
       protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse,
     ]
   > | void {
     request = request || {};
@@ -13622,7 +13622,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDataStream[],
       protos.google.analytics.admin.v1alpha.IListDataStreamsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+      protos.google.analytics.admin.v1alpha.IListDataStreamsResponse,
     ]
   >;
   listDataStreams(
@@ -13668,7 +13668,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IDataStream[],
       protos.google.analytics.admin.v1alpha.IListDataStreamsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+      protos.google.analytics.admin.v1alpha.IListDataStreamsResponse,
     ]
   > | void {
     request = request || {};
@@ -13828,7 +13828,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience[],
       protos.google.analytics.admin.v1alpha.IListAudiencesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+      protos.google.analytics.admin.v1alpha.IListAudiencesResponse,
     ]
   >;
   listAudiences(
@@ -13874,7 +13874,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAudience[],
       protos.google.analytics.admin.v1alpha.IListAudiencesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+      protos.google.analytics.admin.v1alpha.IListAudiencesResponse,
     ]
   > | void {
     request = request || {};
@@ -14033,7 +14033,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ISearchAds360Link[],
       protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse,
     ]
   >;
   listSearchAds360Links(
@@ -14079,7 +14079,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.ISearchAds360Link[],
       protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse,
     ]
   > | void {
     request = request || {};
@@ -14241,7 +14241,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccessBinding[],
       protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse,
     ]
   >;
   listAccessBindings(
@@ -14287,7 +14287,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAccessBinding[],
       protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse,
     ]
   > | void {
     request = request || {};
@@ -14449,7 +14449,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IExpandedDataSet[],
       protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse,
     ]
   >;
   listExpandedDataSets(
@@ -14495,7 +14495,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IExpandedDataSet[],
       protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse,
     ]
   > | void {
     request = request || {};
@@ -14654,7 +14654,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IChannelGroup[],
       protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse,
     ]
   >;
   listChannelGroups(
@@ -14700,7 +14700,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IChannelGroup[],
       protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest | null,
-      protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -14862,7 +14862,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IBigQueryLink[],
       protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse,
     ]
   >;
   listBigQueryLinks(
@@ -14908,7 +14908,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IBigQueryLink[],
       protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -15072,7 +15072,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAdSenseLink[],
       protos.google.analytics.admin.v1alpha.IListAdSenseLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAdSenseLinksResponse
+      protos.google.analytics.admin.v1alpha.IListAdSenseLinksResponse,
     ]
   >;
   listAdSenseLinks(
@@ -15118,7 +15118,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IAdSenseLink[],
       protos.google.analytics.admin.v1alpha.IListAdSenseLinksRequest | null,
-      protos.google.analytics.admin.v1alpha.IListAdSenseLinksResponse
+      protos.google.analytics.admin.v1alpha.IListAdSenseLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -15280,7 +15280,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IEventCreateRule[],
       protos.google.analytics.admin.v1alpha.IListEventCreateRulesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListEventCreateRulesResponse
+      protos.google.analytics.admin.v1alpha.IListEventCreateRulesResponse,
     ]
   >;
   listEventCreateRules(
@@ -15326,7 +15326,7 @@ export class AnalyticsAdminServiceClient {
     [
       protos.google.analytics.admin.v1alpha.IEventCreateRule[],
       protos.google.analytics.admin.v1alpha.IListEventCreateRulesRequest | null,
-      protos.google.analytics.admin.v1alpha.IListEventCreateRulesResponse
+      protos.google.analytics.admin.v1alpha.IListEventCreateRulesResponse,
     ]
   > | void {
     request = request || {};

@@ -382,7 +382,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.ICreateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDashboard(
@@ -428,7 +428,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.ICreateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -480,7 +480,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IGetDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDashboard(
@@ -526,7 +526,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IGetDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -576,7 +576,7 @@ export class DashboardsServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDashboard(
@@ -622,7 +622,7 @@ export class DashboardsServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -673,7 +673,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDashboard(
@@ -719,7 +719,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -780,7 +780,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard[],
       protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      protos.google.monitoring.dashboard.v1.IListDashboardsResponse,
     ]
   >;
   listDashboards(
@@ -826,7 +826,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard[],
       protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      protos.google.monitoring.dashboard.v1.IListDashboardsResponse,
     ]
   > | void {
     request = request || {};

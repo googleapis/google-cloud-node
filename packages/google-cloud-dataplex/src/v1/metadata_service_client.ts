@@ -618,7 +618,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntity(
@@ -658,7 +658,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -705,7 +705,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntity(
@@ -745,7 +745,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -793,7 +793,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntity(
@@ -833,7 +833,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -881,7 +881,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntity(
@@ -919,7 +919,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -969,7 +969,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPartition(
@@ -1015,7 +1015,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1065,7 +1065,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePartition(
@@ -1111,7 +1111,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1158,7 +1158,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPartition(
@@ -1198,7 +1198,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1268,7 +1268,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity[],
       protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      protos.google.cloud.dataplex.v1.IListEntitiesResponse,
     ]
   >;
   listEntities(
@@ -1308,7 +1308,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity[],
       protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      protos.google.cloud.dataplex.v1.IListEntitiesResponse,
     ]
   > | void {
     request = request || {};
@@ -1511,7 +1511,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition[],
       protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      protos.google.cloud.dataplex.v1.IListPartitionsResponse,
     ]
   >;
   listPartitions(
@@ -1557,7 +1557,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition[],
       protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      protos.google.cloud.dataplex.v1.IListPartitionsResponse,
     ]
   > | void {
     request = request || {};

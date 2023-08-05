@@ -505,7 +505,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecuritySettings(
@@ -554,7 +554,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -609,7 +609,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSecuritySettings(
@@ -658,7 +658,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -710,7 +710,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSecuritySettings(
@@ -759,7 +759,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -814,7 +814,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSecuritySettings(
@@ -863,7 +863,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -921,7 +921,7 @@ export class SecuritySettingsServiceClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ISecuritySettings[],
       protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsResponse,
     ]
   >;
   listSecuritySettings(
@@ -967,7 +967,7 @@ export class SecuritySettingsServiceClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ISecuritySettings[],
       protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsResponse,
     ]
   > | void {
     request = request || {};

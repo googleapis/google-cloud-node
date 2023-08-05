@@ -362,7 +362,7 @@ export class RegionHealthCheckServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -408,7 +408,7 @@ export class RegionHealthCheckServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -435,7 +435,7 @@ export class RegionHealthCheckServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -481,7 +481,7 @@ export class RegionHealthCheckServicesClient {
         | protos.google.cloud.compute.v1.IGetRegionHealthCheckServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -530,7 +530,7 @@ export class RegionHealthCheckServicesClient {
         | protos.google.cloud.compute.v1.IGetRegionHealthCheckServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -587,7 +587,7 @@ export class RegionHealthCheckServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -633,7 +633,7 @@ export class RegionHealthCheckServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -659,7 +659,7 @@ export class RegionHealthCheckServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -711,7 +711,7 @@ export class RegionHealthCheckServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -757,7 +757,7 @@ export class RegionHealthCheckServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class RegionHealthCheckServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -839,7 +839,7 @@ export class RegionHealthCheckServicesClient {
     [
       protos.google.cloud.compute.v1.IHealthCheckService[],
       protos.google.cloud.compute.v1.IListRegionHealthCheckServicesRequest | null,
-      protos.google.cloud.compute.v1.IHealthCheckServicesList
+      protos.google.cloud.compute.v1.IHealthCheckServicesList,
     ]
   >;
   list(
@@ -885,7 +885,7 @@ export class RegionHealthCheckServicesClient {
     [
       protos.google.cloud.compute.v1.IHealthCheckService[],
       protos.google.cloud.compute.v1.IListRegionHealthCheckServicesRequest | null,
-      protos.google.cloud.compute.v1.IHealthCheckServicesList
+      protos.google.cloud.compute.v1.IHealthCheckServicesList,
     ]
   > | void {
     request = request || {};

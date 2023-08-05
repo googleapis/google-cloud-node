@@ -379,7 +379,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.ICreateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnection(
@@ -428,7 +428,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.ICreateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -476,7 +476,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.IGetConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnection(
@@ -525,7 +525,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.IGetConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -578,7 +578,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.IUpdateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConnection(
@@ -627,7 +627,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.IUpdateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -675,7 +675,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.IDeleteConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnection(
@@ -724,7 +724,7 @@ export class ConnectionServiceClient {
         | protos.google.cloud.bigquery.connection.v1.IDeleteConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -774,7 +774,7 @@ export class ConnectionServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -812,7 +812,7 @@ export class ConnectionServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -871,7 +871,7 @@ export class ConnectionServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -909,7 +909,7 @@ export class ConnectionServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -965,7 +965,7 @@ export class ConnectionServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1003,7 +1003,7 @@ export class ConnectionServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1056,7 +1056,7 @@ export class ConnectionServiceClient {
     [
       protos.google.cloud.bigquery.connection.v1.IConnection[],
       protos.google.cloud.bigquery.connection.v1.IListConnectionsRequest | null,
-      protos.google.cloud.bigquery.connection.v1.IListConnectionsResponse
+      protos.google.cloud.bigquery.connection.v1.IListConnectionsResponse,
     ]
   >;
   listConnections(
@@ -1102,7 +1102,7 @@ export class ConnectionServiceClient {
     [
       protos.google.cloud.bigquery.connection.v1.IConnection[],
       protos.google.cloud.bigquery.connection.v1.IListConnectionsRequest | null,
-      protos.google.cloud.bigquery.connection.v1.IListConnectionsResponse
+      protos.google.cloud.bigquery.connection.v1.IListConnectionsResponse,
     ]
   > | void {
     request = request || {};

@@ -472,7 +472,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject,
       protos.google.cloud.resourcemanager.v3.IGetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProject(
@@ -518,7 +518,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject,
       protos.google.cloud.resourcemanager.v3.IGetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -568,7 +568,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -606,7 +606,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -702,7 +702,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -740,7 +740,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,7 +791,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -829,7 +829,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -891,7 +891,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProject(
@@ -944,7 +944,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1030,7 +1030,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProject(
@@ -1083,7 +1083,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1183,7 +1183,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveProject(
@@ -1236,7 +1236,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1351,7 +1351,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProject(
@@ -1404,7 +1404,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1497,7 +1497,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteProject(
@@ -1550,7 +1550,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1652,7 +1652,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.IListProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListProjectsResponse
+      protos.google.cloud.resourcemanager.v3.IListProjectsResponse,
     ]
   >;
   listProjects(
@@ -1698,7 +1698,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.IListProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListProjectsResponse
+      protos.google.cloud.resourcemanager.v3.IListProjectsResponse,
     ]
   > | void {
     request = request || {};
@@ -1895,7 +1895,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.ISearchProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse
+      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse,
     ]
   >;
   searchProjects(
@@ -1941,7 +1941,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.ISearchProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse
+      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse,
     ]
   > | void {
     request = request || {};

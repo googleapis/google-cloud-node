@@ -369,7 +369,7 @@ export class ServiceAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -415,7 +415,7 @@ export class ServiceAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class ServiceAttachmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -485,7 +485,7 @@ export class ServiceAttachmentsClient {
     [
       protos.google.cloud.compute.v1.IServiceAttachment,
       protos.google.cloud.compute.v1.IGetServiceAttachmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -531,7 +531,7 @@ export class ServiceAttachmentsClient {
     [
       protos.google.cloud.compute.v1.IServiceAttachment,
       protos.google.cloud.compute.v1.IGetServiceAttachmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -586,7 +586,7 @@ export class ServiceAttachmentsClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyServiceAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -635,7 +635,7 @@ export class ServiceAttachmentsClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyServiceAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -692,7 +692,7 @@ export class ServiceAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -738,7 +738,7 @@ export class ServiceAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -764,7 +764,7 @@ export class ServiceAttachmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -816,7 +816,7 @@ export class ServiceAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -862,7 +862,7 @@ export class ServiceAttachmentsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -889,7 +889,7 @@ export class ServiceAttachmentsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -937,7 +937,7 @@ export class ServiceAttachmentsClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyServiceAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -986,7 +986,7 @@ export class ServiceAttachmentsClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyServiceAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1041,7 +1041,7 @@ export class ServiceAttachmentsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsServiceAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1090,7 +1090,7 @@ export class ServiceAttachmentsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsServiceAttachmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1209,7 +1209,7 @@ export class ServiceAttachmentsClient {
     [
       protos.google.cloud.compute.v1.IServiceAttachment[],
       protos.google.cloud.compute.v1.IListServiceAttachmentsRequest | null,
-      protos.google.cloud.compute.v1.IServiceAttachmentList
+      protos.google.cloud.compute.v1.IServiceAttachmentList,
     ]
   >;
   list(
@@ -1249,7 +1249,7 @@ export class ServiceAttachmentsClient {
     [
       protos.google.cloud.compute.v1.IServiceAttachment[],
       protos.google.cloud.compute.v1.IListServiceAttachmentsRequest | null,
-      protos.google.cloud.compute.v1.IServiceAttachmentList
+      protos.google.cloud.compute.v1.IServiceAttachmentList,
     ]
   > | void {
     request = request || {};

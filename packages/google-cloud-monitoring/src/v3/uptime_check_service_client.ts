@@ -418,7 +418,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig,
       protos.google.monitoring.v3.IGetUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUptimeCheckConfig(
@@ -483,7 +483,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig,
       protos.google.monitoring.v3.IGetUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -511,7 +511,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig,
       protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createUptimeCheckConfig(
@@ -578,7 +578,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig,
       protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -610,7 +610,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig,
       protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateUptimeCheckConfig(
@@ -691,7 +691,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig,
       protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -723,7 +723,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteUptimeCheckConfig(
@@ -790,7 +790,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -823,7 +823,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig[],
       protos.google.monitoring.v3.IListUptimeCheckConfigsRequest | null,
-      protos.google.monitoring.v3.IListUptimeCheckConfigsResponse
+      protos.google.monitoring.v3.IListUptimeCheckConfigsResponse,
     ]
   >;
   listUptimeCheckConfigs(
@@ -901,7 +901,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckConfig[],
       protos.google.monitoring.v3.IListUptimeCheckConfigsRequest | null,
-      protos.google.monitoring.v3.IListUptimeCheckConfigsResponse
+      protos.google.monitoring.v3.IListUptimeCheckConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -1040,7 +1040,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckIp[],
       protos.google.monitoring.v3.IListUptimeCheckIpsRequest | null,
-      protos.google.monitoring.v3.IListUptimeCheckIpsResponse
+      protos.google.monitoring.v3.IListUptimeCheckIpsResponse,
     ]
   >;
   listUptimeCheckIps(
@@ -1115,7 +1115,7 @@ export class UptimeCheckServiceClient {
     [
       protos.google.monitoring.v3.IUptimeCheckIp[],
       protos.google.monitoring.v3.IListUptimeCheckIpsRequest | null,
-      protos.google.monitoring.v3.IListUptimeCheckIpsResponse
+      protos.google.monitoring.v3.IListUptimeCheckIpsResponse,
     ]
   > | void {
     request = request || {};

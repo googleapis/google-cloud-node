@@ -380,7 +380,7 @@ export class DocumentLinkServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listLinkedTargets(
@@ -429,7 +429,7 @@ export class DocumentLinkServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -485,7 +485,7 @@ export class DocumentLinkServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocumentLink(
@@ -534,7 +534,7 @@ export class DocumentLinkServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -586,7 +586,7 @@ export class DocumentLinkServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocumentLink(
@@ -635,7 +635,7 @@ export class DocumentLinkServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -700,7 +700,7 @@ export class DocumentLinkServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocumentLink[],
       protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse
+      protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse,
     ]
   >;
   listLinkedSources(
@@ -746,7 +746,7 @@ export class DocumentLinkServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocumentLink[],
       protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse
+      protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse,
     ]
   > | void {
     request = request || {};

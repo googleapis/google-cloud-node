@@ -948,7 +948,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
       const responses: Array<
         [
           string,
-          protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList
+          protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList,
         ]
       > = [];
       const iterable = client.aggregatedListAsync(request);
@@ -995,7 +995,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
         const responses: Array<
           [
             string,
-            protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList
+            protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList,
           ]
         > = [];
         for await (const resource of iterable) {

@@ -524,7 +524,7 @@ export class ClientGatewaysServiceClient {
         | protos.google.cloud.beyondcorp.clientgateways.v1.IGetClientGatewayRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getClientGateway(
@@ -573,7 +573,7 @@ export class ClientGatewaysServiceClient {
         | protos.google.cloud.beyondcorp.clientgateways.v1.IGetClientGatewayRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,7 +647,7 @@ export class ClientGatewaysServiceClient {
         protos.google.cloud.beyondcorp.clientgateways.v1.IClientGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createClientGateway(
@@ -700,7 +700,7 @@ export class ClientGatewaysServiceClient {
         protos.google.cloud.beyondcorp.clientgateways.v1.IClientGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -800,7 +800,7 @@ export class ClientGatewaysServiceClient {
         protos.google.cloud.beyondcorp.clientgateways.v1.IClientGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteClientGateway(
@@ -853,7 +853,7 @@ export class ClientGatewaysServiceClient {
         protos.google.cloud.beyondcorp.clientgateways.v1.IClientGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -943,7 +943,7 @@ export class ClientGatewaysServiceClient {
     [
       protos.google.cloud.beyondcorp.clientgateways.v1.IClientGateway[],
       protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysRequest | null,
-      protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysResponse
+      protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysResponse,
     ]
   >;
   listClientGateways(
@@ -989,7 +989,7 @@ export class ClientGatewaysServiceClient {
     [
       protos.google.cloud.beyondcorp.clientgateways.v1.IClientGateway[],
       protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysRequest | null,
-      protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysResponse
+      protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysResponse,
     ]
   > | void {
     request = request || {};

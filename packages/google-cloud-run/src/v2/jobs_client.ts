@@ -473,7 +473,7 @@ export class JobsClient {
     [
       protos.google.cloud.run.v2.IJob,
       protos.google.cloud.run.v2.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -511,7 +511,7 @@ export class JobsClient {
     [
       protos.google.cloud.run.v2.IJob,
       protos.google.cloud.run.v2.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -560,7 +560,7 @@ export class JobsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -598,7 +598,7 @@ export class JobsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -655,7 +655,7 @@ export class JobsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -693,7 +693,7 @@ export class JobsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -745,7 +745,7 @@ export class JobsClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -783,7 +783,7 @@ export class JobsClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -843,7 +843,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IJob
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -896,7 +896,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IJob
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -983,7 +983,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IJob
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -1036,7 +1036,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IJob
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1124,7 +1124,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IJob
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -1177,7 +1177,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IJob
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1265,7 +1265,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IExecution
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runJob(
@@ -1318,7 +1318,7 @@ export class JobsClient {
         protos.google.cloud.run.v2.IExecution
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1408,7 +1408,7 @@ export class JobsClient {
     [
       protos.google.cloud.run.v2.IJob[],
       protos.google.cloud.run.v2.IListJobsRequest | null,
-      protos.google.cloud.run.v2.IListJobsResponse
+      protos.google.cloud.run.v2.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -1446,7 +1446,7 @@ export class JobsClient {
     [
       protos.google.cloud.run.v2.IJob[],
       protos.google.cloud.run.v2.IListJobsRequest | null,
-      protos.google.cloud.run.v2.IListJobsResponse
+      protos.google.cloud.run.v2.IListJobsResponse,
     ]
   > | void {
     request = request || {};

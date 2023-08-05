@@ -365,7 +365,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -411,7 +411,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -438,7 +438,7 @@ export class RegionBackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -484,7 +484,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.IGetRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -533,7 +533,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.IGetRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -587,7 +587,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.IGetHealthRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHealth(
@@ -636,7 +636,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.IGetHealthRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -691,7 +691,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -740,7 +740,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -797,7 +797,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -843,7 +843,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -869,7 +869,7 @@ export class RegionBackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -921,7 +921,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -967,7 +967,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -994,7 +994,7 @@ export class RegionBackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1042,7 +1042,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1091,7 +1091,7 @@ export class RegionBackendServicesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1150,7 +1150,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -1196,7 +1196,7 @@ export class RegionBackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1223,7 +1223,7 @@ export class RegionBackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1278,7 +1278,7 @@ export class RegionBackendServicesClient {
     [
       protos.google.cloud.compute.v1.IBackendService[],
       protos.google.cloud.compute.v1.IListRegionBackendServicesRequest | null,
-      protos.google.cloud.compute.v1.IBackendServiceList
+      protos.google.cloud.compute.v1.IBackendServiceList,
     ]
   >;
   list(
@@ -1316,7 +1316,7 @@ export class RegionBackendServicesClient {
     [
       protos.google.cloud.compute.v1.IBackendService[],
       protos.google.cloud.compute.v1.IListRegionBackendServicesRequest | null,
-      protos.google.cloud.compute.v1.IBackendServiceList
+      protos.google.cloud.compute.v1.IBackendServiceList,
     ]
   > | void {
     request = request || {};

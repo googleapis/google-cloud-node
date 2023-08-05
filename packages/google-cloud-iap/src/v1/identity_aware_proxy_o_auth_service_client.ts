@@ -369,7 +369,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IListBrandsResponse,
       protos.google.cloud.iap.v1.IListBrandsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listBrands(
@@ -407,7 +407,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IListBrandsResponse,
       protos.google.cloud.iap.v1.IListBrandsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -461,7 +461,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IBrand,
       protos.google.cloud.iap.v1.ICreateBrandRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBrand(
@@ -499,7 +499,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IBrand,
       protos.google.cloud.iap.v1.ICreateBrandRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -544,7 +544,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IBrand,
       protos.google.cloud.iap.v1.IGetBrandRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBrand(
@@ -582,7 +582,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IBrand,
       protos.google.cloud.iap.v1.IGetBrandRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -636,7 +636,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIdentityAwareProxyClient(
@@ -685,7 +685,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIdentityAwareProxyClient(
@@ -788,7 +788,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -842,7 +842,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetIdentityAwareProxyClientSecret(
@@ -891,7 +891,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -946,7 +946,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIdentityAwareProxyClient(
@@ -995,7 +995,7 @@ export class IdentityAwareProxyOAuthServiceClient {
         | protos.google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1060,7 +1060,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IIdentityAwareProxyClient[],
       protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest | null,
-      protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsResponse
+      protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsResponse,
     ]
   >;
   listIdentityAwareProxyClients(
@@ -1106,7 +1106,7 @@ export class IdentityAwareProxyOAuthServiceClient {
     [
       protos.google.cloud.iap.v1.IIdentityAwareProxyClient[],
       protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest | null,
-      protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsResponse
+      protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsResponse,
     ]
   > | void {
     request = request || {};

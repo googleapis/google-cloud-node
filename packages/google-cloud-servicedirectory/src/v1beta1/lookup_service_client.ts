@@ -396,7 +396,7 @@ export class LookupServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resolveService(
@@ -445,7 +445,7 @@ export class LookupServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

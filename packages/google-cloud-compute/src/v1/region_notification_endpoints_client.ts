@@ -361,7 +361,7 @@ export class RegionNotificationEndpointsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -407,7 +407,7 @@ export class RegionNotificationEndpointsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -434,7 +434,7 @@ export class RegionNotificationEndpointsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -480,7 +480,7 @@ export class RegionNotificationEndpointsClient {
         | protos.google.cloud.compute.v1.IGetRegionNotificationEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -529,7 +529,7 @@ export class RegionNotificationEndpointsClient {
         | protos.google.cloud.compute.v1.IGetRegionNotificationEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -586,7 +586,7 @@ export class RegionNotificationEndpointsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -632,7 +632,7 @@ export class RegionNotificationEndpointsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -658,7 +658,7 @@ export class RegionNotificationEndpointsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -713,7 +713,7 @@ export class RegionNotificationEndpointsClient {
     [
       protos.google.cloud.compute.v1.INotificationEndpoint[],
       protos.google.cloud.compute.v1.IListRegionNotificationEndpointsRequest | null,
-      protos.google.cloud.compute.v1.INotificationEndpointList
+      protos.google.cloud.compute.v1.INotificationEndpointList,
     ]
   >;
   list(
@@ -759,7 +759,7 @@ export class RegionNotificationEndpointsClient {
     [
       protos.google.cloud.compute.v1.INotificationEndpoint[],
       protos.google.cloud.compute.v1.IListRegionNotificationEndpointsRequest | null,
-      protos.google.cloud.compute.v1.INotificationEndpointList
+      protos.google.cloud.compute.v1.INotificationEndpointList,
     ]
   > | void {
     request = request || {};

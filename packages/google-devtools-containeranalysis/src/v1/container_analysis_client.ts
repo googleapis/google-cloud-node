@@ -380,7 +380,7 @@ export class ContainerAnalysisClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -418,7 +418,7 @@ export class ContainerAnalysisClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -473,7 +473,7 @@ export class ContainerAnalysisClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -511,7 +511,7 @@ export class ContainerAnalysisClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -567,7 +567,7 @@ export class ContainerAnalysisClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -605,7 +605,7 @@ export class ContainerAnalysisClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -655,7 +655,7 @@ export class ContainerAnalysisClient {
         | protos.google.devtools.containeranalysis.v1.IGetVulnerabilityOccurrencesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVulnerabilityOccurrencesSummary(
@@ -704,7 +704,7 @@ export class ContainerAnalysisClient {
         | protos.google.devtools.containeranalysis.v1.IGetVulnerabilityOccurrencesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

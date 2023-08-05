@@ -367,7 +367,7 @@ export class PacketMirroringsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -413,7 +413,7 @@ export class PacketMirroringsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -440,7 +440,7 @@ export class PacketMirroringsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -483,7 +483,7 @@ export class PacketMirroringsClient {
     [
       protos.google.cloud.compute.v1.IPacketMirroring,
       protos.google.cloud.compute.v1.IGetPacketMirroringRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -529,7 +529,7 @@ export class PacketMirroringsClient {
     [
       protos.google.cloud.compute.v1.IPacketMirroring,
       protos.google.cloud.compute.v1.IGetPacketMirroringRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -586,7 +586,7 @@ export class PacketMirroringsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -632,7 +632,7 @@ export class PacketMirroringsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -658,7 +658,7 @@ export class PacketMirroringsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -710,7 +710,7 @@ export class PacketMirroringsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -756,7 +756,7 @@ export class PacketMirroringsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -783,7 +783,7 @@ export class PacketMirroringsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -831,7 +831,7 @@ export class PacketMirroringsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -880,7 +880,7 @@ export class PacketMirroringsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -999,7 +999,7 @@ export class PacketMirroringsClient {
     [
       protos.google.cloud.compute.v1.IPacketMirroring[],
       protos.google.cloud.compute.v1.IListPacketMirroringsRequest | null,
-      protos.google.cloud.compute.v1.IPacketMirroringList
+      protos.google.cloud.compute.v1.IPacketMirroringList,
     ]
   >;
   list(
@@ -1039,7 +1039,7 @@ export class PacketMirroringsClient {
     [
       protos.google.cloud.compute.v1.IPacketMirroring[],
       protos.google.cloud.compute.v1.IListPacketMirroringsRequest | null,
-      protos.google.cloud.compute.v1.IPacketMirroringList
+      protos.google.cloud.compute.v1.IPacketMirroringList,
     ]
   > | void {
     request = request || {};

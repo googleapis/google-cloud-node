@@ -647,7 +647,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessPolicy(
@@ -696,7 +696,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -758,7 +758,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessLevel(
@@ -807,7 +807,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -860,7 +860,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServicePerimeter(
@@ -909,7 +909,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -958,7 +958,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGcpUserAccessBinding(
@@ -1007,7 +1007,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1072,7 +1072,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1110,7 +1110,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1159,7 +1159,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1197,7 +1197,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1252,7 +1252,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1290,7 +1290,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1375,7 +1375,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAccessPolicy(
@@ -1428,7 +1428,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1514,7 +1514,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccessPolicy(
@@ -1567,7 +1567,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1656,7 +1656,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccessPolicy(
@@ -1709,7 +1709,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1807,7 +1807,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAccessLevel(
@@ -1860,7 +1860,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1956,7 +1956,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccessLevel(
@@ -2009,7 +2009,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2101,7 +2101,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccessLevel(
@@ -2154,7 +2154,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2272,7 +2272,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceAccessLevels(
@@ -2325,7 +2325,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2424,7 +2424,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServicePerimeter(
@@ -2477,7 +2477,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2574,7 +2574,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateServicePerimeter(
@@ -2627,7 +2627,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2723,7 +2723,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteServicePerimeter(
@@ -2776,7 +2776,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2894,7 +2894,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceServicePerimeters(
@@ -2947,7 +2947,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3062,7 +3062,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   commitServicePerimeters(
@@ -3115,7 +3115,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3214,7 +3214,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGcpUserAccessBinding(
@@ -3267,7 +3267,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3366,7 +3366,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGcpUserAccessBinding(
@@ -3419,7 +3419,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3511,7 +3511,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGcpUserAccessBinding(
@@ -3564,7 +3564,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3660,7 +3660,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
       protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
     ]
   >;
   listAccessPolicies(
@@ -3706,7 +3706,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
       protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -3858,7 +3858,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
       protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
     ]
   >;
   listAccessLevels(
@@ -3904,7 +3904,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
       protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
     ]
   > | void {
     request = request || {};
@@ -4078,7 +4078,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
       protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
     ]
   >;
   listServicePerimeters(
@@ -4124,7 +4124,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
       protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
     ]
   > | void {
     request = request || {};
@@ -4286,7 +4286,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
       protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
     ]
   >;
   listGcpUserAccessBindings(
@@ -4332,7 +4332,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
       protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
     ]
   > | void {
     request = request || {};

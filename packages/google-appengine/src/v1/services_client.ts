@@ -422,7 +422,7 @@ export class ServicesClient {
     [
       protos.google.appengine.v1.IService,
       protos.google.appengine.v1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -460,7 +460,7 @@ export class ServicesClient {
     [
       protos.google.appengine.v1.IService,
       protos.google.appengine.v1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -528,7 +528,7 @@ export class ServicesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateService(
@@ -581,7 +581,7 @@ export class ServicesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -664,7 +664,7 @@ export class ServicesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteService(
@@ -717,7 +717,7 @@ export class ServicesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -802,7 +802,7 @@ export class ServicesClient {
     [
       protos.google.appengine.v1.IService[],
       protos.google.appengine.v1.IListServicesRequest | null,
-      protos.google.appengine.v1.IListServicesResponse
+      protos.google.appengine.v1.IListServicesResponse,
     ]
   >;
   listServices(
@@ -840,7 +840,7 @@ export class ServicesClient {
     [
       protos.google.appengine.v1.IService[],
       protos.google.appengine.v1.IListServicesRequest | null,
-      protos.google.appengine.v1.IListServicesResponse
+      protos.google.appengine.v1.IListServicesResponse,
     ]
   > | void {
     request = request || {};

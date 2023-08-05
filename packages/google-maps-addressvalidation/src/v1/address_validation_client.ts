@@ -371,7 +371,7 @@ export class AddressValidationClient {
         | protos.google.maps.addressvalidation.v1.IValidateAddressRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateAddress(
@@ -420,7 +420,7 @@ export class AddressValidationClient {
         | protos.google.maps.addressvalidation.v1.IValidateAddressRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -475,7 +475,7 @@ export class AddressValidationClient {
         | protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   provideValidationFeedback(
@@ -524,7 +524,7 @@ export class AddressValidationClient {
         | protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

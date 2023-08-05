@@ -548,7 +548,7 @@ export class ClientConnectorServicesServiceClient {
         | protos.google.cloud.beyondcorp.clientconnectorservices.v1.IGetClientConnectorServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getClientConnectorService(
@@ -597,7 +597,7 @@ export class ClientConnectorServicesServiceClient {
         | protos.google.cloud.beyondcorp.clientconnectorservices.v1.IGetClientConnectorServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -678,7 +678,7 @@ export class ClientConnectorServicesServiceClient {
         protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorServiceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createClientConnectorService(
@@ -731,7 +731,7 @@ export class ClientConnectorServicesServiceClient {
         protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorServiceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -845,7 +845,7 @@ export class ClientConnectorServicesServiceClient {
         protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorServiceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateClientConnectorService(
@@ -898,7 +898,7 @@ export class ClientConnectorServicesServiceClient {
         protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorServiceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1003,7 +1003,7 @@ export class ClientConnectorServicesServiceClient {
         protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorServiceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteClientConnectorService(
@@ -1056,7 +1056,7 @@ export class ClientConnectorServicesServiceClient {
         protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorServiceOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1150,7 +1150,7 @@ export class ClientConnectorServicesServiceClient {
     [
       protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorService[],
       protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesRequest | null,
-      protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesResponse
+      protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesResponse,
     ]
   >;
   listClientConnectorServices(
@@ -1196,7 +1196,7 @@ export class ClientConnectorServicesServiceClient {
     [
       protos.google.cloud.beyondcorp.clientconnectorservices.v1.IClientConnectorService[],
       protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesRequest | null,
-      protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesResponse
+      protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesResponse,
     ]
   > | void {
     request = request || {};

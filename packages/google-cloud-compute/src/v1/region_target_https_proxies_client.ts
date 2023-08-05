@@ -364,7 +364,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -410,7 +410,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -437,7 +437,7 @@ export class RegionTargetHttpsProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -483,7 +483,7 @@ export class RegionTargetHttpsProxiesClient {
         | protos.google.cloud.compute.v1.IGetRegionTargetHttpsProxyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -532,7 +532,7 @@ export class RegionTargetHttpsProxiesClient {
         | protos.google.cloud.compute.v1.IGetRegionTargetHttpsProxyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -589,7 +589,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -635,7 +635,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -661,7 +661,7 @@ export class RegionTargetHttpsProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -713,7 +713,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -759,7 +759,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -786,7 +786,7 @@ export class RegionTargetHttpsProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -838,7 +838,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setSslCertificates(
@@ -884,7 +884,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -911,7 +911,7 @@ export class RegionTargetHttpsProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -963,7 +963,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setUrlMap(
@@ -1009,7 +1009,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1036,7 +1036,7 @@ export class RegionTargetHttpsProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1091,7 +1091,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetHttpsProxy[],
       protos.google.cloud.compute.v1.IListRegionTargetHttpsProxiesRequest | null,
-      protos.google.cloud.compute.v1.ITargetHttpsProxyList
+      protos.google.cloud.compute.v1.ITargetHttpsProxyList,
     ]
   >;
   list(
@@ -1131,7 +1131,7 @@ export class RegionTargetHttpsProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetHttpsProxy[],
       protos.google.cloud.compute.v1.IListRegionTargetHttpsProxiesRequest | null,
-      protos.google.cloud.compute.v1.ITargetHttpsProxyList
+      protos.google.cloud.compute.v1.ITargetHttpsProxyList,
     ]
   > | void {
     request = request || {};

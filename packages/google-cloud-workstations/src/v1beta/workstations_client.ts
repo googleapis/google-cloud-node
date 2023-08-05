@@ -636,7 +636,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGetWorkstationClusterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkstationCluster(
@@ -685,7 +685,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGetWorkstationClusterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -732,7 +732,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGetWorkstationConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkstationConfig(
@@ -781,7 +781,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGetWorkstationConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -828,7 +828,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGetWorkstationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkstation(
@@ -877,7 +877,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGetWorkstationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -935,7 +935,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGenerateAccessTokenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateAccessToken(
@@ -984,7 +984,7 @@ export class WorkstationsClient {
         | protos.google.cloud.workstations.v1beta.IGenerateAccessTokenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1041,7 +1041,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkstationCluster(
@@ -1094,7 +1094,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1190,7 +1190,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWorkstationCluster(
@@ -1243,7 +1243,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1339,7 +1339,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkstationCluster(
@@ -1392,7 +1392,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1486,7 +1486,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkstationConfig(
@@ -1539,7 +1539,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1636,7 +1636,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWorkstationConfig(
@@ -1689,7 +1689,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1786,7 +1786,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkstationConfig(
@@ -1839,7 +1839,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1933,7 +1933,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkstation(
@@ -1986,7 +1986,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2079,7 +2079,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWorkstation(
@@ -2132,7 +2132,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2221,7 +2221,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkstation(
@@ -2274,7 +2274,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2363,7 +2363,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startWorkstation(
@@ -2416,7 +2416,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2505,7 +2505,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopWorkstation(
@@ -2558,7 +2558,7 @@ export class WorkstationsClient {
         protos.google.cloud.workstations.v1beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2643,7 +2643,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstationCluster[],
       protos.google.cloud.workstations.v1beta.IListWorkstationClustersRequest | null,
-      protos.google.cloud.workstations.v1beta.IListWorkstationClustersResponse
+      protos.google.cloud.workstations.v1beta.IListWorkstationClustersResponse,
     ]
   >;
   listWorkstationClusters(
@@ -2689,7 +2689,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstationCluster[],
       protos.google.cloud.workstations.v1beta.IListWorkstationClustersRequest | null,
-      protos.google.cloud.workstations.v1beta.IListWorkstationClustersResponse
+      protos.google.cloud.workstations.v1beta.IListWorkstationClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -2833,7 +2833,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstationConfig[],
       protos.google.cloud.workstations.v1beta.IListWorkstationConfigsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListWorkstationConfigsResponse
+      protos.google.cloud.workstations.v1beta.IListWorkstationConfigsResponse,
     ]
   >;
   listWorkstationConfigs(
@@ -2879,7 +2879,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstationConfig[],
       protos.google.cloud.workstations.v1beta.IListWorkstationConfigsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListWorkstationConfigsResponse
+      protos.google.cloud.workstations.v1beta.IListWorkstationConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -3024,7 +3024,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstationConfig[],
       protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsResponse
+      protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsResponse,
     ]
   >;
   listUsableWorkstationConfigs(
@@ -3070,7 +3070,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstationConfig[],
       protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsResponse
+      protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -3214,7 +3214,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstation[],
       protos.google.cloud.workstations.v1beta.IListWorkstationsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListWorkstationsResponse
+      protos.google.cloud.workstations.v1beta.IListWorkstationsResponse,
     ]
   >;
   listWorkstations(
@@ -3260,7 +3260,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstation[],
       protos.google.cloud.workstations.v1beta.IListWorkstationsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListWorkstationsResponse
+      protos.google.cloud.workstations.v1beta.IListWorkstationsResponse,
     ]
   > | void {
     request = request || {};
@@ -3401,7 +3401,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstation[],
       protos.google.cloud.workstations.v1beta.IListUsableWorkstationsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListUsableWorkstationsResponse
+      protos.google.cloud.workstations.v1beta.IListUsableWorkstationsResponse,
     ]
   >;
   listUsableWorkstations(
@@ -3447,7 +3447,7 @@ export class WorkstationsClient {
     [
       protos.google.cloud.workstations.v1beta.IWorkstation[],
       protos.google.cloud.workstations.v1beta.IListUsableWorkstationsRequest | null,
-      protos.google.cloud.workstations.v1beta.IListUsableWorkstationsResponse
+      protos.google.cloud.workstations.v1beta.IListUsableWorkstationsResponse,
     ]
   > | void {
     request = request || {};

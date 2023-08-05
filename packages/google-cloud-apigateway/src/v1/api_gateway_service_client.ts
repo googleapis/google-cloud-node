@@ -572,7 +572,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IGateway,
       protos.google.cloud.apigateway.v1.IGetGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGateway(
@@ -612,7 +612,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IGateway,
       protos.google.cloud.apigateway.v1.IGetGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -657,7 +657,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApi,
       protos.google.cloud.apigateway.v1.IGetApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApi(
@@ -695,7 +695,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApi,
       protos.google.cloud.apigateway.v1.IGetApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -743,7 +743,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApiConfig,
       protos.google.cloud.apigateway.v1.IGetApiConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApiConfig(
@@ -783,7 +783,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApiConfig,
       protos.google.cloud.apigateway.v1.IGetApiConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -839,7 +839,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGateway(
@@ -892,7 +892,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -981,7 +981,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGateway(
@@ -1034,7 +1034,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1118,7 +1118,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGateway(
@@ -1171,7 +1171,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1260,7 +1260,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApi(
@@ -1313,7 +1313,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1402,7 +1402,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApi(
@@ -1455,7 +1455,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1539,7 +1539,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApi(
@@ -1592,7 +1592,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1681,7 +1681,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApiConfig(
@@ -1734,7 +1734,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1823,7 +1823,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApiConfig(
@@ -1876,7 +1876,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1960,7 +1960,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApiConfig(
@@ -2013,7 +2013,7 @@ export class ApiGatewayServiceClient {
         protos.google.cloud.apigateway.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2103,7 +2103,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IGateway[],
       protos.google.cloud.apigateway.v1.IListGatewaysRequest | null,
-      protos.google.cloud.apigateway.v1.IListGatewaysResponse
+      protos.google.cloud.apigateway.v1.IListGatewaysResponse,
     ]
   >;
   listGateways(
@@ -2149,7 +2149,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IGateway[],
       protos.google.cloud.apigateway.v1.IListGatewaysRequest | null,
-      protos.google.cloud.apigateway.v1.IListGatewaysResponse
+      protos.google.cloud.apigateway.v1.IListGatewaysResponse,
     ]
   > | void {
     request = request || {};
@@ -2304,7 +2304,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApi[],
       protos.google.cloud.apigateway.v1.IListApisRequest | null,
-      protos.google.cloud.apigateway.v1.IListApisResponse
+      protos.google.cloud.apigateway.v1.IListApisResponse,
     ]
   >;
   listApis(
@@ -2344,7 +2344,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApi[],
       protos.google.cloud.apigateway.v1.IListApisRequest | null,
-      protos.google.cloud.apigateway.v1.IListApisResponse
+      protos.google.cloud.apigateway.v1.IListApisResponse,
     ]
   > | void {
     request = request || {};
@@ -2499,7 +2499,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApiConfig[],
       protos.google.cloud.apigateway.v1.IListApiConfigsRequest | null,
-      protos.google.cloud.apigateway.v1.IListApiConfigsResponse
+      protos.google.cloud.apigateway.v1.IListApiConfigsResponse,
     ]
   >;
   listApiConfigs(
@@ -2545,7 +2545,7 @@ export class ApiGatewayServiceClient {
     [
       protos.google.cloud.apigateway.v1.IApiConfig[],
       protos.google.cloud.apigateway.v1.IListApiConfigsRequest | null,
-      protos.google.cloud.apigateway.v1.IListApiConfigsResponse
+      protos.google.cloud.apigateway.v1.IListApiConfigsResponse,
     ]
   > | void {
     request = request || {};

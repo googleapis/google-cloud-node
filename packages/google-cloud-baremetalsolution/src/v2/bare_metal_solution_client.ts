@@ -558,7 +558,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance,
       protos.google.cloud.baremetalsolution.v2.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -604,7 +604,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance,
       protos.google.cloud.baremetalsolution.v2.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -648,7 +648,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume,
       protos.google.cloud.baremetalsolution.v2.IGetVolumeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVolume(
@@ -694,7 +694,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume,
       protos.google.cloud.baremetalsolution.v2.IGetVolumeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -742,7 +742,7 @@ export class BareMetalSolutionClient {
         | protos.google.cloud.baremetalsolution.v2.IListNetworkUsageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listNetworkUsage(
@@ -791,7 +791,7 @@ export class BareMetalSolutionClient {
         | protos.google.cloud.baremetalsolution.v2.IListNetworkUsageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -835,7 +835,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork,
       protos.google.cloud.baremetalsolution.v2.IGetNetworkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNetwork(
@@ -881,7 +881,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork,
       protos.google.cloud.baremetalsolution.v2.IGetNetworkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -925,7 +925,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun,
       protos.google.cloud.baremetalsolution.v2.IGetLunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLun(
@@ -971,7 +971,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun,
       protos.google.cloud.baremetalsolution.v2.IGetLunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1015,7 +1015,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare,
       protos.google.cloud.baremetalsolution.v2.IGetNfsShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNfsShare(
@@ -1061,7 +1061,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare,
       protos.google.cloud.baremetalsolution.v2.IGetNfsShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1120,7 +1120,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -1173,7 +1173,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1257,7 +1257,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetInstance(
@@ -1310,7 +1310,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1393,7 +1393,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startInstance(
@@ -1446,7 +1446,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1529,7 +1529,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopInstance(
@@ -1582,7 +1582,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1667,7 +1667,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detachLun(
@@ -1720,7 +1720,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1814,7 +1814,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateVolume(
@@ -1867,7 +1867,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1952,7 +1952,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resizeVolume(
@@ -2005,7 +2005,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2095,7 +2095,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNetwork(
@@ -2148,7 +2148,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2238,7 +2238,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNfsShare(
@@ -2291,7 +2291,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2379,7 +2379,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance[],
       protos.google.cloud.baremetalsolution.v2.IListInstancesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse
+      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -2425,7 +2425,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance[],
       protos.google.cloud.baremetalsolution.v2.IListInstancesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse
+      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -2574,7 +2574,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume[],
       protos.google.cloud.baremetalsolution.v2.IListVolumesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse
+      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse,
     ]
   >;
   listVolumes(
@@ -2620,7 +2620,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume[],
       protos.google.cloud.baremetalsolution.v2.IListVolumesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse
+      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse,
     ]
   > | void {
     request = request || {};
@@ -2769,7 +2769,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork[],
       protos.google.cloud.baremetalsolution.v2.IListNetworksRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse
+      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse,
     ]
   >;
   listNetworks(
@@ -2815,7 +2815,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork[],
       protos.google.cloud.baremetalsolution.v2.IListNetworksRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse
+      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse,
     ]
   > | void {
     request = request || {};
@@ -2962,7 +2962,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun[],
       protos.google.cloud.baremetalsolution.v2.IListLunsRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListLunsResponse
+      protos.google.cloud.baremetalsolution.v2.IListLunsResponse,
     ]
   >;
   listLuns(
@@ -3008,7 +3008,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun[],
       protos.google.cloud.baremetalsolution.v2.IListLunsRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListLunsResponse
+      protos.google.cloud.baremetalsolution.v2.IListLunsResponse,
     ]
   > | void {
     request = request || {};
@@ -3153,7 +3153,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare[],
       protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse
+      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse,
     ]
   >;
   listNfsShares(
@@ -3199,7 +3199,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare[],
       protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse
+      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse,
     ]
   > | void {
     request = request || {};

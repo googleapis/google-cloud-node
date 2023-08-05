@@ -812,7 +812,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPrivateCloud,
       protos.google.cloud.vmwareengine.v1.IGetPrivateCloudRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPrivateCloud(
@@ -858,7 +858,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPrivateCloud,
       protos.google.cloud.vmwareengine.v1.IGetPrivateCloudRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -906,7 +906,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ICluster,
       protos.google.cloud.vmwareengine.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -946,7 +946,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ICluster,
       protos.google.cloud.vmwareengine.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -994,7 +994,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ISubnet,
       protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSubnet(
@@ -1034,7 +1034,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ISubnet,
       protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1082,7 +1082,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INodeType,
       protos.google.cloud.vmwareengine.v1.IGetNodeTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNodeType(
@@ -1128,7 +1128,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INodeType,
       protos.google.cloud.vmwareengine.v1.IGetNodeTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1180,7 +1180,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IShowNsxCredentialsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   showNsxCredentials(
@@ -1229,7 +1229,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IShowNsxCredentialsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1281,7 +1281,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IShowVcenterCredentialsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   showVcenterCredentials(
@@ -1330,7 +1330,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IShowVcenterCredentialsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1385,7 +1385,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IGetHcxActivationKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHcxActivationKey(
@@ -1434,7 +1434,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IGetHcxActivationKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1482,7 +1482,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INetworkPolicy,
       protos.google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNetworkPolicy(
@@ -1528,7 +1528,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INetworkPolicy,
       protos.google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1582,7 +1582,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVmwareEngineNetwork(
@@ -1631,7 +1631,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1688,7 +1688,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPrivateConnection(
@@ -1737,7 +1737,7 @@ export class VmwareEngineClient {
         | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1817,7 +1817,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPrivateCloud(
@@ -1870,7 +1870,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1969,7 +1969,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePrivateCloud(
@@ -2022,7 +2022,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2141,7 +2141,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePrivateCloud(
@@ -2194,7 +2194,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2287,7 +2287,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeletePrivateCloud(
@@ -2340,7 +2340,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2450,7 +2450,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -2503,7 +2503,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2605,7 +2605,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -2658,7 +2658,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2751,7 +2751,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -2804,7 +2804,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2898,7 +2898,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSubnet(
@@ -2951,7 +2951,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3054,7 +3054,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetNsxCredentials(
@@ -3107,7 +3107,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3210,7 +3210,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetVcenterCredentials(
@@ -3263,7 +3263,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3384,7 +3384,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createHcxActivationKey(
@@ -3437,7 +3437,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3561,7 +3561,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNetworkPolicy(
@@ -3614,7 +3614,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3729,7 +3729,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNetworkPolicy(
@@ -3782,7 +3782,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3886,7 +3886,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNetworkPolicy(
@@ -3939,7 +3939,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4060,7 +4060,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createVmwareEngineNetwork(
@@ -4113,7 +4113,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4224,7 +4224,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateVmwareEngineNetwork(
@@ -4277,7 +4277,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4391,7 +4391,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteVmwareEngineNetwork(
@@ -4444,7 +4444,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4565,7 +4565,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPrivateConnection(
@@ -4618,7 +4618,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4728,7 +4728,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePrivateConnection(
@@ -4781,7 +4781,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4889,7 +4889,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePrivateConnection(
@@ -4942,7 +4942,7 @@ export class VmwareEngineClient {
         protos.google.cloud.vmwareengine.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5075,7 +5075,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPrivateCloud[],
       protos.google.cloud.vmwareengine.v1.IListPrivateCloudsRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListPrivateCloudsResponse
+      protos.google.cloud.vmwareengine.v1.IListPrivateCloudsResponse,
     ]
   >;
   listPrivateClouds(
@@ -5121,7 +5121,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPrivateCloud[],
       protos.google.cloud.vmwareengine.v1.IListPrivateCloudsRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListPrivateCloudsResponse
+      protos.google.cloud.vmwareengine.v1.IListPrivateCloudsResponse,
     ]
   > | void {
     request = request || {};
@@ -5381,7 +5381,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ICluster[],
       protos.google.cloud.vmwareengine.v1.IListClustersRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListClustersResponse
+      protos.google.cloud.vmwareengine.v1.IListClustersResponse,
     ]
   >;
   listClusters(
@@ -5427,7 +5427,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ICluster[],
       protos.google.cloud.vmwareengine.v1.IListClustersRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListClustersResponse
+      protos.google.cloud.vmwareengine.v1.IListClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -5643,7 +5643,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ISubnet[],
       protos.google.cloud.vmwareengine.v1.IListSubnetsRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListSubnetsResponse
+      protos.google.cloud.vmwareengine.v1.IListSubnetsResponse,
     ]
   >;
   listSubnets(
@@ -5689,7 +5689,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.ISubnet[],
       protos.google.cloud.vmwareengine.v1.IListSubnetsRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListSubnetsResponse
+      protos.google.cloud.vmwareengine.v1.IListSubnetsResponse,
     ]
   > | void {
     request = request || {};
@@ -5890,7 +5890,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INodeType[],
       protos.google.cloud.vmwareengine.v1.IListNodeTypesRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListNodeTypesResponse
+      protos.google.cloud.vmwareengine.v1.IListNodeTypesResponse,
     ]
   >;
   listNodeTypes(
@@ -5936,7 +5936,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INodeType[],
       protos.google.cloud.vmwareengine.v1.IListNodeTypesRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListNodeTypesResponse
+      protos.google.cloud.vmwareengine.v1.IListNodeTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -6163,7 +6163,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IHcxActivationKey[],
       protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysResponse
+      protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysResponse,
     ]
   >;
   listHcxActivationKeys(
@@ -6209,7 +6209,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IHcxActivationKey[],
       protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysResponse
+      protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysResponse,
     ]
   > | void {
     request = request || {};
@@ -6418,7 +6418,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INetworkPolicy[],
       protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse
+      protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse,
     ]
   >;
   listNetworkPolicies(
@@ -6464,7 +6464,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.INetworkPolicy[],
       protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse
+      protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -6732,7 +6732,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[],
       protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse
+      protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse,
     ]
   >;
   listVmwareEngineNetworks(
@@ -6778,7 +6778,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[],
       protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse
+      protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse,
     ]
   > | void {
     request = request || {};
@@ -7048,7 +7048,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPrivateConnection[],
       protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse,
     ]
   >;
   listPrivateConnections(
@@ -7094,7 +7094,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPrivateConnection[],
       protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse,
     ]
   > | void {
     request = request || {};
@@ -7331,7 +7331,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
       protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse,
     ]
   >;
   listPrivateConnectionPeeringRoutes(
@@ -7377,7 +7377,7 @@ export class VmwareEngineClient {
     [
       protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
       protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest | null,
-      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+      protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse,
     ]
   > | void {
     request = request || {};

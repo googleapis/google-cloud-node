@@ -423,7 +423,7 @@ export class InstancesClient {
     [
       protos.google.appengine.v1.IInstance,
       protos.google.appengine.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -461,7 +461,7 @@ export class InstancesClient {
     [
       protos.google.appengine.v1.IInstance,
       protos.google.appengine.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -523,7 +523,7 @@ export class InstancesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -576,7 +576,7 @@ export class InstancesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -675,7 +675,7 @@ export class InstancesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   debugInstance(
@@ -728,7 +728,7 @@ export class InstancesClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -817,7 +817,7 @@ export class InstancesClient {
     [
       protos.google.appengine.v1.IInstance[],
       protos.google.appengine.v1.IListInstancesRequest | null,
-      protos.google.appengine.v1.IListInstancesResponse
+      protos.google.appengine.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -855,7 +855,7 @@ export class InstancesClient {
     [
       protos.google.appengine.v1.IInstance[],
       protos.google.appengine.v1.IListInstancesRequest | null,
-      protos.google.appengine.v1.IListInstancesResponse
+      protos.google.appengine.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};

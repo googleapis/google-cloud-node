@@ -842,7 +842,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ISource,
       protos.google.cloud.vmmigration.v1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSource(
@@ -882,7 +882,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ISource,
       protos.google.cloud.vmmigration.v1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -933,7 +933,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IFetchInventoryResponse,
       protos.google.cloud.vmmigration.v1.IFetchInventoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchInventory(
@@ -979,7 +979,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IFetchInventoryResponse,
       protos.google.cloud.vmmigration.v1.IFetchInventoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1029,7 +1029,7 @@ export class VmMigrationClient {
         | protos.google.cloud.vmmigration.v1.IGetUtilizationReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUtilizationReport(
@@ -1078,7 +1078,7 @@ export class VmMigrationClient {
         | protos.google.cloud.vmmigration.v1.IGetUtilizationReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1125,7 +1125,7 @@ export class VmMigrationClient {
         | protos.google.cloud.vmmigration.v1.IGetDatacenterConnectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDatacenterConnector(
@@ -1174,7 +1174,7 @@ export class VmMigrationClient {
         | protos.google.cloud.vmmigration.v1.IGetDatacenterConnectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1224,7 +1224,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IMigratingVm,
       protos.google.cloud.vmmigration.v1.IGetMigratingVmRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMigratingVm(
@@ -1270,7 +1270,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IMigratingVm,
       protos.google.cloud.vmmigration.v1.IGetMigratingVmRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1314,7 +1314,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICloneJob,
       protos.google.cloud.vmmigration.v1.IGetCloneJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCloneJob(
@@ -1354,7 +1354,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICloneJob,
       protos.google.cloud.vmmigration.v1.IGetCloneJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1398,7 +1398,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICutoverJob,
       protos.google.cloud.vmmigration.v1.IGetCutoverJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCutoverJob(
@@ -1444,7 +1444,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICutoverJob,
       protos.google.cloud.vmmigration.v1.IGetCutoverJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1488,7 +1488,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IGroup,
       protos.google.cloud.vmmigration.v1.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGroup(
@@ -1528,7 +1528,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IGroup,
       protos.google.cloud.vmmigration.v1.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1575,7 +1575,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ITargetProject,
       protos.google.cloud.vmmigration.v1.IGetTargetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTargetProject(
@@ -1621,7 +1621,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ITargetProject,
       protos.google.cloud.vmmigration.v1.IGetTargetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1668,7 +1668,7 @@ export class VmMigrationClient {
         | protos.google.cloud.vmmigration.v1.IGetReplicationCycleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReplicationCycle(
@@ -1717,7 +1717,7 @@ export class VmMigrationClient {
         | protos.google.cloud.vmmigration.v1.IGetReplicationCycleRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1785,7 +1785,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSource(
@@ -1838,7 +1838,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1941,7 +1941,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSource(
@@ -1994,7 +1994,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2091,7 +2091,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSource(
@@ -2144,7 +2144,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2250,7 +2250,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createUtilizationReport(
@@ -2303,7 +2303,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2404,7 +2404,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteUtilizationReport(
@@ -2457,7 +2457,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2565,7 +2565,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDatacenterConnector(
@@ -2618,7 +2618,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2719,7 +2719,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDatacenterConnector(
@@ -2772,7 +2772,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2874,7 +2874,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeAppliance(
@@ -2927,7 +2927,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3028,7 +3028,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMigratingVm(
@@ -3081,7 +3081,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3184,7 +3184,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMigratingVm(
@@ -3237,7 +3237,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3320,7 +3320,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMigratingVm(
@@ -3373,7 +3373,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3457,7 +3457,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startMigration(
@@ -3510,7 +3510,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3596,7 +3596,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeMigration(
@@ -3649,7 +3649,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3734,7 +3734,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseMigration(
@@ -3787,7 +3787,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3871,7 +3871,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   finalizeMigration(
@@ -3924,7 +3924,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4025,7 +4025,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCloneJob(
@@ -4078,7 +4078,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4161,7 +4161,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelCloneJob(
@@ -4214,7 +4214,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4317,7 +4317,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCutoverJob(
@@ -4370,7 +4370,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4453,7 +4453,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelCutoverJob(
@@ -4506,7 +4506,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4607,7 +4607,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGroup(
@@ -4660,7 +4660,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4763,7 +4763,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGroup(
@@ -4816,7 +4816,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4913,7 +4913,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGroup(
@@ -4966,7 +4966,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5051,7 +5051,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addGroupMigration(
@@ -5104,7 +5104,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5189,7 +5189,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeGroupMigration(
@@ -5242,7 +5242,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5346,7 +5346,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTargetProject(
@@ -5399,7 +5399,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5505,7 +5505,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTargetProject(
@@ -5558,7 +5558,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5658,7 +5658,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTargetProject(
@@ -5711,7 +5711,7 @@ export class VmMigrationClient {
         protos.google.cloud.vmmigration.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5807,7 +5807,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ISource[],
       protos.google.cloud.vmmigration.v1.IListSourcesRequest | null,
-      protos.google.cloud.vmmigration.v1.IListSourcesResponse
+      protos.google.cloud.vmmigration.v1.IListSourcesResponse,
     ]
   >;
   listSources(
@@ -5853,7 +5853,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ISource[],
       protos.google.cloud.vmmigration.v1.IListSourcesRequest | null,
-      protos.google.cloud.vmmigration.v1.IListSourcesResponse
+      protos.google.cloud.vmmigration.v1.IListSourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -6029,7 +6029,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IUtilizationReport[],
       protos.google.cloud.vmmigration.v1.IListUtilizationReportsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListUtilizationReportsResponse
+      protos.google.cloud.vmmigration.v1.IListUtilizationReportsResponse,
     ]
   >;
   listUtilizationReports(
@@ -6075,7 +6075,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IUtilizationReport[],
       protos.google.cloud.vmmigration.v1.IListUtilizationReportsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListUtilizationReportsResponse
+      protos.google.cloud.vmmigration.v1.IListUtilizationReportsResponse,
     ]
   > | void {
     request = request || {};
@@ -6259,7 +6259,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IDatacenterConnector[],
       protos.google.cloud.vmmigration.v1.IListDatacenterConnectorsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListDatacenterConnectorsResponse
+      protos.google.cloud.vmmigration.v1.IListDatacenterConnectorsResponse,
     ]
   >;
   listDatacenterConnectors(
@@ -6305,7 +6305,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IDatacenterConnector[],
       protos.google.cloud.vmmigration.v1.IListDatacenterConnectorsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListDatacenterConnectorsResponse
+      protos.google.cloud.vmmigration.v1.IListDatacenterConnectorsResponse,
     ]
   > | void {
     request = request || {};
@@ -6486,7 +6486,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IMigratingVm[],
       protos.google.cloud.vmmigration.v1.IListMigratingVmsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListMigratingVmsResponse
+      protos.google.cloud.vmmigration.v1.IListMigratingVmsResponse,
     ]
   >;
   listMigratingVms(
@@ -6532,7 +6532,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IMigratingVm[],
       protos.google.cloud.vmmigration.v1.IListMigratingVmsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListMigratingVmsResponse
+      protos.google.cloud.vmmigration.v1.IListMigratingVmsResponse,
     ]
   > | void {
     request = request || {};
@@ -6709,7 +6709,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICloneJob[],
       protos.google.cloud.vmmigration.v1.IListCloneJobsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListCloneJobsResponse
+      protos.google.cloud.vmmigration.v1.IListCloneJobsResponse,
     ]
   >;
   listCloneJobs(
@@ -6755,7 +6755,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICloneJob[],
       protos.google.cloud.vmmigration.v1.IListCloneJobsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListCloneJobsResponse
+      protos.google.cloud.vmmigration.v1.IListCloneJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -6928,7 +6928,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICutoverJob[],
       protos.google.cloud.vmmigration.v1.IListCutoverJobsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListCutoverJobsResponse
+      protos.google.cloud.vmmigration.v1.IListCutoverJobsResponse,
     ]
   >;
   listCutoverJobs(
@@ -6974,7 +6974,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ICutoverJob[],
       protos.google.cloud.vmmigration.v1.IListCutoverJobsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListCutoverJobsResponse
+      protos.google.cloud.vmmigration.v1.IListCutoverJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -7147,7 +7147,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IGroup[],
       protos.google.cloud.vmmigration.v1.IListGroupsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListGroupsResponse
+      protos.google.cloud.vmmigration.v1.IListGroupsResponse,
     ]
   >;
   listGroups(
@@ -7187,7 +7187,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IGroup[],
       protos.google.cloud.vmmigration.v1.IListGroupsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListGroupsResponse
+      protos.google.cloud.vmmigration.v1.IListGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -7363,7 +7363,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ITargetProject[],
       protos.google.cloud.vmmigration.v1.IListTargetProjectsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListTargetProjectsResponse
+      protos.google.cloud.vmmigration.v1.IListTargetProjectsResponse,
     ]
   >;
   listTargetProjects(
@@ -7409,7 +7409,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.ITargetProject[],
       protos.google.cloud.vmmigration.v1.IListTargetProjectsRequest | null,
-      protos.google.cloud.vmmigration.v1.IListTargetProjectsResponse
+      protos.google.cloud.vmmigration.v1.IListTargetProjectsResponse,
     ]
   > | void {
     request = request || {};
@@ -7582,7 +7582,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IReplicationCycle[],
       protos.google.cloud.vmmigration.v1.IListReplicationCyclesRequest | null,
-      protos.google.cloud.vmmigration.v1.IListReplicationCyclesResponse
+      protos.google.cloud.vmmigration.v1.IListReplicationCyclesResponse,
     ]
   >;
   listReplicationCycles(
@@ -7628,7 +7628,7 @@ export class VmMigrationClient {
     [
       protos.google.cloud.vmmigration.v1.IReplicationCycle[],
       protos.google.cloud.vmmigration.v1.IListReplicationCyclesRequest | null,
-      protos.google.cloud.vmmigration.v1.IListReplicationCyclesResponse
+      protos.google.cloud.vmmigration.v1.IListReplicationCyclesResponse,
     ]
   > | void {
     request = request || {};

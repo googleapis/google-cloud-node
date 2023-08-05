@@ -551,7 +551,7 @@ export class AppConnectorsServiceClient {
         | protos.google.cloud.beyondcorp.appconnectors.v1.IGetAppConnectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAppConnector(
@@ -600,7 +600,7 @@ export class AppConnectorsServiceClient {
         | protos.google.cloud.beyondcorp.appconnectors.v1.IGetAppConnectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -676,7 +676,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAppConnector(
@@ -729,7 +729,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -836,7 +836,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAppConnector(
@@ -889,7 +889,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -990,7 +990,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAppConnector(
@@ -1043,7 +1043,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1146,7 +1146,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportStatus(
@@ -1199,7 +1199,7 @@ export class AppConnectorsServiceClient {
         protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnectorOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1298,7 +1298,7 @@ export class AppConnectorsServiceClient {
     [
       protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnector[],
       protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsRequest | null,
-      protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsResponse
+      protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsResponse,
     ]
   >;
   listAppConnectors(
@@ -1344,7 +1344,7 @@ export class AppConnectorsServiceClient {
     [
       protos.google.cloud.beyondcorp.appconnectors.v1.IAppConnector[],
       protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsRequest | null,
-      protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsResponse
+      protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsResponse,
     ]
   > | void {
     request = request || {};

@@ -431,7 +431,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWorkload(
@@ -480,7 +480,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -538,7 +538,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restrictAllowedResources(
@@ -587,7 +587,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -645,7 +645,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkload(
@@ -694,7 +694,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -742,7 +742,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IWorkload,
       protos.google.cloud.assuredworkloads.v1.IGetWorkloadRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkload(
@@ -788,7 +788,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IWorkload,
       protos.google.cloud.assuredworkloads.v1.IGetWorkloadRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -834,7 +834,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IViolation,
       protos.google.cloud.assuredworkloads.v1.IGetViolationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getViolation(
@@ -880,7 +880,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IViolation,
       protos.google.cloud.assuredworkloads.v1.IGetViolationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -938,7 +938,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   acknowledgeViolation(
@@ -987,7 +987,7 @@ export class AssuredWorkloadsServiceClient {
         | protos.google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1041,7 +1041,7 @@ export class AssuredWorkloadsServiceClient {
         protos.google.cloud.assuredworkloads.v1.ICreateWorkloadOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkload(
@@ -1094,7 +1094,7 @@ export class AssuredWorkloadsServiceClient {
         protos.google.cloud.assuredworkloads.v1.ICreateWorkloadOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1185,7 +1185,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IWorkload[],
       protos.google.cloud.assuredworkloads.v1.IListWorkloadsRequest | null,
-      protos.google.cloud.assuredworkloads.v1.IListWorkloadsResponse
+      protos.google.cloud.assuredworkloads.v1.IListWorkloadsResponse,
     ]
   >;
   listWorkloads(
@@ -1231,7 +1231,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IWorkload[],
       protos.google.cloud.assuredworkloads.v1.IListWorkloadsRequest | null,
-      protos.google.cloud.assuredworkloads.v1.IListWorkloadsResponse
+      protos.google.cloud.assuredworkloads.v1.IListWorkloadsResponse,
     ]
   > | void {
     request = request || {};
@@ -1394,7 +1394,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IViolation[],
       protos.google.cloud.assuredworkloads.v1.IListViolationsRequest | null,
-      protos.google.cloud.assuredworkloads.v1.IListViolationsResponse
+      protos.google.cloud.assuredworkloads.v1.IListViolationsResponse,
     ]
   >;
   listViolations(
@@ -1440,7 +1440,7 @@ export class AssuredWorkloadsServiceClient {
     [
       protos.google.cloud.assuredworkloads.v1.IViolation[],
       protos.google.cloud.assuredworkloads.v1.IListViolationsRequest | null,
-      protos.google.cloud.assuredworkloads.v1.IListViolationsResponse
+      protos.google.cloud.assuredworkloads.v1.IListViolationsResponse,
     ]
   > | void {
     request = request || {};

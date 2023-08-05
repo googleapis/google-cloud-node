@@ -352,7 +352,7 @@ export class NodeTypesClient {
     [
       protos.google.cloud.compute.v1.INodeType,
       protos.google.cloud.compute.v1.IGetNodeTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -390,7 +390,7 @@ export class NodeTypesClient {
     [
       protos.google.cloud.compute.v1.INodeType,
       protos.google.cloud.compute.v1.IGetNodeTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -509,7 +509,7 @@ export class NodeTypesClient {
     [
       protos.google.cloud.compute.v1.INodeType[],
       protos.google.cloud.compute.v1.IListNodeTypesRequest | null,
-      protos.google.cloud.compute.v1.INodeTypeList
+      protos.google.cloud.compute.v1.INodeTypeList,
     ]
   >;
   list(
@@ -547,7 +547,7 @@ export class NodeTypesClient {
     [
       protos.google.cloud.compute.v1.INodeType[],
       protos.google.cloud.compute.v1.IListNodeTypesRequest | null,
-      protos.google.cloud.compute.v1.INodeTypeList
+      protos.google.cloud.compute.v1.INodeTypeList,
     ]
   > | void {
     request = request || {};

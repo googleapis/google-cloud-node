@@ -527,7 +527,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.retail.v2.IPredictResponse,
       protos.google.cloud.retail.v2.IPredictRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   predict(
@@ -565,7 +565,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.retail.v2.IPredictResponse,
       protos.google.cloud.retail.v2.IPredictRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

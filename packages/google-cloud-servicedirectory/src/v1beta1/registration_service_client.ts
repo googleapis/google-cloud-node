@@ -423,7 +423,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNamespace(
@@ -472,7 +472,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.ICreateNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -519,7 +519,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNamespace(
@@ -568,7 +568,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IGetNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -617,7 +617,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNamespace(
@@ -666,7 +666,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IUpdateNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -714,7 +714,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNamespace(
@@ -763,7 +763,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IDeleteNamespaceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -820,7 +820,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createService(
@@ -869,7 +869,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.ICreateServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -916,7 +916,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -965,7 +965,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IGetServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1014,7 +1014,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateService(
@@ -1063,7 +1063,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IUpdateServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1111,7 +1111,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteService(
@@ -1160,7 +1160,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IDeleteServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1217,7 +1217,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEndpoint(
@@ -1266,7 +1266,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.ICreateEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1313,7 +1313,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEndpoint(
@@ -1362,7 +1362,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IGetEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1411,7 +1411,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEndpoint(
@@ -1460,7 +1460,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IUpdateEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1507,7 +1507,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEndpoint(
@@ -1556,7 +1556,7 @@ export class RegistrationServiceClient {
         | protos.google.cloud.servicedirectory.v1beta1.IDeleteEndpointRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1604,7 +1604,7 @@ export class RegistrationServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1642,7 +1642,7 @@ export class RegistrationServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1698,7 +1698,7 @@ export class RegistrationServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1736,7 +1736,7 @@ export class RegistrationServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1787,7 +1787,7 @@ export class RegistrationServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1825,7 +1825,7 @@ export class RegistrationServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1921,7 +1921,7 @@ export class RegistrationServiceClient {
     [
       protos.google.cloud.servicedirectory.v1beta1.INamespace[],
       protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse,
     ]
   >;
   listNamespaces(
@@ -1967,7 +1967,7 @@ export class RegistrationServiceClient {
     [
       protos.google.cloud.servicedirectory.v1beta1.INamespace[],
       protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest | null,
-      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse
+      protos.google.cloud.servicedirectory.v1beta1.IListNamespacesResponse,
     ]
   > | void {
     request = request || {};
@@ -2242,7 +2242,7 @@ export class RegistrationServiceClient {
     [
       protos.google.cloud.servicedirectory.v1beta1.IService[],
       protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-      protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse,
     ]
   >;
   listServices(
@@ -2288,7 +2288,7 @@ export class RegistrationServiceClient {
     [
       protos.google.cloud.servicedirectory.v1beta1.IService[],
       protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest | null,
-      protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse
+      protos.google.cloud.servicedirectory.v1beta1.IListServicesResponse,
     ]
   > | void {
     request = request || {};
@@ -2571,7 +2571,7 @@ export class RegistrationServiceClient {
     [
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint[],
       protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse,
     ]
   >;
   listEndpoints(
@@ -2617,7 +2617,7 @@ export class RegistrationServiceClient {
     [
       protos.google.cloud.servicedirectory.v1beta1.IEndpoint[],
       protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest | null,
-      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse
+      protos.google.cloud.servicedirectory.v1beta1.IListEndpointsResponse,
     ]
   > | void {
     request = request || {};

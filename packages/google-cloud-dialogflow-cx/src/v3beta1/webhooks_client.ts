@@ -439,7 +439,7 @@ export class WebhooksClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetWebhookRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWebhook(
@@ -485,7 +485,7 @@ export class WebhooksClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetWebhookRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -535,7 +535,7 @@ export class WebhooksClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICreateWebhookRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWebhook(
@@ -584,7 +584,7 @@ export class WebhooksClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICreateWebhookRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -634,7 +634,7 @@ export class WebhooksClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateWebhookRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateWebhook(
@@ -683,7 +683,7 @@ export class WebhooksClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateWebhookRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -743,7 +743,7 @@ export class WebhooksClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteWebhookRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWebhook(
@@ -792,7 +792,7 @@ export class WebhooksClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteWebhookRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -846,7 +846,7 @@ export class WebhooksClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IWebhook[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksResponse,
     ]
   >;
   listWebhooks(
@@ -892,7 +892,7 @@ export class WebhooksClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IWebhook[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksResponse,
     ]
   > | void {
     request = request || {};

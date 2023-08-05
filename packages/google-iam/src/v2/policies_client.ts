@@ -417,7 +417,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy,
       protos.google.iam.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPolicy(
@@ -455,7 +455,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy,
       protos.google.iam.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -522,7 +522,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPolicy(
@@ -575,7 +575,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -672,7 +672,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePolicy(
@@ -725,7 +725,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -824,7 +824,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePolicy(
@@ -877,7 +877,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -979,7 +979,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy[],
       protos.google.iam.v2.IListPoliciesRequest | null,
-      protos.google.iam.v2.IListPoliciesResponse
+      protos.google.iam.v2.IListPoliciesResponse,
     ]
   >;
   listPolicies(
@@ -1017,7 +1017,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy[],
       protos.google.iam.v2.IListPoliciesRequest | null,
-      protos.google.iam.v2.IListPoliciesResponse
+      protos.google.iam.v2.IListPoliciesResponse,
     ]
   > | void {
     request = request || {};

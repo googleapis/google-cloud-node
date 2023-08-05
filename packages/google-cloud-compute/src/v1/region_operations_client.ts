@@ -346,7 +346,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IDeleteRegionOperationResponse,
       protos.google.cloud.compute.v1.IDeleteRegionOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -392,7 +392,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IDeleteRegionOperationResponse,
       protos.google.cloud.compute.v1.IDeleteRegionOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +442,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IGetRegionOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -488,7 +488,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IGetRegionOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -538,7 +538,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IWaitRegionOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   wait(
@@ -584,7 +584,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation,
       protos.google.cloud.compute.v1.IWaitRegionOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -646,7 +646,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListRegionOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   >;
   list(
@@ -684,7 +684,7 @@ export class RegionOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListRegionOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   > | void {
     request = request || {};

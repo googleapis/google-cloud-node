@@ -378,7 +378,7 @@ export class ResourceSettingsServiceClient {
     [
       protos.google.cloud.resourcesettings.v1.ISetting,
       protos.google.cloud.resourcesettings.v1.IGetSettingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSetting(
@@ -424,7 +424,7 @@ export class ResourceSettingsServiceClient {
     [
       protos.google.cloud.resourcesettings.v1.ISetting,
       protos.google.cloud.resourcesettings.v1.IGetSettingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -483,7 +483,7 @@ export class ResourceSettingsServiceClient {
     [
       protos.google.cloud.resourcesettings.v1.ISetting,
       protos.google.cloud.resourcesettings.v1.IUpdateSettingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSetting(
@@ -529,7 +529,7 @@ export class ResourceSettingsServiceClient {
     [
       protos.google.cloud.resourcesettings.v1.ISetting,
       protos.google.cloud.resourcesettings.v1.IUpdateSettingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -589,7 +589,7 @@ export class ResourceSettingsServiceClient {
     [
       protos.google.cloud.resourcesettings.v1.ISetting[],
       protos.google.cloud.resourcesettings.v1.IListSettingsRequest | null,
-      protos.google.cloud.resourcesettings.v1.IListSettingsResponse
+      protos.google.cloud.resourcesettings.v1.IListSettingsResponse,
     ]
   >;
   listSettings(
@@ -635,7 +635,7 @@ export class ResourceSettingsServiceClient {
     [
       protos.google.cloud.resourcesettings.v1.ISetting[],
       protos.google.cloud.resourcesettings.v1.IListSettingsRequest | null,
-      protos.google.cloud.resourcesettings.v1.IListSettingsResponse
+      protos.google.cloud.resourcesettings.v1.IListSettingsResponse,
     ]
   > | void {
     request = request || {};

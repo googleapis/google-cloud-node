@@ -391,7 +391,7 @@ export class CompletionClient {
     [
       protos.google.cloud.talent.v4beta1.ICompleteQueryResponse,
       protos.google.cloud.talent.v4beta1.ICompleteQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeQuery(
@@ -437,7 +437,7 @@ export class CompletionClient {
     [
       protos.google.cloud.talent.v4beta1.ICompleteQueryResponse,
       protos.google.cloud.talent.v4beta1.ICompleteQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

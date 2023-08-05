@@ -379,7 +379,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IGetOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOccurrence(
@@ -417,7 +417,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IGetOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -464,7 +464,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteOccurrence(
@@ -502,7 +502,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -549,7 +549,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.ICreateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createOccurrence(
@@ -587,7 +587,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.ICreateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -634,7 +634,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateOccurrencesResponse,
       protos.grafeas.v1beta1.IBatchCreateOccurrencesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateOccurrences(
@@ -674,7 +674,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateOccurrencesResponse,
       protos.grafeas.v1beta1.IBatchCreateOccurrencesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -727,7 +727,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IUpdateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateOccurrence(
@@ -765,7 +765,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IUpdateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -811,7 +811,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetOccurrenceNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOccurrenceNote(
@@ -849,7 +849,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetOccurrenceNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -894,7 +894,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNote(
@@ -932,7 +932,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -977,7 +977,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNote(
@@ -1015,7 +1015,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1064,7 +1064,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.ICreateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNote(
@@ -1102,7 +1102,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.ICreateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1149,7 +1149,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateNotesResponse,
       protos.grafeas.v1beta1.IBatchCreateNotesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateNotes(
@@ -1187,7 +1187,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateNotesResponse,
       protos.grafeas.v1beta1.IBatchCreateNotesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1236,7 +1236,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IUpdateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNote(
@@ -1274,7 +1274,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IUpdateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1324,7 +1324,7 @@ export class GrafeasV1Beta1Client {
         | protos.grafeas.v1beta1.IGetVulnerabilityOccurrencesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVulnerabilityOccurrencesSummary(
@@ -1373,7 +1373,7 @@ export class GrafeasV1Beta1Client {
         | protos.grafeas.v1beta1.IGetVulnerabilityOccurrencesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1432,7 +1432,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListOccurrencesResponse
+      protos.grafeas.v1beta1.IListOccurrencesResponse,
     ]
   >;
   listOccurrences(
@@ -1470,7 +1470,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListOccurrencesResponse
+      protos.grafeas.v1beta1.IListOccurrencesResponse,
     ]
   > | void {
     request = request || {};
@@ -1619,7 +1619,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote[],
       protos.grafeas.v1beta1.IListNotesRequest | null,
-      protos.grafeas.v1beta1.IListNotesResponse
+      protos.grafeas.v1beta1.IListNotesResponse,
     ]
   >;
   listNotes(
@@ -1657,7 +1657,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote[],
       protos.grafeas.v1beta1.IListNotesRequest | null,
-      protos.grafeas.v1beta1.IListNotesResponse
+      protos.grafeas.v1beta1.IListNotesResponse,
     ]
   > | void {
     request = request || {};
@@ -1808,7 +1808,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListNoteOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListNoteOccurrencesResponse
+      protos.grafeas.v1beta1.IListNoteOccurrencesResponse,
     ]
   >;
   listNoteOccurrences(
@@ -1848,7 +1848,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListNoteOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListNoteOccurrencesResponse
+      protos.grafeas.v1beta1.IListNoteOccurrencesResponse,
     ]
   > | void {
     request = request || {};

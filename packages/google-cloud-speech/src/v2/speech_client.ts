@@ -631,7 +631,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer,
       protos.google.cloud.speech.v2.IGetRecognizerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRecognizer(
@@ -671,7 +671,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer,
       protos.google.cloud.speech.v2.IGetRecognizerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -754,7 +754,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizeResponse,
       protos.google.cloud.speech.v2.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   recognize(
@@ -792,7 +792,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizeResponse,
       protos.google.cloud.speech.v2.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -838,7 +838,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConfig(
@@ -876,7 +876,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -925,7 +925,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IUpdateConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConfig(
@@ -963,7 +963,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IUpdateConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1009,7 +1009,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass,
       protos.google.cloud.speech.v2.IGetCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomClass(
@@ -1049,7 +1049,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass,
       protos.google.cloud.speech.v2.IGetCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1095,7 +1095,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet,
       protos.google.cloud.speech.v2.IGetPhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPhraseSet(
@@ -1133,7 +1133,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet,
       protos.google.cloud.speech.v2.IGetPhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1215,7 +1215,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRecognizer(
@@ -1268,7 +1268,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1360,7 +1360,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRecognizer(
@@ -1413,7 +1413,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1507,7 +1507,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRecognizer(
@@ -1560,7 +1560,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1651,7 +1651,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteRecognizer(
@@ -1704,7 +1704,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1820,7 +1820,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRecognize(
@@ -1873,7 +1873,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1968,7 +1968,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomClass(
@@ -2021,7 +2021,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2114,7 +2114,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomClass(
@@ -2167,7 +2167,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2262,7 +2262,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCustomClass(
@@ -2315,7 +2315,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2407,7 +2407,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteCustomClass(
@@ -2460,7 +2460,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2555,7 +2555,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPhraseSet(
@@ -2608,7 +2608,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2700,7 +2700,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePhraseSet(
@@ -2753,7 +2753,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2847,7 +2847,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePhraseSet(
@@ -2900,7 +2900,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2991,7 +2991,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeletePhraseSet(
@@ -3044,7 +3044,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3140,7 +3140,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer[],
       protos.google.cloud.speech.v2.IListRecognizersRequest | null,
-      protos.google.cloud.speech.v2.IListRecognizersResponse
+      protos.google.cloud.speech.v2.IListRecognizersResponse,
     ]
   >;
   listRecognizers(
@@ -3180,7 +3180,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer[],
       protos.google.cloud.speech.v2.IListRecognizersRequest | null,
-      protos.google.cloud.speech.v2.IListRecognizersResponse
+      protos.google.cloud.speech.v2.IListRecognizersResponse,
     ]
   > | void {
     request = request || {};
@@ -3354,7 +3354,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass[],
       protos.google.cloud.speech.v2.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v2.IListCustomClassesResponse
+      protos.google.cloud.speech.v2.IListCustomClassesResponse,
     ]
   >;
   listCustomClasses(
@@ -3400,7 +3400,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass[],
       protos.google.cloud.speech.v2.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v2.IListCustomClassesResponse
+      protos.google.cloud.speech.v2.IListCustomClassesResponse,
     ]
   > | void {
     request = request || {};
@@ -3575,7 +3575,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet[],
       protos.google.cloud.speech.v2.IListPhraseSetsRequest | null,
-      protos.google.cloud.speech.v2.IListPhraseSetsResponse
+      protos.google.cloud.speech.v2.IListPhraseSetsResponse,
     ]
   >;
   listPhraseSets(
@@ -3615,7 +3615,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet[],
       protos.google.cloud.speech.v2.IListPhraseSetsRequest | null,
-      protos.google.cloud.speech.v2.IListPhraseSetsResponse
+      protos.google.cloud.speech.v2.IListPhraseSetsResponse,
     ]
   > | void {
     request = request || {};

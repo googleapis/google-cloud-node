@@ -514,7 +514,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAgent(
@@ -560,7 +560,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -611,7 +611,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent,
       protos.google.cloud.dialogflow.cx.v3beta1.ICreateAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAgent(
@@ -657,7 +657,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent,
       protos.google.cloud.dialogflow.cx.v3beta1.ICreateAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -708,7 +708,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent,
       protos.google.cloud.dialogflow.cx.v3beta1.IUpdateAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAgent(
@@ -754,7 +754,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent,
       protos.google.cloud.dialogflow.cx.v3beta1.IUpdateAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -799,7 +799,7 @@ export class AgentsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3beta1.IDeleteAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAgent(
@@ -845,7 +845,7 @@ export class AgentsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3beta1.IDeleteAgentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -897,7 +897,7 @@ export class AgentsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IValidateAgentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateAgent(
@@ -946,7 +946,7 @@ export class AgentsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IValidateAgentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -998,7 +998,7 @@ export class AgentsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentValidationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAgentValidationResult(
@@ -1047,7 +1047,7 @@ export class AgentsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentValidationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1133,7 +1133,7 @@ export class AgentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportAgent(
@@ -1186,7 +1186,7 @@ export class AgentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1302,7 +1302,7 @@ export class AgentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreAgent(
@@ -1355,7 +1355,7 @@ export class AgentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1439,7 +1439,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsResponse,
     ]
   >;
   listAgents(
@@ -1485,7 +1485,7 @@ export class AgentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IAgent[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsResponse,
     ]
   > | void {
     request = request || {};

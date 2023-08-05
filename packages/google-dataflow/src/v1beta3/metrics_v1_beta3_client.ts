@@ -369,7 +369,7 @@ export class MetricsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJobMetrics,
       protos.google.dataflow.v1beta3.IGetJobMetricsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJobMetrics(
@@ -409,7 +409,7 @@ export class MetricsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJobMetrics,
       protos.google.dataflow.v1beta3.IGetJobMetricsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -475,7 +475,7 @@ export class MetricsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IStageSummary[],
       protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails
+      protos.google.dataflow.v1beta3.IJobExecutionDetails,
     ]
   >;
   getJobExecutionDetails(
@@ -515,7 +515,7 @@ export class MetricsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IStageSummary[],
       protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails
+      protos.google.dataflow.v1beta3.IJobExecutionDetails,
     ]
   > | void {
     request = request || {};
@@ -704,7 +704,7 @@ export class MetricsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IWorkerDetails[],
       protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails
+      protos.google.dataflow.v1beta3.IStageExecutionDetails,
     ]
   >;
   getStageExecutionDetails(
@@ -744,7 +744,7 @@ export class MetricsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IWorkerDetails[],
       protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails
+      protos.google.dataflow.v1beta3.IStageExecutionDetails,
     ]
   > | void {
     request = request || {};

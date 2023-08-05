@@ -367,7 +367,7 @@ export class PublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -413,7 +413,7 @@ export class PublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -440,7 +440,7 @@ export class PublicDelegatedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -486,7 +486,7 @@ export class PublicDelegatedPrefixesClient {
         | protos.google.cloud.compute.v1.IGetPublicDelegatedPrefixeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -535,7 +535,7 @@ export class PublicDelegatedPrefixesClient {
         | protos.google.cloud.compute.v1.IGetPublicDelegatedPrefixeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -592,7 +592,7 @@ export class PublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -638,7 +638,7 @@ export class PublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -664,7 +664,7 @@ export class PublicDelegatedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -716,7 +716,7 @@ export class PublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -762,7 +762,7 @@ export class PublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -789,7 +789,7 @@ export class PublicDelegatedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -862,7 +862,7 @@ export class PublicDelegatedPrefixesClient {
     ) as AsyncIterable<
       [
         string,
-        protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList
+        protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList,
       ]
     >;
   }
@@ -904,7 +904,7 @@ export class PublicDelegatedPrefixesClient {
     [
       protos.google.cloud.compute.v1.IPublicDelegatedPrefix[],
       protos.google.cloud.compute.v1.IListPublicDelegatedPrefixesRequest | null,
-      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList
+      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList,
     ]
   >;
   list(
@@ -950,7 +950,7 @@ export class PublicDelegatedPrefixesClient {
     [
       protos.google.cloud.compute.v1.IPublicDelegatedPrefix[],
       protos.google.cloud.compute.v1.IListPublicDelegatedPrefixesRequest | null,
-      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList
+      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList,
     ]
   > | void {
     request = request || {};

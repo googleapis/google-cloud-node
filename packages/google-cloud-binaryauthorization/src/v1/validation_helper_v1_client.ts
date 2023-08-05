@@ -363,7 +363,7 @@ export class ValidationHelperV1Client {
         | protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateAttestationOccurrence(
@@ -412,7 +412,7 @@ export class ValidationHelperV1Client {
         | protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

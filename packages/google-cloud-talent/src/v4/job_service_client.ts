@@ -443,7 +443,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob,
       protos.google.cloud.talent.v4.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -481,7 +481,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob,
       protos.google.cloud.talent.v4.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -530,7 +530,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob,
       protos.google.cloud.talent.v4.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -568,7 +568,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob,
       protos.google.cloud.talent.v4.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -625,7 +625,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob,
       protos.google.cloud.talent.v4.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -663,7 +663,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob,
       protos.google.cloud.talent.v4.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -714,7 +714,7 @@ export class JobServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.talent.v4.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -752,7 +752,7 @@ export class JobServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.talent.v4.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1072,7 +1072,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.ISearchJobsResponse,
       protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchJobs(
@@ -1110,7 +1110,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.ISearchJobsResponse,
       protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1435,7 +1435,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.ISearchJobsResponse,
       protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchJobsForAlert(
@@ -1473,7 +1473,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.ISearchJobsResponse,
       protos.google.cloud.talent.v4.ISearchJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1529,7 +1529,7 @@ export class JobServiceClient {
         protos.google.cloud.talent.v4.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateJobs(
@@ -1582,7 +1582,7 @@ export class JobServiceClient {
         protos.google.cloud.talent.v4.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1688,7 +1688,7 @@ export class JobServiceClient {
         protos.google.cloud.talent.v4.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateJobs(
@@ -1741,7 +1741,7 @@ export class JobServiceClient {
         protos.google.cloud.talent.v4.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1836,7 +1836,7 @@ export class JobServiceClient {
         protos.google.cloud.talent.v4.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteJobs(
@@ -1889,7 +1889,7 @@ export class JobServiceClient {
         protos.google.cloud.talent.v4.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2013,7 +2013,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob[],
       protos.google.cloud.talent.v4.IListJobsRequest | null,
-      protos.google.cloud.talent.v4.IListJobsResponse
+      protos.google.cloud.talent.v4.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -2051,7 +2051,7 @@ export class JobServiceClient {
     [
       protos.google.cloud.talent.v4.IJob[],
       protos.google.cloud.talent.v4.IListJobsRequest | null,
-      protos.google.cloud.talent.v4.IListJobsResponse
+      protos.google.cloud.talent.v4.IListJobsResponse,
     ]
   > | void {
     request = request || {};

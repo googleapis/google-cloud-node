@@ -349,7 +349,7 @@ export class TemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.ICreateJobFromTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJobFromTemplate(
@@ -395,7 +395,7 @@ export class TemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.ICreateJobFromTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -456,7 +456,7 @@ export class TemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
       protos.google.dataflow.v1beta3.ILaunchTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   launchTemplate(
@@ -496,7 +496,7 @@ export class TemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
       protos.google.dataflow.v1beta3.ILaunchTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -551,7 +551,7 @@ export class TemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.IGetTemplateResponse,
       protos.google.dataflow.v1beta3.IGetTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTemplate(
@@ -589,7 +589,7 @@ export class TemplatesServiceClient {
     [
       protos.google.dataflow.v1beta3.IGetTemplateResponse,
       protos.google.dataflow.v1beta3.IGetTemplateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -349,7 +349,7 @@ export class InterconnectLocationsClient {
         | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -398,7 +398,7 @@ export class InterconnectLocationsClient {
         | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -457,7 +457,7 @@ export class InterconnectLocationsClient {
     [
       protos.google.cloud.compute.v1.IInterconnectLocation[],
       protos.google.cloud.compute.v1.IListInterconnectLocationsRequest | null,
-      protos.google.cloud.compute.v1.IInterconnectLocationList
+      protos.google.cloud.compute.v1.IInterconnectLocationList,
     ]
   >;
   list(
@@ -503,7 +503,7 @@ export class InterconnectLocationsClient {
     [
       protos.google.cloud.compute.v1.IInterconnectLocation[],
       protos.google.cloud.compute.v1.IListInterconnectLocationsRequest | null,
-      protos.google.cloud.compute.v1.IInterconnectLocationList
+      protos.google.cloud.compute.v1.IInterconnectLocationList,
     ]
   > | void {
     request = request || {};

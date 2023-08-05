@@ -362,7 +362,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICreateExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExecution(
@@ -411,7 +411,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICreateExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -463,7 +463,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.IGetExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExecution(
@@ -512,7 +512,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.IGetExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -561,7 +561,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICancelExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelExecution(
@@ -610,7 +610,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICancelExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -677,7 +677,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.workflows.executions.v1.IExecution[],
       protos.google.cloud.workflows.executions.v1.IListExecutionsRequest | null,
-      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse
+      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse,
     ]
   >;
   listExecutions(
@@ -723,7 +723,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.workflows.executions.v1.IExecution[],
       protos.google.cloud.workflows.executions.v1.IListExecutionsRequest | null,
-      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse
+      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse,
     ]
   > | void {
     request = request || {};

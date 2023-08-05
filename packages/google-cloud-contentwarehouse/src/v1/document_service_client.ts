@@ -400,7 +400,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocument(
@@ -449,7 +449,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -499,7 +499,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocument,
       protos.google.cloud.contentwarehouse.v1.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocument(
@@ -545,7 +545,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocument,
       protos.google.cloud.contentwarehouse.v1.IGetDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -609,7 +609,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDocument(
@@ -658,7 +658,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -712,7 +712,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocument(
@@ -761,7 +761,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -811,7 +811,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocument,
       protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lockDocument(
@@ -857,7 +857,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocument,
       protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -914,7 +914,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IFetchAclResponse,
       protos.google.cloud.contentwarehouse.v1.IFetchAclRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchAcl(
@@ -960,7 +960,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IFetchAclResponse,
       protos.google.cloud.contentwarehouse.v1.IFetchAclRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1036,7 +1036,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.ISetAclResponse,
       protos.google.cloud.contentwarehouse.v1.ISetAclRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setAcl(
@@ -1076,7 +1076,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.ISetAclResponse,
       protos.google.cloud.contentwarehouse.v1.ISetAclRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1221,7 +1221,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.SearchDocumentsResponse.IMatchingDocument[],
       protos.google.cloud.contentwarehouse.v1.ISearchDocumentsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse
+      protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse,
     ]
   >;
   searchDocuments(
@@ -1267,7 +1267,7 @@ export class DocumentServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.SearchDocumentsResponse.IMatchingDocument[],
       protos.google.cloud.contentwarehouse.v1.ISearchDocumentsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse
+      protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse,
     ]
   > | void {
     request = request || {};

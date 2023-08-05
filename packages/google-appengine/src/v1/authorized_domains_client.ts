@@ -363,7 +363,7 @@ export class AuthorizedDomainsClient {
     [
       protos.google.appengine.v1.IAuthorizedDomain[],
       protos.google.appengine.v1.IListAuthorizedDomainsRequest | null,
-      protos.google.appengine.v1.IListAuthorizedDomainsResponse
+      protos.google.appengine.v1.IListAuthorizedDomainsResponse,
     ]
   >;
   listAuthorizedDomains(
@@ -409,7 +409,7 @@ export class AuthorizedDomainsClient {
     [
       protos.google.appengine.v1.IAuthorizedDomain[],
       protos.google.appengine.v1.IListAuthorizedDomainsRequest | null,
-      protos.google.appengine.v1.IListAuthorizedDomainsResponse
+      protos.google.appengine.v1.IListAuthorizedDomainsResponse,
     ]
   > | void {
     request = request || {};

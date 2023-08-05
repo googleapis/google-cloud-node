@@ -603,7 +603,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.ITrigger,
       protos.google.cloud.eventarc.v1.IGetTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTrigger(
@@ -641,7 +641,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.ITrigger,
       protos.google.cloud.eventarc.v1.IGetTriggerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -685,7 +685,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannel,
       protos.google.cloud.eventarc.v1.IGetChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChannel(
@@ -723,7 +723,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannel,
       protos.google.cloud.eventarc.v1.IGetChannelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -767,7 +767,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IProvider,
       protos.google.cloud.eventarc.v1.IGetProviderRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProvider(
@@ -807,7 +807,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IProvider,
       protos.google.cloud.eventarc.v1.IGetProviderRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -851,7 +851,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannelConnection,
       protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChannelConnection(
@@ -897,7 +897,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannelConnection,
       protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -944,7 +944,7 @@ export class EventarcClient {
         | protos.google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGoogleChannelConfig(
@@ -993,7 +993,7 @@ export class EventarcClient {
         | protos.google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1048,7 +1048,7 @@ export class EventarcClient {
         | protos.google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGoogleChannelConfig(
@@ -1097,7 +1097,7 @@ export class EventarcClient {
         | protos.google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1158,7 +1158,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTrigger(
@@ -1211,7 +1211,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1304,7 +1304,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTrigger(
@@ -1357,7 +1357,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1449,7 +1449,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTrigger(
@@ -1502,7 +1502,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1592,7 +1592,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChannel(
@@ -1645,7 +1645,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1735,7 +1735,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateChannel(
@@ -1788,7 +1788,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1874,7 +1874,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteChannel(
@@ -1927,7 +1927,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2014,7 +2014,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChannelConnection(
@@ -2067,7 +2067,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2154,7 +2154,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteChannelConnection(
@@ -2207,7 +2207,7 @@ export class EventarcClient {
         protos.google.cloud.eventarc.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2311,7 +2311,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.ITrigger[],
       protos.google.cloud.eventarc.v1.IListTriggersRequest | null,
-      protos.google.cloud.eventarc.v1.IListTriggersResponse
+      protos.google.cloud.eventarc.v1.IListTriggersResponse,
     ]
   >;
   listTriggers(
@@ -2351,7 +2351,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.ITrigger[],
       protos.google.cloud.eventarc.v1.IListTriggersRequest | null,
-      protos.google.cloud.eventarc.v1.IListTriggersResponse
+      protos.google.cloud.eventarc.v1.IListTriggersResponse,
     ]
   > | void {
     request = request || {};
@@ -2532,7 +2532,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannel[],
       protos.google.cloud.eventarc.v1.IListChannelsRequest | null,
-      protos.google.cloud.eventarc.v1.IListChannelsResponse
+      protos.google.cloud.eventarc.v1.IListChannelsResponse,
     ]
   >;
   listChannels(
@@ -2572,7 +2572,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannel[],
       protos.google.cloud.eventarc.v1.IListChannelsRequest | null,
-      protos.google.cloud.eventarc.v1.IListChannelsResponse
+      protos.google.cloud.eventarc.v1.IListChannelsResponse,
     ]
   > | void {
     request = request || {};
@@ -2745,7 +2745,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IProvider[],
       protos.google.cloud.eventarc.v1.IListProvidersRequest | null,
-      protos.google.cloud.eventarc.v1.IListProvidersResponse
+      protos.google.cloud.eventarc.v1.IListProvidersResponse,
     ]
   >;
   listProviders(
@@ -2785,7 +2785,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IProvider[],
       protos.google.cloud.eventarc.v1.IListProvidersRequest | null,
-      protos.google.cloud.eventarc.v1.IListProvidersResponse
+      protos.google.cloud.eventarc.v1.IListProvidersResponse,
     ]
   > | void {
     request = request || {};
@@ -2953,7 +2953,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannelConnection[],
       protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest | null,
-      protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse,
     ]
   >;
   listChannelConnections(
@@ -2999,7 +2999,7 @@ export class EventarcClient {
     [
       protos.google.cloud.eventarc.v1.IChannelConnection[],
       protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest | null,
-      protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+      protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse,
     ]
   > | void {
     request = request || {};

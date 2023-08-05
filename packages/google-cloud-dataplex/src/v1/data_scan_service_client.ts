@@ -658,7 +658,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScan,
       protos.google.cloud.dataplex.v1.IGetDataScanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataScan(
@@ -698,7 +698,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScan,
       protos.google.cloud.dataplex.v1.IGetDataScanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -747,7 +747,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IRunDataScanResponse,
       protos.google.cloud.dataplex.v1.IRunDataScanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runDataScan(
@@ -787,7 +787,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IRunDataScanResponse,
       protos.google.cloud.dataplex.v1.IRunDataScanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -836,7 +836,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScanJob,
       protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataScanJob(
@@ -876,7 +876,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScanJob,
       protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -942,7 +942,7 @@ export class DataScanServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataScan(
@@ -995,7 +995,7 @@ export class DataScanServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1085,7 +1085,7 @@ export class DataScanServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataScan(
@@ -1138,7 +1138,7 @@ export class DataScanServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1224,7 +1224,7 @@ export class DataScanServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataScan(
@@ -1277,7 +1277,7 @@ export class DataScanServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1375,7 +1375,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScan[],
       protos.google.cloud.dataplex.v1.IListDataScansRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataScansResponse
+      protos.google.cloud.dataplex.v1.IListDataScansResponse,
     ]
   >;
   listDataScans(
@@ -1415,7 +1415,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScan[],
       protos.google.cloud.dataplex.v1.IListDataScansRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataScansResponse
+      protos.google.cloud.dataplex.v1.IListDataScansResponse,
     ]
   > | void {
     request = request || {};
@@ -1608,7 +1608,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScanJob[],
       protos.google.cloud.dataplex.v1.IListDataScanJobsRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse,
     ]
   >;
   listDataScanJobs(
@@ -1654,7 +1654,7 @@ export class DataScanServiceClient {
     [
       protos.google.cloud.dataplex.v1.IDataScanJob[],
       protos.google.cloud.dataplex.v1.IListDataScanJobsRequest | null,
-      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse,
     ]
   > | void {
     request = request || {};

@@ -549,7 +549,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode,
       protos.google.cloud.tpu.v2alpha1.IGetNodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNode(
@@ -587,7 +587,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode,
       protos.google.cloud.tpu.v2alpha1.IGetNodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -631,7 +631,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource,
       protos.google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getQueuedResource(
@@ -677,7 +677,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource,
       protos.google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -724,7 +724,7 @@ export class TpuClient {
         | protos.google.cloud.tpu.v2alpha1.IGenerateServiceIdentityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateServiceIdentity(
@@ -773,7 +773,7 @@ export class TpuClient {
         | protos.google.cloud.tpu.v2alpha1.IGenerateServiceIdentityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -821,7 +821,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType,
       protos.google.cloud.tpu.v2alpha1.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAcceleratorType(
@@ -867,7 +867,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType,
       protos.google.cloud.tpu.v2alpha1.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -911,7 +911,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion,
       protos.google.cloud.tpu.v2alpha1.IGetRuntimeVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRuntimeVersion(
@@ -957,7 +957,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion,
       protos.google.cloud.tpu.v2alpha1.IGetRuntimeVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1006,7 +1006,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesResponse,
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGuestAttributes(
@@ -1052,7 +1052,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesResponse,
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1108,7 +1108,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNode(
@@ -1161,7 +1161,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1246,7 +1246,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNode(
@@ -1299,7 +1299,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1382,7 +1382,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopNode(
@@ -1435,7 +1435,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1518,7 +1518,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startNode(
@@ -1571,7 +1571,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1658,7 +1658,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNode(
@@ -1711,7 +1711,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1801,7 +1801,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createQueuedResource(
@@ -1854,7 +1854,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1945,7 +1945,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteQueuedResource(
@@ -1998,7 +1998,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2086,7 +2086,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   simulateMaintenanceEvent(
@@ -2139,7 +2139,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2228,7 +2228,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode[],
       protos.google.cloud.tpu.v2alpha1.IListNodesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListNodesResponse
+      protos.google.cloud.tpu.v2alpha1.IListNodesResponse,
     ]
   >;
   listNodes(
@@ -2268,7 +2268,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode[],
       protos.google.cloud.tpu.v2alpha1.IListNodesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListNodesResponse
+      protos.google.cloud.tpu.v2alpha1.IListNodesResponse,
     ]
   > | void {
     request = request || {};
@@ -2408,7 +2408,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource[],
       protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse
+      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse,
     ]
   >;
   listQueuedResources(
@@ -2454,7 +2454,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource[],
       protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse
+      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -2598,7 +2598,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType[],
       protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse
+      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse,
     ]
   >;
   listAcceleratorTypes(
@@ -2644,7 +2644,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType[],
       protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse
+      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -2796,7 +2796,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion[],
       protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse
+      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse,
     ]
   >;
   listRuntimeVersions(
@@ -2842,7 +2842,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion[],
       protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse
+      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse,
     ]
   > | void {
     request = request || {};
