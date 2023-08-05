@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@google-cloud/iot": "^3.2.3",
-    "@google-cloud/pubsub": "^3.0.0",
+    "@google-cloud/pubsub": "^4.0.0",
     "@google-cloud/storage": "^7.0.0"
   },
   "devDependencies": {
