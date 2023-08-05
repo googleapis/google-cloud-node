@@ -422,7 +422,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup,
       protos.google.monitoring.v3.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGroup(
@@ -479,7 +479,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup,
       protos.google.monitoring.v3.IGetGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -507,7 +507,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup,
       protos.google.monitoring.v3.ICreateGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGroup(
@@ -569,7 +569,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup,
       protos.google.monitoring.v3.ICreateGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -597,7 +597,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup,
       protos.google.monitoring.v3.IUpdateGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGroup(
@@ -656,7 +656,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup,
       protos.google.monitoring.v3.IUpdateGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -684,7 +684,7 @@ export class GroupServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGroup(
@@ -745,7 +745,7 @@ export class GroupServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -774,7 +774,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup[],
       protos.google.monitoring.v3.IListGroupsRequest | null,
-      protos.google.monitoring.v3.IListGroupsResponse
+      protos.google.monitoring.v3.IListGroupsResponse,
     ]
   >;
   listGroups(
@@ -864,7 +864,7 @@ export class GroupServiceClient {
     [
       protos.google.monitoring.v3.IGroup[],
       protos.google.monitoring.v3.IListGroupsRequest | null,
-      protos.google.monitoring.v3.IListGroupsResponse
+      protos.google.monitoring.v3.IListGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -1041,7 +1041,7 @@ export class GroupServiceClient {
     [
       protos.google.api.IMonitoredResource[],
       protos.google.monitoring.v3.IListGroupMembersRequest | null,
-      protos.google.monitoring.v3.IListGroupMembersResponse
+      protos.google.monitoring.v3.IListGroupMembersResponse,
     ]
   >;
   listGroupMembers(
@@ -1123,7 +1123,7 @@ export class GroupServiceClient {
     [
       protos.google.api.IMonitoredResource[],
       protos.google.monitoring.v3.IListGroupMembersRequest | null,
-      protos.google.monitoring.v3.IListGroupMembersResponse
+      protos.google.monitoring.v3.IListGroupMembersResponse,
     ]
   > | void {
     request = request || {};

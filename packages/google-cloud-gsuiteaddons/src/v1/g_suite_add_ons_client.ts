@@ -398,7 +398,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IAuthorization,
       protos.google.cloud.gsuiteaddons.v1.IGetAuthorizationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAuthorization(
@@ -444,7 +444,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IAuthorization,
       protos.google.cloud.gsuiteaddons.v1.IGetAuthorizationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -495,7 +495,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment,
       protos.google.cloud.gsuiteaddons.v1.ICreateDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDeployment(
@@ -541,7 +541,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment,
       protos.google.cloud.gsuiteaddons.v1.ICreateDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +585,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment,
       protos.google.cloud.gsuiteaddons.v1.IReplaceDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceDeployment(
@@ -631,7 +631,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment,
       protos.google.cloud.gsuiteaddons.v1.IReplaceDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -677,7 +677,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment,
       protos.google.cloud.gsuiteaddons.v1.IGetDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeployment(
@@ -723,7 +723,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment,
       protos.google.cloud.gsuiteaddons.v1.IGetDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -772,7 +772,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.gsuiteaddons.v1.IDeleteDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDeployment(
@@ -818,7 +818,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.gsuiteaddons.v1.IDeleteDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -866,7 +866,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.gsuiteaddons.v1.IInstallDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   installDeployment(
@@ -912,7 +912,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.gsuiteaddons.v1.IInstallDeploymentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -963,7 +963,7 @@ export class GSuiteAddOnsClient {
         | protos.google.cloud.gsuiteaddons.v1.IUninstallDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   uninstallDeployment(
@@ -1012,7 +1012,7 @@ export class GSuiteAddOnsClient {
         | protos.google.cloud.gsuiteaddons.v1.IUninstallDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1058,7 +1058,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IInstallStatus,
       protos.google.cloud.gsuiteaddons.v1.IGetInstallStatusRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstallStatus(
@@ -1104,7 +1104,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IInstallStatus,
       protos.google.cloud.gsuiteaddons.v1.IGetInstallStatusRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1165,7 +1165,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment[],
       protos.google.cloud.gsuiteaddons.v1.IListDeploymentsRequest | null,
-      protos.google.cloud.gsuiteaddons.v1.IListDeploymentsResponse
+      protos.google.cloud.gsuiteaddons.v1.IListDeploymentsResponse,
     ]
   >;
   listDeployments(
@@ -1211,7 +1211,7 @@ export class GSuiteAddOnsClient {
     [
       protos.google.cloud.gsuiteaddons.v1.IDeployment[],
       protos.google.cloud.gsuiteaddons.v1.IListDeploymentsRequest | null,
-      protos.google.cloud.gsuiteaddons.v1.IListDeploymentsResponse
+      protos.google.cloud.gsuiteaddons.v1.IListDeploymentsResponse,
     ]
   > | void {
     request = request || {};

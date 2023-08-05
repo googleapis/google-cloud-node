@@ -413,7 +413,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy,
       protos.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAlertPolicy(
@@ -470,7 +470,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy,
       protos.google.monitoring.v3.IGetAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -498,7 +498,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy,
       protos.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAlertPolicy(
@@ -569,7 +569,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy,
       protos.google.monitoring.v3.ICreateAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -597,7 +597,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAlertPolicy(
@@ -658,7 +658,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.v3.IDeleteAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -686,7 +686,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy,
       protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAlertPolicy(
@@ -771,7 +771,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy,
       protos.google.monitoring.v3.IUpdateAlertPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -800,7 +800,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy[],
       protos.google.monitoring.v3.IListAlertPoliciesRequest | null,
-      protos.google.monitoring.v3.IListAlertPoliciesResponse
+      protos.google.monitoring.v3.IListAlertPoliciesResponse,
     ]
   >;
   listAlertPolicies(
@@ -887,7 +887,7 @@ export class AlertPolicyServiceClient {
     [
       protos.google.monitoring.v3.IAlertPolicy[],
       protos.google.monitoring.v3.IListAlertPoliciesRequest | null,
-      protos.google.monitoring.v3.IListAlertPoliciesResponse
+      protos.google.monitoring.v3.IListAlertPoliciesResponse,
     ]
   > | void {
     request = request || {};

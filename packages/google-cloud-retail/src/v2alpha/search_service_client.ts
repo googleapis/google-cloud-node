@@ -691,7 +691,7 @@ export class SearchServiceClient {
     [
       protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
       protos.google.cloud.retail.v2alpha.ISearchRequest | null,
-      protos.google.cloud.retail.v2alpha.ISearchResponse
+      protos.google.cloud.retail.v2alpha.ISearchResponse,
     ]
   >;
   search(
@@ -729,7 +729,7 @@ export class SearchServiceClient {
     [
       protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
       protos.google.cloud.retail.v2alpha.ISearchRequest | null,
-      protos.google.cloud.retail.v2alpha.ISearchResponse
+      protos.google.cloud.retail.v2alpha.ISearchResponse,
     ]
   > | void {
     request = request || {};

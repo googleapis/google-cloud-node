@@ -377,7 +377,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.ICreateDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataPolicy(
@@ -426,7 +426,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.ICreateDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -484,7 +484,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IUpdateDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataPolicy(
@@ -533,7 +533,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IUpdateDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -583,7 +583,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IRenameDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   renameDataPolicy(
@@ -632,7 +632,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IRenameDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -680,7 +680,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IDeleteDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataPolicy(
@@ -729,7 +729,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IDeleteDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -777,7 +777,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IGetDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataPolicy(
@@ -826,7 +826,7 @@ export class DataPolicyServiceClient {
         | protos.google.cloud.bigquery.datapolicies.v1.IGetDataPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -874,7 +874,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -912,7 +912,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -968,7 +968,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1006,7 +1006,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1056,7 +1056,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1094,7 +1094,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1158,7 +1158,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[],
       protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesRequest | null,
-      protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesResponse
+      protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesResponse,
     ]
   >;
   listDataPolicies(
@@ -1204,7 +1204,7 @@ export class DataPolicyServiceClient {
     [
       protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[],
       protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesRequest | null,
-      protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesResponse
+      protos.google.cloud.bigquery.datapolicies.v1.IListDataPoliciesResponse,
     ]
   > | void {
     request = request || {};

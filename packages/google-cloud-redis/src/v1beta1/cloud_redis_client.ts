@@ -520,7 +520,7 @@ export class CloudRedisClient {
     [
       protos.google.cloud.redis.v1beta1.IInstance,
       protos.google.cloud.redis.v1beta1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -560,7 +560,7 @@ export class CloudRedisClient {
     [
       protos.google.cloud.redis.v1beta1.IInstance,
       protos.google.cloud.redis.v1beta1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -611,7 +611,7 @@ export class CloudRedisClient {
         | protos.google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstanceAuthString(
@@ -660,7 +660,7 @@ export class CloudRedisClient {
         | protos.google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -734,7 +734,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -787,7 +787,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -885,7 +885,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -938,7 +938,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1026,7 +1026,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeInstance(
@@ -1079,7 +1079,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1173,7 +1173,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importInstance(
@@ -1226,7 +1226,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1318,7 +1318,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportInstance(
@@ -1371,7 +1371,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1460,7 +1460,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   failoverInstance(
@@ -1513,7 +1513,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1596,7 +1596,7 @@ export class CloudRedisClient {
     [
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -1637,7 +1637,7 @@ export class CloudRedisClient {
     [
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1726,7 +1726,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rescheduleMaintenance(
@@ -1779,7 +1779,7 @@ export class CloudRedisClient {
         protos.google.protobuf.IAny
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1881,7 +1881,7 @@ export class CloudRedisClient {
     [
       protos.google.cloud.redis.v1beta1.IInstance[],
       protos.google.cloud.redis.v1beta1.IListInstancesRequest | null,
-      protos.google.cloud.redis.v1beta1.IListInstancesResponse
+      protos.google.cloud.redis.v1beta1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -1927,7 +1927,7 @@ export class CloudRedisClient {
     [
       protos.google.cloud.redis.v1beta1.IInstance[],
       protos.google.cloud.redis.v1beta1.IListInstancesRequest | null,
-      protos.google.cloud.redis.v1beta1.IListInstancesResponse
+      protos.google.cloud.redis.v1beta1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};

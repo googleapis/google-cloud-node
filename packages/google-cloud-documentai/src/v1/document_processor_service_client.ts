@@ -651,7 +651,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessResponse,
       protos.google.cloud.documentai.v1.IProcessRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   processDocument(
@@ -689,7 +689,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessResponse,
       protos.google.cloud.documentai.v1.IProcessRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -736,7 +736,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IFetchProcessorTypesResponse,
       protos.google.cloud.documentai.v1.IFetchProcessorTypesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchProcessorTypes(
@@ -782,7 +782,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IFetchProcessorTypesResponse,
       protos.google.cloud.documentai.v1.IFetchProcessorTypesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -826,7 +826,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorType,
       protos.google.cloud.documentai.v1.IGetProcessorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProcessorType(
@@ -872,7 +872,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorType,
       protos.google.cloud.documentai.v1.IGetProcessorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -916,7 +916,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessor,
       protos.google.cloud.documentai.v1.IGetProcessorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProcessor(
@@ -956,7 +956,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessor,
       protos.google.cloud.documentai.v1.IGetProcessorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1000,7 +1000,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorVersion,
       protos.google.cloud.documentai.v1.IGetProcessorVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProcessorVersion(
@@ -1046,7 +1046,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorVersion,
       protos.google.cloud.documentai.v1.IGetProcessorVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1099,7 +1099,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessor,
       protos.google.cloud.documentai.v1.ICreateProcessorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProcessor(
@@ -1145,7 +1145,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessor,
       protos.google.cloud.documentai.v1.ICreateProcessorRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1191,7 +1191,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IEvaluation,
       protos.google.cloud.documentai.v1.IGetEvaluationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEvaluation(
@@ -1237,7 +1237,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IEvaluation,
       protos.google.cloud.documentai.v1.IGetEvaluationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1306,7 +1306,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IBatchProcessMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchProcessDocuments(
@@ -1359,7 +1359,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IBatchProcessMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1459,7 +1459,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.ITrainProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   trainProcessorVersion(
@@ -1512,7 +1512,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.ITrainProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1596,7 +1596,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDeleteProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProcessorVersion(
@@ -1649,7 +1649,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDeleteProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1736,7 +1736,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDeployProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployProcessorVersion(
@@ -1789,7 +1789,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDeployProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1876,7 +1876,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IUndeployProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployProcessorVersion(
@@ -1929,7 +1929,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IUndeployProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2017,7 +2017,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDeleteProcessorMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProcessor(
@@ -2070,7 +2070,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDeleteProcessorMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2153,7 +2153,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IEnableProcessorMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableProcessor(
@@ -2206,7 +2206,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IEnableProcessorMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2289,7 +2289,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDisableProcessorMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableProcessor(
@@ -2342,7 +2342,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IDisableProcessorMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2436,7 +2436,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.ISetDefaultProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setDefaultProcessorVersion(
@@ -2489,7 +2489,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.ISetDefaultProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2587,7 +2587,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IReviewDocumentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reviewDocument(
@@ -2640,7 +2640,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IReviewDocumentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2730,7 +2730,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   evaluateProcessorVersion(
@@ -2783,7 +2783,7 @@ export class DocumentProcessorServiceClient {
         protos.google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2875,7 +2875,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorType[],
       protos.google.cloud.documentai.v1.IListProcessorTypesRequest | null,
-      protos.google.cloud.documentai.v1.IListProcessorTypesResponse
+      protos.google.cloud.documentai.v1.IListProcessorTypesResponse,
     ]
   >;
   listProcessorTypes(
@@ -2921,7 +2921,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorType[],
       protos.google.cloud.documentai.v1.IListProcessorTypesRequest | null,
-      protos.google.cloud.documentai.v1.IListProcessorTypesResponse
+      protos.google.cloud.documentai.v1.IListProcessorTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -3071,7 +3071,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessor[],
       protos.google.cloud.documentai.v1.IListProcessorsRequest | null,
-      protos.google.cloud.documentai.v1.IListProcessorsResponse
+      protos.google.cloud.documentai.v1.IListProcessorsResponse,
     ]
   >;
   listProcessors(
@@ -3117,7 +3117,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessor[],
       protos.google.cloud.documentai.v1.IListProcessorsRequest | null,
-      protos.google.cloud.documentai.v1.IListProcessorsResponse
+      protos.google.cloud.documentai.v1.IListProcessorsResponse,
     ]
   > | void {
     request = request || {};
@@ -3270,7 +3270,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorVersion[],
       protos.google.cloud.documentai.v1.IListProcessorVersionsRequest | null,
-      protos.google.cloud.documentai.v1.IListProcessorVersionsResponse
+      protos.google.cloud.documentai.v1.IListProcessorVersionsResponse,
     ]
   >;
   listProcessorVersions(
@@ -3316,7 +3316,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IProcessorVersion[],
       protos.google.cloud.documentai.v1.IListProcessorVersionsRequest | null,
-      protos.google.cloud.documentai.v1.IListProcessorVersionsResponse
+      protos.google.cloud.documentai.v1.IListProcessorVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -3472,7 +3472,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IEvaluation[],
       protos.google.cloud.documentai.v1.IListEvaluationsRequest | null,
-      protos.google.cloud.documentai.v1.IListEvaluationsResponse
+      protos.google.cloud.documentai.v1.IListEvaluationsResponse,
     ]
   >;
   listEvaluations(
@@ -3518,7 +3518,7 @@ export class DocumentProcessorServiceClient {
     [
       protos.google.cloud.documentai.v1.IEvaluation[],
       protos.google.cloud.documentai.v1.IListEvaluationsRequest | null,
-      protos.google.cloud.documentai.v1.IListEvaluationsResponse
+      protos.google.cloud.documentai.v1.IListEvaluationsResponse,
     ]
   > | void {
     request = request || {};

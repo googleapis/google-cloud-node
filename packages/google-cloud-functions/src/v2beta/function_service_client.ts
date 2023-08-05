@@ -493,7 +493,7 @@ export class FunctionServiceClient {
     [
       protos.google.cloud.functions.v2beta.IFunction,
       protos.google.cloud.functions.v2beta.IGetFunctionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFunction(
@@ -539,7 +539,7 @@ export class FunctionServiceClient {
     [
       protos.google.cloud.functions.v2beta.IFunction,
       protos.google.cloud.functions.v2beta.IGetFunctionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -625,7 +625,7 @@ export class FunctionServiceClient {
         | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateUploadUrl(
@@ -674,7 +674,7 @@ export class FunctionServiceClient {
         | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -726,7 +726,7 @@ export class FunctionServiceClient {
         | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateDownloadUrl(
@@ -775,7 +775,7 @@ export class FunctionServiceClient {
         | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -823,7 +823,7 @@ export class FunctionServiceClient {
     [
       protos.google.cloud.functions.v2beta.IListRuntimesResponse,
       protos.google.cloud.functions.v2beta.IListRuntimesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listRuntimes(
@@ -869,7 +869,7 @@ export class FunctionServiceClient {
     [
       protos.google.cloud.functions.v2beta.IListRuntimesResponse,
       protos.google.cloud.functions.v2beta.IListRuntimesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -930,7 +930,7 @@ export class FunctionServiceClient {
         protos.google.cloud.functions.v2beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFunction(
@@ -983,7 +983,7 @@ export class FunctionServiceClient {
         protos.google.cloud.functions.v2beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1070,7 +1070,7 @@ export class FunctionServiceClient {
         protos.google.cloud.functions.v2beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFunction(
@@ -1123,7 +1123,7 @@ export class FunctionServiceClient {
         protos.google.cloud.functions.v2beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1208,7 +1208,7 @@ export class FunctionServiceClient {
         protos.google.cloud.functions.v2beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFunction(
@@ -1261,7 +1261,7 @@ export class FunctionServiceClient {
         protos.google.cloud.functions.v2beta.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1364,7 +1364,7 @@ export class FunctionServiceClient {
     [
       protos.google.cloud.functions.v2beta.IFunction[],
       protos.google.cloud.functions.v2beta.IListFunctionsRequest | null,
-      protos.google.cloud.functions.v2beta.IListFunctionsResponse
+      protos.google.cloud.functions.v2beta.IListFunctionsResponse,
     ]
   >;
   listFunctions(
@@ -1410,7 +1410,7 @@ export class FunctionServiceClient {
     [
       protos.google.cloud.functions.v2beta.IFunction[],
       protos.google.cloud.functions.v2beta.IListFunctionsRequest | null,
-      protos.google.cloud.functions.v2beta.IListFunctionsResponse
+      protos.google.cloud.functions.v2beta.IListFunctionsResponse,
     ]
   > | void {
     request = request || {};

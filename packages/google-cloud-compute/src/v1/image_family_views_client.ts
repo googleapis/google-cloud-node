@@ -334,7 +334,7 @@ export class ImageFamilyViewsClient {
     [
       protos.google.cloud.compute.v1.IImageFamilyView,
       protos.google.cloud.compute.v1.IGetImageFamilyViewRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -380,7 +380,7 @@ export class ImageFamilyViewsClient {
     [
       protos.google.cloud.compute.v1.IImageFamilyView,
       protos.google.cloud.compute.v1.IGetImageFamilyViewRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -685,7 +685,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificate(
@@ -734,7 +734,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -782,7 +782,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificateMap(
@@ -831,7 +831,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -879,7 +879,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificateMapEntry(
@@ -928,7 +928,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -980,7 +980,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDnsAuthorization(
@@ -1029,7 +1029,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1077,7 +1077,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificateIssuanceConfig(
@@ -1126,7 +1126,7 @@ export class CertificateManagerClient {
         | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1185,7 +1185,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificate(
@@ -1238,7 +1238,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1325,7 +1325,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificate(
@@ -1378,7 +1378,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1462,7 +1462,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCertificate(
@@ -1515,7 +1515,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1603,7 +1603,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificateMap(
@@ -1656,7 +1656,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1743,7 +1743,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificateMap(
@@ -1796,7 +1796,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1882,7 +1882,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCertificateMap(
@@ -1935,7 +1935,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2023,7 +2023,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificateMapEntry(
@@ -2076,7 +2076,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2167,7 +2167,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificateMapEntry(
@@ -2220,7 +2220,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2308,7 +2308,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCertificateMapEntry(
@@ -2361,7 +2361,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2453,7 +2453,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDnsAuthorization(
@@ -2506,7 +2506,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2597,7 +2597,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDnsAuthorization(
@@ -2650,7 +2650,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2738,7 +2738,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDnsAuthorization(
@@ -2791,7 +2791,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2883,7 +2883,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificateIssuanceConfig(
@@ -2936,7 +2936,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3024,7 +3024,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCertificateIssuanceConfig(
@@ -3077,7 +3077,7 @@ export class CertificateManagerClient {
         protos.google.cloud.certificatemanager.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3175,7 +3175,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificate[],
       protos.google.cloud.certificatemanager.v1.IListCertificatesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse,
     ]
   >;
   listCertificates(
@@ -3221,7 +3221,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificate[],
       protos.google.cloud.certificatemanager.v1.IListCertificatesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse,
     ]
   > | void {
     request = request || {};
@@ -3388,7 +3388,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificateMap[],
       protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse,
     ]
   >;
   listCertificateMaps(
@@ -3434,7 +3434,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificateMap[],
       protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse,
     ]
   > | void {
     request = request || {};
@@ -3606,7 +3606,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
       protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse,
     ]
   >;
   listCertificateMapEntries(
@@ -3652,7 +3652,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
       protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse,
     ]
   > | void {
     request = request || {};
@@ -3833,7 +3833,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
       protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
+      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse,
     ]
   >;
   listDnsAuthorizations(
@@ -3879,7 +3879,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
       protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
+      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse,
     ]
   > | void {
     request = request || {};
@@ -4047,7 +4047,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
       protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse,
     ]
   >;
   listCertificateIssuanceConfigs(
@@ -4093,7 +4093,7 @@ export class CertificateManagerClient {
     [
       protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
       protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse,
     ]
   > | void {
     request = request || {};

@@ -350,7 +350,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         | protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAssessment(
@@ -399,7 +399,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         | protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -464,7 +464,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         | protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   annotateAssessment(
@@ -513,7 +513,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         | protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -441,7 +441,7 @@ export class TagValuesClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagValue,
       protos.google.cloud.resourcemanager.v3.IGetTagValueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTagValue(
@@ -487,7 +487,7 @@ export class TagValuesClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagValue,
       protos.google.cloud.resourcemanager.v3.IGetTagValueRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -544,7 +544,7 @@ export class TagValuesClient {
         | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNamespacedTagValue(
@@ -593,7 +593,7 @@ export class TagValuesClient {
         | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -642,7 +642,7 @@ export class TagValuesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -680,7 +680,7 @@ export class TagValuesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -740,7 +740,7 @@ export class TagValuesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -778,7 +778,7 @@ export class TagValuesClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -832,7 +832,7 @@ export class TagValuesClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -870,7 +870,7 @@ export class TagValuesClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -927,7 +927,7 @@ export class TagValuesClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTagValue(
@@ -980,7 +980,7 @@ export class TagValuesClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagValueMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1067,7 +1067,7 @@ export class TagValuesClient {
         protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTagValue(
@@ -1120,7 +1120,7 @@ export class TagValuesClient {
         protos.google.cloud.resourcemanager.v3.IUpdateTagValueMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1211,7 +1211,7 @@ export class TagValuesClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTagValue(
@@ -1264,7 +1264,7 @@ export class TagValuesClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagValueMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1352,7 +1352,7 @@ export class TagValuesClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagValue[],
       protos.google.cloud.resourcemanager.v3.IListTagValuesRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
+      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse,
     ]
   >;
   listTagValues(
@@ -1398,7 +1398,7 @@ export class TagValuesClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagValue[],
       protos.google.cloud.resourcemanager.v3.IListTagValuesRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse
+      protos.google.cloud.resourcemanager.v3.IListTagValuesResponse,
     ]
   > | void {
     request = request || {};

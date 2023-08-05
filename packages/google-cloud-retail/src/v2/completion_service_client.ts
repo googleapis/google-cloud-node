@@ -493,7 +493,7 @@ export class CompletionServiceClient {
     [
       protos.google.cloud.retail.v2.ICompleteQueryResponse,
       protos.google.cloud.retail.v2.ICompleteQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeQuery(
@@ -533,7 +533,7 @@ export class CompletionServiceClient {
     [
       protos.google.cloud.retail.v2.ICompleteQueryResponse,
       protos.google.cloud.retail.v2.ICompleteQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -601,7 +601,7 @@ export class CompletionServiceClient {
         protos.google.cloud.retail.v2.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importCompletionData(
@@ -654,7 +654,7 @@ export class CompletionServiceClient {
         protos.google.cloud.retail.v2.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

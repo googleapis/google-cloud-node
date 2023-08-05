@@ -339,7 +339,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSnapshot(
@@ -377,7 +377,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -427,7 +427,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
       protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSnapshot(
@@ -467,7 +467,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
       protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -517,7 +517,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IListSnapshotsResponse,
       protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listSnapshots(
@@ -557,7 +557,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IListSnapshotsResponse,
       protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

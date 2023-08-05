@@ -448,7 +448,7 @@ export class IDSClient {
     [
       protos.google.cloud.ids.v1.IEndpoint,
       protos.google.cloud.ids.v1.IGetEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEndpoint(
@@ -486,7 +486,7 @@ export class IDSClient {
     [
       protos.google.cloud.ids.v1.IEndpoint,
       protos.google.cloud.ids.v1.IGetEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -559,7 +559,7 @@ export class IDSClient {
         protos.google.cloud.ids.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEndpoint(
@@ -612,7 +612,7 @@ export class IDSClient {
         protos.google.cloud.ids.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -709,7 +709,7 @@ export class IDSClient {
         protos.google.cloud.ids.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEndpoint(
@@ -762,7 +762,7 @@ export class IDSClient {
         protos.google.cloud.ids.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -858,7 +858,7 @@ export class IDSClient {
     [
       protos.google.cloud.ids.v1.IEndpoint[],
       protos.google.cloud.ids.v1.IListEndpointsRequest | null,
-      protos.google.cloud.ids.v1.IListEndpointsResponse
+      protos.google.cloud.ids.v1.IListEndpointsResponse,
     ]
   >;
   listEndpoints(
@@ -896,7 +896,7 @@ export class IDSClient {
     [
       protos.google.cloud.ids.v1.IEndpoint[],
       protos.google.cloud.ids.v1.IListEndpointsRequest | null,
-      protos.google.cloud.ids.v1.IListEndpointsResponse
+      protos.google.cloud.ids.v1.IListEndpointsResponse,
     ]
   > | void {
     request = request || {};

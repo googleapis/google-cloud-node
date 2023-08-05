@@ -372,7 +372,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v2.ICheckResponse,
       protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   check(
@@ -410,7 +410,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v2.ICheckResponse,
       protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -484,7 +484,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v2.IReportResponse,
       protos.google.api.servicecontrol.v2.IReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   report(
@@ -522,7 +522,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v2.IReportResponse,
       protos.google.api.servicecontrol.v2.IReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

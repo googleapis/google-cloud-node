@@ -549,7 +549,7 @@ export class AppConnectionsServiceClient {
         | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAppConnection(
@@ -598,7 +598,7 @@ export class AppConnectionsServiceClient {
         | protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -673,7 +673,7 @@ export class AppConnectionsServiceClient {
         protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAppConnection(
@@ -726,7 +726,7 @@ export class AppConnectionsServiceClient {
         protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -837,7 +837,7 @@ export class AppConnectionsServiceClient {
         protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAppConnection(
@@ -890,7 +890,7 @@ export class AppConnectionsServiceClient {
         protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -991,7 +991,7 @@ export class AppConnectionsServiceClient {
         protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAppConnection(
@@ -1044,7 +1044,7 @@ export class AppConnectionsServiceClient {
         protos.google.cloud.beyondcorp.appconnections.v1.IAppConnectionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1143,7 +1143,7 @@ export class AppConnectionsServiceClient {
     [
       protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[],
       protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
+      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse,
     ]
   >;
   listAppConnections(
@@ -1189,7 +1189,7 @@ export class AppConnectionsServiceClient {
     [
       protos.google.cloud.beyondcorp.appconnections.v1.IAppConnection[],
       protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse
+      protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsResponse,
     ]
   > | void {
     request = request || {};
@@ -1370,7 +1370,7 @@ export class AppConnectionsServiceClient {
     [
       protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[],
       protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
+      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse,
     ]
   >;
   resolveAppConnections(
@@ -1416,7 +1416,7 @@ export class AppConnectionsServiceClient {
     [
       protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.IAppConnectionDetails[],
       protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest | null,
-      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse
+      protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsResponse,
     ]
   > | void {
     request = request || {};

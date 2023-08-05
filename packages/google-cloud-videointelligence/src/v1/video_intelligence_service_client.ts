@@ -433,7 +433,7 @@ export class VideoIntelligenceServiceClient {
         protos.google.cloud.videointelligence.v1.IAnnotateVideoProgress
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   annotateVideo(
@@ -486,7 +486,7 @@ export class VideoIntelligenceServiceClient {
         protos.google.cloud.videointelligence.v1.IAnnotateVideoProgress
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

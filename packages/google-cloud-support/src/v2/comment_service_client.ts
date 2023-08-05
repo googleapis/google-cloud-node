@@ -368,7 +368,7 @@ export class CommentServiceClient {
     [
       protos.google.cloud.support.v2.IComment,
       protos.google.cloud.support.v2.ICreateCommentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createComment(
@@ -408,7 +408,7 @@ export class CommentServiceClient {
     [
       protos.google.cloud.support.v2.IComment,
       protos.google.cloud.support.v2.ICreateCommentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -462,7 +462,7 @@ export class CommentServiceClient {
     [
       protos.google.cloud.support.v2.IComment[],
       protos.google.cloud.support.v2.IListCommentsRequest | null,
-      protos.google.cloud.support.v2.IListCommentsResponse
+      protos.google.cloud.support.v2.IListCommentsResponse,
     ]
   >;
   listComments(
@@ -502,7 +502,7 @@ export class CommentServiceClient {
     [
       protos.google.cloud.support.v2.IComment[],
       protos.google.cloud.support.v2.IListCommentsRequest | null,
-      protos.google.cloud.support.v2.IListCommentsResponse
+      protos.google.cloud.support.v2.IListCommentsResponse,
     ]
   > | void {
     request = request || {};

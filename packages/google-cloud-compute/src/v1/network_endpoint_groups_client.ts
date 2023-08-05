@@ -377,7 +377,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   attachNetworkEndpoints(
@@ -423,7 +423,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -450,7 +450,7 @@ export class NetworkEndpointGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -500,7 +500,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -546,7 +546,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -573,7 +573,7 @@ export class NetworkEndpointGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -625,7 +625,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detachNetworkEndpoints(
@@ -671,7 +671,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -698,7 +698,7 @@ export class NetworkEndpointGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -744,7 +744,7 @@ export class NetworkEndpointGroupsClient {
         | protos.google.cloud.compute.v1.IGetNetworkEndpointGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -793,7 +793,7 @@ export class NetworkEndpointGroupsClient {
         | protos.google.cloud.compute.v1.IGetNetworkEndpointGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -850,7 +850,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -896,7 +896,7 @@ export class NetworkEndpointGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -922,7 +922,7 @@ export class NetworkEndpointGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -970,7 +970,7 @@ export class NetworkEndpointGroupsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNetworkEndpointGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1019,7 +1019,7 @@ export class NetworkEndpointGroupsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsNetworkEndpointGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1138,7 +1138,7 @@ export class NetworkEndpointGroupsClient {
     [
       protos.google.cloud.compute.v1.INetworkEndpointGroup[],
       protos.google.cloud.compute.v1.IListNetworkEndpointGroupsRequest | null,
-      protos.google.cloud.compute.v1.INetworkEndpointGroupList
+      protos.google.cloud.compute.v1.INetworkEndpointGroupList,
     ]
   >;
   list(
@@ -1184,7 +1184,7 @@ export class NetworkEndpointGroupsClient {
     [
       protos.google.cloud.compute.v1.INetworkEndpointGroup[],
       protos.google.cloud.compute.v1.IListNetworkEndpointGroupsRequest | null,
-      protos.google.cloud.compute.v1.INetworkEndpointGroupList
+      protos.google.cloud.compute.v1.INetworkEndpointGroupList,
     ]
   > | void {
     request = request || {};
@@ -1355,7 +1355,7 @@ export class NetworkEndpointGroupsClient {
     [
       protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus[],
       protos.google.cloud.compute.v1.IListNetworkEndpointsNetworkEndpointGroupsRequest | null,
-      protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints
+      protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints,
     ]
   >;
   listNetworkEndpoints(
@@ -1401,7 +1401,7 @@ export class NetworkEndpointGroupsClient {
     [
       protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus[],
       protos.google.cloud.compute.v1.IListNetworkEndpointsNetworkEndpointGroupsRequest | null,
-      protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints
+      protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints,
     ]
   > | void {
     request = request || {};

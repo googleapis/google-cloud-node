@@ -469,7 +469,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IGetModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getModel(
@@ -509,7 +509,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IGetModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -555,7 +555,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IPauseModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseModel(
@@ -595,7 +595,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IPauseModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -641,7 +641,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IResumeModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeModel(
@@ -681,7 +681,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IResumeModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -727,7 +727,7 @@ export class ModelServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.IDeleteModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteModel(
@@ -767,7 +767,7 @@ export class ModelServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.IDeleteModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -818,7 +818,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IUpdateModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateModel(
@@ -858,7 +858,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel,
       protos.google.cloud.retail.v2alpha.IUpdateModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -915,7 +915,7 @@ export class ModelServiceClient {
         protos.google.cloud.retail.v2alpha.ICreateModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createModel(
@@ -968,7 +968,7 @@ export class ModelServiceClient {
         protos.google.cloud.retail.v2alpha.ICreateModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1053,7 +1053,7 @@ export class ModelServiceClient {
         protos.google.cloud.retail.v2alpha.ITuneModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   tuneModel(
@@ -1106,7 +1106,7 @@ export class ModelServiceClient {
         protos.google.cloud.retail.v2alpha.ITuneModelMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1195,7 +1195,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel[],
       protos.google.cloud.retail.v2alpha.IListModelsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListModelsResponse
+      protos.google.cloud.retail.v2alpha.IListModelsResponse,
     ]
   >;
   listModels(
@@ -1235,7 +1235,7 @@ export class ModelServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IModel[],
       protos.google.cloud.retail.v2alpha.IListModelsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListModelsResponse
+      protos.google.cloud.retail.v2alpha.IListModelsResponse,
     ]
   > | void {
     request = request || {};

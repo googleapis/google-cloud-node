@@ -513,7 +513,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsCluster,
       protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAwsCluster(
@@ -559,7 +559,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsCluster,
       protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -615,7 +615,7 @@ export class AwsClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateAwsAccessToken(
@@ -664,7 +664,7 @@ export class AwsClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -721,7 +721,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
       protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAwsNodePool(
@@ -767,7 +767,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
       protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -823,7 +823,7 @@ export class AwsClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAwsServerConfig(
@@ -872,7 +872,7 @@ export class AwsClustersClient {
         | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -949,7 +949,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAwsCluster(
@@ -1002,7 +1002,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1116,7 +1116,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAwsCluster(
@@ -1169,7 +1169,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1284,7 +1284,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAwsCluster(
@@ -1337,7 +1337,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1448,7 +1448,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAwsNodePool(
@@ -1501,7 +1501,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1614,7 +1614,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAwsNodePool(
@@ -1667,7 +1667,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1780,7 +1780,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAwsNodePool(
@@ -1833,7 +1833,7 @@ export class AwsClustersClient {
         protos.google.cloud.gkemulticloud.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1933,7 +1933,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
       protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
     ]
   >;
   listAwsClusters(
@@ -1979,7 +1979,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
       protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -2164,7 +2164,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
       protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
     ]
   >;
   listAwsNodePools(
@@ -2210,7 +2210,7 @@ export class AwsClustersClient {
     [
       protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
       protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
-      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
     ]
   > | void {
     request = request || {};

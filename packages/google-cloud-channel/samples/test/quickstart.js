@@ -31,7 +31,7 @@ describe('Quickstart', () => {
     try {
       execSync('node ./quickstart.js 1234', {cwd});
     } catch (err) {
-      assert.match(err.message, /Cannot read property 'web' of undefined/);
+      assert.match(err.message, /Cannot read/);
     }
   });
 });

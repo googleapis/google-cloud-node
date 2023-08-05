@@ -435,7 +435,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.ICreateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServingConfig(
@@ -481,7 +481,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.ICreateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -528,7 +528,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2.IDeleteServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteServingConfig(
@@ -574,7 +574,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2.IDeleteServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -626,7 +626,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IUpdateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateServingConfig(
@@ -672,7 +672,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IUpdateServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -719,7 +719,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IGetServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServingConfig(
@@ -759,7 +759,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IGetServingConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -813,7 +813,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IAddControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addControl(
@@ -851,7 +851,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IAddControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -902,7 +902,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IRemoveControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeControl(
@@ -942,7 +942,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig,
       protos.google.cloud.retail.v2.IRemoveControlRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -998,7 +998,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig[],
       protos.google.cloud.retail.v2.IListServingConfigsRequest | null,
-      protos.google.cloud.retail.v2.IListServingConfigsResponse
+      protos.google.cloud.retail.v2.IListServingConfigsResponse,
     ]
   >;
   listServingConfigs(
@@ -1044,7 +1044,7 @@ export class ServingConfigServiceClient {
     [
       protos.google.cloud.retail.v2.IServingConfig[],
       protos.google.cloud.retail.v2.IListServingConfigsRequest | null,
-      protos.google.cloud.retail.v2.IListServingConfigsResponse
+      protos.google.cloud.retail.v2.IListServingConfigsResponse,
     ]
   > | void {
     request = request || {};

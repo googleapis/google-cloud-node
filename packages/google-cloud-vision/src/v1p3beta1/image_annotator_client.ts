@@ -390,7 +390,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateImages(
@@ -439,7 +439,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -490,7 +490,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1p3beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asyncBatchAnnotateFiles(
@@ -543,7 +543,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1p3beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

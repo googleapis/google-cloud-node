@@ -503,7 +503,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTransitionRouteGroup(
@@ -552,7 +552,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -626,7 +626,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTransitionRouteGroup(
@@ -675,7 +675,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -745,7 +745,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTransitionRouteGroup(
@@ -794,7 +794,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -862,7 +862,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTransitionRouteGroup(
@@ -911,7 +911,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -984,7 +984,7 @@ export class TransitionRouteGroupsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup[],
       protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse,
     ]
   >;
   listTransitionRouteGroups(
@@ -1030,7 +1030,7 @@ export class TransitionRouteGroupsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup[],
       protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse,
     ]
   > | void {
     request = request || {};

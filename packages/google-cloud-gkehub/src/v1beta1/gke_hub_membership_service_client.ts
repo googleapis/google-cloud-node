@@ -486,7 +486,7 @@ export class GkeHubMembershipServiceClient {
     [
       protos.google.cloud.gkehub.v1beta1.IMembership,
       protos.google.cloud.gkehub.v1beta1.IGetMembershipRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMembership(
@@ -532,7 +532,7 @@ export class GkeHubMembershipServiceClient {
     [
       protos.google.cloud.gkehub.v1beta1.IMembership,
       protos.google.cloud.gkehub.v1beta1.IGetMembershipRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -596,7 +596,7 @@ export class GkeHubMembershipServiceClient {
         | protos.google.cloud.gkehub.v1beta1.IGenerateConnectManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateConnectManifest(
@@ -645,7 +645,7 @@ export class GkeHubMembershipServiceClient {
         | protos.google.cloud.gkehub.v1beta1.IGenerateConnectManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -705,7 +705,7 @@ export class GkeHubMembershipServiceClient {
         | protos.google.cloud.gkehub.v1beta1.IValidateExclusivityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateExclusivity(
@@ -754,7 +754,7 @@ export class GkeHubMembershipServiceClient {
         | protos.google.cloud.gkehub.v1beta1.IValidateExclusivityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -821,7 +821,7 @@ export class GkeHubMembershipServiceClient {
         | protos.google.cloud.gkehub.v1beta1.IGenerateExclusivityManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateExclusivityManifest(
@@ -870,7 +870,7 @@ export class GkeHubMembershipServiceClient {
         | protos.google.cloud.gkehub.v1beta1.IGenerateExclusivityManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -955,7 +955,7 @@ export class GkeHubMembershipServiceClient {
         protos.google.cloud.gkehub.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMembership(
@@ -1008,7 +1008,7 @@ export class GkeHubMembershipServiceClient {
         protos.google.cloud.gkehub.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1114,7 +1114,7 @@ export class GkeHubMembershipServiceClient {
         protos.google.cloud.gkehub.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMembership(
@@ -1167,7 +1167,7 @@ export class GkeHubMembershipServiceClient {
         protos.google.cloud.gkehub.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1277,7 +1277,7 @@ export class GkeHubMembershipServiceClient {
         protos.google.cloud.gkehub.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMembership(
@@ -1330,7 +1330,7 @@ export class GkeHubMembershipServiceClient {
         protos.google.cloud.gkehub.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1445,7 +1445,7 @@ export class GkeHubMembershipServiceClient {
     [
       protos.google.cloud.gkehub.v1beta1.IMembership[],
       protos.google.cloud.gkehub.v1beta1.IListMembershipsRequest | null,
-      protos.google.cloud.gkehub.v1beta1.IListMembershipsResponse
+      protos.google.cloud.gkehub.v1beta1.IListMembershipsResponse,
     ]
   >;
   listMemberships(
@@ -1491,7 +1491,7 @@ export class GkeHubMembershipServiceClient {
     [
       protos.google.cloud.gkehub.v1beta1.IMembership[],
       protos.google.cloud.gkehub.v1beta1.IListMembershipsRequest | null,
-      protos.google.cloud.gkehub.v1beta1.IListMembershipsResponse
+      protos.google.cloud.gkehub.v1beta1.IListMembershipsResponse,
     ]
   > | void {
     request = request || {};

@@ -527,7 +527,7 @@ export class AppGatewaysServiceClient {
         | protos.google.cloud.beyondcorp.appgateways.v1.IGetAppGatewayRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAppGateway(
@@ -576,7 +576,7 @@ export class AppGatewaysServiceClient {
         | protos.google.cloud.beyondcorp.appgateways.v1.IGetAppGatewayRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -651,7 +651,7 @@ export class AppGatewaysServiceClient {
         protos.google.cloud.beyondcorp.appgateways.v1.IAppGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAppGateway(
@@ -704,7 +704,7 @@ export class AppGatewaysServiceClient {
         protos.google.cloud.beyondcorp.appgateways.v1.IAppGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -805,7 +805,7 @@ export class AppGatewaysServiceClient {
         protos.google.cloud.beyondcorp.appgateways.v1.IAppGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAppGateway(
@@ -858,7 +858,7 @@ export class AppGatewaysServiceClient {
         protos.google.cloud.beyondcorp.appgateways.v1.IAppGatewayOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -957,7 +957,7 @@ export class AppGatewaysServiceClient {
     [
       protos.google.cloud.beyondcorp.appgateways.v1.IAppGateway[],
       protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest | null,
-      protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysResponse
+      protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysResponse,
     ]
   >;
   listAppGateways(
@@ -1003,7 +1003,7 @@ export class AppGatewaysServiceClient {
     [
       protos.google.cloud.beyondcorp.appgateways.v1.IAppGateway[],
       protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest | null,
-      protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysResponse
+      protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysResponse,
     ]
   > | void {
     request = request || {};

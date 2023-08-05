@@ -1,7 +1,11 @@
 {
     "clientLibrary": {
         "name": "nodejs-servicedirectory",
+<<<<<<< HEAD
         "version": "4.1.0",
+=======
+        "version": "4.0.7",
+>>>>>>> 27860facba (🦉 Updates from OwlBot post-processor)
         "language": "TYPESCRIPT",
         "apis": [
             {

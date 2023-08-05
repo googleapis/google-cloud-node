@@ -432,7 +432,7 @@ export class DocumentUnderstandingServiceClient {
         | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   processDocument(
@@ -481,7 +481,7 @@ export class DocumentUnderstandingServiceClient {
         | protos.google.cloud.documentai.v1beta2.IProcessDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -538,7 +538,7 @@ export class DocumentUnderstandingServiceClient {
         protos.google.cloud.documentai.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchProcessDocuments(
@@ -591,7 +591,7 @@ export class DocumentUnderstandingServiceClient {
         protos.google.cloud.documentai.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

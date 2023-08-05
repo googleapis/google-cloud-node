@@ -22,9 +22,9 @@ import {promisify} from '@google-cloud/promisify';
 import * as gax from 'google-gax';
 import * as protoTypes from '../protos/protos';
 interface FeatureFunction {
-  (request: string | ImprovedRequest | Buffer): Promise<
-    [protoTypes.google.cloud.vision.v1.IAnnotateImageResponse]
-  >;
+  (
+    request: string | ImprovedRequest | Buffer
+  ): Promise<[protoTypes.google.cloud.vision.v1.IAnnotateImageResponse]>;
 }
 export interface FeaturesMethod {
   annotateImage: FeatureFunction;
@@ -62,7 +62,7 @@ interface VisionClient {
     [
       protoTypes.google.cloud.vision.v1.IBatchAnnotateImagesResponse,
       protoTypes.google.cloud.vision.v1.IBatchAnnotateImagesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateImages(

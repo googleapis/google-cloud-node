@@ -377,7 +377,7 @@ export class DocumentUnderstandingServiceClient {
         protos.google.cloud.documentai.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchProcessDocuments(
@@ -430,7 +430,7 @@ export class DocumentUnderstandingServiceClient {
         protos.google.cloud.documentai.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

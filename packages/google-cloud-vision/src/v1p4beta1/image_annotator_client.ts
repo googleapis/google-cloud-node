@@ -407,7 +407,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateImages(
@@ -456,7 +456,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateImagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -506,7 +506,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchAnnotateFiles(
@@ -555,7 +555,7 @@ export class ImageAnnotatorClient {
         | protos.google.cloud.vision.v1p4beta1.IBatchAnnotateFilesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -611,7 +611,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asyncBatchAnnotateImages(
@@ -664,7 +664,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -752,7 +752,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   asyncBatchAnnotateFiles(
@@ -805,7 +805,7 @@ export class ImageAnnotatorClient {
         protos.google.cloud.vision.v1p4beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

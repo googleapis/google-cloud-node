@@ -393,7 +393,7 @@ export class PlacesClient {
     [
       protos.google.maps.places.v1.ISearchTextResponse,
       protos.google.maps.places.v1.ISearchTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchText(
@@ -431,7 +431,7 @@ export class PlacesClient {
     [
       protos.google.maps.places.v1.ISearchTextResponse,
       protos.google.maps.places.v1.ISearchTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

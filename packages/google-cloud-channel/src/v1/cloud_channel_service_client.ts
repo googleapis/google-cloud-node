@@ -710,7 +710,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.IGetCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomer(
@@ -748,7 +748,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.IGetCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -816,7 +816,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkCloudIdentityAccountsExist(
@@ -865,7 +865,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -928,7 +928,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.ICreateCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomer(
@@ -968,7 +968,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.ICreateCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1027,7 +1027,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.IUpdateCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomer(
@@ -1067,7 +1067,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.IUpdateCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1120,7 +1120,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.channel.v1.IDeleteCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCustomer(
@@ -1160,7 +1160,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.channel.v1.IDeleteCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1244,7 +1244,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importCustomer(
@@ -1284,7 +1284,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer,
       protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1340,7 +1340,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IEntitlement,
       protos.google.cloud.channel.v1.IGetEntitlementRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntitlement(
@@ -1380,7 +1380,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IEntitlement,
       protos.google.cloud.channel.v1.IGetEntitlementRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1442,7 +1442,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IChannelPartnerLink,
       protos.google.cloud.channel.v1.IGetChannelPartnerLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChannelPartnerLink(
@@ -1488,7 +1488,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IChannelPartnerLink,
       protos.google.cloud.channel.v1.IGetChannelPartnerLinkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1563,7 +1563,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChannelPartnerLink(
@@ -1612,7 +1612,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1693,7 +1693,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateChannelPartnerLink(
@@ -1742,7 +1742,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1811,7 +1811,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomerRepricingConfig(
@@ -1860,7 +1860,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1956,7 +1956,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomerRepricingConfig(
@@ -2005,7 +2005,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2087,7 +2087,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomerRepricingConfig(
@@ -2136,7 +2136,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2206,7 +2206,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCustomerRepricingConfig(
@@ -2255,7 +2255,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2324,7 +2324,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getChannelPartnerRepricingConfig(
@@ -2373,7 +2373,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2468,7 +2468,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createChannelPartnerRepricingConfig(
@@ -2517,7 +2517,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2599,7 +2599,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateChannelPartnerRepricingConfig(
@@ -2648,7 +2648,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2717,7 +2717,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteChannelPartnerRepricingConfig(
@@ -2766,7 +2766,7 @@ export class CloudChannelServiceClient {
         | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2825,7 +2825,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IOffer,
       protos.google.cloud.channel.v1.ILookupOfferRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lookupOffer(
@@ -2863,7 +2863,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IOffer,
       protos.google.cloud.channel.v1.ILookupOfferRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2927,7 +2927,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
       protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerSubscriber(
@@ -2973,7 +2973,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
       protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3040,7 +3040,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
       protos.google.cloud.channel.v1.IUnregisterSubscriberRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   unregisterSubscriber(
@@ -3086,7 +3086,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
       protos.google.cloud.channel.v1.IUnregisterSubscriberRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3163,7 +3163,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   provisionCloudIdentity(
@@ -3216,7 +3216,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3355,7 +3355,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntitlement(
@@ -3408,7 +3408,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3537,7 +3537,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   changeParameters(
@@ -3590,7 +3590,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3712,7 +3712,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   changeRenewalSettings(
@@ -3765,7 +3765,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3893,7 +3893,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   changeOffer(
@@ -3946,7 +3946,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4067,7 +4067,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startPaidService(
@@ -4120,7 +4120,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4238,7 +4238,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suspendEntitlement(
@@ -4291,7 +4291,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4414,7 +4414,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelEntitlement(
@@ -4467,7 +4467,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4591,7 +4591,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   activateEntitlement(
@@ -4644,7 +4644,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4777,7 +4777,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   transferEntitlements(
@@ -4830,7 +4830,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4958,7 +4958,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   transferEntitlementsToGoogle(
@@ -5011,7 +5011,7 @@ export class CloudChannelServiceClient {
         protos.google.cloud.channel.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -5123,7 +5123,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer[],
       protos.google.cloud.channel.v1.IListCustomersRequest | null,
-      protos.google.cloud.channel.v1.IListCustomersResponse
+      protos.google.cloud.channel.v1.IListCustomersResponse,
     ]
   >;
   listCustomers(
@@ -5163,7 +5163,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomer[],
       protos.google.cloud.channel.v1.IListCustomersRequest | null,
-      protos.google.cloud.channel.v1.IListCustomersResponse
+      protos.google.cloud.channel.v1.IListCustomersResponse,
     ]
   > | void {
     request = request || {};
@@ -5348,7 +5348,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IEntitlement[],
       protos.google.cloud.channel.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.channel.v1.IListEntitlementsResponse
+      protos.google.cloud.channel.v1.IListEntitlementsResponse,
     ]
   >;
   listEntitlements(
@@ -5394,7 +5394,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IEntitlement[],
       protos.google.cloud.channel.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.channel.v1.IListEntitlementsResponse
+      protos.google.cloud.channel.v1.IListEntitlementsResponse,
     ]
   > | void {
     request = request || {};
@@ -5596,7 +5596,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ITransferableSku[],
       protos.google.cloud.channel.v1.IListTransferableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListTransferableSkusResponse
+      protos.google.cloud.channel.v1.IListTransferableSkusResponse,
     ]
   >;
   listTransferableSkus(
@@ -5642,7 +5642,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ITransferableSku[],
       protos.google.cloud.channel.v1.IListTransferableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListTransferableSkusResponse
+      protos.google.cloud.channel.v1.IListTransferableSkusResponse,
     ]
   > | void {
     request = request || {};
@@ -5871,7 +5871,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ITransferableOffer[],
       protos.google.cloud.channel.v1.IListTransferableOffersRequest | null,
-      protos.google.cloud.channel.v1.IListTransferableOffersResponse
+      protos.google.cloud.channel.v1.IListTransferableOffersResponse,
     ]
   >;
   listTransferableOffers(
@@ -5917,7 +5917,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ITransferableOffer[],
       protos.google.cloud.channel.v1.IListTransferableOffersRequest | null,
-      protos.google.cloud.channel.v1.IListTransferableOffersResponse
+      protos.google.cloud.channel.v1.IListTransferableOffersResponse,
     ]
   > | void {
     request = request || {};
@@ -6118,7 +6118,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IChannelPartnerLink[],
       protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest | null,
-      protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
+      protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse,
     ]
   >;
   listChannelPartnerLinks(
@@ -6164,7 +6164,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IChannelPartnerLink[],
       protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest | null,
-      protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
+      protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -6370,7 +6370,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomerRepricingConfig[],
       protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest | null,
-      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse,
     ]
   >;
   listCustomerRepricingConfigs(
@@ -6416,7 +6416,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ICustomerRepricingConfig[],
       protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest | null,
-      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+      protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -6641,7 +6641,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[],
       protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest | null,
-      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse,
     ]
   >;
   listChannelPartnerRepricingConfigs(
@@ -6687,7 +6687,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[],
       protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest | null,
-      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+      protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -6903,7 +6903,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ISkuGroup[],
       protos.google.cloud.channel.v1.IListSkuGroupsRequest | null,
-      protos.google.cloud.channel.v1.IListSkuGroupsResponse
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse,
     ]
   >;
   listSkuGroups(
@@ -6943,7 +6943,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ISkuGroup[],
       protos.google.cloud.channel.v1.IListSkuGroupsRequest | null,
-      protos.google.cloud.channel.v1.IListSkuGroupsResponse
+      protos.google.cloud.channel.v1.IListSkuGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -7124,7 +7124,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IBillableSku[],
       protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse,
     ]
   >;
   listSkuGroupBillableSkus(
@@ -7170,7 +7170,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IBillableSku[],
       protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+      protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse,
     ]
   > | void {
     request = request || {};
@@ -7339,7 +7339,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IProduct[],
       protos.google.cloud.channel.v1.IListProductsRequest | null,
-      protos.google.cloud.channel.v1.IListProductsResponse
+      protos.google.cloud.channel.v1.IListProductsResponse,
     ]
   >;
   listProducts(
@@ -7379,7 +7379,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IProduct[],
       protos.google.cloud.channel.v1.IListProductsRequest | null,
-      protos.google.cloud.channel.v1.IListProductsResponse
+      protos.google.cloud.channel.v1.IListProductsResponse,
     ]
   > | void {
     request = request || {};
@@ -7537,7 +7537,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ISku[],
       protos.google.cloud.channel.v1.IListSkusRequest | null,
-      protos.google.cloud.channel.v1.IListSkusResponse
+      protos.google.cloud.channel.v1.IListSkusResponse,
     ]
   >;
   listSkus(
@@ -7575,7 +7575,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.ISku[],
       protos.google.cloud.channel.v1.IListSkusRequest | null,
-      protos.google.cloud.channel.v1.IListSkusResponse
+      protos.google.cloud.channel.v1.IListSkusResponse,
     ]
   > | void {
     request = request || {};
@@ -7761,7 +7761,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IOffer[],
       protos.google.cloud.channel.v1.IListOffersRequest | null,
-      protos.google.cloud.channel.v1.IListOffersResponse
+      protos.google.cloud.channel.v1.IListOffersResponse,
     ]
   >;
   listOffers(
@@ -7799,7 +7799,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IOffer[],
       protos.google.cloud.channel.v1.IListOffersRequest | null,
-      protos.google.cloud.channel.v1.IListOffersResponse
+      protos.google.cloud.channel.v1.IListOffersResponse,
     ]
   > | void {
     request = request || {};
@@ -7994,7 +7994,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IPurchasableSku[],
       protos.google.cloud.channel.v1.IListPurchasableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListPurchasableSkusResponse
+      protos.google.cloud.channel.v1.IListPurchasableSkusResponse,
     ]
   >;
   listPurchasableSkus(
@@ -8040,7 +8040,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IPurchasableSku[],
       protos.google.cloud.channel.v1.IListPurchasableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListPurchasableSkusResponse
+      protos.google.cloud.channel.v1.IListPurchasableSkusResponse,
     ]
   > | void {
     request = request || {};
@@ -8221,7 +8221,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IPurchasableOffer[],
       protos.google.cloud.channel.v1.IListPurchasableOffersRequest | null,
-      protos.google.cloud.channel.v1.IListPurchasableOffersResponse
+      protos.google.cloud.channel.v1.IListPurchasableOffersResponse,
     ]
   >;
   listPurchasableOffers(
@@ -8267,7 +8267,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IPurchasableOffer[],
       protos.google.cloud.channel.v1.IListPurchasableOffersRequest | null,
-      protos.google.cloud.channel.v1.IListPurchasableOffersResponse
+      protos.google.cloud.channel.v1.IListPurchasableOffersResponse,
     ]
   > | void {
     request = request || {};
@@ -8452,7 +8452,7 @@ export class CloudChannelServiceClient {
     [
       string[],
       protos.google.cloud.channel.v1.IListSubscribersRequest | null,
-      protos.google.cloud.channel.v1.IListSubscribersResponse
+      protos.google.cloud.channel.v1.IListSubscribersResponse,
     ]
   >;
   listSubscribers(
@@ -8498,7 +8498,7 @@ export class CloudChannelServiceClient {
     [
       string[],
       protos.google.cloud.channel.v1.IListSubscribersRequest | null,
-      protos.google.cloud.channel.v1.IListSubscribersResponse
+      protos.google.cloud.channel.v1.IListSubscribersResponse,
     ]
   > | void {
     request = request || {};
@@ -8683,7 +8683,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IEntitlementChange[],
       protos.google.cloud.channel.v1.IListEntitlementChangesRequest | null,
-      protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+      protos.google.cloud.channel.v1.IListEntitlementChangesResponse,
     ]
   >;
   listEntitlementChanges(
@@ -8729,7 +8729,7 @@ export class CloudChannelServiceClient {
     [
       protos.google.cloud.channel.v1.IEntitlementChange[],
       protos.google.cloud.channel.v1.IListEntitlementChangesRequest | null,
-      protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+      protos.google.cloud.channel.v1.IListEntitlementChangesResponse,
     ]
   > | void {
     request = request || {};

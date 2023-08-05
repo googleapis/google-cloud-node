@@ -358,7 +358,7 @@ export class TargetGrpcProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -404,7 +404,7 @@ export class TargetGrpcProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -430,7 +430,7 @@ export class TargetGrpcProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -471,7 +471,7 @@ export class TargetGrpcProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetGrpcProxy,
       protos.google.cloud.compute.v1.IGetTargetGrpcProxyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -517,7 +517,7 @@ export class TargetGrpcProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetGrpcProxy,
       protos.google.cloud.compute.v1.IGetTargetGrpcProxyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,7 +571,7 @@ export class TargetGrpcProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -617,7 +617,7 @@ export class TargetGrpcProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -642,7 +642,7 @@ export class TargetGrpcProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -692,7 +692,7 @@ export class TargetGrpcProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -738,7 +738,7 @@ export class TargetGrpcProxiesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -764,7 +764,7 @@ export class TargetGrpcProxiesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -817,7 +817,7 @@ export class TargetGrpcProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetGrpcProxy[],
       protos.google.cloud.compute.v1.IListTargetGrpcProxiesRequest | null,
-      protos.google.cloud.compute.v1.ITargetGrpcProxyList
+      protos.google.cloud.compute.v1.ITargetGrpcProxyList,
     ]
   >;
   list(
@@ -857,7 +857,7 @@ export class TargetGrpcProxiesClient {
     [
       protos.google.cloud.compute.v1.ITargetGrpcProxy[],
       protos.google.cloud.compute.v1.IListTargetGrpcProxiesRequest | null,
-      protos.google.cloud.compute.v1.ITargetGrpcProxyList
+      protos.google.cloud.compute.v1.ITargetGrpcProxyList,
     ]
   > | void {
     request = request || {};

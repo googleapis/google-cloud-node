@@ -563,7 +563,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ICdnKey,
       protos.google.cloud.video.stitcher.v1.IGetCdnKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCdnKey(
@@ -609,7 +609,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ICdnKey,
       protos.google.cloud.video.stitcher.v1.IGetCdnKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -660,7 +660,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.ICreateVodSessionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createVodSession(
@@ -709,7 +709,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.ICreateVodSessionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -755,7 +755,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.IVodSession,
       protos.google.cloud.video.stitcher.v1.IGetVodSessionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVodSession(
@@ -801,7 +801,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.IVodSession,
       protos.google.cloud.video.stitcher.v1.IGetVodSessionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -850,7 +850,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.IGetVodStitchDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVodStitchDetail(
@@ -899,7 +899,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.IGetVodStitchDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -948,7 +948,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.IGetVodAdTagDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVodAdTagDetail(
@@ -997,7 +997,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.IGetVodAdTagDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1045,7 +1045,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.IGetLiveAdTagDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLiveAdTagDetail(
@@ -1094,7 +1094,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.IGetLiveAdTagDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1139,7 +1139,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ISlate,
       protos.google.cloud.video.stitcher.v1.IGetSlateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSlate(
@@ -1179,7 +1179,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ISlate,
       protos.google.cloud.video.stitcher.v1.IGetSlateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1229,7 +1229,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.ICreateLiveSessionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createLiveSession(
@@ -1278,7 +1278,7 @@ export class VideoStitcherServiceClient {
         | protos.google.cloud.video.stitcher.v1.ICreateLiveSessionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1323,7 +1323,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveSession,
       protos.google.cloud.video.stitcher.v1.IGetLiveSessionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLiveSession(
@@ -1369,7 +1369,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveSession,
       protos.google.cloud.video.stitcher.v1.IGetLiveSessionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1416,7 +1416,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveConfig,
       protos.google.cloud.video.stitcher.v1.IGetLiveConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLiveConfig(
@@ -1462,7 +1462,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveConfig,
       protos.google.cloud.video.stitcher.v1.IGetLiveConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1522,7 +1522,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCdnKey(
@@ -1575,7 +1575,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1659,7 +1659,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCdnKey(
@@ -1712,7 +1712,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1800,7 +1800,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCdnKey(
@@ -1853,7 +1853,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1958,7 +1958,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSlate(
@@ -2011,7 +2011,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2096,7 +2096,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSlate(
@@ -2149,7 +2149,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2233,7 +2233,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSlate(
@@ -2286,7 +2286,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2389,7 +2389,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createLiveConfig(
@@ -2442,7 +2442,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2526,7 +2526,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteLiveConfig(
@@ -2579,7 +2579,7 @@ export class VideoStitcherServiceClient {
         protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2670,7 +2670,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ICdnKey[],
       protos.google.cloud.video.stitcher.v1.IListCdnKeysRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListCdnKeysResponse
+      protos.google.cloud.video.stitcher.v1.IListCdnKeysResponse,
     ]
   >;
   listCdnKeys(
@@ -2716,7 +2716,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ICdnKey[],
       protos.google.cloud.video.stitcher.v1.IListCdnKeysRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListCdnKeysResponse
+      protos.google.cloud.video.stitcher.v1.IListCdnKeysResponse,
     ]
   > | void {
     request = request || {};
@@ -2870,7 +2870,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.IVodStitchDetail[],
       protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsResponse
+      protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsResponse,
     ]
   >;
   listVodStitchDetails(
@@ -2916,7 +2916,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.IVodStitchDetail[],
       protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsResponse
+      protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -3059,7 +3059,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[],
       protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsResponse
+      protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsResponse,
     ]
   >;
   listVodAdTagDetails(
@@ -3105,7 +3105,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[],
       protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsResponse
+      protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -3248,7 +3248,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[],
       protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsResponse
+      protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsResponse,
     ]
   >;
   listLiveAdTagDetails(
@@ -3294,7 +3294,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[],
       protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsResponse
+      protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -3442,7 +3442,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ISlate[],
       protos.google.cloud.video.stitcher.v1.IListSlatesRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListSlatesResponse
+      protos.google.cloud.video.stitcher.v1.IListSlatesResponse,
     ]
   >;
   listSlates(
@@ -3488,7 +3488,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ISlate[],
       protos.google.cloud.video.stitcher.v1.IListSlatesRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListSlatesResponse
+      protos.google.cloud.video.stitcher.v1.IListSlatesResponse,
     ]
   > | void {
     request = request || {};
@@ -3649,7 +3649,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveConfig[],
       protos.google.cloud.video.stitcher.v1.IListLiveConfigsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListLiveConfigsResponse
+      protos.google.cloud.video.stitcher.v1.IListLiveConfigsResponse,
     ]
   >;
   listLiveConfigs(
@@ -3695,7 +3695,7 @@ export class VideoStitcherServiceClient {
     [
       protos.google.cloud.video.stitcher.v1.ILiveConfig[],
       protos.google.cloud.video.stitcher.v1.IListLiveConfigsRequest | null,
-      protos.google.cloud.video.stitcher.v1.IListLiveConfigsResponse
+      protos.google.cloud.video.stitcher.v1.IListLiveConfigsResponse,
     ]
   > | void {
     request = request || {};

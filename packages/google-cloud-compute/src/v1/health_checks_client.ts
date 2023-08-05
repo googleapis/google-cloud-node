@@ -365,7 +365,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -411,7 +411,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -437,7 +437,7 @@ export class HealthChecksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -478,7 +478,7 @@ export class HealthChecksClient {
     [
       protos.google.cloud.compute.v1.IHealthCheck,
       protos.google.cloud.compute.v1.IGetHealthCheckRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -518,7 +518,7 @@ export class HealthChecksClient {
     [
       protos.google.cloud.compute.v1.IHealthCheck,
       protos.google.cloud.compute.v1.IGetHealthCheckRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -572,7 +572,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -618,7 +618,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -643,7 +643,7 @@ export class HealthChecksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -693,7 +693,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -739,7 +739,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -765,7 +765,7 @@ export class HealthChecksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -815,7 +815,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -861,7 +861,7 @@ export class HealthChecksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -887,7 +887,7 @@ export class HealthChecksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -997,7 +997,7 @@ export class HealthChecksClient {
     [
       protos.google.cloud.compute.v1.IHealthCheck[],
       protos.google.cloud.compute.v1.IListHealthChecksRequest | null,
-      protos.google.cloud.compute.v1.IHealthCheckList
+      protos.google.cloud.compute.v1.IHealthCheckList,
     ]
   >;
   list(
@@ -1035,7 +1035,7 @@ export class HealthChecksClient {
     [
       protos.google.cloud.compute.v1.IHealthCheck[],
       protos.google.cloud.compute.v1.IListHealthChecksRequest | null,
-      protos.google.cloud.compute.v1.IHealthCheckList
+      protos.google.cloud.compute.v1.IHealthCheckList,
     ]
   > | void {
     request = request || {};

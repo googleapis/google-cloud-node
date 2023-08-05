@@ -435,7 +435,7 @@ export class DomainMappingsClient {
     [
       protos.google.appengine.v1.IDomainMapping,
       protos.google.appengine.v1.IGetDomainMappingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDomainMapping(
@@ -475,7 +475,7 @@ export class DomainMappingsClient {
     [
       protos.google.appengine.v1.IDomainMapping,
       protos.google.appengine.v1.IGetDomainMappingRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -532,7 +532,7 @@ export class DomainMappingsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDomainMapping(
@@ -585,7 +585,7 @@ export class DomainMappingsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -677,7 +677,7 @@ export class DomainMappingsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDomainMapping(
@@ -730,7 +730,7 @@ export class DomainMappingsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -816,7 +816,7 @@ export class DomainMappingsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDomainMapping(
@@ -869,7 +869,7 @@ export class DomainMappingsClient {
         protos.google.appengine.v1.IOperationMetadataV1
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -954,7 +954,7 @@ export class DomainMappingsClient {
     [
       protos.google.appengine.v1.IDomainMapping[],
       protos.google.appengine.v1.IListDomainMappingsRequest | null,
-      protos.google.appengine.v1.IListDomainMappingsResponse
+      protos.google.appengine.v1.IListDomainMappingsResponse,
     ]
   >;
   listDomainMappings(
@@ -994,7 +994,7 @@ export class DomainMappingsClient {
     [
       protos.google.appengine.v1.IDomainMapping[],
       protos.google.appengine.v1.IListDomainMappingsRequest | null,
-      protos.google.appengine.v1.IListDomainMappingsResponse
+      protos.google.appengine.v1.IListDomainMappingsResponse,
     ]
   > | void {
     request = request || {};

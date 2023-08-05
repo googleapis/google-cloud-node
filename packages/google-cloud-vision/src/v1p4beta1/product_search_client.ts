@@ -474,7 +474,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet,
       protos.google.cloud.vision.v1p4beta1.ICreateProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProductSet(
@@ -520,7 +520,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet,
       protos.google.cloud.vision.v1p4beta1.ICreateProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,7 +571,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet,
       protos.google.cloud.vision.v1p4beta1.IGetProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProductSet(
@@ -617,7 +617,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet,
       protos.google.cloud.vision.v1p4beta1.IGetProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -673,7 +673,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet,
       protos.google.cloud.vision.v1p4beta1.IUpdateProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProductSet(
@@ -719,7 +719,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet,
       protos.google.cloud.vision.v1p4beta1.IUpdateProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -769,7 +769,7 @@ export class ProductSearchClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.vision.v1p4beta1.IDeleteProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProductSet(
@@ -815,7 +815,7 @@ export class ProductSearchClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.vision.v1p4beta1.IDeleteProductSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -876,7 +876,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct,
       protos.google.cloud.vision.v1p4beta1.ICreateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProduct(
@@ -922,7 +922,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct,
       protos.google.cloud.vision.v1p4beta1.ICreateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -973,7 +973,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct,
       protos.google.cloud.vision.v1p4beta1.IGetProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProduct(
@@ -1019,7 +1019,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct,
       protos.google.cloud.vision.v1p4beta1.IGetProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1084,7 +1084,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct,
       protos.google.cloud.vision.v1p4beta1.IUpdateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProduct(
@@ -1130,7 +1130,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct,
       protos.google.cloud.vision.v1p4beta1.IUpdateProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1181,7 +1181,7 @@ export class ProductSearchClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.vision.v1p4beta1.IDeleteProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProduct(
@@ -1227,7 +1227,7 @@ export class ProductSearchClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.vision.v1p4beta1.IDeleteProductRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1304,7 +1304,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.ICreateReferenceImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReferenceImage(
@@ -1353,7 +1353,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.ICreateReferenceImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1410,7 +1410,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IDeleteReferenceImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReferenceImage(
@@ -1459,7 +1459,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IDeleteReferenceImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1514,7 +1514,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IGetReferenceImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReferenceImage(
@@ -1563,7 +1563,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IGetReferenceImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1625,7 +1625,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IAddProductToProductSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addProductToProductSet(
@@ -1674,7 +1674,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IAddProductToProductSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1734,7 +1734,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IRemoveProductFromProductSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeProductFromProductSet(
@@ -1783,7 +1783,7 @@ export class ProductSearchClient {
         | protos.google.cloud.vision.v1p4beta1.IRemoveProductFromProductSetRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1851,7 +1851,7 @@ export class ProductSearchClient {
         protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importProductSets(
@@ -1904,7 +1904,7 @@ export class ProductSearchClient {
         protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2020,7 +2020,7 @@ export class ProductSearchClient {
         protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeProducts(
@@ -2073,7 +2073,7 @@ export class ProductSearchClient {
         protos.google.cloud.vision.v1p4beta1.IBatchOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2165,7 +2165,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet[],
       protos.google.cloud.vision.v1p4beta1.IListProductSetsRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListProductSetsResponse
+      protos.google.cloud.vision.v1p4beta1.IListProductSetsResponse,
     ]
   >;
   listProductSets(
@@ -2211,7 +2211,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProductSet[],
       protos.google.cloud.vision.v1p4beta1.IListProductSetsRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListProductSetsResponse
+      protos.google.cloud.vision.v1p4beta1.IListProductSetsResponse,
     ]
   > | void {
     request = request || {};
@@ -2362,7 +2362,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct[],
       protos.google.cloud.vision.v1p4beta1.IListProductsRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListProductsResponse
+      protos.google.cloud.vision.v1p4beta1.IListProductsResponse,
     ]
   >;
   listProducts(
@@ -2408,7 +2408,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct[],
       protos.google.cloud.vision.v1p4beta1.IListProductsRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListProductsResponse
+      protos.google.cloud.vision.v1p4beta1.IListProductsResponse,
     ]
   > | void {
     request = request || {};
@@ -2566,7 +2566,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IReferenceImage[],
       protos.google.cloud.vision.v1p4beta1.IListReferenceImagesRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListReferenceImagesResponse
+      protos.google.cloud.vision.v1p4beta1.IListReferenceImagesResponse,
     ]
   >;
   listReferenceImages(
@@ -2612,7 +2612,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IReferenceImage[],
       protos.google.cloud.vision.v1p4beta1.IListReferenceImagesRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListReferenceImagesResponse
+      protos.google.cloud.vision.v1p4beta1.IListReferenceImagesResponse,
     ]
   > | void {
     request = request || {};
@@ -2773,7 +2773,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct[],
       protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetResponse
+      protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetResponse,
     ]
   >;
   listProductsInProductSet(
@@ -2819,7 +2819,7 @@ export class ProductSearchClient {
     [
       protos.google.cloud.vision.v1p4beta1.IProduct[],
       protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetRequest | null,
-      protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetResponse
+      protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetResponse,
     ]
   > | void {
     request = request || {};

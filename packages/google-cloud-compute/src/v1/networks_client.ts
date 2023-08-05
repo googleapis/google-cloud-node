@@ -371,7 +371,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addPeering(
@@ -417,7 +417,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -443,7 +443,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -491,7 +491,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -531,7 +531,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -557,7 +557,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -598,7 +598,7 @@ export class NetworksClient {
     [
       protos.google.cloud.compute.v1.INetwork,
       protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -636,7 +636,7 @@ export class NetworksClient {
     [
       protos.google.cloud.compute.v1.INetwork,
       protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -686,7 +686,7 @@ export class NetworksClient {
         | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEffectiveFirewalls(
@@ -735,7 +735,7 @@ export class NetworksClient {
         | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -789,7 +789,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -829,7 +829,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -854,7 +854,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -904,7 +904,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -944,7 +944,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -970,7 +970,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1020,7 +1020,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removePeering(
@@ -1066,7 +1066,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1092,7 +1092,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1140,7 +1140,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   switchToCustomMode(
@@ -1186,7 +1186,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1212,7 +1212,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1262,7 +1262,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePeering(
@@ -1308,7 +1308,7 @@ export class NetworksClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1334,7 +1334,7 @@ export class NetworksClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1387,7 +1387,7 @@ export class NetworksClient {
     [
       protos.google.cloud.compute.v1.INetwork[],
       protos.google.cloud.compute.v1.IListNetworksRequest | null,
-      protos.google.cloud.compute.v1.INetworkList
+      protos.google.cloud.compute.v1.INetworkList,
     ]
   >;
   list(
@@ -1425,7 +1425,7 @@ export class NetworksClient {
     [
       protos.google.cloud.compute.v1.INetwork[],
       protos.google.cloud.compute.v1.IListNetworksRequest | null,
-      protos.google.cloud.compute.v1.INetworkList
+      protos.google.cloud.compute.v1.INetworkList,
     ]
   > | void {
     request = request || {};
@@ -1592,7 +1592,7 @@ export class NetworksClient {
     [
       protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
       protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest | null,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
     ]
   >;
   listPeeringRoutes(
@@ -1638,7 +1638,7 @@ export class NetworksClient {
     [
       protos.google.cloud.compute.v1.IExchangedPeeringRoute[],
       protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest | null,
-      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
     ]
   > | void {
     request = request || {};

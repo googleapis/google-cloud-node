@@ -373,7 +373,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -411,7 +411,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -463,7 +463,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -501,7 +501,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -560,7 +560,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -598,7 +598,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -643,7 +643,7 @@ export class CloudSchedulerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -681,7 +681,7 @@ export class CloudSchedulerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.scheduler.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -735,7 +735,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseJob(
@@ -773,7 +773,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IPauseJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -826,7 +826,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeJob(
@@ -864,7 +864,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IResumeJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -912,7 +912,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IRunJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runJob(
@@ -950,7 +950,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob,
       protos.google.cloud.scheduler.v1.IRunJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1017,7 +1017,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob[],
       protos.google.cloud.scheduler.v1.IListJobsRequest | null,
-      protos.google.cloud.scheduler.v1.IListJobsResponse
+      protos.google.cloud.scheduler.v1.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -1055,7 +1055,7 @@ export class CloudSchedulerClient {
     [
       protos.google.cloud.scheduler.v1.IJob[],
       protos.google.cloud.scheduler.v1.IListJobsRequest | null,
-      protos.google.cloud.scheduler.v1.IListJobsResponse
+      protos.google.cloud.scheduler.v1.IListJobsResponse,
     ]
   > | void {
     request = request || {};

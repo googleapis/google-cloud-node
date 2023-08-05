@@ -628,7 +628,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline,
       protos.google.cloud.deploy.v1.IGetDeliveryPipelineRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeliveryPipeline(
@@ -674,7 +674,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline,
       protos.google.cloud.deploy.v1.IGetDeliveryPipelineRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -719,7 +719,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget,
       protos.google.cloud.deploy.v1.IGetTargetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTarget(
@@ -757,7 +757,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget,
       protos.google.cloud.deploy.v1.IGetTargetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -802,7 +802,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease,
       protos.google.cloud.deploy.v1.IGetReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRelease(
@@ -840,7 +840,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease,
       protos.google.cloud.deploy.v1.IGetReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -886,7 +886,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAbandonReleaseResponse,
       protos.google.cloud.deploy.v1.IAbandonReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   abandonRelease(
@@ -926,7 +926,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAbandonReleaseResponse,
       protos.google.cloud.deploy.v1.IAbandonReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -974,7 +974,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IApproveRolloutResponse,
       protos.google.cloud.deploy.v1.IApproveRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   approveRollout(
@@ -1014,7 +1014,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IApproveRolloutResponse,
       protos.google.cloud.deploy.v1.IApproveRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1062,7 +1062,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
       protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   advanceRollout(
@@ -1102,7 +1102,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
       protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1148,7 +1148,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ICancelRolloutResponse,
       protos.google.cloud.deploy.v1.ICancelRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelRollout(
@@ -1188,7 +1188,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ICancelRolloutResponse,
       protos.google.cloud.deploy.v1.ICancelRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1233,7 +1233,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout,
       protos.google.cloud.deploy.v1.IGetRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRollout(
@@ -1271,7 +1271,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout,
       protos.google.cloud.deploy.v1.IGetRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1321,7 +1321,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IIgnoreJobResponse,
       protos.google.cloud.deploy.v1.IIgnoreJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   ignoreJob(
@@ -1359,7 +1359,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IIgnoreJobResponse,
       protos.google.cloud.deploy.v1.IIgnoreJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1409,7 +1409,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRetryJobResponse,
       protos.google.cloud.deploy.v1.IRetryJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retryJob(
@@ -1447,7 +1447,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRetryJobResponse,
       protos.google.cloud.deploy.v1.IRetryJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1492,7 +1492,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun,
       protos.google.cloud.deploy.v1.IGetJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJobRun(
@@ -1530,7 +1530,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun,
       protos.google.cloud.deploy.v1.IGetJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1576,7 +1576,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
       protos.google.cloud.deploy.v1.ITerminateJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   terminateJobRun(
@@ -1616,7 +1616,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
       protos.google.cloud.deploy.v1.ITerminateJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1660,7 +1660,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IConfig,
       protos.google.cloud.deploy.v1.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConfig(
@@ -1698,7 +1698,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IConfig,
       protos.google.cloud.deploy.v1.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1770,7 +1770,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDeliveryPipeline(
@@ -1823,7 +1823,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1936,7 +1936,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDeliveryPipeline(
@@ -1989,7 +1989,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2105,7 +2105,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDeliveryPipeline(
@@ -2158,7 +2158,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2268,7 +2268,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTarget(
@@ -2321,7 +2321,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2430,7 +2430,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTarget(
@@ -2483,7 +2483,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2591,7 +2591,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTarget(
@@ -2644,7 +2644,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2750,7 +2750,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRelease(
@@ -2803,7 +2803,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2912,7 +2912,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRollout(
@@ -2965,7 +2965,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3063,7 +3063,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline[],
       protos.google.cloud.deploy.v1.IListDeliveryPipelinesRequest | null,
-      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse
+      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse,
     ]
   >;
   listDeliveryPipelines(
@@ -3109,7 +3109,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline[],
       protos.google.cloud.deploy.v1.IListDeliveryPipelinesRequest | null,
-      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse
+      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse,
     ]
   > | void {
     request = request || {};
@@ -3289,7 +3289,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget[],
       protos.google.cloud.deploy.v1.IListTargetsRequest | null,
-      protos.google.cloud.deploy.v1.IListTargetsResponse
+      protos.google.cloud.deploy.v1.IListTargetsResponse,
     ]
   >;
   listTargets(
@@ -3327,7 +3327,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget[],
       protos.google.cloud.deploy.v1.IListTargetsRequest | null,
-      protos.google.cloud.deploy.v1.IListTargetsResponse
+      protos.google.cloud.deploy.v1.IListTargetsResponse,
     ]
   > | void {
     request = request || {};
@@ -3509,7 +3509,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease[],
       protos.google.cloud.deploy.v1.IListReleasesRequest | null,
-      protos.google.cloud.deploy.v1.IListReleasesResponse
+      protos.google.cloud.deploy.v1.IListReleasesResponse,
     ]
   >;
   listReleases(
@@ -3549,7 +3549,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease[],
       protos.google.cloud.deploy.v1.IListReleasesRequest | null,
-      protos.google.cloud.deploy.v1.IListReleasesResponse
+      protos.google.cloud.deploy.v1.IListReleasesResponse,
     ]
   > | void {
     request = request || {};
@@ -3730,7 +3730,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout[],
       protos.google.cloud.deploy.v1.IListRolloutsRequest | null,
-      protos.google.cloud.deploy.v1.IListRolloutsResponse
+      protos.google.cloud.deploy.v1.IListRolloutsResponse,
     ]
   >;
   listRollouts(
@@ -3770,7 +3770,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout[],
       protos.google.cloud.deploy.v1.IListRolloutsRequest | null,
-      protos.google.cloud.deploy.v1.IListRolloutsResponse
+      protos.google.cloud.deploy.v1.IListRolloutsResponse,
     ]
   > | void {
     request = request || {};
@@ -3949,7 +3949,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun[],
       protos.google.cloud.deploy.v1.IListJobRunsRequest | null,
-      protos.google.cloud.deploy.v1.IListJobRunsResponse
+      protos.google.cloud.deploy.v1.IListJobRunsResponse,
     ]
   >;
   listJobRuns(
@@ -3987,7 +3987,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun[],
       protos.google.cloud.deploy.v1.IListJobRunsRequest | null,
-      protos.google.cloud.deploy.v1.IListJobRunsResponse
+      protos.google.cloud.deploy.v1.IListJobRunsResponse,
     ]
   > | void {
     request = request || {};

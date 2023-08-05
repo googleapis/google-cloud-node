@@ -387,7 +387,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListClustersResponse,
       protos.google.container.v1beta1.IListClustersRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listClusters(
@@ -427,7 +427,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListClustersResponse,
       protos.google.container.v1beta1.IListClustersRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -486,7 +486,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.ICluster,
       protos.google.container.v1beta1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -524,7 +524,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.ICluster,
       protos.google.container.v1beta1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -597,7 +597,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -637,7 +637,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -698,7 +698,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -738,7 +738,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -866,7 +866,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNodePool(
@@ -906,7 +906,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -976,7 +976,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ISetNodePoolAutoscalingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodePoolAutoscaling(
@@ -1025,7 +1025,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ISetNodePoolAutoscalingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1102,7 +1102,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLoggingService(
@@ -1148,7 +1148,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1220,7 +1220,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setMonitoringService(
@@ -1266,7 +1266,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1329,7 +1329,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setAddonsConfig(
@@ -1375,7 +1375,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1447,7 +1447,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLocations(
@@ -1487,7 +1487,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1563,7 +1563,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateMasterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMaster(
@@ -1603,7 +1603,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateMasterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1669,7 +1669,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMasterAuthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setMasterAuth(
@@ -1709,7 +1709,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMasterAuthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1777,7 +1777,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -1817,7 +1817,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1875,7 +1875,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListOperationsResponse,
       protos.google.container.v1beta1.IListOperationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listOperations(
@@ -1915,7 +1915,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListOperationsResponse,
       protos.google.container.v1beta1.IListOperationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1974,7 +1974,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IGetOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOperation(
@@ -2014,7 +2014,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IGetOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2074,7 +2074,7 @@ export class ClusterManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.container.v1beta1.ICancelOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelOperation(
@@ -2120,7 +2120,7 @@ export class ClusterManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.container.v1beta1.ICancelOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2177,7 +2177,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IServerConfig,
       protos.google.container.v1beta1.IGetServerConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServerConfig(
@@ -2223,7 +2223,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IServerConfig,
       protos.google.container.v1beta1.IGetServerConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2273,7 +2273,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IGetJSONWebKeysResponse,
       protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJSONWebKeys(
@@ -2313,7 +2313,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IGetJSONWebKeysResponse,
       protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2370,7 +2370,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListNodePoolsResponse,
       protos.google.container.v1beta1.IListNodePoolsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listNodePools(
@@ -2410,7 +2410,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListNodePoolsResponse,
       protos.google.container.v1beta1.IListNodePoolsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2474,7 +2474,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.INodePool,
       protos.google.container.v1beta1.IGetNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNodePool(
@@ -2514,7 +2514,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.INodePool,
       protos.google.container.v1beta1.IGetNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2578,7 +2578,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNodePool(
@@ -2618,7 +2618,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2682,7 +2682,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNodePool(
@@ -2722,7 +2722,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2776,7 +2776,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICompleteNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeNodePoolUpgrade(
@@ -2825,7 +2825,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICompleteNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2897,7 +2897,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.IRollbackNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackNodePoolUpgrade(
@@ -2946,7 +2946,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.IRollbackNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3017,7 +3017,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodePoolManagement(
@@ -3063,7 +3063,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3133,7 +3133,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLabelsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -3171,7 +3171,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLabelsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3233,7 +3233,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLegacyAbac(
@@ -3273,7 +3273,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3335,7 +3335,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IStartIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startIPRotation(
@@ -3381,7 +3381,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IStartIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3441,7 +3441,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeIPRotation(
@@ -3487,7 +3487,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3555,7 +3555,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodePoolSize(
@@ -3601,7 +3601,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3664,7 +3664,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNetworkPolicy(
@@ -3710,7 +3710,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3771,7 +3771,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setMaintenancePolicy(
@@ -3817,7 +3817,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3869,7 +3869,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkAutopilotCompatibility(
@@ -3918,7 +3918,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3967,7 +3967,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListLocationsResponse,
       protos.google.container.v1beta1.IListLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listLocations(
@@ -4007,7 +4007,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListLocationsResponse,
       protos.google.container.v1beta1.IListLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4069,7 +4069,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IUsableSubnetwork[],
       protos.google.container.v1beta1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1beta1.IListUsableSubnetworksResponse
+      protos.google.container.v1beta1.IListUsableSubnetworksResponse,
     ]
   >;
   listUsableSubnetworks(
@@ -4115,7 +4115,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IUsableSubnetwork[],
       protos.google.container.v1beta1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1beta1.IListUsableSubnetworksResponse
+      protos.google.container.v1beta1.IListUsableSubnetworksResponse,
     ]
   > | void {
     request = request || {};

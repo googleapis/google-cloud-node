@@ -401,7 +401,7 @@ export class TextServiceClient {
         | protos.google.ai.generativelanguage.v1beta2.IGenerateTextRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateText(
@@ -450,7 +450,7 @@ export class TextServiceClient {
         | protos.google.ai.generativelanguage.v1beta2.IGenerateTextRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -497,7 +497,7 @@ export class TextServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IEmbedTextResponse,
       protos.google.ai.generativelanguage.v1beta2.IEmbedTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   embedText(
@@ -543,7 +543,7 @@ export class TextServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IEmbedTextResponse,
       protos.google.ai.generativelanguage.v1beta2.IEmbedTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

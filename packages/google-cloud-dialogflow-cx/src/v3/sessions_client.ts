@@ -519,7 +519,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detectIntent(
@@ -565,7 +565,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -627,7 +627,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   matchIntent(
@@ -673,7 +673,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -728,7 +728,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fulfillIntent(
@@ -774,7 +774,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

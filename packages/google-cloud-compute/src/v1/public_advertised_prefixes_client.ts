@@ -360,7 +360,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -406,7 +406,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -432,7 +432,7 @@ export class PublicAdvertisedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -476,7 +476,7 @@ export class PublicAdvertisedPrefixesClient {
         | protos.google.cloud.compute.v1.IGetPublicAdvertisedPrefixeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -525,7 +525,7 @@ export class PublicAdvertisedPrefixesClient {
         | protos.google.cloud.compute.v1.IGetPublicAdvertisedPrefixeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -625,7 +625,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -650,7 +650,7 @@ export class PublicAdvertisedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -700,7 +700,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -746,7 +746,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -772,7 +772,7 @@ export class PublicAdvertisedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -825,7 +825,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       protos.google.cloud.compute.v1.IPublicAdvertisedPrefix[],
       protos.google.cloud.compute.v1.IListPublicAdvertisedPrefixesRequest | null,
-      protos.google.cloud.compute.v1.IPublicAdvertisedPrefixList
+      protos.google.cloud.compute.v1.IPublicAdvertisedPrefixList,
     ]
   >;
   list(
@@ -871,7 +871,7 @@ export class PublicAdvertisedPrefixesClient {
     [
       protos.google.cloud.compute.v1.IPublicAdvertisedPrefix[],
       protos.google.cloud.compute.v1.IListPublicAdvertisedPrefixesRequest | null,
-      protos.google.cloud.compute.v1.IPublicAdvertisedPrefixList
+      protos.google.cloud.compute.v1.IPublicAdvertisedPrefixList,
     ]
   > | void {
     request = request || {};

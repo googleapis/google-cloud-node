@@ -601,7 +601,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnectionProfile(
@@ -650,7 +650,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -714,7 +714,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   discoverConnectionProfile(
@@ -763,7 +763,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -811,7 +811,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream,
       protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getStream(
@@ -857,7 +857,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream,
       protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,7 +904,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPrivateConnection(
@@ -953,7 +953,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -997,7 +997,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute,
       protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRoute(
@@ -1043,7 +1043,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute,
       protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1111,7 +1111,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnectionProfile(
@@ -1164,7 +1164,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1271,7 +1271,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConnectionProfile(
@@ -1324,7 +1324,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1425,7 +1425,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnectionProfile(
@@ -1478,7 +1478,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1588,7 +1588,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createStream(
@@ -1641,7 +1641,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1749,7 +1749,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateStream(
@@ -1802,7 +1802,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1899,7 +1899,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteStream(
@@ -1952,7 +1952,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2035,7 +2035,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchErrors(
@@ -2088,7 +2088,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2189,7 +2189,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPrivateConnection(
@@ -2242,7 +2242,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2346,7 +2346,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePrivateConnection(
@@ -2399,7 +2399,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2505,7 +2505,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRoute(
@@ -2558,7 +2558,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2655,7 +2655,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRoute(
@@ -2708,7 +2708,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2804,7 +2804,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
       protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
     ]
   >;
   listConnectionProfiles(
@@ -2850,7 +2850,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
       protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
     ]
   > | void {
     request = request || {};
@@ -3024,7 +3024,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream[],
       protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
     ]
   >;
   listStreams(
@@ -3070,7 +3070,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream[],
       protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
     ]
   > | void {
     request = request || {};
@@ -3234,7 +3234,7 @@ export class DatastreamClient {
     [
       string[],
       protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
     ]
   >;
   fetchStaticIps(
@@ -3280,7 +3280,7 @@ export class DatastreamClient {
     [
       string[],
       protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
     ]
   > | void {
     request = request || {};
@@ -3437,7 +3437,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
       protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
     ]
   >;
   listPrivateConnections(
@@ -3483,7 +3483,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
       protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
     ]
   > | void {
     request = request || {};
@@ -3664,7 +3664,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute[],
       protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
     ]
   >;
   listRoutes(
@@ -3710,7 +3710,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute[],
       protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
     ]
   > | void {
     request = request || {};
