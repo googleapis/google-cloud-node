@@ -63,15 +63,21 @@ const sc = require('@google-cloud/security-center');
 const client = new sc.SecurityCenterClient();
 
 async function quickstart() {
-  // TODO(developer): choose the organization to use
-  // const organization = 'your-organization';
-  const [source] = await client.createSource({
-    parent: client.organizationPath(organization),
-    source: {},
-  });
-  // The newly created source.
-  console.log('Source created.');
-  console.log(source);
+  // TODO(developer): choose the project to use
+  // const project = 'your-project';
+
+  if (!project) {
+    project = await client.getProjectId();
+  }
+
+  let counter = 0;
+  for await (const source of client.listSourcesAsync({
+    parent: `projects/${project}`,
+  })) {
+    ++counter;
+    console.log(source);
+  }
+  console.log(`${counter} sources listed.`);
 }
 quickstart();
 
@@ -179,7 +185,7 @@ also contains samples.
 
 ## Supported Node.js Versions
 
-Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Our client libraries follow the [Node.js release schedule](https://github.com/nodejs/release#release-schedule).
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 If you are using an end-of-life version of Node.js, we recommend that you update

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@google-cloud/dlp": "^4.4.3",
-    "@google-cloud/pubsub": "^3.0.0",
+    "@google-cloud/pubsub": "^4.0.0",
     "mime": "^3.0.0",
     "yargs": "^17.0.0"
   },
