@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/notebooks",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "Notebooks client for Node.js",
   "repository": {
     "type": "git",
