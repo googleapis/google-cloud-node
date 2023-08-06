@@ -1,5 +1,21 @@
 # Changelog
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.4.0...documentai-v8.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [documentai] fix typings for IAM methods ([#4423](https://github.com/googleapis/google-cloud-node/issues/4423)) ([963accc](https://github.com/googleapis/google-cloud-node/commit/963accc64a2273b6d287d15c631de1ab12fcd8b0))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.3.1...documentai-v7.4.0) (2023-06-28)
 
 
