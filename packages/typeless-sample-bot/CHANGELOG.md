@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.3.3...typeless-sample-bot-v2.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [1.3.3](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.3.2...typeless-sample-bot-v1.3.3) (2023-05-26)
 
 

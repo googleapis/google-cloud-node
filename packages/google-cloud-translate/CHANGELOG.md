@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/translate-v7.2.2...translate-v8.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [translate] fix typings for IAM methods ([#4458](https://github.com/googleapis/google-cloud-node/issues/4458)) ([083f9ad](https://github.com/googleapis/google-cloud-node/commit/083f9ad4b37f05bc801f839ba7bbb74306206e83))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [7.2.2](https://github.com/googleapis/google-cloud-node/compare/translate-v7.2.1...translate-v7.2.2) (2023-06-28)
 
 

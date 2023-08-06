@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v4.4.3...dlp-v5.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4466](https://github.com/googleapis/google-cloud-node/issues/4466)) ([fa1520c](https://github.com/googleapis/google-cloud-node/commit/fa1520c3eb526efd3523d9cea349ed31683d5889))
+* **deps:** Update dependency @google-cloud/pubsub to v4 ([#4490](https://github.com/googleapis/google-cloud-node/issues/4490)) ([9c47713](https://github.com/googleapis/google-cloud-node/commit/9c477133e3de3f5fdb7f4a57417a821770a5acb3))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [4.4.3](https://github.com/googleapis/google-cloud-node/compare/dlp-v4.4.2...dlp-v4.4.3) (2023-06-28)
 
 
