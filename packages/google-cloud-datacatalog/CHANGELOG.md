@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.5.0...datacatalog-v4.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Features
+
+* [datacatalog] add support for admin_search in SearchCatalog() API method ([#4476](https://github.com/googleapis/google-cloud-node/issues/4476)) ([3f44639](https://github.com/googleapis/google-cloud-node/commit/3f44639a9541753ed9e24cb0ba579c92bf959417))
+
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4460](https://github.com/googleapis/google-cloud-node/issues/4460)) ([c32965c](https://github.com/googleapis/google-cloud-node/commit/c32965c0c4a5975ba37371ecd819d9cffb080aa5))
+* **deps:** Update dependency @google-cloud/bigquery to v7 ([#4478](https://github.com/googleapis/google-cloud-node/issues/4478)) ([49b51bd](https://github.com/googleapis/google-cloud-node/commit/49b51bdeef5c30a38ff37f68c3b3961353624a82))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.4.0...datacatalog-v3.5.0) (2023-07-11)
 
 

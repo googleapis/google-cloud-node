@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.4.0...dataplex-v3.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [dataplex] fix typings for IAM methods ([#4447](https://github.com/googleapis/google-cloud-node/issues/4447)) ([ad21113](https://github.com/googleapis/google-cloud-node/commit/ad21113bd22a79458f7a83be461b8d0ead4d9691))
+* [dataplex] remove unused annotation in results_table ([#4493](https://github.com/googleapis/google-cloud-node/issues/4493)) ([f9d96a4](https://github.com/googleapis/google-cloud-node/commit/f9d96a4223abfb18cac3e6c47e282b644ca13660))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.3.2...dataplex-v2.4.0) (2023-05-04)
 
 

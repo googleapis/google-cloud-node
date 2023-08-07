@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.7.0...video-transcoder-v3.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4464](https://github.com/googleapis/google-cloud-node/issues/4464)) ([c909357](https://github.com/googleapis/google-cloud-node/commit/c90935765ceee0eea6b9ce21a151707df142cf7d))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.6.0...video-transcoder-v2.7.0) (2023-07-11)
 
 

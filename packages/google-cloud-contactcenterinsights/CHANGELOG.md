@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.9.0...contact-center-insights-v3.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4460](https://github.com/googleapis/google-cloud-node/issues/4460)) ([c32965c](https://github.com/googleapis/google-cloud-node/commit/c32965c0c4a5975ba37371ecd819d9cffb080aa5))
+* **deps:** Update dependency @google-cloud/bigquery to v7 ([#4478](https://github.com/googleapis/google-cloud-node/issues/4478)) ([49b51bd](https://github.com/googleapis/google-cloud-node/commit/49b51bdeef5c30a38ff37f68c3b3961353624a82))
+* **deps:** Update dependency @google-cloud/pubsub to v4 ([#4490](https://github.com/googleapis/google-cloud-node/issues/4490)) ([9c47713](https://github.com/googleapis/google-cloud-node/commit/9c477133e3de3f5fdb7f4a57417a821770a5acb3))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.8.0...contact-center-insights-v2.9.0) (2023-07-11)
 
 

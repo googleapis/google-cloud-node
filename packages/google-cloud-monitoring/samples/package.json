@@ -14,7 +14,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/monitoring": "^3.0.5",
+    "@google-cloud/monitoring": "^4.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {

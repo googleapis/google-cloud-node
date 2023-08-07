@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v3.10.0...compute-v4.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [compute] fix typings for IAM methods ([#4448](https://github.com/googleapis/google-cloud-node/issues/4448)) ([55a2b0a](https://github.com/googleapis/google-cloud-node/commit/55a2b0acdf1106975f1fa31ba6b3f28c195916f3))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/compute-v3.9.1...compute-v3.10.0) (2023-07-11)
 
 

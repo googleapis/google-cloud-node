@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.7.0...tpu-v3.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [tpu] fix typings for IAM methods ([#4446](https://github.com/googleapis/google-cloud-node/issues/4446)) ([014e96c](https://github.com/googleapis/google-cloud-node/commit/014e96c19443833177be1f4acd5f2894e02eadd4))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.6.1...tpu-v2.7.0) (2023-06-06)
 
 

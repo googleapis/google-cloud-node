@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v0.4.0...gke-backup-v1.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4461](https://github.com/googleapis/google-cloud-node/issues/4461)) ([61bcc0a](https://github.com/googleapis/google-cloud-node/commit/61bcc0a89c70cf1037299eecd72aef9c98c2e666))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v0.3.2...gke-backup-v0.4.0) (2023-06-28)
 
 

@@ -1,5 +1,21 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.9.0...admin-v5.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [analytics-admin] fix typings for IAM methods ([#4455](https://github.com/googleapis/google-cloud-node/issues/4455)) ([5aa181c](https://github.com/googleapis/google-cloud-node/commit/5aa181c54065a6920a63cce8324deed7d7a5ce09))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.8.0...admin-v4.9.0) (2023-05-20)
 
 
