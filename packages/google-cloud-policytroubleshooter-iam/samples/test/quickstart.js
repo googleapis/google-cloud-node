@@ -14,24 +14,18 @@
 
 'use strict';
 
-const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
-const {describe, it, before} = require('mocha');
+const {describe, it} = require('mocha');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-  let projectId;
-
   it('should run quickstart', async () => {
     try {
-      execSync(
-        'node ./quickstart.js',
-        {cwd}
-      );
+      execSync('node ./quickstart.js', {cwd});
     } catch (err) {
       // we expect failure due to unknown policy
       // TODO: would be great to have a test that makes more sense

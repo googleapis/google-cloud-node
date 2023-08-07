@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main() {
   // [START policytroubleshooter_quickstart]
   // Imports the Iam library
-  const {PolicyTroubleshooterClient} = require('@google-cloud/policy-troubleshooter-iam').v3beta;
+  const {PolicyTroubleshooterClient} =
+    require('@google-cloud/policy-troubleshooter-iam').v3beta;
 
   // Instantiates a client
   const iamClient = new PolicyTroubleshooterClient();
