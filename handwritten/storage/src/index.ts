@@ -119,6 +119,9 @@ export {
   GetNotificationsOptions,
   GetNotificationsResponse,
   Labels,
+  LifecycleAction,
+  LifecycleCondition,
+  LifecycleRule,
   MakeBucketPrivateCallback,
   MakeBucketPrivateOptions,
   MakeBucketPrivateResponse,
@@ -232,6 +235,7 @@ export {
   GetNotificationOptions,
   GetNotificationResponse,
   Notification,
+  NotificationMetadata,
 } from './notification';
 export {
   BucketCallback,
