@@ -15,6 +15,6 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/policytroubleshooter/(.*)/.*-nodejs
+  - source: /google/cloud/policytroubleshooter/(v.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-policytroubleshooter/$1
 api-name: policytroubleshooter
