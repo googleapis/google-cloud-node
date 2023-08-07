@@ -39,7 +39,7 @@ function main(parent, entities) {
   /**
    *  Required. The entities to create.
    */
-  // const entities = 1234
+  // const entities = [1,2,3,4]
   /**
    *  Optional. The language used to access language-specific data.
    *  If not specified, the agent's default language is used.

@@ -378,7 +378,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJob,
       protos.google.cloud.video.transcoder.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -424,7 +424,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJob,
       protos.google.cloud.video.transcoder.v1.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -469,7 +469,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJob,
       protos.google.cloud.video.transcoder.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -509,7 +509,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJob,
       protos.google.cloud.video.transcoder.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -557,7 +557,7 @@ export class TranscoderServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.video.transcoder.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -603,7 +603,7 @@ export class TranscoderServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.video.transcoder.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -659,7 +659,7 @@ export class TranscoderServiceClient {
         | protos.google.cloud.video.transcoder.v1.ICreateJobTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJobTemplate(
@@ -708,7 +708,7 @@ export class TranscoderServiceClient {
         | protos.google.cloud.video.transcoder.v1.ICreateJobTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -757,7 +757,7 @@ export class TranscoderServiceClient {
         | protos.google.cloud.video.transcoder.v1.IGetJobTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJobTemplate(
@@ -806,7 +806,7 @@ export class TranscoderServiceClient {
         | protos.google.cloud.video.transcoder.v1.IGetJobTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -857,7 +857,7 @@ export class TranscoderServiceClient {
         | protos.google.cloud.video.transcoder.v1.IDeleteJobTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJobTemplate(
@@ -906,7 +906,7 @@ export class TranscoderServiceClient {
         | protos.google.cloud.video.transcoder.v1.IDeleteJobTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -965,7 +965,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJob[],
       protos.google.cloud.video.transcoder.v1.IListJobsRequest | null,
-      protos.google.cloud.video.transcoder.v1.IListJobsResponse
+      protos.google.cloud.video.transcoder.v1.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -1011,7 +1011,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJob[],
       protos.google.cloud.video.transcoder.v1.IListJobsRequest | null,
-      protos.google.cloud.video.transcoder.v1.IListJobsResponse
+      protos.google.cloud.video.transcoder.v1.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1173,7 +1173,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJobTemplate[],
       protos.google.cloud.video.transcoder.v1.IListJobTemplatesRequest | null,
-      protos.google.cloud.video.transcoder.v1.IListJobTemplatesResponse
+      protos.google.cloud.video.transcoder.v1.IListJobTemplatesResponse,
     ]
   >;
   listJobTemplates(
@@ -1219,7 +1219,7 @@ export class TranscoderServiceClient {
     [
       protos.google.cloud.video.transcoder.v1.IJobTemplate[],
       protos.google.cloud.video.transcoder.v1.IListJobTemplatesRequest | null,
-      protos.google.cloud.video.transcoder.v1.IListJobTemplatesResponse
+      protos.google.cloud.video.transcoder.v1.IListJobTemplatesResponse,
     ]
   > | void {
     request = request || {};

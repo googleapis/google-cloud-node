@@ -374,7 +374,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addSignedUrlKey(
@@ -420,7 +420,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -446,7 +446,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -494,7 +494,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -540,7 +540,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -566,7 +566,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -616,7 +616,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSignedUrlKey(
@@ -662,7 +662,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -688,7 +688,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -729,7 +729,7 @@ export class BackendServicesClient {
     [
       protos.google.cloud.compute.v1.IBackendService,
       protos.google.cloud.compute.v1.IGetBackendServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -775,7 +775,7 @@ export class BackendServicesClient {
     [
       protos.google.cloud.compute.v1.IBackendService,
       protos.google.cloud.compute.v1.IGetBackendServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -826,7 +826,7 @@ export class BackendServicesClient {
         | protos.google.cloud.compute.v1.IGetHealthBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getHealth(
@@ -875,7 +875,7 @@ export class BackendServicesClient {
         | protos.google.cloud.compute.v1.IGetHealthBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -927,7 +927,7 @@ export class BackendServicesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -976,7 +976,7 @@ export class BackendServicesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1030,7 +1030,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -1076,7 +1076,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1101,7 +1101,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1151,7 +1151,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -1197,7 +1197,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1223,7 +1223,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1273,7 +1273,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setEdgeSecurityPolicy(
@@ -1319,7 +1319,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1345,7 +1345,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1391,7 +1391,7 @@ export class BackendServicesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1440,7 +1440,7 @@ export class BackendServicesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1496,7 +1496,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setSecurityPolicy(
@@ -1542,7 +1542,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1568,7 +1568,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1618,7 +1618,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -1664,7 +1664,7 @@ export class BackendServicesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1690,7 +1690,7 @@ export class BackendServicesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1800,7 +1800,7 @@ export class BackendServicesClient {
     [
       protos.google.cloud.compute.v1.IBackendService[],
       protos.google.cloud.compute.v1.IListBackendServicesRequest | null,
-      protos.google.cloud.compute.v1.IBackendServiceList
+      protos.google.cloud.compute.v1.IBackendServiceList,
     ]
   >;
   list(
@@ -1838,7 +1838,7 @@ export class BackendServicesClient {
     [
       protos.google.cloud.compute.v1.IBackendService[],
       protos.google.cloud.compute.v1.IListBackendServicesRequest | null,
-      protos.google.cloud.compute.v1.IBackendServiceList
+      protos.google.cloud.compute.v1.IBackendServiceList,
     ]
   > | void {
     request = request || {};

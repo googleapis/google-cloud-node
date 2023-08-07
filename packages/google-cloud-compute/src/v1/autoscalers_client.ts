@@ -367,7 +367,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -413,7 +413,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -440,7 +440,7 @@ export class AutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -483,7 +483,7 @@ export class AutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler,
       protos.google.cloud.compute.v1.IGetAutoscalerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -523,7 +523,7 @@ export class AutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler,
       protos.google.cloud.compute.v1.IGetAutoscalerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -580,7 +580,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -626,7 +626,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -652,7 +652,7 @@ export class AutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -704,7 +704,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -744,7 +744,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -770,7 +770,7 @@ export class AutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -822,7 +822,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -868,7 +868,7 @@ export class AutoscalersClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -894,7 +894,7 @@ export class AutoscalersClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1006,7 +1006,7 @@ export class AutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler[],
       protos.google.cloud.compute.v1.IListAutoscalersRequest | null,
-      protos.google.cloud.compute.v1.IAutoscalerList
+      protos.google.cloud.compute.v1.IAutoscalerList,
     ]
   >;
   list(
@@ -1044,7 +1044,7 @@ export class AutoscalersClient {
     [
       protos.google.cloud.compute.v1.IAutoscaler[],
       protos.google.cloud.compute.v1.IListAutoscalersRequest | null,
-      protos.google.cloud.compute.v1.IAutoscalerList
+      protos.google.cloud.compute.v1.IAutoscalerList,
     ]
   > | void {
     request = request || {};

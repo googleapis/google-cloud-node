@@ -42,7 +42,7 @@ import * as gapicConfig from './versions_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3beta1.Version|Versions}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Versions}.
  * @class
  * @memberof v3beta1
  */
@@ -490,21 +490,20 @@ export class VersionsClient {
   // -------------------
   /**
    * Retrieves the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Version|Version}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3beta1.Version|Version}. Format:
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/versions/<Version ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.Version | Version}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.get_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_GetVersion_async
@@ -516,7 +515,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IVersion,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVersion(
@@ -562,7 +561,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IVersion,
       protos.google.cloud.dialogflow.cx.v3beta1.IGetVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +584,7 @@ export class VersionsClient {
   }
   /**
    * Updates the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Version|Version}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -597,9 +596,8 @@ export class VersionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.Version | Version}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.update_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_UpdateVersion_async
@@ -614,7 +612,7 @@ export class VersionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateVersion(
@@ -663,7 +661,7 @@ export class VersionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -686,21 +684,20 @@ export class VersionsClient {
   }
   /**
    * Deletes the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Version|Version}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3beta1.Version|Version} to delete. Format:
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} to delete. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/versions/<Version ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.delete_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_DeleteVersion_async
@@ -715,7 +712,7 @@ export class VersionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteVersion(
@@ -764,7 +761,7 @@ export class VersionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -812,9 +809,8 @@ export class VersionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.CompareVersionsResponse | CompareVersionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.CompareVersionsResponse|CompareVersionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.compare_versions.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_CompareVersions_async
@@ -829,7 +825,7 @@ export class VersionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   compareVersions(
@@ -878,7 +874,7 @@ export class VersionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -901,22 +897,22 @@ export class VersionsClient {
   }
 
   /**
-   * Creates a {@link google.cloud.dialogflow.cx.v3beta1.Version|Version} in the
-   * specified {@link google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
+   * Creates a {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} in the
+   * specified {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3beta1.CreateVersionOperationMetadata|CreateVersionOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.Version|Version}
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.CreateVersionOperationMetadata|CreateVersionOperationMetadata}
+   * - `response`: {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to create an
-   *   {@link google.cloud.dialogflow.cx.v3beta1.Version|Version} for. Format:
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to create an
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} for. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.Version} request.version
@@ -927,8 +923,7 @@ export class VersionsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.create_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_CreateVersion_async
@@ -943,7 +938,7 @@ export class VersionsClient {
         protos.google.cloud.dialogflow.cx.v3beta1.ICreateVersionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createVersion(
@@ -996,7 +991,7 @@ export class VersionsClient {
         protos.google.cloud.dialogflow.cx.v3beta1.ICreateVersionOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1023,8 +1018,7 @@ export class VersionsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.create_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_CreateVersion_async
@@ -1067,7 +1061,7 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Version|Version} to be
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} to be
    *   loaded to draft flow. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
    * @param {boolean} request.allowOverrideAgentResources
@@ -1081,8 +1075,7 @@ export class VersionsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.load_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_LoadVersion_async
@@ -1097,7 +1090,7 @@ export class VersionsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   loadVersion(
@@ -1150,7 +1143,7 @@ export class VersionsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1177,8 +1170,7 @@ export class VersionsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.load_version.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_LoadVersion_async
@@ -1205,12 +1197,12 @@ export class VersionsClient {
   }
   /**
    * Returns the list of all versions in the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
    *   versions for. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
    * @param {number} request.pageSize
@@ -1221,14 +1213,13 @@ export class VersionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3beta1.Version | Version}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVersions(
@@ -1238,7 +1229,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IVersion[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListVersionsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListVersionsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListVersionsResponse,
     ]
   >;
   listVersions(
@@ -1284,7 +1275,7 @@ export class VersionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IVersion[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListVersionsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListVersionsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -1311,7 +1302,7 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
    *   versions for. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
    * @param {number} request.pageSize
@@ -1322,13 +1313,12 @@ export class VersionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3beta1.Version | Version} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVersionsStream(
@@ -1360,7 +1350,7 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} to list all
    *   versions for. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
    * @param {number} request.pageSize
@@ -1371,12 +1361,11 @@ export class VersionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3beta1.Version | Version}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Version|Version}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/versions.list_versions.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Versions_ListVersions_async
@@ -1413,8 +1402,7 @@ export class VersionsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1460,12 +1448,11 @@ export class VersionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

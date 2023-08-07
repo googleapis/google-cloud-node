@@ -370,7 +370,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -416,7 +416,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -443,7 +443,7 @@ export class ReservationsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -486,7 +486,7 @@ export class ReservationsClient {
     [
       protos.google.cloud.compute.v1.IReservation,
       protos.google.cloud.compute.v1.IGetReservationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -526,7 +526,7 @@ export class ReservationsClient {
     [
       protos.google.cloud.compute.v1.IReservation,
       protos.google.cloud.compute.v1.IGetReservationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -581,7 +581,7 @@ export class ReservationsClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -630,7 +630,7 @@ export class ReservationsClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -687,7 +687,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -733,7 +733,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -759,7 +759,7 @@ export class ReservationsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -811,7 +811,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resize(
@@ -857,7 +857,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -884,7 +884,7 @@ export class ReservationsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -932,7 +932,7 @@ export class ReservationsClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -981,7 +981,7 @@ export class ReservationsClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1036,7 +1036,7 @@ export class ReservationsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1085,7 +1085,7 @@ export class ReservationsClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsReservationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1147,7 +1147,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -1193,7 +1193,7 @@ export class ReservationsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1220,7 +1220,7 @@ export class ReservationsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1332,7 +1332,7 @@ export class ReservationsClient {
     [
       protos.google.cloud.compute.v1.IReservation[],
       protos.google.cloud.compute.v1.IListReservationsRequest | null,
-      protos.google.cloud.compute.v1.IReservationList
+      protos.google.cloud.compute.v1.IReservationList,
     ]
   >;
   list(
@@ -1370,7 +1370,7 @@ export class ReservationsClient {
     [
       protos.google.cloud.compute.v1.IReservation[],
       protos.google.cloud.compute.v1.IListReservationsRequest | null,
-      protos.google.cloud.compute.v1.IReservationList
+      protos.google.cloud.compute.v1.IReservationList,
     ]
   > | void {
     request = request || {};

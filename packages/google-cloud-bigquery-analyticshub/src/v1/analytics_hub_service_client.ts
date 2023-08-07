@@ -391,7 +391,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataExchange(
@@ -440,7 +440,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -496,7 +496,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataExchange(
@@ -545,7 +545,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -596,7 +596,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataExchange(
@@ -645,7 +645,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -693,7 +693,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataExchange(
@@ -742,7 +742,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -790,7 +790,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getListing(
@@ -839,7 +839,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -895,7 +895,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createListing(
@@ -944,7 +944,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -995,7 +995,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateListing(
@@ -1044,7 +1044,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1092,7 +1092,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteListing(
@@ -1141,7 +1141,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1196,7 +1196,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   subscribeListing(
@@ -1245,7 +1245,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1293,7 +1293,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1331,7 +1331,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1387,7 +1387,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1425,7 +1425,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1475,7 +1475,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1513,7 +1513,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1568,7 +1568,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse,
     ]
   >;
   listDataExchanges(
@@ -1614,7 +1614,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse,
     ]
   > | void {
     request = request || {};
@@ -1764,7 +1764,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse,
     ]
   >;
   listOrgDataExchanges(
@@ -1810,7 +1810,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse,
     ]
   > | void {
     request = request || {};
@@ -1959,7 +1959,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IListing[],
       protos.google.cloud.bigquery.analyticshub.v1.IListListingsRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse,
     ]
   >;
   listListings(
@@ -2005,7 +2005,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IListing[],
       protos.google.cloud.bigquery.analyticshub.v1.IListListingsRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse,
     ]
   > | void {
     request = request || {};

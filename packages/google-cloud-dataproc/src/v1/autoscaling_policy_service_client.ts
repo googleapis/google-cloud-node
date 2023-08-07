@@ -385,9 +385,8 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.AutoscalingPolicy | AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.AutoscalingPolicy|AutoscalingPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/autoscaling_policy_service.create_autoscaling_policy.js</caption>
    * region_tag:dataproc_v1_generated_AutoscalingPolicyService_CreateAutoscalingPolicy_async
@@ -402,7 +401,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAutoscalingPolicy(
@@ -451,7 +450,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -489,9 +488,8 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.AutoscalingPolicy | AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.AutoscalingPolicy|AutoscalingPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/autoscaling_policy_service.update_autoscaling_policy.js</caption>
    * region_tag:dataproc_v1_generated_AutoscalingPolicyService_UpdateAutoscalingPolicy_async
@@ -506,7 +504,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAutoscalingPolicy(
@@ -555,7 +553,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -599,9 +597,8 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.AutoscalingPolicy | AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.AutoscalingPolicy|AutoscalingPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/autoscaling_policy_service.get_autoscaling_policy.js</caption>
    * region_tag:dataproc_v1_generated_AutoscalingPolicyService_GetAutoscalingPolicy_async
@@ -613,7 +610,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
       protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAutoscalingPolicy(
@@ -659,7 +656,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
       protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -700,9 +697,8 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/autoscaling_policy_service.delete_autoscaling_policy.js</caption>
    * region_tag:dataproc_v1_generated_AutoscalingPolicyService_DeleteAutoscalingPolicy_async
@@ -717,7 +713,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAutoscalingPolicy(
@@ -766,7 +762,7 @@ export class AutoscalingPolicyServiceClient {
         | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -817,14 +813,13 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataproc.v1.AutoscalingPolicy | AutoscalingPolicy}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.AutoscalingPolicy|AutoscalingPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAutoscalingPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAutoscalingPolicies(
@@ -834,7 +829,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
       protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse,
     ]
   >;
   listAutoscalingPolicies(
@@ -880,7 +875,7 @@ export class AutoscalingPolicyServiceClient {
     [
       protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
       protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -930,13 +925,12 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataproc.v1.AutoscalingPolicy | AutoscalingPolicy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.AutoscalingPolicy|AutoscalingPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAutoscalingPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAutoscalingPoliciesStream(
@@ -987,12 +981,11 @@ export class AutoscalingPolicyServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataproc.v1.AutoscalingPolicy | AutoscalingPolicy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataproc.v1.AutoscalingPolicy|AutoscalingPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/autoscaling_policy_service.list_autoscaling_policies.js</caption>
    * region_tag:dataproc_v1_generated_AutoscalingPolicyService_ListAutoscalingPolicies_async
@@ -1057,7 +1050,7 @@ export class AutoscalingPolicyServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -1078,8 +1071,7 @@ export class AutoscalingPolicyServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -1105,7 +1097,7 @@ export class AutoscalingPolicyServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -1126,8 +1118,7 @@ export class AutoscalingPolicyServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -1154,7 +1145,7 @@ export class AutoscalingPolicyServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 

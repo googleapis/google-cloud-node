@@ -444,7 +444,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1beta1.IInsight,
       protos.google.cloud.recommender.v1beta1.IGetInsightRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInsight(
@@ -490,7 +490,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1beta1.IInsight,
       protos.google.cloud.recommender.v1beta1.IGetInsightRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -547,7 +547,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkInsightAcceptedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markInsightAccepted(
@@ -596,7 +596,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkInsightAcceptedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -644,7 +644,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IGetRecommendationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRecommendation(
@@ -693,7 +693,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IGetRecommendationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -756,7 +756,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markRecommendationClaimed(
@@ -805,7 +805,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -873,7 +873,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markRecommendationSucceeded(
@@ -922,7 +922,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -990,7 +990,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markRecommendationFailed(
@@ -1039,7 +1039,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1099,7 +1099,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IGetRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRecommenderConfig(
@@ -1148,7 +1148,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IGetRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1201,7 +1201,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IUpdateRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRecommenderConfig(
@@ -1250,7 +1250,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IUpdateRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1310,7 +1310,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IGetInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInsightTypeConfig(
@@ -1359,7 +1359,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IGetInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1412,7 +1412,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IUpdateInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInsightTypeConfig(
@@ -1461,7 +1461,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1beta1.IUpdateInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1561,7 +1561,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1beta1.IInsight[],
       protos.google.cloud.recommender.v1beta1.IListInsightsRequest | null,
-      protos.google.cloud.recommender.v1beta1.IListInsightsResponse
+      protos.google.cloud.recommender.v1beta1.IListInsightsResponse,
     ]
   >;
   listInsights(
@@ -1607,7 +1607,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1beta1.IInsight[],
       protos.google.cloud.recommender.v1beta1.IListInsightsRequest | null,
-      protos.google.cloud.recommender.v1beta1.IListInsightsResponse
+      protos.google.cloud.recommender.v1beta1.IListInsightsResponse,
     ]
   > | void {
     request = request || {};
@@ -1877,7 +1877,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1beta1.IRecommendation[],
       protos.google.cloud.recommender.v1beta1.IListRecommendationsRequest | null,
-      protos.google.cloud.recommender.v1beta1.IListRecommendationsResponse
+      protos.google.cloud.recommender.v1beta1.IListRecommendationsResponse,
     ]
   >;
   listRecommendations(
@@ -1923,7 +1923,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1beta1.IRecommendation[],
       protos.google.cloud.recommender.v1beta1.IListRecommendationsRequest | null,
-      protos.google.cloud.recommender.v1beta1.IListRecommendationsResponse
+      protos.google.cloud.recommender.v1beta1.IListRecommendationsResponse,
     ]
   > | void {
     request = request || {};

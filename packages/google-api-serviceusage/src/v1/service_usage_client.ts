@@ -425,7 +425,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1.IService,
       protos.google.api.serviceusage.v1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getService(
@@ -465,7 +465,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1.IService,
       protos.google.api.serviceusage.v1.IGetServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -521,7 +521,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1.IBatchGetServicesResponse,
       protos.google.api.serviceusage.v1.IBatchGetServicesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchGetServices(
@@ -567,7 +567,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1.IBatchGetServicesResponse,
       protos.google.api.serviceusage.v1.IBatchGetServicesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -627,7 +627,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableService(
@@ -680,7 +680,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -783,7 +783,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableService(
@@ -836,7 +836,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -938,7 +938,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchEnableServices(
@@ -991,7 +991,7 @@ export class ServiceUsageClient {
         protos.google.api.serviceusage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1097,7 +1097,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1.IService[],
       protos.google.api.serviceusage.v1.IListServicesRequest | null,
-      protos.google.api.serviceusage.v1.IListServicesResponse
+      protos.google.api.serviceusage.v1.IListServicesResponse,
     ]
   >;
   listServices(
@@ -1143,7 +1143,7 @@ export class ServiceUsageClient {
     [
       protos.google.api.serviceusage.v1.IService[],
       protos.google.api.serviceusage.v1.IListServicesRequest | null,
-      protos.google.api.serviceusage.v1.IListServicesResponse
+      protos.google.api.serviceusage.v1.IListServicesResponse,
     ]
   > | void {
     request = request || {};

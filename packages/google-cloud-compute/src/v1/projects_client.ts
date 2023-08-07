@@ -369,7 +369,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableXpnHost(
@@ -415,7 +415,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -440,7 +440,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -488,7 +488,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableXpnResource(
@@ -534,7 +534,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -559,7 +559,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -605,7 +605,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableXpnHost(
@@ -651,7 +651,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -676,7 +676,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -724,7 +724,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableXpnResource(
@@ -770,7 +770,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -795,7 +795,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -834,7 +834,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IProject,
       protos.google.cloud.compute.v1.IGetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -872,7 +872,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IProject,
       protos.google.cloud.compute.v1.IGetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -916,7 +916,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IProject,
       protos.google.cloud.compute.v1.IGetXpnHostProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getXpnHost(
@@ -962,7 +962,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IProject,
       protos.google.cloud.compute.v1.IGetXpnHostProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1015,7 +1015,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveDisk(
@@ -1055,7 +1055,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1080,7 +1080,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1128,7 +1128,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveInstance(
@@ -1174,7 +1174,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1199,7 +1199,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1247,7 +1247,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setCommonInstanceMetadata(
@@ -1293,7 +1293,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1318,7 +1318,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1366,7 +1366,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setDefaultNetworkTier(
@@ -1412,7 +1412,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1437,7 +1437,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1485,7 +1485,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setUsageExportBucket(
@@ -1531,7 +1531,7 @@ export class ProjectsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1556,7 +1556,7 @@ export class ProjectsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1609,7 +1609,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IXpnResourceId[],
       protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest | null,
-      protos.google.cloud.compute.v1.IProjectsGetXpnResources
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
     ]
   >;
   getXpnResources(
@@ -1655,7 +1655,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IXpnResourceId[],
       protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest | null,
-      protos.google.cloud.compute.v1.IProjectsGetXpnResources
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
     ]
   > | void {
     request = request || {};
@@ -1815,7 +1815,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IProject[],
       protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | null,
-      protos.google.cloud.compute.v1.IXpnHostList
+      protos.google.cloud.compute.v1.IXpnHostList,
     ]
   >;
   listXpnHosts(
@@ -1853,7 +1853,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.compute.v1.IProject[],
       protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | null,
-      protos.google.cloud.compute.v1.IXpnHostList
+      protos.google.cloud.compute.v1.IXpnHostList,
     ]
   > | void {
     request = request || {};

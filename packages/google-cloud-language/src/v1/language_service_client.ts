@@ -327,9 +327,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeSentimentResponse | AnalyzeSentimentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeSentimentResponse|AnalyzeSentimentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.analyze_sentiment.js</caption>
    * region_tag:language_v1_generated_LanguageService_AnalyzeSentiment_async
@@ -341,7 +340,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
       protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeSentiment(
@@ -387,7 +386,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
       protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -418,9 +417,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeEntitiesResponse | AnalyzeEntitiesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeEntitiesResponse|AnalyzeEntitiesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.analyze_entities.js</caption>
    * region_tag:language_v1_generated_LanguageService_AnalyzeEntities_async
@@ -432,7 +430,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
       protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeEntities(
@@ -478,7 +476,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
       protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -497,7 +495,7 @@ export class LanguageServiceClient {
   }
   /**
    * Finds entities, similar to
-   * {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities}
+   * {@link protos.google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities}
    * in the text and analyzes sentiment associated with each entity and its
    * mentions.
    *
@@ -510,9 +508,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeEntitySentimentResponse | AnalyzeEntitySentimentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse|AnalyzeEntitySentimentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.analyze_entity_sentiment.js</caption>
    * region_tag:language_v1_generated_LanguageService_AnalyzeEntitySentiment_async
@@ -527,7 +524,7 @@ export class LanguageServiceClient {
         | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeEntitySentiment(
@@ -576,7 +573,7 @@ export class LanguageServiceClient {
         | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -611,9 +608,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeSyntaxResponse | AnalyzeSyntaxResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnalyzeSyntaxResponse|AnalyzeSyntaxResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.analyze_syntax.js</caption>
    * region_tag:language_v1_generated_LanguageService_AnalyzeSyntax_async
@@ -625,7 +621,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
       protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeSyntax(
@@ -665,7 +661,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
       protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -695,9 +691,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.ClassifyTextResponse | ClassifyTextResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.ClassifyTextResponse|ClassifyTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.classify_text.js</caption>
    * region_tag:language_v1_generated_LanguageService_ClassifyText_async
@@ -709,7 +704,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IClassifyTextResponse,
       protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   classifyText(
@@ -749,7 +744,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IClassifyTextResponse,
       protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -776,9 +771,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.ModerateTextResponse | ModerateTextResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.ModerateTextResponse|ModerateTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.moderate_text.js</caption>
    * region_tag:language_v1_generated_LanguageService_ModerateText_async
@@ -790,7 +784,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IModerateTextResponse,
       protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moderateText(
@@ -830,7 +824,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IModerateTextResponse,
       protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -862,9 +856,8 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnnotateTextResponse | AnnotateTextResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.language.v1.AnnotateTextResponse|AnnotateTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/language_service.annotate_text.js</caption>
    * region_tag:language_v1_generated_LanguageService_AnnotateText_async
@@ -876,7 +869,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnnotateTextResponse,
       protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   annotateText(
@@ -916,7 +909,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnnotateTextResponse,
       protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

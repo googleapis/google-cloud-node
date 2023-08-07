@@ -41,7 +41,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service for managing
- *  {@link google.cloud.dialogflow.v2.AnswerRecord|AnswerRecords}.
+ *  {@link protos.google.cloud.dialogflow.v2.AnswerRecord|AnswerRecords}.
  * @class
  * @memberof v2
  */
@@ -489,9 +489,8 @@ export class AnswerRecordsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.AnswerRecord | AnswerRecord}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.AnswerRecord|AnswerRecord}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/answer_records.update_answer_record.js</caption>
    * region_tag:dialogflow_v2_generated_AnswerRecords_UpdateAnswerRecord_async
@@ -503,7 +502,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord,
       protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAnswerRecord(
@@ -549,7 +548,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord,
       protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -594,20 +593,19 @@ export class AnswerRecordsClient {
    *   The maximum is 100.
    * @param {string} [request.pageToken]
    *   Optional. The
-   *   {@link google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token|ListAnswerRecordsResponse.next_page_token}
+   *   {@link protos.google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token|ListAnswerRecordsResponse.next_page_token}
    *   value returned from a previous list request used to continue listing on
    *   the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.AnswerRecord | AnswerRecord}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.AnswerRecord|AnswerRecord}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAnswerRecordsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAnswerRecords(
@@ -617,7 +615,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord[],
       protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse
+      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse,
     ]
   >;
   listAnswerRecords(
@@ -663,7 +661,7 @@ export class AnswerRecordsClient {
     [
       protos.google.cloud.dialogflow.v2.IAnswerRecord[],
       protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse
+      protos.google.cloud.dialogflow.v2.IListAnswerRecordsResponse,
     ]
   > | void {
     request = request || {};
@@ -706,19 +704,18 @@ export class AnswerRecordsClient {
    *   The maximum is 100.
    * @param {string} [request.pageToken]
    *   Optional. The
-   *   {@link google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token|ListAnswerRecordsResponse.next_page_token}
+   *   {@link protos.google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token|ListAnswerRecordsResponse.next_page_token}
    *   value returned from a previous list request used to continue listing on
    *   the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.AnswerRecord | AnswerRecord} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.AnswerRecord|AnswerRecord} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAnswerRecordsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAnswerRecordsStream(
@@ -766,18 +763,17 @@ export class AnswerRecordsClient {
    *   The maximum is 100.
    * @param {string} [request.pageToken]
    *   Optional. The
-   *   {@link google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token|ListAnswerRecordsResponse.next_page_token}
+   *   {@link protos.google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token|ListAnswerRecordsResponse.next_page_token}
    *   value returned from a previous list request used to continue listing on
    *   the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2.AnswerRecord | AnswerRecord}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2.AnswerRecord|AnswerRecord}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/answer_records.list_answer_records.js</caption>
    * region_tag:dialogflow_v2_generated_AnswerRecords_ListAnswerRecords_async
@@ -814,8 +810,7 @@ export class AnswerRecordsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -861,12 +856,11 @@ export class AnswerRecordsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

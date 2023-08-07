@@ -360,7 +360,7 @@ export class MachineImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -406,7 +406,7 @@ export class MachineImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -432,7 +432,7 @@ export class MachineImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -473,7 +473,7 @@ export class MachineImagesClient {
     [
       protos.google.cloud.compute.v1.IMachineImage,
       protos.google.cloud.compute.v1.IGetMachineImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -513,7 +513,7 @@ export class MachineImagesClient {
     [
       protos.google.cloud.compute.v1.IMachineImage,
       protos.google.cloud.compute.v1.IGetMachineImageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -565,7 +565,7 @@ export class MachineImagesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -614,7 +614,7 @@ export class MachineImagesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -670,7 +670,7 @@ export class MachineImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -716,7 +716,7 @@ export class MachineImagesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -741,7 +741,7 @@ export class MachineImagesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -787,7 +787,7 @@ export class MachineImagesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -836,7 +836,7 @@ export class MachineImagesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -888,7 +888,7 @@ export class MachineImagesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -937,7 +937,7 @@ export class MachineImagesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -996,7 +996,7 @@ export class MachineImagesClient {
     [
       protos.google.cloud.compute.v1.IMachineImage[],
       protos.google.cloud.compute.v1.IListMachineImagesRequest | null,
-      protos.google.cloud.compute.v1.IMachineImageList
+      protos.google.cloud.compute.v1.IMachineImageList,
     ]
   >;
   list(
@@ -1034,7 +1034,7 @@ export class MachineImagesClient {
     [
       protos.google.cloud.compute.v1.IMachineImage[],
       protos.google.cloud.compute.v1.IListMachineImagesRequest | null,
-      protos.google.cloud.compute.v1.IMachineImageList
+      protos.google.cloud.compute.v1.IMachineImageList,
     ]
   > | void {
     request = request || {};

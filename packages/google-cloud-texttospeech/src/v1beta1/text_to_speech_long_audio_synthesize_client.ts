@@ -379,7 +379,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
         protos.google.cloud.texttospeech.v1beta1.ISynthesizeLongAudioMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   synthesizeLongAudio(
@@ -432,7 +432,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
         protos.google.cloud.texttospeech.v1beta1.ISynthesizeLongAudioMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

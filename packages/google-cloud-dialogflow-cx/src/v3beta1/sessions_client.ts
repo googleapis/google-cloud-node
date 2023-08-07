@@ -40,7 +40,7 @@ const version = require('../../../package.json').version;
 /**
  *  A session represents an interaction with a user. You retrieve user input
  *  and pass it to the
- *  {@link google.cloud.dialogflow.cx.v3beta1.Sessions.DetectIntent|DetectIntent}
+ *  {@link protos.google.cloud.dialogflow.cx.v3beta1.Sessions.DetectIntent|DetectIntent}
  *  method to determine user intent and respond.
  * @class
  * @memberof v3beta1
@@ -456,9 +456,8 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse | DetectIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse|DetectIntentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/sessions.detect_intent.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Sessions_DetectIntent_async
@@ -473,7 +472,7 @@ export class SessionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detectIntent(
@@ -522,7 +521,7 @@ export class SessionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,9 +570,8 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.MatchIntentResponse | MatchIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentResponse|MatchIntentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/sessions.match_intent.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Sessions_MatchIntent_async
@@ -585,7 +583,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentResponse,
       protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   matchIntent(
@@ -631,7 +629,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentResponse,
       protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -654,11 +652,11 @@ export class SessionsClient {
   }
   /**
    * Fulfills a matched intent returned by
-   * {@link google.cloud.dialogflow.cx.v3beta1.Sessions.MatchIntent|MatchIntent}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Sessions.MatchIntent|MatchIntent}.
    * Must be called after
-   * {@link google.cloud.dialogflow.cx.v3beta1.Sessions.MatchIntent|MatchIntent},
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Sessions.MatchIntent|MatchIntent},
    * with input from
-   * {@link google.cloud.dialogflow.cx.v3beta1.MatchIntentResponse|MatchIntentResponse}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentResponse|MatchIntentResponse}.
    * Otherwise, the behavior is undefined.
    *
    * @param {Object} request
@@ -673,9 +671,8 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.FulfillIntentResponse | FulfillIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.FulfillIntentResponse|FulfillIntentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/sessions.fulfill_intent.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Sessions_FulfillIntent_async
@@ -690,7 +687,7 @@ export class SessionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IFulfillIntentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fulfillIntent(
@@ -739,7 +736,7 @@ export class SessionsClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IFulfillIntentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -775,10 +772,9 @@ export class SessionsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.dialogflow.cx.v3beta1.StreamingDetectIntentRequest | StreamingDetectIntentRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.dialogflow.cx.v3beta1.StreamingDetectIntentResponse | StreamingDetectIntentResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.dialogflow.cx.v3beta1.StreamingDetectIntentRequest|StreamingDetectIntentRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.dialogflow.cx.v3beta1.StreamingDetectIntentResponse|StreamingDetectIntentResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/sessions.streaming_detect_intent.js</caption>
    * region_tag:dialogflow_v3beta1_generated_Sessions_StreamingDetectIntent_async
@@ -799,8 +795,7 @@ export class SessionsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -846,12 +841,11 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

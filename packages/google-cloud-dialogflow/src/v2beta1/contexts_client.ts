@@ -40,7 +40,7 @@ import * as gapicConfig from './contexts_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.Context|Contexts}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.v2beta1.Context|Contexts}.
  * @class
  * @memberof v2beta1
  */
@@ -488,9 +488,8 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Context | Context}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.Context|Context}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/contexts.get_context.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Contexts_GetContext_async
@@ -502,7 +501,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext,
       protos.google.cloud.dialogflow.v2beta1.IGetContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getContext(
@@ -548,7 +547,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext,
       protos.google.cloud.dialogflow.v2beta1.IGetContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -595,9 +594,8 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Context | Context}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.Context|Context}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/contexts.create_context.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Contexts_CreateContext_async
@@ -609,7 +607,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext,
       protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createContext(
@@ -655,7 +653,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext,
       protos.google.cloud.dialogflow.v2beta1.ICreateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -688,9 +686,8 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Context | Context}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.Context|Context}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/contexts.update_context.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Contexts_UpdateContext_async
@@ -702,7 +699,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext,
       protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateContext(
@@ -748,7 +745,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext,
       protos.google.cloud.dialogflow.v2beta1.IUpdateContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -792,9 +789,8 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/contexts.delete_context.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Contexts_DeleteContext_async
@@ -806,7 +802,7 @@ export class ContextsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteContext(
@@ -852,7 +848,7 @@ export class ContextsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2beta1.IDeleteContextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -896,9 +892,8 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/contexts.delete_all_contexts.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Contexts_DeleteAllContexts_async
@@ -913,7 +908,7 @@ export class ContextsClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAllContexts(
@@ -962,7 +957,7 @@ export class ContextsClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteAllContextsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1011,14 +1006,13 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2beta1.Context | Context}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2beta1.Context|Context}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listContextsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listContexts(
@@ -1028,7 +1022,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext[],
       protos.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListContextsResponse,
     ]
   >;
   listContexts(
@@ -1074,7 +1068,7 @@ export class ContextsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IContext[],
       protos.google.cloud.dialogflow.v2beta1.IListContextsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListContextsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListContextsResponse,
     ]
   > | void {
     request = request || {};
@@ -1122,13 +1116,12 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2beta1.Context | Context} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2beta1.Context|Context} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listContextsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listContextsStream(
@@ -1181,12 +1174,11 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2beta1.Context | Context}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2beta1.Context|Context}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/contexts.list_contexts.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Contexts_ListContexts_async
@@ -1223,8 +1215,7 @@ export class ContextsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1270,12 +1261,11 @@ export class ContextsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

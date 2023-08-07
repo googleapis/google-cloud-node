@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service for managing
- *  {@link google.cloud.dialogflow.cx.v3.Environment|Environments}.
+ *  {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environments}.
  * @class
  * @memberof v3
  */
@@ -523,21 +523,20 @@ export class EnvironmentsClient {
   // -------------------
   /**
    * Retrieves the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Environment | Environment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.get_environment.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_GetEnvironment_async
@@ -549,7 +548,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment,
       protos.google.cloud.dialogflow.cx.v3.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -595,7 +594,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment,
       protos.google.cloud.dialogflow.cx.v3.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -618,21 +617,20 @@ export class EnvironmentsClient {
   }
   /**
    * Deletes the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.delete_environment.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_DeleteEnvironment_async
@@ -647,7 +645,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteEnvironmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEnvironment(
@@ -696,7 +694,7 @@ export class EnvironmentsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteEnvironmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -719,8 +717,8 @@ export class EnvironmentsClient {
   }
 
   /**
-   * Creates an {@link google.cloud.dialogflow.cx.v3.Environment|Environment} in the
-   * specified {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
+   * Creates an {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} in the
+   * specified {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -728,13 +726,13 @@ export class EnvironmentsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.Environment|Environment}
+   * - `response`: {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
-   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
    *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
    * @param {google.cloud.dialogflow.cx.v3.Environment} request.environment
    *   Required. The environment to create.
@@ -744,8 +742,7 @@ export class EnvironmentsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.create_environment.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_CreateEnvironment_async
@@ -760,7 +757,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEnvironment(
@@ -813,7 +810,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -840,8 +837,7 @@ export class EnvironmentsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.create_environment.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_CreateEnvironment_async
@@ -871,7 +867,7 @@ export class EnvironmentsClient {
   }
   /**
    * Updates the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -879,7 +875,7 @@ export class EnvironmentsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.Environment|Environment}
+   * - `response`: {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -893,8 +889,7 @@ export class EnvironmentsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.update_environment.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_UpdateEnvironment_async
@@ -909,7 +904,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEnvironment(
@@ -962,7 +957,7 @@ export class EnvironmentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -989,8 +984,7 @@ export class EnvironmentsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.update_environment.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_UpdateEnvironment_async
@@ -1020,16 +1014,16 @@ export class EnvironmentsClient {
   }
   /**
    * Kicks off a continuous test under the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata|RunContinuousTestMetadata}
+   * {@link protos.google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata|RunContinuousTestMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.RunContinuousTestResponse|RunContinuousTestResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.RunContinuousTestResponse|RunContinuousTestResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1042,8 +1036,7 @@ export class EnvironmentsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.run_continuous_test.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_RunContinuousTest_async
@@ -1058,7 +1051,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runContinuousTest(
@@ -1111,7 +1104,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1138,8 +1131,7 @@ export class EnvironmentsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.run_continuous_test.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_RunContinuousTest_async
@@ -1169,16 +1161,16 @@ export class EnvironmentsClient {
   }
   /**
    * Deploys a flow to the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.cx.v3.DeployFlowMetadata|DeployFlowMetadata}
+   * {@link protos.google.cloud.dialogflow.cx.v3.DeployFlowMetadata|DeployFlowMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.DeployFlowResponse|DeployFlowResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.DeployFlowResponse|DeployFlowResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1196,8 +1188,7 @@ export class EnvironmentsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.deploy_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_DeployFlow_async
@@ -1212,7 +1203,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployFlow(
@@ -1265,7 +1256,7 @@ export class EnvironmentsClient {
         protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1292,8 +1283,7 @@ export class EnvironmentsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.deploy_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_DeployFlow_async
@@ -1323,12 +1313,12 @@ export class EnvironmentsClient {
   }
   /**
    * Returns the list of all environments in the specified
-   * {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
    *   environments for. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>`.
    * @param {number} request.pageSize
@@ -1339,14 +1329,13 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.Environment | Environment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEnvironmentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEnvironments(
@@ -1356,7 +1345,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse,
     ]
   >;
   listEnvironments(
@@ -1402,7 +1391,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -1429,7 +1418,7 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
    *   environments for. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>`.
    * @param {number} request.pageSize
@@ -1440,13 +1429,12 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.Environment | Environment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEnvironmentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEnvironmentsStream(
@@ -1478,7 +1466,7 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
    *   environments for. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>`.
    * @param {number} request.pageSize
@@ -1489,12 +1477,11 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.Environment | Environment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.list_environments.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_ListEnvironments_async
@@ -1522,7 +1509,7 @@ export class EnvironmentsClient {
   }
   /**
    * Looks up the history of the specified
-   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1538,14 +1525,13 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.Environment | Environment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `lookupEnvironmentHistoryAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   lookupEnvironmentHistory(
@@ -1555,7 +1541,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse
+      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse,
     ]
   >;
   lookupEnvironmentHistory(
@@ -1601,7 +1587,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IEnvironment[],
       protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse
+      protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryResponse,
     ]
   > | void {
     request = request || {};
@@ -1643,13 +1629,12 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.Environment | Environment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `lookupEnvironmentHistoryAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   lookupEnvironmentHistoryStream(
@@ -1692,12 +1677,11 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.Environment | Environment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Environment|Environment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.lookup_environment_history.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_LookupEnvironmentHistory_async
@@ -1740,14 +1724,13 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.ContinuousTestResult | ContinuousTestResult}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult|ContinuousTestResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listContinuousTestResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listContinuousTestResults(
@@ -1757,7 +1740,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult[],
       protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse,
     ]
   >;
   listContinuousTestResults(
@@ -1803,7 +1786,7 @@ export class EnvironmentsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult[],
       protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse,
     ]
   > | void {
     request = request || {};
@@ -1845,13 +1828,12 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.ContinuousTestResult | ContinuousTestResult} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult|ContinuousTestResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listContinuousTestResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listContinuousTestResultsStream(
@@ -1894,12 +1876,11 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.ContinuousTestResult | ContinuousTestResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.ContinuousTestResult|ContinuousTestResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/environments.list_continuous_test_results.js</caption>
    * region_tag:dialogflow_v3_generated_Environments_ListContinuousTestResults_async
@@ -1936,8 +1917,7 @@ export class EnvironmentsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1983,12 +1963,11 @@ export class EnvironmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

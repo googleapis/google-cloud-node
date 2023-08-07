@@ -361,7 +361,7 @@ export class RegionSecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -407,7 +407,7 @@ export class RegionSecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -434,7 +434,7 @@ export class RegionSecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -480,7 +480,7 @@ export class RegionSecurityPoliciesClient {
         | protos.google.cloud.compute.v1.IGetRegionSecurityPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -529,7 +529,7 @@ export class RegionSecurityPoliciesClient {
         | protos.google.cloud.compute.v1.IGetRegionSecurityPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -588,7 +588,7 @@ export class RegionSecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -634,7 +634,7 @@ export class RegionSecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -660,7 +660,7 @@ export class RegionSecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -712,7 +712,7 @@ export class RegionSecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -758,7 +758,7 @@ export class RegionSecurityPoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -785,7 +785,7 @@ export class RegionSecurityPoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -840,7 +840,7 @@ export class RegionSecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicy[],
       protos.google.cloud.compute.v1.IListRegionSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
     ]
   >;
   list(
@@ -878,7 +878,7 @@ export class RegionSecurityPoliciesClient {
     [
       protos.google.cloud.compute.v1.ISecurityPolicy[],
       protos.google.cloud.compute.v1.IListRegionSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
     ]
   > | void {
     request = request || {};

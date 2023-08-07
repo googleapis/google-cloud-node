@@ -42,7 +42,7 @@ function main(name, vmId) {
    *  The metadata reported to Notebooks API. This will be merged to the instance
    *  metadata store
    */
-  // const metadata = 1234
+  // const metadata = [1,2,3,4]
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1;

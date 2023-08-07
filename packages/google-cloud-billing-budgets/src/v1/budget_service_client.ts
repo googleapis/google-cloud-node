@@ -367,7 +367,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget,
       protos.google.cloud.billing.budgets.v1.ICreateBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBudget(
@@ -413,7 +413,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget,
       protos.google.cloud.billing.budgets.v1.ICreateBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -469,7 +469,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget,
       protos.google.cloud.billing.budgets.v1.IUpdateBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBudget(
@@ -515,7 +515,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget,
       protos.google.cloud.billing.budgets.v1.IUpdateBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -565,7 +565,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget,
       protos.google.cloud.billing.budgets.v1.IGetBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBudget(
@@ -611,7 +611,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget,
       protos.google.cloud.billing.budgets.v1.IGetBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -656,7 +656,7 @@ export class BudgetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.billing.budgets.v1.IDeleteBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBudget(
@@ -702,7 +702,7 @@ export class BudgetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.billing.budgets.v1.IDeleteBudgetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -763,7 +763,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget[],
       protos.google.cloud.billing.budgets.v1.IListBudgetsRequest | null,
-      protos.google.cloud.billing.budgets.v1.IListBudgetsResponse
+      protos.google.cloud.billing.budgets.v1.IListBudgetsResponse,
     ]
   >;
   listBudgets(
@@ -809,7 +809,7 @@ export class BudgetServiceClient {
     [
       protos.google.cloud.billing.budgets.v1.IBudget[],
       protos.google.cloud.billing.budgets.v1.IListBudgetsRequest | null,
-      protos.google.cloud.billing.budgets.v1.IListBudgetsResponse
+      protos.google.cloud.billing.budgets.v1.IListBudgetsResponse,
     ]
   > | void {
     request = request || {};

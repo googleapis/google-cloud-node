@@ -358,7 +358,7 @@ export class PublicCertificateAuthorityServiceClient {
         | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExternalAccountKey(
@@ -407,7 +407,7 @@ export class PublicCertificateAuthorityServiceClient {
         | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

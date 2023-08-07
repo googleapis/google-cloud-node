@@ -452,7 +452,7 @@ export class CatalogServiceClient {
     [
       protos.google.cloud.retail.v2alpha.ICatalog,
       protos.google.cloud.retail.v2alpha.IUpdateCatalogRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCatalog(
@@ -498,7 +498,7 @@ export class CatalogServiceClient {
     [
       protos.google.cloud.retail.v2alpha.ICatalog,
       protos.google.cloud.retail.v2alpha.IUpdateCatalogRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -595,7 +595,7 @@ export class CatalogServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setDefaultBranch(
@@ -641,7 +641,7 @@ export class CatalogServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -688,7 +688,7 @@ export class CatalogServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
       protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDefaultBranch(
@@ -734,7 +734,7 @@ export class CatalogServiceClient {
     [
       protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
       protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -782,7 +782,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IGetCompletionConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCompletionConfig(
@@ -831,7 +831,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IGetCompletionConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -898,7 +898,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IUpdateCompletionConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCompletionConfig(
@@ -947,7 +947,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IUpdateCompletionConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -999,7 +999,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IGetAttributesConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAttributesConfig(
@@ -1048,7 +1048,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IGetAttributesConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1112,7 +1112,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IUpdateAttributesConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAttributesConfig(
@@ -1161,7 +1161,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IUpdateAttributesConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1221,7 +1221,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IAddCatalogAttributeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addCatalogAttribute(
@@ -1270,7 +1270,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IAddCatalogAttributeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1326,7 +1326,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IRemoveCatalogAttributeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeCatalogAttribute(
@@ -1375,7 +1375,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IRemoveCatalogAttributeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1434,7 +1434,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRemoveCatalogAttributes(
@@ -1483,7 +1483,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1553,7 +1553,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IReplaceCatalogAttributeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceCatalogAttribute(
@@ -1602,7 +1602,7 @@ export class CatalogServiceClient {
         | protos.google.cloud.retail.v2alpha.IReplaceCatalogAttributeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1677,7 +1677,7 @@ export class CatalogServiceClient {
     [
       protos.google.cloud.retail.v2alpha.ICatalog[],
       protos.google.cloud.retail.v2alpha.IListCatalogsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListCatalogsResponse
+      protos.google.cloud.retail.v2alpha.IListCatalogsResponse,
     ]
   >;
   listCatalogs(
@@ -1723,7 +1723,7 @@ export class CatalogServiceClient {
     [
       protos.google.cloud.retail.v2alpha.ICatalog[],
       protos.google.cloud.retail.v2alpha.IListCatalogsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListCatalogsResponse
+      protos.google.cloud.retail.v2alpha.IListCatalogsResponse,
     ]
   > | void {
     request = request || {};

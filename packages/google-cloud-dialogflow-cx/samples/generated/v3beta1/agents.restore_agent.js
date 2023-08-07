@@ -47,7 +47,7 @@ function main(name) {
   /**
    *  Uncompressed raw byte content for agent.
    */
-  // const agentContent = 'Buffer.from('string')'
+  // const agentContent = Buffer.from('string')
   /**
    *  Setting for restoring from a git branch
    */

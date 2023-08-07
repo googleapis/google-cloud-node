@@ -413,7 +413,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
       protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   recognize(
@@ -453,7 +453,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
       protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -529,7 +529,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   longRunningRecognize(
@@ -582,7 +582,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

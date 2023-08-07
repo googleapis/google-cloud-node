@@ -366,7 +366,7 @@ export class TargetVpnGatewaysClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -412,7 +412,7 @@ export class TargetVpnGatewaysClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -439,7 +439,7 @@ export class TargetVpnGatewaysClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -482,7 +482,7 @@ export class TargetVpnGatewaysClient {
     [
       protos.google.cloud.compute.v1.ITargetVpnGateway,
       protos.google.cloud.compute.v1.IGetTargetVpnGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -528,7 +528,7 @@ export class TargetVpnGatewaysClient {
     [
       protos.google.cloud.compute.v1.ITargetVpnGateway,
       protos.google.cloud.compute.v1.IGetTargetVpnGatewayRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -585,7 +585,7 @@ export class TargetVpnGatewaysClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -631,7 +631,7 @@ export class TargetVpnGatewaysClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -657,7 +657,7 @@ export class TargetVpnGatewaysClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -709,7 +709,7 @@ export class TargetVpnGatewaysClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -755,7 +755,7 @@ export class TargetVpnGatewaysClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -782,7 +782,7 @@ export class TargetVpnGatewaysClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -894,7 +894,7 @@ export class TargetVpnGatewaysClient {
     [
       protos.google.cloud.compute.v1.ITargetVpnGateway[],
       protos.google.cloud.compute.v1.IListTargetVpnGatewaysRequest | null,
-      protos.google.cloud.compute.v1.ITargetVpnGatewayList
+      protos.google.cloud.compute.v1.ITargetVpnGatewayList,
     ]
   >;
   list(
@@ -934,7 +934,7 @@ export class TargetVpnGatewaysClient {
     [
       protos.google.cloud.compute.v1.ITargetVpnGateway[],
       protos.google.cloud.compute.v1.IListTargetVpnGatewaysRequest | null,
-      protos.google.cloud.compute.v1.ITargetVpnGatewayList
+      protos.google.cloud.compute.v1.ITargetVpnGatewayList,
     ]
   > | void {
     request = request || {};

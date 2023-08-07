@@ -383,7 +383,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
       protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse,
     ]
   >;
   searchAllResources(
@@ -429,7 +429,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
       protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -638,7 +638,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
       protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse,
     ]
   >;
   searchAllIamPolicies(
@@ -684,7 +684,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
       protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse,
     ]
   > | void {
     request = request || {};

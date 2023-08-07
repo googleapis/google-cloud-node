@@ -42,7 +42,7 @@ import * as gapicConfig from './intents_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.Intent|Intents}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intents}.
  * @class
  * @memberof v2beta1
  */
@@ -564,9 +564,8 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Intent | Intent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.get_intent.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_GetIntent_async
@@ -578,7 +577,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent,
       protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIntent(
@@ -624,7 +623,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent,
       protos.google.cloud.dialogflow.v2beta1.IGetIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -673,9 +672,8 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Intent | Intent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.create_intent.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_CreateIntent_async
@@ -687,7 +685,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent,
       protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIntent(
@@ -733,7 +731,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent,
       protos.google.cloud.dialogflow.v2beta1.ICreateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -778,9 +776,8 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Intent | Intent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.update_intent.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_UpdateIntent_async
@@ -792,7 +789,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent,
       protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIntent(
@@ -838,7 +835,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent,
       protos.google.cloud.dialogflow.v2beta1.IUpdateIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -879,9 +876,8 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.delete_intent.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_DeleteIntent_async
@@ -893,7 +889,7 @@ export class IntentsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIntent(
@@ -939,7 +935,7 @@ export class IntentsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.v2beta1.IDeleteIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -971,7 +967,7 @@ export class IntentsClient {
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
    * - `response`:
-   * {@link google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse|BatchUpdateIntentsResponse}
+   * {@link protos.google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse|BatchUpdateIntentsResponse}
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
@@ -1007,8 +1003,7 @@ export class IntentsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.batch_update_intents.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_BatchUpdateIntents_async
@@ -1023,7 +1018,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateIntents(
@@ -1076,7 +1071,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1103,8 +1098,7 @@ export class IntentsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.batch_update_intents.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_BatchUpdateIntents_async
@@ -1165,8 +1159,7 @@ export class IntentsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.batch_delete_intents.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_BatchDeleteIntents_async
@@ -1181,7 +1174,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteIntents(
@@ -1234,7 +1227,7 @@ export class IntentsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1261,8 +1254,7 @@ export class IntentsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.batch_delete_intents.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_BatchDeleteIntents_async
@@ -1319,14 +1311,13 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2beta1.Intent | Intent}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intent}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listIntentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listIntents(
@@ -1336,7 +1327,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent[],
       protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse,
     ]
   >;
   listIntents(
@@ -1382,7 +1373,7 @@ export class IntentsClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IIntent[],
       protos.google.cloud.dialogflow.v2beta1.IListIntentsRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse
+      protos.google.cloud.dialogflow.v2beta1.IListIntentsResponse,
     ]
   > | void {
     request = request || {};
@@ -1435,13 +1426,12 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2beta1.Intent | Intent} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intent} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listIntentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listIntentsStream(
@@ -1499,12 +1489,11 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2beta1.Intent | Intent}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2beta1.Intent|Intent}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/intents.list_intents.js</caption>
    * region_tag:dialogflow_v2beta1_generated_Intents_ListIntents_async
@@ -1541,8 +1530,7 @@ export class IntentsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1588,12 +1576,11 @@ export class IntentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

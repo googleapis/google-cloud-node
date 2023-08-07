@@ -382,7 +382,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount,
       protos.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBillingAccount(
@@ -428,7 +428,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount,
       protos.google.cloud.billing.v1.IGetBillingAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -483,7 +483,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount,
       protos.google.cloud.billing.v1.IUpdateBillingAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBillingAccount(
@@ -529,7 +529,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount,
       protos.google.cloud.billing.v1.IUpdateBillingAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -590,7 +590,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount,
       protos.google.cloud.billing.v1.ICreateBillingAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBillingAccount(
@@ -636,7 +636,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount,
       protos.google.cloud.billing.v1.ICreateBillingAccountRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -681,7 +681,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IProjectBillingInfo,
       protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProjectBillingInfo(
@@ -727,7 +727,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IProjectBillingInfo,
       protos.google.cloud.billing.v1.IGetProjectBillingInfoRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -809,7 +809,7 @@ export class CloudBillingClient {
         | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProjectBillingInfo(
@@ -858,7 +858,7 @@ export class CloudBillingClient {
         | protos.google.cloud.billing.v1.IUpdateProjectBillingInfoRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -913,7 +913,7 @@ export class CloudBillingClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -951,7 +951,7 @@ export class CloudBillingClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1011,7 +1011,7 @@ export class CloudBillingClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1049,7 +1049,7 @@ export class CloudBillingClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1101,7 +1101,7 @@ export class CloudBillingClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1139,7 +1139,7 @@ export class CloudBillingClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1201,7 +1201,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount[],
       protos.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-      protos.google.cloud.billing.v1.IListBillingAccountsResponse
+      protos.google.cloud.billing.v1.IListBillingAccountsResponse,
     ]
   >;
   listBillingAccounts(
@@ -1247,7 +1247,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IBillingAccount[],
       protos.google.cloud.billing.v1.IListBillingAccountsRequest | null,
-      protos.google.cloud.billing.v1.IListBillingAccountsResponse
+      protos.google.cloud.billing.v1.IListBillingAccountsResponse,
     ]
   > | void {
     request = request || {};
@@ -1399,7 +1399,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IProjectBillingInfo[],
       protos.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-      protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      protos.google.cloud.billing.v1.IListProjectBillingInfoResponse,
     ]
   >;
   listProjectBillingInfo(
@@ -1445,7 +1445,7 @@ export class CloudBillingClient {
     [
       protos.google.cloud.billing.v1.IProjectBillingInfo[],
       protos.google.cloud.billing.v1.IListProjectBillingInfoRequest | null,
-      protos.google.cloud.billing.v1.IListProjectBillingInfoResponse
+      protos.google.cloud.billing.v1.IListProjectBillingInfoResponse,
     ]
   > | void {
     request = request || {};

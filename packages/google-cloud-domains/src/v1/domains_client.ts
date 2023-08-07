@@ -513,9 +513,8 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.domains.v1.SearchDomainsResponse | SearchDomainsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.SearchDomainsResponse|SearchDomainsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.search_domains.js</caption>
    * region_tag:domains_v1_generated_Domains_SearchDomains_async
@@ -527,7 +526,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.ISearchDomainsResponse,
       protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchDomains(
@@ -567,7 +566,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.ISearchDomainsResponse,
       protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -601,9 +600,8 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.domains.v1.RetrieveRegisterParametersResponse | RetrieveRegisterParametersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse|RetrieveRegisterParametersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.retrieve_register_parameters.js</caption>
    * region_tag:domains_v1_generated_Domains_RetrieveRegisterParameters_async
@@ -618,7 +616,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveRegisterParameters(
@@ -667,7 +665,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -709,9 +707,8 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.domains.v1.RetrieveTransferParametersResponse | RetrieveTransferParametersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.RetrieveTransferParametersResponse|RetrieveTransferParametersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.retrieve_transfer_parameters.js</caption>
    * region_tag:domains_v1_generated_Domains_RetrieveTransferParameters_async
@@ -726,7 +723,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveTransferParameters(
@@ -775,7 +772,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -811,9 +808,8 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.domains.v1.Registration | Registration}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.Registration|Registration}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.get_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_GetRegistration_async
@@ -825,7 +821,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration,
       protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRegistration(
@@ -865,7 +861,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration,
       protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -901,9 +897,8 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.domains.v1.AuthorizationCode | AuthorizationCode}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.AuthorizationCode|AuthorizationCode}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.retrieve_authorization_code.js</caption>
    * region_tag:domains_v1_generated_Domains_RetrieveAuthorizationCode_async
@@ -918,7 +913,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveAuthorizationCode(
@@ -967,7 +962,7 @@ export class DomainsClient {
         | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1006,9 +1001,8 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.domains.v1.AuthorizationCode | AuthorizationCode}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.AuthorizationCode|AuthorizationCode}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.reset_authorization_code.js</caption>
    * region_tag:domains_v1_generated_Domains_ResetAuthorizationCode_async
@@ -1020,7 +1014,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IAuthorizationCode,
       protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetAuthorizationCode(
@@ -1066,7 +1060,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IAuthorizationCode,
       protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1135,8 +1129,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.register_domain.js</caption>
    * region_tag:domains_v1_generated_Domains_RegisterDomain_async
@@ -1151,7 +1144,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerDomain(
@@ -1204,7 +1197,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1231,8 +1224,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.register_domain.js</caption>
    * region_tag:domains_v1_generated_Domains_RegisterDomain_async
@@ -1315,8 +1307,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.transfer_domain.js</caption>
    * region_tag:domains_v1_generated_Domains_TransferDomain_async
@@ -1331,7 +1322,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   transferDomain(
@@ -1384,7 +1375,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1411,8 +1402,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.transfer_domain.js</caption>
    * region_tag:domains_v1_generated_Domains_TransferDomain_async
@@ -1462,8 +1452,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.update_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_UpdateRegistration_async
@@ -1478,7 +1467,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRegistration(
@@ -1531,7 +1520,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1558,8 +1547,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.update_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_UpdateRegistration_async
@@ -1607,8 +1595,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.configure_management_settings.js</caption>
    * region_tag:domains_v1_generated_Domains_ConfigureManagementSettings_async
@@ -1623,7 +1610,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   configureManagementSettings(
@@ -1676,7 +1663,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1707,8 +1694,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.configure_management_settings.js</caption>
    * region_tag:domains_v1_generated_Domains_ConfigureManagementSettings_async
@@ -1764,8 +1750,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.configure_dns_settings.js</caption>
    * region_tag:domains_v1_generated_Domains_ConfigureDnsSettings_async
@@ -1780,7 +1765,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   configureDnsSettings(
@@ -1833,7 +1818,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1860,8 +1845,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.configure_dns_settings.js</caption>
    * region_tag:domains_v1_generated_Domains_ConfigureDnsSettings_async
@@ -1915,8 +1899,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.configure_contact_settings.js</caption>
    * region_tag:domains_v1_generated_Domains_ConfigureContactSettings_async
@@ -1931,7 +1914,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   configureContactSettings(
@@ -1984,7 +1967,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2015,8 +1998,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.configure_contact_settings.js</caption>
    * region_tag:domains_v1_generated_Domains_ConfigureContactSettings_async
@@ -2066,8 +2048,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.export_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_ExportRegistration_async
@@ -2082,7 +2063,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportRegistration(
@@ -2135,7 +2116,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2162,8 +2143,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.export_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_ExportRegistration_async
@@ -2223,8 +2203,7 @@ export class DomainsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.delete_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_DeleteRegistration_async
@@ -2239,7 +2218,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRegistration(
@@ -2292,7 +2271,7 @@ export class DomainsClient {
         protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2319,8 +2298,7 @@ export class DomainsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.delete_registration.js</caption>
    * region_tag:domains_v1_generated_Domains_DeleteRegistration_async
@@ -2381,14 +2359,13 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.domains.v1.Registration | Registration}.
+   *   The first element of the array is Array of {@link protos.google.cloud.domains.v1.Registration|Registration}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRegistrationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRegistrations(
@@ -2398,7 +2375,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration[],
       protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsResponse,
     ]
   >;
   listRegistrations(
@@ -2444,7 +2421,7 @@ export class DomainsClient {
     [
       protos.google.cloud.domains.v1.IRegistration[],
       protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsResponse,
     ]
   > | void {
     request = request || {};
@@ -2498,13 +2475,12 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.domains.v1.Registration | Registration} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.domains.v1.Registration|Registration} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRegistrationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRegistrationsStream(
@@ -2563,12 +2539,11 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.domains.v1.Registration | Registration}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.domains.v1.Registration|Registration}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/domains.list_registrations.js</caption>
    * region_tag:domains_v1_generated_Domains_ListRegistrations_async

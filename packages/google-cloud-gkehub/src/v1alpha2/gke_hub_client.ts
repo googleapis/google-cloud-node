@@ -41,7 +41,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  The GKE Hub service handles the registration of many Kubernetes
- *  clusters to Google Cloud, represented with the {@link google.cloud.gkehub.v1alpha2.Membership|Membership} resource.
+ *  clusters to Google Cloud, represented with the {@link protos.google.cloud.gkehub.v1alpha2.Membership|Membership} resource.
  *
  *  GKE Hub is currently only available in the global region.
  *
@@ -456,9 +456,8 @@ export class GkeHubClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkehub.v1alpha2.Membership | Membership}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1alpha2.Membership|Membership}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.get_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_GetMembership_async
@@ -470,7 +469,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha2.IMembership,
       protos.google.cloud.gkehub.v1alpha2.IGetMembershipRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMembership(
@@ -516,7 +515,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha2.IMembership,
       protos.google.cloud.gkehub.v1alpha2.IGetMembershipRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -573,9 +572,8 @@ export class GkeHubClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse | GenerateConnectManifestResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse|GenerateConnectManifestResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.generate_connect_manifest.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_GenerateConnectManifest_async
@@ -590,7 +588,7 @@ export class GkeHubClient {
         | protos.google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateConnectManifest(
@@ -639,7 +637,7 @@ export class GkeHubClient {
         | protos.google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -682,9 +680,8 @@ export class GkeHubClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkehub.v1alpha2.InitializeHubResponse | InitializeHubResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1alpha2.InitializeHubResponse|InitializeHubResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.initialize_hub.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_InitializeHub_async
@@ -696,7 +693,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha2.IInitializeHubResponse,
       protos.google.cloud.gkehub.v1alpha2.IInitializeHubRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   initializeHub(
@@ -742,7 +739,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha2.IInitializeHubResponse,
       protos.google.cloud.gkehub.v1alpha2.IInitializeHubRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -794,8 +791,7 @@ export class GkeHubClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.create_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_CreateMembership_async
@@ -810,7 +806,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMembership(
@@ -863,7 +859,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -890,8 +886,7 @@ export class GkeHubClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.create_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_CreateMembership_async
@@ -937,8 +932,7 @@ export class GkeHubClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.delete_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_DeleteMembership_async
@@ -953,7 +947,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMembership(
@@ -1006,7 +1000,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1033,8 +1027,7 @@ export class GkeHubClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.delete_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_DeleteMembership_async
@@ -1087,8 +1080,7 @@ export class GkeHubClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.update_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_UpdateMembership_async
@@ -1103,7 +1095,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMembership(
@@ -1156,7 +1148,7 @@ export class GkeHubClient {
         protos.google.cloud.gkehub.v1alpha2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1183,8 +1175,7 @@ export class GkeHubClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.update_membership.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_UpdateMembership_async
@@ -1255,14 +1246,13 @@ export class GkeHubClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkehub.v1alpha2.Membership | Membership}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1alpha2.Membership|Membership}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listMembershipsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMemberships(
@@ -1272,7 +1262,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha2.IMembership[],
       protos.google.cloud.gkehub.v1alpha2.IListMembershipsRequest | null,
-      protos.google.cloud.gkehub.v1alpha2.IListMembershipsResponse
+      protos.google.cloud.gkehub.v1alpha2.IListMembershipsResponse,
     ]
   >;
   listMemberships(
@@ -1318,7 +1308,7 @@ export class GkeHubClient {
     [
       protos.google.cloud.gkehub.v1alpha2.IMembership[],
       protos.google.cloud.gkehub.v1alpha2.IListMembershipsRequest | null,
-      protos.google.cloud.gkehub.v1alpha2.IListMembershipsResponse
+      protos.google.cloud.gkehub.v1alpha2.IListMembershipsResponse,
     ]
   > | void {
     request = request || {};
@@ -1382,13 +1372,12 @@ export class GkeHubClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkehub.v1alpha2.Membership | Membership} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1alpha2.Membership|Membership} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMembershipsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMembershipsStream(
@@ -1457,12 +1446,11 @@ export class GkeHubClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkehub.v1alpha2.Membership | Membership}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkehub.v1alpha2.Membership|Membership}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/gke_hub.list_memberships.js</caption>
    * region_tag:gkehub_v1alpha2_generated_GkeHub_ListMemberships_async

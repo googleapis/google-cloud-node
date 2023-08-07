@@ -42,7 +42,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service for managing
- *  {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroups}.
+ *  {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroups}.
  * @class
  * @memberof v3
  */
@@ -462,13 +462,13 @@ export class TransitionRouteGroupsClient {
   // -------------------
   /**
    * Retrieves the specified
-   * {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
    * @param {string} request.languageCode
@@ -487,9 +487,8 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup | TransitionRouteGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/transition_route_groups.get_transition_route_group.js</caption>
    * region_tag:dialogflow_v3_generated_TransitionRouteGroups_GetTransitionRouteGroup_async
@@ -504,7 +503,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTransitionRouteGroup(
@@ -553,7 +552,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -580,7 +579,7 @@ export class TransitionRouteGroupsClient {
   }
   /**
    * Creates an
-   * {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}
+   * {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}
    * in the specified flow.
    *
    * Note: You should always train a flow prior to sending it queries. See the
@@ -591,7 +590,7 @@ export class TransitionRouteGroupsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The flow to create an
-   *   {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}
    *   for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>`.
    * @param {google.cloud.dialogflow.cx.v3.TransitionRouteGroup} request.transitionRouteGroup
@@ -611,9 +610,8 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup | TransitionRouteGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/transition_route_groups.create_transition_route_group.js</caption>
    * region_tag:dialogflow_v3_generated_TransitionRouteGroups_CreateTransitionRouteGroup_async
@@ -628,7 +626,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTransitionRouteGroup(
@@ -677,7 +675,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -704,7 +702,7 @@ export class TransitionRouteGroupsClient {
   }
   /**
    * Updates the specified
-   * {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -731,9 +729,8 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup | TransitionRouteGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/transition_route_groups.update_transition_route_group.js</caption>
    * region_tag:dialogflow_v3_generated_TransitionRouteGroups_UpdateTransitionRouteGroup_async
@@ -748,7 +745,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTransitionRouteGroup(
@@ -797,7 +794,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -824,7 +821,7 @@ export class TransitionRouteGroupsClient {
   }
   /**
    * Deletes the specified
-   * {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -834,7 +831,7 @@ export class TransitionRouteGroupsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}
    *   to delete. Format: `projects/<Project ID>/locations/<Location
    *   ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
    *   Route Group ID>`.
@@ -849,9 +846,8 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/transition_route_groups.delete_transition_route_group.js</caption>
    * region_tag:dialogflow_v3_generated_TransitionRouteGroups_DeleteTransitionRouteGroup_async
@@ -866,7 +862,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTransitionRouteGroup(
@@ -915,7 +911,7 @@ export class TransitionRouteGroupsClient {
         | protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -972,14 +968,13 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup | TransitionRouteGroup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTransitionRouteGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTransitionRouteGroups(
@@ -989,7 +984,7 @@ export class TransitionRouteGroupsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup[],
       protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse,
     ]
   >;
   listTransitionRouteGroups(
@@ -1035,7 +1030,7 @@ export class TransitionRouteGroupsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup[],
       protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -1091,13 +1086,12 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup | TransitionRouteGroup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTransitionRouteGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTransitionRouteGroupsStream(
@@ -1154,12 +1148,11 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.TransitionRouteGroup | TransitionRouteGroup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.TransitionRouteGroup|TransitionRouteGroup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/transition_route_groups.list_transition_route_groups.js</caption>
    * region_tag:dialogflow_v3_generated_TransitionRouteGroups_ListTransitionRouteGroups_async
@@ -1196,8 +1189,7 @@ export class TransitionRouteGroupsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1243,12 +1235,11 @@ export class TransitionRouteGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

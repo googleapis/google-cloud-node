@@ -363,7 +363,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
       protos.google.iam.credentials.v1.IGenerateAccessTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateAccessToken(
@@ -409,7 +409,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
       protos.google.iam.credentials.v1.IGenerateAccessTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -473,7 +473,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
       protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateIdToken(
@@ -519,7 +519,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
       protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignBlobResponse,
       protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   signBlob(
@@ -617,7 +617,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignBlobResponse,
       protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -677,7 +677,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignJwtResponse,
       protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   signJwt(
@@ -715,7 +715,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignJwtResponse,
       protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

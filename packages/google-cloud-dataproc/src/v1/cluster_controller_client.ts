@@ -590,9 +590,8 @@ export class ClusterControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.Cluster | Cluster}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Cluster|Cluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.get_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_GetCluster_async
@@ -604,7 +603,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster,
       protos.google.cloud.dataproc.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -642,7 +641,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster,
       protos.google.cloud.dataproc.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -668,7 +667,7 @@ export class ClusterControllerClient {
 
   /**
    * Creates a cluster in a project. The returned
-   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} will be
    * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    *
    * @param {Object} request
@@ -685,7 +684,7 @@ export class ClusterControllerClient {
    *   two
    *   [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   It is recommended to always set this value to a
@@ -701,8 +700,7 @@ export class ClusterControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.create_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_CreateCluster_async
@@ -717,7 +715,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -770,7 +768,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -798,8 +796,7 @@ export class ClusterControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.create_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_CreateCluster_async
@@ -829,10 +826,10 @@ export class ClusterControllerClient {
   }
   /**
    * Updates a cluster in a project. The returned
-   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} will be
    * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    * The cluster must be in a
-   * {@link google.cloud.dataproc.v1.ClusterStatus.State|`RUNNING`} state or an error
+   * {@link protos.google.cloud.dataproc.v1.ClusterStatus.State|`RUNNING`} state or an error
    * is returned.
    *
    * @param {Object} request
@@ -913,7 +910,7 @@ export class ClusterControllerClient {
    *   receives two
    *   [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   It is recommended to always set this value to a
@@ -927,8 +924,7 @@ export class ClusterControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.update_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_UpdateCluster_async
@@ -943,7 +939,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -996,7 +992,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1025,8 +1021,7 @@ export class ClusterControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.update_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_UpdateCluster_async
@@ -1074,7 +1069,7 @@ export class ClusterControllerClient {
    *   receives two
    *   [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   Recommendation: Set this value to a
@@ -1088,8 +1083,7 @@ export class ClusterControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.stop_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_StopCluster_async
@@ -1104,7 +1098,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopCluster(
@@ -1157,7 +1151,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1186,8 +1180,7 @@ export class ClusterControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.stop_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_StopCluster_async
@@ -1235,7 +1228,7 @@ export class ClusterControllerClient {
    *   receives two
    *   [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   Recommendation: Set this value to a
@@ -1249,8 +1242,7 @@ export class ClusterControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.start_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_StartCluster_async
@@ -1265,7 +1257,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startCluster(
@@ -1318,7 +1310,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1347,8 +1339,7 @@ export class ClusterControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.start_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_StartCluster_async
@@ -1378,7 +1369,7 @@ export class ClusterControllerClient {
   }
   /**
    * Deletes a cluster in a project. The returned
-   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} will be
    * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    *
    * @param {Object} request
@@ -1398,7 +1389,7 @@ export class ClusterControllerClient {
    *   receives two
    *   [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   It is recommended to always set this value to a
@@ -1412,8 +1403,7 @@ export class ClusterControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.delete_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_DeleteCluster_async
@@ -1428,7 +1418,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -1481,7 +1471,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1510,8 +1500,7 @@ export class ClusterControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.delete_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_DeleteCluster_async
@@ -1541,10 +1530,10 @@ export class ClusterControllerClient {
   }
   /**
    * Gets cluster diagnostic information. The returned
-   * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
+   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} will be
    * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
    * After the operation completes,
-   * {@link google.longrunning.Operation.response|Operation.response}
+   * {@link protos.google.longrunning.Operation.response|Operation.response}
    * contains
    * [DiagnoseClusterResults](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
    *
@@ -1563,8 +1552,7 @@ export class ClusterControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.diagnose_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_DiagnoseCluster_async
@@ -1579,7 +1567,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   diagnoseCluster(
@@ -1632,7 +1620,7 @@ export class ClusterControllerClient {
         protos.google.cloud.dataproc.v1.IClusterOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1661,8 +1649,7 @@ export class ClusterControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.diagnose_cluster.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_DiagnoseCluster_async
@@ -1727,14 +1714,13 @@ export class ClusterControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataproc.v1.Cluster | Cluster}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.Cluster|Cluster}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listClusters(
@@ -1744,7 +1730,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster[],
       protos.google.cloud.dataproc.v1.IListClustersRequest | null,
-      protos.google.cloud.dataproc.v1.IListClustersResponse
+      protos.google.cloud.dataproc.v1.IListClustersResponse,
     ]
   >;
   listClusters(
@@ -1784,7 +1770,7 @@ export class ClusterControllerClient {
     [
       protos.google.cloud.dataproc.v1.ICluster[],
       protos.google.cloud.dataproc.v1.IListClustersRequest | null,
-      protos.google.cloud.dataproc.v1.IListClustersResponse
+      protos.google.cloud.dataproc.v1.IListClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -1843,13 +1829,12 @@ export class ClusterControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataproc.v1.Cluster | Cluster} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.Cluster|Cluster} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listClustersStream(
@@ -1913,12 +1898,11 @@ export class ClusterControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataproc.v1.Cluster | Cluster}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataproc.v1.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cluster_controller.list_clusters.js</caption>
    * region_tag:dataproc_v1_generated_ClusterController_ListClusters_async
@@ -1984,7 +1968,7 @@ export class ClusterControllerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -2005,8 +1989,7 @@ export class ClusterControllerClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2032,7 +2015,7 @@ export class ClusterControllerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -2053,8 +2036,7 @@ export class ClusterControllerClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2081,7 +2063,7 @@ export class ClusterControllerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 

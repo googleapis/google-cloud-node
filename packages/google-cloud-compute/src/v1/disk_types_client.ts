@@ -352,7 +352,7 @@ export class DiskTypesClient {
     [
       protos.google.cloud.compute.v1.IDiskType,
       protos.google.cloud.compute.v1.IGetDiskTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -390,7 +390,7 @@ export class DiskTypesClient {
     [
       protos.google.cloud.compute.v1.IDiskType,
       protos.google.cloud.compute.v1.IGetDiskTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -509,7 +509,7 @@ export class DiskTypesClient {
     [
       protos.google.cloud.compute.v1.IDiskType[],
       protos.google.cloud.compute.v1.IListDiskTypesRequest | null,
-      protos.google.cloud.compute.v1.IDiskTypeList
+      protos.google.cloud.compute.v1.IDiskTypeList,
     ]
   >;
   list(
@@ -547,7 +547,7 @@ export class DiskTypesClient {
     [
       protos.google.cloud.compute.v1.IDiskType[],
       protos.google.cloud.compute.v1.IListDiskTypesRequest | null,
-      protos.google.cloud.compute.v1.IDiskTypeList
+      protos.google.cloud.compute.v1.IDiskTypeList,
     ]
   > | void {
     request = request || {};

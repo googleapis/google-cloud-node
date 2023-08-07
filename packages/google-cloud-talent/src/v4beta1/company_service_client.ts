@@ -379,7 +379,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany,
       protos.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCompany(
@@ -425,7 +425,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany,
       protos.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -476,7 +476,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany,
       protos.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCompany(
@@ -516,7 +516,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany,
       protos.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -573,7 +573,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany,
       protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCompany(
@@ -619,7 +619,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany,
       protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -671,7 +671,7 @@ export class CompanyServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCompany(
@@ -717,7 +717,7 @@ export class CompanyServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany[],
       protos.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-      protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+      protos.google.cloud.talent.v4beta1.IListCompaniesResponse,
     ]
   >;
   listCompanies(
@@ -830,7 +830,7 @@ export class CompanyServiceClient {
     [
       protos.google.cloud.talent.v4beta1.ICompany[],
       protos.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
-      protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+      protos.google.cloud.talent.v4beta1.IListCompaniesResponse,
     ]
   > | void {
     request = request || {};

@@ -374,7 +374,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -412,7 +412,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -471,7 +471,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -509,7 +509,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -570,7 +570,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -608,7 +608,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -654,7 +654,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ICheckActiveJobsResponse,
       protos.google.dataflow.v1beta3.ICheckActiveJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkActiveJobs(
@@ -694,7 +694,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ICheckActiveJobsResponse,
       protos.google.dataflow.v1beta3.ICheckActiveJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -744,7 +744,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.ISnapshotJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   snapshotJob(
@@ -782,7 +782,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.ISnapshotJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -855,7 +855,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -893,7 +893,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1072,7 +1072,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   >;
   aggregatedListJobs(
@@ -1110,7 +1110,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   > | void {
     request = request || {};

@@ -332,7 +332,7 @@ export class LicenseCodesClient {
     [
       protos.google.cloud.compute.v1.ILicenseCode,
       protos.google.cloud.compute.v1.IGetLicenseCodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -372,7 +372,7 @@ export class LicenseCodesClient {
     [
       protos.google.cloud.compute.v1.ILicenseCode,
       protos.google.cloud.compute.v1.IGetLicenseCodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -424,7 +424,7 @@ export class LicenseCodesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -473,7 +473,7 @@ export class LicenseCodesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

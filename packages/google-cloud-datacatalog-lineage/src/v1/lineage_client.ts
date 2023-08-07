@@ -476,7 +476,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.ICreateProcessRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProcess(
@@ -525,7 +525,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.ICreateProcessRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.IUpdateProcessRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProcess(
@@ -628,7 +628,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.IUpdateProcessRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -672,7 +672,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IProcess,
       protos.google.cloud.datacatalog.lineage.v1.IGetProcessRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProcess(
@@ -718,7 +718,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IProcess,
       protos.google.cloud.datacatalog.lineage.v1.IGetProcessRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -768,7 +768,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun,
       protos.google.cloud.datacatalog.lineage.v1.ICreateRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRun(
@@ -814,7 +814,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun,
       protos.google.cloud.datacatalog.lineage.v1.ICreateRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -866,7 +866,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun,
       protos.google.cloud.datacatalog.lineage.v1.IUpdateRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRun(
@@ -912,7 +912,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun,
       protos.google.cloud.datacatalog.lineage.v1.IUpdateRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -956,7 +956,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun,
       protos.google.cloud.datacatalog.lineage.v1.IGetRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRun(
@@ -1002,7 +1002,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun,
       protos.google.cloud.datacatalog.lineage.v1.IGetRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1055,7 +1055,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.ICreateLineageEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createLineageEvent(
@@ -1104,7 +1104,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.ICreateLineageEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1151,7 +1151,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.IGetLineageEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLineageEvent(
@@ -1200,7 +1200,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.IGetLineageEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1250,7 +1250,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.IDeleteLineageEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteLineageEvent(
@@ -1299,7 +1299,7 @@ export class LineageClient {
         | protos.google.cloud.datacatalog.lineage.v1.IDeleteLineageEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1352,7 +1352,7 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProcess(
@@ -1405,7 +1405,7 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1491,7 +1491,7 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRun(
@@ -1544,7 +1544,7 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1638,7 +1638,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IProcess[],
       protos.google.cloud.datacatalog.lineage.v1.IListProcessesRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IListProcessesResponse
+      protos.google.cloud.datacatalog.lineage.v1.IListProcessesResponse,
     ]
   >;
   listProcesses(
@@ -1684,7 +1684,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IProcess[],
       protos.google.cloud.datacatalog.lineage.v1.IListProcessesRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IListProcessesResponse
+      protos.google.cloud.datacatalog.lineage.v1.IListProcessesResponse,
     ]
   > | void {
     request = request || {};
@@ -1848,7 +1848,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun[],
       protos.google.cloud.datacatalog.lineage.v1.IListRunsRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IListRunsResponse
+      protos.google.cloud.datacatalog.lineage.v1.IListRunsResponse,
     ]
   >;
   listRuns(
@@ -1894,7 +1894,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IRun[],
       protos.google.cloud.datacatalog.lineage.v1.IListRunsRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IListRunsResponse
+      protos.google.cloud.datacatalog.lineage.v1.IListRunsResponse,
     ]
   > | void {
     request = request || {};
@@ -2058,7 +2058,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[],
       protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsResponse
+      protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsResponse,
     ]
   >;
   listLineageEvents(
@@ -2104,7 +2104,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[],
       protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsResponse
+      protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsResponse,
     ]
   > | void {
     request = request || {};
@@ -2285,7 +2285,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.ILink[],
       protos.google.cloud.datacatalog.lineage.v1.ISearchLinksRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.ISearchLinksResponse
+      protos.google.cloud.datacatalog.lineage.v1.ISearchLinksResponse,
     ]
   >;
   searchLinks(
@@ -2331,7 +2331,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.ILink[],
       protos.google.cloud.datacatalog.lineage.v1.ISearchLinksRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.ISearchLinksResponse
+      protos.google.cloud.datacatalog.lineage.v1.ISearchLinksResponse,
     ]
   > | void {
     request = request || {};
@@ -2528,7 +2528,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[],
       protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesResponse
+      protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesResponse,
     ]
   >;
   batchSearchLinkProcesses(
@@ -2574,7 +2574,7 @@ export class LineageClient {
     [
       protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[],
       protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesRequest | null,
-      protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesResponse
+      protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesResponse,
     ]
   > | void {
     request = request || {};

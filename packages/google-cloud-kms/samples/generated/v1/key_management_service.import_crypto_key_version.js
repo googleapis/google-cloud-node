@@ -106,14 +106,14 @@ function main(parent, algorithm, importJob) {
    *  public_key google.cloud.kms.v1.ImportJob.public_key  using RSAES-OAEP
    *  with SHA-256, MGF1 with SHA-256, and an empty label.
    */
-  // const wrappedKey = 'Buffer.from('string')'
+  // const wrappedKey = Buffer.from('string')
   /**
    *  Optional. This field has the same meaning as
    *  wrapped_key google.cloud.kms.v1.ImportCryptoKeyVersionRequest.wrapped_key.
    *  Prefer to use that field in new work. Either that field or this field
    *  (but not both) must be specified.
    */
-  // const rsaAesWrappedKey = 'Buffer.from('string')'
+  // const rsaAesWrappedKey = Buffer.from('string')
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;

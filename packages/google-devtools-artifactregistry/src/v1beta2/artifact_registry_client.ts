@@ -543,7 +543,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRepository(
@@ -592,7 +592,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -643,7 +643,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IUpdateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRepository(
@@ -692,7 +692,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IUpdateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetPackageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPackage(
@@ -788,7 +788,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetPackageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -837,7 +837,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVersion(
@@ -886,7 +886,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -933,7 +933,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetFileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFile(
@@ -982,7 +982,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetFileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1029,7 +1029,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTag(
@@ -1078,7 +1078,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1129,7 +1129,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.ICreateTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTag(
@@ -1178,7 +1178,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.ICreateTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1229,7 +1229,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IUpdateTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTag(
@@ -1278,7 +1278,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IUpdateTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1325,7 +1325,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IDeleteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTag(
@@ -1374,7 +1374,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IDeleteTagRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1430,7 +1430,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1468,7 +1468,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1516,7 +1516,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1554,7 +1554,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1604,7 +1604,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1642,7 +1642,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1689,7 +1689,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProjectSettings(
@@ -1738,7 +1738,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IGetProjectSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1787,7 +1787,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProjectSettings(
@@ -1836,7 +1836,7 @@ export class ArtifactRegistryClient {
         | protos.google.devtools.artifactregistry.v1beta2.IUpdateProjectSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1891,7 +1891,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importAptArtifacts(
@@ -1944,7 +1944,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IImportAptArtifactsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2032,7 +2032,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importYumArtifacts(
@@ -2085,7 +2085,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IImportYumArtifactsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2173,7 +2173,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRepository(
@@ -2226,7 +2226,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2311,7 +2311,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRepository(
@@ -2364,7 +2364,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2448,7 +2448,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePackage(
@@ -2501,7 +2501,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2588,7 +2588,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteVersion(
@@ -2641,7 +2641,7 @@ export class ArtifactRegistryClient {
         protos.google.devtools.artifactregistry.v1beta2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2726,7 +2726,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IRepository[],
       protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesResponse,
     ]
   >;
   listRepositories(
@@ -2772,7 +2772,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IRepository[],
       protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesResponse,
     ]
   > | void {
     request = request || {};
@@ -2913,7 +2913,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IPackage[],
       protos.google.devtools.artifactregistry.v1beta2.IListPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListPackagesResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListPackagesResponse,
     ]
   >;
   listPackages(
@@ -2959,7 +2959,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IPackage[],
       protos.google.devtools.artifactregistry.v1beta2.IListPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListPackagesResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListPackagesResponse,
     ]
   > | void {
     request = request || {};
@@ -3105,7 +3105,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IVersion[],
       protos.google.devtools.artifactregistry.v1beta2.IListVersionsRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListVersionsResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListVersionsResponse,
     ]
   >;
   listVersions(
@@ -3151,7 +3151,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IVersion[],
       protos.google.devtools.artifactregistry.v1beta2.IListVersionsRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListVersionsResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -3313,7 +3313,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IFile[],
       protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse,
     ]
   >;
   listFiles(
@@ -3359,7 +3359,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.IFile[],
       protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse,
     ]
   > | void {
     request = request || {};
@@ -3537,7 +3537,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.ITag[],
       protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse,
     ]
   >;
   listTags(
@@ -3583,7 +3583,7 @@ export class ArtifactRegistryClient {
     [
       protos.google.devtools.artifactregistry.v1beta2.ITag[],
       protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
+      protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse,
     ]
   > | void {
     request = request || {};

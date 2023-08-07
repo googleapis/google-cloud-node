@@ -782,7 +782,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificate(
@@ -831,7 +831,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -880,7 +880,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificate(
@@ -929,7 +929,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -996,7 +996,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   revokeCertificate(
@@ -1045,7 +1045,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1111,7 +1111,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificate(
@@ -1160,7 +1160,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1219,7 +1219,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchCertificateAuthorityCsr(
@@ -1268,7 +1268,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1323,7 +1323,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificateAuthority(
@@ -1372,7 +1372,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1421,7 +1421,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICaPool,
       protos.google.cloud.security.privateca.v1.IGetCaPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCaPool(
@@ -1467,7 +1467,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICaPool,
       protos.google.cloud.security.privateca.v1.IGetCaPoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1534,7 +1534,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchCaCerts(
@@ -1583,7 +1583,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1635,7 +1635,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificateRevocationList(
@@ -1684,7 +1684,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1739,7 +1739,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCertificateTemplate(
@@ -1788,7 +1788,7 @@ export class CertificateAuthorityServiceClient {
         | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1873,7 +1873,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   activateCertificateAuthority(
@@ -1926,7 +1926,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2039,7 +2039,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificateAuthority(
@@ -2092,7 +2092,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2201,7 +2201,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableCertificateAuthority(
@@ -2254,7 +2254,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2358,7 +2358,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableCertificateAuthority(
@@ -2411,7 +2411,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2516,7 +2516,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteCertificateAuthority(
@@ -2569,7 +2569,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2685,7 +2685,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCertificateAuthority(
@@ -2738,7 +2738,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2844,7 +2844,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificateAuthority(
@@ -2897,7 +2897,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3006,7 +3006,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCaPool(
@@ -3059,7 +3059,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3159,7 +3159,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCaPool(
@@ -3212,7 +3212,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3316,7 +3316,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCaPool(
@@ -3369,7 +3369,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3471,7 +3471,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificateRevocationList(
@@ -3524,7 +3524,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3637,7 +3637,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCertificateTemplate(
@@ -3690,7 +3690,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3794,7 +3794,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCertificateTemplate(
@@ -3847,7 +3847,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3953,7 +3953,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCertificateTemplate(
@@ -4006,7 +4006,7 @@ export class CertificateAuthorityServiceClient {
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4113,7 +4113,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificate[],
       protos.google.cloud.security.privateca.v1.IListCertificatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificatesResponse
+      protos.google.cloud.security.privateca.v1.IListCertificatesResponse,
     ]
   >;
   listCertificates(
@@ -4159,7 +4159,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificate[],
       protos.google.cloud.security.privateca.v1.IListCertificatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificatesResponse
+      protos.google.cloud.security.privateca.v1.IListCertificatesResponse,
     ]
   > | void {
     request = request || {};
@@ -4351,7 +4351,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
       protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
+      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse,
     ]
   >;
   listCertificateAuthorities(
@@ -4397,7 +4397,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
       protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
+      protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse,
     ]
   > | void {
     request = request || {};
@@ -4584,7 +4584,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICaPool[],
       protos.google.cloud.security.privateca.v1.IListCaPoolsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
+      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse,
     ]
   >;
   listCaPools(
@@ -4630,7 +4630,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICaPool[],
       protos.google.cloud.security.privateca.v1.IListCaPoolsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
+      protos.google.cloud.security.privateca.v1.IListCaPoolsResponse,
     ]
   > | void {
     request = request || {};
@@ -4811,7 +4811,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
       protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
+      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse,
     ]
   >;
   listCertificateRevocationLists(
@@ -4857,7 +4857,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
       protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
+      protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse,
     ]
   > | void {
     request = request || {};
@@ -5046,7 +5046,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
       protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
+      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse,
     ]
   >;
   listCertificateTemplates(
@@ -5092,7 +5092,7 @@ export class CertificateAuthorityServiceClient {
     [
       protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
       protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest | null,
-      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
+      protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse,
     ]
   > | void {
     request = request || {};

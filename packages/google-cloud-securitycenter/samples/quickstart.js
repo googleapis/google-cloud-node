@@ -18,7 +18,7 @@
 'use strict';
 
 async function main(
-  organization = 'YOUR_ORGANIZATION' // Your GCP organization
+  project // Your GCP project
 ) {
   // [START securitycenter_quickstart]
   const sc = require('@google-cloud/security-center');
@@ -27,15 +27,21 @@ async function main(
   const client = new sc.SecurityCenterClient();
 
   async function quickstart() {
-    // TODO(developer): choose the organization to use
-    // const organization = 'your-organization';
-    const [source] = await client.createSource({
-      parent: client.organizationPath(organization),
-      source: {},
-    });
-    // The newly created source.
-    console.log('Source created.');
-    console.log(source);
+    // TODO(developer): choose the project to use
+    // const project = 'your-project';
+
+    if (!project) {
+      project = await client.getProjectId();
+    }
+
+    let counter = 0;
+    for await (const source of client.listSourcesAsync({
+      parent: `projects/${project}`,
+    })) {
+      ++counter;
+      console.log(source);
+    }
+    console.log(`${counter} sources listed.`);
   }
   quickstart();
   // [END securitycenter_quickstart]

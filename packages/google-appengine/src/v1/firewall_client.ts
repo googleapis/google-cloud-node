@@ -376,7 +376,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IBatchUpdateIngressRulesResponse,
       protos.google.appengine.v1.IBatchUpdateIngressRulesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateIngressRules(
@@ -422,7 +422,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IBatchUpdateIngressRulesResponse,
       protos.google.appengine.v1.IBatchUpdateIngressRulesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -482,7 +482,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule,
       protos.google.appengine.v1.ICreateIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIngressRule(
@@ -522,7 +522,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule,
       protos.google.appengine.v1.ICreateIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -567,7 +567,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule,
       protos.google.appengine.v1.IGetIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIngressRule(
@@ -605,7 +605,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule,
       protos.google.appengine.v1.IGetIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -654,7 +654,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule,
       protos.google.appengine.v1.IUpdateIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIngressRule(
@@ -694,7 +694,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule,
       protos.google.appengine.v1.IUpdateIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,7 +739,7 @@ export class FirewallClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.appengine.v1.IDeleteIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIngressRule(
@@ -779,7 +779,7 @@ export class FirewallClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.appengine.v1.IDeleteIngressRuleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -836,7 +836,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule[],
       protos.google.appengine.v1.IListIngressRulesRequest | null,
-      protos.google.appengine.v1.IListIngressRulesResponse
+      protos.google.appengine.v1.IListIngressRulesResponse,
     ]
   >;
   listIngressRules(
@@ -876,7 +876,7 @@ export class FirewallClient {
     [
       protos.google.appengine.v1.IFirewallRule[],
       protos.google.appengine.v1.IListIngressRulesRequest | null,
-      protos.google.appengine.v1.IListIngressRulesResponse
+      protos.google.appengine.v1.IListIngressRulesResponse,
     ]
   > | void {
     request = request || {};

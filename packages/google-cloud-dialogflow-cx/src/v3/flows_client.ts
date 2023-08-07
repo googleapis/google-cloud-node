@@ -42,7 +42,7 @@ import * as gapicConfig from './flows_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3.Flow|Flows}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flows}.
  * @class
  * @memberof v3
  */
@@ -530,9 +530,8 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Flow | Flow}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.create_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_CreateFlow_async
@@ -544,7 +543,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow,
       protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFlow(
@@ -590,7 +589,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow,
       protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -634,9 +633,8 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.delete_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_DeleteFlow_async
@@ -648,7 +646,7 @@ export class FlowsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFlow(
@@ -694,7 +692,7 @@ export class FlowsClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -741,9 +739,8 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Flow | Flow}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.get_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_GetFlow_async
@@ -755,7 +752,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow,
       protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFlow(
@@ -795,7 +792,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow,
       protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -846,9 +843,8 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Flow | Flow}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.update_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_UpdateFlow_async
@@ -860,7 +856,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow,
       protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFlow(
@@ -906,7 +902,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow,
       protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -943,9 +939,8 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.FlowValidationResult | FlowValidationResult}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.FlowValidationResult|FlowValidationResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.validate_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_ValidateFlow_async
@@ -957,7 +952,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlowValidationResult,
       protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateFlow(
@@ -1003,7 +998,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlowValidationResult,
       protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1039,9 +1034,8 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.FlowValidationResult | FlowValidationResult}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.FlowValidationResult|FlowValidationResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.get_flow_validation_result.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_GetFlowValidationResult_async
@@ -1056,7 +1050,7 @@ export class FlowsClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFlowValidationResult(
@@ -1105,7 +1099,7 @@ export class FlowsClient {
         | protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1160,8 +1154,7 @@ export class FlowsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.train_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_TrainFlow_async
@@ -1176,7 +1169,7 @@ export class FlowsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   trainFlow(
@@ -1229,7 +1222,7 @@ export class FlowsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1256,8 +1249,7 @@ export class FlowsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.train_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_TrainFlow_async
@@ -1292,7 +1284,7 @@ export class FlowsClient {
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.ImportFlowResponse|ImportFlowResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.ImportFlowResponse|ImportFlowResponse}
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -1323,8 +1315,7 @@ export class FlowsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.import_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_ImportFlow_async
@@ -1339,7 +1330,7 @@ export class FlowsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importFlow(
@@ -1392,7 +1383,7 @@ export class FlowsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1419,8 +1410,7 @@ export class FlowsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.import_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_ImportFlow_async
@@ -1458,7 +1448,7 @@ export class FlowsClient {
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
    * - `response`:
-   * {@link google.cloud.dialogflow.cx.v3.ExportFlowResponse|ExportFlowResponse}
+   * {@link protos.google.cloud.dialogflow.cx.v3.ExportFlowResponse|ExportFlowResponse}
    *
    * Note that resources (e.g. intents, entities, webhooks) that the flow
    * references will also be exported.
@@ -1488,8 +1478,7 @@ export class FlowsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.export_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_ExportFlow_async
@@ -1504,7 +1493,7 @@ export class FlowsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportFlow(
@@ -1557,7 +1546,7 @@ export class FlowsClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1584,8 +1573,7 @@ export class FlowsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.export_flow.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_ExportFlow_async
@@ -1643,14 +1631,13 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.Flow | Flow}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listFlowsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFlows(
@@ -1660,7 +1647,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow[],
       protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListFlowsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListFlowsResponse,
     ]
   >;
   listFlows(
@@ -1706,7 +1693,7 @@ export class FlowsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFlow[],
       protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListFlowsResponse
+      protos.google.cloud.dialogflow.cx.v3.IListFlowsResponse,
     ]
   > | void {
     request = request || {};
@@ -1757,13 +1744,12 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.Flow | Flow} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listFlowsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listFlowsStream(
@@ -1819,12 +1805,11 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.Flow | Flow}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Flow|Flow}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/flows.list_flows.js</caption>
    * region_tag:dialogflow_v3_generated_Flows_ListFlows_async
@@ -1861,8 +1846,7 @@ export class FlowsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1908,12 +1892,11 @@ export class FlowsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

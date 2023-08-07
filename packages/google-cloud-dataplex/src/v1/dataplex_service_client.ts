@@ -853,7 +853,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ILake,
       protos.google.cloud.dataplex.v1.IGetLakeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLake(
@@ -891,7 +891,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ILake,
       protos.google.cloud.dataplex.v1.IGetLakeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -936,7 +936,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IZone,
       protos.google.cloud.dataplex.v1.IGetZoneRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getZone(
@@ -974,7 +974,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IZone,
       protos.google.cloud.dataplex.v1.IGetZoneRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1019,7 +1019,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAsset,
       protos.google.cloud.dataplex.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAsset(
@@ -1057,7 +1057,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAsset,
       protos.google.cloud.dataplex.v1.IGetAssetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1102,7 +1102,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ITask,
       protos.google.cloud.dataplex.v1.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTask(
@@ -1140,7 +1140,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ITask,
       protos.google.cloud.dataplex.v1.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1201,7 +1201,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IRunTaskResponse,
       protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runTask(
@@ -1239,7 +1239,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IRunTaskResponse,
       protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1284,7 +1284,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IJob,
       protos.google.cloud.dataplex.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -1322,7 +1322,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IJob,
       protos.google.cloud.dataplex.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1367,7 +1367,7 @@ export class DataplexServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.ICancelJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelJob(
@@ -1405,7 +1405,7 @@ export class DataplexServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.ICancelJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1450,7 +1450,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEnvironment,
       protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -1490,7 +1490,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEnvironment,
       protos.google.cloud.dataplex.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1556,7 +1556,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createLake(
@@ -1609,7 +1609,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1698,7 +1698,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateLake(
@@ -1751,7 +1751,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1836,7 +1836,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteLake(
@@ -1889,7 +1889,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1988,7 +1988,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createZone(
@@ -2041,7 +2041,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2130,7 +2130,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateZone(
@@ -2183,7 +2183,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2268,7 +2268,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteZone(
@@ -2321,7 +2321,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2419,7 +2419,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAsset(
@@ -2472,7 +2472,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2561,7 +2561,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAsset(
@@ -2614,7 +2614,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2699,7 +2699,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAsset(
@@ -2752,7 +2752,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2843,7 +2843,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTask(
@@ -2896,7 +2896,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2985,7 +2985,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTask(
@@ -3038,7 +3038,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3122,7 +3122,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTask(
@@ -3175,7 +3175,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3271,7 +3271,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEnvironment(
@@ -3324,7 +3324,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3413,7 +3413,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEnvironment(
@@ -3466,7 +3466,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3551,7 +3551,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEnvironment(
@@ -3604,7 +3604,7 @@ export class DataplexServiceClient {
         protos.google.cloud.dataplex.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3699,7 +3699,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ILake[],
       protos.google.cloud.dataplex.v1.IListLakesRequest | null,
-      protos.google.cloud.dataplex.v1.IListLakesResponse
+      protos.google.cloud.dataplex.v1.IListLakesResponse,
     ]
   >;
   listLakes(
@@ -3737,7 +3737,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ILake[],
       protos.google.cloud.dataplex.v1.IListLakesRequest | null,
-      protos.google.cloud.dataplex.v1.IListLakesResponse
+      protos.google.cloud.dataplex.v1.IListLakesResponse,
     ]
   > | void {
     request = request || {};
@@ -3903,7 +3903,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAction[],
       protos.google.cloud.dataplex.v1.IListLakeActionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListActionsResponse
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
     ]
   >;
   listLakeActions(
@@ -3943,7 +3943,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAction[],
       protos.google.cloud.dataplex.v1.IListLakeActionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListActionsResponse
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4104,7 +4104,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IZone[],
       protos.google.cloud.dataplex.v1.IListZonesRequest | null,
-      protos.google.cloud.dataplex.v1.IListZonesResponse
+      protos.google.cloud.dataplex.v1.IListZonesResponse,
     ]
   >;
   listZones(
@@ -4142,7 +4142,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IZone[],
       protos.google.cloud.dataplex.v1.IListZonesRequest | null,
-      protos.google.cloud.dataplex.v1.IListZonesResponse
+      protos.google.cloud.dataplex.v1.IListZonesResponse,
     ]
   > | void {
     request = request || {};
@@ -4306,7 +4306,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAction[],
       protos.google.cloud.dataplex.v1.IListZoneActionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListActionsResponse
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
     ]
   >;
   listZoneActions(
@@ -4346,7 +4346,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAction[],
       protos.google.cloud.dataplex.v1.IListZoneActionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListActionsResponse
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4508,7 +4508,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAsset[],
       protos.google.cloud.dataplex.v1.IListAssetsRequest | null,
-      protos.google.cloud.dataplex.v1.IListAssetsResponse
+      protos.google.cloud.dataplex.v1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -4548,7 +4548,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAsset[],
       protos.google.cloud.dataplex.v1.IListAssetsRequest | null,
-      protos.google.cloud.dataplex.v1.IListAssetsResponse
+      protos.google.cloud.dataplex.v1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};
@@ -4714,7 +4714,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAction[],
       protos.google.cloud.dataplex.v1.IListAssetActionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListActionsResponse
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
     ]
   >;
   listAssetActions(
@@ -4754,7 +4754,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IAction[],
       protos.google.cloud.dataplex.v1.IListAssetActionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListActionsResponse
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4915,7 +4915,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ITask[],
       protos.google.cloud.dataplex.v1.IListTasksRequest | null,
-      protos.google.cloud.dataplex.v1.IListTasksResponse
+      protos.google.cloud.dataplex.v1.IListTasksResponse,
     ]
   >;
   listTasks(
@@ -4953,7 +4953,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ITask[],
       protos.google.cloud.dataplex.v1.IListTasksRequest | null,
-      protos.google.cloud.dataplex.v1.IListTasksResponse
+      protos.google.cloud.dataplex.v1.IListTasksResponse,
     ]
   > | void {
     request = request || {};
@@ -5117,7 +5117,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IJob[],
       protos.google.cloud.dataplex.v1.IListJobsRequest | null,
-      protos.google.cloud.dataplex.v1.IListJobsResponse
+      protos.google.cloud.dataplex.v1.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -5155,7 +5155,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IJob[],
       protos.google.cloud.dataplex.v1.IListJobsRequest | null,
-      protos.google.cloud.dataplex.v1.IListJobsResponse
+      protos.google.cloud.dataplex.v1.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -5318,7 +5318,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEnvironment[],
       protos.google.cloud.dataplex.v1.IListEnvironmentsRequest | null,
-      protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+      protos.google.cloud.dataplex.v1.IListEnvironmentsResponse,
     ]
   >;
   listEnvironments(
@@ -5364,7 +5364,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEnvironment[],
       protos.google.cloud.dataplex.v1.IListEnvironmentsRequest | null,
-      protos.google.cloud.dataplex.v1.IListEnvironmentsResponse
+      protos.google.cloud.dataplex.v1.IListEnvironmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -5542,7 +5542,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ISession[],
       protos.google.cloud.dataplex.v1.IListSessionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListSessionsResponse
+      protos.google.cloud.dataplex.v1.IListSessionsResponse,
     ]
   >;
   listSessions(
@@ -5582,7 +5582,7 @@ export class DataplexServiceClient {
     [
       protos.google.cloud.dataplex.v1.ISession[],
       protos.google.cloud.dataplex.v1.IListSessionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListSessionsResponse
+      protos.google.cloud.dataplex.v1.IListSessionsResponse,
     ]
   > | void {
     request = request || {};

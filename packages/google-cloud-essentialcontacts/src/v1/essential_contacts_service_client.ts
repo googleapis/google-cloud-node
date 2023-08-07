@@ -365,9 +365,8 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.essentialcontacts.v1.Contact | Contact}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.create_contact.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_CreateContact_async
@@ -382,7 +381,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createContact(
@@ -431,7 +430,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -468,9 +467,8 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.essentialcontacts.v1.Contact | Contact}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.update_contact.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_UpdateContact_async
@@ -485,7 +483,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateContact(
@@ -534,7 +532,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -568,9 +566,8 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.essentialcontacts.v1.Contact | Contact}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.get_contact.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_GetContact_async
@@ -582,7 +579,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact,
       protos.google.cloud.essentialcontacts.v1.IGetContactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getContact(
@@ -628,7 +625,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact,
       protos.google.cloud.essentialcontacts.v1.IGetContactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -662,9 +659,8 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.delete_contact.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_DeleteContact_async
@@ -679,7 +675,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteContact(
@@ -728,7 +724,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -772,9 +768,8 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.send_test_message.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_SendTestMessage_async
@@ -789,7 +784,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   sendTestMessage(
@@ -838,7 +833,7 @@ export class EssentialContactsServiceClient {
         | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -882,14 +877,13 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.essentialcontacts.v1.Contact | Contact}.
+   *   The first element of the array is Array of {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listContactsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listContacts(
@@ -899,7 +893,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
     ]
   >;
   listContacts(
@@ -945,7 +939,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
     ]
   > | void {
     request = request || {};
@@ -988,13 +982,12 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.essentialcontacts.v1.Contact | Contact} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listContactsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listContactsStream(
@@ -1042,12 +1035,11 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.essentialcontacts.v1.Contact | Contact}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.list_contacts.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_ListContacts_async
@@ -1101,14 +1093,13 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.essentialcontacts.v1.Contact | Contact}.
+   *   The first element of the array is Array of {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `computeContactsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   computeContacts(
@@ -1118,7 +1109,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
     ]
   >;
   computeContacts(
@@ -1164,7 +1155,7 @@ export class EssentialContactsServiceClient {
     [
       protos.google.cloud.essentialcontacts.v1.IContact[],
       protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
-      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+      protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
     ]
   > | void {
     request = request || {};
@@ -1211,13 +1202,12 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.essentialcontacts.v1.Contact | Contact} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `computeContactsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   computeContactsStream(
@@ -1269,12 +1259,11 @@ export class EssentialContactsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.essentialcontacts.v1.Contact | Contact}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.essentialcontacts.v1.Contact|Contact}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/essential_contacts_service.compute_contacts.js</caption>
    * region_tag:essentialcontacts_v1_generated_EssentialContactsService_ComputeContacts_async

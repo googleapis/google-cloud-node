@@ -372,7 +372,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant,
       protos.google.cloud.talent.v4.ICreateTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTenant(
@@ -410,7 +410,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant,
       protos.google.cloud.talent.v4.ICreateTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -457,7 +457,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant,
       protos.google.cloud.talent.v4.IGetTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTenant(
@@ -495,7 +495,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant,
       protos.google.cloud.talent.v4.IGetTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -550,7 +550,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant,
       protos.google.cloud.talent.v4.IUpdateTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTenant(
@@ -588,7 +588,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant,
       protos.google.cloud.talent.v4.IUpdateTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -635,7 +635,7 @@ export class TenantServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.talent.v4.IDeleteTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTenant(
@@ -673,7 +673,7 @@ export class TenantServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.talent.v4.IDeleteTenantRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -729,7 +729,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant[],
       protos.google.cloud.talent.v4.IListTenantsRequest | null,
-      protos.google.cloud.talent.v4.IListTenantsResponse
+      protos.google.cloud.talent.v4.IListTenantsResponse,
     ]
   >;
   listTenants(
@@ -767,7 +767,7 @@ export class TenantServiceClient {
     [
       protos.google.cloud.talent.v4.ITenant[],
       protos.google.cloud.talent.v4.IListTenantsRequest | null,
-      protos.google.cloud.talent.v4.IListTenantsResponse
+      protos.google.cloud.talent.v4.IListTenantsResponse,
     ]
   > | void {
     request = request || {};

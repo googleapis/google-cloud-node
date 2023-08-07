@@ -349,7 +349,7 @@ export class GlobalOrganizationOperationsClient {
         | protos.google.cloud.compute.v1.IDeleteGlobalOrganizationOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -398,7 +398,7 @@ export class GlobalOrganizationOperationsClient {
         | protos.google.cloud.compute.v1.IDeleteGlobalOrganizationOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -447,7 +447,7 @@ export class GlobalOrganizationOperationsClient {
         | protos.google.cloud.compute.v1.IGetGlobalOrganizationOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -496,7 +496,7 @@ export class GlobalOrganizationOperationsClient {
         | protos.google.cloud.compute.v1.IGetGlobalOrganizationOperationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -554,7 +554,7 @@ export class GlobalOrganizationOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListGlobalOrganizationOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   >;
   list(
@@ -592,7 +592,7 @@ export class GlobalOrganizationOperationsClient {
     [
       protos.google.cloud.compute.v1.IOperation[],
       protos.google.cloud.compute.v1.IListGlobalOrganizationOperationsRequest | null,
-      protos.google.cloud.compute.v1.IOperationList
+      protos.google.cloud.compute.v1.IOperationList,
     ]
   > | void {
     request = request || {};

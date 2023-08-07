@@ -38,7 +38,7 @@ import * as gapicConfig from './fulfillments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2.Fulfillment|Fulfillments}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.v2.Fulfillment|Fulfillments}.
  * @class
  * @memberof v2
  */
@@ -468,9 +468,8 @@ export class FulfillmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Fulfillment | Fulfillment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Fulfillment|Fulfillment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/fulfillments.get_fulfillment.js</caption>
    * region_tag:dialogflow_v2_generated_Fulfillments_GetFulfillment_async
@@ -482,7 +481,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFulfillment(
@@ -528,7 +527,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -562,9 +561,8 @@ export class FulfillmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Fulfillment | Fulfillment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Fulfillment|Fulfillment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/fulfillments.update_fulfillment.js</caption>
    * region_tag:dialogflow_v2_generated_Fulfillments_UpdateFulfillment_async
@@ -576,7 +574,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFulfillment(
@@ -622,7 +620,7 @@ export class FulfillmentsClient {
     [
       protos.google.cloud.dialogflow.v2.IFulfillment,
       protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -655,8 +653,7 @@ export class FulfillmentsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -702,12 +699,11 @@ export class FulfillmentsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

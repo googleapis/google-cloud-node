@@ -435,7 +435,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.run.v2.IExecution,
       protos.google.cloud.run.v2.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExecution(
@@ -473,7 +473,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.run.v2.IExecution,
       protos.google.cloud.run.v2.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -532,7 +532,7 @@ export class ExecutionsClient {
         protos.google.cloud.run.v2.IExecution
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteExecution(
@@ -585,7 +585,7 @@ export class ExecutionsClient {
         protos.google.cloud.run.v2.IExecution
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -676,7 +676,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.run.v2.IExecution[],
       protos.google.cloud.run.v2.IListExecutionsRequest | null,
-      protos.google.cloud.run.v2.IListExecutionsResponse
+      protos.google.cloud.run.v2.IListExecutionsResponse,
     ]
   >;
   listExecutions(
@@ -714,7 +714,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.run.v2.IExecution[],
       protos.google.cloud.run.v2.IListExecutionsRequest | null,
-      protos.google.cloud.run.v2.IListExecutionsResponse
+      protos.google.cloud.run.v2.IListExecutionsResponse,
     ]
   > | void {
     request = request || {};

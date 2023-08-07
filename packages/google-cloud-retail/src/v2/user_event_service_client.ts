@@ -450,7 +450,7 @@ export class UserEventServiceClient {
     [
       protos.google.cloud.retail.v2.IUserEvent,
       protos.google.cloud.retail.v2.IWriteUserEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeUserEvent(
@@ -490,7 +490,7 @@ export class UserEventServiceClient {
     [
       protos.google.cloud.retail.v2.IUserEvent,
       protos.google.cloud.retail.v2.IWriteUserEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -559,7 +559,7 @@ export class UserEventServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.cloud.retail.v2.ICollectUserEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   collectUserEvent(
@@ -599,7 +599,7 @@ export class UserEventServiceClient {
     [
       protos.google.api.IHttpBody,
       protos.google.cloud.retail.v2.ICollectUserEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -682,7 +682,7 @@ export class UserEventServiceClient {
         protos.google.cloud.retail.v2.IPurgeMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   purgeUserEvents(
@@ -735,7 +735,7 @@ export class UserEventServiceClient {
         protos.google.cloud.retail.v2.IPurgeMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,7 +829,7 @@ export class UserEventServiceClient {
         protos.google.cloud.retail.v2.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importUserEvents(
@@ -882,7 +882,7 @@ export class UserEventServiceClient {
         protos.google.cloud.retail.v2.IImportMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -978,7 +978,7 @@ export class UserEventServiceClient {
         protos.google.cloud.retail.v2.IRejoinUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rejoinUserEvents(
@@ -1031,7 +1031,7 @@ export class UserEventServiceClient {
         protos.google.cloud.retail.v2.IRejoinUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

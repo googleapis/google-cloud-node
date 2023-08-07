@@ -630,9 +630,8 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.ConversationModel | ConversationModel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.ConversationModel|ConversationModel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.get_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_GetConversationModel_async
@@ -647,7 +646,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversationModel(
@@ -696,7 +695,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -729,9 +728,8 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.ConversationModelEvaluation | ConversationModelEvaluation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.ConversationModelEvaluation|ConversationModelEvaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.get_conversation_model_evaluation.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_GetConversationModelEvaluation_async
@@ -746,7 +744,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversationModelEvaluation(
@@ -795,7 +793,7 @@ export class ConversationModelsClient {
         | protos.google.cloud.dialogflow.v2.IGetConversationModelEvaluationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,9 +827,9 @@ export class ConversationModelsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata|CreateConversationModelOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata|CreateConversationModelOperationMetadata}
    * - `response`:
-   * {@link google.cloud.dialogflow.v2.ConversationModel|ConversationModel}
+   * {@link protos.google.cloud.dialogflow.v2.ConversationModel|ConversationModel}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -846,8 +844,7 @@ export class ConversationModelsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.create_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_CreateConversationModel_async
@@ -862,7 +859,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversationModel(
@@ -915,7 +912,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -946,8 +943,7 @@ export class ConversationModelsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.create_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_CreateConversationModel_async
@@ -983,7 +979,7 @@ export class ConversationModelsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata|DeleteConversationModelOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata|DeleteConversationModelOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -998,8 +994,7 @@ export class ConversationModelsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.delete_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_DeleteConversationModel_async
@@ -1014,7 +1009,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConversationModel(
@@ -1067,7 +1062,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeleteConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1098,8 +1093,7 @@ export class ConversationModelsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.delete_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_DeleteConversationModel_async
@@ -1138,7 +1132,7 @@ export class ConversationModelsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata|DeployConversationModelOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata|DeployConversationModelOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -1153,8 +1147,7 @@ export class ConversationModelsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.deploy_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_DeployConversationModel_async
@@ -1169,7 +1162,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployConversationModel(
@@ -1222,7 +1215,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IDeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1253,8 +1246,7 @@ export class ConversationModelsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.deploy_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_DeployConversationModel_async
@@ -1293,7 +1285,7 @@ export class ConversationModelsClient {
    * The returned `Operation` type has the following method-specific fields:
    *
    * - `metadata`:
-   * {@link google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata|UndeployConversationModelOperationMetadata}
+   * {@link protos.google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata|UndeployConversationModelOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -1308,8 +1300,7 @@ export class ConversationModelsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.undeploy_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_UndeployConversationModel_async
@@ -1324,7 +1315,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployConversationModel(
@@ -1377,7 +1368,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.IUndeployConversationModelOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1408,8 +1399,7 @@ export class ConversationModelsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.undeploy_conversation_model.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_UndeployConversationModel_async
@@ -1454,8 +1444,7 @@ export class ConversationModelsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.create_conversation_model_evaluation.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_CreateConversationModelEvaluation_async
@@ -1470,7 +1459,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversationModelEvaluation(
@@ -1523,7 +1512,7 @@ export class ConversationModelsClient {
         protos.google.cloud.dialogflow.v2.ICreateConversationModelEvaluationOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1554,8 +1543,7 @@ export class ConversationModelsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.create_conversation_model_evaluation.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_CreateConversationModelEvaluation_async
@@ -1599,14 +1587,13 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.ConversationModel | ConversationModel}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.ConversationModel|ConversationModel}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConversationModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationModels(
@@ -1616,7 +1603,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModel[],
       protos.google.cloud.dialogflow.v2.IListConversationModelsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse,
     ]
   >;
   listConversationModels(
@@ -1662,7 +1649,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModel[],
       protos.google.cloud.dialogflow.v2.IListConversationModelsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelsResponse,
     ]
   > | void {
     request = request || {};
@@ -1703,13 +1690,12 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.ConversationModel | ConversationModel} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.ConversationModel|ConversationModel} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConversationModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationModelsStream(
@@ -1751,12 +1737,11 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2.ConversationModel | ConversationModel}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2.ConversationModel|ConversationModel}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.list_conversation_models.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_ListConversationModels_async
@@ -1798,14 +1783,13 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.ConversationModelEvaluation | ConversationModelEvaluation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.ConversationModelEvaluation|ConversationModelEvaluation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConversationModelEvaluationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationModelEvaluations(
@@ -1815,7 +1799,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModelEvaluation[],
       protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse,
     ]
   >;
   listConversationModelEvaluations(
@@ -1861,7 +1845,7 @@ export class ConversationModelsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversationModelEvaluation[],
       protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsResponse,
     ]
   > | void {
     request = request || {};
@@ -1902,13 +1886,12 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.ConversationModelEvaluation | ConversationModelEvaluation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.ConversationModelEvaluation|ConversationModelEvaluation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConversationModelEvaluationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationModelEvaluationsStream(
@@ -1951,12 +1934,11 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2.ConversationModelEvaluation | ConversationModelEvaluation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2.ConversationModelEvaluation|ConversationModelEvaluation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversation_models.list_conversation_model_evaluations.js</caption>
    * region_tag:dialogflow_v2_generated_ConversationModels_ListConversationModelEvaluations_async
@@ -1994,8 +1976,7 @@ export class ConversationModelsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2041,12 +2022,11 @@ export class ConversationModelsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

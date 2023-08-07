@@ -56,7 +56,6 @@
   "packages/google-cloud-eventarc-publishing": "2.4.2",
   "packages/google-cloud-filestore": "2.4.1",
   "packages/google-cloud-functions": "2.5.0",
-  "packages/google-cloud-gaming": "3.2.2",
   "packages/google-cloud-gkebackup": "0.4.0",
   "packages/google-cloud-gkeconnect-gateway": "2.1.2",
   "packages/google-cloud-gkehub": "3.4.0",

@@ -366,7 +366,7 @@ export class AddressesClient {
     [
       LROperation<protos.google.cloud.compute.v1small.IOperation, null>,
       protos.google.cloud.compute.v1small.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -412,7 +412,7 @@ export class AddressesClient {
     [
       LROperation<protos.google.cloud.compute.v1small.IOperation, null>,
       protos.google.cloud.compute.v1small.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -439,7 +439,7 @@ export class AddressesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -493,7 +493,7 @@ export class AddressesClient {
     [
       LROperation<protos.google.cloud.compute.v1small.IOperation, null>,
       protos.google.cloud.compute.v1small.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -539,7 +539,7 @@ export class AddressesClient {
     [
       LROperation<protos.google.cloud.compute.v1small.IOperation, null>,
       protos.google.cloud.compute.v1small.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -565,7 +565,7 @@ export class AddressesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -693,7 +693,7 @@ export class AddressesClient {
     [
       protos.google.cloud.compute.v1small.IAddress[],
       protos.google.cloud.compute.v1small.IListAddressesRequest | null,
-      protos.google.cloud.compute.v1small.IAddressList
+      protos.google.cloud.compute.v1small.IAddressList,
     ]
   >;
   list(
@@ -731,7 +731,7 @@ export class AddressesClient {
     [
       protos.google.cloud.compute.v1small.IAddress[],
       protos.google.cloud.compute.v1small.IListAddressesRequest | null,
-      protos.google.cloud.compute.v1small.IAddressList
+      protos.google.cloud.compute.v1small.IAddressList,
     ]
   > | void {
     request = request || {};

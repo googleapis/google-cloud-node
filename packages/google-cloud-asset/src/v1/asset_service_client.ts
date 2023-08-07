@@ -532,7 +532,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
       protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchGetAssetsHistory(
@@ -578,7 +578,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
       protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -635,7 +635,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IFeed,
       protos.google.cloud.asset.v1.ICreateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFeed(
@@ -673,7 +673,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IFeed,
       protos.google.cloud.asset.v1.ICreateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -720,7 +720,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IFeed,
       protos.google.cloud.asset.v1.IGetFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFeed(
@@ -758,7 +758,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IFeed,
       protos.google.cloud.asset.v1.IGetFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -804,7 +804,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IListFeedsResponse,
       protos.google.cloud.asset.v1.IListFeedsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listFeeds(
@@ -842,7 +842,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IListFeedsResponse,
       protos.google.cloud.asset.v1.IListFeedsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -894,7 +894,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IFeed,
       protos.google.cloud.asset.v1.IUpdateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFeed(
@@ -932,7 +932,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IFeed,
       protos.google.cloud.asset.v1.IUpdateFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -979,7 +979,7 @@ export class AssetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.asset.v1.IDeleteFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFeed(
@@ -1017,7 +1017,7 @@ export class AssetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.asset.v1.IDeleteFeedRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1091,7 +1091,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
       protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeIamPolicy(
@@ -1131,7 +1131,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
       protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1191,7 +1191,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
       protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeMove(
@@ -1229,7 +1229,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
       protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1340,7 +1340,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IQueryAssetsResponse,
       protos.google.cloud.asset.v1.IQueryAssetsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   queryAssets(
@@ -1378,7 +1378,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IQueryAssetsResponse,
       protos.google.cloud.asset.v1.IQueryAssetsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1439,7 +1439,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery,
       protos.google.cloud.asset.v1.ICreateSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSavedQuery(
@@ -1479,7 +1479,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery,
       protos.google.cloud.asset.v1.ICreateSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1527,7 +1527,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery,
       protos.google.cloud.asset.v1.IGetSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSavedQuery(
@@ -1565,7 +1565,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery,
       protos.google.cloud.asset.v1.IGetSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1618,7 +1618,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery,
       protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSavedQuery(
@@ -1658,7 +1658,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery,
       protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1707,7 +1707,7 @@ export class AssetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSavedQuery(
@@ -1747,7 +1747,7 @@ export class AssetServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1810,7 +1810,7 @@ export class AssetServiceClient {
         | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchGetEffectiveIamPolicies(
@@ -1859,7 +1859,7 @@ export class AssetServiceClient {
         | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1973,7 +1973,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1.IExportAssetsRequest
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportAssets(
@@ -2026,7 +2026,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1.IExportAssetsRequest
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2138,7 +2138,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeIamPolicyLongrunning(
@@ -2191,7 +2191,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2332,7 +2332,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IAsset[],
       protos.google.cloud.asset.v1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1.IListAssetsResponse
+      protos.google.cloud.asset.v1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -2370,7 +2370,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IAsset[],
       protos.google.cloud.asset.v1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1.IListAssetsResponse
+      protos.google.cloud.asset.v1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};
@@ -2757,7 +2757,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IResourceSearchResult[],
       protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      protos.google.cloud.asset.v1.ISearchAllResourcesResponse,
     ]
   >;
   searchAllResources(
@@ -2803,7 +2803,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IResourceSearchResult[],
       protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+      protos.google.cloud.asset.v1.ISearchAllResourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -3320,7 +3320,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IIamPolicySearchResult[],
       protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse,
     ]
   >;
   searchAllIamPolicies(
@@ -3366,7 +3366,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.IIamPolicySearchResult[],
       protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+      protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -3703,7 +3703,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery[],
       protos.google.cloud.asset.v1.IListSavedQueriesRequest | null,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse
+      protos.google.cloud.asset.v1.IListSavedQueriesResponse,
     ]
   >;
   listSavedQueries(
@@ -3743,7 +3743,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.ISavedQuery[],
       protos.google.cloud.asset.v1.IListSavedQueriesRequest | null,
-      protos.google.cloud.asset.v1.IListSavedQueriesResponse
+      protos.google.cloud.asset.v1.IListSavedQueriesResponse,
     ]
   > | void {
     request = request || {};
@@ -3935,7 +3935,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
       protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
+      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse,
     ]
   >;
   analyzeOrgPolicies(
@@ -3981,7 +3981,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
       protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
+      protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -4177,7 +4177,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
       protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse,
     ]
   >;
   analyzeOrgPolicyGovernedContainers(
@@ -4223,7 +4223,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
       protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse,
     ]
   > | void {
     request = request || {};
@@ -4449,7 +4449,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
       protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse,
     ]
   >;
   analyzeOrgPolicyGovernedAssets(
@@ -4495,7 +4495,7 @@ export class AssetServiceClient {
     [
       protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
       protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest | null,
-      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
+      protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse,
     ]
   > | void {
     request = request || {};

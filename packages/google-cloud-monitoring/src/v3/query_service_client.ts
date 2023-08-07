@@ -399,7 +399,7 @@ export class QueryServiceClient {
     [
       protos.google.monitoring.v3.ITimeSeriesData[],
       protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse
+      protos.google.monitoring.v3.IQueryTimeSeriesResponse,
     ]
   >;
   queryTimeSeries(
@@ -471,7 +471,7 @@ export class QueryServiceClient {
     [
       protos.google.monitoring.v3.ITimeSeriesData[],
       protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse
+      protos.google.monitoring.v3.IQueryTimeSeriesResponse,
     ]
   > | void {
     request = request || {};

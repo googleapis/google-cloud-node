@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 102,
+                    "end": 110,
                     "type": "FULL"
                 }
             ],
@@ -50,6 +50,10 @@
                     {
                         "name": "order_by",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "admin_search",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.datacatalog.v1.SearchCatalogResponse",

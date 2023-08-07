@@ -381,7 +381,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocumentSchema(
@@ -430,7 +430,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -487,7 +487,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDocumentSchema(
@@ -536,7 +536,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -584,7 +584,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocumentSchema(
@@ -633,7 +633,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -682,7 +682,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocumentSchema(
@@ -731,7 +731,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,7 +791,7 @@ export class DocumentSchemaServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
       protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
     ]
   >;
   listDocumentSchemas(
@@ -837,7 +837,7 @@ export class DocumentSchemaServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
       protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
     ]
   > | void {
     request = request || {};

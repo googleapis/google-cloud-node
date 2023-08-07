@@ -762,9 +762,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.Instance | Instance}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.get_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_GetInstance_async
@@ -776,7 +775,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance,
       protos.google.cloud.notebooks.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -816,7 +815,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance,
       protos.google.cloud.notebooks.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -850,9 +849,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse | UpdateInstanceMetadataItemsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse|UpdateInstanceMetadataItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.update_instance_metadata_items.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpdateInstanceMetadataItems_async
@@ -867,7 +865,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstanceMetadataItems(
@@ -916,7 +914,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IUpdateInstanceMetadataItemsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -955,9 +953,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.IsInstanceUpgradeableResponse | IsInstanceUpgradeableResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.IsInstanceUpgradeableResponse|IsInstanceUpgradeableResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.is_instance_upgradeable.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_IsInstanceUpgradeable_async
@@ -972,7 +969,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IIsInstanceUpgradeableRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   isInstanceUpgradeable(
@@ -1021,7 +1018,7 @@ export class NotebookServiceClient {
         | protos.google.cloud.notebooks.v1.IIsInstanceUpgradeableRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1053,9 +1050,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.GetInstanceHealthResponse | GetInstanceHealthResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.GetInstanceHealthResponse|GetInstanceHealthResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.get_instance_health.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_GetInstanceHealth_async
@@ -1067,7 +1063,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IGetInstanceHealthResponse,
       protos.google.cloud.notebooks.v1.IGetInstanceHealthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstanceHealth(
@@ -1113,7 +1109,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IGetInstanceHealthResponse,
       protos.google.cloud.notebooks.v1.IGetInstanceHealthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1145,9 +1141,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.Environment | Environment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.Environment|Environment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.get_environment.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_GetEnvironment_async
@@ -1159,7 +1154,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment,
       protos.google.cloud.notebooks.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -1205,7 +1200,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment,
       protos.google.cloud.notebooks.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1237,9 +1232,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.Schedule | Schedule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.Schedule|Schedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.get_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_GetSchedule_async
@@ -1251,7 +1245,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule,
       protos.google.cloud.notebooks.v1.IGetScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSchedule(
@@ -1291,7 +1285,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule,
       protos.google.cloud.notebooks.v1.IGetScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1323,9 +1317,8 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.notebooks.v1.Execution | Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.notebooks.v1.Execution|Execution}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.get_execution.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_GetExecution_async
@@ -1337,7 +1330,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution,
       protos.google.cloud.notebooks.v1.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExecution(
@@ -1377,7 +1370,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution,
       protos.google.cloud.notebooks.v1.IGetExecutionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1417,8 +1410,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateInstance_async
@@ -1433,7 +1425,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -1486,7 +1478,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1513,8 +1505,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateInstance_async
@@ -1564,8 +1555,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.register_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_RegisterInstance_async
@@ -1580,7 +1570,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerInstance(
@@ -1633,7 +1623,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1660,8 +1650,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.register_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_RegisterInstance_async
@@ -1710,8 +1699,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.set_instance_accelerator.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_SetInstanceAccelerator_async
@@ -1726,7 +1714,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInstanceAccelerator(
@@ -1779,7 +1767,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1810,8 +1798,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.set_instance_accelerator.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_SetInstanceAccelerator_async
@@ -1856,8 +1843,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.set_instance_machine_type.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_SetInstanceMachineType_async
@@ -1872,7 +1858,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInstanceMachineType(
@@ -1925,7 +1911,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1956,8 +1942,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.set_instance_machine_type.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_SetInstanceMachineType_async
@@ -2001,8 +1986,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.update_instance_config.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpdateInstanceConfig_async
@@ -2017,7 +2001,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstanceConfig(
@@ -2070,7 +2054,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2097,8 +2081,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.update_instance_config.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpdateInstanceConfig_async
@@ -2142,8 +2125,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.update_shielded_instance_config.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpdateShieldedInstanceConfig_async
@@ -2158,7 +2140,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateShieldedInstanceConfig(
@@ -2211,7 +2193,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2242,8 +2224,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.update_shielded_instance_config.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpdateShieldedInstanceConfig_async
@@ -2288,8 +2269,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.set_instance_labels.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_SetInstanceLabels_async
@@ -2304,7 +2284,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setInstanceLabels(
@@ -2357,7 +2337,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2384,8 +2364,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.set_instance_labels.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_SetInstanceLabels_async
@@ -2427,8 +2406,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteInstance_async
@@ -2443,7 +2421,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -2496,7 +2474,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2523,8 +2501,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteInstance_async
@@ -2566,8 +2543,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.start_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_StartInstance_async
@@ -2582,7 +2558,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startInstance(
@@ -2635,7 +2611,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2662,8 +2638,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.start_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_StartInstance_async
@@ -2705,8 +2680,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.stop_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_StopInstance_async
@@ -2721,7 +2695,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopInstance(
@@ -2774,7 +2748,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2801,8 +2775,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.stop_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_StopInstance_async
@@ -2844,8 +2817,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.reset_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ResetInstance_async
@@ -2860,7 +2832,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetInstance(
@@ -2913,7 +2885,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2940,8 +2912,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.reset_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ResetInstance_async
@@ -2992,8 +2963,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.report_instance_info.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ReportInstanceInfo_async
@@ -3008,7 +2978,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reportInstanceInfo(
@@ -3061,7 +3031,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3088,8 +3058,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.report_instance_info.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ReportInstanceInfo_async
@@ -3134,8 +3103,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.upgrade_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpgradeInstance_async
@@ -3150,7 +3118,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeInstance(
@@ -3203,7 +3171,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3230,8 +3198,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.upgrade_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpgradeInstance_async
@@ -3276,8 +3243,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.rollback_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_RollbackInstance_async
@@ -3292,7 +3258,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackInstance(
@@ -3345,7 +3311,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3372,8 +3338,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.rollback_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_RollbackInstance_async
@@ -3417,8 +3382,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.diagnose_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DiagnoseInstance_async
@@ -3433,7 +3397,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   diagnoseInstance(
@@ -3486,7 +3450,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3513,8 +3477,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.diagnose_instance.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DiagnoseInstance_async
@@ -3563,8 +3526,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.upgrade_instance_internal.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpgradeInstanceInternal_async
@@ -3579,7 +3541,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   upgradeInstanceInternal(
@@ -3632,7 +3594,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3663,8 +3625,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.upgrade_instance_internal.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_UpgradeInstanceInternal_async
@@ -3712,8 +3673,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_environment.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateEnvironment_async
@@ -3728,7 +3688,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEnvironment(
@@ -3781,7 +3741,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3808,8 +3768,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_environment.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateEnvironment_async
@@ -3851,8 +3810,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_environment.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteEnvironment_async
@@ -3867,7 +3825,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEnvironment(
@@ -3920,7 +3878,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3947,8 +3905,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_environment.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteEnvironment_async
@@ -3990,8 +3947,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteSchedule_async
@@ -4006,7 +3962,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSchedule(
@@ -4059,7 +4015,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4086,8 +4042,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteSchedule_async
@@ -4133,8 +4088,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateSchedule_async
@@ -4149,7 +4103,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSchedule(
@@ -4202,7 +4156,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4229,8 +4183,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateSchedule_async
@@ -4272,8 +4225,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.trigger_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_TriggerSchedule_async
@@ -4288,7 +4240,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   triggerSchedule(
@@ -4341,7 +4293,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4368,8 +4320,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.trigger_schedule.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_TriggerSchedule_async
@@ -4411,8 +4362,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_execution.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteExecution_async
@@ -4427,7 +4377,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteExecution(
@@ -4480,7 +4430,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4507,8 +4457,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.delete_execution.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_DeleteExecution_async
@@ -4554,8 +4503,7 @@ export class NotebookServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_execution.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateExecution_async
@@ -4570,7 +4518,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExecution(
@@ -4623,7 +4571,7 @@ export class NotebookServiceClient {
         protos.google.cloud.notebooks.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4650,8 +4598,7 @@ export class NotebookServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.create_execution.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_CreateExecution_async
@@ -4695,14 +4642,13 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.notebooks.v1.Instance | Instance}.
+   *   The first element of the array is Array of {@link protos.google.cloud.notebooks.v1.Instance|Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstances(
@@ -4712,7 +4658,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance[],
       protos.google.cloud.notebooks.v1.IListInstancesRequest | null,
-      protos.google.cloud.notebooks.v1.IListInstancesResponse
+      protos.google.cloud.notebooks.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -4758,7 +4704,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IInstance[],
       protos.google.cloud.notebooks.v1.IListInstancesRequest | null,
-      protos.google.cloud.notebooks.v1.IListInstancesResponse
+      protos.google.cloud.notebooks.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -4795,13 +4741,12 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.notebooks.v1.Instance | Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.notebooks.v1.Instance|Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstancesStream(
@@ -4843,12 +4788,11 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.notebooks.v1.Instance | Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.notebooks.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.list_instances.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ListInstances_async
@@ -4889,14 +4833,13 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.notebooks.v1.Environment | Environment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.notebooks.v1.Environment|Environment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEnvironmentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEnvironments(
@@ -4906,7 +4849,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment[],
       protos.google.cloud.notebooks.v1.IListEnvironmentsRequest | null,
-      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse
+      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse,
     ]
   >;
   listEnvironments(
@@ -4952,7 +4895,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IEnvironment[],
       protos.google.cloud.notebooks.v1.IListEnvironmentsRequest | null,
-      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse
+      protos.google.cloud.notebooks.v1.IListEnvironmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -4988,13 +4931,12 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.notebooks.v1.Environment | Environment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.notebooks.v1.Environment|Environment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEnvironmentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEnvironmentsStream(
@@ -5035,12 +4977,11 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.notebooks.v1.Environment | Environment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.notebooks.v1.Environment|Environment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.list_environments.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ListEnvironments_async
@@ -5086,14 +5027,13 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.notebooks.v1.Schedule | Schedule}.
+   *   The first element of the array is Array of {@link protos.google.cloud.notebooks.v1.Schedule|Schedule}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSchedules(
@@ -5103,7 +5043,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule[],
       protos.google.cloud.notebooks.v1.IListSchedulesRequest | null,
-      protos.google.cloud.notebooks.v1.IListSchedulesResponse
+      protos.google.cloud.notebooks.v1.IListSchedulesResponse,
     ]
   >;
   listSchedules(
@@ -5149,7 +5089,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.ISchedule[],
       protos.google.cloud.notebooks.v1.IListSchedulesRequest | null,
-      protos.google.cloud.notebooks.v1.IListSchedulesResponse
+      protos.google.cloud.notebooks.v1.IListSchedulesResponse,
     ]
   > | void {
     request = request || {};
@@ -5190,13 +5130,12 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.notebooks.v1.Schedule | Schedule} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.notebooks.v1.Schedule|Schedule} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSchedulesStream(
@@ -5242,12 +5181,11 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.notebooks.v1.Schedule | Schedule}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.notebooks.v1.Schedule|Schedule}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.list_schedules.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ListSchedules_async
@@ -5295,14 +5233,13 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.notebooks.v1.Execution | Execution}.
+   *   The first element of the array is Array of {@link protos.google.cloud.notebooks.v1.Execution|Execution}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listExecutionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listExecutions(
@@ -5312,7 +5249,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution[],
       protos.google.cloud.notebooks.v1.IListExecutionsRequest | null,
-      protos.google.cloud.notebooks.v1.IListExecutionsResponse
+      protos.google.cloud.notebooks.v1.IListExecutionsResponse,
     ]
   >;
   listExecutions(
@@ -5358,7 +5295,7 @@ export class NotebookServiceClient {
     [
       protos.google.cloud.notebooks.v1.IExecution[],
       protos.google.cloud.notebooks.v1.IListExecutionsRequest | null,
-      protos.google.cloud.notebooks.v1.IListExecutionsResponse
+      protos.google.cloud.notebooks.v1.IListExecutionsResponse,
     ]
   > | void {
     request = request || {};
@@ -5401,13 +5338,12 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.notebooks.v1.Execution | Execution} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.notebooks.v1.Execution|Execution} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listExecutionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listExecutionsStream(
@@ -5455,12 +5391,11 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.notebooks.v1.Execution | Execution}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.notebooks.v1.Execution|Execution}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/notebook_service.list_executions.js</caption>
    * region_tag:notebooks_v1_generated_NotebookService_ListExecutions_async
@@ -5525,7 +5460,7 @@ export class NotebookServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -5546,8 +5481,7 @@ export class NotebookServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5573,7 +5507,7 @@ export class NotebookServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -5594,8 +5528,7 @@ export class NotebookServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5622,7 +5555,7 @@ export class NotebookServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -5637,8 +5570,7 @@ export class NotebookServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -5684,12 +5616,11 @@ export class NotebookServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

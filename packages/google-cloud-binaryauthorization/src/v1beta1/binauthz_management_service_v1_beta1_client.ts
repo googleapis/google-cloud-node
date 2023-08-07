@@ -384,7 +384,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPolicy(
@@ -433,7 +433,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -486,7 +486,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePolicy(
@@ -535,7 +535,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -591,7 +591,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAttestor(
@@ -640,7 +640,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -689,7 +689,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAttestor(
@@ -738,7 +738,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -788,7 +788,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAttestor(
@@ -837,7 +837,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -886,7 +886,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAttestor(
@@ -935,7 +935,7 @@ export class BinauthzManagementServiceV1Beta1Client {
         | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -992,7 +992,7 @@ export class BinauthzManagementServiceV1Beta1Client {
     [
       protos.google.cloud.binaryauthorization.v1beta1.IAttestor[],
       protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest | null,
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse,
     ]
   >;
   listAttestors(
@@ -1038,7 +1038,7 @@ export class BinauthzManagementServiceV1Beta1Client {
     [
       protos.google.cloud.binaryauthorization.v1beta1.IAttestor[],
       protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest | null,
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse,
     ]
   > | void {
     request = request || {};

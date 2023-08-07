@@ -611,7 +611,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent,
       protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createContent(
@@ -651,7 +651,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent,
       protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -701,7 +701,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent,
       protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateContent(
@@ -741,7 +741,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent,
       protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -786,7 +786,7 @@ export class ContentServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteContent(
@@ -826,7 +826,7 @@ export class ContentServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -873,7 +873,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent,
       protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getContent(
@@ -911,7 +911,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent,
       protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -964,7 +964,7 @@ export class ContentServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1002,7 +1002,7 @@ export class ContentServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1062,7 +1062,7 @@ export class ContentServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1100,7 +1100,7 @@ export class ContentServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1159,7 +1159,7 @@ export class ContentServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1197,7 +1197,7 @@ export class ContentServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1265,7 +1265,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent[],
       protos.google.cloud.dataplex.v1.IListContentRequest | null,
-      protos.google.cloud.dataplex.v1.IListContentResponse
+      protos.google.cloud.dataplex.v1.IListContentResponse,
     ]
   >;
   listContent(
@@ -1305,7 +1305,7 @@ export class ContentServiceClient {
     [
       protos.google.cloud.dataplex.v1.IContent[],
       protos.google.cloud.dataplex.v1.IListContentRequest | null,
-      protos.google.cloud.dataplex.v1.IListContentResponse
+      protos.google.cloud.dataplex.v1.IListContentResponse,
     ]
   > | void {
     request = request || {};

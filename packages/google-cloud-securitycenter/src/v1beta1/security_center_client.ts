@@ -470,7 +470,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSource(
@@ -519,7 +519,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.ICreateSourceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -575,7 +575,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFinding(
@@ -624,7 +624,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.ICreateFindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -672,7 +672,7 @@ export class SecurityCenterClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -710,7 +710,7 @@ export class SecurityCenterClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -758,7 +758,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOrganizationSettings(
@@ -807,7 +807,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IGetOrganizationSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -856,7 +856,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.ISource,
       protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSource(
@@ -902,7 +902,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.ISource,
       protos.google.cloud.securitycenter.v1beta1.IGetSourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -956,7 +956,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setFindingState(
@@ -1005,7 +1005,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.ISetFindingStateRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1061,7 +1061,7 @@ export class SecurityCenterClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1099,7 +1099,7 @@ export class SecurityCenterClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1149,7 +1149,7 @@ export class SecurityCenterClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1187,7 +1187,7 @@ export class SecurityCenterClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1243,7 +1243,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFinding(
@@ -1292,7 +1292,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateFindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1341,7 +1341,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateOrganizationSettings(
@@ -1390,7 +1390,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateOrganizationSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1443,7 +1443,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSource(
@@ -1492,7 +1492,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateSourceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1543,7 +1543,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSecurityMarks(
@@ -1592,7 +1592,7 @@ export class SecurityCenterClient {
         | protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1645,7 +1645,7 @@ export class SecurityCenterClient {
     [
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runAssetDiscovery(
@@ -1686,7 +1686,7 @@ export class SecurityCenterClient {
     [
       LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IEmpty>,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1843,7 +1843,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
       protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse,
     ]
   >;
   groupAssets(
@@ -1889,7 +1889,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
       protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupAssetsResponse,
     ]
   > | void {
     request = request || {};
@@ -2230,7 +2230,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
       protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse,
     ]
   >;
   groupFindings(
@@ -2276,7 +2276,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.IGroupResult[],
       protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IGroupFindingsResponse,
     ]
   > | void {
     request = request || {};
@@ -2588,7 +2588,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
       protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse,
     ]
   >;
   listAssets(
@@ -2634,7 +2634,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.IListAssetsResult[],
       protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse
+      protos.google.cloud.securitycenter.v1beta1.IListAssetsResponse,
     ]
   > | void {
     request = request || {};
@@ -2974,7 +2974,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.IFinding[],
       protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse,
     ]
   >;
   listFindings(
@@ -3020,7 +3020,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.IFinding[],
       protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse
+      protos.google.cloud.securitycenter.v1beta1.IListFindingsResponse,
     ]
   > | void {
     request = request || {};
@@ -3262,7 +3262,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.ISource[],
       protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse,
     ]
   >;
   listSources(
@@ -3308,7 +3308,7 @@ export class SecurityCenterClient {
     [
       protos.google.cloud.securitycenter.v1beta1.ISource[],
       protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest | null,
-      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse
+      protos.google.cloud.securitycenter.v1beta1.IListSourcesResponse,
     ]
   > | void {
     request = request || {};

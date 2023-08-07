@@ -475,7 +475,7 @@ export class FoldersClient {
     [
       protos.google.cloud.resourcemanager.v3.IFolder,
       protos.google.cloud.resourcemanager.v3.IGetFolderRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getFolder(
@@ -521,7 +521,7 @@ export class FoldersClient {
     [
       protos.google.cloud.resourcemanager.v3.IFolder,
       protos.google.cloud.resourcemanager.v3.IGetFolderRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -573,7 +573,7 @@ export class FoldersClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -611,7 +611,7 @@ export class FoldersClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -671,7 +671,7 @@ export class FoldersClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -709,7 +709,7 @@ export class FoldersClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -763,7 +763,7 @@ export class FoldersClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -801,7 +801,7 @@ export class FoldersClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -878,7 +878,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createFolder(
@@ -931,7 +931,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1030,7 +1030,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IUpdateFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateFolder(
@@ -1083,7 +1083,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IUpdateFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1187,7 +1187,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveFolder(
@@ -1240,7 +1240,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1334,7 +1334,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IDeleteFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteFolder(
@@ -1387,7 +1387,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IDeleteFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1481,7 +1481,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IUndeleteFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteFolder(
@@ -1534,7 +1534,7 @@ export class FoldersClient {
         protos.google.cloud.resourcemanager.v3.IUndeleteFolderMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1640,7 +1640,7 @@ export class FoldersClient {
     [
       protos.google.cloud.resourcemanager.v3.IFolder[],
       protos.google.cloud.resourcemanager.v3.IListFoldersRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListFoldersResponse
+      protos.google.cloud.resourcemanager.v3.IListFoldersResponse,
     ]
   >;
   listFolders(
@@ -1686,7 +1686,7 @@ export class FoldersClient {
     [
       protos.google.cloud.resourcemanager.v3.IFolder[],
       protos.google.cloud.resourcemanager.v3.IListFoldersRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListFoldersResponse
+      protos.google.cloud.resourcemanager.v3.IListFoldersResponse,
     ]
   > | void {
     request = request || {};
@@ -1882,7 +1882,7 @@ export class FoldersClient {
     [
       protos.google.cloud.resourcemanager.v3.IFolder[],
       protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
+      protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse,
     ]
   >;
   searchFolders(
@@ -1928,7 +1928,7 @@ export class FoldersClient {
     [
       protos.google.cloud.resourcemanager.v3.IFolder[],
       protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
+      protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse,
     ]
   > | void {
     request = request || {};

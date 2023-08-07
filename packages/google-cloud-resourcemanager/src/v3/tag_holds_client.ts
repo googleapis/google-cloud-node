@@ -439,7 +439,7 @@ export class TagHoldsClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTagHold(
@@ -492,7 +492,7 @@ export class TagHoldsClient {
         protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,7 +579,7 @@ export class TagHoldsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTagHold(
@@ -632,7 +632,7 @@ export class TagHoldsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -733,7 +733,7 @@ export class TagHoldsClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagHold[],
       protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse,
     ]
   >;
   listTagHolds(
@@ -779,7 +779,7 @@ export class TagHoldsClient {
     [
       protos.google.cloud.resourcemanager.v3.ITagHold[],
       protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse,
     ]
   > | void {
     request = request || {};

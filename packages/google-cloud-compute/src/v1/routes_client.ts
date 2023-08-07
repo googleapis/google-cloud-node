@@ -352,7 +352,7 @@ export class RoutesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -390,7 +390,7 @@ export class RoutesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -416,7 +416,7 @@ export class RoutesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -457,7 +457,7 @@ export class RoutesClient {
     [
       protos.google.cloud.compute.v1.IRoute,
       protos.google.cloud.compute.v1.IGetRouteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -495,7 +495,7 @@ export class RoutesClient {
     [
       protos.google.cloud.compute.v1.IRoute,
       protos.google.cloud.compute.v1.IGetRouteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -549,7 +549,7 @@ export class RoutesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -587,7 +587,7 @@ export class RoutesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -612,7 +612,7 @@ export class RoutesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -665,7 +665,7 @@ export class RoutesClient {
     [
       protos.google.cloud.compute.v1.IRoute[],
       protos.google.cloud.compute.v1.IListRoutesRequest | null,
-      protos.google.cloud.compute.v1.IRouteList
+      protos.google.cloud.compute.v1.IRouteList,
     ]
   >;
   list(
@@ -703,7 +703,7 @@ export class RoutesClient {
     [
       protos.google.cloud.compute.v1.IRoute[],
       protos.google.cloud.compute.v1.IListRoutesRequest | null,
-      protos.google.cloud.compute.v1.IRouteList
+      protos.google.cloud.compute.v1.IRouteList,
     ]
   > | void {
     request = request || {};

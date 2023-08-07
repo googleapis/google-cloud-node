@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "repository": "googleapis/nodejs-compute",
   "private": true,
@@ -20,7 +20,7 @@
     "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^6.0.0",
+    "@google-cloud/storage": "^7.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
     "proxyquire": "^2.0.1",

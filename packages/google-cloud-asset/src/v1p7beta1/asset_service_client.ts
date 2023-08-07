@@ -441,7 +441,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1p7beta1.IExportAssetsRequest
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportAssets(
@@ -494,7 +494,7 @@ export class AssetServiceClient {
         protos.google.cloud.asset.v1p7beta1.IExportAssetsRequest
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

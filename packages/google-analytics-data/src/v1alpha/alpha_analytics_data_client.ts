@@ -471,7 +471,7 @@ export class AlphaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
       protos.google.analytics.data.v1alpha.IRunFunnelReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runFunnelReport(
@@ -517,7 +517,7 @@ export class AlphaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1alpha.IRunFunnelReportResponse,
       protos.google.analytics.data.v1alpha.IRunFunnelReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -592,7 +592,7 @@ export class AlphaAnalyticsDataClient {
         | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   queryAudienceList(
@@ -641,7 +641,7 @@ export class AlphaAnalyticsDataClient {
         | protos.google.analytics.data.v1alpha.IQueryAudienceListRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -687,7 +687,7 @@ export class AlphaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1alpha.IAudienceList,
       protos.google.analytics.data.v1alpha.IGetAudienceListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAudienceList(
@@ -733,7 +733,7 @@ export class AlphaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1alpha.IAudienceList,
       protos.google.analytics.data.v1alpha.IGetAudienceListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -800,7 +800,7 @@ export class AlphaAnalyticsDataClient {
         protos.google.analytics.data.v1alpha.IAudienceListMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAudienceList(
@@ -853,7 +853,7 @@ export class AlphaAnalyticsDataClient {
         protos.google.analytics.data.v1alpha.IAudienceListMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -949,7 +949,7 @@ export class AlphaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1alpha.IAudienceList[],
       protos.google.analytics.data.v1alpha.IListAudienceListsRequest | null,
-      protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+      protos.google.analytics.data.v1alpha.IListAudienceListsResponse,
     ]
   >;
   listAudienceLists(
@@ -995,7 +995,7 @@ export class AlphaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1alpha.IAudienceList[],
       protos.google.analytics.data.v1alpha.IListAudienceListsRequest | null,
-      protos.google.analytics.data.v1alpha.IListAudienceListsResponse
+      protos.google.analytics.data.v1alpha.IListAudienceListsResponse,
     ]
   > | void {
     request = request || {};

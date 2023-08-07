@@ -365,7 +365,7 @@ export class TargetInstancesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -411,7 +411,7 @@ export class TargetInstancesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -438,7 +438,7 @@ export class TargetInstancesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -481,7 +481,7 @@ export class TargetInstancesClient {
     [
       protos.google.cloud.compute.v1.ITargetInstance,
       protos.google.cloud.compute.v1.IGetTargetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -527,7 +527,7 @@ export class TargetInstancesClient {
     [
       protos.google.cloud.compute.v1.ITargetInstance,
       protos.google.cloud.compute.v1.IGetTargetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -584,7 +584,7 @@ export class TargetInstancesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -630,7 +630,7 @@ export class TargetInstancesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -656,7 +656,7 @@ export class TargetInstancesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -768,7 +768,7 @@ export class TargetInstancesClient {
     [
       protos.google.cloud.compute.v1.ITargetInstance[],
       protos.google.cloud.compute.v1.IListTargetInstancesRequest | null,
-      protos.google.cloud.compute.v1.ITargetInstanceList
+      protos.google.cloud.compute.v1.ITargetInstanceList,
     ]
   >;
   list(
@@ -806,7 +806,7 @@ export class TargetInstancesClient {
     [
       protos.google.cloud.compute.v1.ITargetInstance[],
       protos.google.cloud.compute.v1.IListTargetInstancesRequest | null,
-      protos.google.cloud.compute.v1.ITargetInstanceList
+      protos.google.cloud.compute.v1.ITargetInstanceList,
     ]
   > | void {
     request = request || {};

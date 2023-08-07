@@ -360,7 +360,7 @@ export class LicensesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -400,7 +400,7 @@ export class LicensesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -426,7 +426,7 @@ export class LicensesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -467,7 +467,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.ILicense,
       protos.google.cloud.compute.v1.IGetLicenseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -505,7 +505,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.ILicense,
       protos.google.cloud.compute.v1.IGetLicenseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -554,7 +554,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.IGetIamPolicyLicenseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -600,7 +600,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.IGetIamPolicyLicenseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -654,7 +654,7 @@ export class LicensesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -694,7 +694,7 @@ export class LicensesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -719,7 +719,7 @@ export class LicensesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -762,7 +762,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.ISetIamPolicyLicenseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -808,7 +808,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.IPolicy,
       protos.google.cloud.compute.v1.ISetIamPolicyLicenseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -860,7 +860,7 @@ export class LicensesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsLicenseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -909,7 +909,7 @@ export class LicensesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsLicenseRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -968,7 +968,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.ILicense[],
       protos.google.cloud.compute.v1.IListLicensesRequest | null,
-      protos.google.cloud.compute.v1.ILicensesListResponse
+      protos.google.cloud.compute.v1.ILicensesListResponse,
     ]
   >;
   list(
@@ -1008,7 +1008,7 @@ export class LicensesClient {
     [
       protos.google.cloud.compute.v1.ILicense[],
       protos.google.cloud.compute.v1.IListLicensesRequest | null,
-      protos.google.cloud.compute.v1.ILicensesListResponse
+      protos.google.cloud.compute.v1.ILicensesListResponse,
     ]
   > | void {
     request = request || {};
