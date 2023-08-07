@@ -1,16 +1,17 @@
 {
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-backup/latest",
-  "api_id": "gkebackup.googleapis.com",
-  "distribution_name": "@google-cloud/gke-backup",
-  "release_level": "stable",
-  "default_version": "v1",
-  "language": "nodejs",
-  "name_pretty": "Backup for GKE API",
-  "repo": "googleapis/google-cloud-node",
-  "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke",
-  "requires_billing": true,
   "name": "gkebackup",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
-  "api_shortname": "gkebackup",
-  "library_type": "GAPIC_AUTO"
+  "name_pretty": "Backup for GKE API",
+  "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/concepts/backup-for-gke",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gkebackup/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/gke-backup",
+  "api_id": "gkebackup.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "gkebackup"
 }
+
