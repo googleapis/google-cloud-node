@@ -14,16 +14,7 @@
 
 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
 const {describe, it} = require('mocha');
-const {ConsumerProcurementServiceClient} =
-  require('@google-cloud/procurement').v1;
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
