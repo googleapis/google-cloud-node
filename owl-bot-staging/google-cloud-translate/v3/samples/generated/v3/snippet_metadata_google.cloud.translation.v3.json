@@ -194,7 +194,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 134,
+          "end": 139,
           "type": "FULL"
         }
       ],
@@ -245,6 +245,10 @@
           },
           {
             "name": "enable_shadow_removal_native_pdf",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "enable_rotation_correction",
             "type": "TYPE_BOOL"
           }
         ],
@@ -342,7 +346,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 122,
+          "end": 133,
           "type": "FULL"
         }
       ],
@@ -386,6 +390,14 @@
           {
             "name": "customized_attribution",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "enable_shadow_removal_native_pdf",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "enable_rotation_correction",
+            "type": "TYPE_BOOL"
           }
         ],
         "resultType": ".google.longrunning.Operation",
