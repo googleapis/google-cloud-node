@@ -69,7 +69,7 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "@google-cloud/pubsub": "^3.0.0",
+    "@google-cloud/pubsub": "^4.0.0",
     "@grpc/grpc-js": "^1.0.3",
     "@grpc/proto-loader": "^0.7.0",
     "@types/async-retry": "^1.4.3",
