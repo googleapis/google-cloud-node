@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.0.1](https://github.com/googleapis/nodejs-storage/compare/v7.0.0...v7.0.1) (2023-08-07)
+
+
+### Bug Fixes
+
+* Export new types from index.ts ([#2258](https://github.com/googleapis/nodejs-storage/issues/2258)) ([93d2a0f](https://github.com/googleapis/nodejs-storage/commit/93d2a0f9f6d6a3de652aaeb3dd914bbc0bb593e0))
+
 ## [7.0.0](https://github.com/googleapis/nodejs-storage/compare/v6.12.0...v7.0.0) (2023-08-03)
 
 
