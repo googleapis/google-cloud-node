@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.17.0...aiplatform-v3.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Features
+
+* Add `PredictionService.ServerStreamingPredict` method ([#4439](https://github.com/googleapis/google-cloud-node/issues/4439)) ([44d81b3](https://github.com/googleapis/google-cloud-node/commit/44d81b3c16b3884aed141a16bc6094f5c54ab6d7))
+* Add RaySepc to ResourceRuntimeSpec, and add ResourceRuntime to PersistentResource ([#4470](https://github.com/googleapis/google-cloud-node/issues/4470)) ([d58a096](https://github.com/googleapis/google-cloud-node/commit/d58a0965ed45659ddab161972da43a64f0b4d36b))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [2.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.16.0...aiplatform-v2.17.0) (2023-07-24)
 
 

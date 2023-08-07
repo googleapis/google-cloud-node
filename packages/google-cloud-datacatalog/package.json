@@ -8,6 +8,8 @@
     "directory": "packages/google-cloud-datacatalog"
   },
   "license": "Apache-2.0",
+  "name": "@google-cloud/datacatalog",
+  "version": "4.0.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
   "files": [

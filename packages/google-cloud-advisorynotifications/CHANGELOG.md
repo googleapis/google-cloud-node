@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v0.2.1...advisorynotifications-v1.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Features
+
+* [advisorynotifications] adding notification types to advisorynotifications.googleapis.com libraries ([#4474](https://github.com/googleapis/google-cloud-node/issues/4474)) ([db3670b](https://github.com/googleapis/google-cloud-node/commit/db3670b6c73e124765b89a34a33ff49076d24c28))
+
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4459](https://github.com/googleapis/google-cloud-node/issues/4459)) ([1d510be](https://github.com/googleapis/google-cloud-node/commit/1d510bef5bd7b0ac3552b4729ef3d9ebe1ac3dc4))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v0.2.0...advisorynotifications-v0.2.1) (2023-04-13)
 
 

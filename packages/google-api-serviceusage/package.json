@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/service-usage",
-  "version": "2.2.2",
+  "version": "3.0.0",
   "description": "Serviceusage client for Node.js",
   "repository": {
     "type": "git",

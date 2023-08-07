@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/apigee-connect",
-  "version": "2.2.2",
+  "version": "3.0.0",
   "description": "apigeeconnect client for Node.js",
   "repository": {
     "type": "git",

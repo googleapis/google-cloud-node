@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.10.0...cloudbuild-v4.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Features
+
+* [cloudbuild] add update_mask to UpdateBuildTriggerRequest proto ([#4473](https://github.com/googleapis/google-cloud-node/issues/4473)) ([7fb6677](https://github.com/googleapis/google-cloud-node/commit/7fb6677bd4368c93b48b16aa4a4149b419b69c9f))
+
+
+### Bug Fixes
+
+* [cloudbuild] fix typings for IAM methods ([#4454](https://github.com/googleapis/google-cloud-node/issues/4454)) ([1f67b6c](https://github.com/googleapis/google-cloud-node/commit/1f67b6ce592ca6c6de3e2eef67e5aaa5271e8772))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.9.0...cloudbuild-v3.10.0) (2023-07-24)
 
 
