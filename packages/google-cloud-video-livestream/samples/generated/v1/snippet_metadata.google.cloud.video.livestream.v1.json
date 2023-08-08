@@ -1,11 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-livestream",
-<<<<<<< HEAD
-        "version": "0.6.0",
-=======
-        "version": "0.5.1",
->>>>>>> 27860facba (🦉 Updates from OwlBot post-processor)
+        "version": "1.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
