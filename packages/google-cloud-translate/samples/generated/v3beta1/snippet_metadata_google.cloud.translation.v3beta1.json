@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-translation",
-        "version": "7.2.2",
+        "version": "8.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -194,7 +194,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 114,
+                    "end": 138,
                     "type": "FULL"
                 }
             ],
@@ -234,6 +234,22 @@
                     {
                         "name": "labels",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "customized_attribution",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "is_translate_native_pdf_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_shadow_removal_native_pdf",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_rotation_correction",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.translation.v3beta1.TranslateDocumentResponse",
@@ -323,14 +339,14 @@
             "regionTag": "translate_v3beta1_generated_TranslationService_BatchTranslateDocument_async",
             "title": "TranslationService batchTranslateDocument Sample",
             "origin": "API_DEFINITION",
-            "description": " Translates a large volume of documents in asynchronous batch mode. This function provides real-time output as the inputs are being processed. If caller cancels a request, the partial results (for an input file, it's all or nothing) may still be available on the specified output location. This call returns immediately and you can use google.longrunning.Operation.name to poll the status of the call.",
+            "description": " Translates a large volume of document in asynchronous batch mode. This function provides real-time output as the inputs are being processed. If caller cancels a request, the partial results (for an input file, it's all or nothing) may still be available on the specified output location. This call returns immediately and you can use google.longrunning.Operation.name to poll the status of the call.",
             "canonical": true,
             "file": "translation_service.batch_translate_document.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 115,
+                    "end": 133,
                     "type": "FULL"
                 }
             ],
@@ -370,6 +386,18 @@
                     {
                         "name": "format_conversions",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "customized_attribution",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "enable_shadow_removal_native_pdf",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_rotation_correction",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

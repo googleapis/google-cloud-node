@@ -89,6 +89,24 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  original file.
    */
   // const formatConversions = [1,2,3,4]
+  /**
+   *  Optional. This flag is to support user customized attribution.
+   *  If not provided, the default is `Machine Translated by Google`.
+   *  Customized attribution should follow rules in
+   *  https://cloud.google.com/translate/attribution#attribution_and_logos
+   */
+  // const customizedAttribution = 'abc123'
+  /**
+   *  Optional. If true, use the text removal server to remove the shadow text on
+   *  background image for native pdf translation.
+   *  Shadow removal feature can only be enabled when
+   *  is_translate_native_pdf_only: false && pdf_native_only: false
+   */
+  // const enableShadowRemovalNativePdf = true
+  /**
+   *  Optional. If true, enable auto rotation correction in DVS.
+   */
+  // const enableRotationCorrection = true
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;

@@ -917,6 +917,22 @@ export class TranslationServiceClient {
    *
    *   See https://cloud.google.com/translate/docs/advanced/labels for more
    *   information.
+   * @param {string} [request.customizedAttribution]
+   *   Optional. This flag is to support user customized attribution.
+   *   If not provided, the default is `Machine Translated by Google`.
+   *   Customized attribution should follow rules in
+   *   https://cloud.google.com/translate/attribution#attribution_and_logos
+   * @param {boolean} [request.isTranslateNativePdfOnly]
+   *   Optional. is_translate_native_pdf_only field for external customers.
+   *   If true, the page limit of online native pdf translation is 300 and only
+   *   native pdf pages will be translated.
+   * @param {boolean} [request.enableShadowRemovalNativePdf]
+   *   Optional. If true, use the text removal server to remove the shadow text on
+   *   background image for native pdf translation.
+   *   Shadow removal feature can only be enabled when
+   *   is_translate_native_pdf_only: false && pdf_native_only: false
+   * @param {boolean} [request.enableRotationCorrection]
+   *   Optional. If true, enable auto rotation correction in DVS.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1290,7 +1306,7 @@ export class TranslationServiceClient {
     >;
   }
   /**
-   * Translates a large volume of documents in asynchronous batch mode.
+   * Translates a large volume of document in asynchronous batch mode.
    * This function provides real-time output as the inputs are being processed.
    * If caller cancels a request, the partial results (for an input file, it's
    * all or nothing) may still be available on the specified output location.
@@ -1355,6 +1371,18 @@ export class TranslationServiceClient {
    *
    *   If nothing specified, output files will be in the same format as the
    *   original file.
+   * @param {string} [request.customizedAttribution]
+   *   Optional. This flag is to support user customized attribution.
+   *   If not provided, the default is `Machine Translated by Google`.
+   *   Customized attribution should follow rules in
+   *   https://cloud.google.com/translate/attribution#attribution_and_logos
+   * @param {boolean} [request.enableShadowRemovalNativePdf]
+   *   Optional. If true, use the text removal server to remove the shadow text on
+   *   background image for native pdf translation.
+   *   Shadow removal feature can only be enabled when
+   *   is_translate_native_pdf_only: false && pdf_native_only: false
+   * @param {boolean} [request.enableRotationCorrection]
+   *   Optional. If true, enable auto rotation correction in DVS.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

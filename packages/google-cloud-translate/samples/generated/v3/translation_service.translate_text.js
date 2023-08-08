@@ -75,7 +75,7 @@ function main(contents, targetLanguageCode, parent) {
    *  For global (non-regionalized) requests, use `location-id` `global`.
    *  For example,
    *  `projects/{project-number-or-id}/locations/global/models/general/nmt`.
-   *  If not provided, the default Google model (NMT) will be used.
+   *  If not provided, the default Google model (NMT) will be used
    */
   // const model = 'abc123'
   /**
