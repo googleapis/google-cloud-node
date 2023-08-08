@@ -3881,7 +3881,9 @@ describe('v1.TensorboardServiceClient', () => {
       request.timeSeries = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      const stream = client.readTensorboardBlobData(request);
+      const stream = client.readTensorboardBlobData(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
       const promise = new Promise((resolve, reject) => {
         stream.on(
           'data',
