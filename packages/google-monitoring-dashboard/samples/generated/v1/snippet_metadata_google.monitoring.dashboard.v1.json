@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dashboard",
-        "version": "2.9.2",
+        "version": "3.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

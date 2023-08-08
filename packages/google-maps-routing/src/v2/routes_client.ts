@@ -475,7 +475,7 @@ export class RoutesClient {
     [
       protos.google.maps.routing.v2.IComputeRoutesResponse,
       protos.google.maps.routing.v2.IComputeRoutesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   computeRoutes(
@@ -515,7 +515,7 @@ export class RoutesClient {
     [
       protos.google.maps.routing.v2.IComputeRoutesResponse,
       protos.google.maps.routing.v2.IComputeRoutesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
