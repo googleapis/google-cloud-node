@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,37 @@ npm install @google-cloud/policy-troubleshooter-iam
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Iam library
+const {PolicyTroubleshooterClient} =
+  require('@google-cloud/policy-troubleshooter-iam').v3beta;
+
+// Instantiates a client
+const iamClient = new PolicyTroubleshooterClient();
+
+async function callTroubleshootIamPolicy() {
+  const project = await iamClient.getProjectId();
+  const accessTuple = {
+    principal: 'alice@example.com',
+    fullResourceName: `//cloudresourcemanager.googleapis.com/projects/${project}`,
+  };
+
+  // Construct request
+  const request = {
+    accessTuple,
+  };
+
+  // Run request
+  const response = await iamClient.troubleshootIamPolicy(request);
+  console.log(response);
+}
+
+callTroubleshootIamPolicy();
+
+```
+
 
 
 ## Samples
@@ -62,7 +93,8 @@ Samples are in the [`samples/`](googleapis/nodejs-iam/samples) directory. Each s
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Policy_troubleshooter.troubleshoot_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js,googleapis/nodejs-iam/samples/README.md) |
+| Policy_troubleshooter.troubleshoot_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js,googleapis/nodejs-iam/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/quickstart.js,googleapis/nodejs-iam/samples/README.md) |
 
 
 
@@ -111,7 +143,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -123,7 +155,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/iam/latest
 [product-docs]: cloud.google.com/iam/
