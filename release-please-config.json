@@ -142,7 +142,8 @@
     "packages/google-cloud-support": {},
     "packages/google-maps-places": {},
     "packages/google-cloud-rapidmigrationassessment": {},
-    "packages/google-cloud-migrationcenter": {}
+    "packages/google-cloud-migrationcenter": {},
+    "packages/google-cloud-policytroubleshooter-iam": {}
   },
   "plugins": [
     {
