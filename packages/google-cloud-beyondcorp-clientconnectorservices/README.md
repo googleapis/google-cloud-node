@@ -5,7 +5,7 @@
 # [BeyondCorp API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/clientgateways.svg)](https://www.npmjs.org/package/@google-cloud/clientgateways)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/clientconnectorservices.svg)](https://www.npmjs.org/package/@google-cloud/clientconnectorservices)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/clientgateways
+npm install @google-cloud/clientconnectorservices
 ```
 
 
@@ -132,7 +132,7 @@ also contains samples.
 
 ## Supported Node.js Versions
 
-Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Our client libraries follow the [Node.js release schedule](https://github.com/nodejs/release#release-schedule).
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 If you are using an end-of-life version of Node.js, we recommend that you update
@@ -148,7 +148,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/clientgateways@legacy-8` installs client libraries
+For example, `npm install @google-cloud/clientconnectorservices@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
