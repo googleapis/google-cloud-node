@@ -20646,7 +20646,13 @@ export namespace google {
                     SYSTEM_COMPONENTS = 1,
                     APISERVER = 3,
                     SCHEDULER = 4,
-                    CONTROLLER_MANAGER = 5
+                    CONTROLLER_MANAGER = 5,
+                    STORAGE = 7,
+                    HPA = 8,
+                    POD = 9,
+                    DAEMONSET = 10,
+                    DEPLOYMENT = 11,
+                    STATEFULSET = 12
                 }
             }
 
@@ -44137,7 +44143,13 @@ export namespace google {
                     WORKLOADS = 2,
                     APISERVER = 3,
                     SCHEDULER = 4,
-                    CONTROLLER_MANAGER = 5
+                    CONTROLLER_MANAGER = 5,
+                    STORAGE = 7,
+                    HPA = 8,
+                    POD = 9,
+                    DAEMONSET = 10,
+                    DEPLOYMENT = 11,
+                    STATEFULSET = 12
                 }
             }
 
