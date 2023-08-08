@@ -4612,6 +4612,7 @@
                          * @property {string|null} [customizedAttribution] TranslateDocumentRequest customizedAttribution
                          * @property {boolean|null} [isTranslateNativePdfOnly] TranslateDocumentRequest isTranslateNativePdfOnly
                          * @property {boolean|null} [enableShadowRemovalNativePdf] TranslateDocumentRequest enableShadowRemovalNativePdf
+                         * @property {boolean|null} [enableRotationCorrection] TranslateDocumentRequest enableRotationCorrection
                          */
     
                         /**
@@ -4719,6 +4720,14 @@
                         TranslateDocumentRequest.prototype.enableShadowRemovalNativePdf = false;
     
                         /**
+                         * TranslateDocumentRequest enableRotationCorrection.
+                         * @member {boolean} enableRotationCorrection
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.enableRotationCorrection = false;
+    
+                        /**
                          * Creates a new TranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3.TranslateDocumentRequest
@@ -4765,6 +4774,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isTranslateNativePdfOnly);
                             if (message.enableShadowRemovalNativePdf != null && Object.hasOwnProperty.call(message, "enableShadowRemovalNativePdf"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableShadowRemovalNativePdf);
+                            if (message.enableRotationCorrection != null && Object.hasOwnProperty.call(message, "enableRotationCorrection"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.enableRotationCorrection);
                             return writer;
                         };
     
@@ -4862,6 +4873,10 @@
                                         message.enableShadowRemovalNativePdf = reader.bool();
                                         break;
                                     }
+                                case 13: {
+                                        message.enableRotationCorrection = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4941,6 +4956,9 @@
                             if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
                                 if (typeof message.enableShadowRemovalNativePdf !== "boolean")
                                     return "enableShadowRemovalNativePdf: boolean expected";
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                if (typeof message.enableRotationCorrection !== "boolean")
+                                    return "enableRotationCorrection: boolean expected";
                             return null;
                         };
     
@@ -4992,6 +5010,8 @@
                                 message.isTranslateNativePdfOnly = Boolean(object.isTranslateNativePdfOnly);
                             if (object.enableShadowRemovalNativePdf != null)
                                 message.enableShadowRemovalNativePdf = Boolean(object.enableShadowRemovalNativePdf);
+                            if (object.enableRotationCorrection != null)
+                                message.enableRotationCorrection = Boolean(object.enableRotationCorrection);
                             return message;
                         };
     
@@ -5021,6 +5041,7 @@
                                 object.customizedAttribution = "";
                                 object.isTranslateNativePdfOnly = false;
                                 object.enableShadowRemovalNativePdf = false;
+                                object.enableRotationCorrection = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -5048,6 +5069,8 @@
                                 object.isTranslateNativePdfOnly = message.isTranslateNativePdfOnly;
                             if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
                                 object.enableShadowRemovalNativePdf = message.enableShadowRemovalNativePdf;
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                object.enableRotationCorrection = message.enableRotationCorrection;
                             return object;
                         };
     
@@ -10067,6 +10090,8 @@
                          * @property {Object.<string,google.cloud.translation.v3.ITranslateTextGlossaryConfig>|null} [glossaries] BatchTranslateDocumentRequest glossaries
                          * @property {Object.<string,string>|null} [formatConversions] BatchTranslateDocumentRequest formatConversions
                          * @property {string|null} [customizedAttribution] BatchTranslateDocumentRequest customizedAttribution
+                         * @property {boolean|null} [enableShadowRemovalNativePdf] BatchTranslateDocumentRequest enableShadowRemovalNativePdf
+                         * @property {boolean|null} [enableRotationCorrection] BatchTranslateDocumentRequest enableRotationCorrection
                          */
     
                         /**
@@ -10162,6 +10187,22 @@
                         BatchTranslateDocumentRequest.prototype.customizedAttribution = "";
     
                         /**
+                         * BatchTranslateDocumentRequest enableShadowRemovalNativePdf.
+                         * @member {boolean} enableShadowRemovalNativePdf
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.enableShadowRemovalNativePdf = false;
+    
+                        /**
+                         * BatchTranslateDocumentRequest enableRotationCorrection.
+                         * @member {boolean} enableRotationCorrection
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.enableRotationCorrection = false;
+    
+                        /**
                          * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
@@ -10210,6 +10251,10 @@
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.formatConversions[keys[i]]).ldelim();
                             if (message.customizedAttribution != null && Object.hasOwnProperty.call(message, "customizedAttribution"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.customizedAttribution);
+                            if (message.enableShadowRemovalNativePdf != null && Object.hasOwnProperty.call(message, "enableShadowRemovalNativePdf"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enableShadowRemovalNativePdf);
+                            if (message.enableRotationCorrection != null && Object.hasOwnProperty.call(message, "enableRotationCorrection"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableRotationCorrection);
                             return writer;
                         };
     
@@ -10341,6 +10386,14 @@
                                         message.customizedAttribution = reader.string();
                                         break;
                                     }
+                                case 11: {
+                                        message.enableShadowRemovalNativePdf = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.enableRotationCorrection = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10432,6 +10485,12 @@
                             if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
                                 if (!$util.isString(message.customizedAttribution))
                                     return "customizedAttribution: string expected";
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                if (typeof message.enableShadowRemovalNativePdf !== "boolean")
+                                    return "enableShadowRemovalNativePdf: boolean expected";
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                if (typeof message.enableRotationCorrection !== "boolean")
+                                    return "enableRotationCorrection: boolean expected";
                             return null;
                         };
     
@@ -10499,6 +10558,10 @@
                             }
                             if (object.customizedAttribution != null)
                                 message.customizedAttribution = String(object.customizedAttribution);
+                            if (object.enableShadowRemovalNativePdf != null)
+                                message.enableShadowRemovalNativePdf = Boolean(object.enableShadowRemovalNativePdf);
+                            if (object.enableRotationCorrection != null)
+                                message.enableRotationCorrection = Boolean(object.enableRotationCorrection);
                             return message;
                         };
     
@@ -10529,6 +10592,8 @@
                                 object.sourceLanguageCode = "";
                                 object.outputConfig = null;
                                 object.customizedAttribution = "";
+                                object.enableShadowRemovalNativePdf = false;
+                                object.enableRotationCorrection = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -10564,6 +10629,10 @@
                             }
                             if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
                                 object.customizedAttribution = message.customizedAttribution;
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                object.enableShadowRemovalNativePdf = message.enableShadowRemovalNativePdf;
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                object.enableRotationCorrection = message.enableRotationCorrection;
                             return object;
                         };
     
@@ -16727,6 +16796,10 @@
                          * @property {string|null} [model] TranslateDocumentRequest model
                          * @property {google.cloud.translation.v3beta1.ITranslateTextGlossaryConfig|null} [glossaryConfig] TranslateDocumentRequest glossaryConfig
                          * @property {Object.<string,string>|null} [labels] TranslateDocumentRequest labels
+                         * @property {string|null} [customizedAttribution] TranslateDocumentRequest customizedAttribution
+                         * @property {boolean|null} [isTranslateNativePdfOnly] TranslateDocumentRequest isTranslateNativePdfOnly
+                         * @property {boolean|null} [enableShadowRemovalNativePdf] TranslateDocumentRequest enableShadowRemovalNativePdf
+                         * @property {boolean|null} [enableRotationCorrection] TranslateDocumentRequest enableRotationCorrection
                          */
     
                         /**
@@ -16810,6 +16883,38 @@
                         TranslateDocumentRequest.prototype.labels = $util.emptyObject;
     
                         /**
+                         * TranslateDocumentRequest customizedAttribution.
+                         * @member {string} customizedAttribution
+                         * @memberof google.cloud.translation.v3beta1.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.customizedAttribution = "";
+    
+                        /**
+                         * TranslateDocumentRequest isTranslateNativePdfOnly.
+                         * @member {boolean} isTranslateNativePdfOnly
+                         * @memberof google.cloud.translation.v3beta1.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.isTranslateNativePdfOnly = false;
+    
+                        /**
+                         * TranslateDocumentRequest enableShadowRemovalNativePdf.
+                         * @member {boolean} enableShadowRemovalNativePdf
+                         * @memberof google.cloud.translation.v3beta1.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.enableShadowRemovalNativePdf = false;
+    
+                        /**
+                         * TranslateDocumentRequest enableRotationCorrection.
+                         * @member {boolean} enableRotationCorrection
+                         * @memberof google.cloud.translation.v3beta1.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.enableRotationCorrection = false;
+    
+                        /**
                          * Creates a new TranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3beta1.TranslateDocumentRequest
@@ -16850,6 +16955,14 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.customizedAttribution != null && Object.hasOwnProperty.call(message, "customizedAttribution"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.customizedAttribution);
+                            if (message.isTranslateNativePdfOnly != null && Object.hasOwnProperty.call(message, "isTranslateNativePdfOnly"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isTranslateNativePdfOnly);
+                            if (message.enableShadowRemovalNativePdf != null && Object.hasOwnProperty.call(message, "enableShadowRemovalNativePdf"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableShadowRemovalNativePdf);
+                            if (message.enableRotationCorrection != null && Object.hasOwnProperty.call(message, "enableRotationCorrection"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.enableRotationCorrection);
                             return writer;
                         };
     
@@ -16935,6 +17048,22 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.customizedAttribution = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.isTranslateNativePdfOnly = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.enableShadowRemovalNativePdf = reader.bool();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.enableRotationCorrection = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17005,6 +17134,18 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                if (!$util.isString(message.customizedAttribution))
+                                    return "customizedAttribution: string expected";
+                            if (message.isTranslateNativePdfOnly != null && message.hasOwnProperty("isTranslateNativePdfOnly"))
+                                if (typeof message.isTranslateNativePdfOnly !== "boolean")
+                                    return "isTranslateNativePdfOnly: boolean expected";
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                if (typeof message.enableShadowRemovalNativePdf !== "boolean")
+                                    return "enableShadowRemovalNativePdf: boolean expected";
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                if (typeof message.enableRotationCorrection !== "boolean")
+                                    return "enableRotationCorrection: boolean expected";
                             return null;
                         };
     
@@ -17050,6 +17191,14 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.customizedAttribution != null)
+                                message.customizedAttribution = String(object.customizedAttribution);
+                            if (object.isTranslateNativePdfOnly != null)
+                                message.isTranslateNativePdfOnly = Boolean(object.isTranslateNativePdfOnly);
+                            if (object.enableShadowRemovalNativePdf != null)
+                                message.enableShadowRemovalNativePdf = Boolean(object.enableShadowRemovalNativePdf);
+                            if (object.enableRotationCorrection != null)
+                                message.enableRotationCorrection = Boolean(object.enableRotationCorrection);
                             return message;
                         };
     
@@ -17076,6 +17225,10 @@
                                 object.documentOutputConfig = null;
                                 object.model = "";
                                 object.glossaryConfig = null;
+                                object.customizedAttribution = "";
+                                object.isTranslateNativePdfOnly = false;
+                                object.enableShadowRemovalNativePdf = false;
+                                object.enableRotationCorrection = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -17097,6 +17250,14 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                object.customizedAttribution = message.customizedAttribution;
+                            if (message.isTranslateNativePdfOnly != null && message.hasOwnProperty("isTranslateNativePdfOnly"))
+                                object.isTranslateNativePdfOnly = message.isTranslateNativePdfOnly;
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                object.enableShadowRemovalNativePdf = message.enableShadowRemovalNativePdf;
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                object.enableRotationCorrection = message.enableRotationCorrection;
                             return object;
                         };
     
@@ -22092,6 +22253,9 @@
                          * @property {Object.<string,string>|null} [models] BatchTranslateDocumentRequest models
                          * @property {Object.<string,google.cloud.translation.v3beta1.ITranslateTextGlossaryConfig>|null} [glossaries] BatchTranslateDocumentRequest glossaries
                          * @property {Object.<string,string>|null} [formatConversions] BatchTranslateDocumentRequest formatConversions
+                         * @property {string|null} [customizedAttribution] BatchTranslateDocumentRequest customizedAttribution
+                         * @property {boolean|null} [enableShadowRemovalNativePdf] BatchTranslateDocumentRequest enableShadowRemovalNativePdf
+                         * @property {boolean|null} [enableRotationCorrection] BatchTranslateDocumentRequest enableRotationCorrection
                          */
     
                         /**
@@ -22179,6 +22343,30 @@
                         BatchTranslateDocumentRequest.prototype.formatConversions = $util.emptyObject;
     
                         /**
+                         * BatchTranslateDocumentRequest customizedAttribution.
+                         * @member {string} customizedAttribution
+                         * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.customizedAttribution = "";
+    
+                        /**
+                         * BatchTranslateDocumentRequest enableShadowRemovalNativePdf.
+                         * @member {boolean} enableShadowRemovalNativePdf
+                         * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.enableShadowRemovalNativePdf = false;
+    
+                        /**
+                         * BatchTranslateDocumentRequest enableRotationCorrection.
+                         * @member {boolean} enableRotationCorrection
+                         * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.enableRotationCorrection = false;
+    
+                        /**
                          * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
@@ -22225,6 +22413,12 @@
                             if (message.formatConversions != null && Object.hasOwnProperty.call(message, "formatConversions"))
                                 for (var keys = Object.keys(message.formatConversions), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.formatConversions[keys[i]]).ldelim();
+                            if (message.customizedAttribution != null && Object.hasOwnProperty.call(message, "customizedAttribution"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.customizedAttribution);
+                            if (message.enableShadowRemovalNativePdf != null && Object.hasOwnProperty.call(message, "enableShadowRemovalNativePdf"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enableShadowRemovalNativePdf);
+                            if (message.enableRotationCorrection != null && Object.hasOwnProperty.call(message, "enableRotationCorrection"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableRotationCorrection);
                             return writer;
                         };
     
@@ -22352,6 +22546,18 @@
                                         message.formatConversions[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.customizedAttribution = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.enableShadowRemovalNativePdf = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.enableRotationCorrection = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22440,6 +22646,15 @@
                                     if (!$util.isString(message.formatConversions[key[i]]))
                                         return "formatConversions: string{k:string} expected";
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                if (!$util.isString(message.customizedAttribution))
+                                    return "customizedAttribution: string expected";
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                if (typeof message.enableShadowRemovalNativePdf !== "boolean")
+                                    return "enableShadowRemovalNativePdf: boolean expected";
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                if (typeof message.enableRotationCorrection !== "boolean")
+                                    return "enableRotationCorrection: boolean expected";
                             return null;
                         };
     
@@ -22505,6 +22720,12 @@
                                 for (var keys = Object.keys(object.formatConversions), i = 0; i < keys.length; ++i)
                                     message.formatConversions[keys[i]] = String(object.formatConversions[keys[i]]);
                             }
+                            if (object.customizedAttribution != null)
+                                message.customizedAttribution = String(object.customizedAttribution);
+                            if (object.enableShadowRemovalNativePdf != null)
+                                message.enableShadowRemovalNativePdf = Boolean(object.enableShadowRemovalNativePdf);
+                            if (object.enableRotationCorrection != null)
+                                message.enableRotationCorrection = Boolean(object.enableRotationCorrection);
                             return message;
                         };
     
@@ -22534,6 +22755,9 @@
                                 object.parent = "";
                                 object.sourceLanguageCode = "";
                                 object.outputConfig = null;
+                                object.customizedAttribution = "";
+                                object.enableShadowRemovalNativePdf = false;
+                                object.enableRotationCorrection = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -22567,6 +22791,12 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.formatConversions[keys2[j]] = message.formatConversions[keys2[j]];
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                object.customizedAttribution = message.customizedAttribution;
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                object.enableShadowRemovalNativePdf = message.enableShadowRemovalNativePdf;
+                            if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
+                                object.enableRotationCorrection = message.enableRotationCorrection;
                             return object;
                         };
     
