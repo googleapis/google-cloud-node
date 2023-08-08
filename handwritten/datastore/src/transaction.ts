@@ -780,7 +780,7 @@ export type ModifiedEntities = Array<{
 }>;
 export type RunResponse = [
   Transaction,
-  google.datastore.v1.IBeginTransactionResponse
+  google.datastore.v1.IBeginTransactionResponse,
 ];
 export interface RunCallback {
   (

@@ -155,14 +155,20 @@ describe('entity', () => {
           const smallIntegerValue = Number.MIN_SAFE_INTEGER - 1;
 
           // should throw when Number is passed
-          assert.throws(() => {
-            new testEntity.Int(largeIntegerValue).valueOf();
-          }, outOfBoundsError({integerValue: largeIntegerValue}));
+          assert.throws(
+            () => {
+              new testEntity.Int(largeIntegerValue).valueOf();
+            },
+            outOfBoundsError({integerValue: largeIntegerValue})
+          );
 
           // should throw when string is passed
-          assert.throws(() => {
-            new testEntity.Int(smallIntegerValue.toString()).valueOf();
-          }, outOfBoundsError({integerValue: smallIntegerValue}));
+          assert.throws(
+            () => {
+              new testEntity.Int(smallIntegerValue.toString()).valueOf();
+            },
+            outOfBoundsError({integerValue: smallIntegerValue})
+          );
         });
 
         it('should not auto throw on initialization', () => {
@@ -173,9 +179,12 @@ describe('entity', () => {
             integerValue: largeIntegerValue,
           };
 
-          assert.doesNotThrow(() => {
-            new testEntity.Int(valueProto);
-          }, new RegExp(`Integer value ${largeIntegerValue} is out of bounds.`));
+          assert.doesNotThrow(
+            () => {
+              new testEntity.Int(valueProto);
+            },
+            new RegExp(`Integer value ${largeIntegerValue} is out of bounds.`)
+          );
         });
       });
 
@@ -799,6 +808,7 @@ describe('entity', () => {
     });
 
     it('should emit warning on out of bounce int', done => {
+      // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
       const largeIntValue = 9223372036854775807;
       const property = 'largeInt';
       const expectedWarning =
