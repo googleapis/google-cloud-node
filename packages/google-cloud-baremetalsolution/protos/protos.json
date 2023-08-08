@@ -11,10 +11,12 @@
                     "csharp_namespace": "Google.Cloud.BareMetalSolution.V2",
                     "go_package": "cloud.google.com/go/baremetalsolution/apiv2/baremetalsolutionpb;baremetalsolutionpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "VolumeProto",
+                    "java_outer_classname": "VolumeSnapshotProto",
                     "java_package": "com.google.cloud.baremetalsolution.v2",
                     "php_namespace": "Google\\Cloud\\BareMetalSolution\\V2",
-                    "ruby_package": "Google::Cloud::BareMetalSolution::V2"
+                    "ruby_package": "Google::Cloud::BareMetalSolution::V2",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/InterconnectAttachment",
+                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/interconnectAttachments/{interconnect_attachment}"
                   },
                   "nested": {
                     "BareMetalSolution": {
@@ -84,6 +86,26 @@
                                 "response_type": "Instance",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "RenameInstance": {
+                          "requestType": "RenameInstanceRequest",
+                          "responseType": "Instance",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/instances/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_instance_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/instances/*}:rename",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,new_instance_id"
                             }
                           ]
                         },
@@ -171,6 +193,62 @@
                             }
                           ]
                         },
+                        "EnableInteractiveSerialConsole": {
+                          "requestType": "EnableInteractiveSerialConsoleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/instances/*}:enableInteractiveSerialConsole",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "EnableInteractiveSerialConsoleResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/instances/*}:enableInteractiveSerialConsole",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "EnableInteractiveSerialConsoleResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DisableInteractiveSerialConsole": {
+                          "requestType": "DisableInteractiveSerialConsoleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/instances/*}:disableInteractiveSerialConsole",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "DisableInteractiveSerialConsoleResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/instances/*}:disableInteractiveSerialConsole",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DisableInteractiveSerialConsoleResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DetachLun": {
                           "requestType": "DetachLunRequest",
                           "responseType": "google.longrunning.Operation",
@@ -196,6 +274,62 @@
                                 "response_type": "Instance",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "ListSSHKeys": {
+                          "requestType": "ListSSHKeysRequest",
+                          "responseType": "ListSSHKeysResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/sshKeys",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/sshKeys"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateSSHKey": {
+                          "requestType": "CreateSSHKeyRequest",
+                          "responseType": "SSHKey",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/sshKeys",
+                            "(google.api.http).body": "ssh_key",
+                            "(google.api.method_signature)": "parent,ssh_key,ssh_key_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/sshKeys",
+                                "body": "ssh_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_key,ssh_key_id"
+                            }
+                          ]
+                        },
+                        "DeleteSSHKey": {
+                          "requestType": "DeleteSSHKeyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/sshKeys/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/sshKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -258,6 +392,54 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Volume",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RenameVolume": {
+                          "requestType": "RenameVolumeRequest",
+                          "responseType": "Volume",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/volumes/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_volume_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/volumes/*}:rename",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,new_volume_id"
+                            }
+                          ]
+                        },
+                        "EvictVolume": {
+                          "requestType": "EvictVolumeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/volumes/*}:evict",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/volumes/*}:evict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -373,6 +555,108 @@
                             }
                           ]
                         },
+                        "CreateVolumeSnapshot": {
+                          "requestType": "CreateVolumeSnapshotRequest",
+                          "responseType": "VolumeSnapshot",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/volumes/*}/snapshots",
+                            "(google.api.http).body": "volume_snapshot",
+                            "(google.api.method_signature)": "parent,volume_snapshot"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/volumes/*}/snapshots",
+                                "body": "volume_snapshot"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,volume_snapshot"
+                            }
+                          ]
+                        },
+                        "RestoreVolumeSnapshot": {
+                          "requestType": "RestoreVolumeSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{volume_snapshot=projects/*/locations/*/volumes/*/snapshots/*}:restoreVolumeSnapshot",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "volume_snapshot",
+                            "(google.longrunning.operation_info).response_type": "VolumeSnapshot",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{volume_snapshot=projects/*/locations/*/volumes/*/snapshots/*}:restoreVolumeSnapshot",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "volume_snapshot"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "VolumeSnapshot",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteVolumeSnapshot": {
+                          "requestType": "DeleteVolumeSnapshotRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/volumes/*/snapshots/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/volumes/*/snapshots/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetVolumeSnapshot": {
+                          "requestType": "GetVolumeSnapshotRequest",
+                          "responseType": "VolumeSnapshot",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/volumes/*/snapshots/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/volumes/*/snapshots/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListVolumeSnapshots": {
+                          "requestType": "ListVolumeSnapshotsRequest",
+                          "responseType": "ListVolumeSnapshotsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/volumes/*}/snapshots",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/volumes/*}/snapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "GetLun": {
                           "requestType": "GetLunRequest",
                           "responseType": "Lun",
@@ -406,6 +690,34 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "EvictLun": {
+                          "requestType": "EvictLunRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/volumes/*/luns/*}:evict",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/volumes/*/luns/*}:evict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
                             }
                           ]
                         },
@@ -472,6 +784,214 @@
                               }
                             }
                           ]
+                        },
+                        "CreateNfsShare": {
+                          "requestType": "CreateNfsShareRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/nfsShares",
+                            "(google.api.http).body": "nfs_share",
+                            "(google.api.method_signature)": "parent,nfs_share",
+                            "(google.longrunning.operation_info).response_type": "NfsShare",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/nfsShares",
+                                "body": "nfs_share"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,nfs_share"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "NfsShare",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RenameNfsShare": {
+                          "requestType": "RenameNfsShareRequest",
+                          "responseType": "NfsShare",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/nfsShares/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_nfsshare_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/nfsShares/*}:rename",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,new_nfsshare_id"
+                            }
+                          ]
+                        },
+                        "DeleteNfsShare": {
+                          "requestType": "DeleteNfsShareRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/nfsShares/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/nfsShares/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListProvisioningQuotas": {
+                          "requestType": "ListProvisioningQuotasRequest",
+                          "responseType": "ListProvisioningQuotasResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/provisioningQuotas",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/provisioningQuotas"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "SubmitProvisioningConfig": {
+                          "requestType": "SubmitProvisioningConfigRequest",
+                          "responseType": "SubmitProvisioningConfigResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/provisioningConfigs:submit",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,provisioning_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/provisioningConfigs:submit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,provisioning_config"
+                            }
+                          ]
+                        },
+                        "GetProvisioningConfig": {
+                          "requestType": "GetProvisioningConfigRequest",
+                          "responseType": "ProvisioningConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/provisioningConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/provisioningConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateProvisioningConfig": {
+                          "requestType": "CreateProvisioningConfigRequest",
+                          "responseType": "ProvisioningConfig",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/provisioningConfigs",
+                            "(google.api.http).body": "provisioning_config",
+                            "(google.api.method_signature)": "parent,provisioning_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/provisioningConfigs",
+                                "body": "provisioning_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,provisioning_config"
+                            }
+                          ]
+                        },
+                        "UpdateProvisioningConfig": {
+                          "requestType": "UpdateProvisioningConfigRequest",
+                          "responseType": "ProvisioningConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{provisioning_config.name=projects/*/locations/*/provisioningConfigs/*}",
+                            "(google.api.http).body": "provisioning_config",
+                            "(google.api.method_signature)": "provisioning_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{provisioning_config.name=projects/*/locations/*/provisioningConfigs/*}",
+                                "body": "provisioning_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "provisioning_config,update_mask"
+                            }
+                          ]
+                        },
+                        "RenameNetwork": {
+                          "requestType": "RenameNetworkRequest",
+                          "responseType": "Network",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/networks/*}:rename",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_network_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/networks/*}:rename",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,new_network_id"
+                            }
+                          ]
+                        },
+                        "ListOSImages": {
+                          "requestType": "ListOSImagesRequest",
+                          "responseType": "ListOSImagesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/osImages",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/osImages"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -528,8 +1048,20 @@
                         }
                       }
                     },
-                    "ResetInstanceResponse": {
-                      "fields": {}
+                    "VolumePerformanceTier": {
+                      "values": {
+                        "VOLUME_PERFORMANCE_TIER_UNSPECIFIED": 0,
+                        "VOLUME_PERFORMANCE_TIER_SHARED": 1,
+                        "VOLUME_PERFORMANCE_TIER_ASSIGNED": 2,
+                        "VOLUME_PERFORMANCE_TIER_HT": 3
+                      }
+                    },
+                    "WorkloadProfile": {
+                      "values": {
+                        "WORKLOAD_PROFILE_UNSPECIFIED": 0,
+                        "WORKLOAD_PROFILE_GENERIC": 1,
+                        "WORKLOAD_PROFILE_HANA": 2
+                      }
                     },
                     "Instance": {
                       "options": {
@@ -541,12 +1073,15 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
                         "id": {
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -564,11 +1099,17 @@
                         },
                         "machineType": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "state": {
                           "type": "State",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "hyperthreadingEnabled": {
                           "type": "bool",
@@ -582,16 +1123,33 @@
                         "luns": {
                           "rule": "repeated",
                           "type": "Lun",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "volumes": {
+                          "rule": "repeated",
+                          "type": "Volume",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         },
                         "networks": {
                           "rule": "repeated",
                           "type": "Network",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "interactiveSerialConsoleEnabled": {
                           "type": "bool",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "osImage": {
                           "type": "string",
@@ -615,6 +1173,24 @@
                           "rule": "repeated",
                           "type": "LogicalInterface",
                           "id": 15
+                        },
+                        "loginInfo": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "workloadProfile": {
+                          "type": "WorkloadProfile",
+                          "id": 18
+                        },
+                        "firmwareVersion": {
+                          "type": "string",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -623,7 +1199,11 @@
                             "STATE_UNSPECIFIED": 0,
                             "PROVISIONING": 1,
                             "RUNNING": 2,
-                            "DELETED": 3
+                            "DELETED": 3,
+                            "UPDATING": 4,
+                            "STARTING": 5,
+                            "STOPPING": 6,
+                            "SHUTDOWN": 7
                           }
                         }
                       }
@@ -697,6 +1277,25 @@
                         }
                       }
                     },
+                    "RenameInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Instance"
+                          }
+                        },
+                        "newInstanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "ResetInstanceRequest": {
                       "fields": {
                         "name": {
@@ -708,6 +1307,9 @@
                           }
                         }
                       }
+                    },
+                    "ResetInstanceResponse": {
+                      "fields": {}
                     },
                     "StartInstanceRequest": {
                       "fields": {
@@ -721,6 +1323,9 @@
                         }
                       }
                     },
+                    "StartInstanceResponse": {
+                      "fields": {}
+                    },
                     "StopInstanceRequest": {
                       "fields": {
                         "name": {
@@ -732,6 +1337,39 @@
                           }
                         }
                       }
+                    },
+                    "StopInstanceResponse": {
+                      "fields": {}
+                    },
+                    "EnableInteractiveSerialConsoleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "EnableInteractiveSerialConsoleResponse": {
+                      "fields": {}
+                    },
+                    "DisableInteractiveSerialConsoleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "DisableInteractiveSerialConsoleResponse": {
+                      "fields": {}
                     },
                     "DetachLunRequest": {
                       "fields": {
@@ -750,66 +1388,12 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Lun"
                           }
-                        }
-                      }
-                    },
-                    "ServerNetworkTemplate": {
-                      "options": {
-                        "(google.api.resource).type": "baremetalsolution.googleapis.com/ServerNetworkTemplate",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         },
-                        "applicableInstanceTypes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "logicalInterfaces": {
-                          "rule": "repeated",
-                          "type": "LogicalInterface",
+                        "skipReboot": {
+                          "type": "bool",
                           "id": 3
                         }
-                      },
-                      "nested": {
-                        "LogicalInterface": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "type": {
-                              "type": "InterfaceType",
-                              "id": 2
-                            },
-                            "required": {
-                              "type": "bool",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "InterfaceType": {
-                              "values": {
-                                "INTERFACE_TYPE_UNSPECIFIED": 0,
-                                "BOND": 1,
-                                "NIC": 2
-                              }
-                            }
-                          }
-                        }
                       }
-                    },
-                    "StartInstanceResponse": {
-                      "fields": {}
-                    },
-                    "StopInstanceResponse": {
-                      "fields": {}
                     },
                     "Lun": {
                       "options": {
@@ -862,6 +1446,22 @@
                         "wwid": {
                           "type": "string",
                           "id": 9
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Instance"
+                          }
                         }
                       },
                       "nested": {
@@ -871,7 +1471,8 @@
                             "CREATING": 1,
                             "UPDATING": 2,
                             "READY": 3,
-                            "DELETING": 4
+                            "DELETING": 4,
+                            "COOL_OFF": 5
                           }
                         },
                         "MultiprotocolType": {
@@ -939,6 +1540,18 @@
                         }
                       }
                     },
+                    "EvictLunRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Lun"
+                          }
+                        }
+                      }
+                    },
                     "Network": {
                       "options": {
                         "(google.api.resource).type": "baremetalsolution.googleapis.com/Network",
@@ -998,6 +1611,32 @@
                           "rule": "repeated",
                           "type": "NetworkAddressReservation",
                           "id": 13
+                        },
+                        "pod": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mountPoints": {
+                          "rule": "repeated",
+                          "type": "NetworkMountPoint",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "jumboFramesEnabled": {
+                          "type": "bool",
+                          "id": 16
+                        },
+                        "gatewayIp": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1012,7 +1651,9 @@
                           "values": {
                             "STATE_UNSPECIFIED": 0,
                             "PROVISIONING": 1,
-                            "PROVISIONED": 2
+                            "PROVISIONED": 2,
+                            "DEPROVISIONING": 3,
+                            "UPDATING": 4
                           }
                         }
                       }
@@ -1082,6 +1723,32 @@
                             "routerIp": {
                               "type": "string",
                               "id": 3
+                            },
+                            "pairingKey": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "qosPolicy": {
+                              "type": "QosPolicy",
+                              "id": 5
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "interconnectAttachment": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/InterconnectAttachment"
+                              }
                             }
                           }
                         }
@@ -1100,7 +1767,10 @@
                         },
                         "interfaceIndex": {
                           "type": "int32",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
@@ -1233,165 +1903,45 @@
                         }
                       }
                     },
-                    "NfsShare": {
-                      "options": {
-                        "(google.api.resource).type": "baremetalsolution.googleapis.com/NFSShare",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nfsShares/{nfs_share}"
-                      },
+                    "NetworkMountPoint": {
                       "fields": {
-                        "name": {
+                        "instance": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Instance"
                           }
                         },
-                        "nfsShareId": {
+                        "logicalInterface": {
                           "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 3
-                        },
-                        "volume": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
-                          }
-                        },
-                        "allowedClients": {
-                          "rule": "repeated",
-                          "type": "AllowedClient",
-                          "id": 5
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "PROVISIONED": 1
-                          }
-                        },
-                        "MountPermissions": {
-                          "values": {
-                            "MOUNT_PERMISSIONS_UNSPECIFIED": 0,
-                            "READ": 1,
-                            "READ_WRITE": 2
-                          }
-                        },
-                        "AllowedClient": {
-                          "fields": {
-                            "network": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Network"
-                              }
-                            },
-                            "shareIp": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "allowedClientsCidr": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "mountPermissions": {
-                              "type": "MountPermissions",
-                              "id": 4
-                            },
-                            "allowDev": {
-                              "type": "bool",
-                              "id": 5
-                            },
-                            "allowSuid": {
-                              "type": "bool",
-                              "id": 6
-                            },
-                            "noRootSquash": {
-                              "type": "bool",
-                              "id": 7
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "GetNfsShareRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/NFSShare"
-                          }
-                        }
-                      }
-                    },
-                    "ListNfsSharesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
                           "id": 2
                         },
-                        "pageToken": {
-                          "type": "string",
+                        "defaultGateway": {
+                          "type": "bool",
                           "id": 3
                         },
-                        "filter": {
+                        "ipAddress": {
                           "type": "string",
                           "id": 4
                         }
                       }
                     },
-                    "ListNfsSharesResponse": {
+                    "RenameNetworkRequest": {
                       "fields": {
-                        "nfsShares": {
-                          "rule": "repeated",
-                          "type": "NfsShare",
-                          "id": 1
-                        },
-                        "nextPageToken": {
+                        "name": {
                           "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "UpdateNfsShareRequest": {
-                      "fields": {
-                        "nfsShare": {
-                          "type": "NfsShare",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Network"
+                          }
+                        },
+                        "newNetworkId": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
                         }
                       }
                     },
@@ -1424,6 +1974,10 @@
                           "type": "int64",
                           "id": 4
                         },
+                        "originallyRequestedSizeGib": {
+                          "type": "int64",
+                          "id": 16
+                        },
                         "currentSizeGib": {
                           "type": "int64",
                           "id": 5
@@ -1431,6 +1985,10 @@
                         "emergencySizeGib": {
                           "type": "int64",
                           "id": 14
+                        },
+                        "maxSizeGib": {
+                          "type": "int64",
+                          "id": 17
                         },
                         "autoGrownSizeGib": {
                           "type": "int64",
@@ -1463,6 +2021,61 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "protocol": {
+                          "type": "Protocol",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "bootVolume": {
+                          "type": "bool",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "performanceTier": {
+                          "type": "VolumePerformanceTier",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "notes": {
+                          "type": "string",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "workloadProfile": {
+                          "type": "WorkloadProfile",
+                          "id": 22
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Instance"
+                          }
+                        },
+                        "attached": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1478,7 +2091,9 @@
                             "STATE_UNSPECIFIED": 0,
                             "CREATING": 1,
                             "READY": 2,
-                            "DELETING": 3
+                            "DELETING": 3,
+                            "UPDATING": 4,
+                            "COOL_OFF": 5
                           }
                         },
                         "SnapshotReservationDetail": {
@@ -1507,6 +2122,20 @@
                             "DISABLED": 1,
                             "OLDEST_FIRST": 2,
                             "NEWEST_FIRST": 3
+                          }
+                        },
+                        "Protocol": {
+                          "values": {
+                            "PROTOCOL_UNSPECIFIED": 0,
+                            "FIBRE_CHANNEL": 1,
+                            "NFS": 2
+                          }
+                        },
+                        "WorkloadProfile": {
+                          "values": {
+                            "WORKLOAD_PROFILE_UNSPECIFIED": 0,
+                            "GENERIC": 1,
+                            "HANA": 2
                           }
                         }
                       }
@@ -1580,6 +2209,37 @@
                         }
                       }
                     },
+                    "RenameVolumeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
+                          }
+                        },
+                        "newVolumeId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EvictVolumeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
+                          }
+                        }
+                      }
+                    },
                     "ResizeVolumeRequest": {
                       "fields": {
                         "volume": {
@@ -1593,6 +2253,1284 @@
                         "sizeGib": {
                           "type": "int64",
                           "id": 2
+                        }
+                      }
+                    },
+                    "NfsShare": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/NFSShare",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nfsShares/{nfs_share}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "nfsShareId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "volume": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
+                          }
+                        },
+                        "allowedClients": {
+                          "rule": "repeated",
+                          "type": "AllowedClient",
+                          "id": 5
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "requestedSizeGib": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "storageType": {
+                          "type": "StorageType",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PROVISIONED": 1,
+                            "CREATING": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4
+                          }
+                        },
+                        "MountPermissions": {
+                          "values": {
+                            "MOUNT_PERMISSIONS_UNSPECIFIED": 0,
+                            "READ": 1,
+                            "READ_WRITE": 2
+                          }
+                        },
+                        "AllowedClient": {
+                          "fields": {
+                            "network": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Network"
+                              }
+                            },
+                            "shareIp": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "allowedClientsCidr": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "mountPermissions": {
+                              "type": "MountPermissions",
+                              "id": 4
+                            },
+                            "allowDev": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "allowSuid": {
+                              "type": "bool",
+                              "id": 6
+                            },
+                            "noRootSquash": {
+                              "type": "bool",
+                              "id": 7
+                            },
+                            "nfsPath": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "StorageType": {
+                          "values": {
+                            "STORAGE_TYPE_UNSPECIFIED": 0,
+                            "SSD": 1,
+                            "HDD": 2
+                          }
+                        }
+                      }
+                    },
+                    "GetNfsShareRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/NFSShare"
+                          }
+                        }
+                      }
+                    },
+                    "ListNfsSharesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListNfsSharesResponse": {
+                      "fields": {
+                        "nfsShares": {
+                          "rule": "repeated",
+                          "type": "NfsShare",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateNfsShareRequest": {
+                      "fields": {
+                        "nfsShare": {
+                          "type": "NfsShare",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RenameNfsShareRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/NFSShare"
+                          }
+                        },
+                        "newNfsshareId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateNfsShareRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "nfsShare": {
+                          "type": "NfsShare",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteNfsShareRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/NFSShare"
+                          }
+                        }
+                      }
+                    },
+                    "OSImage": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/OsImage",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/osImages/{os_image}",
+                        "(google.api.resource).plural": "osImages",
+                        "(google.api.resource).singular": "osImage"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "code": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "applicableInstanceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "supportedNetworkTemplates": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListOSImagesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListOSImagesResponse": {
+                      "fields": {
+                        "osImages": {
+                          "rule": "repeated",
+                          "type": "OSImage",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProvisioningConfig": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/ProvisioningConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/provisioningConfigs/{provisioning_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "InstanceConfig",
+                          "id": 2
+                        },
+                        "networks": {
+                          "rule": "repeated",
+                          "type": "NetworkConfig",
+                          "id": 3
+                        },
+                        "volumes": {
+                          "rule": "repeated",
+                          "type": "VolumeConfig",
+                          "id": 4
+                        },
+                        "ticketId": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "handoverServiceAccount": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "email": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudConsoleUri": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vpcScEnabled": {
+                          "type": "bool",
+                          "id": 12
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "customId": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "DRAFT": 1,
+                            "SUBMITTED": 2,
+                            "PROVISIONING": 3,
+                            "PROVISIONED": 4,
+                            "VALIDATED": 5,
+                            "CANCELLED": 6,
+                            "FAILED": 7
+                          }
+                        }
+                      }
+                    },
+                    "SubmitProvisioningConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "provisioningConfig": {
+                          "type": "ProvisioningConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "email": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SubmitProvisioningConfigResponse": {
+                      "fields": {
+                        "provisioningConfig": {
+                          "type": "ProvisioningConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ProvisioningQuota": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/ProvisioningQuota",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/provisioningQuotas/{provisioning_quota}"
+                      },
+                      "oneofs": {
+                        "quota": {
+                          "oneof": [
+                            "instanceQuota"
+                          ]
+                        },
+                        "availability": {
+                          "oneof": [
+                            "serverCount",
+                            "networkBandwidth",
+                            "storageGib"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "assetType": {
+                          "type": "AssetType",
+                          "id": 2
+                        },
+                        "gcpService": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "availableCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "instanceQuota": {
+                          "type": "InstanceQuota",
+                          "id": 6
+                        },
+                        "serverCount": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "networkBandwidth": {
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "storageGib": {
+                          "type": "int64",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "AssetType": {
+                          "values": {
+                            "ASSET_TYPE_UNSPECIFIED": 0,
+                            "ASSET_TYPE_SERVER": 1,
+                            "ASSET_TYPE_STORAGE": 2,
+                            "ASSET_TYPE_NETWORK": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListProvisioningQuotasRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListProvisioningQuotasResponse": {
+                      "fields": {
+                        "provisioningQuotas": {
+                          "rule": "repeated",
+                          "type": "ProvisioningQuota",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InstanceConfig": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/InstanceConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instanceConfigs/{instance_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "instanceType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "hyperthreading": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "osImage": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "clientNetwork": {
+                          "type": "NetworkAddress",
+                          "id": 6,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "privateNetwork": {
+                          "type": "NetworkAddress",
+                          "id": 7,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "userNote": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "accountNetworksEnabled": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 10
+                        },
+                        "networkTemplate": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "logicalInterfaces": {
+                          "rule": "repeated",
+                          "type": "LogicalInterface",
+                          "id": 12
+                        },
+                        "sshKeyNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "NetworkAddress": {
+                          "fields": {
+                            "networkId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "address": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "existingNetworkId": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "NetworkConfig": {
+                          "values": {
+                            "NETWORKCONFIG_UNSPECIFIED": 0,
+                            "SINGLE_VLAN": 1,
+                            "MULTI_VLAN": 2
+                          }
+                        }
+                      }
+                    },
+                    "VolumeConfig": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/VolumeConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumeConfigs/{volume_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "snapshotsEnabled": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 4
+                        },
+                        "protocol": {
+                          "type": "Protocol",
+                          "id": 5
+                        },
+                        "sizeGb": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "lunRanges": {
+                          "rule": "repeated",
+                          "type": "LunRange",
+                          "id": 7
+                        },
+                        "machineIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "nfsExports": {
+                          "rule": "repeated",
+                          "type": "NfsExport",
+                          "id": 9
+                        },
+                        "userNote": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "gcpService": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "performanceTier": {
+                          "type": "VolumePerformanceTier",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "FLASH": 1,
+                            "DISK": 2
+                          }
+                        },
+                        "Protocol": {
+                          "values": {
+                            "PROTOCOL_UNSPECIFIED": 0,
+                            "PROTOCOL_FC": 1,
+                            "PROTOCOL_NFS": 2
+                          }
+                        },
+                        "LunRange": {
+                          "fields": {
+                            "quantity": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "sizeGb": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "NfsExport": {
+                          "oneofs": {
+                            "client": {
+                              "oneof": [
+                                "machineId",
+                                "cidr"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "networkId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "machineId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "cidr": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "permissions": {
+                              "type": "Permissions",
+                              "id": 4
+                            },
+                            "noRootSquash": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "allowSuid": {
+                              "type": "bool",
+                              "id": 6
+                            },
+                            "allowDev": {
+                              "type": "bool",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "Permissions": {
+                              "values": {
+                                "PERMISSIONS_UNSPECIFIED": 0,
+                                "READ_ONLY": 1,
+                                "READ_WRITE": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "NetworkConfig": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/NetworkConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/networkConfigs/{network_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3
+                        },
+                        "bandwidth": {
+                          "type": "Bandwidth",
+                          "id": 4
+                        },
+                        "vlanAttachments": {
+                          "rule": "repeated",
+                          "type": "IntakeVlanAttachment",
+                          "id": 5
+                        },
+                        "cidr": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "serviceCidr": {
+                          "type": "ServiceCidr",
+                          "id": 7
+                        },
+                        "userNote": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "gcpService": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "vlanSameProject": {
+                          "type": "bool",
+                          "id": 10
+                        },
+                        "jumboFramesEnabled": {
+                          "type": "bool",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "CLIENT": 1,
+                            "PRIVATE": 2
+                          }
+                        },
+                        "Bandwidth": {
+                          "values": {
+                            "BANDWIDTH_UNSPECIFIED": 0,
+                            "BW_1_GBPS": 1,
+                            "BW_2_GBPS": 2,
+                            "BW_5_GBPS": 3,
+                            "BW_10_GBPS": 4
+                          }
+                        },
+                        "IntakeVlanAttachment": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "pairingKey": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ServiceCidr": {
+                          "values": {
+                            "SERVICE_CIDR_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "HIGH_26": 2,
+                            "HIGH_27": 3,
+                            "HIGH_28": 4
+                          }
+                        }
+                      }
+                    },
+                    "InstanceQuota": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/InstanceQuota",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instanceQuotas/{instance_quota}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceType": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "gcpService": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "availableMachineCount": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetProvisioningConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/ProvisioningConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CreateProvisioningConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "provisioningConfig": {
+                          "type": "ProvisioningConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "email": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateProvisioningConfigRequest": {
+                      "fields": {
+                        "provisioningConfig": {
+                          "type": "ProvisioningConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "email": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ServerNetworkTemplate": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/ServerNetworkTemplate",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "applicableInstanceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "logicalInterfaces": {
+                          "rule": "repeated",
+                          "type": "LogicalInterface",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "LogicalInterface": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "type": {
+                              "type": "InterfaceType",
+                              "id": 2
+                            },
+                            "required": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "InterfaceType": {
+                              "values": {
+                                "INTERFACE_TYPE_UNSPECIFIED": 0,
+                                "BOND": 1,
+                                "NIC": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SSHKey": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/SshKey",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sshKeys/{ssh_key}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "publicKey": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListSSHKeysRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListSSHKeysResponse": {
+                      "fields": {
+                        "sshKeys": {
+                          "rule": "repeated",
+                          "type": "SSHKey",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 90
+                        }
+                      }
+                    },
+                    "CreateSSHKeyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "sshKey": {
+                          "type": "SSHKey",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sshKeyId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSSHKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/SshKey"
+                          }
+                        }
+                      }
+                    },
+                    "VolumeSnapshot": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/VolumeSnapshot",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "storageVolume": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
+                          }
+                        },
+                        "type": {
+                          "type": "SnapshotType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SnapshotType": {
+                          "values": {
+                            "SNAPSHOT_TYPE_UNSPECIFIED": 0,
+                            "AD_HOC": 1,
+                            "SCHEDULED": 2
+                          }
+                        }
+                      }
+                    },
+                    "GetVolumeSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/VolumeSnapshot"
+                          }
+                        }
+                      }
+                    },
+                    "ListVolumeSnapshotsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListVolumeSnapshotsResponse": {
+                      "fields": {
+                        "volumeSnapshots": {
+                          "rule": "repeated",
+                          "type": "VolumeSnapshot",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteVolumeSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/VolumeSnapshot"
+                          }
+                        }
+                      }
+                    },
+                    "CreateVolumeSnapshotRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/Volume"
+                          }
+                        },
+                        "volumeSnapshot": {
+                          "type": "VolumeSnapshot",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RestoreVolumeSnapshotRequest": {
+                      "fields": {
+                        "volumeSnapshot": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "baremetalsolution.googleapis.com/VolumeSnapshot"
+                          }
                         }
                       }
                     }
@@ -3047,15 +4985,6 @@
                 }
               }
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -3065,6 +4994,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             },

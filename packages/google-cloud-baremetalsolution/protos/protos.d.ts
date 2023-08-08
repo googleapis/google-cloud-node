@@ -89,6 +89,20 @@ export namespace google {
                     public updateInstance(request: google.cloud.baremetalsolution.v2.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RenameInstance.
+                     * @param request RenameInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Instance
+                     */
+                    public renameInstance(request: google.cloud.baremetalsolution.v2.IRenameInstanceRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.RenameInstanceCallback): void;
+
+                    /**
+                     * Calls RenameInstance.
+                     * @param request RenameInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public renameInstance(request: google.cloud.baremetalsolution.v2.IRenameInstanceRequest): Promise<google.cloud.baremetalsolution.v2.Instance>;
+
+                    /**
                      * Calls ResetInstance.
                      * @param request ResetInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -131,6 +145,34 @@ export namespace google {
                     public stopInstance(request: google.cloud.baremetalsolution.v2.IStopInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls EnableInteractiveSerialConsole.
+                     * @param request EnableInteractiveSerialConsoleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public enableInteractiveSerialConsole(request: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.EnableInteractiveSerialConsoleCallback): void;
+
+                    /**
+                     * Calls EnableInteractiveSerialConsole.
+                     * @param request EnableInteractiveSerialConsoleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public enableInteractiveSerialConsole(request: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DisableInteractiveSerialConsole.
+                     * @param request DisableInteractiveSerialConsoleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public disableInteractiveSerialConsole(request: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.DisableInteractiveSerialConsoleCallback): void;
+
+                    /**
+                     * Calls DisableInteractiveSerialConsole.
+                     * @param request DisableInteractiveSerialConsoleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disableInteractiveSerialConsole(request: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DetachLun.
                      * @param request DetachLunRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -143,6 +185,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public detachLun(request: google.cloud.baremetalsolution.v2.IDetachLunRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSSHKeys.
+                     * @param request ListSSHKeysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSSHKeysResponse
+                     */
+                    public listSSHKeys(request: google.cloud.baremetalsolution.v2.IListSSHKeysRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.ListSSHKeysCallback): void;
+
+                    /**
+                     * Calls ListSSHKeys.
+                     * @param request ListSSHKeysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSSHKeys(request: google.cloud.baremetalsolution.v2.IListSSHKeysRequest): Promise<google.cloud.baremetalsolution.v2.ListSSHKeysResponse>;
+
+                    /**
+                     * Calls CreateSSHKey.
+                     * @param request CreateSSHKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SSHKey
+                     */
+                    public createSSHKey(request: google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.CreateSSHKeyCallback): void;
+
+                    /**
+                     * Calls CreateSSHKey.
+                     * @param request CreateSSHKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSSHKey(request: google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest): Promise<google.cloud.baremetalsolution.v2.SSHKey>;
+
+                    /**
+                     * Calls DeleteSSHKey.
+                     * @param request DeleteSSHKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSSHKey(request: google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteSSHKeyCallback): void;
+
+                    /**
+                     * Calls DeleteSSHKey.
+                     * @param request DeleteSSHKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSSHKey(request: google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls ListVolumes.
@@ -185,6 +269,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateVolume(request: google.cloud.baremetalsolution.v2.IUpdateVolumeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RenameVolume.
+                     * @param request RenameVolumeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Volume
+                     */
+                    public renameVolume(request: google.cloud.baremetalsolution.v2.IRenameVolumeRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.RenameVolumeCallback): void;
+
+                    /**
+                     * Calls RenameVolume.
+                     * @param request RenameVolumeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public renameVolume(request: google.cloud.baremetalsolution.v2.IRenameVolumeRequest): Promise<google.cloud.baremetalsolution.v2.Volume>;
+
+                    /**
+                     * Calls EvictVolume.
+                     * @param request EvictVolumeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public evictVolume(request: google.cloud.baremetalsolution.v2.IEvictVolumeRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.EvictVolumeCallback): void;
+
+                    /**
+                     * Calls EvictVolume.
+                     * @param request EvictVolumeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public evictVolume(request: google.cloud.baremetalsolution.v2.IEvictVolumeRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ResizeVolume.
@@ -257,6 +369,76 @@ export namespace google {
                     public updateNetwork(request: google.cloud.baremetalsolution.v2.IUpdateNetworkRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CreateVolumeSnapshot.
+                     * @param request CreateVolumeSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VolumeSnapshot
+                     */
+                    public createVolumeSnapshot(request: google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.CreateVolumeSnapshotCallback): void;
+
+                    /**
+                     * Calls CreateVolumeSnapshot.
+                     * @param request CreateVolumeSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createVolumeSnapshot(request: google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest): Promise<google.cloud.baremetalsolution.v2.VolumeSnapshot>;
+
+                    /**
+                     * Calls RestoreVolumeSnapshot.
+                     * @param request RestoreVolumeSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public restoreVolumeSnapshot(request: google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.RestoreVolumeSnapshotCallback): void;
+
+                    /**
+                     * Calls RestoreVolumeSnapshot.
+                     * @param request RestoreVolumeSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restoreVolumeSnapshot(request: google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteVolumeSnapshot.
+                     * @param request DeleteVolumeSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteVolumeSnapshot(request: google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteVolumeSnapshotCallback): void;
+
+                    /**
+                     * Calls DeleteVolumeSnapshot.
+                     * @param request DeleteVolumeSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteVolumeSnapshot(request: google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetVolumeSnapshot.
+                     * @param request GetVolumeSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VolumeSnapshot
+                     */
+                    public getVolumeSnapshot(request: google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolumeSnapshotCallback): void;
+
+                    /**
+                     * Calls GetVolumeSnapshot.
+                     * @param request GetVolumeSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getVolumeSnapshot(request: google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest): Promise<google.cloud.baremetalsolution.v2.VolumeSnapshot>;
+
+                    /**
+                     * Calls ListVolumeSnapshots.
+                     * @param request ListVolumeSnapshotsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListVolumeSnapshotsResponse
+                     */
+                    public listVolumeSnapshots(request: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumeSnapshotsCallback): void;
+
+                    /**
+                     * Calls ListVolumeSnapshots.
+                     * @param request ListVolumeSnapshotsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listVolumeSnapshots(request: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest): Promise<google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse>;
+
+                    /**
                      * Calls GetLun.
                      * @param request GetLunRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Lun
@@ -283,6 +465,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listLuns(request: google.cloud.baremetalsolution.v2.IListLunsRequest): Promise<google.cloud.baremetalsolution.v2.ListLunsResponse>;
+
+                    /**
+                     * Calls EvictLun.
+                     * @param request EvictLunRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public evictLun(request: google.cloud.baremetalsolution.v2.IEvictLunRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.EvictLunCallback): void;
+
+                    /**
+                     * Calls EvictLun.
+                     * @param request EvictLunRequest message or plain object
+                     * @returns Promise
+                     */
+                    public evictLun(request: google.cloud.baremetalsolution.v2.IEvictLunRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls GetNfsShare.
@@ -325,6 +521,146 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateNfsShare(request: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateNfsShare.
+                     * @param request CreateNfsShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createNfsShare(request: google.cloud.baremetalsolution.v2.ICreateNfsShareRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.CreateNfsShareCallback): void;
+
+                    /**
+                     * Calls CreateNfsShare.
+                     * @param request CreateNfsShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createNfsShare(request: google.cloud.baremetalsolution.v2.ICreateNfsShareRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RenameNfsShare.
+                     * @param request RenameNfsShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NfsShare
+                     */
+                    public renameNfsShare(request: google.cloud.baremetalsolution.v2.IRenameNfsShareRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNfsShareCallback): void;
+
+                    /**
+                     * Calls RenameNfsShare.
+                     * @param request RenameNfsShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public renameNfsShare(request: google.cloud.baremetalsolution.v2.IRenameNfsShareRequest): Promise<google.cloud.baremetalsolution.v2.NfsShare>;
+
+                    /**
+                     * Calls DeleteNfsShare.
+                     * @param request DeleteNfsShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteNfsShare(request: google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteNfsShareCallback): void;
+
+                    /**
+                     * Calls DeleteNfsShare.
+                     * @param request DeleteNfsShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteNfsShare(request: google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListProvisioningQuotas.
+                     * @param request ListProvisioningQuotasRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProvisioningQuotasResponse
+                     */
+                    public listProvisioningQuotas(request: google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.ListProvisioningQuotasCallback): void;
+
+                    /**
+                     * Calls ListProvisioningQuotas.
+                     * @param request ListProvisioningQuotasRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProvisioningQuotas(request: google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest): Promise<google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse>;
+
+                    /**
+                     * Calls SubmitProvisioningConfig.
+                     * @param request SubmitProvisioningConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubmitProvisioningConfigResponse
+                     */
+                    public submitProvisioningConfig(request: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.SubmitProvisioningConfigCallback): void;
+
+                    /**
+                     * Calls SubmitProvisioningConfig.
+                     * @param request SubmitProvisioningConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public submitProvisioningConfig(request: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest): Promise<google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse>;
+
+                    /**
+                     * Calls GetProvisioningConfig.
+                     * @param request GetProvisioningConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProvisioningConfig
+                     */
+                    public getProvisioningConfig(request: google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.GetProvisioningConfigCallback): void;
+
+                    /**
+                     * Calls GetProvisioningConfig.
+                     * @param request GetProvisioningConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProvisioningConfig(request: google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest): Promise<google.cloud.baremetalsolution.v2.ProvisioningConfig>;
+
+                    /**
+                     * Calls CreateProvisioningConfig.
+                     * @param request CreateProvisioningConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProvisioningConfig
+                     */
+                    public createProvisioningConfig(request: google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.CreateProvisioningConfigCallback): void;
+
+                    /**
+                     * Calls CreateProvisioningConfig.
+                     * @param request CreateProvisioningConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createProvisioningConfig(request: google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest): Promise<google.cloud.baremetalsolution.v2.ProvisioningConfig>;
+
+                    /**
+                     * Calls UpdateProvisioningConfig.
+                     * @param request UpdateProvisioningConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProvisioningConfig
+                     */
+                    public updateProvisioningConfig(request: google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateProvisioningConfigCallback): void;
+
+                    /**
+                     * Calls UpdateProvisioningConfig.
+                     * @param request UpdateProvisioningConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateProvisioningConfig(request: google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest): Promise<google.cloud.baremetalsolution.v2.ProvisioningConfig>;
+
+                    /**
+                     * Calls RenameNetwork.
+                     * @param request RenameNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Network
+                     */
+                    public renameNetwork(request: google.cloud.baremetalsolution.v2.IRenameNetworkRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNetworkCallback): void;
+
+                    /**
+                     * Calls RenameNetwork.
+                     * @param request RenameNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public renameNetwork(request: google.cloud.baremetalsolution.v2.IRenameNetworkRequest): Promise<google.cloud.baremetalsolution.v2.Network>;
+
+                    /**
+                     * Calls ListOSImages.
+                     * @param request ListOSImagesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOSImagesResponse
+                     */
+                    public listOSImages(request: google.cloud.baremetalsolution.v2.IListOSImagesRequest, callback: google.cloud.baremetalsolution.v2.BareMetalSolution.ListOSImagesCallback): void;
+
+                    /**
+                     * Calls ListOSImages.
+                     * @param request ListOSImagesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOSImages(request: google.cloud.baremetalsolution.v2.IListOSImagesRequest): Promise<google.cloud.baremetalsolution.v2.ListOSImagesResponse>;
                 }
 
                 namespace BareMetalSolution {
@@ -351,6 +687,13 @@ export namespace google {
                     type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|renameInstance}.
+                     * @param error Error, if any
+                     * @param [response] Instance
+                     */
+                    type RenameInstanceCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.Instance) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|resetInstance}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -372,11 +715,46 @@ export namespace google {
                     type StopInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|enableInteractiveSerialConsole}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type EnableInteractiveSerialConsoleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|disableInteractiveSerialConsole}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DisableInteractiveSerialConsoleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|detachLun}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DetachLunCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|listSSHKeys}.
+                     * @param error Error, if any
+                     * @param [response] ListSSHKeysResponse
+                     */
+                    type ListSSHKeysCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ListSSHKeysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|createSSHKey}.
+                     * @param error Error, if any
+                     * @param [response] SSHKey
+                     */
+                    type CreateSSHKeyCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.SSHKey) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|deleteSSHKey}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSSHKeyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|listVolumes}.
@@ -398,6 +776,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateVolumeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|renameVolume}.
+                     * @param error Error, if any
+                     * @param [response] Volume
+                     */
+                    type RenameVolumeCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.Volume) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|evictVolume}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type EvictVolumeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|resizeVolume}.
@@ -435,6 +827,41 @@ export namespace google {
                     type UpdateNetworkCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|createVolumeSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] VolumeSnapshot
+                     */
+                    type CreateVolumeSnapshotCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.VolumeSnapshot) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|restoreVolumeSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RestoreVolumeSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|deleteVolumeSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteVolumeSnapshotCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|getVolumeSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] VolumeSnapshot
+                     */
+                    type GetVolumeSnapshotCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.VolumeSnapshot) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|listVolumeSnapshots}.
+                     * @param error Error, if any
+                     * @param [response] ListVolumeSnapshotsResponse
+                     */
+                    type ListVolumeSnapshotsCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|getLun}.
                      * @param error Error, if any
                      * @param [response] Lun
@@ -447,6 +874,13 @@ export namespace google {
                      * @param [response] ListLunsResponse
                      */
                     type ListLunsCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ListLunsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|evictLun}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type EvictLunCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|getNfsShare}.
@@ -468,6 +902,76 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateNfsShareCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|createNfsShare}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateNfsShareCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|renameNfsShare}.
+                     * @param error Error, if any
+                     * @param [response] NfsShare
+                     */
+                    type RenameNfsShareCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.NfsShare) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|deleteNfsShare}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteNfsShareCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|listProvisioningQuotas}.
+                     * @param error Error, if any
+                     * @param [response] ListProvisioningQuotasResponse
+                     */
+                    type ListProvisioningQuotasCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|submitProvisioningConfig}.
+                     * @param error Error, if any
+                     * @param [response] SubmitProvisioningConfigResponse
+                     */
+                    type SubmitProvisioningConfigCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|getProvisioningConfig}.
+                     * @param error Error, if any
+                     * @param [response] ProvisioningConfig
+                     */
+                    type GetProvisioningConfigCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ProvisioningConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|createProvisioningConfig}.
+                     * @param error Error, if any
+                     * @param [response] ProvisioningConfig
+                     */
+                    type CreateProvisioningConfigCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ProvisioningConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|updateProvisioningConfig}.
+                     * @param error Error, if any
+                     * @param [response] ProvisioningConfig
+                     */
+                    type UpdateProvisioningConfigCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ProvisioningConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|renameNetwork}.
+                     * @param error Error, if any
+                     * @param [response] Network
+                     */
+                    type RenameNetworkCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.Network) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.baremetalsolution.v2.BareMetalSolution|listOSImages}.
+                     * @param error Error, if any
+                     * @param [response] ListOSImagesResponse
+                     */
+                    type ListOSImagesCallback = (error: (Error|null), response?: google.cloud.baremetalsolution.v2.ListOSImagesResponse) => void;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -603,95 +1107,19 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a ResetInstanceResponse. */
-                interface IResetInstanceResponse {
+                /** VolumePerformanceTier enum. */
+                enum VolumePerformanceTier {
+                    VOLUME_PERFORMANCE_TIER_UNSPECIFIED = 0,
+                    VOLUME_PERFORMANCE_TIER_SHARED = 1,
+                    VOLUME_PERFORMANCE_TIER_ASSIGNED = 2,
+                    VOLUME_PERFORMANCE_TIER_HT = 3
                 }
 
-                /** Represents a ResetInstanceResponse. */
-                class ResetInstanceResponse implements IResetInstanceResponse {
-
-                    /**
-                     * Constructs a new ResetInstanceResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse);
-
-                    /**
-                     * Creates a new ResetInstanceResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ResetInstanceResponse instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Encodes the specified ResetInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
-                     * @param message ResetInstanceResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ResetInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
-                     * @param message ResetInstanceResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ResetInstanceResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ResetInstanceResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Decodes a ResetInstanceResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ResetInstanceResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Verifies a ResetInstanceResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ResetInstanceResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ResetInstanceResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Creates a plain object from a ResetInstanceResponse message. Also converts values to other types if specified.
-                     * @param message ResetInstanceResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.ResetInstanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ResetInstanceResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ResetInstanceResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                /** WorkloadProfile enum. */
+                enum WorkloadProfile {
+                    WORKLOAD_PROFILE_UNSPECIFIED = 0,
+                    WORKLOAD_PROFILE_GENERIC = 1,
+                    WORKLOAD_PROFILE_HANA = 2
                 }
 
                 /** Properties of an Instance. */
@@ -724,6 +1152,9 @@ export namespace google {
                     /** Instance luns */
                     luns?: (google.cloud.baremetalsolution.v2.ILun[]|null);
 
+                    /** Instance volumes */
+                    volumes?: (google.cloud.baremetalsolution.v2.IVolume[]|null);
+
                     /** Instance networks */
                     networks?: (google.cloud.baremetalsolution.v2.INetwork[]|null);
 
@@ -741,6 +1172,15 @@ export namespace google {
 
                     /** Instance logicalInterfaces */
                     logicalInterfaces?: (google.cloud.baremetalsolution.v2.ILogicalInterface[]|null);
+
+                    /** Instance loginInfo */
+                    loginInfo?: (string|null);
+
+                    /** Instance workloadProfile */
+                    workloadProfile?: (google.cloud.baremetalsolution.v2.WorkloadProfile|keyof typeof google.cloud.baremetalsolution.v2.WorkloadProfile|null);
+
+                    /** Instance firmwareVersion */
+                    firmwareVersion?: (string|null);
                 }
 
                 /** Represents an Instance. */
@@ -779,6 +1219,9 @@ export namespace google {
                     /** Instance luns. */
                     public luns: google.cloud.baremetalsolution.v2.ILun[];
 
+                    /** Instance volumes. */
+                    public volumes: google.cloud.baremetalsolution.v2.IVolume[];
+
                     /** Instance networks. */
                     public networks: google.cloud.baremetalsolution.v2.INetwork[];
 
@@ -796,6 +1239,15 @@ export namespace google {
 
                     /** Instance logicalInterfaces. */
                     public logicalInterfaces: google.cloud.baremetalsolution.v2.ILogicalInterface[];
+
+                    /** Instance loginInfo. */
+                    public loginInfo: string;
+
+                    /** Instance workloadProfile. */
+                    public workloadProfile: (google.cloud.baremetalsolution.v2.WorkloadProfile|keyof typeof google.cloud.baremetalsolution.v2.WorkloadProfile);
+
+                    /** Instance firmwareVersion. */
+                    public firmwareVersion: string;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -882,7 +1334,11 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         PROVISIONING = 1,
                         RUNNING = 2,
-                        DELETED = 3
+                        DELETED = 3,
+                        UPDATING = 4,
+                        STARTING = 5,
+                        STOPPING = 6,
+                        SHUTDOWN = 7
                     }
                 }
 
@@ -1310,6 +1766,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RenameInstanceRequest. */
+                interface IRenameInstanceRequest {
+
+                    /** RenameInstanceRequest name */
+                    name?: (string|null);
+
+                    /** RenameInstanceRequest newInstanceId */
+                    newInstanceId?: (string|null);
+                }
+
+                /** Represents a RenameInstanceRequest. */
+                class RenameInstanceRequest implements IRenameInstanceRequest {
+
+                    /**
+                     * Constructs a new RenameInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IRenameInstanceRequest);
+
+                    /** RenameInstanceRequest name. */
+                    public name: string;
+
+                    /** RenameInstanceRequest newInstanceId. */
+                    public newInstanceId: string;
+
+                    /**
+                     * Creates a new RenameInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenameInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IRenameInstanceRequest): google.cloud.baremetalsolution.v2.RenameInstanceRequest;
+
+                    /**
+                     * Encodes the specified RenameInstanceRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameInstanceRequest.verify|verify} messages.
+                     * @param message RenameInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IRenameInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenameInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameInstanceRequest.verify|verify} messages.
+                     * @param message RenameInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IRenameInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenameInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenameInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.RenameInstanceRequest;
+
+                    /**
+                     * Decodes a RenameInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenameInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.RenameInstanceRequest;
+
+                    /**
+                     * Verifies a RenameInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenameInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenameInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.RenameInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a RenameInstanceRequest message. Also converts values to other types if specified.
+                     * @param message RenameInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.RenameInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenameInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenameInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ResetInstanceRequest. */
                 interface IResetInstanceRequest {
 
@@ -1401,6 +1960,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ResetInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResetInstanceResponse. */
+                interface IResetInstanceResponse {
+                }
+
+                /** Represents a ResetInstanceResponse. */
+                class ResetInstanceResponse implements IResetInstanceResponse {
+
+                    /**
+                     * Constructs a new ResetInstanceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse);
+
+                    /**
+                     * Creates a new ResetInstanceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResetInstanceResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Encodes the specified ResetInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
+                     * @param message ResetInstanceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResetInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
+                     * @param message ResetInstanceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResetInstanceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResetInstanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Decodes a ResetInstanceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResetInstanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Verifies a ResetInstanceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResetInstanceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResetInstanceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Creates a plain object from a ResetInstanceResponse message. Also converts values to other types if specified.
+                     * @param message ResetInstanceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ResetInstanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResetInstanceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetInstanceResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1504,6 +2154,97 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a StartInstanceResponse. */
+                interface IStartInstanceResponse {
+                }
+
+                /** Represents a StartInstanceResponse. */
+                class StartInstanceResponse implements IStartInstanceResponse {
+
+                    /**
+                     * Constructs a new StartInstanceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IStartInstanceResponse);
+
+                    /**
+                     * Creates a new StartInstanceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartInstanceResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IStartInstanceResponse): google.cloud.baremetalsolution.v2.StartInstanceResponse;
+
+                    /**
+                     * Encodes the specified StartInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.StartInstanceResponse.verify|verify} messages.
+                     * @param message StartInstanceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IStartInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.StartInstanceResponse.verify|verify} messages.
+                     * @param message StartInstanceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IStartInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartInstanceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartInstanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.StartInstanceResponse;
+
+                    /**
+                     * Decodes a StartInstanceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartInstanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.StartInstanceResponse;
+
+                    /**
+                     * Verifies a StartInstanceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartInstanceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartInstanceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.StartInstanceResponse;
+
+                    /**
+                     * Creates a plain object from a StartInstanceResponse message. Also converts values to other types if specified.
+                     * @param message StartInstanceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.StartInstanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartInstanceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartInstanceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a StopInstanceRequest. */
                 interface IStopInstanceRequest {
 
@@ -1601,431 +2342,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a DetachLunRequest. */
-                interface IDetachLunRequest {
-
-                    /** DetachLunRequest instance */
-                    instance?: (string|null);
-
-                    /** DetachLunRequest lun */
-                    lun?: (string|null);
-                }
-
-                /** Represents a DetachLunRequest. */
-                class DetachLunRequest implements IDetachLunRequest {
-
-                    /**
-                     * Constructs a new DetachLunRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IDetachLunRequest);
-
-                    /** DetachLunRequest instance. */
-                    public instance: string;
-
-                    /** DetachLunRequest lun. */
-                    public lun: string;
-
-                    /**
-                     * Creates a new DetachLunRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DetachLunRequest instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IDetachLunRequest): google.cloud.baremetalsolution.v2.DetachLunRequest;
-
-                    /**
-                     * Encodes the specified DetachLunRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DetachLunRequest.verify|verify} messages.
-                     * @param message DetachLunRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IDetachLunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DetachLunRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DetachLunRequest.verify|verify} messages.
-                     * @param message DetachLunRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDetachLunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DetachLunRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DetachLunRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DetachLunRequest;
-
-                    /**
-                     * Decodes a DetachLunRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DetachLunRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DetachLunRequest;
-
-                    /**
-                     * Verifies a DetachLunRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DetachLunRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DetachLunRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DetachLunRequest;
-
-                    /**
-                     * Creates a plain object from a DetachLunRequest message. Also converts values to other types if specified.
-                     * @param message DetachLunRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.DetachLunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DetachLunRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DetachLunRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ServerNetworkTemplate. */
-                interface IServerNetworkTemplate {
-
-                    /** ServerNetworkTemplate name */
-                    name?: (string|null);
-
-                    /** ServerNetworkTemplate applicableInstanceTypes */
-                    applicableInstanceTypes?: (string[]|null);
-
-                    /** ServerNetworkTemplate logicalInterfaces */
-                    logicalInterfaces?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[]|null);
-                }
-
-                /** Represents a ServerNetworkTemplate. */
-                class ServerNetworkTemplate implements IServerNetworkTemplate {
-
-                    /**
-                     * Constructs a new ServerNetworkTemplate.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate);
-
-                    /** ServerNetworkTemplate name. */
-                    public name: string;
-
-                    /** ServerNetworkTemplate applicableInstanceTypes. */
-                    public applicableInstanceTypes: string[];
-
-                    /** ServerNetworkTemplate logicalInterfaces. */
-                    public logicalInterfaces: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[];
-
-                    /**
-                     * Creates a new ServerNetworkTemplate instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ServerNetworkTemplate instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Encodes the specified ServerNetworkTemplate message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
-                     * @param message ServerNetworkTemplate message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ServerNetworkTemplate message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
-                     * @param message ServerNetworkTemplate message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ServerNetworkTemplate
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ServerNetworkTemplate
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Verifies a ServerNetworkTemplate message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ServerNetworkTemplate message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ServerNetworkTemplate
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Creates a plain object from a ServerNetworkTemplate message. Also converts values to other types if specified.
-                     * @param message ServerNetworkTemplate
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ServerNetworkTemplate to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ServerNetworkTemplate
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace ServerNetworkTemplate {
-
-                    /** Properties of a LogicalInterface. */
-                    interface ILogicalInterface {
-
-                        /** LogicalInterface name */
-                        name?: (string|null);
-
-                        /** LogicalInterface type */
-                        type?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|null);
-
-                        /** LogicalInterface required */
-                        required?: (boolean|null);
-                    }
-
-                    /** Represents a LogicalInterface. */
-                    class LogicalInterface implements ILogicalInterface {
-
-                        /**
-                         * Constructs a new LogicalInterface.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface);
-
-                        /** LogicalInterface name. */
-                        public name: string;
-
-                        /** LogicalInterface type. */
-                        public type: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType);
-
-                        /** LogicalInterface required. */
-                        public required: boolean;
-
-                        /**
-                         * Creates a new LogicalInterface instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns LogicalInterface instance
-                         */
-                        public static create(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Encodes the specified LogicalInterface message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
-                         * @param message LogicalInterface message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified LogicalInterface message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
-                         * @param message LogicalInterface message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a LogicalInterface message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns LogicalInterface
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Decodes a LogicalInterface message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns LogicalInterface
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Verifies a LogicalInterface message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a LogicalInterface message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns LogicalInterface
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Creates a plain object from a LogicalInterface message. Also converts values to other types if specified.
-                         * @param message LogicalInterface
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this LogicalInterface to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for LogicalInterface
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace LogicalInterface {
-
-                        /** InterfaceType enum. */
-                        enum InterfaceType {
-                            INTERFACE_TYPE_UNSPECIFIED = 0,
-                            BOND = 1,
-                            NIC = 2
-                        }
-                    }
-                }
-
-                /** Properties of a StartInstanceResponse. */
-                interface IStartInstanceResponse {
-                }
-
-                /** Represents a StartInstanceResponse. */
-                class StartInstanceResponse implements IStartInstanceResponse {
-
-                    /**
-                     * Constructs a new StartInstanceResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IStartInstanceResponse);
-
-                    /**
-                     * Creates a new StartInstanceResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StartInstanceResponse instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IStartInstanceResponse): google.cloud.baremetalsolution.v2.StartInstanceResponse;
-
-                    /**
-                     * Encodes the specified StartInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.StartInstanceResponse.verify|verify} messages.
-                     * @param message StartInstanceResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IStartInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StartInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.StartInstanceResponse.verify|verify} messages.
-                     * @param message StartInstanceResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IStartInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StartInstanceResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StartInstanceResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.StartInstanceResponse;
-
-                    /**
-                     * Decodes a StartInstanceResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StartInstanceResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.StartInstanceResponse;
-
-                    /**
-                     * Verifies a StartInstanceResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StartInstanceResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StartInstanceResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.StartInstanceResponse;
-
-                    /**
-                     * Creates a plain object from a StartInstanceResponse message. Also converts values to other types if specified.
-                     * @param message StartInstanceResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.StartInstanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StartInstanceResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for StartInstanceResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a StopInstanceResponse. */
                 interface IStopInstanceResponse {
                 }
@@ -2117,6 +2433,491 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EnableInteractiveSerialConsoleRequest. */
+                interface IEnableInteractiveSerialConsoleRequest {
+
+                    /** EnableInteractiveSerialConsoleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an EnableInteractiveSerialConsoleRequest. */
+                class EnableInteractiveSerialConsoleRequest implements IEnableInteractiveSerialConsoleRequest {
+
+                    /**
+                     * Constructs a new EnableInteractiveSerialConsoleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest);
+
+                    /** EnableInteractiveSerialConsoleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new EnableInteractiveSerialConsoleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableInteractiveSerialConsoleRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Encodes the specified EnableInteractiveSerialConsoleRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest.verify|verify} messages.
+                     * @param message EnableInteractiveSerialConsoleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableInteractiveSerialConsoleRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest.verify|verify} messages.
+                     * @param message EnableInteractiveSerialConsoleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableInteractiveSerialConsoleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableInteractiveSerialConsoleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Decodes an EnableInteractiveSerialConsoleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableInteractiveSerialConsoleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Verifies an EnableInteractiveSerialConsoleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableInteractiveSerialConsoleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableInteractiveSerialConsoleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Creates a plain object from an EnableInteractiveSerialConsoleRequest message. Also converts values to other types if specified.
+                     * @param message EnableInteractiveSerialConsoleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableInteractiveSerialConsoleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnableInteractiveSerialConsoleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnableInteractiveSerialConsoleResponse. */
+                interface IEnableInteractiveSerialConsoleResponse {
+                }
+
+                /** Represents an EnableInteractiveSerialConsoleResponse. */
+                class EnableInteractiveSerialConsoleResponse implements IEnableInteractiveSerialConsoleResponse {
+
+                    /**
+                     * Constructs a new EnableInteractiveSerialConsoleResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse);
+
+                    /**
+                     * Creates a new EnableInteractiveSerialConsoleResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableInteractiveSerialConsoleResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Encodes the specified EnableInteractiveSerialConsoleResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse.verify|verify} messages.
+                     * @param message EnableInteractiveSerialConsoleResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableInteractiveSerialConsoleResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse.verify|verify} messages.
+                     * @param message EnableInteractiveSerialConsoleResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableInteractiveSerialConsoleResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableInteractiveSerialConsoleResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Decodes an EnableInteractiveSerialConsoleResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableInteractiveSerialConsoleResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Verifies an EnableInteractiveSerialConsoleResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableInteractiveSerialConsoleResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableInteractiveSerialConsoleResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Creates a plain object from an EnableInteractiveSerialConsoleResponse message. Also converts values to other types if specified.
+                     * @param message EnableInteractiveSerialConsoleResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableInteractiveSerialConsoleResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnableInteractiveSerialConsoleResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableInteractiveSerialConsoleRequest. */
+                interface IDisableInteractiveSerialConsoleRequest {
+
+                    /** DisableInteractiveSerialConsoleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DisableInteractiveSerialConsoleRequest. */
+                class DisableInteractiveSerialConsoleRequest implements IDisableInteractiveSerialConsoleRequest {
+
+                    /**
+                     * Constructs a new DisableInteractiveSerialConsoleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest);
+
+                    /** DisableInteractiveSerialConsoleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DisableInteractiveSerialConsoleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableInteractiveSerialConsoleRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Encodes the specified DisableInteractiveSerialConsoleRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest.verify|verify} messages.
+                     * @param message DisableInteractiveSerialConsoleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableInteractiveSerialConsoleRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest.verify|verify} messages.
+                     * @param message DisableInteractiveSerialConsoleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableInteractiveSerialConsoleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableInteractiveSerialConsoleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Decodes a DisableInteractiveSerialConsoleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableInteractiveSerialConsoleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Verifies a DisableInteractiveSerialConsoleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableInteractiveSerialConsoleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableInteractiveSerialConsoleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest;
+
+                    /**
+                     * Creates a plain object from a DisableInteractiveSerialConsoleRequest message. Also converts values to other types if specified.
+                     * @param message DisableInteractiveSerialConsoleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableInteractiveSerialConsoleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableInteractiveSerialConsoleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableInteractiveSerialConsoleResponse. */
+                interface IDisableInteractiveSerialConsoleResponse {
+                }
+
+                /** Represents a DisableInteractiveSerialConsoleResponse. */
+                class DisableInteractiveSerialConsoleResponse implements IDisableInteractiveSerialConsoleResponse {
+
+                    /**
+                     * Constructs a new DisableInteractiveSerialConsoleResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse);
+
+                    /**
+                     * Creates a new DisableInteractiveSerialConsoleResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableInteractiveSerialConsoleResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Encodes the specified DisableInteractiveSerialConsoleResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse.verify|verify} messages.
+                     * @param message DisableInteractiveSerialConsoleResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableInteractiveSerialConsoleResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse.verify|verify} messages.
+                     * @param message DisableInteractiveSerialConsoleResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableInteractiveSerialConsoleResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableInteractiveSerialConsoleResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Decodes a DisableInteractiveSerialConsoleResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableInteractiveSerialConsoleResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Verifies a DisableInteractiveSerialConsoleResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableInteractiveSerialConsoleResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableInteractiveSerialConsoleResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse;
+
+                    /**
+                     * Creates a plain object from a DisableInteractiveSerialConsoleResponse message. Also converts values to other types if specified.
+                     * @param message DisableInteractiveSerialConsoleResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableInteractiveSerialConsoleResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableInteractiveSerialConsoleResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DetachLunRequest. */
+                interface IDetachLunRequest {
+
+                    /** DetachLunRequest instance */
+                    instance?: (string|null);
+
+                    /** DetachLunRequest lun */
+                    lun?: (string|null);
+
+                    /** DetachLunRequest skipReboot */
+                    skipReboot?: (boolean|null);
+                }
+
+                /** Represents a DetachLunRequest. */
+                class DetachLunRequest implements IDetachLunRequest {
+
+                    /**
+                     * Constructs a new DetachLunRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IDetachLunRequest);
+
+                    /** DetachLunRequest instance. */
+                    public instance: string;
+
+                    /** DetachLunRequest lun. */
+                    public lun: string;
+
+                    /** DetachLunRequest skipReboot. */
+                    public skipReboot: boolean;
+
+                    /**
+                     * Creates a new DetachLunRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetachLunRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IDetachLunRequest): google.cloud.baremetalsolution.v2.DetachLunRequest;
+
+                    /**
+                     * Encodes the specified DetachLunRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DetachLunRequest.verify|verify} messages.
+                     * @param message DetachLunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IDetachLunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetachLunRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DetachLunRequest.verify|verify} messages.
+                     * @param message DetachLunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDetachLunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetachLunRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetachLunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DetachLunRequest;
+
+                    /**
+                     * Decodes a DetachLunRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetachLunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DetachLunRequest;
+
+                    /**
+                     * Verifies a DetachLunRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetachLunRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetachLunRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DetachLunRequest;
+
+                    /**
+                     * Creates a plain object from a DetachLunRequest message. Also converts values to other types if specified.
+                     * @param message DetachLunRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.DetachLunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetachLunRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DetachLunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Lun. */
                 interface ILun {
 
@@ -2149,6 +2950,12 @@ export namespace google {
 
                     /** Lun wwid */
                     wwid?: (string|null);
+
+                    /** Lun expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Lun instances */
+                    instances?: (string[]|null);
                 }
 
                 /** Represents a Lun. */
@@ -2189,6 +2996,12 @@ export namespace google {
 
                     /** Lun wwid. */
                     public wwid: string;
+
+                    /** Lun expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Lun instances. */
+                    public instances: string[];
 
                     /**
                      * Creates a new Lun instance using the specified properties.
@@ -2276,7 +3089,8 @@ export namespace google {
                         CREATING = 1,
                         UPDATING = 2,
                         READY = 3,
-                        DELETING = 4
+                        DELETING = 4,
+                        COOL_OFF = 5
                     }
 
                     /** MultiprotocolType enum. */
@@ -2608,6 +3422,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EvictLunRequest. */
+                interface IEvictLunRequest {
+
+                    /** EvictLunRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an EvictLunRequest. */
+                class EvictLunRequest implements IEvictLunRequest {
+
+                    /**
+                     * Constructs a new EvictLunRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IEvictLunRequest);
+
+                    /** EvictLunRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new EvictLunRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvictLunRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IEvictLunRequest): google.cloud.baremetalsolution.v2.EvictLunRequest;
+
+                    /**
+                     * Encodes the specified EvictLunRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.EvictLunRequest.verify|verify} messages.
+                     * @param message EvictLunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IEvictLunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvictLunRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.EvictLunRequest.verify|verify} messages.
+                     * @param message EvictLunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IEvictLunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvictLunRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvictLunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.EvictLunRequest;
+
+                    /**
+                     * Decodes an EvictLunRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvictLunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.EvictLunRequest;
+
+                    /**
+                     * Verifies an EvictLunRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvictLunRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvictLunRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.EvictLunRequest;
+
+                    /**
+                     * Creates a plain object from an EvictLunRequest message. Also converts values to other types if specified.
+                     * @param message EvictLunRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.EvictLunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvictLunRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvictLunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Network. */
                 interface INetwork {
 
@@ -2646,6 +3557,18 @@ export namespace google {
 
                     /** Network reservations */
                     reservations?: (google.cloud.baremetalsolution.v2.INetworkAddressReservation[]|null);
+
+                    /** Network pod */
+                    pod?: (string|null);
+
+                    /** Network mountPoints */
+                    mountPoints?: (google.cloud.baremetalsolution.v2.INetworkMountPoint[]|null);
+
+                    /** Network jumboFramesEnabled */
+                    jumboFramesEnabled?: (boolean|null);
+
+                    /** Network gatewayIp */
+                    gatewayIp?: (string|null);
                 }
 
                 /** Represents a Network. */
@@ -2692,6 +3615,18 @@ export namespace google {
 
                     /** Network reservations. */
                     public reservations: google.cloud.baremetalsolution.v2.INetworkAddressReservation[];
+
+                    /** Network pod. */
+                    public pod: string;
+
+                    /** Network mountPoints. */
+                    public mountPoints: google.cloud.baremetalsolution.v2.INetworkMountPoint[];
+
+                    /** Network jumboFramesEnabled. */
+                    public jumboFramesEnabled: boolean;
+
+                    /** Network gatewayIp. */
+                    public gatewayIp: string;
 
                     /**
                      * Creates a new Network instance using the specified properties.
@@ -2784,7 +3719,9 @@ export namespace google {
                     enum State {
                         STATE_UNSPECIFIED = 0,
                         PROVISIONING = 1,
-                        PROVISIONED = 2
+                        PROVISIONED = 2,
+                        DEPROVISIONING = 3,
+                        UPDATING = 4
                     }
                 }
 
@@ -3129,6 +4066,18 @@ export namespace google {
 
                         /** VlanAttachment routerIp */
                         routerIp?: (string|null);
+
+                        /** VlanAttachment pairingKey */
+                        pairingKey?: (string|null);
+
+                        /** VlanAttachment qosPolicy */
+                        qosPolicy?: (google.cloud.baremetalsolution.v2.VRF.IQosPolicy|null);
+
+                        /** VlanAttachment id */
+                        id?: (string|null);
+
+                        /** VlanAttachment interconnectAttachment */
+                        interconnectAttachment?: (string|null);
                     }
 
                     /** Represents a VlanAttachment. */
@@ -3148,6 +4097,18 @@ export namespace google {
 
                         /** VlanAttachment routerIp. */
                         public routerIp: string;
+
+                        /** VlanAttachment pairingKey. */
+                        public pairingKey: string;
+
+                        /** VlanAttachment qosPolicy. */
+                        public qosPolicy?: (google.cloud.baremetalsolution.v2.VRF.IQosPolicy|null);
+
+                        /** VlanAttachment id. */
+                        public id: string;
+
+                        /** VlanAttachment interconnectAttachment. */
+                        public interconnectAttachment: string;
 
                         /**
                          * Creates a new VlanAttachment instance using the specified properties.
@@ -4182,700 +5143,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a NfsShare. */
-                interface INfsShare {
+                /** Properties of a NetworkMountPoint. */
+                interface INetworkMountPoint {
 
-                    /** NfsShare name */
+                    /** NetworkMountPoint instance */
+                    instance?: (string|null);
+
+                    /** NetworkMountPoint logicalInterface */
+                    logicalInterface?: (string|null);
+
+                    /** NetworkMountPoint defaultGateway */
+                    defaultGateway?: (boolean|null);
+
+                    /** NetworkMountPoint ipAddress */
+                    ipAddress?: (string|null);
+                }
+
+                /** Represents a NetworkMountPoint. */
+                class NetworkMountPoint implements INetworkMountPoint {
+
+                    /**
+                     * Constructs a new NetworkMountPoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.INetworkMountPoint);
+
+                    /** NetworkMountPoint instance. */
+                    public instance: string;
+
+                    /** NetworkMountPoint logicalInterface. */
+                    public logicalInterface: string;
+
+                    /** NetworkMountPoint defaultGateway. */
+                    public defaultGateway: boolean;
+
+                    /** NetworkMountPoint ipAddress. */
+                    public ipAddress: string;
+
+                    /**
+                     * Creates a new NetworkMountPoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkMountPoint instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.INetworkMountPoint): google.cloud.baremetalsolution.v2.NetworkMountPoint;
+
+                    /**
+                     * Encodes the specified NetworkMountPoint message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NetworkMountPoint.verify|verify} messages.
+                     * @param message NetworkMountPoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.INetworkMountPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkMountPoint message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NetworkMountPoint.verify|verify} messages.
+                     * @param message NetworkMountPoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.INetworkMountPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkMountPoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkMountPoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NetworkMountPoint;
+
+                    /**
+                     * Decodes a NetworkMountPoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkMountPoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NetworkMountPoint;
+
+                    /**
+                     * Verifies a NetworkMountPoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkMountPoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkMountPoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NetworkMountPoint;
+
+                    /**
+                     * Creates a plain object from a NetworkMountPoint message. Also converts values to other types if specified.
+                     * @param message NetworkMountPoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.NetworkMountPoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkMountPoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkMountPoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RenameNetworkRequest. */
+                interface IRenameNetworkRequest {
+
+                    /** RenameNetworkRequest name */
                     name?: (string|null);
 
-                    /** NfsShare nfsShareId */
-                    nfsShareId?: (string|null);
-
-                    /** NfsShare state */
-                    state?: (google.cloud.baremetalsolution.v2.NfsShare.State|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.State|null);
-
-                    /** NfsShare volume */
-                    volume?: (string|null);
-
-                    /** NfsShare allowedClients */
-                    allowedClients?: (google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient[]|null);
-
-                    /** NfsShare labels */
-                    labels?: ({ [k: string]: string }|null);
+                    /** RenameNetworkRequest newNetworkId */
+                    newNetworkId?: (string|null);
                 }
 
-                /** Represents a NfsShare. */
-                class NfsShare implements INfsShare {
+                /** Represents a RenameNetworkRequest. */
+                class RenameNetworkRequest implements IRenameNetworkRequest {
 
                     /**
-                     * Constructs a new NfsShare.
+                     * Constructs a new RenameNetworkRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.INfsShare);
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IRenameNetworkRequest);
 
-                    /** NfsShare name. */
+                    /** RenameNetworkRequest name. */
                     public name: string;
 
-                    /** NfsShare nfsShareId. */
-                    public nfsShareId: string;
-
-                    /** NfsShare state. */
-                    public state: (google.cloud.baremetalsolution.v2.NfsShare.State|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.State);
-
-                    /** NfsShare volume. */
-                    public volume: string;
-
-                    /** NfsShare allowedClients. */
-                    public allowedClients: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient[];
-
-                    /** NfsShare labels. */
-                    public labels: { [k: string]: string };
+                    /** RenameNetworkRequest newNetworkId. */
+                    public newNetworkId: string;
 
                     /**
-                     * Creates a new NfsShare instance using the specified properties.
+                     * Creates a new RenameNetworkRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns NfsShare instance
+                     * @returns RenameNetworkRequest instance
                      */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.INfsShare): google.cloud.baremetalsolution.v2.NfsShare;
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IRenameNetworkRequest): google.cloud.baremetalsolution.v2.RenameNetworkRequest;
 
                     /**
-                     * Encodes the specified NfsShare message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.verify|verify} messages.
-                     * @param message NfsShare message or plain object to encode
+                     * Encodes the specified RenameNetworkRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameNetworkRequest.verify|verify} messages.
+                     * @param message RenameNetworkRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.baremetalsolution.v2.INfsShare, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.baremetalsolution.v2.IRenameNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified NfsShare message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.verify|verify} messages.
-                     * @param message NfsShare message or plain object to encode
+                     * Encodes the specified RenameNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameNetworkRequest.verify|verify} messages.
+                     * @param message RenameNetworkRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.INfsShare, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IRenameNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a NfsShare message from the specified reader or buffer.
+                     * Decodes a RenameNetworkRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns NfsShare
+                     * @returns RenameNetworkRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NfsShare;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.RenameNetworkRequest;
 
                     /**
-                     * Decodes a NfsShare message from the specified reader or buffer, length delimited.
+                     * Decodes a RenameNetworkRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns NfsShare
+                     * @returns RenameNetworkRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NfsShare;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.RenameNetworkRequest;
 
                     /**
-                     * Verifies a NfsShare message.
+                     * Verifies a RenameNetworkRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a NfsShare message from a plain object. Also converts values to their respective internal types.
+                     * Creates a RenameNetworkRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns NfsShare
+                     * @returns RenameNetworkRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NfsShare;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.RenameNetworkRequest;
 
                     /**
-                     * Creates a plain object from a NfsShare message. Also converts values to other types if specified.
-                     * @param message NfsShare
+                     * Creates a plain object from a RenameNetworkRequest message. Also converts values to other types if specified.
+                     * @param message RenameNetworkRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.NfsShare, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.baremetalsolution.v2.RenameNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this NfsShare to JSON.
+                     * Converts this RenameNetworkRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for NfsShare
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace NfsShare {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        PROVISIONED = 1
-                    }
-
-                    /** MountPermissions enum. */
-                    enum MountPermissions {
-                        MOUNT_PERMISSIONS_UNSPECIFIED = 0,
-                        READ = 1,
-                        READ_WRITE = 2
-                    }
-
-                    /** Properties of an AllowedClient. */
-                    interface IAllowedClient {
-
-                        /** AllowedClient network */
-                        network?: (string|null);
-
-                        /** AllowedClient shareIp */
-                        shareIp?: (string|null);
-
-                        /** AllowedClient allowedClientsCidr */
-                        allowedClientsCidr?: (string|null);
-
-                        /** AllowedClient mountPermissions */
-                        mountPermissions?: (google.cloud.baremetalsolution.v2.NfsShare.MountPermissions|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.MountPermissions|null);
-
-                        /** AllowedClient allowDev */
-                        allowDev?: (boolean|null);
-
-                        /** AllowedClient allowSuid */
-                        allowSuid?: (boolean|null);
-
-                        /** AllowedClient noRootSquash */
-                        noRootSquash?: (boolean|null);
-                    }
-
-                    /** Represents an AllowedClient. */
-                    class AllowedClient implements IAllowedClient {
-
-                        /**
-                         * Constructs a new AllowedClient.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient);
-
-                        /** AllowedClient network. */
-                        public network: string;
-
-                        /** AllowedClient shareIp. */
-                        public shareIp: string;
-
-                        /** AllowedClient allowedClientsCidr. */
-                        public allowedClientsCidr: string;
-
-                        /** AllowedClient mountPermissions. */
-                        public mountPermissions: (google.cloud.baremetalsolution.v2.NfsShare.MountPermissions|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.MountPermissions);
-
-                        /** AllowedClient allowDev. */
-                        public allowDev: boolean;
-
-                        /** AllowedClient allowSuid. */
-                        public allowSuid: boolean;
-
-                        /** AllowedClient noRootSquash. */
-                        public noRootSquash: boolean;
-
-                        /**
-                         * Creates a new AllowedClient instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns AllowedClient instance
-                         */
-                        public static create(properties?: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
-
-                        /**
-                         * Encodes the specified AllowedClient message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.AllowedClient.verify|verify} messages.
-                         * @param message AllowedClient message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified AllowedClient message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.AllowedClient.verify|verify} messages.
-                         * @param message AllowedClient message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an AllowedClient message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns AllowedClient
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
-
-                        /**
-                         * Decodes an AllowedClient message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns AllowedClient
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
-
-                        /**
-                         * Verifies an AllowedClient message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an AllowedClient message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns AllowedClient
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
-
-                        /**
-                         * Creates a plain object from an AllowedClient message. Also converts values to other types if specified.
-                         * @param message AllowedClient
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.baremetalsolution.v2.NfsShare.AllowedClient, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this AllowedClient to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for AllowedClient
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-                }
-
-                /** Properties of a GetNfsShareRequest. */
-                interface IGetNfsShareRequest {
-
-                    /** GetNfsShareRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetNfsShareRequest. */
-                class GetNfsShareRequest implements IGetNfsShareRequest {
-
-                    /**
-                     * Constructs a new GetNfsShareRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IGetNfsShareRequest);
-
-                    /** GetNfsShareRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetNfsShareRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetNfsShareRequest instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IGetNfsShareRequest): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
-
-                    /**
-                     * Encodes the specified GetNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetNfsShareRequest.verify|verify} messages.
-                     * @param message GetNfsShareRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IGetNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetNfsShareRequest.verify|verify} messages.
-                     * @param message GetNfsShareRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IGetNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetNfsShareRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetNfsShareRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
-
-                    /**
-                     * Decodes a GetNfsShareRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetNfsShareRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
-
-                    /**
-                     * Verifies a GetNfsShareRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetNfsShareRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetNfsShareRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
-
-                    /**
-                     * Creates a plain object from a GetNfsShareRequest message. Also converts values to other types if specified.
-                     * @param message GetNfsShareRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.GetNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetNfsShareRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GetNfsShareRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ListNfsSharesRequest. */
-                interface IListNfsSharesRequest {
-
-                    /** ListNfsSharesRequest parent */
-                    parent?: (string|null);
-
-                    /** ListNfsSharesRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListNfsSharesRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListNfsSharesRequest filter */
-                    filter?: (string|null);
-                }
-
-                /** Represents a ListNfsSharesRequest. */
-                class ListNfsSharesRequest implements IListNfsSharesRequest {
-
-                    /**
-                     * Constructs a new ListNfsSharesRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesRequest);
-
-                    /** ListNfsSharesRequest parent. */
-                    public parent: string;
-
-                    /** ListNfsSharesRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListNfsSharesRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListNfsSharesRequest filter. */
-                    public filter: string;
-
-                    /**
-                     * Creates a new ListNfsSharesRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListNfsSharesRequest instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesRequest): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
-
-                    /**
-                     * Encodes the specified ListNfsSharesRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesRequest.verify|verify} messages.
-                     * @param message ListNfsSharesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IListNfsSharesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListNfsSharesRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesRequest.verify|verify} messages.
-                     * @param message ListNfsSharesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListNfsSharesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListNfsSharesRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListNfsSharesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
-
-                    /**
-                     * Decodes a ListNfsSharesRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListNfsSharesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
-
-                    /**
-                     * Verifies a ListNfsSharesRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListNfsSharesRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListNfsSharesRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
-
-                    /**
-                     * Creates a plain object from a ListNfsSharesRequest message. Also converts values to other types if specified.
-                     * @param message ListNfsSharesRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.ListNfsSharesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListNfsSharesRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ListNfsSharesRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ListNfsSharesResponse. */
-                interface IListNfsSharesResponse {
-
-                    /** ListNfsSharesResponse nfsShares */
-                    nfsShares?: (google.cloud.baremetalsolution.v2.INfsShare[]|null);
-
-                    /** ListNfsSharesResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** ListNfsSharesResponse unreachable */
-                    unreachable?: (string[]|null);
-                }
-
-                /** Represents a ListNfsSharesResponse. */
-                class ListNfsSharesResponse implements IListNfsSharesResponse {
-
-                    /**
-                     * Constructs a new ListNfsSharesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesResponse);
-
-                    /** ListNfsSharesResponse nfsShares. */
-                    public nfsShares: google.cloud.baremetalsolution.v2.INfsShare[];
-
-                    /** ListNfsSharesResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** ListNfsSharesResponse unreachable. */
-                    public unreachable: string[];
-
-                    /**
-                     * Creates a new ListNfsSharesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListNfsSharesResponse instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesResponse): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
-
-                    /**
-                     * Encodes the specified ListNfsSharesResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesResponse.verify|verify} messages.
-                     * @param message ListNfsSharesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IListNfsSharesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListNfsSharesResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesResponse.verify|verify} messages.
-                     * @param message ListNfsSharesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListNfsSharesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListNfsSharesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListNfsSharesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
-
-                    /**
-                     * Decodes a ListNfsSharesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListNfsSharesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
-
-                    /**
-                     * Verifies a ListNfsSharesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListNfsSharesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListNfsSharesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
-
-                    /**
-                     * Creates a plain object from a ListNfsSharesResponse message. Also converts values to other types if specified.
-                     * @param message ListNfsSharesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.ListNfsSharesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListNfsSharesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ListNfsSharesResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an UpdateNfsShareRequest. */
-                interface IUpdateNfsShareRequest {
-
-                    /** UpdateNfsShareRequest nfsShare */
-                    nfsShare?: (google.cloud.baremetalsolution.v2.INfsShare|null);
-
-                    /** UpdateNfsShareRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateNfsShareRequest. */
-                class UpdateNfsShareRequest implements IUpdateNfsShareRequest {
-
-                    /**
-                     * Constructs a new UpdateNfsShareRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest);
-
-                    /** UpdateNfsShareRequest nfsShare. */
-                    public nfsShare?: (google.cloud.baremetalsolution.v2.INfsShare|null);
-
-                    /** UpdateNfsShareRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateNfsShareRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateNfsShareRequest instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
-
-                    /**
-                     * Encodes the specified UpdateNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.UpdateNfsShareRequest.verify|verify} messages.
-                     * @param message UpdateNfsShareRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.UpdateNfsShareRequest.verify|verify} messages.
-                     * @param message UpdateNfsShareRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateNfsShareRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateNfsShareRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
-
-                    /**
-                     * Decodes an UpdateNfsShareRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateNfsShareRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
-
-                    /**
-                     * Verifies an UpdateNfsShareRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateNfsShareRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateNfsShareRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateNfsShareRequest message. Also converts values to other types if specified.
-                     * @param message UpdateNfsShareRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.UpdateNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateNfsShareRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for UpdateNfsShareRequest
+                     * Gets the default type url for RenameNetworkRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4900,11 +5379,17 @@ export namespace google {
                     /** Volume requestedSizeGib */
                     requestedSizeGib?: (number|Long|string|null);
 
+                    /** Volume originallyRequestedSizeGib */
+                    originallyRequestedSizeGib?: (number|Long|string|null);
+
                     /** Volume currentSizeGib */
                     currentSizeGib?: (number|Long|string|null);
 
                     /** Volume emergencySizeGib */
                     emergencySizeGib?: (number|Long|string|null);
+
+                    /** Volume maxSizeGib */
+                    maxSizeGib?: (number|Long|string|null);
 
                     /** Volume autoGrownSizeGib */
                     autoGrownSizeGib?: (number|Long|string|null);
@@ -4926,6 +5411,30 @@ export namespace google {
 
                     /** Volume pod */
                     pod?: (string|null);
+
+                    /** Volume protocol */
+                    protocol?: (google.cloud.baremetalsolution.v2.Volume.Protocol|keyof typeof google.cloud.baremetalsolution.v2.Volume.Protocol|null);
+
+                    /** Volume bootVolume */
+                    bootVolume?: (boolean|null);
+
+                    /** Volume performanceTier */
+                    performanceTier?: (google.cloud.baremetalsolution.v2.VolumePerformanceTier|keyof typeof google.cloud.baremetalsolution.v2.VolumePerformanceTier|null);
+
+                    /** Volume notes */
+                    notes?: (string|null);
+
+                    /** Volume workloadProfile */
+                    workloadProfile?: (google.cloud.baremetalsolution.v2.Volume.WorkloadProfile|keyof typeof google.cloud.baremetalsolution.v2.Volume.WorkloadProfile|null);
+
+                    /** Volume expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Volume instances */
+                    instances?: (string[]|null);
+
+                    /** Volume attached */
+                    attached?: (boolean|null);
                 }
 
                 /** Represents a Volume. */
@@ -4952,11 +5461,17 @@ export namespace google {
                     /** Volume requestedSizeGib. */
                     public requestedSizeGib: (number|Long|string);
 
+                    /** Volume originallyRequestedSizeGib. */
+                    public originallyRequestedSizeGib: (number|Long|string);
+
                     /** Volume currentSizeGib. */
                     public currentSizeGib: (number|Long|string);
 
                     /** Volume emergencySizeGib. */
                     public emergencySizeGib: (number|Long|string);
+
+                    /** Volume maxSizeGib. */
+                    public maxSizeGib: (number|Long|string);
 
                     /** Volume autoGrownSizeGib. */
                     public autoGrownSizeGib: (number|Long|string);
@@ -4978,6 +5493,30 @@ export namespace google {
 
                     /** Volume pod. */
                     public pod: string;
+
+                    /** Volume protocol. */
+                    public protocol: (google.cloud.baremetalsolution.v2.Volume.Protocol|keyof typeof google.cloud.baremetalsolution.v2.Volume.Protocol);
+
+                    /** Volume bootVolume. */
+                    public bootVolume: boolean;
+
+                    /** Volume performanceTier. */
+                    public performanceTier: (google.cloud.baremetalsolution.v2.VolumePerformanceTier|keyof typeof google.cloud.baremetalsolution.v2.VolumePerformanceTier);
+
+                    /** Volume notes. */
+                    public notes: string;
+
+                    /** Volume workloadProfile. */
+                    public workloadProfile: (google.cloud.baremetalsolution.v2.Volume.WorkloadProfile|keyof typeof google.cloud.baremetalsolution.v2.Volume.WorkloadProfile);
+
+                    /** Volume expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Volume instances. */
+                    public instances: string[];
+
+                    /** Volume attached. */
+                    public attached: boolean;
 
                     /**
                      * Creates a new Volume instance using the specified properties.
@@ -5071,7 +5610,9 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         CREATING = 1,
                         READY = 2,
-                        DELETING = 3
+                        DELETING = 3,
+                        UPDATING = 4,
+                        COOL_OFF = 5
                     }
 
                     /** Properties of a SnapshotReservationDetail. */
@@ -5195,6 +5736,20 @@ export namespace google {
                         DISABLED = 1,
                         OLDEST_FIRST = 2,
                         NEWEST_FIRST = 3
+                    }
+
+                    /** Protocol enum. */
+                    enum Protocol {
+                        PROTOCOL_UNSPECIFIED = 0,
+                        FIBRE_CHANNEL = 1,
+                        NFS = 2
+                    }
+
+                    /** WorkloadProfile enum. */
+                    enum WorkloadProfile {
+                        WORKLOAD_PROFILE_UNSPECIFIED = 0,
+                        GENERIC = 1,
+                        HANA = 2
                     }
                 }
 
@@ -5622,6 +6177,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RenameVolumeRequest. */
+                interface IRenameVolumeRequest {
+
+                    /** RenameVolumeRequest name */
+                    name?: (string|null);
+
+                    /** RenameVolumeRequest newVolumeId */
+                    newVolumeId?: (string|null);
+                }
+
+                /** Represents a RenameVolumeRequest. */
+                class RenameVolumeRequest implements IRenameVolumeRequest {
+
+                    /**
+                     * Constructs a new RenameVolumeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IRenameVolumeRequest);
+
+                    /** RenameVolumeRequest name. */
+                    public name: string;
+
+                    /** RenameVolumeRequest newVolumeId. */
+                    public newVolumeId: string;
+
+                    /**
+                     * Creates a new RenameVolumeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenameVolumeRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IRenameVolumeRequest): google.cloud.baremetalsolution.v2.RenameVolumeRequest;
+
+                    /**
+                     * Encodes the specified RenameVolumeRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameVolumeRequest.verify|verify} messages.
+                     * @param message RenameVolumeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IRenameVolumeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenameVolumeRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameVolumeRequest.verify|verify} messages.
+                     * @param message RenameVolumeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IRenameVolumeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenameVolumeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenameVolumeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.RenameVolumeRequest;
+
+                    /**
+                     * Decodes a RenameVolumeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenameVolumeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.RenameVolumeRequest;
+
+                    /**
+                     * Verifies a RenameVolumeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenameVolumeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenameVolumeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.RenameVolumeRequest;
+
+                    /**
+                     * Creates a plain object from a RenameVolumeRequest message. Also converts values to other types if specified.
+                     * @param message RenameVolumeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.RenameVolumeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenameVolumeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenameVolumeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvictVolumeRequest. */
+                interface IEvictVolumeRequest {
+
+                    /** EvictVolumeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an EvictVolumeRequest. */
+                class EvictVolumeRequest implements IEvictVolumeRequest {
+
+                    /**
+                     * Constructs a new EvictVolumeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IEvictVolumeRequest);
+
+                    /** EvictVolumeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new EvictVolumeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvictVolumeRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IEvictVolumeRequest): google.cloud.baremetalsolution.v2.EvictVolumeRequest;
+
+                    /**
+                     * Encodes the specified EvictVolumeRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.EvictVolumeRequest.verify|verify} messages.
+                     * @param message EvictVolumeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IEvictVolumeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvictVolumeRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.EvictVolumeRequest.verify|verify} messages.
+                     * @param message EvictVolumeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IEvictVolumeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvictVolumeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvictVolumeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.EvictVolumeRequest;
+
+                    /**
+                     * Decodes an EvictVolumeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvictVolumeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.EvictVolumeRequest;
+
+                    /**
+                     * Verifies an EvictVolumeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvictVolumeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvictVolumeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.EvictVolumeRequest;
+
+                    /**
+                     * Creates a plain object from an EvictVolumeRequest message. Also converts values to other types if specified.
+                     * @param message EvictVolumeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.EvictVolumeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvictVolumeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvictVolumeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ResizeVolumeRequest. */
                 interface IResizeVolumeRequest {
 
@@ -5719,6 +6474,5088 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ResizeVolumeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NfsShare. */
+                interface INfsShare {
+
+                    /** NfsShare name */
+                    name?: (string|null);
+
+                    /** NfsShare nfsShareId */
+                    nfsShareId?: (string|null);
+
+                    /** NfsShare id */
+                    id?: (string|null);
+
+                    /** NfsShare state */
+                    state?: (google.cloud.baremetalsolution.v2.NfsShare.State|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.State|null);
+
+                    /** NfsShare volume */
+                    volume?: (string|null);
+
+                    /** NfsShare allowedClients */
+                    allowedClients?: (google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient[]|null);
+
+                    /** NfsShare labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** NfsShare requestedSizeGib */
+                    requestedSizeGib?: (number|Long|string|null);
+
+                    /** NfsShare storageType */
+                    storageType?: (google.cloud.baremetalsolution.v2.NfsShare.StorageType|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.StorageType|null);
+                }
+
+                /** Represents a NfsShare. */
+                class NfsShare implements INfsShare {
+
+                    /**
+                     * Constructs a new NfsShare.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.INfsShare);
+
+                    /** NfsShare name. */
+                    public name: string;
+
+                    /** NfsShare nfsShareId. */
+                    public nfsShareId: string;
+
+                    /** NfsShare id. */
+                    public id: string;
+
+                    /** NfsShare state. */
+                    public state: (google.cloud.baremetalsolution.v2.NfsShare.State|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.State);
+
+                    /** NfsShare volume. */
+                    public volume: string;
+
+                    /** NfsShare allowedClients. */
+                    public allowedClients: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient[];
+
+                    /** NfsShare labels. */
+                    public labels: { [k: string]: string };
+
+                    /** NfsShare requestedSizeGib. */
+                    public requestedSizeGib: (number|Long|string);
+
+                    /** NfsShare storageType. */
+                    public storageType: (google.cloud.baremetalsolution.v2.NfsShare.StorageType|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.StorageType);
+
+                    /**
+                     * Creates a new NfsShare instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NfsShare instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.INfsShare): google.cloud.baremetalsolution.v2.NfsShare;
+
+                    /**
+                     * Encodes the specified NfsShare message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.verify|verify} messages.
+                     * @param message NfsShare message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.INfsShare, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NfsShare message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.verify|verify} messages.
+                     * @param message NfsShare message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.INfsShare, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NfsShare message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NfsShare
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NfsShare;
+
+                    /**
+                     * Decodes a NfsShare message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NfsShare
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NfsShare;
+
+                    /**
+                     * Verifies a NfsShare message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NfsShare message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NfsShare
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NfsShare;
+
+                    /**
+                     * Creates a plain object from a NfsShare message. Also converts values to other types if specified.
+                     * @param message NfsShare
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.NfsShare, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NfsShare to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NfsShare
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NfsShare {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROVISIONED = 1,
+                        CREATING = 2,
+                        UPDATING = 3,
+                        DELETING = 4
+                    }
+
+                    /** MountPermissions enum. */
+                    enum MountPermissions {
+                        MOUNT_PERMISSIONS_UNSPECIFIED = 0,
+                        READ = 1,
+                        READ_WRITE = 2
+                    }
+
+                    /** Properties of an AllowedClient. */
+                    interface IAllowedClient {
+
+                        /** AllowedClient network */
+                        network?: (string|null);
+
+                        /** AllowedClient shareIp */
+                        shareIp?: (string|null);
+
+                        /** AllowedClient allowedClientsCidr */
+                        allowedClientsCidr?: (string|null);
+
+                        /** AllowedClient mountPermissions */
+                        mountPermissions?: (google.cloud.baremetalsolution.v2.NfsShare.MountPermissions|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.MountPermissions|null);
+
+                        /** AllowedClient allowDev */
+                        allowDev?: (boolean|null);
+
+                        /** AllowedClient allowSuid */
+                        allowSuid?: (boolean|null);
+
+                        /** AllowedClient noRootSquash */
+                        noRootSquash?: (boolean|null);
+
+                        /** AllowedClient nfsPath */
+                        nfsPath?: (string|null);
+                    }
+
+                    /** Represents an AllowedClient. */
+                    class AllowedClient implements IAllowedClient {
+
+                        /**
+                         * Constructs a new AllowedClient.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient);
+
+                        /** AllowedClient network. */
+                        public network: string;
+
+                        /** AllowedClient shareIp. */
+                        public shareIp: string;
+
+                        /** AllowedClient allowedClientsCidr. */
+                        public allowedClientsCidr: string;
+
+                        /** AllowedClient mountPermissions. */
+                        public mountPermissions: (google.cloud.baremetalsolution.v2.NfsShare.MountPermissions|keyof typeof google.cloud.baremetalsolution.v2.NfsShare.MountPermissions);
+
+                        /** AllowedClient allowDev. */
+                        public allowDev: boolean;
+
+                        /** AllowedClient allowSuid. */
+                        public allowSuid: boolean;
+
+                        /** AllowedClient noRootSquash. */
+                        public noRootSquash: boolean;
+
+                        /** AllowedClient nfsPath. */
+                        public nfsPath: string;
+
+                        /**
+                         * Creates a new AllowedClient instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AllowedClient instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
+
+                        /**
+                         * Encodes the specified AllowedClient message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.AllowedClient.verify|verify} messages.
+                         * @param message AllowedClient message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AllowedClient message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NfsShare.AllowedClient.verify|verify} messages.
+                         * @param message AllowedClient message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.NfsShare.IAllowedClient, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AllowedClient message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AllowedClient
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
+
+                        /**
+                         * Decodes an AllowedClient message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AllowedClient
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
+
+                        /**
+                         * Verifies an AllowedClient message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AllowedClient message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AllowedClient
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NfsShare.AllowedClient;
+
+                        /**
+                         * Creates a plain object from an AllowedClient message. Also converts values to other types if specified.
+                         * @param message AllowedClient
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.NfsShare.AllowedClient, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AllowedClient to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AllowedClient
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** StorageType enum. */
+                    enum StorageType {
+                        STORAGE_TYPE_UNSPECIFIED = 0,
+                        SSD = 1,
+                        HDD = 2
+                    }
+                }
+
+                /** Properties of a GetNfsShareRequest. */
+                interface IGetNfsShareRequest {
+
+                    /** GetNfsShareRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNfsShareRequest. */
+                class GetNfsShareRequest implements IGetNfsShareRequest {
+
+                    /**
+                     * Constructs a new GetNfsShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IGetNfsShareRequest);
+
+                    /** GetNfsShareRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNfsShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNfsShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IGetNfsShareRequest): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
+
+                    /**
+                     * Encodes the specified GetNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetNfsShareRequest.verify|verify} messages.
+                     * @param message GetNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IGetNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetNfsShareRequest.verify|verify} messages.
+                     * @param message GetNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IGetNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNfsShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
+
+                    /**
+                     * Decodes a GetNfsShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
+
+                    /**
+                     * Verifies a GetNfsShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNfsShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNfsShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.GetNfsShareRequest;
+
+                    /**
+                     * Creates a plain object from a GetNfsShareRequest message. Also converts values to other types if specified.
+                     * @param message GetNfsShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.GetNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNfsShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNfsShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNfsSharesRequest. */
+                interface IListNfsSharesRequest {
+
+                    /** ListNfsSharesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListNfsSharesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListNfsSharesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListNfsSharesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListNfsSharesRequest. */
+                class ListNfsSharesRequest implements IListNfsSharesRequest {
+
+                    /**
+                     * Constructs a new ListNfsSharesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesRequest);
+
+                    /** ListNfsSharesRequest parent. */
+                    public parent: string;
+
+                    /** ListNfsSharesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListNfsSharesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListNfsSharesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListNfsSharesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNfsSharesRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesRequest): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
+
+                    /**
+                     * Encodes the specified ListNfsSharesRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesRequest.verify|verify} messages.
+                     * @param message ListNfsSharesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListNfsSharesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNfsSharesRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesRequest.verify|verify} messages.
+                     * @param message ListNfsSharesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListNfsSharesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNfsSharesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNfsSharesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
+
+                    /**
+                     * Decodes a ListNfsSharesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNfsSharesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
+
+                    /**
+                     * Verifies a ListNfsSharesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNfsSharesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNfsSharesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListNfsSharesRequest;
+
+                    /**
+                     * Creates a plain object from a ListNfsSharesRequest message. Also converts values to other types if specified.
+                     * @param message ListNfsSharesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListNfsSharesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNfsSharesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNfsSharesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNfsSharesResponse. */
+                interface IListNfsSharesResponse {
+
+                    /** ListNfsSharesResponse nfsShares */
+                    nfsShares?: (google.cloud.baremetalsolution.v2.INfsShare[]|null);
+
+                    /** ListNfsSharesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListNfsSharesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListNfsSharesResponse. */
+                class ListNfsSharesResponse implements IListNfsSharesResponse {
+
+                    /**
+                     * Constructs a new ListNfsSharesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesResponse);
+
+                    /** ListNfsSharesResponse nfsShares. */
+                    public nfsShares: google.cloud.baremetalsolution.v2.INfsShare[];
+
+                    /** ListNfsSharesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListNfsSharesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListNfsSharesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNfsSharesResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListNfsSharesResponse): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
+
+                    /**
+                     * Encodes the specified ListNfsSharesResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesResponse.verify|verify} messages.
+                     * @param message ListNfsSharesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListNfsSharesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNfsSharesResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListNfsSharesResponse.verify|verify} messages.
+                     * @param message ListNfsSharesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListNfsSharesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNfsSharesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNfsSharesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
+
+                    /**
+                     * Decodes a ListNfsSharesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNfsSharesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
+
+                    /**
+                     * Verifies a ListNfsSharesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNfsSharesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNfsSharesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListNfsSharesResponse;
+
+                    /**
+                     * Creates a plain object from a ListNfsSharesResponse message. Also converts values to other types if specified.
+                     * @param message ListNfsSharesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListNfsSharesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNfsSharesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNfsSharesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateNfsShareRequest. */
+                interface IUpdateNfsShareRequest {
+
+                    /** UpdateNfsShareRequest nfsShare */
+                    nfsShare?: (google.cloud.baremetalsolution.v2.INfsShare|null);
+
+                    /** UpdateNfsShareRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateNfsShareRequest. */
+                class UpdateNfsShareRequest implements IUpdateNfsShareRequest {
+
+                    /**
+                     * Constructs a new UpdateNfsShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest);
+
+                    /** UpdateNfsShareRequest nfsShare. */
+                    public nfsShare?: (google.cloud.baremetalsolution.v2.INfsShare|null);
+
+                    /** UpdateNfsShareRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateNfsShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNfsShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
+
+                    /**
+                     * Encodes the specified UpdateNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.UpdateNfsShareRequest.verify|verify} messages.
+                     * @param message UpdateNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.UpdateNfsShareRequest.verify|verify} messages.
+                     * @param message UpdateNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IUpdateNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNfsShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
+
+                    /**
+                     * Decodes an UpdateNfsShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
+
+                    /**
+                     * Verifies an UpdateNfsShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNfsShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNfsShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.UpdateNfsShareRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateNfsShareRequest message. Also converts values to other types if specified.
+                     * @param message UpdateNfsShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.UpdateNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNfsShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateNfsShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RenameNfsShareRequest. */
+                interface IRenameNfsShareRequest {
+
+                    /** RenameNfsShareRequest name */
+                    name?: (string|null);
+
+                    /** RenameNfsShareRequest newNfsshareId */
+                    newNfsshareId?: (string|null);
+                }
+
+                /** Represents a RenameNfsShareRequest. */
+                class RenameNfsShareRequest implements IRenameNfsShareRequest {
+
+                    /**
+                     * Constructs a new RenameNfsShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IRenameNfsShareRequest);
+
+                    /** RenameNfsShareRequest name. */
+                    public name: string;
+
+                    /** RenameNfsShareRequest newNfsshareId. */
+                    public newNfsshareId: string;
+
+                    /**
+                     * Creates a new RenameNfsShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenameNfsShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IRenameNfsShareRequest): google.cloud.baremetalsolution.v2.RenameNfsShareRequest;
+
+                    /**
+                     * Encodes the specified RenameNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameNfsShareRequest.verify|verify} messages.
+                     * @param message RenameNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IRenameNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenameNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.RenameNfsShareRequest.verify|verify} messages.
+                     * @param message RenameNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IRenameNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenameNfsShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenameNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.RenameNfsShareRequest;
+
+                    /**
+                     * Decodes a RenameNfsShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenameNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.RenameNfsShareRequest;
+
+                    /**
+                     * Verifies a RenameNfsShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenameNfsShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenameNfsShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.RenameNfsShareRequest;
+
+                    /**
+                     * Creates a plain object from a RenameNfsShareRequest message. Also converts values to other types if specified.
+                     * @param message RenameNfsShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.RenameNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenameNfsShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenameNfsShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateNfsShareRequest. */
+                interface ICreateNfsShareRequest {
+
+                    /** CreateNfsShareRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateNfsShareRequest nfsShare */
+                    nfsShare?: (google.cloud.baremetalsolution.v2.INfsShare|null);
+                }
+
+                /** Represents a CreateNfsShareRequest. */
+                class CreateNfsShareRequest implements ICreateNfsShareRequest {
+
+                    /**
+                     * Constructs a new CreateNfsShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ICreateNfsShareRequest);
+
+                    /** CreateNfsShareRequest parent. */
+                    public parent: string;
+
+                    /** CreateNfsShareRequest nfsShare. */
+                    public nfsShare?: (google.cloud.baremetalsolution.v2.INfsShare|null);
+
+                    /**
+                     * Creates a new CreateNfsShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNfsShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ICreateNfsShareRequest): google.cloud.baremetalsolution.v2.CreateNfsShareRequest;
+
+                    /**
+                     * Encodes the specified CreateNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateNfsShareRequest.verify|verify} messages.
+                     * @param message CreateNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ICreateNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateNfsShareRequest.verify|verify} messages.
+                     * @param message CreateNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ICreateNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNfsShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.CreateNfsShareRequest;
+
+                    /**
+                     * Decodes a CreateNfsShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.CreateNfsShareRequest;
+
+                    /**
+                     * Verifies a CreateNfsShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNfsShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNfsShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.CreateNfsShareRequest;
+
+                    /**
+                     * Creates a plain object from a CreateNfsShareRequest message. Also converts values to other types if specified.
+                     * @param message CreateNfsShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.CreateNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNfsShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateNfsShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteNfsShareRequest. */
+                interface IDeleteNfsShareRequest {
+
+                    /** DeleteNfsShareRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteNfsShareRequest. */
+                class DeleteNfsShareRequest implements IDeleteNfsShareRequest {
+
+                    /**
+                     * Constructs a new DeleteNfsShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest);
+
+                    /** DeleteNfsShareRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteNfsShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteNfsShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest): google.cloud.baremetalsolution.v2.DeleteNfsShareRequest;
+
+                    /**
+                     * Encodes the specified DeleteNfsShareRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DeleteNfsShareRequest.verify|verify} messages.
+                     * @param message DeleteNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteNfsShareRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DeleteNfsShareRequest.verify|verify} messages.
+                     * @param message DeleteNfsShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteNfsShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DeleteNfsShareRequest;
+
+                    /**
+                     * Decodes a DeleteNfsShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteNfsShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DeleteNfsShareRequest;
+
+                    /**
+                     * Verifies a DeleteNfsShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteNfsShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteNfsShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DeleteNfsShareRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteNfsShareRequest message. Also converts values to other types if specified.
+                     * @param message DeleteNfsShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.DeleteNfsShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteNfsShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteNfsShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a OSImage. */
+                interface IOSImage {
+
+                    /** OSImage name */
+                    name?: (string|null);
+
+                    /** OSImage code */
+                    code?: (string|null);
+
+                    /** OSImage description */
+                    description?: (string|null);
+
+                    /** OSImage applicableInstanceTypes */
+                    applicableInstanceTypes?: (string[]|null);
+
+                    /** OSImage supportedNetworkTemplates */
+                    supportedNetworkTemplates?: (string[]|null);
+                }
+
+                /** Represents a OSImage. */
+                class OSImage implements IOSImage {
+
+                    /**
+                     * Constructs a new OSImage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IOSImage);
+
+                    /** OSImage name. */
+                    public name: string;
+
+                    /** OSImage code. */
+                    public code: string;
+
+                    /** OSImage description. */
+                    public description: string;
+
+                    /** OSImage applicableInstanceTypes. */
+                    public applicableInstanceTypes: string[];
+
+                    /** OSImage supportedNetworkTemplates. */
+                    public supportedNetworkTemplates: string[];
+
+                    /**
+                     * Creates a new OSImage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OSImage instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IOSImage): google.cloud.baremetalsolution.v2.OSImage;
+
+                    /**
+                     * Encodes the specified OSImage message. Does not implicitly {@link google.cloud.baremetalsolution.v2.OSImage.verify|verify} messages.
+                     * @param message OSImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IOSImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OSImage message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.OSImage.verify|verify} messages.
+                     * @param message OSImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IOSImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OSImage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OSImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.OSImage;
+
+                    /**
+                     * Decodes a OSImage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OSImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.OSImage;
+
+                    /**
+                     * Verifies a OSImage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OSImage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OSImage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.OSImage;
+
+                    /**
+                     * Creates a plain object from a OSImage message. Also converts values to other types if specified.
+                     * @param message OSImage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.OSImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OSImage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OSImage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOSImagesRequest. */
+                interface IListOSImagesRequest {
+
+                    /** ListOSImagesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOSImagesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOSImagesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOSImagesRequest. */
+                class ListOSImagesRequest implements IListOSImagesRequest {
+
+                    /**
+                     * Constructs a new ListOSImagesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListOSImagesRequest);
+
+                    /** ListOSImagesRequest parent. */
+                    public parent: string;
+
+                    /** ListOSImagesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOSImagesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOSImagesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSImagesRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListOSImagesRequest): google.cloud.baremetalsolution.v2.ListOSImagesRequest;
+
+                    /**
+                     * Encodes the specified ListOSImagesRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListOSImagesRequest.verify|verify} messages.
+                     * @param message ListOSImagesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListOSImagesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSImagesRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListOSImagesRequest.verify|verify} messages.
+                     * @param message ListOSImagesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListOSImagesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSImagesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSImagesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListOSImagesRequest;
+
+                    /**
+                     * Decodes a ListOSImagesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSImagesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListOSImagesRequest;
+
+                    /**
+                     * Verifies a ListOSImagesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSImagesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSImagesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListOSImagesRequest;
+
+                    /**
+                     * Creates a plain object from a ListOSImagesRequest message. Also converts values to other types if specified.
+                     * @param message ListOSImagesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListOSImagesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSImagesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOSImagesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOSImagesResponse. */
+                interface IListOSImagesResponse {
+
+                    /** ListOSImagesResponse osImages */
+                    osImages?: (google.cloud.baremetalsolution.v2.IOSImage[]|null);
+
+                    /** ListOSImagesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOSImagesResponse. */
+                class ListOSImagesResponse implements IListOSImagesResponse {
+
+                    /**
+                     * Constructs a new ListOSImagesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListOSImagesResponse);
+
+                    /** ListOSImagesResponse osImages. */
+                    public osImages: google.cloud.baremetalsolution.v2.IOSImage[];
+
+                    /** ListOSImagesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOSImagesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSImagesResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListOSImagesResponse): google.cloud.baremetalsolution.v2.ListOSImagesResponse;
+
+                    /**
+                     * Encodes the specified ListOSImagesResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListOSImagesResponse.verify|verify} messages.
+                     * @param message ListOSImagesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListOSImagesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSImagesResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListOSImagesResponse.verify|verify} messages.
+                     * @param message ListOSImagesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListOSImagesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSImagesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSImagesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListOSImagesResponse;
+
+                    /**
+                     * Decodes a ListOSImagesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSImagesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListOSImagesResponse;
+
+                    /**
+                     * Verifies a ListOSImagesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSImagesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSImagesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListOSImagesResponse;
+
+                    /**
+                     * Creates a plain object from a ListOSImagesResponse message. Also converts values to other types if specified.
+                     * @param message ListOSImagesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListOSImagesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSImagesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOSImagesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisioningConfig. */
+                interface IProvisioningConfig {
+
+                    /** ProvisioningConfig name */
+                    name?: (string|null);
+
+                    /** ProvisioningConfig instances */
+                    instances?: (google.cloud.baremetalsolution.v2.IInstanceConfig[]|null);
+
+                    /** ProvisioningConfig networks */
+                    networks?: (google.cloud.baremetalsolution.v2.INetworkConfig[]|null);
+
+                    /** ProvisioningConfig volumes */
+                    volumes?: (google.cloud.baremetalsolution.v2.IVolumeConfig[]|null);
+
+                    /** ProvisioningConfig ticketId */
+                    ticketId?: (string|null);
+
+                    /** ProvisioningConfig handoverServiceAccount */
+                    handoverServiceAccount?: (string|null);
+
+                    /** ProvisioningConfig email */
+                    email?: (string|null);
+
+                    /** ProvisioningConfig state */
+                    state?: (google.cloud.baremetalsolution.v2.ProvisioningConfig.State|keyof typeof google.cloud.baremetalsolution.v2.ProvisioningConfig.State|null);
+
+                    /** ProvisioningConfig location */
+                    location?: (string|null);
+
+                    /** ProvisioningConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProvisioningConfig cloudConsoleUri */
+                    cloudConsoleUri?: (string|null);
+
+                    /** ProvisioningConfig vpcScEnabled */
+                    vpcScEnabled?: (boolean|null);
+
+                    /** ProvisioningConfig statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** ProvisioningConfig customId */
+                    customId?: (string|null);
+                }
+
+                /** Represents a ProvisioningConfig. */
+                class ProvisioningConfig implements IProvisioningConfig {
+
+                    /**
+                     * Constructs a new ProvisioningConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IProvisioningConfig);
+
+                    /** ProvisioningConfig name. */
+                    public name: string;
+
+                    /** ProvisioningConfig instances. */
+                    public instances: google.cloud.baremetalsolution.v2.IInstanceConfig[];
+
+                    /** ProvisioningConfig networks. */
+                    public networks: google.cloud.baremetalsolution.v2.INetworkConfig[];
+
+                    /** ProvisioningConfig volumes. */
+                    public volumes: google.cloud.baremetalsolution.v2.IVolumeConfig[];
+
+                    /** ProvisioningConfig ticketId. */
+                    public ticketId: string;
+
+                    /** ProvisioningConfig handoverServiceAccount. */
+                    public handoverServiceAccount: string;
+
+                    /** ProvisioningConfig email. */
+                    public email: string;
+
+                    /** ProvisioningConfig state. */
+                    public state: (google.cloud.baremetalsolution.v2.ProvisioningConfig.State|keyof typeof google.cloud.baremetalsolution.v2.ProvisioningConfig.State);
+
+                    /** ProvisioningConfig location. */
+                    public location: string;
+
+                    /** ProvisioningConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProvisioningConfig cloudConsoleUri. */
+                    public cloudConsoleUri: string;
+
+                    /** ProvisioningConfig vpcScEnabled. */
+                    public vpcScEnabled: boolean;
+
+                    /** ProvisioningConfig statusMessage. */
+                    public statusMessage: string;
+
+                    /** ProvisioningConfig customId. */
+                    public customId: string;
+
+                    /**
+                     * Creates a new ProvisioningConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisioningConfig instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IProvisioningConfig): google.cloud.baremetalsolution.v2.ProvisioningConfig;
+
+                    /**
+                     * Encodes the specified ProvisioningConfig message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ProvisioningConfig.verify|verify} messages.
+                     * @param message ProvisioningConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IProvisioningConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisioningConfig message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ProvisioningConfig.verify|verify} messages.
+                     * @param message ProvisioningConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IProvisioningConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisioningConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisioningConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ProvisioningConfig;
+
+                    /**
+                     * Decodes a ProvisioningConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisioningConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ProvisioningConfig;
+
+                    /**
+                     * Verifies a ProvisioningConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisioningConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisioningConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ProvisioningConfig;
+
+                    /**
+                     * Creates a plain object from a ProvisioningConfig message. Also converts values to other types if specified.
+                     * @param message ProvisioningConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ProvisioningConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisioningConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisioningConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProvisioningConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        DRAFT = 1,
+                        SUBMITTED = 2,
+                        PROVISIONING = 3,
+                        PROVISIONED = 4,
+                        VALIDATED = 5,
+                        CANCELLED = 6,
+                        FAILED = 7
+                    }
+                }
+
+                /** Properties of a SubmitProvisioningConfigRequest. */
+                interface ISubmitProvisioningConfigRequest {
+
+                    /** SubmitProvisioningConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** SubmitProvisioningConfigRequest provisioningConfig */
+                    provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /** SubmitProvisioningConfigRequest email */
+                    email?: (string|null);
+                }
+
+                /** Represents a SubmitProvisioningConfigRequest. */
+                class SubmitProvisioningConfigRequest implements ISubmitProvisioningConfigRequest {
+
+                    /**
+                     * Constructs a new SubmitProvisioningConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest);
+
+                    /** SubmitProvisioningConfigRequest parent. */
+                    public parent: string;
+
+                    /** SubmitProvisioningConfigRequest provisioningConfig. */
+                    public provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /** SubmitProvisioningConfigRequest email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new SubmitProvisioningConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitProvisioningConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest;
+
+                    /**
+                     * Encodes the specified SubmitProvisioningConfigRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest.verify|verify} messages.
+                     * @param message SubmitProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitProvisioningConfigRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest.verify|verify} messages.
+                     * @param message SubmitProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitProvisioningConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest;
+
+                    /**
+                     * Decodes a SubmitProvisioningConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest;
+
+                    /**
+                     * Verifies a SubmitProvisioningConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitProvisioningConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitProvisioningConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest;
+
+                    /**
+                     * Creates a plain object from a SubmitProvisioningConfigRequest message. Also converts values to other types if specified.
+                     * @param message SubmitProvisioningConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitProvisioningConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitProvisioningConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SubmitProvisioningConfigResponse. */
+                interface ISubmitProvisioningConfigResponse {
+
+                    /** SubmitProvisioningConfigResponse provisioningConfig */
+                    provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+                }
+
+                /** Represents a SubmitProvisioningConfigResponse. */
+                class SubmitProvisioningConfigResponse implements ISubmitProvisioningConfigResponse {
+
+                    /**
+                     * Constructs a new SubmitProvisioningConfigResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse);
+
+                    /** SubmitProvisioningConfigResponse provisioningConfig. */
+                    public provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /**
+                     * Creates a new SubmitProvisioningConfigResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitProvisioningConfigResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse;
+
+                    /**
+                     * Encodes the specified SubmitProvisioningConfigResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse.verify|verify} messages.
+                     * @param message SubmitProvisioningConfigResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitProvisioningConfigResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse.verify|verify} messages.
+                     * @param message SubmitProvisioningConfigResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitProvisioningConfigResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitProvisioningConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse;
+
+                    /**
+                     * Decodes a SubmitProvisioningConfigResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitProvisioningConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse;
+
+                    /**
+                     * Verifies a SubmitProvisioningConfigResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitProvisioningConfigResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitProvisioningConfigResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse;
+
+                    /**
+                     * Creates a plain object from a SubmitProvisioningConfigResponse message. Also converts values to other types if specified.
+                     * @param message SubmitProvisioningConfigResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitProvisioningConfigResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitProvisioningConfigResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisioningQuota. */
+                interface IProvisioningQuota {
+
+                    /** ProvisioningQuota name */
+                    name?: (string|null);
+
+                    /** ProvisioningQuota assetType */
+                    assetType?: (google.cloud.baremetalsolution.v2.ProvisioningQuota.AssetType|keyof typeof google.cloud.baremetalsolution.v2.ProvisioningQuota.AssetType|null);
+
+                    /** ProvisioningQuota gcpService */
+                    gcpService?: (string|null);
+
+                    /** ProvisioningQuota location */
+                    location?: (string|null);
+
+                    /** ProvisioningQuota availableCount */
+                    availableCount?: (number|null);
+
+                    /** ProvisioningQuota instanceQuota */
+                    instanceQuota?: (google.cloud.baremetalsolution.v2.IInstanceQuota|null);
+
+                    /** ProvisioningQuota serverCount */
+                    serverCount?: (number|Long|string|null);
+
+                    /** ProvisioningQuota networkBandwidth */
+                    networkBandwidth?: (number|Long|string|null);
+
+                    /** ProvisioningQuota storageGib */
+                    storageGib?: (number|Long|string|null);
+                }
+
+                /** Represents a ProvisioningQuota. */
+                class ProvisioningQuota implements IProvisioningQuota {
+
+                    /**
+                     * Constructs a new ProvisioningQuota.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IProvisioningQuota);
+
+                    /** ProvisioningQuota name. */
+                    public name: string;
+
+                    /** ProvisioningQuota assetType. */
+                    public assetType: (google.cloud.baremetalsolution.v2.ProvisioningQuota.AssetType|keyof typeof google.cloud.baremetalsolution.v2.ProvisioningQuota.AssetType);
+
+                    /** ProvisioningQuota gcpService. */
+                    public gcpService: string;
+
+                    /** ProvisioningQuota location. */
+                    public location: string;
+
+                    /** ProvisioningQuota availableCount. */
+                    public availableCount: number;
+
+                    /** ProvisioningQuota instanceQuota. */
+                    public instanceQuota?: (google.cloud.baremetalsolution.v2.IInstanceQuota|null);
+
+                    /** ProvisioningQuota serverCount. */
+                    public serverCount?: (number|Long|string|null);
+
+                    /** ProvisioningQuota networkBandwidth. */
+                    public networkBandwidth?: (number|Long|string|null);
+
+                    /** ProvisioningQuota storageGib. */
+                    public storageGib?: (number|Long|string|null);
+
+                    /** ProvisioningQuota quota. */
+                    public quota?: "instanceQuota";
+
+                    /** ProvisioningQuota availability. */
+                    public availability?: ("serverCount"|"networkBandwidth"|"storageGib");
+
+                    /**
+                     * Creates a new ProvisioningQuota instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisioningQuota instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IProvisioningQuota): google.cloud.baremetalsolution.v2.ProvisioningQuota;
+
+                    /**
+                     * Encodes the specified ProvisioningQuota message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ProvisioningQuota.verify|verify} messages.
+                     * @param message ProvisioningQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IProvisioningQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisioningQuota message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ProvisioningQuota.verify|verify} messages.
+                     * @param message ProvisioningQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IProvisioningQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisioningQuota message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisioningQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ProvisioningQuota;
+
+                    /**
+                     * Decodes a ProvisioningQuota message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisioningQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ProvisioningQuota;
+
+                    /**
+                     * Verifies a ProvisioningQuota message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisioningQuota message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisioningQuota
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ProvisioningQuota;
+
+                    /**
+                     * Creates a plain object from a ProvisioningQuota message. Also converts values to other types if specified.
+                     * @param message ProvisioningQuota
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ProvisioningQuota, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisioningQuota to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisioningQuota
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProvisioningQuota {
+
+                    /** AssetType enum. */
+                    enum AssetType {
+                        ASSET_TYPE_UNSPECIFIED = 0,
+                        ASSET_TYPE_SERVER = 1,
+                        ASSET_TYPE_STORAGE = 2,
+                        ASSET_TYPE_NETWORK = 3
+                    }
+                }
+
+                /** Properties of a ListProvisioningQuotasRequest. */
+                interface IListProvisioningQuotasRequest {
+
+                    /** ListProvisioningQuotasRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProvisioningQuotasRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProvisioningQuotasRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListProvisioningQuotasRequest. */
+                class ListProvisioningQuotasRequest implements IListProvisioningQuotasRequest {
+
+                    /**
+                     * Constructs a new ListProvisioningQuotasRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest);
+
+                    /** ListProvisioningQuotasRequest parent. */
+                    public parent: string;
+
+                    /** ListProvisioningQuotasRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProvisioningQuotasRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListProvisioningQuotasRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProvisioningQuotasRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest): google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest;
+
+                    /**
+                     * Encodes the specified ListProvisioningQuotasRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest.verify|verify} messages.
+                     * @param message ListProvisioningQuotasRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProvisioningQuotasRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest.verify|verify} messages.
+                     * @param message ListProvisioningQuotasRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProvisioningQuotasRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProvisioningQuotasRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest;
+
+                    /**
+                     * Decodes a ListProvisioningQuotasRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProvisioningQuotasRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest;
+
+                    /**
+                     * Verifies a ListProvisioningQuotasRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProvisioningQuotasRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProvisioningQuotasRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest;
+
+                    /**
+                     * Creates a plain object from a ListProvisioningQuotasRequest message. Also converts values to other types if specified.
+                     * @param message ListProvisioningQuotasRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProvisioningQuotasRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProvisioningQuotasRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProvisioningQuotasResponse. */
+                interface IListProvisioningQuotasResponse {
+
+                    /** ListProvisioningQuotasResponse provisioningQuotas */
+                    provisioningQuotas?: (google.cloud.baremetalsolution.v2.IProvisioningQuota[]|null);
+
+                    /** ListProvisioningQuotasResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListProvisioningQuotasResponse. */
+                class ListProvisioningQuotasResponse implements IListProvisioningQuotasResponse {
+
+                    /**
+                     * Constructs a new ListProvisioningQuotasResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse);
+
+                    /** ListProvisioningQuotasResponse provisioningQuotas. */
+                    public provisioningQuotas: google.cloud.baremetalsolution.v2.IProvisioningQuota[];
+
+                    /** ListProvisioningQuotasResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListProvisioningQuotasResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProvisioningQuotasResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse): google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse;
+
+                    /**
+                     * Encodes the specified ListProvisioningQuotasResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse.verify|verify} messages.
+                     * @param message ListProvisioningQuotasResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProvisioningQuotasResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse.verify|verify} messages.
+                     * @param message ListProvisioningQuotasResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProvisioningQuotasResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProvisioningQuotasResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse;
+
+                    /**
+                     * Decodes a ListProvisioningQuotasResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProvisioningQuotasResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse;
+
+                    /**
+                     * Verifies a ListProvisioningQuotasResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProvisioningQuotasResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProvisioningQuotasResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse;
+
+                    /**
+                     * Creates a plain object from a ListProvisioningQuotasResponse message. Also converts values to other types if specified.
+                     * @param message ListProvisioningQuotasResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProvisioningQuotasResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProvisioningQuotasResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstanceConfig. */
+                interface IInstanceConfig {
+
+                    /** InstanceConfig name */
+                    name?: (string|null);
+
+                    /** InstanceConfig id */
+                    id?: (string|null);
+
+                    /** InstanceConfig instanceType */
+                    instanceType?: (string|null);
+
+                    /** InstanceConfig hyperthreading */
+                    hyperthreading?: (boolean|null);
+
+                    /** InstanceConfig osImage */
+                    osImage?: (string|null);
+
+                    /** InstanceConfig clientNetwork */
+                    clientNetwork?: (google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress|null);
+
+                    /** InstanceConfig privateNetwork */
+                    privateNetwork?: (google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress|null);
+
+                    /** InstanceConfig userNote */
+                    userNote?: (string|null);
+
+                    /** InstanceConfig accountNetworksEnabled */
+                    accountNetworksEnabled?: (boolean|null);
+
+                    /** InstanceConfig networkConfig */
+                    networkConfig?: (google.cloud.baremetalsolution.v2.InstanceConfig.NetworkConfig|keyof typeof google.cloud.baremetalsolution.v2.InstanceConfig.NetworkConfig|null);
+
+                    /** InstanceConfig networkTemplate */
+                    networkTemplate?: (string|null);
+
+                    /** InstanceConfig logicalInterfaces */
+                    logicalInterfaces?: (google.cloud.baremetalsolution.v2.ILogicalInterface[]|null);
+
+                    /** InstanceConfig sshKeyNames */
+                    sshKeyNames?: (string[]|null);
+                }
+
+                /** Represents an InstanceConfig. */
+                class InstanceConfig implements IInstanceConfig {
+
+                    /**
+                     * Constructs a new InstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IInstanceConfig);
+
+                    /** InstanceConfig name. */
+                    public name: string;
+
+                    /** InstanceConfig id. */
+                    public id: string;
+
+                    /** InstanceConfig instanceType. */
+                    public instanceType: string;
+
+                    /** InstanceConfig hyperthreading. */
+                    public hyperthreading: boolean;
+
+                    /** InstanceConfig osImage. */
+                    public osImage: string;
+
+                    /** InstanceConfig clientNetwork. */
+                    public clientNetwork?: (google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress|null);
+
+                    /** InstanceConfig privateNetwork. */
+                    public privateNetwork?: (google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress|null);
+
+                    /** InstanceConfig userNote. */
+                    public userNote: string;
+
+                    /** InstanceConfig accountNetworksEnabled. */
+                    public accountNetworksEnabled: boolean;
+
+                    /** InstanceConfig networkConfig. */
+                    public networkConfig: (google.cloud.baremetalsolution.v2.InstanceConfig.NetworkConfig|keyof typeof google.cloud.baremetalsolution.v2.InstanceConfig.NetworkConfig);
+
+                    /** InstanceConfig networkTemplate. */
+                    public networkTemplate: string;
+
+                    /** InstanceConfig logicalInterfaces. */
+                    public logicalInterfaces: google.cloud.baremetalsolution.v2.ILogicalInterface[];
+
+                    /** InstanceConfig sshKeyNames. */
+                    public sshKeyNames: string[];
+
+                    /**
+                     * Creates a new InstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IInstanceConfig): google.cloud.baremetalsolution.v2.InstanceConfig;
+
+                    /**
+                     * Encodes the specified InstanceConfig message. Does not implicitly {@link google.cloud.baremetalsolution.v2.InstanceConfig.verify|verify} messages.
+                     * @param message InstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceConfig message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.InstanceConfig.verify|verify} messages.
+                     * @param message InstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.InstanceConfig;
+
+                    /**
+                     * Decodes an InstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.InstanceConfig;
+
+                    /**
+                     * Verifies an InstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.InstanceConfig;
+
+                    /**
+                     * Creates a plain object from an InstanceConfig message. Also converts values to other types if specified.
+                     * @param message InstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.InstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InstanceConfig {
+
+                    /** Properties of a NetworkAddress. */
+                    interface INetworkAddress {
+
+                        /** NetworkAddress networkId */
+                        networkId?: (string|null);
+
+                        /** NetworkAddress address */
+                        address?: (string|null);
+
+                        /** NetworkAddress existingNetworkId */
+                        existingNetworkId?: (string|null);
+                    }
+
+                    /** Represents a NetworkAddress. */
+                    class NetworkAddress implements INetworkAddress {
+
+                        /**
+                         * Constructs a new NetworkAddress.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress);
+
+                        /** NetworkAddress networkId. */
+                        public networkId: string;
+
+                        /** NetworkAddress address. */
+                        public address: string;
+
+                        /** NetworkAddress existingNetworkId. */
+                        public existingNetworkId: string;
+
+                        /**
+                         * Creates a new NetworkAddress instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NetworkAddress instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress): google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress;
+
+                        /**
+                         * Encodes the specified NetworkAddress message. Does not implicitly {@link google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress.verify|verify} messages.
+                         * @param message NetworkAddress message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NetworkAddress message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress.verify|verify} messages.
+                         * @param message NetworkAddress message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.InstanceConfig.INetworkAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NetworkAddress message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NetworkAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress;
+
+                        /**
+                         * Decodes a NetworkAddress message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NetworkAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress;
+
+                        /**
+                         * Verifies a NetworkAddress message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NetworkAddress message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NetworkAddress
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress;
+
+                        /**
+                         * Creates a plain object from a NetworkAddress message. Also converts values to other types if specified.
+                         * @param message NetworkAddress
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.InstanceConfig.NetworkAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NetworkAddress to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NetworkAddress
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** NetworkConfig enum. */
+                    enum NetworkConfig {
+                        NETWORKCONFIG_UNSPECIFIED = 0,
+                        SINGLE_VLAN = 1,
+                        MULTI_VLAN = 2
+                    }
+                }
+
+                /** Properties of a VolumeConfig. */
+                interface IVolumeConfig {
+
+                    /** VolumeConfig name */
+                    name?: (string|null);
+
+                    /** VolumeConfig id */
+                    id?: (string|null);
+
+                    /** VolumeConfig snapshotsEnabled */
+                    snapshotsEnabled?: (boolean|null);
+
+                    /** VolumeConfig type */
+                    type?: (google.cloud.baremetalsolution.v2.VolumeConfig.Type|keyof typeof google.cloud.baremetalsolution.v2.VolumeConfig.Type|null);
+
+                    /** VolumeConfig protocol */
+                    protocol?: (google.cloud.baremetalsolution.v2.VolumeConfig.Protocol|keyof typeof google.cloud.baremetalsolution.v2.VolumeConfig.Protocol|null);
+
+                    /** VolumeConfig sizeGb */
+                    sizeGb?: (number|null);
+
+                    /** VolumeConfig lunRanges */
+                    lunRanges?: (google.cloud.baremetalsolution.v2.VolumeConfig.ILunRange[]|null);
+
+                    /** VolumeConfig machineIds */
+                    machineIds?: (string[]|null);
+
+                    /** VolumeConfig nfsExports */
+                    nfsExports?: (google.cloud.baremetalsolution.v2.VolumeConfig.INfsExport[]|null);
+
+                    /** VolumeConfig userNote */
+                    userNote?: (string|null);
+
+                    /** VolumeConfig gcpService */
+                    gcpService?: (string|null);
+
+                    /** VolumeConfig performanceTier */
+                    performanceTier?: (google.cloud.baremetalsolution.v2.VolumePerformanceTier|keyof typeof google.cloud.baremetalsolution.v2.VolumePerformanceTier|null);
+                }
+
+                /** Represents a VolumeConfig. */
+                class VolumeConfig implements IVolumeConfig {
+
+                    /**
+                     * Constructs a new VolumeConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IVolumeConfig);
+
+                    /** VolumeConfig name. */
+                    public name: string;
+
+                    /** VolumeConfig id. */
+                    public id: string;
+
+                    /** VolumeConfig snapshotsEnabled. */
+                    public snapshotsEnabled: boolean;
+
+                    /** VolumeConfig type. */
+                    public type: (google.cloud.baremetalsolution.v2.VolumeConfig.Type|keyof typeof google.cloud.baremetalsolution.v2.VolumeConfig.Type);
+
+                    /** VolumeConfig protocol. */
+                    public protocol: (google.cloud.baremetalsolution.v2.VolumeConfig.Protocol|keyof typeof google.cloud.baremetalsolution.v2.VolumeConfig.Protocol);
+
+                    /** VolumeConfig sizeGb. */
+                    public sizeGb: number;
+
+                    /** VolumeConfig lunRanges. */
+                    public lunRanges: google.cloud.baremetalsolution.v2.VolumeConfig.ILunRange[];
+
+                    /** VolumeConfig machineIds. */
+                    public machineIds: string[];
+
+                    /** VolumeConfig nfsExports. */
+                    public nfsExports: google.cloud.baremetalsolution.v2.VolumeConfig.INfsExport[];
+
+                    /** VolumeConfig userNote. */
+                    public userNote: string;
+
+                    /** VolumeConfig gcpService. */
+                    public gcpService: string;
+
+                    /** VolumeConfig performanceTier. */
+                    public performanceTier: (google.cloud.baremetalsolution.v2.VolumePerformanceTier|keyof typeof google.cloud.baremetalsolution.v2.VolumePerformanceTier);
+
+                    /**
+                     * Creates a new VolumeConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VolumeConfig instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IVolumeConfig): google.cloud.baremetalsolution.v2.VolumeConfig;
+
+                    /**
+                     * Encodes the specified VolumeConfig message. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeConfig.verify|verify} messages.
+                     * @param message VolumeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IVolumeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VolumeConfig message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeConfig.verify|verify} messages.
+                     * @param message VolumeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IVolumeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VolumeConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VolumeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.VolumeConfig;
+
+                    /**
+                     * Decodes a VolumeConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VolumeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.VolumeConfig;
+
+                    /**
+                     * Verifies a VolumeConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VolumeConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VolumeConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.VolumeConfig;
+
+                    /**
+                     * Creates a plain object from a VolumeConfig message. Also converts values to other types if specified.
+                     * @param message VolumeConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.VolumeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VolumeConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VolumeConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VolumeConfig {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        FLASH = 1,
+                        DISK = 2
+                    }
+
+                    /** Protocol enum. */
+                    enum Protocol {
+                        PROTOCOL_UNSPECIFIED = 0,
+                        PROTOCOL_FC = 1,
+                        PROTOCOL_NFS = 2
+                    }
+
+                    /** Properties of a LunRange. */
+                    interface ILunRange {
+
+                        /** LunRange quantity */
+                        quantity?: (number|null);
+
+                        /** LunRange sizeGb */
+                        sizeGb?: (number|null);
+                    }
+
+                    /** Represents a LunRange. */
+                    class LunRange implements ILunRange {
+
+                        /**
+                         * Constructs a new LunRange.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.VolumeConfig.ILunRange);
+
+                        /** LunRange quantity. */
+                        public quantity: number;
+
+                        /** LunRange sizeGb. */
+                        public sizeGb: number;
+
+                        /**
+                         * Creates a new LunRange instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LunRange instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.VolumeConfig.ILunRange): google.cloud.baremetalsolution.v2.VolumeConfig.LunRange;
+
+                        /**
+                         * Encodes the specified LunRange message. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeConfig.LunRange.verify|verify} messages.
+                         * @param message LunRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.VolumeConfig.ILunRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LunRange message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeConfig.LunRange.verify|verify} messages.
+                         * @param message LunRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.VolumeConfig.ILunRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LunRange message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LunRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.VolumeConfig.LunRange;
+
+                        /**
+                         * Decodes a LunRange message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LunRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.VolumeConfig.LunRange;
+
+                        /**
+                         * Verifies a LunRange message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LunRange message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LunRange
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.VolumeConfig.LunRange;
+
+                        /**
+                         * Creates a plain object from a LunRange message. Also converts values to other types if specified.
+                         * @param message LunRange
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.VolumeConfig.LunRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LunRange to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LunRange
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NfsExport. */
+                    interface INfsExport {
+
+                        /** NfsExport networkId */
+                        networkId?: (string|null);
+
+                        /** NfsExport machineId */
+                        machineId?: (string|null);
+
+                        /** NfsExport cidr */
+                        cidr?: (string|null);
+
+                        /** NfsExport permissions */
+                        permissions?: (google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.Permissions|keyof typeof google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.Permissions|null);
+
+                        /** NfsExport noRootSquash */
+                        noRootSquash?: (boolean|null);
+
+                        /** NfsExport allowSuid */
+                        allowSuid?: (boolean|null);
+
+                        /** NfsExport allowDev */
+                        allowDev?: (boolean|null);
+                    }
+
+                    /** Represents a NfsExport. */
+                    class NfsExport implements INfsExport {
+
+                        /**
+                         * Constructs a new NfsExport.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.VolumeConfig.INfsExport);
+
+                        /** NfsExport networkId. */
+                        public networkId: string;
+
+                        /** NfsExport machineId. */
+                        public machineId?: (string|null);
+
+                        /** NfsExport cidr. */
+                        public cidr?: (string|null);
+
+                        /** NfsExport permissions. */
+                        public permissions: (google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.Permissions|keyof typeof google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.Permissions);
+
+                        /** NfsExport noRootSquash. */
+                        public noRootSquash: boolean;
+
+                        /** NfsExport allowSuid. */
+                        public allowSuid: boolean;
+
+                        /** NfsExport allowDev. */
+                        public allowDev: boolean;
+
+                        /** NfsExport client. */
+                        public client?: ("machineId"|"cidr");
+
+                        /**
+                         * Creates a new NfsExport instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NfsExport instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.VolumeConfig.INfsExport): google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport;
+
+                        /**
+                         * Encodes the specified NfsExport message. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.verify|verify} messages.
+                         * @param message NfsExport message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.VolumeConfig.INfsExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NfsExport message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.verify|verify} messages.
+                         * @param message NfsExport message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.VolumeConfig.INfsExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NfsExport message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NfsExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport;
+
+                        /**
+                         * Decodes a NfsExport message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NfsExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport;
+
+                        /**
+                         * Verifies a NfsExport message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NfsExport message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NfsExport
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport;
+
+                        /**
+                         * Creates a plain object from a NfsExport message. Also converts values to other types if specified.
+                         * @param message NfsExport
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NfsExport to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NfsExport
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NfsExport {
+
+                        /** Permissions enum. */
+                        enum Permissions {
+                            PERMISSIONS_UNSPECIFIED = 0,
+                            READ_ONLY = 1,
+                            READ_WRITE = 2
+                        }
+                    }
+                }
+
+                /** Properties of a NetworkConfig. */
+                interface INetworkConfig {
+
+                    /** NetworkConfig name */
+                    name?: (string|null);
+
+                    /** NetworkConfig id */
+                    id?: (string|null);
+
+                    /** NetworkConfig type */
+                    type?: (google.cloud.baremetalsolution.v2.NetworkConfig.Type|keyof typeof google.cloud.baremetalsolution.v2.NetworkConfig.Type|null);
+
+                    /** NetworkConfig bandwidth */
+                    bandwidth?: (google.cloud.baremetalsolution.v2.NetworkConfig.Bandwidth|keyof typeof google.cloud.baremetalsolution.v2.NetworkConfig.Bandwidth|null);
+
+                    /** NetworkConfig vlanAttachments */
+                    vlanAttachments?: (google.cloud.baremetalsolution.v2.NetworkConfig.IIntakeVlanAttachment[]|null);
+
+                    /** NetworkConfig cidr */
+                    cidr?: (string|null);
+
+                    /** NetworkConfig serviceCidr */
+                    serviceCidr?: (google.cloud.baremetalsolution.v2.NetworkConfig.ServiceCidr|keyof typeof google.cloud.baremetalsolution.v2.NetworkConfig.ServiceCidr|null);
+
+                    /** NetworkConfig userNote */
+                    userNote?: (string|null);
+
+                    /** NetworkConfig gcpService */
+                    gcpService?: (string|null);
+
+                    /** NetworkConfig vlanSameProject */
+                    vlanSameProject?: (boolean|null);
+
+                    /** NetworkConfig jumboFramesEnabled */
+                    jumboFramesEnabled?: (boolean|null);
+                }
+
+                /** Represents a NetworkConfig. */
+                class NetworkConfig implements INetworkConfig {
+
+                    /**
+                     * Constructs a new NetworkConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.INetworkConfig);
+
+                    /** NetworkConfig name. */
+                    public name: string;
+
+                    /** NetworkConfig id. */
+                    public id: string;
+
+                    /** NetworkConfig type. */
+                    public type: (google.cloud.baremetalsolution.v2.NetworkConfig.Type|keyof typeof google.cloud.baremetalsolution.v2.NetworkConfig.Type);
+
+                    /** NetworkConfig bandwidth. */
+                    public bandwidth: (google.cloud.baremetalsolution.v2.NetworkConfig.Bandwidth|keyof typeof google.cloud.baremetalsolution.v2.NetworkConfig.Bandwidth);
+
+                    /** NetworkConfig vlanAttachments. */
+                    public vlanAttachments: google.cloud.baremetalsolution.v2.NetworkConfig.IIntakeVlanAttachment[];
+
+                    /** NetworkConfig cidr. */
+                    public cidr: string;
+
+                    /** NetworkConfig serviceCidr. */
+                    public serviceCidr: (google.cloud.baremetalsolution.v2.NetworkConfig.ServiceCidr|keyof typeof google.cloud.baremetalsolution.v2.NetworkConfig.ServiceCidr);
+
+                    /** NetworkConfig userNote. */
+                    public userNote: string;
+
+                    /** NetworkConfig gcpService. */
+                    public gcpService: string;
+
+                    /** NetworkConfig vlanSameProject. */
+                    public vlanSameProject: boolean;
+
+                    /** NetworkConfig jumboFramesEnabled. */
+                    public jumboFramesEnabled: boolean;
+
+                    /**
+                     * Creates a new NetworkConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkConfig instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.INetworkConfig): google.cloud.baremetalsolution.v2.NetworkConfig;
+
+                    /**
+                     * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NetworkConfig.verify|verify} messages.
+                     * @param message NetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NetworkConfig.verify|verify} messages.
+                     * @param message NetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NetworkConfig;
+
+                    /**
+                     * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NetworkConfig;
+
+                    /**
+                     * Verifies a NetworkConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NetworkConfig;
+
+                    /**
+                     * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                     * @param message NetworkConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.NetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NetworkConfig {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        CLIENT = 1,
+                        PRIVATE = 2
+                    }
+
+                    /** Bandwidth enum. */
+                    enum Bandwidth {
+                        BANDWIDTH_UNSPECIFIED = 0,
+                        BW_1_GBPS = 1,
+                        BW_2_GBPS = 2,
+                        BW_5_GBPS = 3,
+                        BW_10_GBPS = 4
+                    }
+
+                    /** Properties of an IntakeVlanAttachment. */
+                    interface IIntakeVlanAttachment {
+
+                        /** IntakeVlanAttachment id */
+                        id?: (string|null);
+
+                        /** IntakeVlanAttachment pairingKey */
+                        pairingKey?: (string|null);
+                    }
+
+                    /** Represents an IntakeVlanAttachment. */
+                    class IntakeVlanAttachment implements IIntakeVlanAttachment {
+
+                        /**
+                         * Constructs a new IntakeVlanAttachment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.NetworkConfig.IIntakeVlanAttachment);
+
+                        /** IntakeVlanAttachment id. */
+                        public id: string;
+
+                        /** IntakeVlanAttachment pairingKey. */
+                        public pairingKey: string;
+
+                        /**
+                         * Creates a new IntakeVlanAttachment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IntakeVlanAttachment instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.NetworkConfig.IIntakeVlanAttachment): google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment;
+
+                        /**
+                         * Encodes the specified IntakeVlanAttachment message. Does not implicitly {@link google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment.verify|verify} messages.
+                         * @param message IntakeVlanAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.NetworkConfig.IIntakeVlanAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IntakeVlanAttachment message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment.verify|verify} messages.
+                         * @param message IntakeVlanAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.NetworkConfig.IIntakeVlanAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IntakeVlanAttachment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IntakeVlanAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment;
+
+                        /**
+                         * Decodes an IntakeVlanAttachment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IntakeVlanAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment;
+
+                        /**
+                         * Verifies an IntakeVlanAttachment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IntakeVlanAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IntakeVlanAttachment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment;
+
+                        /**
+                         * Creates a plain object from an IntakeVlanAttachment message. Also converts values to other types if specified.
+                         * @param message IntakeVlanAttachment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IntakeVlanAttachment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IntakeVlanAttachment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ServiceCidr enum. */
+                    enum ServiceCidr {
+                        SERVICE_CIDR_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        HIGH_26 = 2,
+                        HIGH_27 = 3,
+                        HIGH_28 = 4
+                    }
+                }
+
+                /** Properties of an InstanceQuota. */
+                interface IInstanceQuota {
+
+                    /** InstanceQuota name */
+                    name?: (string|null);
+
+                    /** InstanceQuota instanceType */
+                    instanceType?: (string|null);
+
+                    /** InstanceQuota gcpService */
+                    gcpService?: (string|null);
+
+                    /** InstanceQuota location */
+                    location?: (string|null);
+
+                    /** InstanceQuota availableMachineCount */
+                    availableMachineCount?: (number|null);
+                }
+
+                /** Represents an InstanceQuota. */
+                class InstanceQuota implements IInstanceQuota {
+
+                    /**
+                     * Constructs a new InstanceQuota.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IInstanceQuota);
+
+                    /** InstanceQuota name. */
+                    public name: string;
+
+                    /** InstanceQuota instanceType. */
+                    public instanceType: string;
+
+                    /** InstanceQuota gcpService. */
+                    public gcpService: string;
+
+                    /** InstanceQuota location. */
+                    public location: string;
+
+                    /** InstanceQuota availableMachineCount. */
+                    public availableMachineCount: number;
+
+                    /**
+                     * Creates a new InstanceQuota instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceQuota instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IInstanceQuota): google.cloud.baremetalsolution.v2.InstanceQuota;
+
+                    /**
+                     * Encodes the specified InstanceQuota message. Does not implicitly {@link google.cloud.baremetalsolution.v2.InstanceQuota.verify|verify} messages.
+                     * @param message InstanceQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IInstanceQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceQuota message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.InstanceQuota.verify|verify} messages.
+                     * @param message InstanceQuota message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IInstanceQuota, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceQuota message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.InstanceQuota;
+
+                    /**
+                     * Decodes an InstanceQuota message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceQuota
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.InstanceQuota;
+
+                    /**
+                     * Verifies an InstanceQuota message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceQuota message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceQuota
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.InstanceQuota;
+
+                    /**
+                     * Creates a plain object from an InstanceQuota message. Also converts values to other types if specified.
+                     * @param message InstanceQuota
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.InstanceQuota, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceQuota to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceQuota
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProvisioningConfigRequest. */
+                interface IGetProvisioningConfigRequest {
+
+                    /** GetProvisioningConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProvisioningConfigRequest. */
+                class GetProvisioningConfigRequest implements IGetProvisioningConfigRequest {
+
+                    /**
+                     * Constructs a new GetProvisioningConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest);
+
+                    /** GetProvisioningConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProvisioningConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProvisioningConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest): google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest;
+
+                    /**
+                     * Encodes the specified GetProvisioningConfigRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest.verify|verify} messages.
+                     * @param message GetProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProvisioningConfigRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest.verify|verify} messages.
+                     * @param message GetProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProvisioningConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest;
+
+                    /**
+                     * Decodes a GetProvisioningConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest;
+
+                    /**
+                     * Verifies a GetProvisioningConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProvisioningConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProvisioningConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetProvisioningConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetProvisioningConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProvisioningConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProvisioningConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateProvisioningConfigRequest. */
+                interface ICreateProvisioningConfigRequest {
+
+                    /** CreateProvisioningConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateProvisioningConfigRequest provisioningConfig */
+                    provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /** CreateProvisioningConfigRequest email */
+                    email?: (string|null);
+                }
+
+                /** Represents a CreateProvisioningConfigRequest. */
+                class CreateProvisioningConfigRequest implements ICreateProvisioningConfigRequest {
+
+                    /**
+                     * Constructs a new CreateProvisioningConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest);
+
+                    /** CreateProvisioningConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateProvisioningConfigRequest provisioningConfig. */
+                    public provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /** CreateProvisioningConfigRequest email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new CreateProvisioningConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateProvisioningConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest): google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateProvisioningConfigRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest.verify|verify} messages.
+                     * @param message CreateProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateProvisioningConfigRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest.verify|verify} messages.
+                     * @param message CreateProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateProvisioningConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest;
+
+                    /**
+                     * Decodes a CreateProvisioningConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest;
+
+                    /**
+                     * Verifies a CreateProvisioningConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateProvisioningConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateProvisioningConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateProvisioningConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateProvisioningConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateProvisioningConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateProvisioningConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateProvisioningConfigRequest. */
+                interface IUpdateProvisioningConfigRequest {
+
+                    /** UpdateProvisioningConfigRequest provisioningConfig */
+                    provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /** UpdateProvisioningConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateProvisioningConfigRequest email */
+                    email?: (string|null);
+                }
+
+                /** Represents an UpdateProvisioningConfigRequest. */
+                class UpdateProvisioningConfigRequest implements IUpdateProvisioningConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateProvisioningConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest);
+
+                    /** UpdateProvisioningConfigRequest provisioningConfig. */
+                    public provisioningConfig?: (google.cloud.baremetalsolution.v2.IProvisioningConfig|null);
+
+                    /** UpdateProvisioningConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateProvisioningConfigRequest email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new UpdateProvisioningConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateProvisioningConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest): google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateProvisioningConfigRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest.verify|verify} messages.
+                     * @param message UpdateProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateProvisioningConfigRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest.verify|verify} messages.
+                     * @param message UpdateProvisioningConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateProvisioningConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest;
+
+                    /**
+                     * Decodes an UpdateProvisioningConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateProvisioningConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest;
+
+                    /**
+                     * Verifies an UpdateProvisioningConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateProvisioningConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateProvisioningConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateProvisioningConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateProvisioningConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateProvisioningConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateProvisioningConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServerNetworkTemplate. */
+                interface IServerNetworkTemplate {
+
+                    /** ServerNetworkTemplate name */
+                    name?: (string|null);
+
+                    /** ServerNetworkTemplate applicableInstanceTypes */
+                    applicableInstanceTypes?: (string[]|null);
+
+                    /** ServerNetworkTemplate logicalInterfaces */
+                    logicalInterfaces?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[]|null);
+                }
+
+                /** Represents a ServerNetworkTemplate. */
+                class ServerNetworkTemplate implements IServerNetworkTemplate {
+
+                    /**
+                     * Constructs a new ServerNetworkTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate);
+
+                    /** ServerNetworkTemplate name. */
+                    public name: string;
+
+                    /** ServerNetworkTemplate applicableInstanceTypes. */
+                    public applicableInstanceTypes: string[];
+
+                    /** ServerNetworkTemplate logicalInterfaces. */
+                    public logicalInterfaces: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[];
+
+                    /**
+                     * Creates a new ServerNetworkTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServerNetworkTemplate instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Encodes the specified ServerNetworkTemplate message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
+                     * @param message ServerNetworkTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServerNetworkTemplate message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
+                     * @param message ServerNetworkTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServerNetworkTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServerNetworkTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Verifies a ServerNetworkTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServerNetworkTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServerNetworkTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Creates a plain object from a ServerNetworkTemplate message. Also converts values to other types if specified.
+                     * @param message ServerNetworkTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServerNetworkTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServerNetworkTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ServerNetworkTemplate {
+
+                    /** Properties of a LogicalInterface. */
+                    interface ILogicalInterface {
+
+                        /** LogicalInterface name */
+                        name?: (string|null);
+
+                        /** LogicalInterface type */
+                        type?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|null);
+
+                        /** LogicalInterface required */
+                        required?: (boolean|null);
+                    }
+
+                    /** Represents a LogicalInterface. */
+                    class LogicalInterface implements ILogicalInterface {
+
+                        /**
+                         * Constructs a new LogicalInterface.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface);
+
+                        /** LogicalInterface name. */
+                        public name: string;
+
+                        /** LogicalInterface type. */
+                        public type: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType);
+
+                        /** LogicalInterface required. */
+                        public required: boolean;
+
+                        /**
+                         * Creates a new LogicalInterface instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LogicalInterface instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Encodes the specified LogicalInterface message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
+                         * @param message LogicalInterface message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LogicalInterface message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
+                         * @param message LogicalInterface message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LogicalInterface message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LogicalInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Decodes a LogicalInterface message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LogicalInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Verifies a LogicalInterface message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LogicalInterface message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LogicalInterface
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Creates a plain object from a LogicalInterface message. Also converts values to other types if specified.
+                         * @param message LogicalInterface
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LogicalInterface to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LogicalInterface
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LogicalInterface {
+
+                        /** InterfaceType enum. */
+                        enum InterfaceType {
+                            INTERFACE_TYPE_UNSPECIFIED = 0,
+                            BOND = 1,
+                            NIC = 2
+                        }
+                    }
+                }
+
+                /** Properties of a SSHKey. */
+                interface ISSHKey {
+
+                    /** SSHKey name */
+                    name?: (string|null);
+
+                    /** SSHKey publicKey */
+                    publicKey?: (string|null);
+                }
+
+                /** Represents a SSHKey. */
+                class SSHKey implements ISSHKey {
+
+                    /**
+                     * Constructs a new SSHKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ISSHKey);
+
+                    /** SSHKey name. */
+                    public name: string;
+
+                    /** SSHKey publicKey. */
+                    public publicKey: string;
+
+                    /**
+                     * Creates a new SSHKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SSHKey instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ISSHKey): google.cloud.baremetalsolution.v2.SSHKey;
+
+                    /**
+                     * Encodes the specified SSHKey message. Does not implicitly {@link google.cloud.baremetalsolution.v2.SSHKey.verify|verify} messages.
+                     * @param message SSHKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ISSHKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SSHKey message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.SSHKey.verify|verify} messages.
+                     * @param message SSHKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ISSHKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SSHKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SSHKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.SSHKey;
+
+                    /**
+                     * Decodes a SSHKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SSHKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.SSHKey;
+
+                    /**
+                     * Verifies a SSHKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SSHKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SSHKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.SSHKey;
+
+                    /**
+                     * Creates a plain object from a SSHKey message. Also converts values to other types if specified.
+                     * @param message SSHKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.SSHKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SSHKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SSHKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSSHKeysRequest. */
+                interface IListSSHKeysRequest {
+
+                    /** ListSSHKeysRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSSHKeysRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSSHKeysRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSSHKeysRequest. */
+                class ListSSHKeysRequest implements IListSSHKeysRequest {
+
+                    /**
+                     * Constructs a new ListSSHKeysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListSSHKeysRequest);
+
+                    /** ListSSHKeysRequest parent. */
+                    public parent: string;
+
+                    /** ListSSHKeysRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSSHKeysRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSSHKeysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSSHKeysRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListSSHKeysRequest): google.cloud.baremetalsolution.v2.ListSSHKeysRequest;
+
+                    /**
+                     * Encodes the specified ListSSHKeysRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListSSHKeysRequest.verify|verify} messages.
+                     * @param message ListSSHKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListSSHKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSSHKeysRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListSSHKeysRequest.verify|verify} messages.
+                     * @param message ListSSHKeysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListSSHKeysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSSHKeysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSSHKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListSSHKeysRequest;
+
+                    /**
+                     * Decodes a ListSSHKeysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSSHKeysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListSSHKeysRequest;
+
+                    /**
+                     * Verifies a ListSSHKeysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSSHKeysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSSHKeysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListSSHKeysRequest;
+
+                    /**
+                     * Creates a plain object from a ListSSHKeysRequest message. Also converts values to other types if specified.
+                     * @param message ListSSHKeysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListSSHKeysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSSHKeysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSSHKeysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSSHKeysResponse. */
+                interface IListSSHKeysResponse {
+
+                    /** ListSSHKeysResponse sshKeys */
+                    sshKeys?: (google.cloud.baremetalsolution.v2.ISSHKey[]|null);
+
+                    /** ListSSHKeysResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSSHKeysResponse. */
+                class ListSSHKeysResponse implements IListSSHKeysResponse {
+
+                    /**
+                     * Constructs a new ListSSHKeysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListSSHKeysResponse);
+
+                    /** ListSSHKeysResponse sshKeys. */
+                    public sshKeys: google.cloud.baremetalsolution.v2.ISSHKey[];
+
+                    /** ListSSHKeysResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSSHKeysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSSHKeysResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListSSHKeysResponse): google.cloud.baremetalsolution.v2.ListSSHKeysResponse;
+
+                    /**
+                     * Encodes the specified ListSSHKeysResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListSSHKeysResponse.verify|verify} messages.
+                     * @param message ListSSHKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListSSHKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSSHKeysResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListSSHKeysResponse.verify|verify} messages.
+                     * @param message ListSSHKeysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListSSHKeysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSSHKeysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSSHKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListSSHKeysResponse;
+
+                    /**
+                     * Decodes a ListSSHKeysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSSHKeysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListSSHKeysResponse;
+
+                    /**
+                     * Verifies a ListSSHKeysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSSHKeysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSSHKeysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListSSHKeysResponse;
+
+                    /**
+                     * Creates a plain object from a ListSSHKeysResponse message. Also converts values to other types if specified.
+                     * @param message ListSSHKeysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListSSHKeysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSSHKeysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSSHKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSSHKeyRequest. */
+                interface ICreateSSHKeyRequest {
+
+                    /** CreateSSHKeyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSSHKeyRequest sshKey */
+                    sshKey?: (google.cloud.baremetalsolution.v2.ISSHKey|null);
+
+                    /** CreateSSHKeyRequest sshKeyId */
+                    sshKeyId?: (string|null);
+                }
+
+                /** Represents a CreateSSHKeyRequest. */
+                class CreateSSHKeyRequest implements ICreateSSHKeyRequest {
+
+                    /**
+                     * Constructs a new CreateSSHKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest);
+
+                    /** CreateSSHKeyRequest parent. */
+                    public parent: string;
+
+                    /** CreateSSHKeyRequest sshKey. */
+                    public sshKey?: (google.cloud.baremetalsolution.v2.ISSHKey|null);
+
+                    /** CreateSSHKeyRequest sshKeyId. */
+                    public sshKeyId: string;
+
+                    /**
+                     * Creates a new CreateSSHKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSSHKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest): google.cloud.baremetalsolution.v2.CreateSSHKeyRequest;
+
+                    /**
+                     * Encodes the specified CreateSSHKeyRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateSSHKeyRequest.verify|verify} messages.
+                     * @param message CreateSSHKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSSHKeyRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateSSHKeyRequest.verify|verify} messages.
+                     * @param message CreateSSHKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSSHKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSSHKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.CreateSSHKeyRequest;
+
+                    /**
+                     * Decodes a CreateSSHKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSSHKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.CreateSSHKeyRequest;
+
+                    /**
+                     * Verifies a CreateSSHKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSSHKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSSHKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.CreateSSHKeyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSSHKeyRequest message. Also converts values to other types if specified.
+                     * @param message CreateSSHKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.CreateSSHKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSSHKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSSHKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSSHKeyRequest. */
+                interface IDeleteSSHKeyRequest {
+
+                    /** DeleteSSHKeyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSSHKeyRequest. */
+                class DeleteSSHKeyRequest implements IDeleteSSHKeyRequest {
+
+                    /**
+                     * Constructs a new DeleteSSHKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest);
+
+                    /** DeleteSSHKeyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSSHKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSSHKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest): google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest;
+
+                    /**
+                     * Encodes the specified DeleteSSHKeyRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest.verify|verify} messages.
+                     * @param message DeleteSSHKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSSHKeyRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest.verify|verify} messages.
+                     * @param message DeleteSSHKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSSHKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSSHKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest;
+
+                    /**
+                     * Decodes a DeleteSSHKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSSHKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest;
+
+                    /**
+                     * Verifies a DeleteSSHKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSSHKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSSHKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSSHKeyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSSHKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSSHKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSSHKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VolumeSnapshot. */
+                interface IVolumeSnapshot {
+
+                    /** VolumeSnapshot name */
+                    name?: (string|null);
+
+                    /** VolumeSnapshot id */
+                    id?: (string|null);
+
+                    /** VolumeSnapshot description */
+                    description?: (string|null);
+
+                    /** VolumeSnapshot createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VolumeSnapshot storageVolume */
+                    storageVolume?: (string|null);
+
+                    /** VolumeSnapshot type */
+                    type?: (google.cloud.baremetalsolution.v2.VolumeSnapshot.SnapshotType|keyof typeof google.cloud.baremetalsolution.v2.VolumeSnapshot.SnapshotType|null);
+                }
+
+                /** Represents a VolumeSnapshot. */
+                class VolumeSnapshot implements IVolumeSnapshot {
+
+                    /**
+                     * Constructs a new VolumeSnapshot.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IVolumeSnapshot);
+
+                    /** VolumeSnapshot name. */
+                    public name: string;
+
+                    /** VolumeSnapshot id. */
+                    public id: string;
+
+                    /** VolumeSnapshot description. */
+                    public description: string;
+
+                    /** VolumeSnapshot createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VolumeSnapshot storageVolume. */
+                    public storageVolume: string;
+
+                    /** VolumeSnapshot type. */
+                    public type: (google.cloud.baremetalsolution.v2.VolumeSnapshot.SnapshotType|keyof typeof google.cloud.baremetalsolution.v2.VolumeSnapshot.SnapshotType);
+
+                    /**
+                     * Creates a new VolumeSnapshot instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VolumeSnapshot instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IVolumeSnapshot): google.cloud.baremetalsolution.v2.VolumeSnapshot;
+
+                    /**
+                     * Encodes the specified VolumeSnapshot message. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeSnapshot.verify|verify} messages.
+                     * @param message VolumeSnapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IVolumeSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VolumeSnapshot message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.VolumeSnapshot.verify|verify} messages.
+                     * @param message VolumeSnapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IVolumeSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VolumeSnapshot message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VolumeSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.VolumeSnapshot;
+
+                    /**
+                     * Decodes a VolumeSnapshot message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VolumeSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.VolumeSnapshot;
+
+                    /**
+                     * Verifies a VolumeSnapshot message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VolumeSnapshot message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VolumeSnapshot
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.VolumeSnapshot;
+
+                    /**
+                     * Creates a plain object from a VolumeSnapshot message. Also converts values to other types if specified.
+                     * @param message VolumeSnapshot
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.VolumeSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VolumeSnapshot to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VolumeSnapshot
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VolumeSnapshot {
+
+                    /** SnapshotType enum. */
+                    enum SnapshotType {
+                        SNAPSHOT_TYPE_UNSPECIFIED = 0,
+                        AD_HOC = 1,
+                        SCHEDULED = 2
+                    }
+                }
+
+                /** Properties of a GetVolumeSnapshotRequest. */
+                interface IGetVolumeSnapshotRequest {
+
+                    /** GetVolumeSnapshotRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetVolumeSnapshotRequest. */
+                class GetVolumeSnapshotRequest implements IGetVolumeSnapshotRequest {
+
+                    /**
+                     * Constructs a new GetVolumeSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest);
+
+                    /** GetVolumeSnapshotRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetVolumeSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetVolumeSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest): google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest;
+
+                    /**
+                     * Encodes the specified GetVolumeSnapshotRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message GetVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetVolumeSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message GetVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetVolumeSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest;
+
+                    /**
+                     * Decodes a GetVolumeSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest;
+
+                    /**
+                     * Verifies a GetVolumeSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetVolumeSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetVolumeSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a GetVolumeSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message GetVolumeSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetVolumeSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetVolumeSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListVolumeSnapshotsRequest. */
+                interface IListVolumeSnapshotsRequest {
+
+                    /** ListVolumeSnapshotsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListVolumeSnapshotsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListVolumeSnapshotsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListVolumeSnapshotsRequest. */
+                class ListVolumeSnapshotsRequest implements IListVolumeSnapshotsRequest {
+
+                    /**
+                     * Constructs a new ListVolumeSnapshotsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest);
+
+                    /** ListVolumeSnapshotsRequest parent. */
+                    public parent: string;
+
+                    /** ListVolumeSnapshotsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListVolumeSnapshotsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListVolumeSnapshotsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListVolumeSnapshotsRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest;
+
+                    /**
+                     * Encodes the specified ListVolumeSnapshotsRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest.verify|verify} messages.
+                     * @param message ListVolumeSnapshotsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListVolumeSnapshotsRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest.verify|verify} messages.
+                     * @param message ListVolumeSnapshotsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListVolumeSnapshotsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListVolumeSnapshotsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest;
+
+                    /**
+                     * Decodes a ListVolumeSnapshotsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListVolumeSnapshotsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest;
+
+                    /**
+                     * Verifies a ListVolumeSnapshotsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListVolumeSnapshotsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListVolumeSnapshotsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest;
+
+                    /**
+                     * Creates a plain object from a ListVolumeSnapshotsRequest message. Also converts values to other types if specified.
+                     * @param message ListVolumeSnapshotsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListVolumeSnapshotsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListVolumeSnapshotsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListVolumeSnapshotsResponse. */
+                interface IListVolumeSnapshotsResponse {
+
+                    /** ListVolumeSnapshotsResponse volumeSnapshots */
+                    volumeSnapshots?: (google.cloud.baremetalsolution.v2.IVolumeSnapshot[]|null);
+
+                    /** ListVolumeSnapshotsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListVolumeSnapshotsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListVolumeSnapshotsResponse. */
+                class ListVolumeSnapshotsResponse implements IListVolumeSnapshotsResponse {
+
+                    /**
+                     * Constructs a new ListVolumeSnapshotsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse);
+
+                    /** ListVolumeSnapshotsResponse volumeSnapshots. */
+                    public volumeSnapshots: google.cloud.baremetalsolution.v2.IVolumeSnapshot[];
+
+                    /** ListVolumeSnapshotsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListVolumeSnapshotsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListVolumeSnapshotsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListVolumeSnapshotsResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse;
+
+                    /**
+                     * Encodes the specified ListVolumeSnapshotsResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse.verify|verify} messages.
+                     * @param message ListVolumeSnapshotsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListVolumeSnapshotsResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse.verify|verify} messages.
+                     * @param message ListVolumeSnapshotsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListVolumeSnapshotsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListVolumeSnapshotsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse;
+
+                    /**
+                     * Decodes a ListVolumeSnapshotsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListVolumeSnapshotsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse;
+
+                    /**
+                     * Verifies a ListVolumeSnapshotsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListVolumeSnapshotsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListVolumeSnapshotsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse;
+
+                    /**
+                     * Creates a plain object from a ListVolumeSnapshotsResponse message. Also converts values to other types if specified.
+                     * @param message ListVolumeSnapshotsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListVolumeSnapshotsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListVolumeSnapshotsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteVolumeSnapshotRequest. */
+                interface IDeleteVolumeSnapshotRequest {
+
+                    /** DeleteVolumeSnapshotRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteVolumeSnapshotRequest. */
+                class DeleteVolumeSnapshotRequest implements IDeleteVolumeSnapshotRequest {
+
+                    /**
+                     * Constructs a new DeleteVolumeSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest);
+
+                    /** DeleteVolumeSnapshotRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteVolumeSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteVolumeSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest): google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest;
+
+                    /**
+                     * Encodes the specified DeleteVolumeSnapshotRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message DeleteVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteVolumeSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message DeleteVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteVolumeSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest;
+
+                    /**
+                     * Decodes a DeleteVolumeSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest;
+
+                    /**
+                     * Verifies a DeleteVolumeSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteVolumeSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteVolumeSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteVolumeSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message DeleteVolumeSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteVolumeSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteVolumeSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateVolumeSnapshotRequest. */
+                interface ICreateVolumeSnapshotRequest {
+
+                    /** CreateVolumeSnapshotRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateVolumeSnapshotRequest volumeSnapshot */
+                    volumeSnapshot?: (google.cloud.baremetalsolution.v2.IVolumeSnapshot|null);
+                }
+
+                /** Represents a CreateVolumeSnapshotRequest. */
+                class CreateVolumeSnapshotRequest implements ICreateVolumeSnapshotRequest {
+
+                    /**
+                     * Constructs a new CreateVolumeSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest);
+
+                    /** CreateVolumeSnapshotRequest parent. */
+                    public parent: string;
+
+                    /** CreateVolumeSnapshotRequest volumeSnapshot. */
+                    public volumeSnapshot?: (google.cloud.baremetalsolution.v2.IVolumeSnapshot|null);
+
+                    /**
+                     * Creates a new CreateVolumeSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateVolumeSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest): google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest;
+
+                    /**
+                     * Encodes the specified CreateVolumeSnapshotRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message CreateVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateVolumeSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message CreateVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateVolumeSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest;
+
+                    /**
+                     * Decodes a CreateVolumeSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest;
+
+                    /**
+                     * Verifies a CreateVolumeSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateVolumeSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateVolumeSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a CreateVolumeSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message CreateVolumeSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateVolumeSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateVolumeSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreVolumeSnapshotRequest. */
+                interface IRestoreVolumeSnapshotRequest {
+
+                    /** RestoreVolumeSnapshotRequest volumeSnapshot */
+                    volumeSnapshot?: (string|null);
+                }
+
+                /** Represents a RestoreVolumeSnapshotRequest. */
+                class RestoreVolumeSnapshotRequest implements IRestoreVolumeSnapshotRequest {
+
+                    /**
+                     * Constructs a new RestoreVolumeSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest);
+
+                    /** RestoreVolumeSnapshotRequest volumeSnapshot. */
+                    public volumeSnapshot: string;
+
+                    /**
+                     * Creates a new RestoreVolumeSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVolumeSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest): google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest;
+
+                    /**
+                     * Encodes the specified RestoreVolumeSnapshotRequest message. Does not implicitly {@link google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message RestoreVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVolumeSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest.verify|verify} messages.
+                     * @param message RestoreVolumeSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVolumeSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest;
+
+                    /**
+                     * Decodes a RestoreVolumeSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVolumeSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest;
+
+                    /**
+                     * Verifies a RestoreVolumeSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVolumeSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVolumeSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a RestoreVolumeSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message RestoreVolumeSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVolumeSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVolumeSnapshotRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11301,103 +17138,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -11495,6 +17235,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

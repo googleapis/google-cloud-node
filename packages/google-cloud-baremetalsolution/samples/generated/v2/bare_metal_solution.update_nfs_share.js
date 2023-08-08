@@ -38,6 +38,7 @@ function main(nfsShare) {
    *  The list of fields to update.
    *  The only currently supported fields are:
    *    `labels`
+   *    `allowed_clients`
    */
   // const updateMask = {}
 
