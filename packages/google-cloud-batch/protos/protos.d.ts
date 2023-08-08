@@ -9757,6 +9757,9 @@ export namespace google {
 
                         /** Container password */
                         password?: (string|null);
+
+                        /** Container enableImageStreaming */
+                        enableImageStreaming?: (boolean|null);
                     }
 
                     /** Represents a Container. */
@@ -9791,6 +9794,9 @@ export namespace google {
 
                         /** Container password. */
                         public password: string;
+
+                        /** Container enableImageStreaming. */
+                        public enableImageStreaming: boolean;
 
                         /**
                          * Creates a new Container instance using the specified properties.
