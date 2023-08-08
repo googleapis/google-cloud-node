@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/clientgateways",
+  "name": "@google-cloud/clientconnectorservices",
   "version": "1.0.0",
   "description": "BeyondCorp API client for Node.js",
   "repository": {
