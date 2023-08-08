@@ -45,7 +45,7 @@ export interface GetIndexesOptions {
 export type GetIndexesResponse = [
   Index[],
   GetIndexesOptions,
-  google.datastore.admin.v1.IListIndexesResponse
+  google.datastore.admin.v1.IListIndexesResponse,
 ];
 export type GetIndexesCallback = (
   err?: ServiceError | null,

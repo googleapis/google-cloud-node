@@ -498,7 +498,7 @@ export class DatastoreAdminClient {
     [
       protos.google.datastore.admin.v1.IIndex,
       protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIndex(
@@ -536,7 +536,7 @@ export class DatastoreAdminClient {
     [
       protos.google.datastore.admin.v1.IIndex,
       protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -618,7 +618,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IExportEntitiesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportEntities(
@@ -671,7 +671,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IExportEntitiesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -781,7 +781,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IImportEntitiesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importEntities(
@@ -834,7 +834,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IImportEntitiesMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -935,7 +935,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIndex(
@@ -988,7 +988,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1084,7 +1084,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIndex(
@@ -1137,7 +1137,7 @@ export class DatastoreAdminClient {
         protos.google.datastore.admin.v1.IIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1229,7 +1229,7 @@ export class DatastoreAdminClient {
     [
       protos.google.datastore.admin.v1.IIndex[],
       protos.google.datastore.admin.v1.IListIndexesRequest | null,
-      protos.google.datastore.admin.v1.IListIndexesResponse
+      protos.google.datastore.admin.v1.IListIndexesResponse,
     ]
   >;
   listIndexes(
@@ -1269,7 +1269,7 @@ export class DatastoreAdminClient {
     [
       protos.google.datastore.admin.v1.IIndex[],
       protos.google.datastore.admin.v1.IListIndexesRequest | null,
-      protos.google.datastore.admin.v1.IListIndexesResponse
+      protos.google.datastore.admin.v1.IListIndexesResponse,
     ]
   > | void {
     request = request || {};

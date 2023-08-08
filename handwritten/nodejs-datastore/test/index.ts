@@ -1842,7 +1842,7 @@ describe('Datastore', () => {
       };
 
       sandbox.stub(fakeEntity, 'keyFromKeyProto').callsFake(keyProto => {
-        keyProtos.push(keyProto);
+        keyProtos.push(keyProto as any);
         return {
           id: ids[keyProtos.length - 1],
         } as {} as entity.Key;

@@ -391,7 +391,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.ILookupResponse,
       protos.google.datastore.v1.ILookupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lookup(
@@ -429,7 +429,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.ILookupResponse,
       protos.google.datastore.v1.ILookupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -509,7 +509,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IRunQueryResponse,
       protos.google.datastore.v1.IRunQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runQuery(
@@ -547,7 +547,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IRunQueryResponse,
       protos.google.datastore.v1.IRunQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -627,7 +627,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IRunAggregationQueryResponse,
       protos.google.datastore.v1.IRunAggregationQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runAggregationQuery(
@@ -667,7 +667,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IRunAggregationQueryResponse,
       protos.google.datastore.v1.IRunAggregationQueryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -738,7 +738,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IBeginTransactionResponse,
       protos.google.datastore.v1.IBeginTransactionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   beginTransaction(
@@ -778,7 +778,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IBeginTransactionResponse,
       protos.google.datastore.v1.IBeginTransactionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -873,7 +873,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.ICommitResponse,
       protos.google.datastore.v1.ICommitRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   commit(
@@ -911,7 +911,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.ICommitResponse,
       protos.google.datastore.v1.ICommitRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -983,7 +983,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IRollbackResponse,
       protos.google.datastore.v1.IRollbackRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollback(
@@ -1021,7 +1021,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IRollbackResponse,
       protos.google.datastore.v1.IRollbackRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1094,7 +1094,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IAllocateIdsResponse,
       protos.google.datastore.v1.IAllocateIdsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   allocateIds(
@@ -1132,7 +1132,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IAllocateIdsResponse,
       protos.google.datastore.v1.IAllocateIdsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1205,7 +1205,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IReserveIdsResponse,
       protos.google.datastore.v1.IReserveIdsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reserveIds(
@@ -1243,7 +1243,7 @@ export class DatastoreClient {
     [
       protos.google.datastore.v1.IReserveIdsResponse,
       protos.google.datastore.v1.IReserveIdsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
