@@ -33,10 +33,7 @@
   * [Livestream_service.stop_channel](#livestream_service.stop_channel)
   * [Livestream_service.update_channel](#livestream_service.update_channel)
   * [Livestream_service.update_input](#livestream_service.update_input)
-<<<<<<< HEAD
   * [Livestream_service.update_pool](#livestream_service.update_pool)
-=======
->>>>>>> 27860facba (🦉 Updates from OwlBot post-processor)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -56,7 +53,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Livestream_service.create_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_asset.js,samples/README.md)
 
@@ -73,7 +70,7 @@ __Usage:__
 
 ### Livestream_service.create_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_channel.js,samples/README.md)
 
@@ -90,7 +87,7 @@ __Usage:__
 
 ### Livestream_service.create_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_event.js,samples/README.md)
 
@@ -107,7 +104,7 @@ __Usage:__
 
 ### Livestream_service.create_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.create_input.js,samples/README.md)
 
@@ -124,7 +121,7 @@ __Usage:__
 
 ### Livestream_service.delete_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_asset.js,samples/README.md)
 
@@ -141,7 +138,7 @@ __Usage:__
 
 ### Livestream_service.delete_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_channel.js,samples/README.md)
 
@@ -158,7 +155,7 @@ __Usage:__
 
 ### Livestream_service.delete_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_event.js,samples/README.md)
 
@@ -175,7 +172,7 @@ __Usage:__
 
 ### Livestream_service.delete_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.delete_input.js,samples/README.md)
 
@@ -192,7 +189,7 @@ __Usage:__
 
 ### Livestream_service.get_asset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_asset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_asset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_asset.js,samples/README.md)
 
@@ -209,7 +206,7 @@ __Usage:__
 
 ### Livestream_service.get_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_channel.js,samples/README.md)
 
@@ -226,7 +223,7 @@ __Usage:__
 
 ### Livestream_service.get_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_event.js,samples/README.md)
 
@@ -243,7 +240,7 @@ __Usage:__
 
 ### Livestream_service.get_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_input.js,samples/README.md)
 
@@ -260,7 +257,7 @@ __Usage:__
 
 ### Livestream_service.get_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.get_pool.js,samples/README.md)
 
@@ -277,7 +274,7 @@ __Usage:__
 
 ### Livestream_service.list_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_assets.js,samples/README.md)
 
@@ -294,7 +291,7 @@ __Usage:__
 
 ### Livestream_service.list_channels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_channels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_channels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_channels.js,samples/README.md)
 
@@ -311,7 +308,7 @@ __Usage:__
 
 ### Livestream_service.list_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_events.js,samples/README.md)
 
@@ -328,7 +325,7 @@ __Usage:__
 
 ### Livestream_service.list_inputs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_inputs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_inputs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.list_inputs.js,samples/README.md)
 
@@ -345,7 +342,7 @@ __Usage:__
 
 ### Livestream_service.start_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.start_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.start_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.start_channel.js,samples/README.md)
 
@@ -362,7 +359,7 @@ __Usage:__
 
 ### Livestream_service.stop_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.stop_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.stop_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.stop_channel.js,samples/README.md)
 
@@ -379,7 +376,7 @@ __Usage:__
 
 ### Livestream_service.update_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_channel.js,samples/README.md)
 
@@ -396,7 +393,7 @@ __Usage:__
 
 ### Livestream_service.update_input
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_input.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_input.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_input.js,samples/README.md)
 
@@ -413,7 +410,7 @@ __Usage:__
 
 ### Livestream_service.update_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/generated/v1/livestream_service.update_pool.js,samples/README.md)
 
@@ -430,7 +427,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-livestream/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-video-livestream/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-livestream/samples/quickstart.js,samples/README.md)
 
