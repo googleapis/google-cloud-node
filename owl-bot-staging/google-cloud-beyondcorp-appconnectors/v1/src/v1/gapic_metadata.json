@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.beyondcorp.appconnectors.v1",
+  "libraryPackage": "@google-cloud/appconnectors",
+  "services": {
+    "AppConnectorsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AppConnectorsServiceClient",
+          "rpcs": {
+            "GetAppConnector": {
+              "methods": [
+                "getAppConnector"
+              ]
+            },
+            "CreateAppConnector": {
+              "methods": [
+                "createAppConnector"
+              ]
+            },
+            "UpdateAppConnector": {
+              "methods": [
+                "updateAppConnector"
+              ]
+            },
+            "DeleteAppConnector": {
+              "methods": [
+                "deleteAppConnector"
+              ]
+            },
+            "ReportStatus": {
+              "methods": [
+                "reportStatus"
+              ]
+            },
+            "ListAppConnectors": {
+              "methods": [
+                "listAppConnectors",
+                "listAppConnectorsStream",
+                "listAppConnectorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AppConnectorsServiceClient",
+          "rpcs": {
+            "GetAppConnector": {
+              "methods": [
+                "getAppConnector"
+              ]
+            },
+            "CreateAppConnector": {
+              "methods": [
+                "createAppConnector"
+              ]
+            },
+            "UpdateAppConnector": {
+              "methods": [
+                "updateAppConnector"
+              ]
+            },
+            "DeleteAppConnector": {
+              "methods": [
+                "deleteAppConnector"
+              ]
+            },
+            "ReportStatus": {
+              "methods": [
+                "reportStatus"
+              ]
+            },
+            "ListAppConnectors": {
+              "methods": [
+                "listAppConnectors",
+                "listAppConnectorsStream",
+                "listAppConnectorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
