@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.places.v1",
+  "libraryPackage": "@googlemaps/places",
+  "services": {
+    "Places": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PlacesClient",
+          "rpcs": {
+            "SearchText": {
+              "methods": [
+                "searchText"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PlacesClient",
+          "rpcs": {
+            "SearchText": {
+              "methods": [
+                "searchText"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
