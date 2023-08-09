@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.0...translate-v8.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/promisify to v4 ([#4520](https://github.com/googleapis/google-cloud-node/issues/4520)) ([e0e9343](https://github.com/googleapis/google-cloud-node/commit/e0e93433ca78c88f232498fec56d773c2550658d))
+* **deps:** Update dependency @google-cloud/text-to-speech to v5 ([#4513](https://github.com/googleapis/google-cloud-node/issues/4513)) ([8bef5cf](https://github.com/googleapis/google-cloud-node/commit/8bef5cfbe11f86c171ac5424cde14cd255ce0e09))
+* **deps:** Update dependency @google-cloud/vision to v4 ([#4521](https://github.com/googleapis/google-cloud-node/issues/4521)) ([30bae66](https://github.com/googleapis/google-cloud-node/commit/30bae66289904330ce557b741c117713c6877d77))
+
 ## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/translate-v7.2.2...translate-v8.0.0) (2023-08-06)
 
 

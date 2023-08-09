@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.0.0...container-v5.1.0) (2023-08-09)
+
+
+### Features
+
+* [container] add APIs for GKE OOTB metrics packages ([#4519](https://github.com/googleapis/google-cloud-node/issues/4519)) ([0f6b33d](https://github.com/googleapis/google-cloud-node/commit/0f6b33d95e501840c161a9447f7d3a8322b32303))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.16.0...container-v5.0.0) (2023-08-06)
 
 

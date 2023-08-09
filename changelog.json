@@ -4,6 +4,370 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "cff0faf8dd014d164c160cb0f6a07b5817c1183a",
+          "message": "Add initial files for google.cloud.policytroubleshooter.iam.v3beta",
+          "issues": [
+            "4499"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "8d64c7ee-7971-4e3f-82c7-e5907dd1bcba",
+      "createTime": "2023-08-09T17:57:48.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e6adc9c14dd5bc2dc5f1d444e3460130de3a318",
+          "message": "Add initial files for google.cloud.commerce.consumer.procurement.v1",
+          "issues": [
+            "4469"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "6be24549-76f2-42d8-aef4-823532371c7d",
+      "createTime": "2023-08-09T17:57:48.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "10458cd35c9083c6c94d320a32d858aa4321a4aa",
+          "message": "Update dependency @google-cloud/grafeas to v5",
+          "issues": [
+            "4512"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "cb633894-9775-400a-b0c2-88fcb95a42c9",
+      "createTime": "2023-08-09T17:57:48.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0f6b33d95e501840c161a9447f7d3a8322b32303",
+          "message": "[container] add APIs for GKE OOTB metrics packages",
+          "issues": [
+            "4519"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "e1a9fba4-f57a-4ad8-a8f4-82b3be82a874",
+      "createTime": "2023-08-09T17:57:48.732Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e0e93433ca78c88f232498fec56d773c2550658d",
+          "message": "Update dependency @google-cloud/promisify to v4",
+          "issues": [
+            "4520"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "bcf5b0b4-1940-4f83-af52-91f125a24d68",
+      "createTime": "2023-08-09T17:57:48.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cbce19078780b17f842c0d8e43a6a7f90941e938",
+          "message": "@google-cloud/video-transcoder must not depend on itself",
+          "issues": [
+            "4514"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "ad7d40dd-ec7e-46f3-96dc-e8d3e64c5f4a",
+      "createTime": "2023-08-09T17:57:48.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e0e93433ca78c88f232498fec56d773c2550658d",
+          "message": "Update dependency @google-cloud/promisify to v4",
+          "issues": [
+            "4520"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "30bae66289904330ce557b741c117713c6877d77",
+          "message": "Update dependency @google-cloud/vision to v4",
+          "issues": [
+            "4521"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "8bef5cfbe11f86c171ac5424cde14cd255ce0e09",
+          "message": "Update dependency @google-cloud/text-to-speech to v5",
+          "issues": [
+            "4513"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "8.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "f65db709-b410-41d0-87b9-d90190469a49",
+      "createTime": "2023-08-09T17:57:48.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "da600c6d3a6fb9793ec1b647aef4197116866f8b",
+          "message": "Update dependency proto3-json-serializer to v2",
+          "issues": [
+            "4523"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "4a0fe765-1530-4796-abc6-73f1f263a0e4",
+      "createTime": "2023-08-09T17:57:48.710Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cff0faf8dd014d164c160cb0f6a07b5817c1183a",
+          "message": "Add initial files for google.cloud.policytroubleshooter.iam.v3beta",
+          "issues": [
+            "4499"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "f351872e-0c75-4990-aad9-7b2a70382ea6",
+      "createTime": "2023-08-09T17:57:48.705Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "65ee10e09d7c69e00bdfd7be2a591c866873ceda",
+          "message": "Revert package.json version",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "d1cef14fabc0b1e3dbc957f70f383a5464f7c840",
+          "message": "Roll back dependency @google-cloud/dataform to ^0.4.0",
+          "issues": [
+            "4044"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "dbd05090-69af-4dd2-84d9-83e2bfa9bbb1",
+      "createTime": "2023-08-09T17:57:48.697Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "1d510bef5bd7b0ac3552b4729ef3d9ebe1ac3dc4",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4459"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "0b4ffa9a-6b03-4a5c-bf2e-55e1b328145e",
+      "createTime": "2023-08-09T17:57:48.692Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e3fb6ad7595f85b0e2f06fedeabb18df4364b224",
+          "message": "[batch] Clarify Batch API proto doc about pubsub notifications",
+          "issues": [
+            "4518"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ca2296c5d180e00f41baca3a03fa0f3f4592fbb3",
+          "message": "[batch] Clarify Batch API proto doc about pubsub notifications",
+          "issues": [
+            "4503"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "38cb0e79-714a-49b3-9c47-bd625617edfd",
+      "createTime": "2023-08-09T17:57:48.687Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e3d600371265cd8fc0609b55086e39d0d4d5df0",
+          "message": "[baremetalsolution] several new resources and RPCs",
+          "issues": [
+            "4517"
+          ],
+          "scope": "baremetalsolution"
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "abd88967-8b4c-41a7-a76c-a8069144489c",
+      "createTime": "2023-08-09T17:57:48.682Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a964b5aad6bd1ad1cff67c1594ff424553a2e3a3",
+          "message": "Update dependency @google-cloud/compute to v4",
+          "issues": [
+            "4511"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "2c6be0d2-d32f-432e-9196-3e54c4cb71d0",
+      "createTime": "2023-08-09T17:57:48.673Z"
+    },
+    {
+      "changes": [
+        {
           "type": "chore",
           "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
           "message": "Migrate to Node 14",
@@ -15171,5 +15535,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-08-06T05:21:57.741Z"
+  "updateTime": "2023-08-09T17:57:48.750Z"
 }

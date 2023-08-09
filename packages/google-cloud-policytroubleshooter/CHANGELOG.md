@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-v3.0.0...policy-troubleshooter-v3.1.0) (2023-08-09)
+
+
+### Features
+
+* Add initial files for google.cloud.policytroubleshooter.iam.v3beta ([#4499](https://github.com/googleapis/google-cloud-node/issues/4499)) ([cff0faf](https://github.com/googleapis/google-cloud-node/commit/cff0faf8dd014d164c160cb0f6a07b5817c1183a))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-v2.1.0...policy-troubleshooter-v3.0.0) (2023-08-06)
 
 

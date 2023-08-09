@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.0...vision-v4.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/promisify to v4 ([#4520](https://github.com/googleapis/google-cloud-node/issues/4520)) ([e0e9343](https://github.com/googleapis/google-cloud-node/commit/e0e93433ca78c88f232498fec56d773c2550658d))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/vision-v3.1.4...vision-v4.0.0) (2023-08-06)
 
 
