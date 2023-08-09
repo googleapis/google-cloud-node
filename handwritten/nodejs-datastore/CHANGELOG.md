@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/nodejs-datastore/compare/v7.5.1...v8.0.0) (2023-08-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([b7904f1](https://github.com/googleapis/nodejs-datastore/commit/b7904f12b1d398a5b0e6fefc2a002c404f9e7d3d))
+
 ## [7.5.1](https://github.com/googleapis/nodejs-datastore/compare/v7.5.0...v7.5.1) (2023-04-11)
 
 
