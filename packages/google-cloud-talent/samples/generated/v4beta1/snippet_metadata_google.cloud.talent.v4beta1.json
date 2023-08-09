@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-talent",
-        "version": "5.1.4",
+        "version": "6.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
