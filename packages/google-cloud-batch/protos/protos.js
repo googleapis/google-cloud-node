@@ -25645,6 +25645,7 @@
                              * @property {boolean|null} [blockExternalNetwork] Container blockExternalNetwork
                              * @property {string|null} [username] Container username
                              * @property {string|null} [password] Container password
+                             * @property {boolean|null} [enableImageStreaming] Container enableImageStreaming
                              */
     
                             /**
@@ -25729,6 +25730,14 @@
                             Container.prototype.password = "";
     
                             /**
+                             * Container enableImageStreaming.
+                             * @member {boolean} enableImageStreaming
+                             * @memberof google.cloud.batch.v1alpha.Runnable.Container
+                             * @instance
+                             */
+                            Container.prototype.enableImageStreaming = false;
+    
+                            /**
                              * Creates a new Container instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.batch.v1alpha.Runnable.Container
@@ -25770,6 +25779,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.username);
                                 if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                     writer.uint32(/* id 11, wireType 2 =*/90).string(message.password);
+                                if (message.enableImageStreaming != null && Object.hasOwnProperty.call(message, "enableImageStreaming"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableImageStreaming);
                                 return writer;
                             };
     
@@ -25840,6 +25851,10 @@
                                             message.password = reader.string();
                                             break;
                                         }
+                                    case 12: {
+                                            message.enableImageStreaming = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -25907,6 +25922,9 @@
                                 if (message.password != null && message.hasOwnProperty("password"))
                                     if (!$util.isString(message.password))
                                         return "password: string expected";
+                                if (message.enableImageStreaming != null && message.hasOwnProperty("enableImageStreaming"))
+                                    if (typeof message.enableImageStreaming !== "boolean")
+                                        return "enableImageStreaming: boolean expected";
                                 return null;
                             };
     
@@ -25948,6 +25966,8 @@
                                     message.username = String(object.username);
                                 if (object.password != null)
                                     message.password = String(object.password);
+                                if (object.enableImageStreaming != null)
+                                    message.enableImageStreaming = Boolean(object.enableImageStreaming);
                                 return message;
                             };
     
@@ -25975,6 +25995,7 @@
                                     object.blockExternalNetwork = false;
                                     object.username = "";
                                     object.password = "";
+                                    object.enableImageStreaming = false;
                                 }
                                 if (message.imageUri != null && message.hasOwnProperty("imageUri"))
                                     object.imageUri = message.imageUri;
@@ -25998,6 +26019,8 @@
                                     object.username = message.username;
                                 if (message.password != null && message.hasOwnProperty("password"))
                                     object.password = message.password;
+                                if (message.enableImageStreaming != null && message.hasOwnProperty("enableImageStreaming"))
+                                    object.enableImageStreaming = message.enableImageStreaming;
                                 return object;
                             };
     

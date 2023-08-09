@@ -2363,6 +2363,13 @@
                             "password": {
                               "type": "string",
                               "id": 11
+                            },
+                            "enableImageStreaming": {
+                              "type": "bool",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
