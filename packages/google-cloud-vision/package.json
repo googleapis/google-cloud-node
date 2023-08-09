@@ -49,7 +49,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^3.0.0",
+    "@google-cloud/promisify": "^4.0.0",
     "google-gax": "^4.0.3",
     "is": "^3.3.0"
   },
