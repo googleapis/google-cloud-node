@@ -1,8 +1,13 @@
 [
   "../../protos/google/cloud/baremetalsolution/v2/baremetalsolution.proto",
+  "../../protos/google/cloud/baremetalsolution/v2/common.proto",
   "../../protos/google/cloud/baremetalsolution/v2/instance.proto",
   "../../protos/google/cloud/baremetalsolution/v2/lun.proto",
   "../../protos/google/cloud/baremetalsolution/v2/network.proto",
   "../../protos/google/cloud/baremetalsolution/v2/nfs_share.proto",
-  "../../protos/google/cloud/baremetalsolution/v2/volume.proto"
+  "../../protos/google/cloud/baremetalsolution/v2/osimage.proto",
+  "../../protos/google/cloud/baremetalsolution/v2/provisioning.proto",
+  "../../protos/google/cloud/baremetalsolution/v2/ssh_key.proto",
+  "../../protos/google/cloud/baremetalsolution/v2/volume.proto",
+  "../../protos/google/cloud/baremetalsolution/v2/volume_snapshot.proto"
 ]

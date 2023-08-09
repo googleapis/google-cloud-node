@@ -37,11 +37,7 @@ function main(volume) {
   /**
    *  The list of fields to update.
    *  The only currently supported fields are:
-   *    `snapshot_auto_delete_behavior`
-   *    `snapshot_schedule_policy_name`
    *    'labels'
-   *    'snapshot_enabled'
-   *    'snapshot_reservation_detail.reserved_space_percent'
    */
   // const updateMask = {}
 

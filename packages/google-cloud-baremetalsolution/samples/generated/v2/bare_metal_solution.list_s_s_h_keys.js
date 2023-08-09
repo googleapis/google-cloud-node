@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(nfsShare) {
-  // [START baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+function main(parent) {
+  // [START baremetalsolution_v2_generated_BareMetalSolution_ListSSHKeys_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,18 @@ function main(nfsShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NFS share to update.
-   *  The `name` field is used to identify the NFS share to update.
-   *  Format: projects/{project}/locations/{location}/nfsShares/{nfs_share}
+   *  Required. The parent containing the SSH keys.
+   *  Currently, the only valid value for the location is "global".
    */
-  // const nfsShare = {}
+  // const parent = 'abc123'
   /**
-   *  The list of fields to update.
-   *  The only currently supported fields are:
-   *    `labels`
-   *    `allowed_clients`
+   *  The maximum number of items to return.
    */
-  // const updateMask = {}
+  // const pageSize = 1234
+  /**
+   *  The next_page_token value returned from a previous List request, if any.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Baremetalsolution library
   const {BareMetalSolutionClient} = require('@google-cloud/bare-metal-solution').v2;
@@ -48,20 +48,21 @@ function main(nfsShare) {
   // Instantiates a client
   const baremetalsolutionClient = new BareMetalSolutionClient();
 
-  async function callUpdateNfsShare() {
+  async function callListSSHKeys() {
     // Construct request
     const request = {
-      nfsShare,
+      parent,
     };
 
     // Run request
-    const [operation] = await baremetalsolutionClient.updateNfsShare(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await baremetalsolutionClient.listSSHKeysAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callUpdateNfsShare();
-  // [END baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+  callListSSHKeys();
+  // [END baremetalsolution_v2_generated_BareMetalSolution_ListSSHKeys_async]
 }
 
 process.on('unhandledRejection', err => {

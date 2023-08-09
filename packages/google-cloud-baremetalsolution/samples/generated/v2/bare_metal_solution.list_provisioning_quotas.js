@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(nfsShare) {
-  // [START baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+function main(parent) {
+  // [START baremetalsolution_v2_generated_BareMetalSolution_ListProvisioningQuotas_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,20 @@ function main(nfsShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NFS share to update.
-   *  The `name` field is used to identify the NFS share to update.
-   *  Format: projects/{project}/locations/{location}/nfsShares/{nfs_share}
+   *  Required. Parent value for ListProvisioningQuotasRequest.
    */
-  // const nfsShare = {}
+  // const parent = 'abc123'
   /**
-   *  The list of fields to update.
-   *  The only currently supported fields are:
-   *    `labels`
-   *    `allowed_clients`
+   *  Requested page size. The server might return fewer items than requested.
+   *  If unspecified, server will pick an appropriate default.
+   *  Notice that page_size field is not supported and won't be respected in
+   *  the API request for now, will be updated when pagination is supported.
    */
-  // const updateMask = {}
+  // const pageSize = 1234
+  /**
+   *  A token identifying a page of results from the server.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Baremetalsolution library
   const {BareMetalSolutionClient} = require('@google-cloud/bare-metal-solution').v2;
@@ -48,20 +50,21 @@ function main(nfsShare) {
   // Instantiates a client
   const baremetalsolutionClient = new BareMetalSolutionClient();
 
-  async function callUpdateNfsShare() {
+  async function callListProvisioningQuotas() {
     // Construct request
     const request = {
-      nfsShare,
+      parent,
     };
 
     // Run request
-    const [operation] = await baremetalsolutionClient.updateNfsShare(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await baremetalsolutionClient.listProvisioningQuotasAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callUpdateNfsShare();
-  // [END baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+  callListProvisioningQuotas();
+  // [END baremetalsolution_v2_generated_BareMetalSolution_ListProvisioningQuotas_async]
 }
 
 process.on('unhandledRejection', err => {

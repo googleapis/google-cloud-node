@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(nfsShare) {
-  // [START baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+function main(name, newNfsshareId) {
+  // [START baremetalsolution_v2_generated_BareMetalSolution_RenameNfsShare_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,14 @@ function main(nfsShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NFS share to update.
-   *  The `name` field is used to identify the NFS share to update.
-   *  Format: projects/{project}/locations/{location}/nfsShares/{nfs_share}
+   *  Required. The `name` field is used to identify the nfsshare.
+   *  Format: projects/{project}/locations/{location}/nfsshares/{nfsshare}
    */
-  // const nfsShare = {}
+  // const name = 'abc123'
   /**
-   *  The list of fields to update.
-   *  The only currently supported fields are:
-   *    `labels`
-   *    `allowed_clients`
+   *  Required. The new `id` of the nfsshare.
    */
-  // const updateMask = {}
+  // const newNfsshareId = 'abc123'
 
   // Imports the Baremetalsolution library
   const {BareMetalSolutionClient} = require('@google-cloud/bare-metal-solution').v2;
@@ -48,20 +44,20 @@ function main(nfsShare) {
   // Instantiates a client
   const baremetalsolutionClient = new BareMetalSolutionClient();
 
-  async function callUpdateNfsShare() {
+  async function callRenameNfsShare() {
     // Construct request
     const request = {
-      nfsShare,
+      name,
+      newNfsshareId,
     };
 
     // Run request
-    const [operation] = await baremetalsolutionClient.updateNfsShare(request);
-    const [response] = await operation.promise();
+    const response = await baremetalsolutionClient.renameNfsShare(request);
     console.log(response);
   }
 
-  callUpdateNfsShare();
-  // [END baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+  callRenameNfsShare();
+  // [END baremetalsolution_v2_generated_BareMetalSolution_RenameNfsShare_async]
 }
 
 process.on('unhandledRejection', err => {

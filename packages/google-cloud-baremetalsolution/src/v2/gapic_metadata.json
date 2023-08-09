@@ -15,9 +15,29 @@
                 "getInstance"
               ]
             },
+            "RenameInstance": {
+              "methods": [
+                "renameInstance"
+              ]
+            },
+            "CreateSSHKey": {
+              "methods": [
+                "createSSHKey"
+              ]
+            },
+            "DeleteSSHKey": {
+              "methods": [
+                "deleteSSHKey"
+              ]
+            },
             "GetVolume": {
               "methods": [
                 "getVolume"
+              ]
+            },
+            "RenameVolume": {
+              "methods": [
+                "renameVolume"
               ]
             },
             "ListNetworkUsage": {
@@ -30,6 +50,21 @@
                 "getNetwork"
               ]
             },
+            "CreateVolumeSnapshot": {
+              "methods": [
+                "createVolumeSnapshot"
+              ]
+            },
+            "DeleteVolumeSnapshot": {
+              "methods": [
+                "deleteVolumeSnapshot"
+              ]
+            },
+            "GetVolumeSnapshot": {
+              "methods": [
+                "getVolumeSnapshot"
+              ]
+            },
             "GetLun": {
               "methods": [
                 "getLun"
@@ -38,6 +73,36 @@
             "GetNfsShare": {
               "methods": [
                 "getNfsShare"
+              ]
+            },
+            "RenameNfsShare": {
+              "methods": [
+                "renameNfsShare"
+              ]
+            },
+            "SubmitProvisioningConfig": {
+              "methods": [
+                "submitProvisioningConfig"
+              ]
+            },
+            "GetProvisioningConfig": {
+              "methods": [
+                "getProvisioningConfig"
+              ]
+            },
+            "CreateProvisioningConfig": {
+              "methods": [
+                "createProvisioningConfig"
+              ]
+            },
+            "UpdateProvisioningConfig": {
+              "methods": [
+                "updateProvisioningConfig"
+              ]
+            },
+            "RenameNetwork": {
+              "methods": [
+                "renameNetwork"
               ]
             },
             "UpdateInstance": {
@@ -60,6 +125,16 @@
                 "stopInstance"
               ]
             },
+            "EnableInteractiveSerialConsole": {
+              "methods": [
+                "enableInteractiveSerialConsole"
+              ]
+            },
+            "DisableInteractiveSerialConsole": {
+              "methods": [
+                "disableInteractiveSerialConsole"
+              ]
+            },
             "DetachLun": {
               "methods": [
                 "detachLun"
@@ -68,6 +143,11 @@
             "UpdateVolume": {
               "methods": [
                 "updateVolume"
+              ]
+            },
+            "EvictVolume": {
+              "methods": [
+                "evictVolume"
               ]
             },
             "ResizeVolume": {
@@ -80,9 +160,29 @@
                 "updateNetwork"
               ]
             },
+            "RestoreVolumeSnapshot": {
+              "methods": [
+                "restoreVolumeSnapshot"
+              ]
+            },
+            "EvictLun": {
+              "methods": [
+                "evictLun"
+              ]
+            },
             "UpdateNfsShare": {
               "methods": [
                 "updateNfsShare"
+              ]
+            },
+            "CreateNfsShare": {
+              "methods": [
+                "createNfsShare"
+              ]
+            },
+            "DeleteNfsShare": {
+              "methods": [
+                "deleteNfsShare"
               ]
             },
             "ListInstances": {
@@ -90,6 +190,13 @@
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListSSHKeys": {
+              "methods": [
+                "listSSHKeys",
+                "listSSHKeysStream",
+                "listSSHKeysAsync"
               ]
             },
             "ListVolumes": {
@@ -106,6 +213,13 @@
                 "listNetworksAsync"
               ]
             },
+            "ListVolumeSnapshots": {
+              "methods": [
+                "listVolumeSnapshots",
+                "listVolumeSnapshotsStream",
+                "listVolumeSnapshotsAsync"
+              ]
+            },
             "ListLuns": {
               "methods": [
                 "listLuns",
@@ -118,6 +232,20 @@
                 "listNfsShares",
                 "listNfsSharesStream",
                 "listNfsSharesAsync"
+              ]
+            },
+            "ListProvisioningQuotas": {
+              "methods": [
+                "listProvisioningQuotas",
+                "listProvisioningQuotasStream",
+                "listProvisioningQuotasAsync"
+              ]
+            },
+            "ListOSImages": {
+              "methods": [
+                "listOSImages",
+                "listOSImagesStream",
+                "listOSImagesAsync"
               ]
             }
           }
@@ -130,9 +258,29 @@
                 "getInstance"
               ]
             },
+            "RenameInstance": {
+              "methods": [
+                "renameInstance"
+              ]
+            },
+            "CreateSSHKey": {
+              "methods": [
+                "createSSHKey"
+              ]
+            },
+            "DeleteSSHKey": {
+              "methods": [
+                "deleteSSHKey"
+              ]
+            },
             "GetVolume": {
               "methods": [
                 "getVolume"
+              ]
+            },
+            "RenameVolume": {
+              "methods": [
+                "renameVolume"
               ]
             },
             "ListNetworkUsage": {
@@ -145,6 +293,21 @@
                 "getNetwork"
               ]
             },
+            "CreateVolumeSnapshot": {
+              "methods": [
+                "createVolumeSnapshot"
+              ]
+            },
+            "DeleteVolumeSnapshot": {
+              "methods": [
+                "deleteVolumeSnapshot"
+              ]
+            },
+            "GetVolumeSnapshot": {
+              "methods": [
+                "getVolumeSnapshot"
+              ]
+            },
             "GetLun": {
               "methods": [
                 "getLun"
@@ -153,6 +316,36 @@
             "GetNfsShare": {
               "methods": [
                 "getNfsShare"
+              ]
+            },
+            "RenameNfsShare": {
+              "methods": [
+                "renameNfsShare"
+              ]
+            },
+            "SubmitProvisioningConfig": {
+              "methods": [
+                "submitProvisioningConfig"
+              ]
+            },
+            "GetProvisioningConfig": {
+              "methods": [
+                "getProvisioningConfig"
+              ]
+            },
+            "CreateProvisioningConfig": {
+              "methods": [
+                "createProvisioningConfig"
+              ]
+            },
+            "UpdateProvisioningConfig": {
+              "methods": [
+                "updateProvisioningConfig"
+              ]
+            },
+            "RenameNetwork": {
+              "methods": [
+                "renameNetwork"
               ]
             },
             "UpdateInstance": {
@@ -175,6 +368,16 @@
                 "stopInstance"
               ]
             },
+            "EnableInteractiveSerialConsole": {
+              "methods": [
+                "enableInteractiveSerialConsole"
+              ]
+            },
+            "DisableInteractiveSerialConsole": {
+              "methods": [
+                "disableInteractiveSerialConsole"
+              ]
+            },
             "DetachLun": {
               "methods": [
                 "detachLun"
@@ -183,6 +386,11 @@
             "UpdateVolume": {
               "methods": [
                 "updateVolume"
+              ]
+            },
+            "EvictVolume": {
+              "methods": [
+                "evictVolume"
               ]
             },
             "ResizeVolume": {
@@ -195,9 +403,29 @@
                 "updateNetwork"
               ]
             },
+            "RestoreVolumeSnapshot": {
+              "methods": [
+                "restoreVolumeSnapshot"
+              ]
+            },
+            "EvictLun": {
+              "methods": [
+                "evictLun"
+              ]
+            },
             "UpdateNfsShare": {
               "methods": [
                 "updateNfsShare"
+              ]
+            },
+            "CreateNfsShare": {
+              "methods": [
+                "createNfsShare"
+              ]
+            },
+            "DeleteNfsShare": {
+              "methods": [
+                "deleteNfsShare"
               ]
             },
             "ListInstances": {
@@ -205,6 +433,13 @@
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListSSHKeys": {
+              "methods": [
+                "listSSHKeys",
+                "listSSHKeysStream",
+                "listSSHKeysAsync"
               ]
             },
             "ListVolumes": {
@@ -221,6 +456,13 @@
                 "listNetworksAsync"
               ]
             },
+            "ListVolumeSnapshots": {
+              "methods": [
+                "listVolumeSnapshots",
+                "listVolumeSnapshotsStream",
+                "listVolumeSnapshotsAsync"
+              ]
+            },
             "ListLuns": {
               "methods": [
                 "listLuns",
@@ -233,6 +475,20 @@
                 "listNfsShares",
                 "listNfsSharesStream",
                 "listNfsSharesAsync"
+              ]
+            },
+            "ListProvisioningQuotas": {
+              "methods": [
+                "listProvisioningQuotas",
+                "listProvisioningQuotasStream",
+                "listProvisioningQuotasAsync"
+              ]
+            },
+            "ListOSImages": {
+              "methods": [
+                "listOSImages",
+                "listOSImagesStream",
+                "listOSImagesAsync"
               ]
             }
           }

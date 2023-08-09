@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(nfsShare) {
-  // [START baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+function main(parent, volumeSnapshot) {
+  // [START baremetalsolution_v2_generated_BareMetalSolution_CreateVolumeSnapshot_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,13 @@ function main(nfsShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NFS share to update.
-   *  The `name` field is used to identify the NFS share to update.
-   *  Format: projects/{project}/locations/{location}/nfsShares/{nfs_share}
+   *  Required. The volume to snapshot.
    */
-  // const nfsShare = {}
+  // const parent = 'abc123'
   /**
-   *  The list of fields to update.
-   *  The only currently supported fields are:
-   *    `labels`
-   *    `allowed_clients`
+   *  Required. The snapshot to create.
    */
-  // const updateMask = {}
+  // const volumeSnapshot = {}
 
   // Imports the Baremetalsolution library
   const {BareMetalSolutionClient} = require('@google-cloud/bare-metal-solution').v2;
@@ -48,20 +43,20 @@ function main(nfsShare) {
   // Instantiates a client
   const baremetalsolutionClient = new BareMetalSolutionClient();
 
-  async function callUpdateNfsShare() {
+  async function callCreateVolumeSnapshot() {
     // Construct request
     const request = {
-      nfsShare,
+      parent,
+      volumeSnapshot,
     };
 
     // Run request
-    const [operation] = await baremetalsolutionClient.updateNfsShare(request);
-    const [response] = await operation.promise();
+    const response = await baremetalsolutionClient.createVolumeSnapshot(request);
     console.log(response);
   }
 
-  callUpdateNfsShare();
-  // [END baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+  callCreateVolumeSnapshot();
+  // [END baremetalsolution_v2_generated_BareMetalSolution_CreateVolumeSnapshot_async]
 }
 
 process.on('unhandledRejection', err => {

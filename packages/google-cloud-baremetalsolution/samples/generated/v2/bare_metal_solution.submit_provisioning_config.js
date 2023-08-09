@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(nfsShare) {
-  // [START baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+function main(parent, provisioningConfig) {
+  // [START baremetalsolution_v2_generated_BareMetalSolution_SubmitProvisioningConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,19 @@ function main(nfsShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The NFS share to update.
-   *  The `name` field is used to identify the NFS share to update.
-   *  Format: projects/{project}/locations/{location}/nfsShares/{nfs_share}
+   *  Required. The parent project and location containing the
+   *  ProvisioningConfig.
    */
-  // const nfsShare = {}
+  // const parent = 'abc123'
   /**
-   *  The list of fields to update.
-   *  The only currently supported fields are:
-   *    `labels`
-   *    `allowed_clients`
+   *  Required. The ProvisioningConfig to create.
    */
-  // const updateMask = {}
+  // const provisioningConfig = {}
+  /**
+   *  Optional. Email provided to send a confirmation with provisioning config
+   *  to.
+   */
+  // const email = 'abc123'
 
   // Imports the Baremetalsolution library
   const {BareMetalSolutionClient} = require('@google-cloud/bare-metal-solution').v2;
@@ -48,20 +49,20 @@ function main(nfsShare) {
   // Instantiates a client
   const baremetalsolutionClient = new BareMetalSolutionClient();
 
-  async function callUpdateNfsShare() {
+  async function callSubmitProvisioningConfig() {
     // Construct request
     const request = {
-      nfsShare,
+      parent,
+      provisioningConfig,
     };
 
     // Run request
-    const [operation] = await baremetalsolutionClient.updateNfsShare(request);
-    const [response] = await operation.promise();
+    const response = await baremetalsolutionClient.submitProvisioningConfig(request);
     console.log(response);
   }
 
-  callUpdateNfsShare();
-  // [END baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async]
+  callSubmitProvisioningConfig();
+  // [END baremetalsolution_v2_generated_BareMetalSolution_SubmitProvisioningConfig_async]
 }
 
 process.on('unhandledRejection', err => {

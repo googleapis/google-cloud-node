@@ -37,7 +37,7 @@ function main(network) {
   /**
    *  The list of fields to update.
    *  The only currently supported fields are:
-   *    `labels`, `reservations`
+   *    `labels`, `reservations`, `vrf.vlan_attachments`
    */
   // const updateMask = {}
 
