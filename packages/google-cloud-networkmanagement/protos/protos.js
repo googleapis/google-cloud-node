@@ -83,6 +83,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] ConnectivityTest createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ConnectivityTest updateTime
                          * @property {google.cloud.networkmanagement.v1.IReachabilityDetails|null} [reachabilityDetails] ConnectivityTest reachabilityDetails
+                         * @property {google.cloud.networkmanagement.v1.IProbingDetails|null} [probingDetails] ConnectivityTest probingDetails
                          */
     
                         /**
@@ -191,6 +192,14 @@
                         ConnectivityTest.prototype.reachabilityDetails = null;
     
                         /**
+                         * ConnectivityTest probingDetails.
+                         * @member {google.cloud.networkmanagement.v1.IProbingDetails|null|undefined} probingDetails
+                         * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.probingDetails = null;
+    
+                        /**
                          * Creates a new ConnectivityTest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
@@ -238,6 +247,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.reachabilityDetails != null && Object.hasOwnProperty.call(message, "reachabilityDetails"))
                                 $root.google.cloud.networkmanagement.v1.ReachabilityDetails.encode(message.reachabilityDetails, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.probingDetails != null && Object.hasOwnProperty.call(message, "probingDetails"))
+                                $root.google.cloud.networkmanagement.v1.ProbingDetails.encode(message.probingDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -337,6 +348,10 @@
                                         message.reachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -424,6 +439,11 @@
                                 if (error)
                                     return "reachabilityDetails." + error;
                             }
+                            if (message.probingDetails != null && message.hasOwnProperty("probingDetails")) {
+                                var error = $root.google.cloud.networkmanagement.v1.ProbingDetails.verify(message.probingDetails);
+                                if (error)
+                                    return "probingDetails." + error;
+                            }
                             return null;
                         };
     
@@ -486,6 +506,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.ConnectivityTest.reachabilityDetails: object expected");
                                 message.reachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.fromObject(object.reachabilityDetails);
                             }
+                            if (object.probingDetails != null) {
+                                if (typeof object.probingDetails !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ConnectivityTest.probingDetails: object expected");
+                                message.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.fromObject(object.probingDetails);
+                            }
                             return message;
                         };
     
@@ -516,6 +541,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.reachabilityDetails = null;
+                                object.probingDetails = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -546,6 +572,8 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.reachabilityDetails != null && message.hasOwnProperty("reachabilityDetails"))
                                 object.reachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.toObject(message.reachabilityDetails, options);
+                            if (message.probingDetails != null && message.hasOwnProperty("probingDetails"))
+                                object.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.toObject(message.probingDetails, options);
                             return object;
                         };
     
@@ -588,8 +616,14 @@
                          * @property {number|null} [port] Endpoint port
                          * @property {string|null} [instance] Endpoint instance
                          * @property {string|null} [forwardingRule] Endpoint forwardingRule
+                         * @property {google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|null} [forwardingRuleTarget] Endpoint forwardingRuleTarget
+                         * @property {string|null} [loadBalancerId] Endpoint loadBalancerId
+                         * @property {google.cloud.networkmanagement.v1.LoadBalancerType|null} [loadBalancerType] Endpoint loadBalancerType
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
+                         * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
+                         * @property {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
+                         * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
                          * @property {string|null} [network] Endpoint network
                          * @property {google.cloud.networkmanagement.v1.Endpoint.NetworkType|null} [networkType] Endpoint networkType
                          * @property {string|null} [projectId] Endpoint projectId
@@ -643,6 +677,30 @@
                         Endpoint.prototype.forwardingRule = "";
     
                         /**
+                         * Endpoint forwardingRuleTarget.
+                         * @member {google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|null|undefined} forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.forwardingRuleTarget = null;
+    
+                        /**
+                         * Endpoint loadBalancerId.
+                         * @member {string|null|undefined} loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerId = null;
+    
+                        /**
+                         * Endpoint loadBalancerType.
+                         * @member {google.cloud.networkmanagement.v1.LoadBalancerType|null|undefined} loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerType = null;
+    
+                        /**
                          * Endpoint gkeMasterCluster.
                          * @member {string} gkeMasterCluster
                          * @memberof google.cloud.networkmanagement.v1.Endpoint
@@ -657,6 +715,30 @@
                          * @instance
                          */
                         Endpoint.prototype.cloudSqlInstance = "";
+    
+                        /**
+                         * Endpoint cloudFunction.
+                         * @member {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null|undefined} cloudFunction
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.cloudFunction = null;
+    
+                        /**
+                         * Endpoint appEngineVersion.
+                         * @member {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint|null|undefined} appEngineVersion
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.appEngineVersion = null;
+    
+                        /**
+                         * Endpoint cloudRunRevision.
+                         * @member {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint|null|undefined} cloudRunRevision
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.cloudRunRevision = null;
     
                         /**
                          * Endpoint network.
@@ -681,6 +763,42 @@
                          * @instance
                          */
                         Endpoint.prototype.projectId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Endpoint _forwardingRuleTarget.
+                         * @member {"forwardingRuleTarget"|undefined} _forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_forwardingRuleTarget", {
+                            get: $util.oneOfGetter($oneOfFields = ["forwardingRuleTarget"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerId.
+                         * @member {"loadBalancerId"|undefined} _loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerId", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerType.
+                         * @member {"loadBalancerType"|undefined} _loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerType", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Endpoint instance using the specified properties.
@@ -722,8 +840,20 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.gkeMasterCluster);
                             if (message.cloudSqlInstance != null && Object.hasOwnProperty.call(message, "cloudSqlInstance"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.cloudSqlInstance);
+                            if (message.cloudFunction != null && Object.hasOwnProperty.call(message, "cloudFunction"))
+                                $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.encode(message.cloudFunction, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.appEngineVersion != null && Object.hasOwnProperty.call(message, "appEngineVersion"))
+                                $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.encode(message.appEngineVersion, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
+                                $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.encode(message.cloudRunRevision, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardingRule);
+                            if (message.forwardingRuleTarget != null && Object.hasOwnProperty.call(message, "forwardingRuleTarget"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.forwardingRuleTarget);
+                            if (message.loadBalancerId != null && Object.hasOwnProperty.call(message, "loadBalancerId"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.loadBalancerId);
+                            if (message.loadBalancerType != null && Object.hasOwnProperty.call(message, "loadBalancerType"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.loadBalancerType);
                             return writer;
                         };
     
@@ -774,12 +904,36 @@
                                         message.forwardingRule = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.forwardingRuleTarget = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.loadBalancerId = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.loadBalancerType = reader.int32();
+                                        break;
+                                    }
                                 case 7: {
                                         message.gkeMasterCluster = reader.string();
                                         break;
                                     }
                                 case 8: {
                                         message.cloudSqlInstance = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cloudFunction = $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.appEngineVersion = $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.cloudRunRevision = $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -829,6 +983,7 @@
                         Endpoint.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 if (!$util.isString(message.ipAddress))
                                     return "ipAddress: string expected";
@@ -841,12 +996,64 @@
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 if (!$util.isString(message.forwardingRule))
                                     return "forwardingRule: string expected";
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                properties._forwardingRuleTarget = 1;
+                                switch (message.forwardingRuleTarget) {
+                                default:
+                                    return "forwardingRuleTarget: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                properties._loadBalancerId = 1;
+                                if (!$util.isString(message.loadBalancerId))
+                                    return "loadBalancerId: string expected";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                properties._loadBalancerType = 1;
+                                switch (message.loadBalancerType) {
+                                default:
+                                    return "loadBalancerType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    break;
+                                }
+                            }
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance"))
                                 if (!$util.isString(message.cloudSqlInstance))
                                     return "cloudSqlInstance: string expected";
+                            if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
+                                var error = $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction);
+                                if (error)
+                                    return "cloudFunction." + error;
+                            }
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion")) {
+                                var error = $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.verify(message.appEngineVersion);
+                                if (error)
+                                    return "appEngineVersion." + error;
+                            }
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                var error = $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.verify(message.cloudRunRevision);
+                                if (error)
+                                    return "cloudRunRevision." + error;
+                            }
                             if (message.network != null && message.hasOwnProperty("network"))
                                 if (!$util.isString(message.network))
                                     return "network: string expected";
@@ -885,10 +1092,107 @@
                                 message.instance = String(object.instance);
                             if (object.forwardingRule != null)
                                 message.forwardingRule = String(object.forwardingRule);
+                            switch (object.forwardingRuleTarget) {
+                            default:
+                                if (typeof object.forwardingRuleTarget === "number") {
+                                    message.forwardingRuleTarget = object.forwardingRuleTarget;
+                                    break;
+                                }
+                                break;
+                            case "FORWARDING_RULE_TARGET_UNSPECIFIED":
+                            case 0:
+                                message.forwardingRuleTarget = 0;
+                                break;
+                            case "INSTANCE":
+                            case 1:
+                                message.forwardingRuleTarget = 1;
+                                break;
+                            case "LOAD_BALANCER":
+                            case 2:
+                                message.forwardingRuleTarget = 2;
+                                break;
+                            case "VPN_GATEWAY":
+                            case 3:
+                                message.forwardingRuleTarget = 3;
+                                break;
+                            case "PSC":
+                            case 4:
+                                message.forwardingRuleTarget = 4;
+                                break;
+                            }
+                            if (object.loadBalancerId != null)
+                                message.loadBalancerId = String(object.loadBalancerId);
+                            switch (object.loadBalancerType) {
+                            default:
+                                if (typeof object.loadBalancerType === "number") {
+                                    message.loadBalancerType = object.loadBalancerType;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancerType = 0;
+                                break;
+                            case "HTTPS_ADVANCED_LOAD_BALANCER":
+                            case 1:
+                                message.loadBalancerType = 1;
+                                break;
+                            case "HTTPS_LOAD_BALANCER":
+                            case 2:
+                                message.loadBalancerType = 2;
+                                break;
+                            case "REGIONAL_HTTPS_LOAD_BALANCER":
+                            case 3:
+                                message.loadBalancerType = 3;
+                                break;
+                            case "INTERNAL_HTTPS_LOAD_BALANCER":
+                            case 4:
+                                message.loadBalancerType = 4;
+                                break;
+                            case "SSL_PROXY_LOAD_BALANCER":
+                            case 5:
+                                message.loadBalancerType = 5;
+                                break;
+                            case "TCP_PROXY_LOAD_BALANCER":
+                            case 6:
+                                message.loadBalancerType = 6;
+                                break;
+                            case "INTERNAL_TCP_PROXY_LOAD_BALANCER":
+                            case 7:
+                                message.loadBalancerType = 7;
+                                break;
+                            case "NETWORK_LOAD_BALANCER":
+                            case 8:
+                                message.loadBalancerType = 8;
+                                break;
+                            case "LEGACY_NETWORK_LOAD_BALANCER":
+                            case 9:
+                                message.loadBalancerType = 9;
+                                break;
+                            case "TCP_UDP_INTERNAL_LOAD_BALANCER":
+                            case 10:
+                                message.loadBalancerType = 10;
+                                break;
+                            }
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
                             if (object.cloudSqlInstance != null)
                                 message.cloudSqlInstance = String(object.cloudSqlInstance);
+                            if (object.cloudFunction != null) {
+                                if (typeof object.cloudFunction !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Endpoint.cloudFunction: object expected");
+                                message.cloudFunction = $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.fromObject(object.cloudFunction);
+                            }
+                            if (object.appEngineVersion != null) {
+                                if (typeof object.appEngineVersion !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Endpoint.appEngineVersion: object expected");
+                                message.appEngineVersion = $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.fromObject(object.appEngineVersion);
+                            }
+                            if (object.cloudRunRevision != null) {
+                                if (typeof object.cloudRunRevision !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Endpoint.cloudRunRevision: object expected");
+                                message.cloudRunRevision = $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.fromObject(object.cloudRunRevision);
+                            }
                             if (object.network != null)
                                 message.network = String(object.network);
                             switch (object.networkType) {
@@ -938,6 +1242,9 @@
                                 object.projectId = "";
                                 object.gkeMasterCluster = "";
                                 object.cloudSqlInstance = "";
+                                object.cloudFunction = null;
+                                object.appEngineVersion = null;
+                                object.cloudRunRevision = null;
                                 object.forwardingRule = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
@@ -956,8 +1263,29 @@
                                 object.gkeMasterCluster = message.gkeMasterCluster;
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance"))
                                 object.cloudSqlInstance = message.cloudSqlInstance;
+                            if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction"))
+                                object.cloudFunction = $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.toObject(message.cloudFunction, options);
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion"))
+                                object.appEngineVersion = $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.toObject(message.appEngineVersion, options);
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision"))
+                                object.cloudRunRevision = $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.toObject(message.cloudRunRevision, options);
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 object.forwardingRule = message.forwardingRule;
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                object.forwardingRuleTarget = options.enums === String ? $root.google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] === undefined ? message.forwardingRuleTarget : $root.google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] : message.forwardingRuleTarget;
+                                if (options.oneofs)
+                                    object._forwardingRuleTarget = "forwardingRuleTarget";
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                object.loadBalancerId = message.loadBalancerId;
+                                if (options.oneofs)
+                                    object._loadBalancerId = "loadBalancerId";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerType[message.loadBalancerType] === undefined ? message.loadBalancerType : $root.google.cloud.networkmanagement.v1.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
+                                if (options.oneofs)
+                                    object._loadBalancerType = "loadBalancerType";
+                            }
                             return object;
                         };
     
@@ -1001,6 +1329,635 @@
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
                             return values;
+                        })();
+    
+                        /**
+                         * ForwardingRuleTarget enum.
+                         * @name google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget
+                         * @enum {number}
+                         * @property {number} FORWARDING_RULE_TARGET_UNSPECIFIED=0 FORWARDING_RULE_TARGET_UNSPECIFIED value
+                         * @property {number} INSTANCE=1 INSTANCE value
+                         * @property {number} LOAD_BALANCER=2 LOAD_BALANCER value
+                         * @property {number} VPN_GATEWAY=3 VPN_GATEWAY value
+                         * @property {number} PSC=4 PSC value
+                         */
+                        Endpoint.ForwardingRuleTarget = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FORWARDING_RULE_TARGET_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INSTANCE"] = 1;
+                            values[valuesById[2] = "LOAD_BALANCER"] = 2;
+                            values[valuesById[3] = "VPN_GATEWAY"] = 3;
+                            values[valuesById[4] = "PSC"] = 4;
+                            return values;
+                        })();
+    
+                        Endpoint.CloudFunctionEndpoint = (function() {
+    
+                            /**
+                             * Properties of a CloudFunctionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint
+                             * @interface ICloudFunctionEndpoint
+                             * @property {string|null} [uri] CloudFunctionEndpoint uri
+                             */
+    
+                            /**
+                             * Constructs a new CloudFunctionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint
+                             * @classdesc Represents a CloudFunctionEndpoint.
+                             * @implements ICloudFunctionEndpoint
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint=} [properties] Properties to set
+                             */
+                            function CloudFunctionEndpoint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudFunctionEndpoint uri.
+                             * @member {string} uri
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @instance
+                             */
+                            CloudFunctionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * Creates a new CloudFunctionEndpoint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint} CloudFunctionEndpoint instance
+                             */
+                            CloudFunctionEndpoint.create = function create(properties) {
+                                return new CloudFunctionEndpoint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudFunctionEndpoint message. Does not implicitly {@link google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint} message CloudFunctionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudFunctionEndpoint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudFunctionEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint} message CloudFunctionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudFunctionEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudFunctionEndpoint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint} CloudFunctionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudFunctionEndpoint.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudFunctionEndpoint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint} CloudFunctionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudFunctionEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudFunctionEndpoint message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudFunctionEndpoint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudFunctionEndpoint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint} CloudFunctionEndpoint
+                             */
+                            CloudFunctionEndpoint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudFunctionEndpoint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint} message CloudFunctionEndpoint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudFunctionEndpoint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.uri = "";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudFunctionEndpoint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudFunctionEndpoint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudFunctionEndpoint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudFunctionEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint";
+                            };
+    
+                            return CloudFunctionEndpoint;
+                        })();
+    
+                        Endpoint.AppEngineVersionEndpoint = (function() {
+    
+                            /**
+                             * Properties of an AppEngineVersionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint
+                             * @interface IAppEngineVersionEndpoint
+                             * @property {string|null} [uri] AppEngineVersionEndpoint uri
+                             */
+    
+                            /**
+                             * Constructs a new AppEngineVersionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint
+                             * @classdesc Represents an AppEngineVersionEndpoint.
+                             * @implements IAppEngineVersionEndpoint
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint=} [properties] Properties to set
+                             */
+                            function AppEngineVersionEndpoint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AppEngineVersionEndpoint uri.
+                             * @member {string} uri
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @instance
+                             */
+                            AppEngineVersionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * Creates a new AppEngineVersionEndpoint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint instance
+                             */
+                            AppEngineVersionEndpoint.create = function create(properties) {
+                                return new AppEngineVersionEndpoint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AppEngineVersionEndpoint message. Does not implicitly {@link google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint} message AppEngineVersionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AppEngineVersionEndpoint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AppEngineVersionEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint} message AppEngineVersionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AppEngineVersionEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AppEngineVersionEndpoint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AppEngineVersionEndpoint.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AppEngineVersionEndpoint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AppEngineVersionEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AppEngineVersionEndpoint message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AppEngineVersionEndpoint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AppEngineVersionEndpoint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint
+                             */
+                            AppEngineVersionEndpoint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AppEngineVersionEndpoint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint} message AppEngineVersionEndpoint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AppEngineVersionEndpoint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.uri = "";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AppEngineVersionEndpoint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AppEngineVersionEndpoint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AppEngineVersionEndpoint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AppEngineVersionEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint";
+                            };
+    
+                            return AppEngineVersionEndpoint;
+                        })();
+    
+                        Endpoint.CloudRunRevisionEndpoint = (function() {
+    
+                            /**
+                             * Properties of a CloudRunRevisionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint
+                             * @interface ICloudRunRevisionEndpoint
+                             * @property {string|null} [uri] CloudRunRevisionEndpoint uri
+                             */
+    
+                            /**
+                             * Constructs a new CloudRunRevisionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint
+                             * @classdesc Represents a CloudRunRevisionEndpoint.
+                             * @implements ICloudRunRevisionEndpoint
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint=} [properties] Properties to set
+                             */
+                            function CloudRunRevisionEndpoint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudRunRevisionEndpoint uri.
+                             * @member {string} uri
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             */
+                            CloudRunRevisionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint instance
+                             */
+                            CloudRunRevisionEndpoint.create = function create(properties) {
+                                return new CloudRunRevisionEndpoint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudRunRevisionEndpoint message. Does not implicitly {@link google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint} message CloudRunRevisionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudRunRevisionEndpoint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudRunRevisionEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint} message CloudRunRevisionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudRunRevisionEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudRunRevisionEndpoint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudRunRevisionEndpoint.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudRunRevisionEndpoint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudRunRevisionEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudRunRevisionEndpoint message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudRunRevisionEndpoint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudRunRevisionEndpoint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint
+                             */
+                            CloudRunRevisionEndpoint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudRunRevisionEndpoint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint} message CloudRunRevisionEndpoint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudRunRevisionEndpoint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.uri = "";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudRunRevisionEndpoint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudRunRevisionEndpoint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudRunRevisionEndpoint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudRunRevisionEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint";
+                            };
+    
+                            return CloudRunRevisionEndpoint;
                         })();
     
                         return Endpoint;
@@ -1365,6 +2322,1181 @@
                         return ReachabilityDetails;
                     })();
     
+                    v1.LatencyPercentile = (function() {
+    
+                        /**
+                         * Properties of a LatencyPercentile.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface ILatencyPercentile
+                         * @property {number|null} [percent] LatencyPercentile percent
+                         * @property {number|Long|null} [latencyMicros] LatencyPercentile latencyMicros
+                         */
+    
+                        /**
+                         * Constructs a new LatencyPercentile.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a LatencyPercentile.
+                         * @implements ILatencyPercentile
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.ILatencyPercentile=} [properties] Properties to set
+                         */
+                        function LatencyPercentile(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LatencyPercentile percent.
+                         * @member {number} percent
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @instance
+                         */
+                        LatencyPercentile.prototype.percent = 0;
+    
+                        /**
+                         * LatencyPercentile latencyMicros.
+                         * @member {number|Long} latencyMicros
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @instance
+                         */
+                        LatencyPercentile.prototype.latencyMicros = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new LatencyPercentile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ILatencyPercentile=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.LatencyPercentile} LatencyPercentile instance
+                         */
+                        LatencyPercentile.create = function create(properties) {
+                            return new LatencyPercentile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LatencyPercentile message. Does not implicitly {@link google.cloud.networkmanagement.v1.LatencyPercentile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ILatencyPercentile} message LatencyPercentile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LatencyPercentile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.percent != null && Object.hasOwnProperty.call(message, "percent"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.percent);
+                            if (message.latencyMicros != null && Object.hasOwnProperty.call(message, "latencyMicros"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.latencyMicros);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LatencyPercentile message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.LatencyPercentile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ILatencyPercentile} message LatencyPercentile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LatencyPercentile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LatencyPercentile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.LatencyPercentile} LatencyPercentile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LatencyPercentile.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.LatencyPercentile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.percent = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.latencyMicros = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LatencyPercentile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.LatencyPercentile} LatencyPercentile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LatencyPercentile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LatencyPercentile message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LatencyPercentile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.percent != null && message.hasOwnProperty("percent"))
+                                if (!$util.isInteger(message.percent))
+                                    return "percent: integer expected";
+                            if (message.latencyMicros != null && message.hasOwnProperty("latencyMicros"))
+                                if (!$util.isInteger(message.latencyMicros) && !(message.latencyMicros && $util.isInteger(message.latencyMicros.low) && $util.isInteger(message.latencyMicros.high)))
+                                    return "latencyMicros: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LatencyPercentile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.LatencyPercentile} LatencyPercentile
+                         */
+                        LatencyPercentile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.LatencyPercentile)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.LatencyPercentile();
+                            if (object.percent != null)
+                                message.percent = object.percent | 0;
+                            if (object.latencyMicros != null)
+                                if ($util.Long)
+                                    (message.latencyMicros = $util.Long.fromValue(object.latencyMicros)).unsigned = false;
+                                else if (typeof object.latencyMicros === "string")
+                                    message.latencyMicros = parseInt(object.latencyMicros, 10);
+                                else if (typeof object.latencyMicros === "number")
+                                    message.latencyMicros = object.latencyMicros;
+                                else if (typeof object.latencyMicros === "object")
+                                    message.latencyMicros = new $util.LongBits(object.latencyMicros.low >>> 0, object.latencyMicros.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LatencyPercentile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.LatencyPercentile} message LatencyPercentile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LatencyPercentile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.percent = 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.latencyMicros = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.latencyMicros = options.longs === String ? "0" : 0;
+                            }
+                            if (message.percent != null && message.hasOwnProperty("percent"))
+                                object.percent = message.percent;
+                            if (message.latencyMicros != null && message.hasOwnProperty("latencyMicros"))
+                                if (typeof message.latencyMicros === "number")
+                                    object.latencyMicros = options.longs === String ? String(message.latencyMicros) : message.latencyMicros;
+                                else
+                                    object.latencyMicros = options.longs === String ? $util.Long.prototype.toString.call(message.latencyMicros) : options.longs === Number ? new $util.LongBits(message.latencyMicros.low >>> 0, message.latencyMicros.high >>> 0).toNumber() : message.latencyMicros;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LatencyPercentile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LatencyPercentile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LatencyPercentile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.LatencyPercentile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LatencyPercentile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.LatencyPercentile";
+                        };
+    
+                        return LatencyPercentile;
+                    })();
+    
+                    v1.LatencyDistribution = (function() {
+    
+                        /**
+                         * Properties of a LatencyDistribution.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface ILatencyDistribution
+                         * @property {Array.<google.cloud.networkmanagement.v1.ILatencyPercentile>|null} [latencyPercentiles] LatencyDistribution latencyPercentiles
+                         */
+    
+                        /**
+                         * Constructs a new LatencyDistribution.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a LatencyDistribution.
+                         * @implements ILatencyDistribution
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.ILatencyDistribution=} [properties] Properties to set
+                         */
+                        function LatencyDistribution(properties) {
+                            this.latencyPercentiles = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LatencyDistribution latencyPercentiles.
+                         * @member {Array.<google.cloud.networkmanagement.v1.ILatencyPercentile>} latencyPercentiles
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @instance
+                         */
+                        LatencyDistribution.prototype.latencyPercentiles = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LatencyDistribution instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ILatencyDistribution=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.LatencyDistribution} LatencyDistribution instance
+                         */
+                        LatencyDistribution.create = function create(properties) {
+                            return new LatencyDistribution(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LatencyDistribution message. Does not implicitly {@link google.cloud.networkmanagement.v1.LatencyDistribution.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ILatencyDistribution} message LatencyDistribution message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LatencyDistribution.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.latencyPercentiles != null && message.latencyPercentiles.length)
+                                for (var i = 0; i < message.latencyPercentiles.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1.LatencyPercentile.encode(message.latencyPercentiles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LatencyDistribution message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.LatencyDistribution.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ILatencyDistribution} message LatencyDistribution message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LatencyDistribution.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LatencyDistribution message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.LatencyDistribution} LatencyDistribution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LatencyDistribution.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.LatencyDistribution();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.latencyPercentiles && message.latencyPercentiles.length))
+                                            message.latencyPercentiles = [];
+                                        message.latencyPercentiles.push($root.google.cloud.networkmanagement.v1.LatencyPercentile.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LatencyDistribution message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.LatencyDistribution} LatencyDistribution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LatencyDistribution.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LatencyDistribution message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LatencyDistribution.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.latencyPercentiles != null && message.hasOwnProperty("latencyPercentiles")) {
+                                if (!Array.isArray(message.latencyPercentiles))
+                                    return "latencyPercentiles: array expected";
+                                for (var i = 0; i < message.latencyPercentiles.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1.LatencyPercentile.verify(message.latencyPercentiles[i]);
+                                    if (error)
+                                        return "latencyPercentiles." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LatencyDistribution message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.LatencyDistribution} LatencyDistribution
+                         */
+                        LatencyDistribution.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.LatencyDistribution)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.LatencyDistribution();
+                            if (object.latencyPercentiles) {
+                                if (!Array.isArray(object.latencyPercentiles))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.LatencyDistribution.latencyPercentiles: array expected");
+                                message.latencyPercentiles = [];
+                                for (var i = 0; i < object.latencyPercentiles.length; ++i) {
+                                    if (typeof object.latencyPercentiles[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1.LatencyDistribution.latencyPercentiles: object expected");
+                                    message.latencyPercentiles[i] = $root.google.cloud.networkmanagement.v1.LatencyPercentile.fromObject(object.latencyPercentiles[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LatencyDistribution message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.LatencyDistribution} message LatencyDistribution
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LatencyDistribution.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.latencyPercentiles = [];
+                            if (message.latencyPercentiles && message.latencyPercentiles.length) {
+                                object.latencyPercentiles = [];
+                                for (var j = 0; j < message.latencyPercentiles.length; ++j)
+                                    object.latencyPercentiles[j] = $root.google.cloud.networkmanagement.v1.LatencyPercentile.toObject(message.latencyPercentiles[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LatencyDistribution to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LatencyDistribution.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LatencyDistribution
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.LatencyDistribution
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LatencyDistribution.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.LatencyDistribution";
+                        };
+    
+                        return LatencyDistribution;
+                    })();
+    
+                    v1.ProbingDetails = (function() {
+    
+                        /**
+                         * Properties of a ProbingDetails.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IProbingDetails
+                         * @property {google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult|null} [result] ProbingDetails result
+                         * @property {google.protobuf.ITimestamp|null} [verifyTime] ProbingDetails verifyTime
+                         * @property {google.rpc.IStatus|null} [error] ProbingDetails error
+                         * @property {google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause|null} [abortCause] ProbingDetails abortCause
+                         * @property {number|null} [sentProbeCount] ProbingDetails sentProbeCount
+                         * @property {number|null} [successfulProbeCount] ProbingDetails successfulProbeCount
+                         * @property {google.cloud.networkmanagement.v1.IEndpointInfo|null} [endpointInfo] ProbingDetails endpointInfo
+                         * @property {google.cloud.networkmanagement.v1.ILatencyDistribution|null} [probingLatency] ProbingDetails probingLatency
+                         * @property {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null} [destinationEgressLocation] ProbingDetails destinationEgressLocation
+                         */
+    
+                        /**
+                         * Constructs a new ProbingDetails.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a ProbingDetails.
+                         * @implements IProbingDetails
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IProbingDetails=} [properties] Properties to set
+                         */
+                        function ProbingDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProbingDetails result.
+                         * @member {google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult} result
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.result = 0;
+    
+                        /**
+                         * ProbingDetails verifyTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} verifyTime
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.verifyTime = null;
+    
+                        /**
+                         * ProbingDetails error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.error = null;
+    
+                        /**
+                         * ProbingDetails abortCause.
+                         * @member {google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause} abortCause
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.abortCause = 0;
+    
+                        /**
+                         * ProbingDetails sentProbeCount.
+                         * @member {number} sentProbeCount
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.sentProbeCount = 0;
+    
+                        /**
+                         * ProbingDetails successfulProbeCount.
+                         * @member {number} successfulProbeCount
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.successfulProbeCount = 0;
+    
+                        /**
+                         * ProbingDetails endpointInfo.
+                         * @member {google.cloud.networkmanagement.v1.IEndpointInfo|null|undefined} endpointInfo
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.endpointInfo = null;
+    
+                        /**
+                         * ProbingDetails probingLatency.
+                         * @member {google.cloud.networkmanagement.v1.ILatencyDistribution|null|undefined} probingLatency
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.probingLatency = null;
+    
+                        /**
+                         * ProbingDetails destinationEgressLocation.
+                         * @member {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null|undefined} destinationEgressLocation
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.destinationEgressLocation = null;
+    
+                        /**
+                         * Creates a new ProbingDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IProbingDetails=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.ProbingDetails} ProbingDetails instance
+                         */
+                        ProbingDetails.create = function create(properties) {
+                            return new ProbingDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProbingDetails message. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IProbingDetails} message ProbingDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProbingDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.result);
+                            if (message.verifyTime != null && Object.hasOwnProperty.call(message, "verifyTime"))
+                                $root.google.protobuf.Timestamp.encode(message.verifyTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.abortCause != null && Object.hasOwnProperty.call(message, "abortCause"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.abortCause);
+                            if (message.sentProbeCount != null && Object.hasOwnProperty.call(message, "sentProbeCount"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.sentProbeCount);
+                            if (message.successfulProbeCount != null && Object.hasOwnProperty.call(message, "successfulProbeCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.successfulProbeCount);
+                            if (message.endpointInfo != null && Object.hasOwnProperty.call(message, "endpointInfo"))
+                                $root.google.cloud.networkmanagement.v1.EndpointInfo.encode(message.endpointInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.probingLatency != null && Object.hasOwnProperty.call(message, "probingLatency"))
+                                $root.google.cloud.networkmanagement.v1.LatencyDistribution.encode(message.probingLatency, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.destinationEgressLocation != null && Object.hasOwnProperty.call(message, "destinationEgressLocation"))
+                                $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.encode(message.destinationEgressLocation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProbingDetails message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IProbingDetails} message ProbingDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProbingDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProbingDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.ProbingDetails} ProbingDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProbingDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.ProbingDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.result = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.verifyTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.abortCause = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.sentProbeCount = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.successfulProbeCount = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.endpointInfo = $root.google.cloud.networkmanagement.v1.EndpointInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProbingDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.ProbingDetails} ProbingDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProbingDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProbingDetails message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProbingDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.result != null && message.hasOwnProperty("result"))
+                                switch (message.result) {
+                                default:
+                                    return "result: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.verifyTime != null && message.hasOwnProperty("verifyTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.verifyTime);
+                                if (error)
+                                    return "verifyTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            if (message.abortCause != null && message.hasOwnProperty("abortCause"))
+                                switch (message.abortCause) {
+                                default:
+                                    return "abortCause: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
+                                if (!$util.isInteger(message.sentProbeCount))
+                                    return "sentProbeCount: integer expected";
+                            if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
+                                if (!$util.isInteger(message.successfulProbeCount))
+                                    return "successfulProbeCount: integer expected";
+                            if (message.endpointInfo != null && message.hasOwnProperty("endpointInfo")) {
+                                var error = $root.google.cloud.networkmanagement.v1.EndpointInfo.verify(message.endpointInfo);
+                                if (error)
+                                    return "endpointInfo." + error;
+                            }
+                            if (message.probingLatency != null && message.hasOwnProperty("probingLatency")) {
+                                var error = $root.google.cloud.networkmanagement.v1.LatencyDistribution.verify(message.probingLatency);
+                                if (error)
+                                    return "probingLatency." + error;
+                            }
+                            if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation")) {
+                                var error = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.verify(message.destinationEgressLocation);
+                                if (error)
+                                    return "destinationEgressLocation." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProbingDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.ProbingDetails} ProbingDetails
+                         */
+                        ProbingDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.ProbingDetails)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.ProbingDetails();
+                            switch (object.result) {
+                            default:
+                                if (typeof object.result === "number") {
+                                    message.result = object.result;
+                                    break;
+                                }
+                                break;
+                            case "PROBING_RESULT_UNSPECIFIED":
+                            case 0:
+                                message.result = 0;
+                                break;
+                            case "REACHABLE":
+                            case 1:
+                                message.result = 1;
+                                break;
+                            case "UNREACHABLE":
+                            case 2:
+                                message.result = 2;
+                                break;
+                            case "REACHABILITY_INCONSISTENT":
+                            case 3:
+                                message.result = 3;
+                                break;
+                            case "UNDETERMINED":
+                            case 4:
+                                message.result = 4;
+                                break;
+                            }
+                            if (object.verifyTime != null) {
+                                if (typeof object.verifyTime !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.verifyTime: object expected");
+                                message.verifyTime = $root.google.protobuf.Timestamp.fromObject(object.verifyTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            switch (object.abortCause) {
+                            default:
+                                if (typeof object.abortCause === "number") {
+                                    message.abortCause = object.abortCause;
+                                    break;
+                                }
+                                break;
+                            case "PROBING_ABORT_CAUSE_UNSPECIFIED":
+                            case 0:
+                                message.abortCause = 0;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 1:
+                                message.abortCause = 1;
+                                break;
+                            case "NO_SOURCE_LOCATION":
+                            case 2:
+                                message.abortCause = 2;
+                                break;
+                            }
+                            if (object.sentProbeCount != null)
+                                message.sentProbeCount = object.sentProbeCount | 0;
+                            if (object.successfulProbeCount != null)
+                                message.successfulProbeCount = object.successfulProbeCount | 0;
+                            if (object.endpointInfo != null) {
+                                if (typeof object.endpointInfo !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.endpointInfo: object expected");
+                                message.endpointInfo = $root.google.cloud.networkmanagement.v1.EndpointInfo.fromObject(object.endpointInfo);
+                            }
+                            if (object.probingLatency != null) {
+                                if (typeof object.probingLatency !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.probingLatency: object expected");
+                                message.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.fromObject(object.probingLatency);
+                            }
+                            if (object.destinationEgressLocation != null) {
+                                if (typeof object.destinationEgressLocation !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.destinationEgressLocation: object expected");
+                                message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.fromObject(object.destinationEgressLocation);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProbingDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ProbingDetails} message ProbingDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProbingDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.result = options.enums === String ? "PROBING_RESULT_UNSPECIFIED" : 0;
+                                object.verifyTime = null;
+                                object.error = null;
+                                object.abortCause = options.enums === String ? "PROBING_ABORT_CAUSE_UNSPECIFIED" : 0;
+                                object.sentProbeCount = 0;
+                                object.successfulProbeCount = 0;
+                                object.endpointInfo = null;
+                                object.probingLatency = null;
+                                object.destinationEgressLocation = null;
+                            }
+                            if (message.result != null && message.hasOwnProperty("result"))
+                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult[message.result] : message.result;
+                            if (message.verifyTime != null && message.hasOwnProperty("verifyTime"))
+                                object.verifyTime = $root.google.protobuf.Timestamp.toObject(message.verifyTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.abortCause != null && message.hasOwnProperty("abortCause"))
+                                object.abortCause = options.enums === String ? $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause[message.abortCause] === undefined ? message.abortCause : $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause[message.abortCause] : message.abortCause;
+                            if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
+                                object.sentProbeCount = message.sentProbeCount;
+                            if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
+                                object.successfulProbeCount = message.successfulProbeCount;
+                            if (message.endpointInfo != null && message.hasOwnProperty("endpointInfo"))
+                                object.endpointInfo = $root.google.cloud.networkmanagement.v1.EndpointInfo.toObject(message.endpointInfo, options);
+                            if (message.probingLatency != null && message.hasOwnProperty("probingLatency"))
+                                object.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.toObject(message.probingLatency, options);
+                            if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation"))
+                                object.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.toObject(message.destinationEgressLocation, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProbingDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProbingDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProbingDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProbingDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.ProbingDetails";
+                        };
+    
+                        /**
+                         * ProbingResult enum.
+                         * @name google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult
+                         * @enum {number}
+                         * @property {number} PROBING_RESULT_UNSPECIFIED=0 PROBING_RESULT_UNSPECIFIED value
+                         * @property {number} REACHABLE=1 REACHABLE value
+                         * @property {number} UNREACHABLE=2 UNREACHABLE value
+                         * @property {number} REACHABILITY_INCONSISTENT=3 REACHABILITY_INCONSISTENT value
+                         * @property {number} UNDETERMINED=4 UNDETERMINED value
+                         */
+                        ProbingDetails.ProbingResult = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROBING_RESULT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REACHABLE"] = 1;
+                            values[valuesById[2] = "UNREACHABLE"] = 2;
+                            values[valuesById[3] = "REACHABILITY_INCONSISTENT"] = 3;
+                            values[valuesById[4] = "UNDETERMINED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * ProbingAbortCause enum.
+                         * @name google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause
+                         * @enum {number}
+                         * @property {number} PROBING_ABORT_CAUSE_UNSPECIFIED=0 PROBING_ABORT_CAUSE_UNSPECIFIED value
+                         * @property {number} PERMISSION_DENIED=1 PERMISSION_DENIED value
+                         * @property {number} NO_SOURCE_LOCATION=2 NO_SOURCE_LOCATION value
+                         */
+                        ProbingDetails.ProbingAbortCause = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROBING_ABORT_CAUSE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PERMISSION_DENIED"] = 1;
+                            values[valuesById[2] = "NO_SOURCE_LOCATION"] = 2;
+                            return values;
+                        })();
+    
+                        ProbingDetails.EdgeLocation = (function() {
+    
+                            /**
+                             * Properties of an EdgeLocation.
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                             * @interface IEdgeLocation
+                             * @property {string|null} [metropolitanArea] EdgeLocation metropolitanArea
+                             */
+    
+                            /**
+                             * Constructs a new EdgeLocation.
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                             * @classdesc Represents an EdgeLocation.
+                             * @implements IEdgeLocation
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation=} [properties] Properties to set
+                             */
+                            function EdgeLocation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EdgeLocation metropolitanArea.
+                             * @member {string} metropolitanArea
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @instance
+                             */
+                            EdgeLocation.prototype.metropolitanArea = "";
+    
+                            /**
+                             * Creates a new EdgeLocation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation} EdgeLocation instance
+                             */
+                            EdgeLocation.create = function create(properties) {
+                                return new EdgeLocation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EdgeLocation message. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation} message EdgeLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EdgeLocation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.metropolitanArea != null && Object.hasOwnProperty.call(message, "metropolitanArea"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.metropolitanArea);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EdgeLocation message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation} message EdgeLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EdgeLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EdgeLocation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation} EdgeLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EdgeLocation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.metropolitanArea = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EdgeLocation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation} EdgeLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EdgeLocation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EdgeLocation message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EdgeLocation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.metropolitanArea != null && message.hasOwnProperty("metropolitanArea"))
+                                    if (!$util.isString(message.metropolitanArea))
+                                        return "metropolitanArea: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EdgeLocation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation} EdgeLocation
+                             */
+                            EdgeLocation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation();
+                                if (object.metropolitanArea != null)
+                                    message.metropolitanArea = String(object.metropolitanArea);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EdgeLocation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation} message EdgeLocation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EdgeLocation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.metropolitanArea = "";
+                                if (message.metropolitanArea != null && message.hasOwnProperty("metropolitanArea"))
+                                    object.metropolitanArea = message.metropolitanArea;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EdgeLocation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EdgeLocation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EdgeLocation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EdgeLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation";
+                            };
+    
+                            return EdgeLocation;
+                        })();
+    
+                        return ProbingDetails;
+                    })();
+    
                     v1.Trace = (function() {
     
                         /**
@@ -1635,6 +3767,7 @@
                          * @property {google.cloud.networkmanagement.v1.IForwardingRuleInfo|null} [forwardingRule] Step forwardingRule
                          * @property {google.cloud.networkmanagement.v1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
+                         * @property {google.cloud.networkmanagement.v1.IVpcConnectorInfo|null} [vpcConnector] Step vpcConnector
                          * @property {google.cloud.networkmanagement.v1.IDeliverInfo|null} [deliver] Step deliver
                          * @property {google.cloud.networkmanagement.v1.IForwardInfo|null} [forward] Step forward
                          * @property {google.cloud.networkmanagement.v1.IAbortInfo|null} [abort] Step abort
@@ -1643,6 +3776,9 @@
                          * @property {google.cloud.networkmanagement.v1.INetworkInfo|null} [network] Step network
                          * @property {google.cloud.networkmanagement.v1.IGKEMasterInfo|null} [gkeMaster] Step gkeMaster
                          * @property {google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null} [cloudSqlInstance] Step cloudSqlInstance
+                         * @property {google.cloud.networkmanagement.v1.ICloudFunctionInfo|null} [cloudFunction] Step cloudFunction
+                         * @property {google.cloud.networkmanagement.v1.IAppEngineVersionInfo|null} [appEngineVersion] Step appEngineVersion
+                         * @property {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null} [cloudRunRevision] Step cloudRunRevision
                          */
     
                         /**
@@ -1749,6 +3885,14 @@
                         Step.prototype.vpnTunnel = null;
     
                         /**
+                         * Step vpcConnector.
+                         * @member {google.cloud.networkmanagement.v1.IVpcConnectorInfo|null|undefined} vpcConnector
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.vpcConnector = null;
+    
+                        /**
                          * Step deliver.
                          * @member {google.cloud.networkmanagement.v1.IDeliverInfo|null|undefined} deliver
                          * @memberof google.cloud.networkmanagement.v1.Step
@@ -1812,17 +3956,41 @@
                          */
                         Step.prototype.cloudSqlInstance = null;
     
+                        /**
+                         * Step cloudFunction.
+                         * @member {google.cloud.networkmanagement.v1.ICloudFunctionInfo|null|undefined} cloudFunction
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.cloudFunction = null;
+    
+                        /**
+                         * Step appEngineVersion.
+                         * @member {google.cloud.networkmanagement.v1.IAppEngineVersionInfo|null|undefined} appEngineVersion
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.appEngineVersion = null;
+    
+                        /**
+                         * Step cloudRunRevision.
+                         * @member {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null|undefined} cloudRunRevision
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.cloudRunRevision = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "forwardingRule", "vpnGateway", "vpnTunnel", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1888,6 +4056,14 @@
                                 $root.google.cloud.networkmanagement.v1.GKEMasterInfo.encode(message.gkeMaster, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.cloudSqlInstance != null && Object.hasOwnProperty.call(message, "cloudSqlInstance"))
                                 $root.google.cloud.networkmanagement.v1.CloudSQLInstanceInfo.encode(message.cloudSqlInstance, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.cloudFunction != null && Object.hasOwnProperty.call(message, "cloudFunction"))
+                                $root.google.cloud.networkmanagement.v1.CloudFunctionInfo.encode(message.cloudFunction, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.vpcConnector != null && Object.hasOwnProperty.call(message, "vpcConnector"))
+                                $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.encode(message.vpcConnector, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.appEngineVersion != null && Object.hasOwnProperty.call(message, "appEngineVersion"))
+                                $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo.encode(message.appEngineVersion, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
+                                $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.encode(message.cloudRunRevision, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             return writer;
                         };
     
@@ -1966,6 +4142,10 @@
                                         message.vpnTunnel = $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 21: {
+                                        message.vpcConnector = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 12: {
                                         message.deliver = $root.google.cloud.networkmanagement.v1.DeliverInfo.decode(reader, reader.uint32());
                                         break;
@@ -1996,6 +4176,18 @@
                                     }
                                 case 19: {
                                         message.cloudSqlInstance = $root.google.cloud.networkmanagement.v1.CloudSQLInstanceInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.cloudFunction = $root.google.cloud.networkmanagement.v1.CloudFunctionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.appEngineVersion = $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.cloudRunRevision = $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -2047,6 +4239,9 @@
                                 case 3:
                                 case 21:
                                 case 22:
+                                case 23:
+                                case 25:
+                                case 26:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -2057,6 +4252,7 @@
                                 case 11:
                                 case 12:
                                 case 13:
+                                case 24:
                                 case 14:
                                 case 15:
                                 case 16:
@@ -2140,6 +4336,16 @@
                                         return "vpnTunnel." + error;
                                 }
                             }
+                            if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.verify(message.vpcConnector);
+                                    if (error)
+                                        return "vpcConnector." + error;
+                                }
+                            }
                             if (message.deliver != null && message.hasOwnProperty("deliver")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -2220,6 +4426,36 @@
                                         return "cloudSqlInstance." + error;
                                 }
                             }
+                            if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.CloudFunctionInfo.verify(message.cloudFunction);
+                                    if (error)
+                                        return "cloudFunction." + error;
+                                }
+                            }
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo.verify(message.appEngineVersion);
+                                    if (error)
+                                        return "appEngineVersion." + error;
+                                }
+                            }
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.verify(message.cloudRunRevision);
+                                    if (error)
+                                        return "cloudRunRevision." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2268,6 +4504,18 @@
                             case 22:
                                 message.state = 22;
                                 break;
+                            case "START_FROM_CLOUD_FUNCTION":
+                            case 23:
+                                message.state = 23;
+                                break;
+                            case "START_FROM_APP_ENGINE_VERSION":
+                            case 25:
+                                message.state = 25;
+                                break;
+                            case "START_FROM_CLOUD_RUN_REVISION":
+                            case 26:
+                                message.state = 26;
+                                break;
                             case "APPLY_INGRESS_FIREWALL_RULE":
                             case 4:
                                 message.state = 4;
@@ -2307,6 +4555,10 @@
                             case "ARRIVE_AT_VPN_TUNNEL":
                             case 13:
                                 message.state = 13;
+                                break;
+                            case "ARRIVE_AT_VPC_CONNECTOR":
+                            case 24:
+                                message.state = 24;
                                 break;
                             case "NAT":
                             case 14:
@@ -2376,6 +4628,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.vpnTunnel: object expected");
                                 message.vpnTunnel = $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.fromObject(object.vpnTunnel);
                             }
+                            if (object.vpcConnector != null) {
+                                if (typeof object.vpcConnector !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.vpcConnector: object expected");
+                                message.vpcConnector = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.fromObject(object.vpcConnector);
+                            }
                             if (object.deliver != null) {
                                 if (typeof object.deliver !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.deliver: object expected");
@@ -2415,6 +4672,21 @@
                                 if (typeof object.cloudSqlInstance !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.cloudSqlInstance: object expected");
                                 message.cloudSqlInstance = $root.google.cloud.networkmanagement.v1.CloudSQLInstanceInfo.fromObject(object.cloudSqlInstance);
+                            }
+                            if (object.cloudFunction != null) {
+                                if (typeof object.cloudFunction !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.cloudFunction: object expected");
+                                message.cloudFunction = $root.google.cloud.networkmanagement.v1.CloudFunctionInfo.fromObject(object.cloudFunction);
+                            }
+                            if (object.appEngineVersion != null) {
+                                if (typeof object.appEngineVersion !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.appEngineVersion: object expected");
+                                message.appEngineVersion = $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo.fromObject(object.appEngineVersion);
+                            }
+                            if (object.cloudRunRevision != null) {
+                                if (typeof object.cloudRunRevision !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.cloudRunRevision: object expected");
+                                message.cloudRunRevision = $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.fromObject(object.cloudRunRevision);
                             }
                             return message;
                         };
@@ -2521,6 +4793,26 @@
                                 if (options.oneofs)
                                     object.stepInfo = "cloudSqlInstance";
                             }
+                            if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
+                                object.cloudFunction = $root.google.cloud.networkmanagement.v1.CloudFunctionInfo.toObject(message.cloudFunction, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "cloudFunction";
+                            }
+                            if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector")) {
+                                object.vpcConnector = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.toObject(message.vpcConnector, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "vpcConnector";
+                            }
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion")) {
+                                object.appEngineVersion = $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo.toObject(message.appEngineVersion, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "appEngineVersion";
+                            }
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                object.cloudRunRevision = $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.toObject(message.cloudRunRevision, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "cloudRunRevision";
+                            }
                             return object;
                         };
     
@@ -2560,6 +4852,9 @@
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
+                         * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
+                         * @property {number} START_FROM_APP_ENGINE_VERSION=25 START_FROM_APP_ENGINE_VERSION value
+                         * @property {number} START_FROM_CLOUD_RUN_REVISION=26 START_FROM_CLOUD_RUN_REVISION value
                          * @property {number} APPLY_INGRESS_FIREWALL_RULE=4 APPLY_INGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_EGRESS_FIREWALL_RULE=5 APPLY_EGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_ROUTE=6 APPLY_ROUTE value
@@ -2570,6 +4865,7 @@
                          * @property {number} ARRIVE_AT_EXTERNAL_LOAD_BALANCER=11 ARRIVE_AT_EXTERNAL_LOAD_BALANCER value
                          * @property {number} ARRIVE_AT_VPN_GATEWAY=12 ARRIVE_AT_VPN_GATEWAY value
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
+                         * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
                          * @property {number} NAT=14 NAT value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
@@ -2586,6 +4882,9 @@
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
+                            values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
+                            values[valuesById[25] = "START_FROM_APP_ENGINE_VERSION"] = 25;
+                            values[valuesById[26] = "START_FROM_CLOUD_RUN_REVISION"] = 26;
                             values[valuesById[4] = "APPLY_INGRESS_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "APPLY_EGRESS_FIREWALL_RULE"] = 5;
                             values[valuesById[6] = "APPLY_ROUTE"] = 6;
@@ -2596,6 +4895,7 @@
                             values[valuesById[11] = "ARRIVE_AT_EXTERNAL_LOAD_BALANCER"] = 11;
                             values[valuesById[12] = "ARRIVE_AT_VPN_GATEWAY"] = 12;
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
+                            values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
                             values[valuesById[14] = "NAT"] = 14;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
@@ -3558,6 +5858,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -3625,6 +5926,10 @@
                             case "IMPLIED_VPC_FIREWALL_RULE":
                             case 3:
                                 message.firewallRuleType = 3;
+                                break;
+                            case "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE":
+                            case 4:
+                                message.firewallRuleType = 4;
                                 break;
                             }
                             return message;
@@ -3720,6 +6025,7 @@
                          * @property {number} HIERARCHICAL_FIREWALL_POLICY_RULE=1 HIERARCHICAL_FIREWALL_POLICY_RULE value
                          * @property {number} VPC_FIREWALL_RULE=2 VPC_FIREWALL_RULE value
                          * @property {number} IMPLIED_VPC_FIREWALL_RULE=3 IMPLIED_VPC_FIREWALL_RULE value
+                         * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3727,6 +6033,7 @@
                             values[valuesById[1] = "HIERARCHICAL_FIREWALL_POLICY_RULE"] = 1;
                             values[valuesById[2] = "VPC_FIREWALL_RULE"] = 2;
                             values[valuesById[3] = "IMPLIED_VPC_FIREWALL_RULE"] = 3;
+                            values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             return values;
                         })();
     
@@ -3741,6 +6048,7 @@
                          * @interface IRouteInfo
                          * @property {google.cloud.networkmanagement.v1.RouteInfo.RouteType|null} [routeType] RouteInfo routeType
                          * @property {google.cloud.networkmanagement.v1.RouteInfo.NextHopType|null} [nextHopType] RouteInfo nextHopType
+                         * @property {google.cloud.networkmanagement.v1.RouteInfo.RouteScope|null} [routeScope] RouteInfo routeScope
                          * @property {string|null} [displayName] RouteInfo displayName
                          * @property {string|null} [uri] RouteInfo uri
                          * @property {string|null} [destIpRange] RouteInfo destIpRange
@@ -3748,6 +6056,12 @@
                          * @property {string|null} [networkUri] RouteInfo networkUri
                          * @property {number|null} [priority] RouteInfo priority
                          * @property {Array.<string>|null} [instanceTags] RouteInfo instanceTags
+                         * @property {string|null} [srcIpRange] RouteInfo srcIpRange
+                         * @property {Array.<string>|null} [destPortRanges] RouteInfo destPortRanges
+                         * @property {Array.<string>|null} [srcPortRanges] RouteInfo srcPortRanges
+                         * @property {Array.<string>|null} [protocols] RouteInfo protocols
+                         * @property {string|null} [nccHubUri] RouteInfo nccHubUri
+                         * @property {string|null} [nccSpokeUri] RouteInfo nccSpokeUri
                          */
     
                         /**
@@ -3760,6 +6074,9 @@
                          */
                         function RouteInfo(properties) {
                             this.instanceTags = [];
+                            this.destPortRanges = [];
+                            this.srcPortRanges = [];
+                            this.protocols = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3781,6 +6098,14 @@
                          * @instance
                          */
                         RouteInfo.prototype.nextHopType = 0;
+    
+                        /**
+                         * RouteInfo routeScope.
+                         * @member {google.cloud.networkmanagement.v1.RouteInfo.RouteScope} routeScope
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.routeScope = 0;
     
                         /**
                          * RouteInfo displayName.
@@ -3839,6 +6164,79 @@
                         RouteInfo.prototype.instanceTags = $util.emptyArray;
     
                         /**
+                         * RouteInfo srcIpRange.
+                         * @member {string} srcIpRange
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcIpRange = "";
+    
+                        /**
+                         * RouteInfo destPortRanges.
+                         * @member {Array.<string>} destPortRanges
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.destPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo srcPortRanges.
+                         * @member {Array.<string>} srcPortRanges
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo protocols.
+                         * @member {Array.<string>} protocols
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.protocols = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo nccHubUri.
+                         * @member {string|null|undefined} nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccHubUri = null;
+    
+                        /**
+                         * RouteInfo nccSpokeUri.
+                         * @member {string|null|undefined} nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccSpokeUri = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RouteInfo _nccHubUri.
+                         * @member {"nccHubUri"|undefined} _nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccHubUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccHubUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RouteInfo _nccSpokeUri.
+                         * @member {"nccSpokeUri"|undefined} _nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccSpokeUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccSpokeUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RouteInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.RouteInfo
@@ -3881,6 +6279,23 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.routeType);
                             if (message.nextHopType != null && Object.hasOwnProperty.call(message, "nextHopType"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.nextHopType);
+                            if (message.srcIpRange != null && Object.hasOwnProperty.call(message, "srcIpRange"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.srcIpRange);
+                            if (message.destPortRanges != null && message.destPortRanges.length)
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.destPortRanges[i]);
+                            if (message.srcPortRanges != null && message.srcPortRanges.length)
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.srcPortRanges[i]);
+                            if (message.protocols != null && message.protocols.length)
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.protocols[i]);
+                            if (message.routeScope != null && Object.hasOwnProperty.call(message, "routeScope"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.routeScope);
+                            if (message.nccHubUri != null && Object.hasOwnProperty.call(message, "nccHubUri"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.nccHubUri);
+                            if (message.nccSpokeUri != null && Object.hasOwnProperty.call(message, "nccSpokeUri"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.nccSpokeUri);
                             return writer;
                         };
     
@@ -3923,6 +6338,10 @@
                                         message.nextHopType = reader.int32();
                                         break;
                                     }
+                                case 14: {
+                                        message.routeScope = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.displayName = reader.string();
                                         break;
@@ -3951,6 +6370,36 @@
                                         if (!(message.instanceTags && message.instanceTags.length))
                                             message.instanceTags = [];
                                         message.instanceTags.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.srcIpRange = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.destPortRanges && message.destPortRanges.length))
+                                            message.destPortRanges = [];
+                                        message.destPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.srcPortRanges && message.srcPortRanges.length))
+                                            message.srcPortRanges = [];
+                                        message.srcPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.protocols && message.protocols.length))
+                                            message.protocols = [];
+                                        message.protocols.push(reader.string());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.nccHubUri = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.nccSpokeUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -3988,6 +6437,7 @@
                         RouteInfo.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.routeType != null && message.hasOwnProperty("routeType"))
                                 switch (message.routeType) {
                                 default:
@@ -3999,6 +6449,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
@@ -4017,6 +6468,16 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
+                                    break;
+                                }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                switch (message.routeScope) {
+                                default:
+                                    return "routeScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
@@ -4043,6 +6504,40 @@
                                 for (var i = 0; i < message.instanceTags.length; ++i)
                                     if (!$util.isString(message.instanceTags[i]))
                                         return "instanceTags: string[] expected";
+                            }
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                if (!$util.isString(message.srcIpRange))
+                                    return "srcIpRange: string expected";
+                            if (message.destPortRanges != null && message.hasOwnProperty("destPortRanges")) {
+                                if (!Array.isArray(message.destPortRanges))
+                                    return "destPortRanges: array expected";
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    if (!$util.isString(message.destPortRanges[i]))
+                                        return "destPortRanges: string[] expected";
+                            }
+                            if (message.srcPortRanges != null && message.hasOwnProperty("srcPortRanges")) {
+                                if (!Array.isArray(message.srcPortRanges))
+                                    return "srcPortRanges: array expected";
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    if (!$util.isString(message.srcPortRanges[i]))
+                                        return "srcPortRanges: string[] expected";
+                            }
+                            if (message.protocols != null && message.hasOwnProperty("protocols")) {
+                                if (!Array.isArray(message.protocols))
+                                    return "protocols: array expected";
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    if (!$util.isString(message.protocols[i]))
+                                        return "protocols: string[] expected";
+                            }
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                properties._nccHubUri = 1;
+                                if (!$util.isString(message.nccHubUri))
+                                    return "nccHubUri: string expected";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                properties._nccSpokeUri = 1;
+                                if (!$util.isString(message.nccSpokeUri))
+                                    return "nccSpokeUri: string expected";
                             }
                             return null;
                         };
@@ -4093,6 +6588,10 @@
                             case "PEERING_DYNAMIC":
                             case 6:
                                 message.routeType = 6;
+                                break;
+                            case "POLICY_BASED":
+                            case 7:
+                                message.routeType = 7;
                                 break;
                             }
                             switch (object.nextHopType) {
@@ -4150,6 +6649,30 @@
                             case 11:
                                 message.nextHopType = 11;
                                 break;
+                            case "NEXT_HOP_NCC_HUB":
+                            case 12:
+                                message.nextHopType = 12;
+                                break;
+                            }
+                            switch (object.routeScope) {
+                            default:
+                                if (typeof object.routeScope === "number") {
+                                    message.routeScope = object.routeScope;
+                                    break;
+                                }
+                                break;
+                            case "ROUTE_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.routeScope = 0;
+                                break;
+                            case "NETWORK":
+                            case 1:
+                                message.routeScope = 1;
+                                break;
+                            case "NCC_HUB":
+                            case 2:
+                                message.routeScope = 2;
+                                break;
                             }
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
@@ -4170,6 +6693,33 @@
                                 for (var i = 0; i < object.instanceTags.length; ++i)
                                     message.instanceTags[i] = String(object.instanceTags[i]);
                             }
+                            if (object.srcIpRange != null)
+                                message.srcIpRange = String(object.srcIpRange);
+                            if (object.destPortRanges) {
+                                if (!Array.isArray(object.destPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.RouteInfo.destPortRanges: array expected");
+                                message.destPortRanges = [];
+                                for (var i = 0; i < object.destPortRanges.length; ++i)
+                                    message.destPortRanges[i] = String(object.destPortRanges[i]);
+                            }
+                            if (object.srcPortRanges) {
+                                if (!Array.isArray(object.srcPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.RouteInfo.srcPortRanges: array expected");
+                                message.srcPortRanges = [];
+                                for (var i = 0; i < object.srcPortRanges.length; ++i)
+                                    message.srcPortRanges[i] = String(object.srcPortRanges[i]);
+                            }
+                            if (object.protocols) {
+                                if (!Array.isArray(object.protocols))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.RouteInfo.protocols: array expected");
+                                message.protocols = [];
+                                for (var i = 0; i < object.protocols.length; ++i)
+                                    message.protocols[i] = String(object.protocols[i]);
+                            }
+                            if (object.nccHubUri != null)
+                                message.nccHubUri = String(object.nccHubUri);
+                            if (object.nccSpokeUri != null)
+                                message.nccSpokeUri = String(object.nccSpokeUri);
                             return message;
                         };
     
@@ -4186,8 +6736,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.instanceTags = [];
+                                object.destPortRanges = [];
+                                object.srcPortRanges = [];
+                                object.protocols = [];
+                            }
                             if (options.defaults) {
                                 object.displayName = "";
                                 object.uri = "";
@@ -4197,6 +6751,8 @@
                                 object.priority = 0;
                                 object.routeType = options.enums === String ? "ROUTE_TYPE_UNSPECIFIED" : 0;
                                 object.nextHopType = options.enums === String ? "NEXT_HOP_TYPE_UNSPECIFIED" : 0;
+                                object.srcIpRange = "";
+                                object.routeScope = options.enums === String ? "ROUTE_SCOPE_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -4219,6 +6775,35 @@
                                 object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] === undefined ? message.routeType : $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] : message.routeType;
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
                                 object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] === undefined ? message.nextHopType : $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                object.srcIpRange = message.srcIpRange;
+                            if (message.destPortRanges && message.destPortRanges.length) {
+                                object.destPortRanges = [];
+                                for (var j = 0; j < message.destPortRanges.length; ++j)
+                                    object.destPortRanges[j] = message.destPortRanges[j];
+                            }
+                            if (message.srcPortRanges && message.srcPortRanges.length) {
+                                object.srcPortRanges = [];
+                                for (var j = 0; j < message.srcPortRanges.length; ++j)
+                                    object.srcPortRanges[j] = message.srcPortRanges[j];
+                            }
+                            if (message.protocols && message.protocols.length) {
+                                object.protocols = [];
+                                for (var j = 0; j < message.protocols.length; ++j)
+                                    object.protocols[j] = message.protocols[j];
+                            }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                object.routeScope = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.RouteScope[message.routeScope] === undefined ? message.routeScope : $root.google.cloud.networkmanagement.v1.RouteInfo.RouteScope[message.routeScope] : message.routeScope;
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                object.nccHubUri = message.nccHubUri;
+                                if (options.oneofs)
+                                    object._nccHubUri = "nccHubUri";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                object.nccSpokeUri = message.nccSpokeUri;
+                                if (options.oneofs)
+                                    object._nccSpokeUri = "nccSpokeUri";
+                            }
                             return object;
                         };
     
@@ -4259,6 +6844,7 @@
                          * @property {number} PEERING_SUBNET=4 PEERING_SUBNET value
                          * @property {number} PEERING_STATIC=5 PEERING_STATIC value
                          * @property {number} PEERING_DYNAMIC=6 PEERING_DYNAMIC value
+                         * @property {number} POLICY_BASED=7 POLICY_BASED value
                          */
                         RouteInfo.RouteType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4269,6 +6855,7 @@
                             values[valuesById[4] = "PEERING_SUBNET"] = 4;
                             values[valuesById[5] = "PEERING_STATIC"] = 5;
                             values[valuesById[6] = "PEERING_DYNAMIC"] = 6;
+                            values[valuesById[7] = "POLICY_BASED"] = 7;
                             return values;
                         })();
     
@@ -4288,6 +6875,7 @@
                          * @property {number} NEXT_HOP_BLACKHOLE=9 NEXT_HOP_BLACKHOLE value
                          * @property {number} NEXT_HOP_ILB=10 NEXT_HOP_ILB value
                          * @property {number} NEXT_HOP_ROUTER_APPLIANCE=11 NEXT_HOP_ROUTER_APPLIANCE value
+                         * @property {number} NEXT_HOP_NCC_HUB=12 NEXT_HOP_NCC_HUB value
                          */
                         RouteInfo.NextHopType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4303,6 +6891,23 @@
                             values[valuesById[9] = "NEXT_HOP_BLACKHOLE"] = 9;
                             values[valuesById[10] = "NEXT_HOP_ILB"] = 10;
                             values[valuesById[11] = "NEXT_HOP_ROUTER_APPLIANCE"] = 11;
+                            values[valuesById[12] = "NEXT_HOP_NCC_HUB"] = 12;
+                            return values;
+                        })();
+    
+                        /**
+                         * RouteScope enum.
+                         * @name google.cloud.networkmanagement.v1.RouteInfo.RouteScope
+                         * @enum {number}
+                         * @property {number} ROUTE_SCOPE_UNSPECIFIED=0 ROUTE_SCOPE_UNSPECIFIED value
+                         * @property {number} NETWORK=1 NETWORK value
+                         * @property {number} NCC_HUB=2 NCC_HUB value
+                         */
+                        RouteInfo.RouteScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROUTE_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK"] = 1;
+                            values[valuesById[2] = "NCC_HUB"] = 2;
                             return values;
                         })();
     
@@ -4877,6 +7482,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.backendUri != null && message.hasOwnProperty("backendUri"))
@@ -4959,6 +7565,10 @@
                             case "TARGET_POOL":
                             case 2:
                                 message.backendType = 2;
+                                break;
+                            case "TARGET_INSTANCE":
+                            case 3:
+                                message.backendType = 3;
                                 break;
                             }
                             if (object.backendUri != null)
@@ -5058,12 +7668,14 @@
                          * @property {number} BACKEND_TYPE_UNSPECIFIED=0 BACKEND_TYPE_UNSPECIFIED value
                          * @property {number} BACKEND_SERVICE=1 BACKEND_SERVICE value
                          * @property {number} TARGET_POOL=2 TARGET_POOL value
+                         * @property {number} TARGET_INSTANCE=3 TARGET_INSTANCE value
                          */
                         LoadBalancerInfo.BackendType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BACKEND_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "BACKEND_SERVICE"] = 1;
                             values[valuesById[2] = "TARGET_POOL"] = 2;
+                            values[valuesById[3] = "TARGET_INSTANCE"] = 3;
                             return values;
                         })();
     
@@ -6207,6 +8819,7 @@
                          * @property {number|null} [destinationPort] EndpointInfo destinationPort
                          * @property {string|null} [sourceNetworkUri] EndpointInfo sourceNetworkUri
                          * @property {string|null} [destinationNetworkUri] EndpointInfo destinationNetworkUri
+                         * @property {string|null} [sourceAgentUri] EndpointInfo sourceAgentUri
                          */
     
                         /**
@@ -6281,6 +8894,14 @@
                         EndpointInfo.prototype.destinationNetworkUri = "";
     
                         /**
+                         * EndpointInfo sourceAgentUri.
+                         * @member {string} sourceAgentUri
+                         * @memberof google.cloud.networkmanagement.v1.EndpointInfo
+                         * @instance
+                         */
+                        EndpointInfo.prototype.sourceAgentUri = "";
+    
+                        /**
                          * Creates a new EndpointInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.EndpointInfo
@@ -6318,6 +8939,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourceNetworkUri);
                             if (message.destinationNetworkUri != null && Object.hasOwnProperty.call(message, "destinationNetworkUri"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.destinationNetworkUri);
+                            if (message.sourceAgentUri != null && Object.hasOwnProperty.call(message, "sourceAgentUri"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.sourceAgentUri);
                             return writer;
                         };
     
@@ -6380,6 +9003,10 @@
                                         message.destinationNetworkUri = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.sourceAgentUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6436,6 +9063,9 @@
                             if (message.destinationNetworkUri != null && message.hasOwnProperty("destinationNetworkUri"))
                                 if (!$util.isString(message.destinationNetworkUri))
                                     return "destinationNetworkUri: string expected";
+                            if (message.sourceAgentUri != null && message.hasOwnProperty("sourceAgentUri"))
+                                if (!$util.isString(message.sourceAgentUri))
+                                    return "sourceAgentUri: string expected";
                             return null;
                         };
     
@@ -6465,6 +9095,8 @@
                                 message.sourceNetworkUri = String(object.sourceNetworkUri);
                             if (object.destinationNetworkUri != null)
                                 message.destinationNetworkUri = String(object.destinationNetworkUri);
+                            if (object.sourceAgentUri != null)
+                                message.sourceAgentUri = String(object.sourceAgentUri);
                             return message;
                         };
     
@@ -6489,6 +9121,7 @@
                                 object.destinationPort = 0;
                                 object.sourceNetworkUri = "";
                                 object.destinationNetworkUri = "";
+                                object.sourceAgentUri = "";
                             }
                             if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
                                 object.sourceIp = message.sourceIp;
@@ -6504,6 +9137,8 @@
                                 object.sourceNetworkUri = message.sourceNetworkUri;
                             if (message.destinationNetworkUri != null && message.hasOwnProperty("destinationNetworkUri"))
                                 object.destinationNetworkUri = message.destinationNetworkUri;
+                            if (message.sourceAgentUri != null && message.hasOwnProperty("sourceAgentUri"))
+                                object.sourceAgentUri = message.sourceAgentUri;
                             return object;
                         };
     
@@ -6692,6 +9327,10 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -6742,6 +9381,22 @@
                             case "CLOUD_SQL_INSTANCE":
                             case 5:
                                 message.target = 5;
+                                break;
+                            case "PSC_PUBLISHED_SERVICE":
+                            case 6:
+                                message.target = 6;
+                                break;
+                            case "PSC_GOOGLE_API":
+                            case 7:
+                                message.target = 7;
+                                break;
+                            case "PSC_VPC_SC":
+                            case 8:
+                                message.target = 8;
+                                break;
+                            case "SERVERLESS_NEG":
+                            case 9:
+                                message.target = 9;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -6809,6 +9464,10 @@
                          * @property {number} GOOGLE_API=3 GOOGLE_API value
                          * @property {number} GKE_MASTER=4 GKE_MASTER value
                          * @property {number} CLOUD_SQL_INSTANCE=5 CLOUD_SQL_INSTANCE value
+                         * @property {number} PSC_PUBLISHED_SERVICE=6 PSC_PUBLISHED_SERVICE value
+                         * @property {number} PSC_GOOGLE_API=7 PSC_GOOGLE_API value
+                         * @property {number} PSC_VPC_SC=8 PSC_VPC_SC value
+                         * @property {number} SERVERLESS_NEG=9 SERVERLESS_NEG value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6818,6 +9477,10 @@
                             values[valuesById[3] = "GOOGLE_API"] = 3;
                             values[valuesById[4] = "GKE_MASTER"] = 4;
                             values[valuesById[5] = "CLOUD_SQL_INSTANCE"] = 5;
+                            values[valuesById[6] = "PSC_PUBLISHED_SERVICE"] = 6;
+                            values[valuesById[7] = "PSC_GOOGLE_API"] = 7;
+                            values[valuesById[8] = "PSC_VPC_SC"] = 8;
+                            values[valuesById[9] = "SERVERLESS_NEG"] = 9;
                             return values;
                         })();
     
@@ -6981,6 +9644,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -7035,6 +9700,14 @@
                             case "CLOUD_SQL_INSTANCE":
                             case 6:
                                 message.target = 6;
+                                break;
+                            case "ANOTHER_PROJECT":
+                            case 7:
+                                message.target = 7;
+                                break;
+                            case "NCC_HUB":
+                            case 8:
+                                message.target = 8;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -7103,6 +9776,8 @@
                          * @property {number} GKE_MASTER=4 GKE_MASTER value
                          * @property {number} IMPORTED_CUSTOM_ROUTE_NEXT_HOP=5 IMPORTED_CUSTOM_ROUTE_NEXT_HOP value
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
+                         * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
+                         * @property {number} NCC_HUB=8 NCC_HUB value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7113,6 +9788,8 @@
                             values[valuesById[4] = "GKE_MASTER"] = 4;
                             values[valuesById[5] = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"] = 5;
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
+                            values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
+                            values[valuesById[8] = "NCC_HUB"] = 8;
                             return values;
                         })();
     
@@ -7304,6 +9981,12 @@
                                 case 13:
                                 case 14:
                                 case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -7402,6 +10085,30 @@
                             case 15:
                                 message.cause = 15;
                                 break;
+                            case "MISMATCHED_IP_VERSION":
+                            case 16:
+                                message.cause = 16;
+                                break;
+                            case "GKE_KONNECTIVITY_PROXY_UNSUPPORTED":
+                            case 17:
+                                message.cause = 17;
+                                break;
+                            case "RESOURCE_CONFIG_NOT_FOUND":
+                            case 18:
+                                message.cause = 18;
+                                break;
+                            case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT":
+                            case 19:
+                                message.cause = 19;
+                                break;
+                            case "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED":
+                            case 20:
+                                message.cause = 20;
+                                break;
+                            case "SOURCE_FORWARDING_RULE_UNSUPPORTED":
+                            case 21:
+                                message.cause = 21;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -7492,6 +10199,12 @@
                          * @property {number} DESTINATION_ENDPOINT_NOT_FOUND=13 DESTINATION_ENDPOINT_NOT_FOUND value
                          * @property {number} MISMATCHED_DESTINATION_NETWORK=14 MISMATCHED_DESTINATION_NETWORK value
                          * @property {number} UNSUPPORTED=15 UNSUPPORTED value
+                         * @property {number} MISMATCHED_IP_VERSION=16 MISMATCHED_IP_VERSION value
+                         * @property {number} GKE_KONNECTIVITY_PROXY_UNSUPPORTED=17 GKE_KONNECTIVITY_PROXY_UNSUPPORTED value
+                         * @property {number} RESOURCE_CONFIG_NOT_FOUND=18 RESOURCE_CONFIG_NOT_FOUND value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
+                         * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7511,6 +10224,12 @@
                             values[valuesById[13] = "DESTINATION_ENDPOINT_NOT_FOUND"] = 13;
                             values[valuesById[14] = "MISMATCHED_DESTINATION_NETWORK"] = 14;
                             values[valuesById[15] = "UNSUPPORTED"] = 15;
+                            values[valuesById[16] = "MISMATCHED_IP_VERSION"] = 16;
+                            values[valuesById[17] = "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"] = 17;
+                            values[valuesById[18] = "RESOURCE_CONFIG_NOT_FOUND"] = 18;
+                            values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
+                            values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
                             return values;
                         })();
     
@@ -7679,16 +10398,34 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 25:
                                 case 12:
                                 case 13:
                                 case 14:
+                                case 27:
+                                case 28:
                                 case 15:
                                 case 16:
                                 case 17:
                                 case 18:
                                 case 19:
                                 case 20:
+                                case 38:
+                                case 36:
                                 case 21:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 26:
+                                case 29:
+                                case 37:
+                                case 39:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -7764,6 +10501,10 @@
                             case 11:
                                 message.cause = 11;
                                 break;
+                            case "FORWARDING_RULE_REGION_MISMATCH":
+                            case 25:
+                                message.cause = 25;
+                                break;
                             case "FORWARDING_RULE_NO_INSTANCES":
                             case 12:
                                 message.cause = 12;
@@ -7775,6 +10516,14 @@
                             case "INSTANCE_NOT_RUNNING":
                             case 14:
                                 message.cause = 14;
+                                break;
+                            case "GKE_CLUSTER_NOT_RUNNING":
+                            case 27:
+                                message.cause = 27;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
+                            case 28:
+                                message.cause = 28;
                                 break;
                             case "TRAFFIC_TYPE_BLOCKED":
                             case 15:
@@ -7800,9 +10549,69 @@
                             case 20:
                                 message.cause = 20;
                                 break;
+                            case "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT":
+                            case 38:
+                                message.cause = 38;
+                                break;
+                            case "GKE_PSC_ENDPOINT_MISSING":
+                            case 36:
+                                message.cause = 36;
+                                break;
                             case "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS":
                             case 21:
                                 message.cause = 21;
+                                break;
+                            case "GKE_CONTROL_PLANE_REGION_MISMATCH":
+                            case 30:
+                                message.cause = 30;
+                                break;
+                            case "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION":
+                            case 31:
+                                message.cause = 31;
+                                break;
+                            case "GKE_CONTROL_PLANE_NO_ROUTE":
+                            case 32:
+                                message.cause = 32;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC":
+                            case 33:
+                                message.cause = 33;
+                                break;
+                            case "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION":
+                            case 34:
+                                message.cause = 34;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NO_ROUTE":
+                            case 35:
+                                message.cause = 35;
+                                break;
+                            case "CLOUD_FUNCTION_NOT_ACTIVE":
+                            case 22:
+                                message.cause = 22;
+                                break;
+                            case "VPC_CONNECTOR_NOT_SET":
+                            case 23:
+                                message.cause = 23;
+                                break;
+                            case "VPC_CONNECTOR_NOT_RUNNING":
+                            case 24:
+                                message.cause = 24;
+                                break;
+                            case "PSC_CONNECTION_NOT_ACCEPTED":
+                            case 26:
+                                message.cause = 26;
+                                break;
+                            case "CLOUD_RUN_REVISION_NOT_READY":
+                            case 29:
+                                message.cause = 29;
+                                break;
+                            case "DROPPED_INSIDE_PSC_SERVICE_PRODUCER":
+                            case 37:
+                                message.cause = 37;
+                                break;
+                            case "LOAD_BALANCER_HAS_NO_PROXY_SUBNET":
+                            case 39:
+                                message.cause = 39;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -7876,16 +10685,34 @@
                          * @property {number} NO_EXTERNAL_ADDRESS=9 NO_EXTERNAL_ADDRESS value
                          * @property {number} UNKNOWN_INTERNAL_ADDRESS=10 UNKNOWN_INTERNAL_ADDRESS value
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
+                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
+                         * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} TRAFFIC_TYPE_BLOCKED=15 TRAFFIC_TYPE_BLOCKED value
                          * @property {number} GKE_MASTER_UNAUTHORIZED_ACCESS=16 GKE_MASTER_UNAUTHORIZED_ACCESS value
                          * @property {number} CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS=17 CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS value
                          * @property {number} DROPPED_INSIDE_GKE_SERVICE=18 DROPPED_INSIDE_GKE_SERVICE value
                          * @property {number} DROPPED_INSIDE_CLOUD_SQL_SERVICE=19 DROPPED_INSIDE_CLOUD_SQL_SERVICE value
                          * @property {number} GOOGLE_MANAGED_SERVICE_NO_PEERING=20 GOOGLE_MANAGED_SERVICE_NO_PEERING value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT=38 GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT value
+                         * @property {number} GKE_PSC_ENDPOINT_MISSING=36 GKE_PSC_ENDPOINT_MISSING value
                          * @property {number} CLOUD_SQL_INSTANCE_NO_IP_ADDRESS=21 CLOUD_SQL_INSTANCE_NO_IP_ADDRESS value
+                         * @property {number} GKE_CONTROL_PLANE_REGION_MISMATCH=30 GKE_CONTROL_PLANE_REGION_MISMATCH value
+                         * @property {number} PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION=31 PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION value
+                         * @property {number} GKE_CONTROL_PLANE_NO_ROUTE=32 GKE_CONTROL_PLANE_NO_ROUTE value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC=33 CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC value
+                         * @property {number} PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION=34 PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION value
+                         * @property {number} CLOUD_SQL_INSTANCE_NO_ROUTE=35 CLOUD_SQL_INSTANCE_NO_ROUTE value
+                         * @property {number} CLOUD_FUNCTION_NOT_ACTIVE=22 CLOUD_FUNCTION_NOT_ACTIVE value
+                         * @property {number} VPC_CONNECTOR_NOT_SET=23 VPC_CONNECTOR_NOT_SET value
+                         * @property {number} VPC_CONNECTOR_NOT_RUNNING=24 VPC_CONNECTOR_NOT_RUNNING value
+                         * @property {number} PSC_CONNECTION_NOT_ACCEPTED=26 PSC_CONNECTION_NOT_ACCEPTED value
+                         * @property {number} CLOUD_RUN_REVISION_NOT_READY=29 CLOUD_RUN_REVISION_NOT_READY value
+                         * @property {number} DROPPED_INSIDE_PSC_SERVICE_PRODUCER=37 DROPPED_INSIDE_PSC_SERVICE_PRODUCER value
+                         * @property {number} LOAD_BALANCER_HAS_NO_PROXY_SUBNET=39 LOAD_BALANCER_HAS_NO_PROXY_SUBNET value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7901,16 +10728,34 @@
                             values[valuesById[9] = "NO_EXTERNAL_ADDRESS"] = 9;
                             values[valuesById[10] = "UNKNOWN_INTERNAL_ADDRESS"] = 10;
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
+                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
+                            values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[15] = "TRAFFIC_TYPE_BLOCKED"] = 15;
                             values[valuesById[16] = "GKE_MASTER_UNAUTHORIZED_ACCESS"] = 16;
                             values[valuesById[17] = "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"] = 17;
                             values[valuesById[18] = "DROPPED_INSIDE_GKE_SERVICE"] = 18;
                             values[valuesById[19] = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"] = 19;
                             values[valuesById[20] = "GOOGLE_MANAGED_SERVICE_NO_PEERING"] = 20;
+                            values[valuesById[38] = "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"] = 38;
+                            values[valuesById[36] = "GKE_PSC_ENDPOINT_MISSING"] = 36;
                             values[valuesById[21] = "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"] = 21;
+                            values[valuesById[30] = "GKE_CONTROL_PLANE_REGION_MISMATCH"] = 30;
+                            values[valuesById[31] = "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"] = 31;
+                            values[valuesById[32] = "GKE_CONTROL_PLANE_NO_ROUTE"] = 32;
+                            values[valuesById[33] = "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"] = 33;
+                            values[valuesById[34] = "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"] = 34;
+                            values[valuesById[35] = "CLOUD_SQL_INSTANCE_NO_ROUTE"] = 35;
+                            values[valuesById[22] = "CLOUD_FUNCTION_NOT_ACTIVE"] = 22;
+                            values[valuesById[23] = "VPC_CONNECTOR_NOT_SET"] = 23;
+                            values[valuesById[24] = "VPC_CONNECTOR_NOT_RUNNING"] = 24;
+                            values[valuesById[26] = "PSC_CONNECTION_NOT_ACCEPTED"] = 26;
+                            values[valuesById[29] = "CLOUD_RUN_REVISION_NOT_READY"] = 29;
+                            values[valuesById[37] = "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"] = 37;
+                            values[valuesById[39] = "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"] = 39;
                             return values;
                         })();
     
@@ -8507,6 +11352,1121 @@
                         };
     
                         return CloudSQLInstanceInfo;
+                    })();
+    
+                    v1.CloudFunctionInfo = (function() {
+    
+                        /**
+                         * Properties of a CloudFunctionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface ICloudFunctionInfo
+                         * @property {string|null} [displayName] CloudFunctionInfo displayName
+                         * @property {string|null} [uri] CloudFunctionInfo uri
+                         * @property {string|null} [location] CloudFunctionInfo location
+                         * @property {number|Long|null} [versionId] CloudFunctionInfo versionId
+                         */
+    
+                        /**
+                         * Constructs a new CloudFunctionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a CloudFunctionInfo.
+                         * @implements ICloudFunctionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.ICloudFunctionInfo=} [properties] Properties to set
+                         */
+                        function CloudFunctionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudFunctionInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @instance
+                         */
+                        CloudFunctionInfo.prototype.displayName = "";
+    
+                        /**
+                         * CloudFunctionInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @instance
+                         */
+                        CloudFunctionInfo.prototype.uri = "";
+    
+                        /**
+                         * CloudFunctionInfo location.
+                         * @member {string} location
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @instance
+                         */
+                        CloudFunctionInfo.prototype.location = "";
+    
+                        /**
+                         * CloudFunctionInfo versionId.
+                         * @member {number|Long} versionId
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @instance
+                         */
+                        CloudFunctionInfo.prototype.versionId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new CloudFunctionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ICloudFunctionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.CloudFunctionInfo} CloudFunctionInfo instance
+                         */
+                        CloudFunctionInfo.create = function create(properties) {
+                            return new CloudFunctionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudFunctionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.CloudFunctionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ICloudFunctionInfo} message CloudFunctionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudFunctionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.location);
+                            if (message.versionId != null && Object.hasOwnProperty.call(message, "versionId"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.versionId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudFunctionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.CloudFunctionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ICloudFunctionInfo} message CloudFunctionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudFunctionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudFunctionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.CloudFunctionInfo} CloudFunctionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudFunctionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.CloudFunctionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.versionId = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudFunctionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.CloudFunctionInfo} CloudFunctionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudFunctionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudFunctionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudFunctionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.versionId != null && message.hasOwnProperty("versionId"))
+                                if (!$util.isInteger(message.versionId) && !(message.versionId && $util.isInteger(message.versionId.low) && $util.isInteger(message.versionId.high)))
+                                    return "versionId: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudFunctionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.CloudFunctionInfo} CloudFunctionInfo
+                         */
+                        CloudFunctionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.CloudFunctionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.CloudFunctionInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.versionId != null)
+                                if ($util.Long)
+                                    (message.versionId = $util.Long.fromValue(object.versionId)).unsigned = false;
+                                else if (typeof object.versionId === "string")
+                                    message.versionId = parseInt(object.versionId, 10);
+                                else if (typeof object.versionId === "number")
+                                    message.versionId = object.versionId;
+                                else if (typeof object.versionId === "object")
+                                    message.versionId = new $util.LongBits(object.versionId.low >>> 0, object.versionId.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudFunctionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.CloudFunctionInfo} message CloudFunctionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudFunctionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.location = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.versionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.versionId = options.longs === String ? "0" : 0;
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.versionId != null && message.hasOwnProperty("versionId"))
+                                if (typeof message.versionId === "number")
+                                    object.versionId = options.longs === String ? String(message.versionId) : message.versionId;
+                                else
+                                    object.versionId = options.longs === String ? $util.Long.prototype.toString.call(message.versionId) : options.longs === Number ? new $util.LongBits(message.versionId.low >>> 0, message.versionId.high >>> 0).toNumber() : message.versionId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudFunctionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudFunctionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudFunctionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.CloudFunctionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudFunctionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.CloudFunctionInfo";
+                        };
+    
+                        return CloudFunctionInfo;
+                    })();
+    
+                    v1.CloudRunRevisionInfo = (function() {
+    
+                        /**
+                         * Properties of a CloudRunRevisionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface ICloudRunRevisionInfo
+                         * @property {string|null} [displayName] CloudRunRevisionInfo displayName
+                         * @property {string|null} [uri] CloudRunRevisionInfo uri
+                         * @property {string|null} [location] CloudRunRevisionInfo location
+                         * @property {string|null} [serviceUri] CloudRunRevisionInfo serviceUri
+                         */
+    
+                        /**
+                         * Constructs a new CloudRunRevisionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a CloudRunRevisionInfo.
+                         * @implements ICloudRunRevisionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo=} [properties] Properties to set
+                         */
+                        function CloudRunRevisionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudRunRevisionInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.displayName = "";
+    
+                        /**
+                         * CloudRunRevisionInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.uri = "";
+    
+                        /**
+                         * CloudRunRevisionInfo location.
+                         * @member {string} location
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.location = "";
+    
+                        /**
+                         * CloudRunRevisionInfo serviceUri.
+                         * @member {string} serviceUri
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.serviceUri = "";
+    
+                        /**
+                         * Creates a new CloudRunRevisionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.CloudRunRevisionInfo} CloudRunRevisionInfo instance
+                         */
+                        CloudRunRevisionInfo.create = function create(properties) {
+                            return new CloudRunRevisionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudRunRevisionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.CloudRunRevisionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo} message CloudRunRevisionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudRunRevisionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                            if (message.serviceUri != null && Object.hasOwnProperty.call(message, "serviceUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudRunRevisionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.CloudRunRevisionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo} message CloudRunRevisionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudRunRevisionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudRunRevisionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.CloudRunRevisionInfo} CloudRunRevisionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudRunRevisionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudRunRevisionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.CloudRunRevisionInfo} CloudRunRevisionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudRunRevisionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudRunRevisionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudRunRevisionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                if (!$util.isString(message.serviceUri))
+                                    return "serviceUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudRunRevisionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.CloudRunRevisionInfo} CloudRunRevisionInfo
+                         */
+                        CloudRunRevisionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.serviceUri != null)
+                                message.serviceUri = String(object.serviceUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudRunRevisionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.CloudRunRevisionInfo} message CloudRunRevisionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudRunRevisionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.location = "";
+                                object.serviceUri = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                object.serviceUri = message.serviceUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudRunRevisionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudRunRevisionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudRunRevisionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.CloudRunRevisionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudRunRevisionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.CloudRunRevisionInfo";
+                        };
+    
+                        return CloudRunRevisionInfo;
+                    })();
+    
+                    v1.AppEngineVersionInfo = (function() {
+    
+                        /**
+                         * Properties of an AppEngineVersionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IAppEngineVersionInfo
+                         * @property {string|null} [displayName] AppEngineVersionInfo displayName
+                         * @property {string|null} [uri] AppEngineVersionInfo uri
+                         * @property {string|null} [runtime] AppEngineVersionInfo runtime
+                         * @property {string|null} [environment] AppEngineVersionInfo environment
+                         */
+    
+                        /**
+                         * Constructs a new AppEngineVersionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents an AppEngineVersionInfo.
+                         * @implements IAppEngineVersionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IAppEngineVersionInfo=} [properties] Properties to set
+                         */
+                        function AppEngineVersionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AppEngineVersionInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.displayName = "";
+    
+                        /**
+                         * AppEngineVersionInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.uri = "";
+    
+                        /**
+                         * AppEngineVersionInfo runtime.
+                         * @member {string} runtime
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.runtime = "";
+    
+                        /**
+                         * AppEngineVersionInfo environment.
+                         * @member {string} environment
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.environment = "";
+    
+                        /**
+                         * Creates a new AppEngineVersionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IAppEngineVersionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.AppEngineVersionInfo} AppEngineVersionInfo instance
+                         */
+                        AppEngineVersionInfo.create = function create(properties) {
+                            return new AppEngineVersionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AppEngineVersionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.AppEngineVersionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IAppEngineVersionInfo} message AppEngineVersionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppEngineVersionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.runtime != null && Object.hasOwnProperty.call(message, "runtime"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.runtime);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.environment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AppEngineVersionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.AppEngineVersionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IAppEngineVersionInfo} message AppEngineVersionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppEngineVersionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AppEngineVersionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.AppEngineVersionInfo} AppEngineVersionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppEngineVersionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.runtime = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.environment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AppEngineVersionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.AppEngineVersionInfo} AppEngineVersionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppEngineVersionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AppEngineVersionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AppEngineVersionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.runtime != null && message.hasOwnProperty("runtime"))
+                                if (!$util.isString(message.runtime))
+                                    return "runtime: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                if (!$util.isString(message.environment))
+                                    return "environment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AppEngineVersionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.AppEngineVersionInfo} AppEngineVersionInfo
+                         */
+                        AppEngineVersionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.runtime != null)
+                                message.runtime = String(object.runtime);
+                            if (object.environment != null)
+                                message.environment = String(object.environment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AppEngineVersionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.AppEngineVersionInfo} message AppEngineVersionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AppEngineVersionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.runtime = "";
+                                object.environment = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.runtime != null && message.hasOwnProperty("runtime"))
+                                object.runtime = message.runtime;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = message.environment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AppEngineVersionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AppEngineVersionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AppEngineVersionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.AppEngineVersionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AppEngineVersionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.AppEngineVersionInfo";
+                        };
+    
+                        return AppEngineVersionInfo;
+                    })();
+    
+                    v1.VpcConnectorInfo = (function() {
+    
+                        /**
+                         * Properties of a VpcConnectorInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IVpcConnectorInfo
+                         * @property {string|null} [displayName] VpcConnectorInfo displayName
+                         * @property {string|null} [uri] VpcConnectorInfo uri
+                         * @property {string|null} [location] VpcConnectorInfo location
+                         */
+    
+                        /**
+                         * Constructs a new VpcConnectorInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a VpcConnectorInfo.
+                         * @implements IVpcConnectorInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IVpcConnectorInfo=} [properties] Properties to set
+                         */
+                        function VpcConnectorInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VpcConnectorInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @instance
+                         */
+                        VpcConnectorInfo.prototype.displayName = "";
+    
+                        /**
+                         * VpcConnectorInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @instance
+                         */
+                        VpcConnectorInfo.prototype.uri = "";
+    
+                        /**
+                         * VpcConnectorInfo location.
+                         * @member {string} location
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @instance
+                         */
+                        VpcConnectorInfo.prototype.location = "";
+    
+                        /**
+                         * Creates a new VpcConnectorInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IVpcConnectorInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.VpcConnectorInfo} VpcConnectorInfo instance
+                         */
+                        VpcConnectorInfo.create = function create(properties) {
+                            return new VpcConnectorInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VpcConnectorInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.VpcConnectorInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IVpcConnectorInfo} message VpcConnectorInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VpcConnectorInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VpcConnectorInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.VpcConnectorInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IVpcConnectorInfo} message VpcConnectorInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VpcConnectorInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VpcConnectorInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.VpcConnectorInfo} VpcConnectorInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VpcConnectorInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.VpcConnectorInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VpcConnectorInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.VpcConnectorInfo} VpcConnectorInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VpcConnectorInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VpcConnectorInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VpcConnectorInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VpcConnectorInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.VpcConnectorInfo} VpcConnectorInfo
+                         */
+                        VpcConnectorInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.VpcConnectorInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.VpcConnectorInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VpcConnectorInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.VpcConnectorInfo} message VpcConnectorInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VpcConnectorInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.location = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VpcConnectorInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VpcConnectorInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VpcConnectorInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.VpcConnectorInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VpcConnectorInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.VpcConnectorInfo";
+                        };
+    
+                        return VpcConnectorInfo;
+                    })();
+    
+                    /**
+                     * LoadBalancerType enum.
+                     * @name google.cloud.networkmanagement.v1.LoadBalancerType
+                     * @enum {number}
+                     * @property {number} LOAD_BALANCER_TYPE_UNSPECIFIED=0 LOAD_BALANCER_TYPE_UNSPECIFIED value
+                     * @property {number} HTTPS_ADVANCED_LOAD_BALANCER=1 HTTPS_ADVANCED_LOAD_BALANCER value
+                     * @property {number} HTTPS_LOAD_BALANCER=2 HTTPS_LOAD_BALANCER value
+                     * @property {number} REGIONAL_HTTPS_LOAD_BALANCER=3 REGIONAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} INTERNAL_HTTPS_LOAD_BALANCER=4 INTERNAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} SSL_PROXY_LOAD_BALANCER=5 SSL_PROXY_LOAD_BALANCER value
+                     * @property {number} TCP_PROXY_LOAD_BALANCER=6 TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} INTERNAL_TCP_PROXY_LOAD_BALANCER=7 INTERNAL_TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} NETWORK_LOAD_BALANCER=8 NETWORK_LOAD_BALANCER value
+                     * @property {number} LEGACY_NETWORK_LOAD_BALANCER=9 LEGACY_NETWORK_LOAD_BALANCER value
+                     * @property {number} TCP_UDP_INTERNAL_LOAD_BALANCER=10 TCP_UDP_INTERNAL_LOAD_BALANCER value
+                     */
+                    v1.LoadBalancerType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOAD_BALANCER_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HTTPS_ADVANCED_LOAD_BALANCER"] = 1;
+                        values[valuesById[2] = "HTTPS_LOAD_BALANCER"] = 2;
+                        values[valuesById[3] = "REGIONAL_HTTPS_LOAD_BALANCER"] = 3;
+                        values[valuesById[4] = "INTERNAL_HTTPS_LOAD_BALANCER"] = 4;
+                        values[valuesById[5] = "SSL_PROXY_LOAD_BALANCER"] = 5;
+                        values[valuesById[6] = "TCP_PROXY_LOAD_BALANCER"] = 6;
+                        values[valuesById[7] = "INTERNAL_TCP_PROXY_LOAD_BALANCER"] = 7;
+                        values[valuesById[8] = "NETWORK_LOAD_BALANCER"] = 8;
+                        values[valuesById[9] = "LEGACY_NETWORK_LOAD_BALANCER"] = 9;
+                        values[valuesById[10] = "TCP_UDP_INTERNAL_LOAD_BALANCER"] = 10;
+                        return values;
                     })();
     
                     v1.ReachabilityService = (function() {
@@ -11341,9 +15301,14 @@
                          * @property {number|null} [port] Endpoint port
                          * @property {string|null} [instance] Endpoint instance
                          * @property {string|null} [forwardingRule] Endpoint forwardingRule
+                         * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|null} [forwardingRuleTarget] Endpoint forwardingRuleTarget
+                         * @property {string|null} [loadBalancerId] Endpoint loadBalancerId
+                         * @property {google.cloud.networkmanagement.v1beta1.LoadBalancerType|null} [loadBalancerType] Endpoint loadBalancerType
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
+                         * @property {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
+                         * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
                          * @property {string|null} [network] Endpoint network
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.NetworkType|null} [networkType] Endpoint networkType
                          * @property {string|null} [projectId] Endpoint projectId
@@ -11397,6 +15362,30 @@
                         Endpoint.prototype.forwardingRule = "";
     
                         /**
+                         * Endpoint forwardingRuleTarget.
+                         * @member {google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|null|undefined} forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.forwardingRuleTarget = null;
+    
+                        /**
+                         * Endpoint loadBalancerId.
+                         * @member {string|null|undefined} loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerId = null;
+    
+                        /**
+                         * Endpoint loadBalancerType.
+                         * @member {google.cloud.networkmanagement.v1beta1.LoadBalancerType|null|undefined} loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerType = null;
+    
+                        /**
                          * Endpoint gkeMasterCluster.
                          * @member {string} gkeMasterCluster
                          * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
@@ -11421,6 +15410,22 @@
                         Endpoint.prototype.cloudFunction = null;
     
                         /**
+                         * Endpoint appEngineVersion.
+                         * @member {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint|null|undefined} appEngineVersion
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.appEngineVersion = null;
+    
+                        /**
+                         * Endpoint cloudRunRevision.
+                         * @member {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint|null|undefined} cloudRunRevision
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.cloudRunRevision = null;
+    
+                        /**
                          * Endpoint network.
                          * @member {string} network
                          * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
@@ -11443,6 +15448,42 @@
                          * @instance
                          */
                         Endpoint.prototype.projectId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Endpoint _forwardingRuleTarget.
+                         * @member {"forwardingRuleTarget"|undefined} _forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_forwardingRuleTarget", {
+                            get: $util.oneOfGetter($oneOfFields = ["forwardingRuleTarget"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerId.
+                         * @member {"loadBalancerId"|undefined} _loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerId", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerType.
+                         * @member {"loadBalancerType"|undefined} _loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerType", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Endpoint instance using the specified properties.
@@ -11486,8 +15527,18 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.cloudSqlInstance);
                             if (message.cloudFunction != null && Object.hasOwnProperty.call(message, "cloudFunction"))
                                 $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.encode(message.cloudFunction, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.appEngineVersion != null && Object.hasOwnProperty.call(message, "appEngineVersion"))
+                                $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.encode(message.appEngineVersion, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
+                                $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.encode(message.cloudRunRevision, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardingRule);
+                            if (message.forwardingRuleTarget != null && Object.hasOwnProperty.call(message, "forwardingRuleTarget"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.forwardingRuleTarget);
+                            if (message.loadBalancerId != null && Object.hasOwnProperty.call(message, "loadBalancerId"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.loadBalancerId);
+                            if (message.loadBalancerType != null && Object.hasOwnProperty.call(message, "loadBalancerType"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.loadBalancerType);
                             return writer;
                         };
     
@@ -11538,6 +15589,18 @@
                                         message.forwardingRule = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.forwardingRuleTarget = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.loadBalancerId = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.loadBalancerType = reader.int32();
+                                        break;
+                                    }
                                 case 7: {
                                         message.gkeMasterCluster = reader.string();
                                         break;
@@ -11548,6 +15611,14 @@
                                     }
                                 case 10: {
                                         message.cloudFunction = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.appEngineVersion = $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -11597,6 +15668,7 @@
                         Endpoint.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 if (!$util.isString(message.ipAddress))
                                     return "ipAddress: string expected";
@@ -11609,6 +15681,43 @@
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 if (!$util.isString(message.forwardingRule))
                                     return "forwardingRule: string expected";
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                properties._forwardingRuleTarget = 1;
+                                switch (message.forwardingRuleTarget) {
+                                default:
+                                    return "forwardingRuleTarget: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                properties._loadBalancerId = 1;
+                                if (!$util.isString(message.loadBalancerId))
+                                    return "loadBalancerId: string expected";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                properties._loadBalancerType = 1;
+                                switch (message.loadBalancerType) {
+                                default:
+                                    return "loadBalancerType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    break;
+                                }
+                            }
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
@@ -11619,6 +15728,16 @@
                                 var error = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction);
                                 if (error)
                                     return "cloudFunction." + error;
+                            }
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion")) {
+                                var error = $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.verify(message.appEngineVersion);
+                                if (error)
+                                    return "appEngineVersion." + error;
+                            }
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                var error = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.verify(message.cloudRunRevision);
+                                if (error)
+                                    return "cloudRunRevision." + error;
                             }
                             if (message.network != null && message.hasOwnProperty("network"))
                                 if (!$util.isString(message.network))
@@ -11658,6 +15777,88 @@
                                 message.instance = String(object.instance);
                             if (object.forwardingRule != null)
                                 message.forwardingRule = String(object.forwardingRule);
+                            switch (object.forwardingRuleTarget) {
+                            default:
+                                if (typeof object.forwardingRuleTarget === "number") {
+                                    message.forwardingRuleTarget = object.forwardingRuleTarget;
+                                    break;
+                                }
+                                break;
+                            case "FORWARDING_RULE_TARGET_UNSPECIFIED":
+                            case 0:
+                                message.forwardingRuleTarget = 0;
+                                break;
+                            case "INSTANCE":
+                            case 1:
+                                message.forwardingRuleTarget = 1;
+                                break;
+                            case "LOAD_BALANCER":
+                            case 2:
+                                message.forwardingRuleTarget = 2;
+                                break;
+                            case "VPN_GATEWAY":
+                            case 3:
+                                message.forwardingRuleTarget = 3;
+                                break;
+                            case "PSC":
+                            case 4:
+                                message.forwardingRuleTarget = 4;
+                                break;
+                            }
+                            if (object.loadBalancerId != null)
+                                message.loadBalancerId = String(object.loadBalancerId);
+                            switch (object.loadBalancerType) {
+                            default:
+                                if (typeof object.loadBalancerType === "number") {
+                                    message.loadBalancerType = object.loadBalancerType;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancerType = 0;
+                                break;
+                            case "HTTPS_ADVANCED_LOAD_BALANCER":
+                            case 1:
+                                message.loadBalancerType = 1;
+                                break;
+                            case "HTTPS_LOAD_BALANCER":
+                            case 2:
+                                message.loadBalancerType = 2;
+                                break;
+                            case "REGIONAL_HTTPS_LOAD_BALANCER":
+                            case 3:
+                                message.loadBalancerType = 3;
+                                break;
+                            case "INTERNAL_HTTPS_LOAD_BALANCER":
+                            case 4:
+                                message.loadBalancerType = 4;
+                                break;
+                            case "SSL_PROXY_LOAD_BALANCER":
+                            case 5:
+                                message.loadBalancerType = 5;
+                                break;
+                            case "TCP_PROXY_LOAD_BALANCER":
+                            case 6:
+                                message.loadBalancerType = 6;
+                                break;
+                            case "INTERNAL_TCP_PROXY_LOAD_BALANCER":
+                            case 7:
+                                message.loadBalancerType = 7;
+                                break;
+                            case "NETWORK_LOAD_BALANCER":
+                            case 8:
+                                message.loadBalancerType = 8;
+                                break;
+                            case "LEGACY_NETWORK_LOAD_BALANCER":
+                            case 9:
+                                message.loadBalancerType = 9;
+                                break;
+                            case "TCP_UDP_INTERNAL_LOAD_BALANCER":
+                            case 10:
+                                message.loadBalancerType = 10;
+                                break;
+                            }
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
                             if (object.cloudSqlInstance != null)
@@ -11666,6 +15867,16 @@
                                 if (typeof object.cloudFunction !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Endpoint.cloudFunction: object expected");
                                 message.cloudFunction = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.fromObject(object.cloudFunction);
+                            }
+                            if (object.appEngineVersion != null) {
+                                if (typeof object.appEngineVersion !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Endpoint.appEngineVersion: object expected");
+                                message.appEngineVersion = $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.fromObject(object.appEngineVersion);
+                            }
+                            if (object.cloudRunRevision != null) {
+                                if (typeof object.cloudRunRevision !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Endpoint.cloudRunRevision: object expected");
+                                message.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.fromObject(object.cloudRunRevision);
                             }
                             if (object.network != null)
                                 message.network = String(object.network);
@@ -11717,6 +15928,8 @@
                                 object.gkeMasterCluster = "";
                                 object.cloudSqlInstance = "";
                                 object.cloudFunction = null;
+                                object.appEngineVersion = null;
+                                object.cloudRunRevision = null;
                                 object.forwardingRule = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
@@ -11737,8 +15950,27 @@
                                 object.cloudSqlInstance = message.cloudSqlInstance;
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction"))
                                 object.cloudFunction = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.toObject(message.cloudFunction, options);
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion"))
+                                object.appEngineVersion = $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.toObject(message.appEngineVersion, options);
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision"))
+                                object.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.toObject(message.cloudRunRevision, options);
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 object.forwardingRule = message.forwardingRule;
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                object.forwardingRuleTarget = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] === undefined ? message.forwardingRuleTarget : $root.google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] : message.forwardingRuleTarget;
+                                if (options.oneofs)
+                                    object._forwardingRuleTarget = "forwardingRuleTarget";
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                object.loadBalancerId = message.loadBalancerId;
+                                if (options.oneofs)
+                                    object._loadBalancerId = "loadBalancerId";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerType[message.loadBalancerType] === undefined ? message.loadBalancerType : $root.google.cloud.networkmanagement.v1beta1.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
+                                if (options.oneofs)
+                                    object._loadBalancerType = "loadBalancerType";
+                            }
                             return object;
                         };
     
@@ -11781,6 +16013,26 @@
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ForwardingRuleTarget enum.
+                         * @name google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget
+                         * @enum {number}
+                         * @property {number} FORWARDING_RULE_TARGET_UNSPECIFIED=0 FORWARDING_RULE_TARGET_UNSPECIFIED value
+                         * @property {number} INSTANCE=1 INSTANCE value
+                         * @property {number} LOAD_BALANCER=2 LOAD_BALANCER value
+                         * @property {number} VPN_GATEWAY=3 VPN_GATEWAY value
+                         * @property {number} PSC=4 PSC value
+                         */
+                        Endpoint.ForwardingRuleTarget = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FORWARDING_RULE_TARGET_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INSTANCE"] = 1;
+                            values[valuesById[2] = "LOAD_BALANCER"] = 2;
+                            values[valuesById[3] = "VPN_GATEWAY"] = 3;
+                            values[valuesById[4] = "PSC"] = 4;
                             return values;
                         })();
     
@@ -11985,6 +16237,412 @@
                             };
     
                             return CloudFunctionEndpoint;
+                        })();
+    
+                        Endpoint.AppEngineVersionEndpoint = (function() {
+    
+                            /**
+                             * Properties of an AppEngineVersionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                             * @interface IAppEngineVersionEndpoint
+                             * @property {string|null} [uri] AppEngineVersionEndpoint uri
+                             */
+    
+                            /**
+                             * Constructs a new AppEngineVersionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                             * @classdesc Represents an AppEngineVersionEndpoint.
+                             * @implements IAppEngineVersionEndpoint
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint=} [properties] Properties to set
+                             */
+                            function AppEngineVersionEndpoint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AppEngineVersionEndpoint uri.
+                             * @member {string} uri
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @instance
+                             */
+                            AppEngineVersionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * Creates a new AppEngineVersionEndpoint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint instance
+                             */
+                            AppEngineVersionEndpoint.create = function create(properties) {
+                                return new AppEngineVersionEndpoint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AppEngineVersionEndpoint message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint} message AppEngineVersionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AppEngineVersionEndpoint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AppEngineVersionEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint} message AppEngineVersionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AppEngineVersionEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AppEngineVersionEndpoint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AppEngineVersionEndpoint.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AppEngineVersionEndpoint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AppEngineVersionEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AppEngineVersionEndpoint message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AppEngineVersionEndpoint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AppEngineVersionEndpoint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint} AppEngineVersionEndpoint
+                             */
+                            AppEngineVersionEndpoint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AppEngineVersionEndpoint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint} message AppEngineVersionEndpoint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AppEngineVersionEndpoint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.uri = "";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AppEngineVersionEndpoint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AppEngineVersionEndpoint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AppEngineVersionEndpoint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AppEngineVersionEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.Endpoint.AppEngineVersionEndpoint";
+                            };
+    
+                            return AppEngineVersionEndpoint;
+                        })();
+    
+                        Endpoint.CloudRunRevisionEndpoint = (function() {
+    
+                            /**
+                             * Properties of a CloudRunRevisionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                             * @interface ICloudRunRevisionEndpoint
+                             * @property {string|null} [uri] CloudRunRevisionEndpoint uri
+                             */
+    
+                            /**
+                             * Constructs a new CloudRunRevisionEndpoint.
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                             * @classdesc Represents a CloudRunRevisionEndpoint.
+                             * @implements ICloudRunRevisionEndpoint
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint=} [properties] Properties to set
+                             */
+                            function CloudRunRevisionEndpoint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudRunRevisionEndpoint uri.
+                             * @member {string} uri
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             */
+                            CloudRunRevisionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint instance
+                             */
+                            CloudRunRevisionEndpoint.create = function create(properties) {
+                                return new CloudRunRevisionEndpoint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudRunRevisionEndpoint message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint} message CloudRunRevisionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudRunRevisionEndpoint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudRunRevisionEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint} message CloudRunRevisionEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudRunRevisionEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudRunRevisionEndpoint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudRunRevisionEndpoint.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudRunRevisionEndpoint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudRunRevisionEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudRunRevisionEndpoint message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudRunRevisionEndpoint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudRunRevisionEndpoint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint} CloudRunRevisionEndpoint
+                             */
+                            CloudRunRevisionEndpoint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudRunRevisionEndpoint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint} message CloudRunRevisionEndpoint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudRunRevisionEndpoint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.uri = "";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudRunRevisionEndpoint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudRunRevisionEndpoint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudRunRevisionEndpoint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudRunRevisionEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint";
+                            };
+    
+                            return CloudRunRevisionEndpoint;
                         })();
     
                         return Endpoint;
@@ -13804,6 +18462,8 @@
                          * @property {google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null} [gkeMaster] Step gkeMaster
                          * @property {google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null} [cloudSqlInstance] Step cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo|null} [cloudFunction] Step cloudFunction
+                         * @property {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo|null} [appEngineVersion] Step appEngineVersion
+                         * @property {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null} [cloudRunRevision] Step cloudRunRevision
                          */
     
                         /**
@@ -13989,17 +18649,33 @@
                          */
                         Step.prototype.cloudFunction = null;
     
+                        /**
+                         * Step appEngineVersion.
+                         * @member {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo|null|undefined} appEngineVersion
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.appEngineVersion = null;
+    
+                        /**
+                         * Step cloudRunRevision.
+                         * @member {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null|undefined} cloudRunRevision
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.cloudRunRevision = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -14069,6 +18745,10 @@
                                 $root.google.cloud.networkmanagement.v1beta1.CloudFunctionInfo.encode(message.cloudFunction, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.vpcConnector != null && Object.hasOwnProperty.call(message, "vpcConnector"))
                                 $root.google.cloud.networkmanagement.v1beta1.VpcConnectorInfo.encode(message.vpcConnector, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.appEngineVersion != null && Object.hasOwnProperty.call(message, "appEngineVersion"))
+                                $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.encode(message.appEngineVersion, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
+                                $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.encode(message.cloudRunRevision, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             return writer;
                         };
     
@@ -14187,6 +18867,14 @@
                                         message.cloudFunction = $root.google.cloud.networkmanagement.v1beta1.CloudFunctionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 22: {
+                                        message.appEngineVersion = $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14237,6 +18925,8 @@
                                 case 21:
                                 case 22:
                                 case 23:
+                                case 25:
+                                case 26:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -14431,6 +19121,26 @@
                                         return "cloudFunction." + error;
                                 }
                             }
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.verify(message.appEngineVersion);
+                                    if (error)
+                                        return "appEngineVersion." + error;
+                                }
+                            }
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.verify(message.cloudRunRevision);
+                                    if (error)
+                                        return "cloudRunRevision." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -14482,6 +19192,14 @@
                             case "START_FROM_CLOUD_FUNCTION":
                             case 23:
                                 message.state = 23;
+                                break;
+                            case "START_FROM_APP_ENGINE_VERSION":
+                            case 25:
+                                message.state = 25;
+                                break;
+                            case "START_FROM_CLOUD_RUN_REVISION":
+                            case 26:
+                                message.state = 26;
                                 break;
                             case "APPLY_INGRESS_FIREWALL_RULE":
                             case 4:
@@ -14645,6 +19363,16 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.cloudFunction: object expected");
                                 message.cloudFunction = $root.google.cloud.networkmanagement.v1beta1.CloudFunctionInfo.fromObject(object.cloudFunction);
                             }
+                            if (object.appEngineVersion != null) {
+                                if (typeof object.appEngineVersion !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.appEngineVersion: object expected");
+                                message.appEngineVersion = $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.fromObject(object.appEngineVersion);
+                            }
+                            if (object.cloudRunRevision != null) {
+                                if (typeof object.cloudRunRevision !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.cloudRunRevision: object expected");
+                                message.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.fromObject(object.cloudRunRevision);
+                            }
                             return message;
                         };
     
@@ -14760,6 +19488,16 @@
                                 if (options.oneofs)
                                     object.stepInfo = "vpcConnector";
                             }
+                            if (message.appEngineVersion != null && message.hasOwnProperty("appEngineVersion")) {
+                                object.appEngineVersion = $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.toObject(message.appEngineVersion, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "appEngineVersion";
+                            }
+                            if (message.cloudRunRevision != null && message.hasOwnProperty("cloudRunRevision")) {
+                                object.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.toObject(message.cloudRunRevision, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "cloudRunRevision";
+                            }
                             return object;
                         };
     
@@ -14800,6 +19538,8 @@
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
+                         * @property {number} START_FROM_APP_ENGINE_VERSION=25 START_FROM_APP_ENGINE_VERSION value
+                         * @property {number} START_FROM_CLOUD_RUN_REVISION=26 START_FROM_CLOUD_RUN_REVISION value
                          * @property {number} APPLY_INGRESS_FIREWALL_RULE=4 APPLY_INGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_EGRESS_FIREWALL_RULE=5 APPLY_EGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_ROUTE=6 APPLY_ROUTE value
@@ -14828,6 +19568,8 @@
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
+                            values[valuesById[25] = "START_FROM_APP_ENGINE_VERSION"] = 25;
+                            values[valuesById[26] = "START_FROM_CLOUD_RUN_REVISION"] = 26;
                             values[valuesById[4] = "APPLY_INGRESS_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "APPLY_EGRESS_FIREWALL_RULE"] = 5;
                             values[valuesById[6] = "APPLY_ROUTE"] = 6;
@@ -15991,6 +20733,7 @@
                          * @interface IRouteInfo
                          * @property {google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType|null} [routeType] RouteInfo routeType
                          * @property {google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType|null} [nextHopType] RouteInfo nextHopType
+                         * @property {google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope|null} [routeScope] RouteInfo routeScope
                          * @property {string|null} [displayName] RouteInfo displayName
                          * @property {string|null} [uri] RouteInfo uri
                          * @property {string|null} [destIpRange] RouteInfo destIpRange
@@ -15998,6 +20741,12 @@
                          * @property {string|null} [networkUri] RouteInfo networkUri
                          * @property {number|null} [priority] RouteInfo priority
                          * @property {Array.<string>|null} [instanceTags] RouteInfo instanceTags
+                         * @property {string|null} [srcIpRange] RouteInfo srcIpRange
+                         * @property {Array.<string>|null} [destPortRanges] RouteInfo destPortRanges
+                         * @property {Array.<string>|null} [srcPortRanges] RouteInfo srcPortRanges
+                         * @property {Array.<string>|null} [protocols] RouteInfo protocols
+                         * @property {string|null} [nccHubUri] RouteInfo nccHubUri
+                         * @property {string|null} [nccSpokeUri] RouteInfo nccSpokeUri
                          */
     
                         /**
@@ -16010,6 +20759,9 @@
                          */
                         function RouteInfo(properties) {
                             this.instanceTags = [];
+                            this.destPortRanges = [];
+                            this.srcPortRanges = [];
+                            this.protocols = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -16031,6 +20783,14 @@
                          * @instance
                          */
                         RouteInfo.prototype.nextHopType = 0;
+    
+                        /**
+                         * RouteInfo routeScope.
+                         * @member {google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope} routeScope
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.routeScope = 0;
     
                         /**
                          * RouteInfo displayName.
@@ -16089,6 +20849,79 @@
                         RouteInfo.prototype.instanceTags = $util.emptyArray;
     
                         /**
+                         * RouteInfo srcIpRange.
+                         * @member {string} srcIpRange
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcIpRange = "";
+    
+                        /**
+                         * RouteInfo destPortRanges.
+                         * @member {Array.<string>} destPortRanges
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.destPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo srcPortRanges.
+                         * @member {Array.<string>} srcPortRanges
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo protocols.
+                         * @member {Array.<string>} protocols
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.protocols = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo nccHubUri.
+                         * @member {string|null|undefined} nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccHubUri = null;
+    
+                        /**
+                         * RouteInfo nccSpokeUri.
+                         * @member {string|null|undefined} nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccSpokeUri = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RouteInfo _nccHubUri.
+                         * @member {"nccHubUri"|undefined} _nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccHubUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccHubUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RouteInfo _nccSpokeUri.
+                         * @member {"nccSpokeUri"|undefined} _nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccSpokeUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccSpokeUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RouteInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
@@ -16131,6 +20964,23 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.routeType);
                             if (message.nextHopType != null && Object.hasOwnProperty.call(message, "nextHopType"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.nextHopType);
+                            if (message.srcIpRange != null && Object.hasOwnProperty.call(message, "srcIpRange"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.srcIpRange);
+                            if (message.destPortRanges != null && message.destPortRanges.length)
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.destPortRanges[i]);
+                            if (message.srcPortRanges != null && message.srcPortRanges.length)
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.srcPortRanges[i]);
+                            if (message.protocols != null && message.protocols.length)
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.protocols[i]);
+                            if (message.routeScope != null && Object.hasOwnProperty.call(message, "routeScope"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.routeScope);
+                            if (message.nccHubUri != null && Object.hasOwnProperty.call(message, "nccHubUri"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.nccHubUri);
+                            if (message.nccSpokeUri != null && Object.hasOwnProperty.call(message, "nccSpokeUri"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.nccSpokeUri);
                             return writer;
                         };
     
@@ -16173,6 +21023,10 @@
                                         message.nextHopType = reader.int32();
                                         break;
                                     }
+                                case 14: {
+                                        message.routeScope = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.displayName = reader.string();
                                         break;
@@ -16201,6 +21055,36 @@
                                         if (!(message.instanceTags && message.instanceTags.length))
                                             message.instanceTags = [];
                                         message.instanceTags.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.srcIpRange = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.destPortRanges && message.destPortRanges.length))
+                                            message.destPortRanges = [];
+                                        message.destPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.srcPortRanges && message.srcPortRanges.length))
+                                            message.srcPortRanges = [];
+                                        message.srcPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.protocols && message.protocols.length))
+                                            message.protocols = [];
+                                        message.protocols.push(reader.string());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.nccHubUri = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.nccSpokeUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -16238,6 +21122,7 @@
                         RouteInfo.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.routeType != null && message.hasOwnProperty("routeType"))
                                 switch (message.routeType) {
                                 default:
@@ -16249,6 +21134,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
@@ -16267,6 +21153,16 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
+                                    break;
+                                }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                switch (message.routeScope) {
+                                default:
+                                    return "routeScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
@@ -16293,6 +21189,40 @@
                                 for (var i = 0; i < message.instanceTags.length; ++i)
                                     if (!$util.isString(message.instanceTags[i]))
                                         return "instanceTags: string[] expected";
+                            }
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                if (!$util.isString(message.srcIpRange))
+                                    return "srcIpRange: string expected";
+                            if (message.destPortRanges != null && message.hasOwnProperty("destPortRanges")) {
+                                if (!Array.isArray(message.destPortRanges))
+                                    return "destPortRanges: array expected";
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    if (!$util.isString(message.destPortRanges[i]))
+                                        return "destPortRanges: string[] expected";
+                            }
+                            if (message.srcPortRanges != null && message.hasOwnProperty("srcPortRanges")) {
+                                if (!Array.isArray(message.srcPortRanges))
+                                    return "srcPortRanges: array expected";
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    if (!$util.isString(message.srcPortRanges[i]))
+                                        return "srcPortRanges: string[] expected";
+                            }
+                            if (message.protocols != null && message.hasOwnProperty("protocols")) {
+                                if (!Array.isArray(message.protocols))
+                                    return "protocols: array expected";
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    if (!$util.isString(message.protocols[i]))
+                                        return "protocols: string[] expected";
+                            }
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                properties._nccHubUri = 1;
+                                if (!$util.isString(message.nccHubUri))
+                                    return "nccHubUri: string expected";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                properties._nccSpokeUri = 1;
+                                if (!$util.isString(message.nccSpokeUri))
+                                    return "nccSpokeUri: string expected";
                             }
                             return null;
                         };
@@ -16343,6 +21273,10 @@
                             case "PEERING_DYNAMIC":
                             case 6:
                                 message.routeType = 6;
+                                break;
+                            case "POLICY_BASED":
+                            case 7:
+                                message.routeType = 7;
                                 break;
                             }
                             switch (object.nextHopType) {
@@ -16400,6 +21334,30 @@
                             case 11:
                                 message.nextHopType = 11;
                                 break;
+                            case "NEXT_HOP_NCC_HUB":
+                            case 12:
+                                message.nextHopType = 12;
+                                break;
+                            }
+                            switch (object.routeScope) {
+                            default:
+                                if (typeof object.routeScope === "number") {
+                                    message.routeScope = object.routeScope;
+                                    break;
+                                }
+                                break;
+                            case "ROUTE_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.routeScope = 0;
+                                break;
+                            case "NETWORK":
+                            case 1:
+                                message.routeScope = 1;
+                                break;
+                            case "NCC_HUB":
+                            case 2:
+                                message.routeScope = 2;
+                                break;
                             }
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
@@ -16420,6 +21378,33 @@
                                 for (var i = 0; i < object.instanceTags.length; ++i)
                                     message.instanceTags[i] = String(object.instanceTags[i]);
                             }
+                            if (object.srcIpRange != null)
+                                message.srcIpRange = String(object.srcIpRange);
+                            if (object.destPortRanges) {
+                                if (!Array.isArray(object.destPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.RouteInfo.destPortRanges: array expected");
+                                message.destPortRanges = [];
+                                for (var i = 0; i < object.destPortRanges.length; ++i)
+                                    message.destPortRanges[i] = String(object.destPortRanges[i]);
+                            }
+                            if (object.srcPortRanges) {
+                                if (!Array.isArray(object.srcPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.RouteInfo.srcPortRanges: array expected");
+                                message.srcPortRanges = [];
+                                for (var i = 0; i < object.srcPortRanges.length; ++i)
+                                    message.srcPortRanges[i] = String(object.srcPortRanges[i]);
+                            }
+                            if (object.protocols) {
+                                if (!Array.isArray(object.protocols))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.RouteInfo.protocols: array expected");
+                                message.protocols = [];
+                                for (var i = 0; i < object.protocols.length; ++i)
+                                    message.protocols[i] = String(object.protocols[i]);
+                            }
+                            if (object.nccHubUri != null)
+                                message.nccHubUri = String(object.nccHubUri);
+                            if (object.nccSpokeUri != null)
+                                message.nccSpokeUri = String(object.nccSpokeUri);
                             return message;
                         };
     
@@ -16436,8 +21421,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.instanceTags = [];
+                                object.destPortRanges = [];
+                                object.srcPortRanges = [];
+                                object.protocols = [];
+                            }
                             if (options.defaults) {
                                 object.displayName = "";
                                 object.uri = "";
@@ -16447,6 +21436,8 @@
                                 object.priority = 0;
                                 object.routeType = options.enums === String ? "ROUTE_TYPE_UNSPECIFIED" : 0;
                                 object.nextHopType = options.enums === String ? "NEXT_HOP_TYPE_UNSPECIFIED" : 0;
+                                object.srcIpRange = "";
+                                object.routeScope = options.enums === String ? "ROUTE_SCOPE_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -16469,6 +21460,35 @@
                                 object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] === undefined ? message.routeType : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] : message.routeType;
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
                                 object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] === undefined ? message.nextHopType : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                object.srcIpRange = message.srcIpRange;
+                            if (message.destPortRanges && message.destPortRanges.length) {
+                                object.destPortRanges = [];
+                                for (var j = 0; j < message.destPortRanges.length; ++j)
+                                    object.destPortRanges[j] = message.destPortRanges[j];
+                            }
+                            if (message.srcPortRanges && message.srcPortRanges.length) {
+                                object.srcPortRanges = [];
+                                for (var j = 0; j < message.srcPortRanges.length; ++j)
+                                    object.srcPortRanges[j] = message.srcPortRanges[j];
+                            }
+                            if (message.protocols && message.protocols.length) {
+                                object.protocols = [];
+                                for (var j = 0; j < message.protocols.length; ++j)
+                                    object.protocols[j] = message.protocols[j];
+                            }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                object.routeScope = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope[message.routeScope] === undefined ? message.routeScope : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope[message.routeScope] : message.routeScope;
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                object.nccHubUri = message.nccHubUri;
+                                if (options.oneofs)
+                                    object._nccHubUri = "nccHubUri";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                object.nccSpokeUri = message.nccSpokeUri;
+                                if (options.oneofs)
+                                    object._nccSpokeUri = "nccSpokeUri";
+                            }
                             return object;
                         };
     
@@ -16509,6 +21529,7 @@
                          * @property {number} PEERING_SUBNET=4 PEERING_SUBNET value
                          * @property {number} PEERING_STATIC=5 PEERING_STATIC value
                          * @property {number} PEERING_DYNAMIC=6 PEERING_DYNAMIC value
+                         * @property {number} POLICY_BASED=7 POLICY_BASED value
                          */
                         RouteInfo.RouteType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16519,6 +21540,7 @@
                             values[valuesById[4] = "PEERING_SUBNET"] = 4;
                             values[valuesById[5] = "PEERING_STATIC"] = 5;
                             values[valuesById[6] = "PEERING_DYNAMIC"] = 6;
+                            values[valuesById[7] = "POLICY_BASED"] = 7;
                             return values;
                         })();
     
@@ -16538,6 +21560,7 @@
                          * @property {number} NEXT_HOP_BLACKHOLE=9 NEXT_HOP_BLACKHOLE value
                          * @property {number} NEXT_HOP_ILB=10 NEXT_HOP_ILB value
                          * @property {number} NEXT_HOP_ROUTER_APPLIANCE=11 NEXT_HOP_ROUTER_APPLIANCE value
+                         * @property {number} NEXT_HOP_NCC_HUB=12 NEXT_HOP_NCC_HUB value
                          */
                         RouteInfo.NextHopType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16553,6 +21576,23 @@
                             values[valuesById[9] = "NEXT_HOP_BLACKHOLE"] = 9;
                             values[valuesById[10] = "NEXT_HOP_ILB"] = 10;
                             values[valuesById[11] = "NEXT_HOP_ROUTER_APPLIANCE"] = 11;
+                            values[valuesById[12] = "NEXT_HOP_NCC_HUB"] = 12;
+                            return values;
+                        })();
+    
+                        /**
+                         * RouteScope enum.
+                         * @name google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope
+                         * @enum {number}
+                         * @property {number} ROUTE_SCOPE_UNSPECIFIED=0 ROUTE_SCOPE_UNSPECIFIED value
+                         * @property {number} NETWORK=1 NETWORK value
+                         * @property {number} NCC_HUB=2 NCC_HUB value
+                         */
+                        RouteInfo.RouteScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROUTE_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK"] = 1;
+                            values[valuesById[2] = "NCC_HUB"] = 2;
                             return values;
                         })();
     
@@ -17127,6 +22167,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.backendUri != null && message.hasOwnProperty("backendUri"))
@@ -17209,6 +22250,10 @@
                             case "TARGET_POOL":
                             case 2:
                                 message.backendType = 2;
+                                break;
+                            case "TARGET_INSTANCE":
+                            case 3:
+                                message.backendType = 3;
                                 break;
                             }
                             if (object.backendUri != null)
@@ -17308,12 +22353,14 @@
                          * @property {number} BACKEND_TYPE_UNSPECIFIED=0 BACKEND_TYPE_UNSPECIFIED value
                          * @property {number} BACKEND_SERVICE=1 BACKEND_SERVICE value
                          * @property {number} TARGET_POOL=2 TARGET_POOL value
+                         * @property {number} TARGET_INSTANCE=3 TARGET_INSTANCE value
                          */
                         LoadBalancerInfo.BackendType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BACKEND_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "BACKEND_SERVICE"] = 1;
                             values[valuesById[2] = "TARGET_POOL"] = 2;
+                            values[valuesById[3] = "TARGET_INSTANCE"] = 3;
                             return values;
                         })();
     
@@ -18968,6 +24015,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -19030,6 +24078,10 @@
                             case "PSC_VPC_SC":
                             case 8:
                                 message.target = 8;
+                                break;
+                            case "SERVERLESS_NEG":
+                            case 9:
+                                message.target = 9;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -19100,6 +24152,7 @@
                          * @property {number} PSC_PUBLISHED_SERVICE=6 PSC_PUBLISHED_SERVICE value
                          * @property {number} PSC_GOOGLE_API=7 PSC_GOOGLE_API value
                          * @property {number} PSC_VPC_SC=8 PSC_VPC_SC value
+                         * @property {number} SERVERLESS_NEG=9 SERVERLESS_NEG value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -19112,6 +24165,7 @@
                             values[valuesById[6] = "PSC_PUBLISHED_SERVICE"] = 6;
                             values[valuesById[7] = "PSC_GOOGLE_API"] = 7;
                             values[valuesById[8] = "PSC_VPC_SC"] = 8;
+                            values[valuesById[9] = "SERVERLESS_NEG"] = 9;
                             return values;
                         })();
     
@@ -19275,6 +24329,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -19329,6 +24385,14 @@
                             case "CLOUD_SQL_INSTANCE":
                             case 6:
                                 message.target = 6;
+                                break;
+                            case "ANOTHER_PROJECT":
+                            case 7:
+                                message.target = 7;
+                                break;
+                            case "NCC_HUB":
+                            case 8:
+                                message.target = 8;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -19397,6 +24461,8 @@
                          * @property {number} GKE_MASTER=4 GKE_MASTER value
                          * @property {number} IMPORTED_CUSTOM_ROUTE_NEXT_HOP=5 IMPORTED_CUSTOM_ROUTE_NEXT_HOP value
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
+                         * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
+                         * @property {number} NCC_HUB=8 NCC_HUB value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -19407,6 +24473,8 @@
                             values[valuesById[4] = "GKE_MASTER"] = 4;
                             values[valuesById[5] = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"] = 5;
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
+                            values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
+                            values[valuesById[8] = "NCC_HUB"] = 8;
                             return values;
                         })();
     
@@ -19598,6 +24666,12 @@
                                 case 13:
                                 case 14:
                                 case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -19696,6 +24770,30 @@
                             case 15:
                                 message.cause = 15;
                                 break;
+                            case "MISMATCHED_IP_VERSION":
+                            case 16:
+                                message.cause = 16;
+                                break;
+                            case "GKE_KONNECTIVITY_PROXY_UNSUPPORTED":
+                            case 17:
+                                message.cause = 17;
+                                break;
+                            case "RESOURCE_CONFIG_NOT_FOUND":
+                            case 18:
+                                message.cause = 18;
+                                break;
+                            case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT":
+                            case 19:
+                                message.cause = 19;
+                                break;
+                            case "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED":
+                            case 20:
+                                message.cause = 20;
+                                break;
+                            case "SOURCE_FORWARDING_RULE_UNSUPPORTED":
+                            case 21:
+                                message.cause = 21;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -19786,6 +24884,12 @@
                          * @property {number} DESTINATION_ENDPOINT_NOT_FOUND=13 DESTINATION_ENDPOINT_NOT_FOUND value
                          * @property {number} MISMATCHED_DESTINATION_NETWORK=14 MISMATCHED_DESTINATION_NETWORK value
                          * @property {number} UNSUPPORTED=15 UNSUPPORTED value
+                         * @property {number} MISMATCHED_IP_VERSION=16 MISMATCHED_IP_VERSION value
+                         * @property {number} GKE_KONNECTIVITY_PROXY_UNSUPPORTED=17 GKE_KONNECTIVITY_PROXY_UNSUPPORTED value
+                         * @property {number} RESOURCE_CONFIG_NOT_FOUND=18 RESOURCE_CONFIG_NOT_FOUND value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
+                         * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -19805,6 +24909,12 @@
                             values[valuesById[13] = "DESTINATION_ENDPOINT_NOT_FOUND"] = 13;
                             values[valuesById[14] = "MISMATCHED_DESTINATION_NETWORK"] = 14;
                             values[valuesById[15] = "UNSUPPORTED"] = 15;
+                            values[valuesById[16] = "MISMATCHED_IP_VERSION"] = 16;
+                            values[valuesById[17] = "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"] = 17;
+                            values[valuesById[18] = "RESOURCE_CONFIG_NOT_FOUND"] = 18;
+                            values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
+                            values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
                             return values;
                         })();
     
@@ -19973,21 +25083,34 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 25:
                                 case 12:
                                 case 13:
                                 case 14:
+                                case 27:
+                                case 28:
                                 case 15:
                                 case 16:
                                 case 17:
                                 case 18:
                                 case 19:
                                 case 20:
+                                case 38:
+                                case 36:
                                 case 21:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
                                 case 22:
                                 case 23:
                                 case 24:
-                                case 25:
                                 case 26:
+                                case 29:
+                                case 37:
+                                case 39:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -20063,6 +25186,10 @@
                             case 11:
                                 message.cause = 11;
                                 break;
+                            case "FORWARDING_RULE_REGION_MISMATCH":
+                            case 25:
+                                message.cause = 25;
+                                break;
                             case "FORWARDING_RULE_NO_INSTANCES":
                             case 12:
                                 message.cause = 12;
@@ -20074,6 +25201,14 @@
                             case "INSTANCE_NOT_RUNNING":
                             case 14:
                                 message.cause = 14;
+                                break;
+                            case "GKE_CLUSTER_NOT_RUNNING":
+                            case 27:
+                                message.cause = 27;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
+                            case 28:
+                                message.cause = 28;
                                 break;
                             case "TRAFFIC_TYPE_BLOCKED":
                             case 15:
@@ -20099,9 +25234,41 @@
                             case 20:
                                 message.cause = 20;
                                 break;
+                            case "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT":
+                            case 38:
+                                message.cause = 38;
+                                break;
+                            case "GKE_PSC_ENDPOINT_MISSING":
+                            case 36:
+                                message.cause = 36;
+                                break;
                             case "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS":
                             case 21:
                                 message.cause = 21;
+                                break;
+                            case "GKE_CONTROL_PLANE_REGION_MISMATCH":
+                            case 30:
+                                message.cause = 30;
+                                break;
+                            case "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION":
+                            case 31:
+                                message.cause = 31;
+                                break;
+                            case "GKE_CONTROL_PLANE_NO_ROUTE":
+                            case 32:
+                                message.cause = 32;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC":
+                            case 33:
+                                message.cause = 33;
+                                break;
+                            case "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION":
+                            case 34:
+                                message.cause = 34;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NO_ROUTE":
+                            case 35:
+                                message.cause = 35;
                                 break;
                             case "CLOUD_FUNCTION_NOT_ACTIVE":
                             case 22:
@@ -20115,13 +25282,21 @@
                             case 24:
                                 message.cause = 24;
                                 break;
-                            case "FORWARDING_RULE_REGION_MISMATCH":
-                            case 25:
-                                message.cause = 25;
-                                break;
                             case "PSC_CONNECTION_NOT_ACCEPTED":
                             case 26:
                                 message.cause = 26;
+                                break;
+                            case "CLOUD_RUN_REVISION_NOT_READY":
+                            case 29:
+                                message.cause = 29;
+                                break;
+                            case "DROPPED_INSIDE_PSC_SERVICE_PRODUCER":
+                            case 37:
+                                message.cause = 37;
+                                break;
+                            case "LOAD_BALANCER_HAS_NO_PROXY_SUBNET":
+                            case 39:
+                                message.cause = 39;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -20195,21 +25370,34 @@
                          * @property {number} NO_EXTERNAL_ADDRESS=9 NO_EXTERNAL_ADDRESS value
                          * @property {number} UNKNOWN_INTERNAL_ADDRESS=10 UNKNOWN_INTERNAL_ADDRESS value
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
+                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
+                         * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} TRAFFIC_TYPE_BLOCKED=15 TRAFFIC_TYPE_BLOCKED value
                          * @property {number} GKE_MASTER_UNAUTHORIZED_ACCESS=16 GKE_MASTER_UNAUTHORIZED_ACCESS value
                          * @property {number} CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS=17 CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS value
                          * @property {number} DROPPED_INSIDE_GKE_SERVICE=18 DROPPED_INSIDE_GKE_SERVICE value
                          * @property {number} DROPPED_INSIDE_CLOUD_SQL_SERVICE=19 DROPPED_INSIDE_CLOUD_SQL_SERVICE value
                          * @property {number} GOOGLE_MANAGED_SERVICE_NO_PEERING=20 GOOGLE_MANAGED_SERVICE_NO_PEERING value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT=38 GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT value
+                         * @property {number} GKE_PSC_ENDPOINT_MISSING=36 GKE_PSC_ENDPOINT_MISSING value
                          * @property {number} CLOUD_SQL_INSTANCE_NO_IP_ADDRESS=21 CLOUD_SQL_INSTANCE_NO_IP_ADDRESS value
+                         * @property {number} GKE_CONTROL_PLANE_REGION_MISMATCH=30 GKE_CONTROL_PLANE_REGION_MISMATCH value
+                         * @property {number} PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION=31 PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION value
+                         * @property {number} GKE_CONTROL_PLANE_NO_ROUTE=32 GKE_CONTROL_PLANE_NO_ROUTE value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC=33 CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC value
+                         * @property {number} PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION=34 PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION value
+                         * @property {number} CLOUD_SQL_INSTANCE_NO_ROUTE=35 CLOUD_SQL_INSTANCE_NO_ROUTE value
                          * @property {number} CLOUD_FUNCTION_NOT_ACTIVE=22 CLOUD_FUNCTION_NOT_ACTIVE value
                          * @property {number} VPC_CONNECTOR_NOT_SET=23 VPC_CONNECTOR_NOT_SET value
                          * @property {number} VPC_CONNECTOR_NOT_RUNNING=24 VPC_CONNECTOR_NOT_RUNNING value
-                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} PSC_CONNECTION_NOT_ACCEPTED=26 PSC_CONNECTION_NOT_ACCEPTED value
+                         * @property {number} CLOUD_RUN_REVISION_NOT_READY=29 CLOUD_RUN_REVISION_NOT_READY value
+                         * @property {number} DROPPED_INSIDE_PSC_SERVICE_PRODUCER=37 DROPPED_INSIDE_PSC_SERVICE_PRODUCER value
+                         * @property {number} LOAD_BALANCER_HAS_NO_PROXY_SUBNET=39 LOAD_BALANCER_HAS_NO_PROXY_SUBNET value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -20225,21 +25413,34 @@
                             values[valuesById[9] = "NO_EXTERNAL_ADDRESS"] = 9;
                             values[valuesById[10] = "UNKNOWN_INTERNAL_ADDRESS"] = 10;
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
+                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
+                            values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[15] = "TRAFFIC_TYPE_BLOCKED"] = 15;
                             values[valuesById[16] = "GKE_MASTER_UNAUTHORIZED_ACCESS"] = 16;
                             values[valuesById[17] = "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"] = 17;
                             values[valuesById[18] = "DROPPED_INSIDE_GKE_SERVICE"] = 18;
                             values[valuesById[19] = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"] = 19;
                             values[valuesById[20] = "GOOGLE_MANAGED_SERVICE_NO_PEERING"] = 20;
+                            values[valuesById[38] = "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"] = 38;
+                            values[valuesById[36] = "GKE_PSC_ENDPOINT_MISSING"] = 36;
                             values[valuesById[21] = "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"] = 21;
+                            values[valuesById[30] = "GKE_CONTROL_PLANE_REGION_MISMATCH"] = 30;
+                            values[valuesById[31] = "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"] = 31;
+                            values[valuesById[32] = "GKE_CONTROL_PLANE_NO_ROUTE"] = 32;
+                            values[valuesById[33] = "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"] = 33;
+                            values[valuesById[34] = "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"] = 34;
+                            values[valuesById[35] = "CLOUD_SQL_INSTANCE_NO_ROUTE"] = 35;
                             values[valuesById[22] = "CLOUD_FUNCTION_NOT_ACTIVE"] = 22;
                             values[valuesById[23] = "VPC_CONNECTOR_NOT_SET"] = 23;
                             values[valuesById[24] = "VPC_CONNECTOR_NOT_RUNNING"] = 24;
-                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[26] = "PSC_CONNECTION_NOT_ACCEPTED"] = 26;
+                            values[valuesById[29] = "CLOUD_RUN_REVISION_NOT_READY"] = 29;
+                            values[valuesById[37] = "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"] = 37;
+                            values[valuesById[39] = "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"] = 39;
                             return values;
                         })();
     
@@ -21125,6 +26326,552 @@
                         return CloudFunctionInfo;
                     })();
     
+                    v1beta1.CloudRunRevisionInfo = (function() {
+    
+                        /**
+                         * Properties of a CloudRunRevisionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface ICloudRunRevisionInfo
+                         * @property {string|null} [displayName] CloudRunRevisionInfo displayName
+                         * @property {string|null} [uri] CloudRunRevisionInfo uri
+                         * @property {string|null} [location] CloudRunRevisionInfo location
+                         * @property {string|null} [serviceUri] CloudRunRevisionInfo serviceUri
+                         */
+    
+                        /**
+                         * Constructs a new CloudRunRevisionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a CloudRunRevisionInfo.
+                         * @implements ICloudRunRevisionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo=} [properties] Properties to set
+                         */
+                        function CloudRunRevisionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudRunRevisionInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.displayName = "";
+    
+                        /**
+                         * CloudRunRevisionInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.uri = "";
+    
+                        /**
+                         * CloudRunRevisionInfo location.
+                         * @member {string} location
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.location = "";
+    
+                        /**
+                         * CloudRunRevisionInfo serviceUri.
+                         * @member {string} serviceUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @instance
+                         */
+                        CloudRunRevisionInfo.prototype.serviceUri = "";
+    
+                        /**
+                         * Creates a new CloudRunRevisionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo} CloudRunRevisionInfo instance
+                         */
+                        CloudRunRevisionInfo.create = function create(properties) {
+                            return new CloudRunRevisionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudRunRevisionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo} message CloudRunRevisionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudRunRevisionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                            if (message.serviceUri != null && Object.hasOwnProperty.call(message, "serviceUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudRunRevisionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo} message CloudRunRevisionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudRunRevisionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudRunRevisionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo} CloudRunRevisionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudRunRevisionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudRunRevisionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo} CloudRunRevisionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudRunRevisionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudRunRevisionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudRunRevisionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                if (!$util.isString(message.serviceUri))
+                                    return "serviceUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudRunRevisionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo} CloudRunRevisionInfo
+                         */
+                        CloudRunRevisionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.serviceUri != null)
+                                message.serviceUri = String(object.serviceUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudRunRevisionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo} message CloudRunRevisionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudRunRevisionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.location = "";
+                                object.serviceUri = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                object.serviceUri = message.serviceUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudRunRevisionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudRunRevisionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudRunRevisionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudRunRevisionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo";
+                        };
+    
+                        return CloudRunRevisionInfo;
+                    })();
+    
+                    v1beta1.AppEngineVersionInfo = (function() {
+    
+                        /**
+                         * Properties of an AppEngineVersionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IAppEngineVersionInfo
+                         * @property {string|null} [displayName] AppEngineVersionInfo displayName
+                         * @property {string|null} [uri] AppEngineVersionInfo uri
+                         * @property {string|null} [runtime] AppEngineVersionInfo runtime
+                         * @property {string|null} [environment] AppEngineVersionInfo environment
+                         */
+    
+                        /**
+                         * Constructs a new AppEngineVersionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an AppEngineVersionInfo.
+                         * @implements IAppEngineVersionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo=} [properties] Properties to set
+                         */
+                        function AppEngineVersionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AppEngineVersionInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.displayName = "";
+    
+                        /**
+                         * AppEngineVersionInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.uri = "";
+    
+                        /**
+                         * AppEngineVersionInfo runtime.
+                         * @member {string} runtime
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.runtime = "";
+    
+                        /**
+                         * AppEngineVersionInfo environment.
+                         * @member {string} environment
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @instance
+                         */
+                        AppEngineVersionInfo.prototype.environment = "";
+    
+                        /**
+                         * Creates a new AppEngineVersionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo} AppEngineVersionInfo instance
+                         */
+                        AppEngineVersionInfo.create = function create(properties) {
+                            return new AppEngineVersionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AppEngineVersionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo} message AppEngineVersionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppEngineVersionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.runtime != null && Object.hasOwnProperty.call(message, "runtime"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.runtime);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.environment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AppEngineVersionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo} message AppEngineVersionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppEngineVersionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AppEngineVersionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo} AppEngineVersionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppEngineVersionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.runtime = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.environment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AppEngineVersionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo} AppEngineVersionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppEngineVersionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AppEngineVersionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AppEngineVersionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.runtime != null && message.hasOwnProperty("runtime"))
+                                if (!$util.isString(message.runtime))
+                                    return "runtime: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                if (!$util.isString(message.environment))
+                                    return "environment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AppEngineVersionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo} AppEngineVersionInfo
+                         */
+                        AppEngineVersionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.runtime != null)
+                                message.runtime = String(object.runtime);
+                            if (object.environment != null)
+                                message.environment = String(object.environment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AppEngineVersionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo} message AppEngineVersionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AppEngineVersionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.runtime = "";
+                                object.environment = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.runtime != null && message.hasOwnProperty("runtime"))
+                                object.runtime = message.runtime;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = message.environment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AppEngineVersionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AppEngineVersionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AppEngineVersionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AppEngineVersionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo";
+                        };
+    
+                        return AppEngineVersionInfo;
+                    })();
+    
                     v1beta1.VpcConnectorInfo = (function() {
     
                         /**
@@ -21373,6 +27120,38 @@
                         };
     
                         return VpcConnectorInfo;
+                    })();
+    
+                    /**
+                     * LoadBalancerType enum.
+                     * @name google.cloud.networkmanagement.v1beta1.LoadBalancerType
+                     * @enum {number}
+                     * @property {number} LOAD_BALANCER_TYPE_UNSPECIFIED=0 LOAD_BALANCER_TYPE_UNSPECIFIED value
+                     * @property {number} HTTPS_ADVANCED_LOAD_BALANCER=1 HTTPS_ADVANCED_LOAD_BALANCER value
+                     * @property {number} HTTPS_LOAD_BALANCER=2 HTTPS_LOAD_BALANCER value
+                     * @property {number} REGIONAL_HTTPS_LOAD_BALANCER=3 REGIONAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} INTERNAL_HTTPS_LOAD_BALANCER=4 INTERNAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} SSL_PROXY_LOAD_BALANCER=5 SSL_PROXY_LOAD_BALANCER value
+                     * @property {number} TCP_PROXY_LOAD_BALANCER=6 TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} INTERNAL_TCP_PROXY_LOAD_BALANCER=7 INTERNAL_TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} NETWORK_LOAD_BALANCER=8 NETWORK_LOAD_BALANCER value
+                     * @property {number} LEGACY_NETWORK_LOAD_BALANCER=9 LEGACY_NETWORK_LOAD_BALANCER value
+                     * @property {number} TCP_UDP_INTERNAL_LOAD_BALANCER=10 TCP_UDP_INTERNAL_LOAD_BALANCER value
+                     */
+                    v1beta1.LoadBalancerType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOAD_BALANCER_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HTTPS_ADVANCED_LOAD_BALANCER"] = 1;
+                        values[valuesById[2] = "HTTPS_LOAD_BALANCER"] = 2;
+                        values[valuesById[3] = "REGIONAL_HTTPS_LOAD_BALANCER"] = 3;
+                        values[valuesById[4] = "INTERNAL_HTTPS_LOAD_BALANCER"] = 4;
+                        values[valuesById[5] = "SSL_PROXY_LOAD_BALANCER"] = 5;
+                        values[valuesById[6] = "TCP_PROXY_LOAD_BALANCER"] = 6;
+                        values[valuesById[7] = "INTERNAL_TCP_PROXY_LOAD_BALANCER"] = 7;
+                        values[valuesById[8] = "NETWORK_LOAD_BALANCER"] = 8;
+                        values[valuesById[9] = "LEGACY_NETWORK_LOAD_BALANCER"] = 9;
+                        values[valuesById[10] = "TCP_UDP_INTERNAL_LOAD_BALANCER"] = 10;
+                        return values;
                     })();
     
                     v1beta1.ReachabilityService = (function() {
