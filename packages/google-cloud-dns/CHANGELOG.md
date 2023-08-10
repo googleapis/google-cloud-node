@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-dns/compare/v3.0.2...v4.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14 ([#556](https://github.com/googleapis/nodejs-dns/issues/556))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([#556](https://github.com/googleapis/nodejs-dns/issues/556)) ([75b5a56](https://github.com/googleapis/nodejs-dns/commit/75b5a56993e74826b69650c8c7601e977802b15f))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-dns/compare/v3.0.1...v3.0.2) (2022-08-23)
 
 
