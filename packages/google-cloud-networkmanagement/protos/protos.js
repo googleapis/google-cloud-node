@@ -616,6 +616,9 @@
                          * @property {number|null} [port] Endpoint port
                          * @property {string|null} [instance] Endpoint instance
                          * @property {string|null} [forwardingRule] Endpoint forwardingRule
+                         * @property {google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|null} [forwardingRuleTarget] Endpoint forwardingRuleTarget
+                         * @property {string|null} [loadBalancerId] Endpoint loadBalancerId
+                         * @property {google.cloud.networkmanagement.v1.LoadBalancerType|null} [loadBalancerType] Endpoint loadBalancerType
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
@@ -672,6 +675,30 @@
                          * @instance
                          */
                         Endpoint.prototype.forwardingRule = "";
+    
+                        /**
+                         * Endpoint forwardingRuleTarget.
+                         * @member {google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|null|undefined} forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.forwardingRuleTarget = null;
+    
+                        /**
+                         * Endpoint loadBalancerId.
+                         * @member {string|null|undefined} loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerId = null;
+    
+                        /**
+                         * Endpoint loadBalancerType.
+                         * @member {google.cloud.networkmanagement.v1.LoadBalancerType|null|undefined} loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerType = null;
     
                         /**
                          * Endpoint gkeMasterCluster.
@@ -737,6 +764,42 @@
                          */
                         Endpoint.prototype.projectId = "";
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Endpoint _forwardingRuleTarget.
+                         * @member {"forwardingRuleTarget"|undefined} _forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_forwardingRuleTarget", {
+                            get: $util.oneOfGetter($oneOfFields = ["forwardingRuleTarget"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerId.
+                         * @member {"loadBalancerId"|undefined} _loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerId", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerType.
+                         * @member {"loadBalancerType"|undefined} _loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerType", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Endpoint instance using the specified properties.
                          * @function create
@@ -785,6 +848,12 @@
                                 $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.encode(message.cloudRunRevision, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardingRule);
+                            if (message.forwardingRuleTarget != null && Object.hasOwnProperty.call(message, "forwardingRuleTarget"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.forwardingRuleTarget);
+                            if (message.loadBalancerId != null && Object.hasOwnProperty.call(message, "loadBalancerId"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.loadBalancerId);
+                            if (message.loadBalancerType != null && Object.hasOwnProperty.call(message, "loadBalancerType"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.loadBalancerType);
                             return writer;
                         };
     
@@ -833,6 +902,18 @@
                                     }
                                 case 13: {
                                         message.forwardingRule = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.forwardingRuleTarget = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.loadBalancerId = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.loadBalancerType = reader.int32();
                                         break;
                                     }
                                 case 7: {
@@ -902,6 +983,7 @@
                         Endpoint.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 if (!$util.isString(message.ipAddress))
                                     return "ipAddress: string expected";
@@ -914,6 +996,43 @@
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 if (!$util.isString(message.forwardingRule))
                                     return "forwardingRule: string expected";
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                properties._forwardingRuleTarget = 1;
+                                switch (message.forwardingRuleTarget) {
+                                default:
+                                    return "forwardingRuleTarget: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                properties._loadBalancerId = 1;
+                                if (!$util.isString(message.loadBalancerId))
+                                    return "loadBalancerId: string expected";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                properties._loadBalancerType = 1;
+                                switch (message.loadBalancerType) {
+                                default:
+                                    return "loadBalancerType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    break;
+                                }
+                            }
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
@@ -973,6 +1092,88 @@
                                 message.instance = String(object.instance);
                             if (object.forwardingRule != null)
                                 message.forwardingRule = String(object.forwardingRule);
+                            switch (object.forwardingRuleTarget) {
+                            default:
+                                if (typeof object.forwardingRuleTarget === "number") {
+                                    message.forwardingRuleTarget = object.forwardingRuleTarget;
+                                    break;
+                                }
+                                break;
+                            case "FORWARDING_RULE_TARGET_UNSPECIFIED":
+                            case 0:
+                                message.forwardingRuleTarget = 0;
+                                break;
+                            case "INSTANCE":
+                            case 1:
+                                message.forwardingRuleTarget = 1;
+                                break;
+                            case "LOAD_BALANCER":
+                            case 2:
+                                message.forwardingRuleTarget = 2;
+                                break;
+                            case "VPN_GATEWAY":
+                            case 3:
+                                message.forwardingRuleTarget = 3;
+                                break;
+                            case "PSC":
+                            case 4:
+                                message.forwardingRuleTarget = 4;
+                                break;
+                            }
+                            if (object.loadBalancerId != null)
+                                message.loadBalancerId = String(object.loadBalancerId);
+                            switch (object.loadBalancerType) {
+                            default:
+                                if (typeof object.loadBalancerType === "number") {
+                                    message.loadBalancerType = object.loadBalancerType;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancerType = 0;
+                                break;
+                            case "HTTPS_ADVANCED_LOAD_BALANCER":
+                            case 1:
+                                message.loadBalancerType = 1;
+                                break;
+                            case "HTTPS_LOAD_BALANCER":
+                            case 2:
+                                message.loadBalancerType = 2;
+                                break;
+                            case "REGIONAL_HTTPS_LOAD_BALANCER":
+                            case 3:
+                                message.loadBalancerType = 3;
+                                break;
+                            case "INTERNAL_HTTPS_LOAD_BALANCER":
+                            case 4:
+                                message.loadBalancerType = 4;
+                                break;
+                            case "SSL_PROXY_LOAD_BALANCER":
+                            case 5:
+                                message.loadBalancerType = 5;
+                                break;
+                            case "TCP_PROXY_LOAD_BALANCER":
+                            case 6:
+                                message.loadBalancerType = 6;
+                                break;
+                            case "INTERNAL_TCP_PROXY_LOAD_BALANCER":
+                            case 7:
+                                message.loadBalancerType = 7;
+                                break;
+                            case "NETWORK_LOAD_BALANCER":
+                            case 8:
+                                message.loadBalancerType = 8;
+                                break;
+                            case "LEGACY_NETWORK_LOAD_BALANCER":
+                            case 9:
+                                message.loadBalancerType = 9;
+                                break;
+                            case "TCP_UDP_INTERNAL_LOAD_BALANCER":
+                            case 10:
+                                message.loadBalancerType = 10;
+                                break;
+                            }
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
                             if (object.cloudSqlInstance != null)
@@ -1070,6 +1271,21 @@
                                 object.cloudRunRevision = $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint.toObject(message.cloudRunRevision, options);
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 object.forwardingRule = message.forwardingRule;
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                object.forwardingRuleTarget = options.enums === String ? $root.google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] === undefined ? message.forwardingRuleTarget : $root.google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] : message.forwardingRuleTarget;
+                                if (options.oneofs)
+                                    object._forwardingRuleTarget = "forwardingRuleTarget";
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                object.loadBalancerId = message.loadBalancerId;
+                                if (options.oneofs)
+                                    object._loadBalancerId = "loadBalancerId";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerType[message.loadBalancerType] === undefined ? message.loadBalancerType : $root.google.cloud.networkmanagement.v1.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
+                                if (options.oneofs)
+                                    object._loadBalancerType = "loadBalancerType";
+                            }
                             return object;
                         };
     
@@ -1112,6 +1328,26 @@
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ForwardingRuleTarget enum.
+                         * @name google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget
+                         * @enum {number}
+                         * @property {number} FORWARDING_RULE_TARGET_UNSPECIFIED=0 FORWARDING_RULE_TARGET_UNSPECIFIED value
+                         * @property {number} INSTANCE=1 INSTANCE value
+                         * @property {number} LOAD_BALANCER=2 LOAD_BALANCER value
+                         * @property {number} VPN_GATEWAY=3 VPN_GATEWAY value
+                         * @property {number} PSC=4 PSC value
+                         */
+                        Endpoint.ForwardingRuleTarget = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FORWARDING_RULE_TARGET_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INSTANCE"] = 1;
+                            values[valuesById[2] = "LOAD_BALANCER"] = 2;
+                            values[valuesById[3] = "VPN_GATEWAY"] = 3;
+                            values[valuesById[4] = "PSC"] = 4;
                             return values;
                         })();
     
@@ -6948,6 +7184,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.backendUri != null && message.hasOwnProperty("backendUri"))
@@ -7030,6 +7267,10 @@
                             case "TARGET_POOL":
                             case 2:
                                 message.backendType = 2;
+                                break;
+                            case "TARGET_INSTANCE":
+                            case 3:
+                                message.backendType = 3;
                                 break;
                             }
                             if (object.backendUri != null)
@@ -7129,12 +7370,14 @@
                          * @property {number} BACKEND_TYPE_UNSPECIFIED=0 BACKEND_TYPE_UNSPECIFIED value
                          * @property {number} BACKEND_SERVICE=1 BACKEND_SERVICE value
                          * @property {number} TARGET_POOL=2 TARGET_POOL value
+                         * @property {number} TARGET_INSTANCE=3 TARGET_INSTANCE value
                          */
                         LoadBalancerInfo.BackendType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BACKEND_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "BACKEND_SERVICE"] = 1;
                             values[valuesById[2] = "TARGET_POOL"] = 2;
+                            values[valuesById[3] = "TARGET_INSTANCE"] = 3;
                             return values;
                         })();
     
@@ -8278,6 +8521,7 @@
                          * @property {number|null} [destinationPort] EndpointInfo destinationPort
                          * @property {string|null} [sourceNetworkUri] EndpointInfo sourceNetworkUri
                          * @property {string|null} [destinationNetworkUri] EndpointInfo destinationNetworkUri
+                         * @property {string|null} [sourceAgentUri] EndpointInfo sourceAgentUri
                          */
     
                         /**
@@ -8352,6 +8596,14 @@
                         EndpointInfo.prototype.destinationNetworkUri = "";
     
                         /**
+                         * EndpointInfo sourceAgentUri.
+                         * @member {string} sourceAgentUri
+                         * @memberof google.cloud.networkmanagement.v1.EndpointInfo
+                         * @instance
+                         */
+                        EndpointInfo.prototype.sourceAgentUri = "";
+    
+                        /**
                          * Creates a new EndpointInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.EndpointInfo
@@ -8389,6 +8641,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourceNetworkUri);
                             if (message.destinationNetworkUri != null && Object.hasOwnProperty.call(message, "destinationNetworkUri"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.destinationNetworkUri);
+                            if (message.sourceAgentUri != null && Object.hasOwnProperty.call(message, "sourceAgentUri"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.sourceAgentUri);
                             return writer;
                         };
     
@@ -8451,6 +8705,10 @@
                                         message.destinationNetworkUri = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.sourceAgentUri = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8507,6 +8765,9 @@
                             if (message.destinationNetworkUri != null && message.hasOwnProperty("destinationNetworkUri"))
                                 if (!$util.isString(message.destinationNetworkUri))
                                     return "destinationNetworkUri: string expected";
+                            if (message.sourceAgentUri != null && message.hasOwnProperty("sourceAgentUri"))
+                                if (!$util.isString(message.sourceAgentUri))
+                                    return "sourceAgentUri: string expected";
                             return null;
                         };
     
@@ -8536,6 +8797,8 @@
                                 message.sourceNetworkUri = String(object.sourceNetworkUri);
                             if (object.destinationNetworkUri != null)
                                 message.destinationNetworkUri = String(object.destinationNetworkUri);
+                            if (object.sourceAgentUri != null)
+                                message.sourceAgentUri = String(object.sourceAgentUri);
                             return message;
                         };
     
@@ -8560,6 +8823,7 @@
                                 object.destinationPort = 0;
                                 object.sourceNetworkUri = "";
                                 object.destinationNetworkUri = "";
+                                object.sourceAgentUri = "";
                             }
                             if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
                                 object.sourceIp = message.sourceIp;
@@ -8575,6 +8839,8 @@
                                 object.sourceNetworkUri = message.sourceNetworkUri;
                             if (message.destinationNetworkUri != null && message.hasOwnProperty("destinationNetworkUri"))
                                 object.destinationNetworkUri = message.destinationNetworkUri;
+                            if (message.sourceAgentUri != null && message.hasOwnProperty("sourceAgentUri"))
+                                object.sourceAgentUri = message.sourceAgentUri;
                             return object;
                         };
     
@@ -8763,6 +9029,10 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -8813,6 +9083,22 @@
                             case "CLOUD_SQL_INSTANCE":
                             case 5:
                                 message.target = 5;
+                                break;
+                            case "PSC_PUBLISHED_SERVICE":
+                            case 6:
+                                message.target = 6;
+                                break;
+                            case "PSC_GOOGLE_API":
+                            case 7:
+                                message.target = 7;
+                                break;
+                            case "PSC_VPC_SC":
+                            case 8:
+                                message.target = 8;
+                                break;
+                            case "SERVERLESS_NEG":
+                            case 9:
+                                message.target = 9;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -8880,6 +9166,10 @@
                          * @property {number} GOOGLE_API=3 GOOGLE_API value
                          * @property {number} GKE_MASTER=4 GKE_MASTER value
                          * @property {number} CLOUD_SQL_INSTANCE=5 CLOUD_SQL_INSTANCE value
+                         * @property {number} PSC_PUBLISHED_SERVICE=6 PSC_PUBLISHED_SERVICE value
+                         * @property {number} PSC_GOOGLE_API=7 PSC_GOOGLE_API value
+                         * @property {number} PSC_VPC_SC=8 PSC_VPC_SC value
+                         * @property {number} SERVERLESS_NEG=9 SERVERLESS_NEG value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -8889,6 +9179,10 @@
                             values[valuesById[3] = "GOOGLE_API"] = 3;
                             values[valuesById[4] = "GKE_MASTER"] = 4;
                             values[valuesById[5] = "CLOUD_SQL_INSTANCE"] = 5;
+                            values[valuesById[6] = "PSC_PUBLISHED_SERVICE"] = 6;
+                            values[valuesById[7] = "PSC_GOOGLE_API"] = 7;
+                            values[valuesById[8] = "PSC_VPC_SC"] = 8;
+                            values[valuesById[9] = "SERVERLESS_NEG"] = 9;
                             return values;
                         })();
     
@@ -9052,6 +9346,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -9106,6 +9401,10 @@
                             case "CLOUD_SQL_INSTANCE":
                             case 6:
                                 message.target = 6;
+                                break;
+                            case "ANOTHER_PROJECT":
+                            case 7:
+                                message.target = 7;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -9174,6 +9473,7 @@
                          * @property {number} GKE_MASTER=4 GKE_MASTER value
                          * @property {number} IMPORTED_CUSTOM_ROUTE_NEXT_HOP=5 IMPORTED_CUSTOM_ROUTE_NEXT_HOP value
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
+                         * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9184,6 +9484,7 @@
                             values[valuesById[4] = "GKE_MASTER"] = 4;
                             values[valuesById[5] = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"] = 5;
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
+                            values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
                             return values;
                         })();
     
@@ -9763,6 +10064,8 @@
                                 case 22:
                                 case 23:
                                 case 24:
+                                case 25:
+                                case 26:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -9890,6 +10193,14 @@
                             case 24:
                                 message.cause = 24;
                                 break;
+                            case "FORWARDING_RULE_REGION_MISMATCH":
+                            case 25:
+                                message.cause = 25;
+                                break;
+                            case "PSC_CONNECTION_NOT_ACCEPTED":
+                            case 26:
+                                message.cause = 26;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -9975,6 +10286,8 @@
                          * @property {number} CLOUD_FUNCTION_NOT_ACTIVE=22 CLOUD_FUNCTION_NOT_ACTIVE value
                          * @property {number} VPC_CONNECTOR_NOT_SET=23 VPC_CONNECTOR_NOT_SET value
                          * @property {number} VPC_CONNECTOR_NOT_RUNNING=24 VPC_CONNECTOR_NOT_RUNNING value
+                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
+                         * @property {number} PSC_CONNECTION_NOT_ACCEPTED=26 PSC_CONNECTION_NOT_ACCEPTED value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10003,6 +10316,8 @@
                             values[valuesById[22] = "CLOUD_FUNCTION_NOT_ACTIVE"] = 22;
                             values[valuesById[23] = "VPC_CONNECTOR_NOT_SET"] = 23;
                             values[valuesById[24] = "VPC_CONNECTOR_NOT_RUNNING"] = 24;
+                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
+                            values[valuesById[26] = "PSC_CONNECTION_NOT_ACCEPTED"] = 26;
                             return values;
                         })();
     
@@ -11682,6 +11997,38 @@
                         };
     
                         return VpcConnectorInfo;
+                    })();
+    
+                    /**
+                     * LoadBalancerType enum.
+                     * @name google.cloud.networkmanagement.v1.LoadBalancerType
+                     * @enum {number}
+                     * @property {number} LOAD_BALANCER_TYPE_UNSPECIFIED=0 LOAD_BALANCER_TYPE_UNSPECIFIED value
+                     * @property {number} HTTPS_ADVANCED_LOAD_BALANCER=1 HTTPS_ADVANCED_LOAD_BALANCER value
+                     * @property {number} HTTPS_LOAD_BALANCER=2 HTTPS_LOAD_BALANCER value
+                     * @property {number} REGIONAL_HTTPS_LOAD_BALANCER=3 REGIONAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} INTERNAL_HTTPS_LOAD_BALANCER=4 INTERNAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} SSL_PROXY_LOAD_BALANCER=5 SSL_PROXY_LOAD_BALANCER value
+                     * @property {number} TCP_PROXY_LOAD_BALANCER=6 TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} INTERNAL_TCP_PROXY_LOAD_BALANCER=7 INTERNAL_TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} NETWORK_LOAD_BALANCER=8 NETWORK_LOAD_BALANCER value
+                     * @property {number} LEGACY_NETWORK_LOAD_BALANCER=9 LEGACY_NETWORK_LOAD_BALANCER value
+                     * @property {number} TCP_UDP_INTERNAL_LOAD_BALANCER=10 TCP_UDP_INTERNAL_LOAD_BALANCER value
+                     */
+                    v1.LoadBalancerType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOAD_BALANCER_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HTTPS_ADVANCED_LOAD_BALANCER"] = 1;
+                        values[valuesById[2] = "HTTPS_LOAD_BALANCER"] = 2;
+                        values[valuesById[3] = "REGIONAL_HTTPS_LOAD_BALANCER"] = 3;
+                        values[valuesById[4] = "INTERNAL_HTTPS_LOAD_BALANCER"] = 4;
+                        values[valuesById[5] = "SSL_PROXY_LOAD_BALANCER"] = 5;
+                        values[valuesById[6] = "TCP_PROXY_LOAD_BALANCER"] = 6;
+                        values[valuesById[7] = "INTERNAL_TCP_PROXY_LOAD_BALANCER"] = 7;
+                        values[valuesById[8] = "NETWORK_LOAD_BALANCER"] = 8;
+                        values[valuesById[9] = "LEGACY_NETWORK_LOAD_BALANCER"] = 9;
+                        values[valuesById[10] = "TCP_UDP_INTERNAL_LOAD_BALANCER"] = 10;
+                        return values;
                     })();
     
                     v1.ReachabilityService = (function() {
@@ -14516,6 +14863,9 @@
                          * @property {number|null} [port] Endpoint port
                          * @property {string|null} [instance] Endpoint instance
                          * @property {string|null} [forwardingRule] Endpoint forwardingRule
+                         * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|null} [forwardingRuleTarget] Endpoint forwardingRuleTarget
+                         * @property {string|null} [loadBalancerId] Endpoint loadBalancerId
+                         * @property {google.cloud.networkmanagement.v1beta1.LoadBalancerType|null} [loadBalancerType] Endpoint loadBalancerType
                          * @property {string|null} [gkeMasterCluster] Endpoint gkeMasterCluster
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
@@ -14572,6 +14922,30 @@
                          * @instance
                          */
                         Endpoint.prototype.forwardingRule = "";
+    
+                        /**
+                         * Endpoint forwardingRuleTarget.
+                         * @member {google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|null|undefined} forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.forwardingRuleTarget = null;
+    
+                        /**
+                         * Endpoint loadBalancerId.
+                         * @member {string|null|undefined} loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerId = null;
+    
+                        /**
+                         * Endpoint loadBalancerType.
+                         * @member {google.cloud.networkmanagement.v1beta1.LoadBalancerType|null|undefined} loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.loadBalancerType = null;
     
                         /**
                          * Endpoint gkeMasterCluster.
@@ -14637,6 +15011,42 @@
                          */
                         Endpoint.prototype.projectId = "";
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Endpoint _forwardingRuleTarget.
+                         * @member {"forwardingRuleTarget"|undefined} _forwardingRuleTarget
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_forwardingRuleTarget", {
+                            get: $util.oneOfGetter($oneOfFields = ["forwardingRuleTarget"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerId.
+                         * @member {"loadBalancerId"|undefined} _loadBalancerId
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerId", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Endpoint _loadBalancerType.
+                         * @member {"loadBalancerType"|undefined} _loadBalancerType
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Object.defineProperty(Endpoint.prototype, "_loadBalancerType", {
+                            get: $util.oneOfGetter($oneOfFields = ["loadBalancerType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Endpoint instance using the specified properties.
                          * @function create
@@ -14685,6 +15095,12 @@
                                 $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.encode(message.cloudRunRevision, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.forwardingRule != null && Object.hasOwnProperty.call(message, "forwardingRule"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardingRule);
+                            if (message.forwardingRuleTarget != null && Object.hasOwnProperty.call(message, "forwardingRuleTarget"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.forwardingRuleTarget);
+                            if (message.loadBalancerId != null && Object.hasOwnProperty.call(message, "loadBalancerId"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.loadBalancerId);
+                            if (message.loadBalancerType != null && Object.hasOwnProperty.call(message, "loadBalancerType"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.loadBalancerType);
                             return writer;
                         };
     
@@ -14733,6 +15149,18 @@
                                     }
                                 case 13: {
                                         message.forwardingRule = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.forwardingRuleTarget = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.loadBalancerId = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.loadBalancerType = reader.int32();
                                         break;
                                     }
                                 case 7: {
@@ -14802,6 +15230,7 @@
                         Endpoint.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 if (!$util.isString(message.ipAddress))
                                     return "ipAddress: string expected";
@@ -14814,6 +15243,43 @@
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 if (!$util.isString(message.forwardingRule))
                                     return "forwardingRule: string expected";
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                properties._forwardingRuleTarget = 1;
+                                switch (message.forwardingRuleTarget) {
+                                default:
+                                    return "forwardingRuleTarget: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                properties._loadBalancerId = 1;
+                                if (!$util.isString(message.loadBalancerId))
+                                    return "loadBalancerId: string expected";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                properties._loadBalancerType = 1;
+                                switch (message.loadBalancerType) {
+                                default:
+                                    return "loadBalancerType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    break;
+                                }
+                            }
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
                                 if (!$util.isString(message.gkeMasterCluster))
                                     return "gkeMasterCluster: string expected";
@@ -14873,6 +15339,88 @@
                                 message.instance = String(object.instance);
                             if (object.forwardingRule != null)
                                 message.forwardingRule = String(object.forwardingRule);
+                            switch (object.forwardingRuleTarget) {
+                            default:
+                                if (typeof object.forwardingRuleTarget === "number") {
+                                    message.forwardingRuleTarget = object.forwardingRuleTarget;
+                                    break;
+                                }
+                                break;
+                            case "FORWARDING_RULE_TARGET_UNSPECIFIED":
+                            case 0:
+                                message.forwardingRuleTarget = 0;
+                                break;
+                            case "INSTANCE":
+                            case 1:
+                                message.forwardingRuleTarget = 1;
+                                break;
+                            case "LOAD_BALANCER":
+                            case 2:
+                                message.forwardingRuleTarget = 2;
+                                break;
+                            case "VPN_GATEWAY":
+                            case 3:
+                                message.forwardingRuleTarget = 3;
+                                break;
+                            case "PSC":
+                            case 4:
+                                message.forwardingRuleTarget = 4;
+                                break;
+                            }
+                            if (object.loadBalancerId != null)
+                                message.loadBalancerId = String(object.loadBalancerId);
+                            switch (object.loadBalancerType) {
+                            default:
+                                if (typeof object.loadBalancerType === "number") {
+                                    message.loadBalancerType = object.loadBalancerType;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancerType = 0;
+                                break;
+                            case "HTTPS_ADVANCED_LOAD_BALANCER":
+                            case 1:
+                                message.loadBalancerType = 1;
+                                break;
+                            case "HTTPS_LOAD_BALANCER":
+                            case 2:
+                                message.loadBalancerType = 2;
+                                break;
+                            case "REGIONAL_HTTPS_LOAD_BALANCER":
+                            case 3:
+                                message.loadBalancerType = 3;
+                                break;
+                            case "INTERNAL_HTTPS_LOAD_BALANCER":
+                            case 4:
+                                message.loadBalancerType = 4;
+                                break;
+                            case "SSL_PROXY_LOAD_BALANCER":
+                            case 5:
+                                message.loadBalancerType = 5;
+                                break;
+                            case "TCP_PROXY_LOAD_BALANCER":
+                            case 6:
+                                message.loadBalancerType = 6;
+                                break;
+                            case "INTERNAL_TCP_PROXY_LOAD_BALANCER":
+                            case 7:
+                                message.loadBalancerType = 7;
+                                break;
+                            case "NETWORK_LOAD_BALANCER":
+                            case 8:
+                                message.loadBalancerType = 8;
+                                break;
+                            case "LEGACY_NETWORK_LOAD_BALANCER":
+                            case 9:
+                                message.loadBalancerType = 9;
+                                break;
+                            case "TCP_UDP_INTERNAL_LOAD_BALANCER":
+                            case 10:
+                                message.loadBalancerType = 10;
+                                break;
+                            }
                             if (object.gkeMasterCluster != null)
                                 message.gkeMasterCluster = String(object.gkeMasterCluster);
                             if (object.cloudSqlInstance != null)
@@ -14970,6 +15518,21 @@
                                 object.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint.toObject(message.cloudRunRevision, options);
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule"))
                                 object.forwardingRule = message.forwardingRule;
+                            if (message.forwardingRuleTarget != null && message.hasOwnProperty("forwardingRuleTarget")) {
+                                object.forwardingRuleTarget = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] === undefined ? message.forwardingRuleTarget : $root.google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget[message.forwardingRuleTarget] : message.forwardingRuleTarget;
+                                if (options.oneofs)
+                                    object._forwardingRuleTarget = "forwardingRuleTarget";
+                            }
+                            if (message.loadBalancerId != null && message.hasOwnProperty("loadBalancerId")) {
+                                object.loadBalancerId = message.loadBalancerId;
+                                if (options.oneofs)
+                                    object._loadBalancerId = "loadBalancerId";
+                            }
+                            if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType")) {
+                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerType[message.loadBalancerType] === undefined ? message.loadBalancerType : $root.google.cloud.networkmanagement.v1beta1.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
+                                if (options.oneofs)
+                                    object._loadBalancerType = "loadBalancerType";
+                            }
                             return object;
                         };
     
@@ -15012,6 +15575,26 @@
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ForwardingRuleTarget enum.
+                         * @name google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget
+                         * @enum {number}
+                         * @property {number} FORWARDING_RULE_TARGET_UNSPECIFIED=0 FORWARDING_RULE_TARGET_UNSPECIFIED value
+                         * @property {number} INSTANCE=1 INSTANCE value
+                         * @property {number} LOAD_BALANCER=2 LOAD_BALANCER value
+                         * @property {number} VPN_GATEWAY=3 VPN_GATEWAY value
+                         * @property {number} PSC=4 PSC value
+                         */
+                        Endpoint.ForwardingRuleTarget = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FORWARDING_RULE_TARGET_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INSTANCE"] = 1;
+                            values[valuesById[2] = "LOAD_BALANCER"] = 2;
+                            values[valuesById[3] = "VPN_GATEWAY"] = 3;
+                            values[valuesById[4] = "PSC"] = 4;
                             return values;
                         })();
     
@@ -20848,6 +21431,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.backendUri != null && message.hasOwnProperty("backendUri"))
@@ -20930,6 +21514,10 @@
                             case "TARGET_POOL":
                             case 2:
                                 message.backendType = 2;
+                                break;
+                            case "TARGET_INSTANCE":
+                            case 3:
+                                message.backendType = 3;
                                 break;
                             }
                             if (object.backendUri != null)
@@ -21029,12 +21617,14 @@
                          * @property {number} BACKEND_TYPE_UNSPECIFIED=0 BACKEND_TYPE_UNSPECIFIED value
                          * @property {number} BACKEND_SERVICE=1 BACKEND_SERVICE value
                          * @property {number} TARGET_POOL=2 TARGET_POOL value
+                         * @property {number} TARGET_INSTANCE=3 TARGET_INSTANCE value
                          */
                         LoadBalancerInfo.BackendType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BACKEND_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "BACKEND_SERVICE"] = 1;
                             values[valuesById[2] = "TARGET_POOL"] = 2;
+                            values[valuesById[3] = "TARGET_INSTANCE"] = 3;
                             return values;
                         })();
     
@@ -22689,6 +23279,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -22751,6 +23342,10 @@
                             case "PSC_VPC_SC":
                             case 8:
                                 message.target = 8;
+                                break;
+                            case "SERVERLESS_NEG":
+                            case 9:
+                                message.target = 9;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -22821,6 +23416,7 @@
                          * @property {number} PSC_PUBLISHED_SERVICE=6 PSC_PUBLISHED_SERVICE value
                          * @property {number} PSC_GOOGLE_API=7 PSC_GOOGLE_API value
                          * @property {number} PSC_VPC_SC=8 PSC_VPC_SC value
+                         * @property {number} SERVERLESS_NEG=9 SERVERLESS_NEG value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -22833,6 +23429,7 @@
                             values[valuesById[6] = "PSC_PUBLISHED_SERVICE"] = 6;
                             values[valuesById[7] = "PSC_GOOGLE_API"] = 7;
                             values[valuesById[8] = "PSC_VPC_SC"] = 8;
+                            values[valuesById[9] = "SERVERLESS_NEG"] = 9;
                             return values;
                         })();
     
@@ -22996,6 +23593,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -23050,6 +23648,10 @@
                             case "CLOUD_SQL_INSTANCE":
                             case 6:
                                 message.target = 6;
+                                break;
+                            case "ANOTHER_PROJECT":
+                            case 7:
+                                message.target = 7;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -23118,6 +23720,7 @@
                          * @property {number} GKE_MASTER=4 GKE_MASTER value
                          * @property {number} IMPORTED_CUSTOM_ROUTE_NEXT_HOP=5 IMPORTED_CUSTOM_ROUTE_NEXT_HOP value
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
+                         * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -23128,6 +23731,7 @@
                             values[valuesById[4] = "GKE_MASTER"] = 4;
                             values[valuesById[5] = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"] = 5;
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
+                            values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
                             return values;
                         })();
     
@@ -25640,6 +26244,38 @@
                         };
     
                         return VpcConnectorInfo;
+                    })();
+    
+                    /**
+                     * LoadBalancerType enum.
+                     * @name google.cloud.networkmanagement.v1beta1.LoadBalancerType
+                     * @enum {number}
+                     * @property {number} LOAD_BALANCER_TYPE_UNSPECIFIED=0 LOAD_BALANCER_TYPE_UNSPECIFIED value
+                     * @property {number} HTTPS_ADVANCED_LOAD_BALANCER=1 HTTPS_ADVANCED_LOAD_BALANCER value
+                     * @property {number} HTTPS_LOAD_BALANCER=2 HTTPS_LOAD_BALANCER value
+                     * @property {number} REGIONAL_HTTPS_LOAD_BALANCER=3 REGIONAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} INTERNAL_HTTPS_LOAD_BALANCER=4 INTERNAL_HTTPS_LOAD_BALANCER value
+                     * @property {number} SSL_PROXY_LOAD_BALANCER=5 SSL_PROXY_LOAD_BALANCER value
+                     * @property {number} TCP_PROXY_LOAD_BALANCER=6 TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} INTERNAL_TCP_PROXY_LOAD_BALANCER=7 INTERNAL_TCP_PROXY_LOAD_BALANCER value
+                     * @property {number} NETWORK_LOAD_BALANCER=8 NETWORK_LOAD_BALANCER value
+                     * @property {number} LEGACY_NETWORK_LOAD_BALANCER=9 LEGACY_NETWORK_LOAD_BALANCER value
+                     * @property {number} TCP_UDP_INTERNAL_LOAD_BALANCER=10 TCP_UDP_INTERNAL_LOAD_BALANCER value
+                     */
+                    v1beta1.LoadBalancerType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOAD_BALANCER_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HTTPS_ADVANCED_LOAD_BALANCER"] = 1;
+                        values[valuesById[2] = "HTTPS_LOAD_BALANCER"] = 2;
+                        values[valuesById[3] = "REGIONAL_HTTPS_LOAD_BALANCER"] = 3;
+                        values[valuesById[4] = "INTERNAL_HTTPS_LOAD_BALANCER"] = 4;
+                        values[valuesById[5] = "SSL_PROXY_LOAD_BALANCER"] = 5;
+                        values[valuesById[6] = "TCP_PROXY_LOAD_BALANCER"] = 6;
+                        values[valuesById[7] = "INTERNAL_TCP_PROXY_LOAD_BALANCER"] = 7;
+                        values[valuesById[8] = "NETWORK_LOAD_BALANCER"] = 8;
+                        values[valuesById[9] = "LEGACY_NETWORK_LOAD_BALANCER"] = 9;
+                        values[valuesById[10] = "TCP_UDP_INTERNAL_LOAD_BALANCER"] = 10;
+                        return values;
                     })();
     
                     v1beta1.ReachabilityService = (function() {

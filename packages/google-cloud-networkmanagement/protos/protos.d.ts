@@ -204,6 +204,15 @@ export namespace google {
                     /** Endpoint forwardingRule */
                     forwardingRule?: (string|null);
 
+                    /** Endpoint forwardingRuleTarget */
+                    forwardingRuleTarget?: (google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|keyof typeof google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|null);
+
+                    /** Endpoint loadBalancerId */
+                    loadBalancerId?: (string|null);
+
+                    /** Endpoint loadBalancerType */
+                    loadBalancerType?: (google.cloud.networkmanagement.v1.LoadBalancerType|keyof typeof google.cloud.networkmanagement.v1.LoadBalancerType|null);
+
                     /** Endpoint gkeMasterCluster */
                     gkeMasterCluster?: (string|null);
 
@@ -250,6 +259,15 @@ export namespace google {
                     /** Endpoint forwardingRule. */
                     public forwardingRule: string;
 
+                    /** Endpoint forwardingRuleTarget. */
+                    public forwardingRuleTarget?: (google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|keyof typeof google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget|null);
+
+                    /** Endpoint loadBalancerId. */
+                    public loadBalancerId?: (string|null);
+
+                    /** Endpoint loadBalancerType. */
+                    public loadBalancerType?: (google.cloud.networkmanagement.v1.LoadBalancerType|keyof typeof google.cloud.networkmanagement.v1.LoadBalancerType|null);
+
                     /** Endpoint gkeMasterCluster. */
                     public gkeMasterCluster: string;
 
@@ -273,6 +291,15 @@ export namespace google {
 
                     /** Endpoint projectId. */
                     public projectId: string;
+
+                    /** Endpoint _forwardingRuleTarget. */
+                    public _forwardingRuleTarget?: "forwardingRuleTarget";
+
+                    /** Endpoint _loadBalancerId. */
+                    public _loadBalancerId?: "loadBalancerId";
+
+                    /** Endpoint _loadBalancerType. */
+                    public _loadBalancerType?: "loadBalancerType";
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -359,6 +386,15 @@ export namespace google {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
                         NON_GCP_NETWORK = 2
+                    }
+
+                    /** ForwardingRuleTarget enum. */
+                    enum ForwardingRuleTarget {
+                        FORWARDING_RULE_TARGET_UNSPECIFIED = 0,
+                        INSTANCE = 1,
+                        LOAD_BALANCER = 2,
+                        VPN_GATEWAY = 3,
+                        PSC = 4
                     }
 
                     /** Properties of a CloudFunctionEndpoint. */
@@ -2466,7 +2502,8 @@ export namespace google {
                     enum BackendType {
                         BACKEND_TYPE_UNSPECIFIED = 0,
                         BACKEND_SERVICE = 1,
-                        TARGET_POOL = 2
+                        TARGET_POOL = 2,
+                        TARGET_INSTANCE = 3
                     }
                 }
 
@@ -2907,6 +2944,9 @@ export namespace google {
 
                     /** EndpointInfo destinationNetworkUri */
                     destinationNetworkUri?: (string|null);
+
+                    /** EndpointInfo sourceAgentUri */
+                    sourceAgentUri?: (string|null);
                 }
 
                 /** Represents an EndpointInfo. */
@@ -2938,6 +2978,9 @@ export namespace google {
 
                     /** EndpointInfo destinationNetworkUri. */
                     public destinationNetworkUri: string;
+
+                    /** EndpointInfo sourceAgentUri. */
+                    public sourceAgentUri: string;
 
                     /**
                      * Creates a new EndpointInfo instance using the specified properties.
@@ -3129,7 +3172,11 @@ export namespace google {
                         INTERNET = 2,
                         GOOGLE_API = 3,
                         GKE_MASTER = 4,
-                        CLOUD_SQL_INSTANCE = 5
+                        CLOUD_SQL_INSTANCE = 5,
+                        PSC_PUBLISHED_SERVICE = 6,
+                        PSC_GOOGLE_API = 7,
+                        PSC_VPC_SC = 8,
+                        SERVERLESS_NEG = 9
                     }
                 }
 
@@ -3246,7 +3293,8 @@ export namespace google {
                         INTERCONNECT = 3,
                         GKE_MASTER = 4,
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
-                        CLOUD_SQL_INSTANCE = 6
+                        CLOUD_SQL_INSTANCE = 6,
+                        ANOTHER_PROJECT = 7
                     }
                 }
 
@@ -3513,7 +3561,9 @@ export namespace google {
                         CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21,
                         CLOUD_FUNCTION_NOT_ACTIVE = 22,
                         VPC_CONNECTOR_NOT_SET = 23,
-                        VPC_CONNECTOR_NOT_RUNNING = 24
+                        VPC_CONNECTOR_NOT_RUNNING = 24,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
+                        PSC_CONNECTION_NOT_ACCEPTED = 26
                     }
                 }
 
@@ -4211,6 +4261,21 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** LoadBalancerType enum. */
+                enum LoadBalancerType {
+                    LOAD_BALANCER_TYPE_UNSPECIFIED = 0,
+                    HTTPS_ADVANCED_LOAD_BALANCER = 1,
+                    HTTPS_LOAD_BALANCER = 2,
+                    REGIONAL_HTTPS_LOAD_BALANCER = 3,
+                    INTERNAL_HTTPS_LOAD_BALANCER = 4,
+                    SSL_PROXY_LOAD_BALANCER = 5,
+                    TCP_PROXY_LOAD_BALANCER = 6,
+                    INTERNAL_TCP_PROXY_LOAD_BALANCER = 7,
+                    NETWORK_LOAD_BALANCER = 8,
+                    LEGACY_NETWORK_LOAD_BALANCER = 9,
+                    TCP_UDP_INTERNAL_LOAD_BALANCER = 10
                 }
 
                 /** Represents a ReachabilityService */
@@ -5411,6 +5476,15 @@ export namespace google {
                     /** Endpoint forwardingRule */
                     forwardingRule?: (string|null);
 
+                    /** Endpoint forwardingRuleTarget */
+                    forwardingRuleTarget?: (google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|keyof typeof google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|null);
+
+                    /** Endpoint loadBalancerId */
+                    loadBalancerId?: (string|null);
+
+                    /** Endpoint loadBalancerType */
+                    loadBalancerType?: (google.cloud.networkmanagement.v1beta1.LoadBalancerType|keyof typeof google.cloud.networkmanagement.v1beta1.LoadBalancerType|null);
+
                     /** Endpoint gkeMasterCluster */
                     gkeMasterCluster?: (string|null);
 
@@ -5457,6 +5531,15 @@ export namespace google {
                     /** Endpoint forwardingRule. */
                     public forwardingRule: string;
 
+                    /** Endpoint forwardingRuleTarget. */
+                    public forwardingRuleTarget?: (google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|keyof typeof google.cloud.networkmanagement.v1beta1.Endpoint.ForwardingRuleTarget|null);
+
+                    /** Endpoint loadBalancerId. */
+                    public loadBalancerId?: (string|null);
+
+                    /** Endpoint loadBalancerType. */
+                    public loadBalancerType?: (google.cloud.networkmanagement.v1beta1.LoadBalancerType|keyof typeof google.cloud.networkmanagement.v1beta1.LoadBalancerType|null);
+
                     /** Endpoint gkeMasterCluster. */
                     public gkeMasterCluster: string;
 
@@ -5480,6 +5563,15 @@ export namespace google {
 
                     /** Endpoint projectId. */
                     public projectId: string;
+
+                    /** Endpoint _forwardingRuleTarget. */
+                    public _forwardingRuleTarget?: "forwardingRuleTarget";
+
+                    /** Endpoint _loadBalancerId. */
+                    public _loadBalancerId?: "loadBalancerId";
+
+                    /** Endpoint _loadBalancerType. */
+                    public _loadBalancerType?: "loadBalancerType";
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -5566,6 +5658,15 @@ export namespace google {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
                         NON_GCP_NETWORK = 2
+                    }
+
+                    /** ForwardingRuleTarget enum. */
+                    enum ForwardingRuleTarget {
+                        FORWARDING_RULE_TARGET_UNSPECIFIED = 0,
+                        INSTANCE = 1,
+                        LOAD_BALANCER = 2,
+                        VPN_GATEWAY = 3,
+                        PSC = 4
                     }
 
                     /** Properties of a CloudFunctionEndpoint. */
@@ -7673,7 +7774,8 @@ export namespace google {
                     enum BackendType {
                         BACKEND_TYPE_UNSPECIFIED = 0,
                         BACKEND_SERVICE = 1,
-                        TARGET_POOL = 2
+                        TARGET_POOL = 2,
+                        TARGET_INSTANCE = 3
                     }
                 }
 
@@ -8345,7 +8447,8 @@ export namespace google {
                         CLOUD_SQL_INSTANCE = 5,
                         PSC_PUBLISHED_SERVICE = 6,
                         PSC_GOOGLE_API = 7,
-                        PSC_VPC_SC = 8
+                        PSC_VPC_SC = 8,
+                        SERVERLESS_NEG = 9
                     }
                 }
 
@@ -8462,7 +8565,8 @@ export namespace google {
                         INTERCONNECT = 3,
                         GKE_MASTER = 4,
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
-                        CLOUD_SQL_INSTANCE = 6
+                        CLOUD_SQL_INSTANCE = 6,
+                        ANOTHER_PROJECT = 7
                     }
                 }
 
@@ -9429,6 +9533,21 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** LoadBalancerType enum. */
+                enum LoadBalancerType {
+                    LOAD_BALANCER_TYPE_UNSPECIFIED = 0,
+                    HTTPS_ADVANCED_LOAD_BALANCER = 1,
+                    HTTPS_LOAD_BALANCER = 2,
+                    REGIONAL_HTTPS_LOAD_BALANCER = 3,
+                    INTERNAL_HTTPS_LOAD_BALANCER = 4,
+                    SSL_PROXY_LOAD_BALANCER = 5,
+                    TCP_PROXY_LOAD_BALANCER = 6,
+                    INTERNAL_TCP_PROXY_LOAD_BALANCER = 7,
+                    NETWORK_LOAD_BALANCER = 8,
+                    LEGACY_NETWORK_LOAD_BALANCER = 9,
+                    TCP_UDP_INTERNAL_LOAD_BALANCER = 10
                 }
 
                 /** Represents a ReachabilityService */
