@@ -1914,7 +1914,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 74,
+          "end": 79,
           "type": "FULL"
         }
       ],
@@ -1938,6 +1938,10 @@
           {
             "name": "import_option",
             "type": ".google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption"
+          },
+          {
+            "name": "flow_import_strategy",
+            "type": ".google.cloud.dialogflow.cx.v3.FlowImportStrategy"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -3682,7 +3686,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 79,
+          "end": 80,
           "type": "FULL"
         }
       ],
@@ -3734,7 +3738,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 69,
+          "end": 71,
           "type": "FULL"
         }
       ],
@@ -3778,7 +3782,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 73,
+          "end": 75,
           "type": "FULL"
         }
       ],
@@ -3874,7 +3878,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 67,
           "type": "FULL"
         }
       ],
