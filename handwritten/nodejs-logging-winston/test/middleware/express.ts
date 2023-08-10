@@ -37,6 +37,7 @@ class FakeLoggingWinston extends TransportStream {
 
   constructor(options: Options) {
     super(options);
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     transport = this;
     passedOptions.push(options);
     this.common = {
