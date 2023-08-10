@@ -112,6 +112,11 @@
                       }
                     },
                     "DatabaseType": {
+                      "valuesOptions": {
+                        "DB_CLOUD_SQL_POSTGRES": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "DB_UNKNOWN": 0,
                         "DB_INFRA_SPANNER": 1,
@@ -259,6 +264,20 @@
                         "updater": {
                           "type": "string",
                           "id": 14
+                        },
+                        "dispositionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "legalHold": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -304,6 +323,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "documentIsRetentionFolder": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "documentIsLegalHoldFolder": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -1461,6 +1488,10 @@
                           "rule": "repeated",
                           "type": "HistogramQueryResult",
                           "id": 6
+                        },
+                        "questionAnswer": {
+                          "type": "string",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1784,6 +1815,11 @@
                           "type": "string",
                           "id": 9
                         },
+                        "documentNameFilter": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
                         "queryContext": {
                           "rule": "repeated",
                           "type": "string",
@@ -1816,7 +1852,8 @@
                           "values": {
                             "TIME_FIELD_UNSPECIFIED": 0,
                             "CREATE_TIME": 1,
-                            "UPDATE_TIME": 2
+                            "UPDATE_TIME": 2,
+                            "DISPOSITION_TIME": 3
                           }
                         }
                       }
@@ -1994,7 +2031,9 @@
                           "values": {
                             "UNKNOWN": 0,
                             "ON_CREATE": 1,
-                            "ON_UPDATE": 4
+                            "ON_UPDATE": 4,
+                            "ON_CREATE_LINK": 7,
+                            "ON_DELETE_LINK": 8
                           }
                         }
                       }

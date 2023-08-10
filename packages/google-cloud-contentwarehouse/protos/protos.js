@@ -1736,6 +1736,8 @@
                          * @property {boolean|null} [textExtractionEnabled] Document textExtractionEnabled
                          * @property {string|null} [creator] Document creator
                          * @property {string|null} [updater] Document updater
+                         * @property {google.protobuf.ITimestamp|null} [dispositionTime] Document dispositionTime
+                         * @property {boolean|null} [legalHold] Document legalHold
                          */
     
                         /**
@@ -1922,6 +1924,22 @@
                          */
                         Document.prototype.updater = "";
     
+                        /**
+                         * Document dispositionTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} dispositionTime
+                         * @memberof google.cloud.contentwarehouse.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.dispositionTime = null;
+    
+                        /**
+                         * Document legalHold.
+                         * @member {boolean} legalHold
+                         * @memberof google.cloud.contentwarehouse.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.legalHold = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -2014,6 +2032,10 @@
                                 writer.uint32(/* id 20, wireType 0 =*/160).int32(message.contentCategory);
                             if (message.textExtractionEnabled != null && Object.hasOwnProperty.call(message, "textExtractionEnabled"))
                                 writer.uint32(/* id 21, wireType 0 =*/168).bool(message.textExtractionEnabled);
+                            if (message.dispositionTime != null && Object.hasOwnProperty.call(message, "dispositionTime"))
+                                $root.google.protobuf.Timestamp.encode(message.dispositionTime, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.legalHold != null && Object.hasOwnProperty.call(message, "legalHold"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.legalHold);
                             return writer;
                         };
     
@@ -2132,6 +2154,14 @@
                                     }
                                 case 14: {
                                         message.updater = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.dispositionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.legalHold = reader.bool();
                                         break;
                                     }
                                 default:
@@ -2275,6 +2305,14 @@
                             if (message.updater != null && message.hasOwnProperty("updater"))
                                 if (!$util.isString(message.updater))
                                     return "updater: string expected";
+                            if (message.dispositionTime != null && message.hasOwnProperty("dispositionTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.dispositionTime);
+                                if (error)
+                                    return "dispositionTime." + error;
+                            }
+                            if (message.legalHold != null && message.hasOwnProperty("legalHold"))
+                                if (typeof message.legalHold !== "boolean")
+                                    return "legalHold: boolean expected";
                             return null;
                         };
     
@@ -2408,6 +2446,13 @@
                                 message.creator = String(object.creator);
                             if (object.updater != null)
                                 message.updater = String(object.updater);
+                            if (object.dispositionTime != null) {
+                                if (typeof object.dispositionTime !== "object")
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.Document.dispositionTime: object expected");
+                                message.dispositionTime = $root.google.protobuf.Timestamp.fromObject(object.dispositionTime);
+                            }
+                            if (object.legalHold != null)
+                                message.legalHold = Boolean(object.legalHold);
                             return message;
                         };
     
@@ -2443,6 +2488,8 @@
                                 object.textExtractionDisabled = false;
                                 object.contentCategory = options.enums === String ? "CONTENT_CATEGORY_UNSPECIFIED" : 0;
                                 object.textExtractionEnabled = false;
+                                object.dispositionTime = null;
+                                object.legalHold = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2501,6 +2548,10 @@
                                 object.contentCategory = options.enums === String ? $root.google.cloud.contentwarehouse.v1.ContentCategory[message.contentCategory] === undefined ? message.contentCategory : $root.google.cloud.contentwarehouse.v1.ContentCategory[message.contentCategory] : message.contentCategory;
                             if (message.textExtractionEnabled != null && message.hasOwnProperty("textExtractionEnabled"))
                                 object.textExtractionEnabled = message.textExtractionEnabled;
+                            if (message.dispositionTime != null && message.hasOwnProperty("dispositionTime"))
+                                object.dispositionTime = $root.google.protobuf.Timestamp.toObject(message.dispositionTime, options);
+                            if (message.legalHold != null && message.hasOwnProperty("legalHold"))
+                                object.legalHold = message.legalHold;
                             return object;
                         };
     
@@ -2546,6 +2597,8 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] DocumentReference updateTime
                          * @property {google.protobuf.ITimestamp|null} [createTime] DocumentReference createTime
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] DocumentReference deleteTime
+                         * @property {boolean|null} [documentIsRetentionFolder] DocumentReference documentIsRetentionFolder
+                         * @property {boolean|null} [documentIsLegalHoldFolder] DocumentReference documentIsLegalHoldFolder
                          */
     
                         /**
@@ -2620,6 +2673,22 @@
                         DocumentReference.prototype.deleteTime = null;
     
                         /**
+                         * DocumentReference documentIsRetentionFolder.
+                         * @member {boolean} documentIsRetentionFolder
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentReference
+                         * @instance
+                         */
+                        DocumentReference.prototype.documentIsRetentionFolder = false;
+    
+                        /**
+                         * DocumentReference documentIsLegalHoldFolder.
+                         * @member {boolean} documentIsLegalHoldFolder
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentReference
+                         * @instance
+                         */
+                        DocumentReference.prototype.documentIsLegalHoldFolder = false;
+    
+                        /**
                          * Creates a new DocumentReference instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contentwarehouse.v1.DocumentReference
@@ -2657,6 +2726,10 @@
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
                                 $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.documentIsRetentionFolder != null && Object.hasOwnProperty.call(message, "documentIsRetentionFolder"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.documentIsRetentionFolder);
+                            if (message.documentIsLegalHoldFolder != null && Object.hasOwnProperty.call(message, "documentIsLegalHoldFolder"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.documentIsLegalHoldFolder);
                             return writer;
                         };
     
@@ -2717,6 +2790,14 @@
                                     }
                                 case 7: {
                                         message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.documentIsRetentionFolder = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.documentIsLegalHoldFolder = reader.bool();
                                         break;
                                     }
                                 default:
@@ -2781,6 +2862,12 @@
                                 if (error)
                                     return "deleteTime." + error;
                             }
+                            if (message.documentIsRetentionFolder != null && message.hasOwnProperty("documentIsRetentionFolder"))
+                                if (typeof message.documentIsRetentionFolder !== "boolean")
+                                    return "documentIsRetentionFolder: boolean expected";
+                            if (message.documentIsLegalHoldFolder != null && message.hasOwnProperty("documentIsLegalHoldFolder"))
+                                if (typeof message.documentIsLegalHoldFolder !== "boolean")
+                                    return "documentIsLegalHoldFolder: boolean expected";
                             return null;
                         };
     
@@ -2819,6 +2906,10 @@
                                     throw TypeError(".google.cloud.contentwarehouse.v1.DocumentReference.deleteTime: object expected");
                                 message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
                             }
+                            if (object.documentIsRetentionFolder != null)
+                                message.documentIsRetentionFolder = Boolean(object.documentIsRetentionFolder);
+                            if (object.documentIsLegalHoldFolder != null)
+                                message.documentIsLegalHoldFolder = Boolean(object.documentIsLegalHoldFolder);
                             return message;
                         };
     
@@ -2843,6 +2934,8 @@
                                 object.updateTime = null;
                                 object.createTime = null;
                                 object.deleteTime = null;
+                                object.documentIsRetentionFolder = false;
+                                object.documentIsLegalHoldFolder = false;
                             }
                             if (message.documentName != null && message.hasOwnProperty("documentName"))
                                 object.documentName = message.documentName;
@@ -2858,6 +2951,10 @@
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
                                 object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.documentIsRetentionFolder != null && message.hasOwnProperty("documentIsRetentionFolder"))
+                                object.documentIsRetentionFolder = message.documentIsRetentionFolder;
+                            if (message.documentIsLegalHoldFolder != null && message.hasOwnProperty("documentIsLegalHoldFolder"))
+                                object.documentIsLegalHoldFolder = message.documentIsLegalHoldFolder;
                             return object;
                         };
     
@@ -13993,6 +14090,7 @@
                          * @property {number|null} [totalSize] SearchDocumentsResponse totalSize
                          * @property {google.cloud.contentwarehouse.v1.IResponseMetadata|null} [metadata] SearchDocumentsResponse metadata
                          * @property {Array.<google.cloud.contentwarehouse.v1.IHistogramQueryResult>|null} [histogramQueryResults] SearchDocumentsResponse histogramQueryResults
+                         * @property {string|null} [questionAnswer] SearchDocumentsResponse questionAnswer
                          */
     
                         /**
@@ -14053,6 +14151,14 @@
                         SearchDocumentsResponse.prototype.histogramQueryResults = $util.emptyArray;
     
                         /**
+                         * SearchDocumentsResponse questionAnswer.
+                         * @member {string} questionAnswer
+                         * @memberof google.cloud.contentwarehouse.v1.SearchDocumentsResponse
+                         * @instance
+                         */
+                        SearchDocumentsResponse.prototype.questionAnswer = "";
+    
+                        /**
                          * Creates a new SearchDocumentsResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contentwarehouse.v1.SearchDocumentsResponse
@@ -14088,6 +14194,8 @@
                             if (message.histogramQueryResults != null && message.histogramQueryResults.length)
                                 for (var i = 0; i < message.histogramQueryResults.length; ++i)
                                     $root.google.cloud.contentwarehouse.v1.HistogramQueryResult.encode(message.histogramQueryResults[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.questionAnswer != null && Object.hasOwnProperty.call(message, "questionAnswer"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.questionAnswer);
                             return writer;
                         };
     
@@ -14144,6 +14252,10 @@
                                         if (!(message.histogramQueryResults && message.histogramQueryResults.length))
                                             message.histogramQueryResults = [];
                                         message.histogramQueryResults.push($root.google.cloud.contentwarehouse.v1.HistogramQueryResult.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.questionAnswer = reader.string();
                                         break;
                                     }
                                 default:
@@ -14210,6 +14322,9 @@
                                         return "histogramQueryResults." + error;
                                 }
                             }
+                            if (message.questionAnswer != null && message.hasOwnProperty("questionAnswer"))
+                                if (!$util.isString(message.questionAnswer))
+                                    return "questionAnswer: string expected";
                             return null;
                         };
     
@@ -14254,6 +14369,8 @@
                                     message.histogramQueryResults[i] = $root.google.cloud.contentwarehouse.v1.HistogramQueryResult.fromObject(object.histogramQueryResults[i]);
                                 }
                             }
+                            if (object.questionAnswer != null)
+                                message.questionAnswer = String(object.questionAnswer);
                             return message;
                         };
     
@@ -14278,6 +14395,7 @@
                                 object.nextPageToken = "";
                                 object.totalSize = 0;
                                 object.metadata = null;
+                                object.questionAnswer = "";
                             }
                             if (message.matchingDocuments && message.matchingDocuments.length) {
                                 object.matchingDocuments = [];
@@ -14295,6 +14413,8 @@
                                 for (var j = 0; j < message.histogramQueryResults.length; ++j)
                                     object.histogramQueryResults[j] = $root.google.cloud.contentwarehouse.v1.HistogramQueryResult.toObject(message.histogramQueryResults[j], options);
                             }
+                            if (message.questionAnswer != null && message.hasOwnProperty("questionAnswer"))
+                                object.questionAnswer = message.questionAnswer;
                             return object;
                         };
     
@@ -17760,6 +17880,7 @@
                          * @property {Array.<google.cloud.contentwarehouse.v1.IPropertyFilter>|null} [propertyFilter] DocumentQuery propertyFilter
                          * @property {google.cloud.contentwarehouse.v1.IFileTypeFilter|null} [fileTypeFilter] DocumentQuery fileTypeFilter
                          * @property {string|null} [folderNameFilter] DocumentQuery folderNameFilter
+                         * @property {Array.<string>|null} [documentNameFilter] DocumentQuery documentNameFilter
                          * @property {Array.<string>|null} [queryContext] DocumentQuery queryContext
                          * @property {Array.<string>|null} [documentCreatorFilter] DocumentQuery documentCreatorFilter
                          * @property {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata|null} [customWeightsMetadata] DocumentQuery customWeightsMetadata
@@ -17777,6 +17898,7 @@
                             this.timeFilters = [];
                             this.documentSchemaNames = [];
                             this.propertyFilter = [];
+                            this.documentNameFilter = [];
                             this.queryContext = [];
                             this.documentCreatorFilter = [];
                             if (properties)
@@ -17848,6 +17970,14 @@
                          * @instance
                          */
                         DocumentQuery.prototype.folderNameFilter = "";
+    
+                        /**
+                         * DocumentQuery documentNameFilter.
+                         * @member {Array.<string>} documentNameFilter
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentQuery
+                         * @instance
+                         */
+                        DocumentQuery.prototype.documentNameFilter = $util.emptyArray;
     
                         /**
                          * DocumentQuery queryContext.
@@ -17924,6 +18054,9 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.isNlQuery);
                             if (message.customWeightsMetadata != null && Object.hasOwnProperty.call(message, "customWeightsMetadata"))
                                 $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.encode(message.customWeightsMetadata, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.documentNameFilter != null && message.documentNameFilter.length)
+                                for (var i = 0; i < message.documentNameFilter.length; ++i)
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.documentNameFilter[i]);
                             return writer;
                         };
     
@@ -17994,6 +18127,12 @@
                                     }
                                 case 9: {
                                         message.folderNameFilter = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.documentNameFilter && message.documentNameFilter.length))
+                                            message.documentNameFilter = [];
+                                        message.documentNameFilter.push(reader.string());
                                         break;
                                     }
                                 case 10: {
@@ -18089,6 +18228,13 @@
                             if (message.folderNameFilter != null && message.hasOwnProperty("folderNameFilter"))
                                 if (!$util.isString(message.folderNameFilter))
                                     return "folderNameFilter: string expected";
+                            if (message.documentNameFilter != null && message.hasOwnProperty("documentNameFilter")) {
+                                if (!Array.isArray(message.documentNameFilter))
+                                    return "documentNameFilter: array expected";
+                                for (var i = 0; i < message.documentNameFilter.length; ++i)
+                                    if (!$util.isString(message.documentNameFilter[i]))
+                                        return "documentNameFilter: string[] expected";
+                            }
                             if (message.queryContext != null && message.hasOwnProperty("queryContext")) {
                                 if (!Array.isArray(message.queryContext))
                                     return "queryContext: array expected";
@@ -18163,6 +18309,13 @@
                             }
                             if (object.folderNameFilter != null)
                                 message.folderNameFilter = String(object.folderNameFilter);
+                            if (object.documentNameFilter) {
+                                if (!Array.isArray(object.documentNameFilter))
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.DocumentQuery.documentNameFilter: array expected");
+                                message.documentNameFilter = [];
+                                for (var i = 0; i < object.documentNameFilter.length; ++i)
+                                    message.documentNameFilter[i] = String(object.documentNameFilter[i]);
+                            }
                             if (object.queryContext) {
                                 if (!Array.isArray(object.queryContext))
                                     throw TypeError(".google.cloud.contentwarehouse.v1.DocumentQuery.queryContext: array expected");
@@ -18204,6 +18357,7 @@
                                 object.propertyFilter = [];
                                 object.queryContext = [];
                                 object.documentCreatorFilter = [];
+                                object.documentNameFilter = [];
                             }
                             if (options.defaults) {
                                 object.query = "";
@@ -18250,6 +18404,11 @@
                                 object.isNlQuery = message.isNlQuery;
                             if (message.customWeightsMetadata != null && message.hasOwnProperty("customWeightsMetadata"))
                                 object.customWeightsMetadata = $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.toObject(message.customWeightsMetadata, options);
+                            if (message.documentNameFilter && message.documentNameFilter.length) {
+                                object.documentNameFilter = [];
+                                for (var j = 0; j < message.documentNameFilter.length; ++j)
+                                    object.documentNameFilter[j] = message.documentNameFilter[j];
+                            }
                             return object;
                         };
     
@@ -18440,6 +18599,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             return null;
@@ -18480,6 +18640,10 @@
                             case "UPDATE_TIME":
                             case 2:
                                 message.timeField = 2;
+                                break;
+                            case "DISPOSITION_TIME":
+                            case 3:
+                                message.timeField = 3;
                                 break;
                             }
                             return message;
@@ -18542,12 +18706,14 @@
                          * @property {number} TIME_FIELD_UNSPECIFIED=0 TIME_FIELD_UNSPECIFIED value
                          * @property {number} CREATE_TIME=1 CREATE_TIME value
                          * @property {number} UPDATE_TIME=2 UPDATE_TIME value
+                         * @property {number} DISPOSITION_TIME=3 DISPOSITION_TIME value
                          */
                         TimeFilter.TimeField = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TIME_FIELD_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "CREATE_TIME"] = 1;
                             values[valuesById[2] = "UPDATE_TIME"] = 2;
+                            values[valuesById[3] = "DISPOSITION_TIME"] = 3;
                             return values;
                         })();
     
@@ -20844,6 +21010,8 @@
                                 case 0:
                                 case 1:
                                 case 4:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.condition != null && message.hasOwnProperty("condition"))
@@ -20895,6 +21063,14 @@
                             case "ON_UPDATE":
                             case 4:
                                 message.triggerType = 4;
+                                break;
+                            case "ON_CREATE_LINK":
+                            case 7:
+                                message.triggerType = 7;
+                                break;
+                            case "ON_DELETE_LINK":
+                            case 8:
+                                message.triggerType = 8;
                                 break;
                             }
                             if (object.condition != null)
@@ -20982,12 +21158,16 @@
                          * @property {number} UNKNOWN=0 UNKNOWN value
                          * @property {number} ON_CREATE=1 ON_CREATE value
                          * @property {number} ON_UPDATE=4 ON_UPDATE value
+                         * @property {number} ON_CREATE_LINK=7 ON_CREATE_LINK value
+                         * @property {number} ON_DELETE_LINK=8 ON_DELETE_LINK value
                          */
                         Rule.TriggerType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "UNKNOWN"] = 0;
                             values[valuesById[1] = "ON_CREATE"] = 1;
                             values[valuesById[4] = "ON_UPDATE"] = 4;
+                            values[valuesById[7] = "ON_CREATE_LINK"] = 7;
+                            values[valuesById[8] = "ON_DELETE_LINK"] = 8;
                             return values;
                         })();
     

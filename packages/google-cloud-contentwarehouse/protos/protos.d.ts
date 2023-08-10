@@ -822,6 +822,12 @@ export namespace google {
 
                     /** Document updater */
                     updater?: (string|null);
+
+                    /** Document dispositionTime */
+                    dispositionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Document legalHold */
+                    legalHold?: (boolean|null);
                 }
 
                 /** Represents a Document. */
@@ -895,6 +901,12 @@ export namespace google {
 
                     /** Document updater. */
                     public updater: string;
+
+                    /** Document dispositionTime. */
+                    public dispositionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Document legalHold. */
+                    public legalHold: boolean;
 
                     /** Document structuredContent. */
                     public structuredContent?: ("plainText"|"cloudAiDocument");
@@ -1003,6 +1015,12 @@ export namespace google {
 
                     /** DocumentReference deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DocumentReference documentIsRetentionFolder */
+                    documentIsRetentionFolder?: (boolean|null);
+
+                    /** DocumentReference documentIsLegalHoldFolder */
+                    documentIsLegalHoldFolder?: (boolean|null);
                 }
 
                 /** Represents a DocumentReference. */
@@ -1034,6 +1052,12 @@ export namespace google {
 
                     /** DocumentReference deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DocumentReference documentIsRetentionFolder. */
+                    public documentIsRetentionFolder: boolean;
+
+                    /** DocumentReference documentIsLegalHoldFolder. */
+                    public documentIsLegalHoldFolder: boolean;
 
                     /**
                      * Creates a new DocumentReference instance using the specified properties.
@@ -5857,6 +5881,9 @@ export namespace google {
 
                     /** SearchDocumentsResponse histogramQueryResults */
                     histogramQueryResults?: (google.cloud.contentwarehouse.v1.IHistogramQueryResult[]|null);
+
+                    /** SearchDocumentsResponse questionAnswer */
+                    questionAnswer?: (string|null);
                 }
 
                 /** Represents a SearchDocumentsResponse. */
@@ -5882,6 +5909,9 @@ export namespace google {
 
                     /** SearchDocumentsResponse histogramQueryResults. */
                     public histogramQueryResults: google.cloud.contentwarehouse.v1.IHistogramQueryResult[];
+
+                    /** SearchDocumentsResponse questionAnswer. */
+                    public questionAnswer: string;
 
                     /**
                      * Creates a new SearchDocumentsResponse instance using the specified properties.
@@ -7363,6 +7393,9 @@ export namespace google {
                     /** DocumentQuery folderNameFilter */
                     folderNameFilter?: (string|null);
 
+                    /** DocumentQuery documentNameFilter */
+                    documentNameFilter?: (string[]|null);
+
                     /** DocumentQuery queryContext */
                     queryContext?: (string[]|null);
 
@@ -7405,6 +7438,9 @@ export namespace google {
 
                     /** DocumentQuery folderNameFilter. */
                     public folderNameFilter: string;
+
+                    /** DocumentQuery documentNameFilter. */
+                    public documentNameFilter: string[];
 
                     /** DocumentQuery queryContext. */
                     public queryContext: string[];
@@ -7602,7 +7638,8 @@ export namespace google {
                     enum TimeField {
                         TIME_FIELD_UNSPECIFIED = 0,
                         CREATE_TIME = 1,
-                        UPDATE_TIME = 2
+                        UPDATE_TIME = 2,
+                        DISPOSITION_TIME = 3
                     }
                 }
 
@@ -8589,7 +8626,9 @@ export namespace google {
                     enum TriggerType {
                         UNKNOWN = 0,
                         ON_CREATE = 1,
-                        ON_UPDATE = 4
+                        ON_UPDATE = 4,
+                        ON_CREATE_LINK = 7,
+                        ON_DELETE_LINK = 8
                     }
                 }
 
