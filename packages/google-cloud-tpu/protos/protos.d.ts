@@ -9275,6 +9275,9 @@ export namespace google {
 
                     /** QueuedResourceState suspendedData */
                     suspendedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null);
+
+                    /** QueuedResourceState stateInitiator */
+                    stateInitiator?: (google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator|keyof typeof google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator|null);
                 }
 
                 /** Represents a QueuedResourceState. */
@@ -9312,6 +9315,9 @@ export namespace google {
 
                     /** QueuedResourceState suspendedData. */
                     public suspendedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null);
+
+                    /** QueuedResourceState stateInitiator. */
+                    public stateInitiator: (google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator|keyof typeof google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator);
 
                     /** QueuedResourceState stateData. */
                     public stateData?: ("creatingData"|"acceptedData"|"provisioningData"|"failedData"|"deletingData"|"activeData"|"suspendingData"|"suspendedData");
@@ -10141,6 +10147,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** StateInitiator enum. */
+                    enum StateInitiator {
+                        STATE_INITIATOR_UNSPECIFIED = 0,
+                        USER = 1,
+                        SERVICE = 2
                     }
                 }
 

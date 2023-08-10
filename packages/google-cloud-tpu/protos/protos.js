@@ -22279,6 +22279,7 @@
                          * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData|null} [activeData] QueuedResourceState activeData
                          * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData|null} [suspendingData] QueuedResourceState suspendingData
                          * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null} [suspendedData] QueuedResourceState suspendedData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator|null} [stateInitiator] QueuedResourceState stateInitiator
                          */
     
                         /**
@@ -22368,6 +22369,14 @@
                          */
                         QueuedResourceState.prototype.suspendedData = null;
     
+                        /**
+                         * QueuedResourceState stateInitiator.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator} stateInitiator
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.stateInitiator = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -22424,6 +22433,8 @@
                                 $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.encode(message.suspendingData, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.suspendedData != null && Object.hasOwnProperty.call(message, "suspendedData"))
                                 $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.encode(message.suspendedData, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.stateInitiator != null && Object.hasOwnProperty.call(message, "stateInitiator"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.stateInitiator);
                             return writer;
                         };
     
@@ -22492,6 +22503,10 @@
                                     }
                                 case 9: {
                                         message.suspendedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.stateInitiator = reader.int32();
                                         break;
                                     }
                                 default:
@@ -22623,6 +22638,15 @@
                                         return "suspendedData." + error;
                                 }
                             }
+                            if (message.stateInitiator != null && message.hasOwnProperty("stateInitiator"))
+                                switch (message.stateInitiator) {
+                                default:
+                                    return "stateInitiator: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -22722,6 +22746,26 @@
                                     throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.suspendedData: object expected");
                                 message.suspendedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.fromObject(object.suspendedData);
                             }
+                            switch (object.stateInitiator) {
+                            default:
+                                if (typeof object.stateInitiator === "number") {
+                                    message.stateInitiator = object.stateInitiator;
+                                    break;
+                                }
+                                break;
+                            case "STATE_INITIATOR_UNSPECIFIED":
+                            case 0:
+                                message.stateInitiator = 0;
+                                break;
+                            case "USER":
+                            case 1:
+                                message.stateInitiator = 1;
+                                break;
+                            case "SERVICE":
+                            case 2:
+                                message.stateInitiator = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -22738,8 +22782,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateInitiator = options.enums === String ? "STATE_INITIATOR_UNSPECIFIED" : 0;
+                            }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.tpu.v2alpha1.QueuedResourceState.State[message.state] === undefined ? message.state : $root.google.cloud.tpu.v2alpha1.QueuedResourceState.State[message.state] : message.state;
                             if (message.creatingData != null && message.hasOwnProperty("creatingData")) {
@@ -22782,6 +22828,8 @@
                                 if (options.oneofs)
                                     object.stateData = "suspendedData";
                             }
+                            if (message.stateInitiator != null && message.hasOwnProperty("stateInitiator"))
+                                object.stateInitiator = options.enums === String ? $root.google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator[message.stateInitiator] === undefined ? message.stateInitiator : $root.google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator[message.stateInitiator] : message.stateInitiator;
                             return object;
                         };
     
@@ -24270,6 +24318,22 @@
                             };
     
                             return SuspendedData;
+                        })();
+    
+                        /**
+                         * StateInitiator enum.
+                         * @name google.cloud.tpu.v2alpha1.QueuedResourceState.StateInitiator
+                         * @enum {number}
+                         * @property {number} STATE_INITIATOR_UNSPECIFIED=0 STATE_INITIATOR_UNSPECIFIED value
+                         * @property {number} USER=1 USER value
+                         * @property {number} SERVICE=2 SERVICE value
+                         */
+                        QueuedResourceState.StateInitiator = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_INITIATOR_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "USER"] = 1;
+                            values[valuesById[2] = "SERVICE"] = 2;
+                            return values;
                         })();
     
                         return QueuedResourceState;
