@@ -2835,6 +2835,20 @@ export namespace google {
                     public createConversionEvent(request: google.analytics.admin.v1alpha.ICreateConversionEventRequest): Promise<google.analytics.admin.v1alpha.ConversionEvent>;
 
                     /**
+                     * Calls UpdateConversionEvent.
+                     * @param request UpdateConversionEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConversionEvent
+                     */
+                    public updateConversionEvent(request: google.analytics.admin.v1alpha.IUpdateConversionEventRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateConversionEventCallback): void;
+
+                    /**
+                     * Calls UpdateConversionEvent.
+                     * @param request UpdateConversionEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConversionEvent(request: google.analytics.admin.v1alpha.IUpdateConversionEventRequest): Promise<google.analytics.admin.v1alpha.ConversionEvent>;
+
+                    /**
                      * Calls GetConversionEvent.
                      * @param request GetConversionEventRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ConversionEvent
@@ -4264,6 +4278,13 @@ export namespace google {
                      * @param [response] ConversionEvent
                      */
                     type CreateConversionEventCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ConversionEvent) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateConversionEvent}.
+                     * @param error Error, if any
+                     * @param [response] ConversionEvent
+                     */
+                    type UpdateConversionEventCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ConversionEvent) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getConversionEvent}.
@@ -10650,6 +10671,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateConversionEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConversionEventRequest. */
+                interface IUpdateConversionEventRequest {
+
+                    /** UpdateConversionEventRequest conversionEvent */
+                    conversionEvent?: (google.analytics.admin.v1alpha.IConversionEvent|null);
+
+                    /** UpdateConversionEventRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateConversionEventRequest. */
+                class UpdateConversionEventRequest implements IUpdateConversionEventRequest {
+
+                    /**
+                     * Constructs a new UpdateConversionEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateConversionEventRequest);
+
+                    /** UpdateConversionEventRequest conversionEvent. */
+                    public conversionEvent?: (google.analytics.admin.v1alpha.IConversionEvent|null);
+
+                    /** UpdateConversionEventRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateConversionEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConversionEventRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateConversionEventRequest): google.analytics.admin.v1alpha.UpdateConversionEventRequest;
+
+                    /**
+                     * Encodes the specified UpdateConversionEventRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateConversionEventRequest.verify|verify} messages.
+                     * @param message UpdateConversionEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateConversionEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConversionEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateConversionEventRequest.verify|verify} messages.
+                     * @param message UpdateConversionEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateConversionEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConversionEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConversionEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateConversionEventRequest;
+
+                    /**
+                     * Decodes an UpdateConversionEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConversionEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateConversionEventRequest;
+
+                    /**
+                     * Verifies an UpdateConversionEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConversionEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConversionEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateConversionEventRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConversionEventRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConversionEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateConversionEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConversionEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConversionEventRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -27626,6 +27750,9 @@ export namespace google {
 
                     /** ConversionEvent custom */
                     custom?: (boolean|null);
+
+                    /** ConversionEvent countingMethod */
+                    countingMethod?: (google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod|keyof typeof google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod|null);
                 }
 
                 /** Represents a ConversionEvent. */
@@ -27651,6 +27778,9 @@ export namespace google {
 
                     /** ConversionEvent custom. */
                     public custom: boolean;
+
+                    /** ConversionEvent countingMethod. */
+                    public countingMethod: (google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod|keyof typeof google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod);
 
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
@@ -27728,6 +27858,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConversionEvent {
+
+                    /** ConversionCountingMethod enum. */
+                    enum ConversionCountingMethod {
+                        CONVERSION_COUNTING_METHOD_UNSPECIFIED = 0,
+                        ONCE_PER_EVENT = 1,
+                        ONCE_PER_SESSION = 2
+                    }
                 }
 
                 /** Properties of a GoogleSignalsSettings. */
@@ -28552,8 +28692,8 @@ export namespace google {
                     /** BigQueryLink streamingExportEnabled */
                     streamingExportEnabled?: (boolean|null);
 
-                    /** BigQueryLink intradayExportEnabled */
-                    intradayExportEnabled?: (boolean|null);
+                    /** BigQueryLink enterpriseExportEnabled */
+                    enterpriseExportEnabled?: (boolean|null);
 
                     /** BigQueryLink includeAdvertisingId */
                     includeAdvertisingId?: (boolean|null);
@@ -28589,8 +28729,8 @@ export namespace google {
                     /** BigQueryLink streamingExportEnabled. */
                     public streamingExportEnabled: boolean;
 
-                    /** BigQueryLink intradayExportEnabled. */
-                    public intradayExportEnabled: boolean;
+                    /** BigQueryLink enterpriseExportEnabled. */
+                    public enterpriseExportEnabled: boolean;
 
                     /** BigQueryLink includeAdvertisingId. */
                     public includeAdvertisingId: boolean;

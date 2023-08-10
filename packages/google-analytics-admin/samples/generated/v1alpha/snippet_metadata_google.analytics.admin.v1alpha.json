@@ -1780,6 +1780,50 @@
             }
         },
         {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateConversionEvent_async",
+            "title": "AnalyticsAdminService updateConversionEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a conversion event with the specified attributes.",
+            "canonical": true,
+            "file": "analytics_admin_service.update_conversion_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateConversionEvent",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateConversionEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversion_event",
+                        "type": ".google.analytics.admin.v1alpha.ConversionEvent"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.ConversionEvent",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateConversionEvent",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateConversionEvent",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetConversionEvent_async",
             "title": "AnalyticsAdminService getConversionEvent Sample",
             "origin": "API_DEFINITION",

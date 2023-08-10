@@ -1123,6 +1123,26 @@
                             }
                           ]
                         },
+                        "UpdateConversionEvent": {
+                          "requestType": "UpdateConversionEventRequest",
+                          "responseType": "ConversionEvent",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{conversion_event.name=properties/*/conversionEvents/*}",
+                            "(google.api.http).body": "conversion_event",
+                            "(google.api.method_signature)": "conversion_event,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{conversion_event.name=properties/*/conversionEvents/*}",
+                                "body": "conversion_event"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "conversion_event,update_mask"
+                            }
+                          ]
+                        },
                         "GetConversionEvent": {
                           "requestType": "GetConversionEventRequest",
                           "responseType": "ConversionEvent",
@@ -3614,6 +3634,24 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ConversionEvent"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateConversionEventRequest": {
+                      "fields": {
+                        "conversionEvent": {
+                          "type": "ConversionEvent",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -7096,6 +7134,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "countingMethod": {
+                          "type": "ConversionCountingMethod",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConversionCountingMethod": {
+                          "values": {
+                            "CONVERSION_COUNTING_METHOD_UNSPECIFIED": 0,
+                            "ONCE_PER_EVENT": 1,
+                            "ONCE_PER_SESSION": 2
+                          }
                         }
                       }
                     },
@@ -7454,7 +7508,7 @@
                           "type": "bool",
                           "id": 5
                         },
-                        "intradayExportEnabled": {
+                        "enterpriseExportEnabled": {
                           "type": "bool",
                           "id": 9
                         },

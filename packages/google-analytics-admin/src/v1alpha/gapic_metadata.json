@@ -165,6 +165,11 @@
                 "createConversionEvent"
               ]
             },
+            "UpdateConversionEvent": {
+              "methods": [
+                "updateConversionEvent"
+              ]
+            },
             "GetConversionEvent": {
               "methods": [
                 "getConversionEvent"
@@ -824,6 +829,11 @@
             "CreateConversionEvent": {
               "methods": [
                 "createConversionEvent"
+              ]
+            },
+            "UpdateConversionEvent": {
+              "methods": [
+                "updateConversionEvent"
               ]
             },
             "GetConversionEvent": {
