@@ -74,7 +74,7 @@ export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
  * Using release-please annotations to update DEFAULT_INSTRUMENTATION_VERSION with latest version.
  * See https://github.com/googleapis/release-please/blob/main/docs/customizing.md#updating-arbitrary-files
  */
-export const NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION = '4.2.2'; // {x-release-please-version}
+export const NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION = '5.0.0'; // {x-release-please-version}
 
 /**
  * Gets the current fully qualified trace ID when available from the
