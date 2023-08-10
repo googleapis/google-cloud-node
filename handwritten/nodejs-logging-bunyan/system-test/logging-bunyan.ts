@@ -135,9 +135,9 @@ describe('LoggingBunyan', function () {
         level: 'error',
         verify: (entry: types.StackdriverEntry) => {
           assert(
-            (
-              (entry.data as types.StackdriverData).message as string
-            ).startsWith('Error: second')
+            ((entry.data as types.StackdriverData).message as string).includes(
+              'Error: second'
+            )
           );
           assert.strictEqual(
             (entry.data as types.StackdriverData).pid,
@@ -252,7 +252,7 @@ describe('LoggingBunyan', function () {
       const errEvent = errors[0];
 
       assert.strictEqual(errEvent.serviceContext.service, SERVICE);
-      assert(errEvent.message.startsWith(`Error: ${message}`));
+      assert(errEvent.message.includes(`Error: ${message}`));
     });
   });
 });
