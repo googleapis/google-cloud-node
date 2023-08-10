@@ -373,7 +373,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.ICreateMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createMigrationWorkflow(
@@ -422,7 +422,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.ICreateMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -477,7 +477,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IGetMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMigrationWorkflow(
@@ -526,7 +526,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IGetMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -575,7 +575,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IDeleteMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteMigrationWorkflow(
@@ -624,7 +624,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IDeleteMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -680,7 +680,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IStartMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startMigrationWorkflow(
@@ -729,7 +729,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IStartMigrationWorkflowRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IGetMigrationSubtaskRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMigrationSubtask(
@@ -833,7 +833,7 @@ export class MigrationServiceClient {
         | protos.google.cloud.bigquery.migration.v2.IGetMigrationSubtaskRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -894,7 +894,7 @@ export class MigrationServiceClient {
     [
       protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[],
       protos.google.cloud.bigquery.migration.v2.IListMigrationWorkflowsRequest | null,
-      protos.google.cloud.bigquery.migration.v2.IListMigrationWorkflowsResponse
+      protos.google.cloud.bigquery.migration.v2.IListMigrationWorkflowsResponse,
     ]
   >;
   listMigrationWorkflows(
@@ -940,7 +940,7 @@ export class MigrationServiceClient {
     [
       protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[],
       protos.google.cloud.bigquery.migration.v2.IListMigrationWorkflowsRequest | null,
-      protos.google.cloud.bigquery.migration.v2.IListMigrationWorkflowsResponse
+      protos.google.cloud.bigquery.migration.v2.IListMigrationWorkflowsResponse,
     ]
   > | void {
     request = request || {};
@@ -1115,7 +1115,7 @@ export class MigrationServiceClient {
     [
       protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[],
       protos.google.cloud.bigquery.migration.v2.IListMigrationSubtasksRequest | null,
-      protos.google.cloud.bigquery.migration.v2.IListMigrationSubtasksResponse
+      protos.google.cloud.bigquery.migration.v2.IListMigrationSubtasksResponse,
     ]
   >;
   listMigrationSubtasks(
@@ -1161,7 +1161,7 @@ export class MigrationServiceClient {
     [
       protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[],
       protos.google.cloud.bigquery.migration.v2.IListMigrationSubtasksRequest | null,
-      protos.google.cloud.bigquery.migration.v2.IListMigrationSubtasksResponse
+      protos.google.cloud.bigquery.migration.v2.IListMigrationSubtasksResponse,
     ]
   > | void {
     request = request || {};

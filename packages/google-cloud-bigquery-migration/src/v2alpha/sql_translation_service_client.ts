@@ -350,7 +350,7 @@ export class SqlTranslationServiceClient {
         | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   translateQuery(
@@ -399,7 +399,7 @@ export class SqlTranslationServiceClient {
         | protos.google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
