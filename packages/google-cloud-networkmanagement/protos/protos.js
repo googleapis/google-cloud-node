@@ -9676,6 +9676,12 @@
                                 case 13:
                                 case 14:
                                 case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -9774,6 +9780,30 @@
                             case 15:
                                 message.cause = 15;
                                 break;
+                            case "MISMATCHED_IP_VERSION":
+                            case 16:
+                                message.cause = 16;
+                                break;
+                            case "GKE_KONNECTIVITY_PROXY_UNSUPPORTED":
+                            case 17:
+                                message.cause = 17;
+                                break;
+                            case "RESOURCE_CONFIG_NOT_FOUND":
+                            case 18:
+                                message.cause = 18;
+                                break;
+                            case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT":
+                            case 19:
+                                message.cause = 19;
+                                break;
+                            case "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED":
+                            case 20:
+                                message.cause = 20;
+                                break;
+                            case "SOURCE_FORWARDING_RULE_UNSUPPORTED":
+                            case 21:
+                                message.cause = 21;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -9864,6 +9894,12 @@
                          * @property {number} DESTINATION_ENDPOINT_NOT_FOUND=13 DESTINATION_ENDPOINT_NOT_FOUND value
                          * @property {number} MISMATCHED_DESTINATION_NETWORK=14 MISMATCHED_DESTINATION_NETWORK value
                          * @property {number} UNSUPPORTED=15 UNSUPPORTED value
+                         * @property {number} MISMATCHED_IP_VERSION=16 MISMATCHED_IP_VERSION value
+                         * @property {number} GKE_KONNECTIVITY_PROXY_UNSUPPORTED=17 GKE_KONNECTIVITY_PROXY_UNSUPPORTED value
+                         * @property {number} RESOURCE_CONFIG_NOT_FOUND=18 RESOURCE_CONFIG_NOT_FOUND value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
+                         * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9883,6 +9919,12 @@
                             values[valuesById[13] = "DESTINATION_ENDPOINT_NOT_FOUND"] = 13;
                             values[valuesById[14] = "MISMATCHED_DESTINATION_NETWORK"] = 14;
                             values[valuesById[15] = "UNSUPPORTED"] = 15;
+                            values[valuesById[16] = "MISMATCHED_IP_VERSION"] = 16;
+                            values[valuesById[17] = "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"] = 17;
+                            values[valuesById[18] = "RESOURCE_CONFIG_NOT_FOUND"] = 18;
+                            values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
+                            values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
                             return values;
                         })();
     
@@ -10051,21 +10093,34 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 25:
                                 case 12:
                                 case 13:
                                 case 14:
+                                case 27:
+                                case 28:
                                 case 15:
                                 case 16:
                                 case 17:
                                 case 18:
                                 case 19:
                                 case 20:
+                                case 38:
+                                case 36:
                                 case 21:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
                                 case 22:
                                 case 23:
                                 case 24:
-                                case 25:
                                 case 26:
+                                case 29:
+                                case 37:
+                                case 39:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -10141,6 +10196,10 @@
                             case 11:
                                 message.cause = 11;
                                 break;
+                            case "FORWARDING_RULE_REGION_MISMATCH":
+                            case 25:
+                                message.cause = 25;
+                                break;
                             case "FORWARDING_RULE_NO_INSTANCES":
                             case 12:
                                 message.cause = 12;
@@ -10152,6 +10211,14 @@
                             case "INSTANCE_NOT_RUNNING":
                             case 14:
                                 message.cause = 14;
+                                break;
+                            case "GKE_CLUSTER_NOT_RUNNING":
+                            case 27:
+                                message.cause = 27;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
+                            case 28:
+                                message.cause = 28;
                                 break;
                             case "TRAFFIC_TYPE_BLOCKED":
                             case 15:
@@ -10177,9 +10244,41 @@
                             case 20:
                                 message.cause = 20;
                                 break;
+                            case "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT":
+                            case 38:
+                                message.cause = 38;
+                                break;
+                            case "GKE_PSC_ENDPOINT_MISSING":
+                            case 36:
+                                message.cause = 36;
+                                break;
                             case "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS":
                             case 21:
                                 message.cause = 21;
+                                break;
+                            case "GKE_CONTROL_PLANE_REGION_MISMATCH":
+                            case 30:
+                                message.cause = 30;
+                                break;
+                            case "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION":
+                            case 31:
+                                message.cause = 31;
+                                break;
+                            case "GKE_CONTROL_PLANE_NO_ROUTE":
+                            case 32:
+                                message.cause = 32;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC":
+                            case 33:
+                                message.cause = 33;
+                                break;
+                            case "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION":
+                            case 34:
+                                message.cause = 34;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NO_ROUTE":
+                            case 35:
+                                message.cause = 35;
                                 break;
                             case "CLOUD_FUNCTION_NOT_ACTIVE":
                             case 22:
@@ -10193,13 +10292,21 @@
                             case 24:
                                 message.cause = 24;
                                 break;
-                            case "FORWARDING_RULE_REGION_MISMATCH":
-                            case 25:
-                                message.cause = 25;
-                                break;
                             case "PSC_CONNECTION_NOT_ACCEPTED":
                             case 26:
                                 message.cause = 26;
+                                break;
+                            case "CLOUD_RUN_REVISION_NOT_READY":
+                            case 29:
+                                message.cause = 29;
+                                break;
+                            case "DROPPED_INSIDE_PSC_SERVICE_PRODUCER":
+                            case 37:
+                                message.cause = 37;
+                                break;
+                            case "LOAD_BALANCER_HAS_NO_PROXY_SUBNET":
+                            case 39:
+                                message.cause = 39;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -10273,21 +10380,34 @@
                          * @property {number} NO_EXTERNAL_ADDRESS=9 NO_EXTERNAL_ADDRESS value
                          * @property {number} UNKNOWN_INTERNAL_ADDRESS=10 UNKNOWN_INTERNAL_ADDRESS value
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
+                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
+                         * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} TRAFFIC_TYPE_BLOCKED=15 TRAFFIC_TYPE_BLOCKED value
                          * @property {number} GKE_MASTER_UNAUTHORIZED_ACCESS=16 GKE_MASTER_UNAUTHORIZED_ACCESS value
                          * @property {number} CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS=17 CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS value
                          * @property {number} DROPPED_INSIDE_GKE_SERVICE=18 DROPPED_INSIDE_GKE_SERVICE value
                          * @property {number} DROPPED_INSIDE_CLOUD_SQL_SERVICE=19 DROPPED_INSIDE_CLOUD_SQL_SERVICE value
                          * @property {number} GOOGLE_MANAGED_SERVICE_NO_PEERING=20 GOOGLE_MANAGED_SERVICE_NO_PEERING value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT=38 GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT value
+                         * @property {number} GKE_PSC_ENDPOINT_MISSING=36 GKE_PSC_ENDPOINT_MISSING value
                          * @property {number} CLOUD_SQL_INSTANCE_NO_IP_ADDRESS=21 CLOUD_SQL_INSTANCE_NO_IP_ADDRESS value
+                         * @property {number} GKE_CONTROL_PLANE_REGION_MISMATCH=30 GKE_CONTROL_PLANE_REGION_MISMATCH value
+                         * @property {number} PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION=31 PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION value
+                         * @property {number} GKE_CONTROL_PLANE_NO_ROUTE=32 GKE_CONTROL_PLANE_NO_ROUTE value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC=33 CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC value
+                         * @property {number} PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION=34 PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION value
+                         * @property {number} CLOUD_SQL_INSTANCE_NO_ROUTE=35 CLOUD_SQL_INSTANCE_NO_ROUTE value
                          * @property {number} CLOUD_FUNCTION_NOT_ACTIVE=22 CLOUD_FUNCTION_NOT_ACTIVE value
                          * @property {number} VPC_CONNECTOR_NOT_SET=23 VPC_CONNECTOR_NOT_SET value
                          * @property {number} VPC_CONNECTOR_NOT_RUNNING=24 VPC_CONNECTOR_NOT_RUNNING value
-                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} PSC_CONNECTION_NOT_ACCEPTED=26 PSC_CONNECTION_NOT_ACCEPTED value
+                         * @property {number} CLOUD_RUN_REVISION_NOT_READY=29 CLOUD_RUN_REVISION_NOT_READY value
+                         * @property {number} DROPPED_INSIDE_PSC_SERVICE_PRODUCER=37 DROPPED_INSIDE_PSC_SERVICE_PRODUCER value
+                         * @property {number} LOAD_BALANCER_HAS_NO_PROXY_SUBNET=39 LOAD_BALANCER_HAS_NO_PROXY_SUBNET value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10303,21 +10423,34 @@
                             values[valuesById[9] = "NO_EXTERNAL_ADDRESS"] = 9;
                             values[valuesById[10] = "UNKNOWN_INTERNAL_ADDRESS"] = 10;
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
+                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
+                            values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[15] = "TRAFFIC_TYPE_BLOCKED"] = 15;
                             values[valuesById[16] = "GKE_MASTER_UNAUTHORIZED_ACCESS"] = 16;
                             values[valuesById[17] = "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"] = 17;
                             values[valuesById[18] = "DROPPED_INSIDE_GKE_SERVICE"] = 18;
                             values[valuesById[19] = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"] = 19;
                             values[valuesById[20] = "GOOGLE_MANAGED_SERVICE_NO_PEERING"] = 20;
+                            values[valuesById[38] = "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"] = 38;
+                            values[valuesById[36] = "GKE_PSC_ENDPOINT_MISSING"] = 36;
                             values[valuesById[21] = "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"] = 21;
+                            values[valuesById[30] = "GKE_CONTROL_PLANE_REGION_MISMATCH"] = 30;
+                            values[valuesById[31] = "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"] = 31;
+                            values[valuesById[32] = "GKE_CONTROL_PLANE_NO_ROUTE"] = 32;
+                            values[valuesById[33] = "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"] = 33;
+                            values[valuesById[34] = "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"] = 34;
+                            values[valuesById[35] = "CLOUD_SQL_INSTANCE_NO_ROUTE"] = 35;
                             values[valuesById[22] = "CLOUD_FUNCTION_NOT_ACTIVE"] = 22;
                             values[valuesById[23] = "VPC_CONNECTOR_NOT_SET"] = 23;
                             values[valuesById[24] = "VPC_CONNECTOR_NOT_RUNNING"] = 24;
-                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[26] = "PSC_CONNECTION_NOT_ACCEPTED"] = 26;
+                            values[valuesById[29] = "CLOUD_RUN_REVISION_NOT_READY"] = 29;
+                            values[valuesById[37] = "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"] = 37;
+                            values[valuesById[39] = "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"] = 39;
                             return values;
                         })();
     
@@ -23923,6 +24056,12 @@
                                 case 13:
                                 case 14:
                                 case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -24021,6 +24160,30 @@
                             case 15:
                                 message.cause = 15;
                                 break;
+                            case "MISMATCHED_IP_VERSION":
+                            case 16:
+                                message.cause = 16;
+                                break;
+                            case "GKE_KONNECTIVITY_PROXY_UNSUPPORTED":
+                            case 17:
+                                message.cause = 17;
+                                break;
+                            case "RESOURCE_CONFIG_NOT_FOUND":
+                            case 18:
+                                message.cause = 18;
+                                break;
+                            case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT":
+                            case 19:
+                                message.cause = 19;
+                                break;
+                            case "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED":
+                            case 20:
+                                message.cause = 20;
+                                break;
+                            case "SOURCE_FORWARDING_RULE_UNSUPPORTED":
+                            case 21:
+                                message.cause = 21;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -24111,6 +24274,12 @@
                          * @property {number} DESTINATION_ENDPOINT_NOT_FOUND=13 DESTINATION_ENDPOINT_NOT_FOUND value
                          * @property {number} MISMATCHED_DESTINATION_NETWORK=14 MISMATCHED_DESTINATION_NETWORK value
                          * @property {number} UNSUPPORTED=15 UNSUPPORTED value
+                         * @property {number} MISMATCHED_IP_VERSION=16 MISMATCHED_IP_VERSION value
+                         * @property {number} GKE_KONNECTIVITY_PROXY_UNSUPPORTED=17 GKE_KONNECTIVITY_PROXY_UNSUPPORTED value
+                         * @property {number} RESOURCE_CONFIG_NOT_FOUND=18 RESOURCE_CONFIG_NOT_FOUND value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
+                         * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -24130,6 +24299,12 @@
                             values[valuesById[13] = "DESTINATION_ENDPOINT_NOT_FOUND"] = 13;
                             values[valuesById[14] = "MISMATCHED_DESTINATION_NETWORK"] = 14;
                             values[valuesById[15] = "UNSUPPORTED"] = 15;
+                            values[valuesById[16] = "MISMATCHED_IP_VERSION"] = 16;
+                            values[valuesById[17] = "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"] = 17;
+                            values[valuesById[18] = "RESOURCE_CONFIG_NOT_FOUND"] = 18;
+                            values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
+                            values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
                             return values;
                         })();
     
@@ -24298,21 +24473,34 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 25:
                                 case 12:
                                 case 13:
                                 case 14:
+                                case 27:
+                                case 28:
                                 case 15:
                                 case 16:
                                 case 17:
                                 case 18:
                                 case 19:
                                 case 20:
+                                case 38:
+                                case 36:
                                 case 21:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
                                 case 22:
                                 case 23:
                                 case 24:
-                                case 25:
                                 case 26:
+                                case 29:
+                                case 37:
+                                case 39:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -24388,6 +24576,10 @@
                             case 11:
                                 message.cause = 11;
                                 break;
+                            case "FORWARDING_RULE_REGION_MISMATCH":
+                            case 25:
+                                message.cause = 25;
+                                break;
                             case "FORWARDING_RULE_NO_INSTANCES":
                             case 12:
                                 message.cause = 12;
@@ -24399,6 +24591,14 @@
                             case "INSTANCE_NOT_RUNNING":
                             case 14:
                                 message.cause = 14;
+                                break;
+                            case "GKE_CLUSTER_NOT_RUNNING":
+                            case 27:
+                                message.cause = 27;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
+                            case 28:
+                                message.cause = 28;
                                 break;
                             case "TRAFFIC_TYPE_BLOCKED":
                             case 15:
@@ -24424,9 +24624,41 @@
                             case 20:
                                 message.cause = 20;
                                 break;
+                            case "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT":
+                            case 38:
+                                message.cause = 38;
+                                break;
+                            case "GKE_PSC_ENDPOINT_MISSING":
+                            case 36:
+                                message.cause = 36;
+                                break;
                             case "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS":
                             case 21:
                                 message.cause = 21;
+                                break;
+                            case "GKE_CONTROL_PLANE_REGION_MISMATCH":
+                            case 30:
+                                message.cause = 30;
+                                break;
+                            case "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION":
+                            case 31:
+                                message.cause = 31;
+                                break;
+                            case "GKE_CONTROL_PLANE_NO_ROUTE":
+                            case 32:
+                                message.cause = 32;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC":
+                            case 33:
+                                message.cause = 33;
+                                break;
+                            case "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION":
+                            case 34:
+                                message.cause = 34;
+                                break;
+                            case "CLOUD_SQL_INSTANCE_NO_ROUTE":
+                            case 35:
+                                message.cause = 35;
                                 break;
                             case "CLOUD_FUNCTION_NOT_ACTIVE":
                             case 22:
@@ -24440,13 +24672,21 @@
                             case 24:
                                 message.cause = 24;
                                 break;
-                            case "FORWARDING_RULE_REGION_MISMATCH":
-                            case 25:
-                                message.cause = 25;
-                                break;
                             case "PSC_CONNECTION_NOT_ACCEPTED":
                             case 26:
                                 message.cause = 26;
+                                break;
+                            case "CLOUD_RUN_REVISION_NOT_READY":
+                            case 29:
+                                message.cause = 29;
+                                break;
+                            case "DROPPED_INSIDE_PSC_SERVICE_PRODUCER":
+                            case 37:
+                                message.cause = 37;
+                                break;
+                            case "LOAD_BALANCER_HAS_NO_PROXY_SUBNET":
+                            case 39:
+                                message.cause = 39;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -24520,21 +24760,34 @@
                          * @property {number} NO_EXTERNAL_ADDRESS=9 NO_EXTERNAL_ADDRESS value
                          * @property {number} UNKNOWN_INTERNAL_ADDRESS=10 UNKNOWN_INTERNAL_ADDRESS value
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
+                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
+                         * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} TRAFFIC_TYPE_BLOCKED=15 TRAFFIC_TYPE_BLOCKED value
                          * @property {number} GKE_MASTER_UNAUTHORIZED_ACCESS=16 GKE_MASTER_UNAUTHORIZED_ACCESS value
                          * @property {number} CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS=17 CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS value
                          * @property {number} DROPPED_INSIDE_GKE_SERVICE=18 DROPPED_INSIDE_GKE_SERVICE value
                          * @property {number} DROPPED_INSIDE_CLOUD_SQL_SERVICE=19 DROPPED_INSIDE_CLOUD_SQL_SERVICE value
                          * @property {number} GOOGLE_MANAGED_SERVICE_NO_PEERING=20 GOOGLE_MANAGED_SERVICE_NO_PEERING value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT=38 GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT value
+                         * @property {number} GKE_PSC_ENDPOINT_MISSING=36 GKE_PSC_ENDPOINT_MISSING value
                          * @property {number} CLOUD_SQL_INSTANCE_NO_IP_ADDRESS=21 CLOUD_SQL_INSTANCE_NO_IP_ADDRESS value
+                         * @property {number} GKE_CONTROL_PLANE_REGION_MISMATCH=30 GKE_CONTROL_PLANE_REGION_MISMATCH value
+                         * @property {number} PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION=31 PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION value
+                         * @property {number} GKE_CONTROL_PLANE_NO_ROUTE=32 GKE_CONTROL_PLANE_NO_ROUTE value
+                         * @property {number} CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC=33 CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC value
+                         * @property {number} PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION=34 PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION value
+                         * @property {number} CLOUD_SQL_INSTANCE_NO_ROUTE=35 CLOUD_SQL_INSTANCE_NO_ROUTE value
                          * @property {number} CLOUD_FUNCTION_NOT_ACTIVE=22 CLOUD_FUNCTION_NOT_ACTIVE value
                          * @property {number} VPC_CONNECTOR_NOT_SET=23 VPC_CONNECTOR_NOT_SET value
                          * @property {number} VPC_CONNECTOR_NOT_RUNNING=24 VPC_CONNECTOR_NOT_RUNNING value
-                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} PSC_CONNECTION_NOT_ACCEPTED=26 PSC_CONNECTION_NOT_ACCEPTED value
+                         * @property {number} CLOUD_RUN_REVISION_NOT_READY=29 CLOUD_RUN_REVISION_NOT_READY value
+                         * @property {number} DROPPED_INSIDE_PSC_SERVICE_PRODUCER=37 DROPPED_INSIDE_PSC_SERVICE_PRODUCER value
+                         * @property {number} LOAD_BALANCER_HAS_NO_PROXY_SUBNET=39 LOAD_BALANCER_HAS_NO_PROXY_SUBNET value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -24550,21 +24803,34 @@
                             values[valuesById[9] = "NO_EXTERNAL_ADDRESS"] = 9;
                             values[valuesById[10] = "UNKNOWN_INTERNAL_ADDRESS"] = 10;
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
+                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
+                            values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[15] = "TRAFFIC_TYPE_BLOCKED"] = 15;
                             values[valuesById[16] = "GKE_MASTER_UNAUTHORIZED_ACCESS"] = 16;
                             values[valuesById[17] = "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"] = 17;
                             values[valuesById[18] = "DROPPED_INSIDE_GKE_SERVICE"] = 18;
                             values[valuesById[19] = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"] = 19;
                             values[valuesById[20] = "GOOGLE_MANAGED_SERVICE_NO_PEERING"] = 20;
+                            values[valuesById[38] = "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"] = 38;
+                            values[valuesById[36] = "GKE_PSC_ENDPOINT_MISSING"] = 36;
                             values[valuesById[21] = "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"] = 21;
+                            values[valuesById[30] = "GKE_CONTROL_PLANE_REGION_MISMATCH"] = 30;
+                            values[valuesById[31] = "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"] = 31;
+                            values[valuesById[32] = "GKE_CONTROL_PLANE_NO_ROUTE"] = 32;
+                            values[valuesById[33] = "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"] = 33;
+                            values[valuesById[34] = "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"] = 34;
+                            values[valuesById[35] = "CLOUD_SQL_INSTANCE_NO_ROUTE"] = 35;
                             values[valuesById[22] = "CLOUD_FUNCTION_NOT_ACTIVE"] = 22;
                             values[valuesById[23] = "VPC_CONNECTOR_NOT_SET"] = 23;
                             values[valuesById[24] = "VPC_CONNECTOR_NOT_RUNNING"] = 24;
-                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[26] = "PSC_CONNECTION_NOT_ACCEPTED"] = 26;
+                            values[valuesById[29] = "CLOUD_RUN_REVISION_NOT_READY"] = 29;
+                            values[valuesById[37] = "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"] = 37;
+                            values[valuesById[39] = "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"] = 39;
                             return values;
                         })();
     

@@ -3426,7 +3426,13 @@ export namespace google {
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
                         MISMATCHED_DESTINATION_NETWORK = 14,
-                        UNSUPPORTED = 15
+                        UNSUPPORTED = 15,
+                        MISMATCHED_IP_VERSION = 16,
+                        GKE_KONNECTIVITY_PROXY_UNSUPPORTED = 17,
+                        RESOURCE_CONFIG_NOT_FOUND = 18,
+                        GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
+                        SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
+                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21
                     }
                 }
 
@@ -3549,21 +3555,34 @@ export namespace google {
                         NO_EXTERNAL_ADDRESS = 9,
                         UNKNOWN_INTERNAL_ADDRESS = 10,
                         FORWARDING_RULE_MISMATCH = 11,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
                         INSTANCE_NOT_RUNNING = 14,
+                        GKE_CLUSTER_NOT_RUNNING = 27,
+                        CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
                         TRAFFIC_TYPE_BLOCKED = 15,
                         GKE_MASTER_UNAUTHORIZED_ACCESS = 16,
                         CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS = 17,
                         DROPPED_INSIDE_GKE_SERVICE = 18,
                         DROPPED_INSIDE_CLOUD_SQL_SERVICE = 19,
                         GOOGLE_MANAGED_SERVICE_NO_PEERING = 20,
+                        GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT = 38,
+                        GKE_PSC_ENDPOINT_MISSING = 36,
                         CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21,
+                        GKE_CONTROL_PLANE_REGION_MISMATCH = 30,
+                        PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION = 31,
+                        GKE_CONTROL_PLANE_NO_ROUTE = 32,
+                        CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC = 33,
+                        PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION = 34,
+                        CLOUD_SQL_INSTANCE_NO_ROUTE = 35,
                         CLOUD_FUNCTION_NOT_ACTIVE = 22,
                         VPC_CONNECTOR_NOT_SET = 23,
                         VPC_CONNECTOR_NOT_RUNNING = 24,
-                        FORWARDING_RULE_REGION_MISMATCH = 25,
-                        PSC_CONNECTION_NOT_ACCEPTED = 26
+                        PSC_CONNECTION_NOT_ACCEPTED = 26,
+                        CLOUD_RUN_REVISION_NOT_READY = 29,
+                        DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37,
+                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39
                     }
                 }
 
@@ -8698,7 +8717,13 @@ export namespace google {
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
                         MISMATCHED_DESTINATION_NETWORK = 14,
-                        UNSUPPORTED = 15
+                        UNSUPPORTED = 15,
+                        MISMATCHED_IP_VERSION = 16,
+                        GKE_KONNECTIVITY_PROXY_UNSUPPORTED = 17,
+                        RESOURCE_CONFIG_NOT_FOUND = 18,
+                        GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
+                        SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
+                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21
                     }
                 }
 
@@ -8821,21 +8846,34 @@ export namespace google {
                         NO_EXTERNAL_ADDRESS = 9,
                         UNKNOWN_INTERNAL_ADDRESS = 10,
                         FORWARDING_RULE_MISMATCH = 11,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
                         INSTANCE_NOT_RUNNING = 14,
+                        GKE_CLUSTER_NOT_RUNNING = 27,
+                        CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
                         TRAFFIC_TYPE_BLOCKED = 15,
                         GKE_MASTER_UNAUTHORIZED_ACCESS = 16,
                         CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS = 17,
                         DROPPED_INSIDE_GKE_SERVICE = 18,
                         DROPPED_INSIDE_CLOUD_SQL_SERVICE = 19,
                         GOOGLE_MANAGED_SERVICE_NO_PEERING = 20,
+                        GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT = 38,
+                        GKE_PSC_ENDPOINT_MISSING = 36,
                         CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21,
+                        GKE_CONTROL_PLANE_REGION_MISMATCH = 30,
+                        PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION = 31,
+                        GKE_CONTROL_PLANE_NO_ROUTE = 32,
+                        CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC = 33,
+                        PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION = 34,
+                        CLOUD_SQL_INSTANCE_NO_ROUTE = 35,
                         CLOUD_FUNCTION_NOT_ACTIVE = 22,
                         VPC_CONNECTOR_NOT_SET = 23,
                         VPC_CONNECTOR_NOT_RUNNING = 24,
-                        FORWARDING_RULE_REGION_MISMATCH = 25,
-                        PSC_CONNECTION_NOT_ACCEPTED = 26
+                        PSC_CONNECTION_NOT_ACCEPTED = 26,
+                        CLOUD_RUN_REVISION_NOT_READY = 29,
+                        DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37,
+                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39
                     }
                 }
 
