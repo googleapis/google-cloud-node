@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/nodejs-logging-winston/compare/v5.3.0...v6.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to node 14 ([#807](https://github.com/googleapis/nodejs-logging-winston/issues/807))
+
+### Miscellaneous Chores
+
+* Upgrade to node 14 ([#807](https://github.com/googleapis/nodejs-logging-winston/issues/807)) ([2f4ea63](https://github.com/googleapis/nodejs-logging-winston/commit/2f4ea631a84d3d9da7a16f1f5922ceb95a4a62e4))
+
 ## [5.3.0](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.3...v5.3.0) (2023-01-04)
 
 
