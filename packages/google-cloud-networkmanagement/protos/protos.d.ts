@@ -1407,6 +1407,9 @@ export namespace google {
                     /** Step endpoint */
                     endpoint?: (google.cloud.networkmanagement.v1.IEndpointInfo|null);
 
+                    /** Step googleService */
+                    googleService?: (google.cloud.networkmanagement.v1.IGoogleServiceInfo|null);
+
                     /** Step forwardingRule */
                     forwardingRule?: (google.cloud.networkmanagement.v1.IForwardingRuleInfo|null);
 
@@ -1486,6 +1489,9 @@ export namespace google {
                     /** Step endpoint. */
                     public endpoint?: (google.cloud.networkmanagement.v1.IEndpointInfo|null);
 
+                    /** Step googleService. */
+                    public googleService?: (google.cloud.networkmanagement.v1.IGoogleServiceInfo|null);
+
                     /** Step forwardingRule. */
                     public forwardingRule?: (google.cloud.networkmanagement.v1.IForwardingRuleInfo|null);
 
@@ -1532,7 +1538,7 @@ export namespace google {
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -1619,6 +1625,7 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         START_FROM_INSTANCE = 1,
                         START_FROM_INTERNET = 2,
+                        START_FROM_GOOGLE_SERVICE = 27,
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
@@ -2286,6 +2293,120 @@ export namespace google {
                         ROUTE_SCOPE_UNSPECIFIED = 0,
                         NETWORK = 1,
                         NCC_HUB = 2
+                    }
+                }
+
+                /** Properties of a GoogleServiceInfo. */
+                interface IGoogleServiceInfo {
+
+                    /** GoogleServiceInfo sourceIp */
+                    sourceIp?: (string|null);
+
+                    /** GoogleServiceInfo googleServiceType */
+                    googleServiceType?: (google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType|null);
+                }
+
+                /** Represents a GoogleServiceInfo. */
+                class GoogleServiceInfo implements IGoogleServiceInfo {
+
+                    /**
+                     * Constructs a new GoogleServiceInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IGoogleServiceInfo);
+
+                    /** GoogleServiceInfo sourceIp. */
+                    public sourceIp: string;
+
+                    /** GoogleServiceInfo googleServiceType. */
+                    public googleServiceType: (google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType);
+
+                    /**
+                     * Creates a new GoogleServiceInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleServiceInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IGoogleServiceInfo): google.cloud.networkmanagement.v1.GoogleServiceInfo;
+
+                    /**
+                     * Encodes the specified GoogleServiceInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GoogleServiceInfo.verify|verify} messages.
+                     * @param message GoogleServiceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IGoogleServiceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleServiceInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GoogleServiceInfo.verify|verify} messages.
+                     * @param message GoogleServiceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IGoogleServiceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleServiceInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleServiceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.GoogleServiceInfo;
+
+                    /**
+                     * Decodes a GoogleServiceInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleServiceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.GoogleServiceInfo;
+
+                    /**
+                     * Verifies a GoogleServiceInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleServiceInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleServiceInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.GoogleServiceInfo;
+
+                    /**
+                     * Creates a plain object from a GoogleServiceInfo message. Also converts values to other types if specified.
+                     * @param message GoogleServiceInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.GoogleServiceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleServiceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleServiceInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoogleServiceInfo {
+
+                    /** GoogleServiceType enum. */
+                    enum GoogleServiceType {
+                        GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
+                        IAP = 1,
+                        GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
+                        CLOUD_DNS = 3
                     }
                 }
 
@@ -6756,6 +6877,9 @@ export namespace google {
                     /** Step endpoint */
                     endpoint?: (google.cloud.networkmanagement.v1beta1.IEndpointInfo|null);
 
+                    /** Step googleService */
+                    googleService?: (google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo|null);
+
                     /** Step forwardingRule */
                     forwardingRule?: (google.cloud.networkmanagement.v1beta1.IForwardingRuleInfo|null);
 
@@ -6835,6 +6959,9 @@ export namespace google {
                     /** Step endpoint. */
                     public endpoint?: (google.cloud.networkmanagement.v1beta1.IEndpointInfo|null);
 
+                    /** Step googleService. */
+                    public googleService?: (google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo|null);
+
                     /** Step forwardingRule. */
                     public forwardingRule?: (google.cloud.networkmanagement.v1beta1.IForwardingRuleInfo|null);
 
@@ -6881,7 +7008,7 @@ export namespace google {
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -6968,6 +7095,7 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         START_FROM_INSTANCE = 1,
                         START_FROM_INTERNET = 2,
+                        START_FROM_GOOGLE_SERVICE = 27,
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
@@ -7635,6 +7763,120 @@ export namespace google {
                         ROUTE_SCOPE_UNSPECIFIED = 0,
                         NETWORK = 1,
                         NCC_HUB = 2
+                    }
+                }
+
+                /** Properties of a GoogleServiceInfo. */
+                interface IGoogleServiceInfo {
+
+                    /** GoogleServiceInfo sourceIp */
+                    sourceIp?: (string|null);
+
+                    /** GoogleServiceInfo googleServiceType */
+                    googleServiceType?: (google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType|null);
+                }
+
+                /** Represents a GoogleServiceInfo. */
+                class GoogleServiceInfo implements IGoogleServiceInfo {
+
+                    /**
+                     * Constructs a new GoogleServiceInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo);
+
+                    /** GoogleServiceInfo sourceIp. */
+                    public sourceIp: string;
+
+                    /** GoogleServiceInfo googleServiceType. */
+                    public googleServiceType: (google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType);
+
+                    /**
+                     * Creates a new GoogleServiceInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleServiceInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo): google.cloud.networkmanagement.v1beta1.GoogleServiceInfo;
+
+                    /**
+                     * Encodes the specified GoogleServiceInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.verify|verify} messages.
+                     * @param message GoogleServiceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleServiceInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.verify|verify} messages.
+                     * @param message GoogleServiceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleServiceInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleServiceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.GoogleServiceInfo;
+
+                    /**
+                     * Decodes a GoogleServiceInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleServiceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.GoogleServiceInfo;
+
+                    /**
+                     * Verifies a GoogleServiceInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleServiceInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleServiceInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.GoogleServiceInfo;
+
+                    /**
+                     * Creates a plain object from a GoogleServiceInfo message. Also converts values to other types if specified.
+                     * @param message GoogleServiceInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.GoogleServiceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleServiceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleServiceInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoogleServiceInfo {
+
+                    /** GoogleServiceType enum. */
+                    enum GoogleServiceType {
+                        GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
+                        IAP = 1,
+                        GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
+                        CLOUD_DNS = 3
                     }
                 }
 
