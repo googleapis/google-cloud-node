@@ -183,10 +183,9 @@ type Without<T, K> = {
 
 // Using the Without type, we essentially make a new ServiceObject type that
 // doesn't contain any of the methods that have signatures we wish to override.
-type ZoneServiceObject = new (config: ServiceObjectConfig) => Without<
-  ServiceObject<Zone>,
-  'create' | 'delete' | 'get'
->;
+type ZoneServiceObject = new (
+  config: ServiceObjectConfig
+) => Without<ServiceObject<Zone>, 'create' | 'delete' | 'get'>;
 
 // This is used purely for making TypeScript think that the object we are
 // subclassing does not contain a signature mismatch for methods we are
