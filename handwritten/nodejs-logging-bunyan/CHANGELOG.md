@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.2.2...v5.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14 ([#705](https://github.com/googleapis/nodejs-logging-bunyan/issues/705))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([#705](https://github.com/googleapis/nodejs-logging-bunyan/issues/705)) ([e2299d6](https://github.com/googleapis/nodejs-logging-bunyan/commit/e2299d66ec80a8d5b5c9f15c36b071771e28f9b9))
+
 ## [4.2.2](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.2.1...v4.2.2) (2022-12-02)
 
 
