@@ -89,6 +89,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "probingDetails": {
+                          "type": "ProbingDetails",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -118,6 +125,18 @@
                           "type": "string",
                           "id": 8
                         },
+                        "cloudFunction": {
+                          "type": "CloudFunctionEndpoint",
+                          "id": 10
+                        },
+                        "appEngineVersion": {
+                          "type": "AppEngineVersionEndpoint",
+                          "id": 11
+                        },
+                        "cloudRunRevision": {
+                          "type": "CloudRunRevisionEndpoint",
+                          "id": 12
+                        },
                         "network": {
                           "type": "string",
                           "id": 4
@@ -137,6 +156,30 @@
                             "NETWORK_TYPE_UNSPECIFIED": 0,
                             "GCP_NETWORK": 1,
                             "NON_GCP_NETWORK": 2
+                          }
+                        },
+                        "CloudFunctionEndpoint": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AppEngineVersionEndpoint": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CloudRunRevisionEndpoint": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -173,6 +216,93 @@
                         }
                       }
                     },
+                    "LatencyPercentile": {
+                      "fields": {
+                        "percent": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "latencyMicros": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LatencyDistribution": {
+                      "fields": {
+                        "latencyPercentiles": {
+                          "rule": "repeated",
+                          "type": "LatencyPercentile",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ProbingDetails": {
+                      "fields": {
+                        "result": {
+                          "type": "ProbingResult",
+                          "id": 1
+                        },
+                        "verifyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        },
+                        "abortCause": {
+                          "type": "ProbingAbortCause",
+                          "id": 4
+                        },
+                        "sentProbeCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "successfulProbeCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "endpointInfo": {
+                          "type": "EndpointInfo",
+                          "id": 7
+                        },
+                        "probingLatency": {
+                          "type": "LatencyDistribution",
+                          "id": 8
+                        },
+                        "destinationEgressLocation": {
+                          "type": "EdgeLocation",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "ProbingResult": {
+                          "values": {
+                            "PROBING_RESULT_UNSPECIFIED": 0,
+                            "REACHABLE": 1,
+                            "UNREACHABLE": 2,
+                            "REACHABILITY_INCONSISTENT": 3,
+                            "UNDETERMINED": 4
+                          }
+                        },
+                        "ProbingAbortCause": {
+                          "values": {
+                            "PROBING_ABORT_CAUSE_UNSPECIFIED": 0,
+                            "PERMISSION_DENIED": 1,
+                            "NO_SOURCE_LOCATION": 2
+                          }
+                        },
+                        "EdgeLocation": {
+                          "fields": {
+                            "metropolitanArea": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Trace": {
                       "fields": {
                         "endpointInfo": {
@@ -197,6 +327,7 @@
                             "forwardingRule",
                             "vpnGateway",
                             "vpnTunnel",
+                            "vpcConnector",
                             "deliver",
                             "forward",
                             "abort",
@@ -204,7 +335,10 @@
                             "loadBalancer",
                             "network",
                             "gkeMaster",
-                            "cloudSqlInstance"
+                            "cloudSqlInstance",
+                            "cloudFunction",
+                            "appEngineVersion",
+                            "cloudRunRevision"
                           ]
                         }
                       },
@@ -253,6 +387,10 @@
                           "type": "VpnTunnelInfo",
                           "id": 11
                         },
+                        "vpcConnector": {
+                          "type": "VpcConnectorInfo",
+                          "id": 21
+                        },
                         "deliver": {
                           "type": "DeliverInfo",
                           "id": 12
@@ -284,6 +422,18 @@
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
+                        },
+                        "cloudFunction": {
+                          "type": "CloudFunctionInfo",
+                          "id": 20
+                        },
+                        "appEngineVersion": {
+                          "type": "AppEngineVersionInfo",
+                          "id": 22
+                        },
+                        "cloudRunRevision": {
+                          "type": "CloudRunRevisionInfo",
+                          "id": 23
                         }
                       },
                       "nested": {
@@ -295,6 +445,9 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_CLOUD_FUNCTION": 23,
+                            "START_FROM_APP_ENGINE_VERSION": 25,
+                            "START_FROM_CLOUD_RUN_REVISION": 26,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -305,6 +458,7 @@
                             "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "ARRIVE_AT_VPC_CONNECTOR": 24,
                             "NAT": 14,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
@@ -423,7 +577,8 @@
                             "FIREWALL_RULE_TYPE_UNSPECIFIED": 0,
                             "HIERARCHICAL_FIREWALL_POLICY_RULE": 1,
                             "VPC_FIREWALL_RULE": 2,
-                            "IMPLIED_VPC_FIREWALL_RULE": 3
+                            "IMPLIED_VPC_FIREWALL_RULE": 3,
+                            "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4
                           }
                         }
                       }
@@ -842,7 +997,10 @@
                             "DROPPED_INSIDE_GKE_SERVICE": 18,
                             "DROPPED_INSIDE_CLOUD_SQL_SERVICE": 19,
                             "GOOGLE_MANAGED_SERVICE_NO_PEERING": 20,
-                            "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS": 21
+                            "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS": 21,
+                            "CLOUD_FUNCTION_NOT_ACTIVE": 22,
+                            "VPC_CONNECTOR_NOT_SET": 23,
+                            "VPC_CONNECTOR_NOT_RUNNING": 24
                           }
                         }
                       }
@@ -892,6 +1050,82 @@
                         "region": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "CloudFunctionInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "versionId": {
+                          "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "CloudRunRevisionInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "serviceUri": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AppEngineVersionInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "runtime": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "environment": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "VpcConnectorInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1323,6 +1557,14 @@
                           "type": "CloudFunctionEndpoint",
                           "id": 10
                         },
+                        "appEngineVersion": {
+                          "type": "AppEngineVersionEndpoint",
+                          "id": 11
+                        },
+                        "cloudRunRevision": {
+                          "type": "CloudRunRevisionEndpoint",
+                          "id": 12
+                        },
                         "network": {
                           "type": "string",
                           "id": 4
@@ -1345,6 +1587,22 @@
                           }
                         },
                         "CloudFunctionEndpoint": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AppEngineVersionEndpoint": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CloudRunRevisionEndpoint": {
                           "fields": {
                             "uri": {
                               "type": "string",
@@ -1506,7 +1764,9 @@
                             "network",
                             "gkeMaster",
                             "cloudSqlInstance",
-                            "cloudFunction"
+                            "cloudFunction",
+                            "appEngineVersion",
+                            "cloudRunRevision"
                           ]
                         }
                       },
@@ -1594,6 +1854,14 @@
                         "cloudFunction": {
                           "type": "CloudFunctionInfo",
                           "id": 20
+                        },
+                        "appEngineVersion": {
+                          "type": "AppEngineVersionInfo",
+                          "id": 22
+                        },
+                        "cloudRunRevision": {
+                          "type": "CloudRunRevisionInfo",
+                          "id": 23
                         }
                       },
                       "nested": {
@@ -1606,6 +1874,8 @@
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
                             "START_FROM_CLOUD_FUNCTION": 23,
+                            "START_FROM_APP_ENGINE_VERSION": 25,
+                            "START_FROM_CLOUD_RUN_REVISION": 26,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -2236,6 +2506,46 @@
                         },
                         "versionId": {
                           "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "CloudRunRevisionInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "serviceUri": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AppEngineVersionInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "runtime": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "environment": {
+                          "type": "string",
                           "id": 4
                         }
                       }
