@@ -2060,7 +2060,9 @@ export namespace google {
                         HIERARCHICAL_FIREWALL_POLICY_RULE = 1,
                         VPC_FIREWALL_RULE = 2,
                         IMPLIED_VPC_FIREWALL_RULE = 3,
-                        SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4
+                        SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
+                        NETWORK_FIREWALL_POLICY_RULE = 5,
+                        NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
                     }
                 }
 
@@ -7530,7 +7532,9 @@ export namespace google {
                         HIERARCHICAL_FIREWALL_POLICY_RULE = 1,
                         VPC_FIREWALL_RULE = 2,
                         IMPLIED_VPC_FIREWALL_RULE = 3,
-                        SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4
+                        SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
+                        NETWORK_FIREWALL_POLICY_RULE = 5,
+                        NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
                     }
                 }
 

@@ -5901,6 +5901,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -5972,6 +5974,14 @@
                             case "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE":
                             case 4:
                                 message.firewallRuleType = 4;
+                                break;
+                            case "NETWORK_FIREWALL_POLICY_RULE":
+                            case 5:
+                                message.firewallRuleType = 5;
+                                break;
+                            case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
+                            case 6:
+                                message.firewallRuleType = 6;
                                 break;
                             }
                             return message;
@@ -6068,6 +6078,8 @@
                          * @property {number} VPC_FIREWALL_RULE=2 VPC_FIREWALL_RULE value
                          * @property {number} IMPLIED_VPC_FIREWALL_RULE=3 IMPLIED_VPC_FIREWALL_RULE value
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
+                         * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6076,6 +6088,8 @@
                             values[valuesById[2] = "VPC_FIREWALL_RULE"] = 2;
                             values[valuesById[3] = "IMPLIED_VPC_FIREWALL_RULE"] = 3;
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
+                            values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
+                            values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
                             return values;
                         })();
     
@@ -20902,6 +20916,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -20973,6 +20989,14 @@
                             case "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE":
                             case 4:
                                 message.firewallRuleType = 4;
+                                break;
+                            case "NETWORK_FIREWALL_POLICY_RULE":
+                            case 5:
+                                message.firewallRuleType = 5;
+                                break;
+                            case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
+                            case 6:
+                                message.firewallRuleType = 6;
                                 break;
                             }
                             return message;
@@ -21069,6 +21093,8 @@
                          * @property {number} VPC_FIREWALL_RULE=2 VPC_FIREWALL_RULE value
                          * @property {number} IMPLIED_VPC_FIREWALL_RULE=3 IMPLIED_VPC_FIREWALL_RULE value
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
+                         * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -21077,6 +21103,8 @@
                             values[valuesById[2] = "VPC_FIREWALL_RULE"] = 2;
                             values[valuesById[3] = "IMPLIED_VPC_FIREWALL_RULE"] = 3;
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
+                            values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
+                            values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
                             return values;
                         })();
     
