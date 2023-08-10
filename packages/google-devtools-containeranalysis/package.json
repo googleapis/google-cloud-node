@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/containeranalysis",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Containeranalysis client for Node.js",
   "repository": "googleapis/nodejs-containeranalysis",
   "license": "Apache-2.0",

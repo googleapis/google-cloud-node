@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v3.0.0...video-transcoder-v3.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** @google-cloud/video-transcoder must not depend on itself ([#4514](https://github.com/googleapis/google-cloud-node/issues/4514)) ([cbce190](https://github.com/googleapis/google-cloud-node/commit/cbce19078780b17f842c0d8e43a6a7f90941e938))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.7.0...video-transcoder-v3.0.0) (2023-08-06)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v1.0.0...bare-metal-solution-v1.1.0) (2023-08-09)
+
+
+### Features
+
+* **baremetalsolution:** [baremetalsolution] several new resources and RPCs ([#4517](https://github.com/googleapis/google-cloud-node/issues/4517)) ([0e3d600](https://github.com/googleapis/google-cloud-node/commit/0e3d600371265cd8fc0609b55086e39d0d4d5df0))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v0.3.2...bare-metal-solution-v1.0.0) (2023-08-06)
 
 

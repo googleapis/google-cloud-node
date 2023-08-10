@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.0.0...batch-v1.1.0) (2023-08-09)
+
+
+### Features
+
+* [batch] Clarify Batch API proto doc about pubsub notifications ([#4503](https://github.com/googleapis/google-cloud-node/issues/4503)) ([ca2296c](https://github.com/googleapis/google-cloud-node/commit/ca2296c5d180e00f41baca3a03fa0f3f4592fbb3))
+* [batch] Clarify Batch API proto doc about pubsub notifications ([#4518](https://github.com/googleapis/google-cloud-node/issues/4518)) ([e3fb6ad](https://github.com/googleapis/google-cloud-node/commit/e3fb6ad7595f85b0e2f06fedeabb18df4364b224))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.10.0...batch-v1.0.0) (2023-08-06)
 
 

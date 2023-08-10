@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.0.0...containeranalysis-v5.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/grafeas to v5 ([#4512](https://github.com/googleapis/google-cloud-node/issues/4512)) ([10458cd](https://github.com/googleapis/google-cloud-node/commit/10458cd35c9083c6c94d320a32d858aa4321a4aa))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.7.0...containeranalysis-v5.0.0) (2023-08-06)
 
 
