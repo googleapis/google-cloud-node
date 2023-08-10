@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-bigquery-migration/compare/v0.2.1...v1.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14 ([#52](https://github.com/googleapis/nodejs-bigquery-migration/issues/52))
+
+### Features
+
+* Add request_source field and update formatting ([#39](https://github.com/googleapis/nodejs-bigquery-migration/issues/39)) ([f402ca3](https://github.com/googleapis/nodejs-bigquery-migration/commit/f402ca3274b9d1e34c0828fab8a0cd4e283c6a0a))
+* Add SQL translation service to Bazel generation ([#36](https://github.com/googleapis/nodejs-bigquery-migration/issues/36)) ([d6e6e76](https://github.com/googleapis/nodejs-bigquery-migration/commit/d6e6e76cd519daa4b6084c355aa4b30f4c5ec7f7))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([#52](https://github.com/googleapis/nodejs-bigquery-migration/issues/52)) ([49d73aa](https://github.com/googleapis/nodejs-bigquery-migration/commit/49d73aad7bc1f1bf908489bb30b3845b33272886))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-bigquery-migration/compare/v0.2.0...v0.2.1) (2023-02-09)
 
 
