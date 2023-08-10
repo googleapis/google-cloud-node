@@ -634,6 +634,18 @@
                       }
                     },
                     "RouteInfo": {
+                      "oneofs": {
+                        "_nccHubUri": {
+                          "oneof": [
+                            "nccHubUri"
+                          ]
+                        },
+                        "_nccSpokeUri": {
+                          "oneof": [
+                            "nccSpokeUri"
+                          ]
+                        }
+                      },
                       "fields": {
                         "routeType": {
                           "type": "RouteType",
@@ -642,6 +654,10 @@
                         "nextHopType": {
                           "type": "NextHopType",
                           "id": 9
+                        },
+                        "routeScope": {
+                          "type": "RouteScope",
+                          "id": 14
                         },
                         "displayName": {
                           "type": "string",
@@ -671,6 +687,39 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 7
+                        },
+                        "srcIpRange": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "destPortRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "srcPortRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "protocols": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13
+                        },
+                        "nccHubUri": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nccSpokeUri": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -682,7 +731,8 @@
                             "DYNAMIC": 3,
                             "PEERING_SUBNET": 4,
                             "PEERING_STATIC": 5,
-                            "PEERING_DYNAMIC": 6
+                            "PEERING_DYNAMIC": 6,
+                            "POLICY_BASED": 7
                           }
                         },
                         "NextHopType": {
@@ -698,7 +748,15 @@
                             "NEXT_HOP_INTERNET_GATEWAY": 8,
                             "NEXT_HOP_BLACKHOLE": 9,
                             "NEXT_HOP_ILB": 10,
-                            "NEXT_HOP_ROUTER_APPLIANCE": 11
+                            "NEXT_HOP_ROUTER_APPLIANCE": 11,
+                            "NEXT_HOP_NCC_HUB": 12
+                          }
+                        },
+                        "RouteScope": {
+                          "values": {
+                            "ROUTE_SCOPE_UNSPECIFIED": 0,
+                            "NETWORK": 1,
+                            "NCC_HUB": 2
                           }
                         }
                       }
@@ -978,7 +1036,8 @@
                             "GKE_MASTER": 4,
                             "IMPORTED_CUSTOM_ROUTE_NEXT_HOP": 5,
                             "CLOUD_SQL_INSTANCE": 6,
-                            "ANOTHER_PROJECT": 7
+                            "ANOTHER_PROJECT": 7,
+                            "NCC_HUB": 8
                           }
                         }
                       }
@@ -2158,6 +2217,18 @@
                       }
                     },
                     "RouteInfo": {
+                      "oneofs": {
+                        "_nccHubUri": {
+                          "oneof": [
+                            "nccHubUri"
+                          ]
+                        },
+                        "_nccSpokeUri": {
+                          "oneof": [
+                            "nccSpokeUri"
+                          ]
+                        }
+                      },
                       "fields": {
                         "routeType": {
                           "type": "RouteType",
@@ -2166,6 +2237,10 @@
                         "nextHopType": {
                           "type": "NextHopType",
                           "id": 9
+                        },
+                        "routeScope": {
+                          "type": "RouteScope",
+                          "id": 14
                         },
                         "displayName": {
                           "type": "string",
@@ -2195,6 +2270,39 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 7
+                        },
+                        "srcIpRange": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "destPortRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "srcPortRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "protocols": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13
+                        },
+                        "nccHubUri": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nccSpokeUri": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2206,7 +2314,8 @@
                             "DYNAMIC": 3,
                             "PEERING_SUBNET": 4,
                             "PEERING_STATIC": 5,
-                            "PEERING_DYNAMIC": 6
+                            "PEERING_DYNAMIC": 6,
+                            "POLICY_BASED": 7
                           }
                         },
                         "NextHopType": {
@@ -2222,7 +2331,15 @@
                             "NEXT_HOP_INTERNET_GATEWAY": 8,
                             "NEXT_HOP_BLACKHOLE": 9,
                             "NEXT_HOP_ILB": 10,
-                            "NEXT_HOP_ROUTER_APPLIANCE": 11
+                            "NEXT_HOP_ROUTER_APPLIANCE": 11,
+                            "NEXT_HOP_NCC_HUB": 12
+                          }
+                        },
+                        "RouteScope": {
+                          "values": {
+                            "ROUTE_SCOPE_UNSPECIFIED": 0,
+                            "NETWORK": 1,
+                            "NCC_HUB": 2
                           }
                         }
                       }
@@ -2502,7 +2619,8 @@
                             "GKE_MASTER": 4,
                             "IMPORTED_CUSTOM_ROUTE_NEXT_HOP": 5,
                             "CLOUD_SQL_INSTANCE": 6,
-                            "ANOTHER_PROJECT": 7
+                            "ANOTHER_PROJECT": 7,
+                            "NCC_HUB": 8
                           }
                         }
                       }

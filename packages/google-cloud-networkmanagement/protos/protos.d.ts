@@ -2066,6 +2066,9 @@ export namespace google {
                     /** RouteInfo nextHopType */
                     nextHopType?: (google.cloud.networkmanagement.v1.RouteInfo.NextHopType|keyof typeof google.cloud.networkmanagement.v1.RouteInfo.NextHopType|null);
 
+                    /** RouteInfo routeScope */
+                    routeScope?: (google.cloud.networkmanagement.v1.RouteInfo.RouteScope|keyof typeof google.cloud.networkmanagement.v1.RouteInfo.RouteScope|null);
+
                     /** RouteInfo displayName */
                     displayName?: (string|null);
 
@@ -2086,6 +2089,24 @@ export namespace google {
 
                     /** RouteInfo instanceTags */
                     instanceTags?: (string[]|null);
+
+                    /** RouteInfo srcIpRange */
+                    srcIpRange?: (string|null);
+
+                    /** RouteInfo destPortRanges */
+                    destPortRanges?: (string[]|null);
+
+                    /** RouteInfo srcPortRanges */
+                    srcPortRanges?: (string[]|null);
+
+                    /** RouteInfo protocols */
+                    protocols?: (string[]|null);
+
+                    /** RouteInfo nccHubUri */
+                    nccHubUri?: (string|null);
+
+                    /** RouteInfo nccSpokeUri */
+                    nccSpokeUri?: (string|null);
                 }
 
                 /** Represents a RouteInfo. */
@@ -2102,6 +2123,9 @@ export namespace google {
 
                     /** RouteInfo nextHopType. */
                     public nextHopType: (google.cloud.networkmanagement.v1.RouteInfo.NextHopType|keyof typeof google.cloud.networkmanagement.v1.RouteInfo.NextHopType);
+
+                    /** RouteInfo routeScope. */
+                    public routeScope: (google.cloud.networkmanagement.v1.RouteInfo.RouteScope|keyof typeof google.cloud.networkmanagement.v1.RouteInfo.RouteScope);
 
                     /** RouteInfo displayName. */
                     public displayName: string;
@@ -2123,6 +2147,30 @@ export namespace google {
 
                     /** RouteInfo instanceTags. */
                     public instanceTags: string[];
+
+                    /** RouteInfo srcIpRange. */
+                    public srcIpRange: string;
+
+                    /** RouteInfo destPortRanges. */
+                    public destPortRanges: string[];
+
+                    /** RouteInfo srcPortRanges. */
+                    public srcPortRanges: string[];
+
+                    /** RouteInfo protocols. */
+                    public protocols: string[];
+
+                    /** RouteInfo nccHubUri. */
+                    public nccHubUri?: (string|null);
+
+                    /** RouteInfo nccSpokeUri. */
+                    public nccSpokeUri?: (string|null);
+
+                    /** RouteInfo _nccHubUri. */
+                    public _nccHubUri?: "nccHubUri";
+
+                    /** RouteInfo _nccSpokeUri. */
+                    public _nccSpokeUri?: "nccSpokeUri";
 
                     /**
                      * Creates a new RouteInfo instance using the specified properties.
@@ -2212,7 +2260,8 @@ export namespace google {
                         DYNAMIC = 3,
                         PEERING_SUBNET = 4,
                         PEERING_STATIC = 5,
-                        PEERING_DYNAMIC = 6
+                        PEERING_DYNAMIC = 6,
+                        POLICY_BASED = 7
                     }
 
                     /** NextHopType enum. */
@@ -2228,7 +2277,15 @@ export namespace google {
                         NEXT_HOP_INTERNET_GATEWAY = 8,
                         NEXT_HOP_BLACKHOLE = 9,
                         NEXT_HOP_ILB = 10,
-                        NEXT_HOP_ROUTER_APPLIANCE = 11
+                        NEXT_HOP_ROUTER_APPLIANCE = 11,
+                        NEXT_HOP_NCC_HUB = 12
+                    }
+
+                    /** RouteScope enum. */
+                    enum RouteScope {
+                        ROUTE_SCOPE_UNSPECIFIED = 0,
+                        NETWORK = 1,
+                        NCC_HUB = 2
                     }
                 }
 
@@ -3294,7 +3351,8 @@ export namespace google {
                         GKE_MASTER = 4,
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
                         CLOUD_SQL_INSTANCE = 6,
-                        ANOTHER_PROJECT = 7
+                        ANOTHER_PROJECT = 7,
+                        NCC_HUB = 8
                     }
                 }
 
@@ -7357,6 +7415,9 @@ export namespace google {
                     /** RouteInfo nextHopType */
                     nextHopType?: (google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType|keyof typeof google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType|null);
 
+                    /** RouteInfo routeScope */
+                    routeScope?: (google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope|keyof typeof google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope|null);
+
                     /** RouteInfo displayName */
                     displayName?: (string|null);
 
@@ -7377,6 +7438,24 @@ export namespace google {
 
                     /** RouteInfo instanceTags */
                     instanceTags?: (string[]|null);
+
+                    /** RouteInfo srcIpRange */
+                    srcIpRange?: (string|null);
+
+                    /** RouteInfo destPortRanges */
+                    destPortRanges?: (string[]|null);
+
+                    /** RouteInfo srcPortRanges */
+                    srcPortRanges?: (string[]|null);
+
+                    /** RouteInfo protocols */
+                    protocols?: (string[]|null);
+
+                    /** RouteInfo nccHubUri */
+                    nccHubUri?: (string|null);
+
+                    /** RouteInfo nccSpokeUri */
+                    nccSpokeUri?: (string|null);
                 }
 
                 /** Represents a RouteInfo. */
@@ -7393,6 +7472,9 @@ export namespace google {
 
                     /** RouteInfo nextHopType. */
                     public nextHopType: (google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType|keyof typeof google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType);
+
+                    /** RouteInfo routeScope. */
+                    public routeScope: (google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope|keyof typeof google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope);
 
                     /** RouteInfo displayName. */
                     public displayName: string;
@@ -7414,6 +7496,30 @@ export namespace google {
 
                     /** RouteInfo instanceTags. */
                     public instanceTags: string[];
+
+                    /** RouteInfo srcIpRange. */
+                    public srcIpRange: string;
+
+                    /** RouteInfo destPortRanges. */
+                    public destPortRanges: string[];
+
+                    /** RouteInfo srcPortRanges. */
+                    public srcPortRanges: string[];
+
+                    /** RouteInfo protocols. */
+                    public protocols: string[];
+
+                    /** RouteInfo nccHubUri. */
+                    public nccHubUri?: (string|null);
+
+                    /** RouteInfo nccSpokeUri. */
+                    public nccSpokeUri?: (string|null);
+
+                    /** RouteInfo _nccHubUri. */
+                    public _nccHubUri?: "nccHubUri";
+
+                    /** RouteInfo _nccSpokeUri. */
+                    public _nccSpokeUri?: "nccSpokeUri";
 
                     /**
                      * Creates a new RouteInfo instance using the specified properties.
@@ -7503,7 +7609,8 @@ export namespace google {
                         DYNAMIC = 3,
                         PEERING_SUBNET = 4,
                         PEERING_STATIC = 5,
-                        PEERING_DYNAMIC = 6
+                        PEERING_DYNAMIC = 6,
+                        POLICY_BASED = 7
                     }
 
                     /** NextHopType enum. */
@@ -7519,7 +7626,15 @@ export namespace google {
                         NEXT_HOP_INTERNET_GATEWAY = 8,
                         NEXT_HOP_BLACKHOLE = 9,
                         NEXT_HOP_ILB = 10,
-                        NEXT_HOP_ROUTER_APPLIANCE = 11
+                        NEXT_HOP_ROUTER_APPLIANCE = 11,
+                        NEXT_HOP_NCC_HUB = 12
+                    }
+
+                    /** RouteScope enum. */
+                    enum RouteScope {
+                        ROUTE_SCOPE_UNSPECIFIED = 0,
+                        NETWORK = 1,
+                        NCC_HUB = 2
                     }
                 }
 
@@ -8585,7 +8700,8 @@ export namespace google {
                         GKE_MASTER = 4,
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
                         CLOUD_SQL_INSTANCE = 6,
-                        ANOTHER_PROJECT = 7
+                        ANOTHER_PROJECT = 7,
+                        NCC_HUB = 8
                     }
                 }
 

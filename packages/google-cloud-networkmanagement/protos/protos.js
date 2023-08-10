@@ -6048,6 +6048,7 @@
                          * @interface IRouteInfo
                          * @property {google.cloud.networkmanagement.v1.RouteInfo.RouteType|null} [routeType] RouteInfo routeType
                          * @property {google.cloud.networkmanagement.v1.RouteInfo.NextHopType|null} [nextHopType] RouteInfo nextHopType
+                         * @property {google.cloud.networkmanagement.v1.RouteInfo.RouteScope|null} [routeScope] RouteInfo routeScope
                          * @property {string|null} [displayName] RouteInfo displayName
                          * @property {string|null} [uri] RouteInfo uri
                          * @property {string|null} [destIpRange] RouteInfo destIpRange
@@ -6055,6 +6056,12 @@
                          * @property {string|null} [networkUri] RouteInfo networkUri
                          * @property {number|null} [priority] RouteInfo priority
                          * @property {Array.<string>|null} [instanceTags] RouteInfo instanceTags
+                         * @property {string|null} [srcIpRange] RouteInfo srcIpRange
+                         * @property {Array.<string>|null} [destPortRanges] RouteInfo destPortRanges
+                         * @property {Array.<string>|null} [srcPortRanges] RouteInfo srcPortRanges
+                         * @property {Array.<string>|null} [protocols] RouteInfo protocols
+                         * @property {string|null} [nccHubUri] RouteInfo nccHubUri
+                         * @property {string|null} [nccSpokeUri] RouteInfo nccSpokeUri
                          */
     
                         /**
@@ -6067,6 +6074,9 @@
                          */
                         function RouteInfo(properties) {
                             this.instanceTags = [];
+                            this.destPortRanges = [];
+                            this.srcPortRanges = [];
+                            this.protocols = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6088,6 +6098,14 @@
                          * @instance
                          */
                         RouteInfo.prototype.nextHopType = 0;
+    
+                        /**
+                         * RouteInfo routeScope.
+                         * @member {google.cloud.networkmanagement.v1.RouteInfo.RouteScope} routeScope
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.routeScope = 0;
     
                         /**
                          * RouteInfo displayName.
@@ -6146,6 +6164,79 @@
                         RouteInfo.prototype.instanceTags = $util.emptyArray;
     
                         /**
+                         * RouteInfo srcIpRange.
+                         * @member {string} srcIpRange
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcIpRange = "";
+    
+                        /**
+                         * RouteInfo destPortRanges.
+                         * @member {Array.<string>} destPortRanges
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.destPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo srcPortRanges.
+                         * @member {Array.<string>} srcPortRanges
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo protocols.
+                         * @member {Array.<string>} protocols
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.protocols = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo nccHubUri.
+                         * @member {string|null|undefined} nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccHubUri = null;
+    
+                        /**
+                         * RouteInfo nccSpokeUri.
+                         * @member {string|null|undefined} nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccSpokeUri = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RouteInfo _nccHubUri.
+                         * @member {"nccHubUri"|undefined} _nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccHubUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccHubUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RouteInfo _nccSpokeUri.
+                         * @member {"nccSpokeUri"|undefined} _nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccSpokeUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccSpokeUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RouteInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.RouteInfo
@@ -6188,6 +6279,23 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.routeType);
                             if (message.nextHopType != null && Object.hasOwnProperty.call(message, "nextHopType"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.nextHopType);
+                            if (message.srcIpRange != null && Object.hasOwnProperty.call(message, "srcIpRange"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.srcIpRange);
+                            if (message.destPortRanges != null && message.destPortRanges.length)
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.destPortRanges[i]);
+                            if (message.srcPortRanges != null && message.srcPortRanges.length)
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.srcPortRanges[i]);
+                            if (message.protocols != null && message.protocols.length)
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.protocols[i]);
+                            if (message.routeScope != null && Object.hasOwnProperty.call(message, "routeScope"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.routeScope);
+                            if (message.nccHubUri != null && Object.hasOwnProperty.call(message, "nccHubUri"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.nccHubUri);
+                            if (message.nccSpokeUri != null && Object.hasOwnProperty.call(message, "nccSpokeUri"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.nccSpokeUri);
                             return writer;
                         };
     
@@ -6230,6 +6338,10 @@
                                         message.nextHopType = reader.int32();
                                         break;
                                     }
+                                case 14: {
+                                        message.routeScope = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.displayName = reader.string();
                                         break;
@@ -6258,6 +6370,36 @@
                                         if (!(message.instanceTags && message.instanceTags.length))
                                             message.instanceTags = [];
                                         message.instanceTags.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.srcIpRange = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.destPortRanges && message.destPortRanges.length))
+                                            message.destPortRanges = [];
+                                        message.destPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.srcPortRanges && message.srcPortRanges.length))
+                                            message.srcPortRanges = [];
+                                        message.srcPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.protocols && message.protocols.length))
+                                            message.protocols = [];
+                                        message.protocols.push(reader.string());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.nccHubUri = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.nccSpokeUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -6295,6 +6437,7 @@
                         RouteInfo.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.routeType != null && message.hasOwnProperty("routeType"))
                                 switch (message.routeType) {
                                 default:
@@ -6306,6 +6449,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
@@ -6324,6 +6468,16 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
+                                    break;
+                                }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                switch (message.routeScope) {
+                                default:
+                                    return "routeScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
@@ -6350,6 +6504,40 @@
                                 for (var i = 0; i < message.instanceTags.length; ++i)
                                     if (!$util.isString(message.instanceTags[i]))
                                         return "instanceTags: string[] expected";
+                            }
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                if (!$util.isString(message.srcIpRange))
+                                    return "srcIpRange: string expected";
+                            if (message.destPortRanges != null && message.hasOwnProperty("destPortRanges")) {
+                                if (!Array.isArray(message.destPortRanges))
+                                    return "destPortRanges: array expected";
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    if (!$util.isString(message.destPortRanges[i]))
+                                        return "destPortRanges: string[] expected";
+                            }
+                            if (message.srcPortRanges != null && message.hasOwnProperty("srcPortRanges")) {
+                                if (!Array.isArray(message.srcPortRanges))
+                                    return "srcPortRanges: array expected";
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    if (!$util.isString(message.srcPortRanges[i]))
+                                        return "srcPortRanges: string[] expected";
+                            }
+                            if (message.protocols != null && message.hasOwnProperty("protocols")) {
+                                if (!Array.isArray(message.protocols))
+                                    return "protocols: array expected";
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    if (!$util.isString(message.protocols[i]))
+                                        return "protocols: string[] expected";
+                            }
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                properties._nccHubUri = 1;
+                                if (!$util.isString(message.nccHubUri))
+                                    return "nccHubUri: string expected";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                properties._nccSpokeUri = 1;
+                                if (!$util.isString(message.nccSpokeUri))
+                                    return "nccSpokeUri: string expected";
                             }
                             return null;
                         };
@@ -6400,6 +6588,10 @@
                             case "PEERING_DYNAMIC":
                             case 6:
                                 message.routeType = 6;
+                                break;
+                            case "POLICY_BASED":
+                            case 7:
+                                message.routeType = 7;
                                 break;
                             }
                             switch (object.nextHopType) {
@@ -6457,6 +6649,30 @@
                             case 11:
                                 message.nextHopType = 11;
                                 break;
+                            case "NEXT_HOP_NCC_HUB":
+                            case 12:
+                                message.nextHopType = 12;
+                                break;
+                            }
+                            switch (object.routeScope) {
+                            default:
+                                if (typeof object.routeScope === "number") {
+                                    message.routeScope = object.routeScope;
+                                    break;
+                                }
+                                break;
+                            case "ROUTE_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.routeScope = 0;
+                                break;
+                            case "NETWORK":
+                            case 1:
+                                message.routeScope = 1;
+                                break;
+                            case "NCC_HUB":
+                            case 2:
+                                message.routeScope = 2;
+                                break;
                             }
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
@@ -6477,6 +6693,33 @@
                                 for (var i = 0; i < object.instanceTags.length; ++i)
                                     message.instanceTags[i] = String(object.instanceTags[i]);
                             }
+                            if (object.srcIpRange != null)
+                                message.srcIpRange = String(object.srcIpRange);
+                            if (object.destPortRanges) {
+                                if (!Array.isArray(object.destPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.RouteInfo.destPortRanges: array expected");
+                                message.destPortRanges = [];
+                                for (var i = 0; i < object.destPortRanges.length; ++i)
+                                    message.destPortRanges[i] = String(object.destPortRanges[i]);
+                            }
+                            if (object.srcPortRanges) {
+                                if (!Array.isArray(object.srcPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.RouteInfo.srcPortRanges: array expected");
+                                message.srcPortRanges = [];
+                                for (var i = 0; i < object.srcPortRanges.length; ++i)
+                                    message.srcPortRanges[i] = String(object.srcPortRanges[i]);
+                            }
+                            if (object.protocols) {
+                                if (!Array.isArray(object.protocols))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.RouteInfo.protocols: array expected");
+                                message.protocols = [];
+                                for (var i = 0; i < object.protocols.length; ++i)
+                                    message.protocols[i] = String(object.protocols[i]);
+                            }
+                            if (object.nccHubUri != null)
+                                message.nccHubUri = String(object.nccHubUri);
+                            if (object.nccSpokeUri != null)
+                                message.nccSpokeUri = String(object.nccSpokeUri);
                             return message;
                         };
     
@@ -6493,8 +6736,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.instanceTags = [];
+                                object.destPortRanges = [];
+                                object.srcPortRanges = [];
+                                object.protocols = [];
+                            }
                             if (options.defaults) {
                                 object.displayName = "";
                                 object.uri = "";
@@ -6504,6 +6751,8 @@
                                 object.priority = 0;
                                 object.routeType = options.enums === String ? "ROUTE_TYPE_UNSPECIFIED" : 0;
                                 object.nextHopType = options.enums === String ? "NEXT_HOP_TYPE_UNSPECIFIED" : 0;
+                                object.srcIpRange = "";
+                                object.routeScope = options.enums === String ? "ROUTE_SCOPE_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -6526,6 +6775,35 @@
                                 object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] === undefined ? message.routeType : $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] : message.routeType;
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
                                 object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] === undefined ? message.nextHopType : $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                object.srcIpRange = message.srcIpRange;
+                            if (message.destPortRanges && message.destPortRanges.length) {
+                                object.destPortRanges = [];
+                                for (var j = 0; j < message.destPortRanges.length; ++j)
+                                    object.destPortRanges[j] = message.destPortRanges[j];
+                            }
+                            if (message.srcPortRanges && message.srcPortRanges.length) {
+                                object.srcPortRanges = [];
+                                for (var j = 0; j < message.srcPortRanges.length; ++j)
+                                    object.srcPortRanges[j] = message.srcPortRanges[j];
+                            }
+                            if (message.protocols && message.protocols.length) {
+                                object.protocols = [];
+                                for (var j = 0; j < message.protocols.length; ++j)
+                                    object.protocols[j] = message.protocols[j];
+                            }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                object.routeScope = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.RouteScope[message.routeScope] === undefined ? message.routeScope : $root.google.cloud.networkmanagement.v1.RouteInfo.RouteScope[message.routeScope] : message.routeScope;
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                object.nccHubUri = message.nccHubUri;
+                                if (options.oneofs)
+                                    object._nccHubUri = "nccHubUri";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                object.nccSpokeUri = message.nccSpokeUri;
+                                if (options.oneofs)
+                                    object._nccSpokeUri = "nccSpokeUri";
+                            }
                             return object;
                         };
     
@@ -6566,6 +6844,7 @@
                          * @property {number} PEERING_SUBNET=4 PEERING_SUBNET value
                          * @property {number} PEERING_STATIC=5 PEERING_STATIC value
                          * @property {number} PEERING_DYNAMIC=6 PEERING_DYNAMIC value
+                         * @property {number} POLICY_BASED=7 POLICY_BASED value
                          */
                         RouteInfo.RouteType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6576,6 +6855,7 @@
                             values[valuesById[4] = "PEERING_SUBNET"] = 4;
                             values[valuesById[5] = "PEERING_STATIC"] = 5;
                             values[valuesById[6] = "PEERING_DYNAMIC"] = 6;
+                            values[valuesById[7] = "POLICY_BASED"] = 7;
                             return values;
                         })();
     
@@ -6595,6 +6875,7 @@
                          * @property {number} NEXT_HOP_BLACKHOLE=9 NEXT_HOP_BLACKHOLE value
                          * @property {number} NEXT_HOP_ILB=10 NEXT_HOP_ILB value
                          * @property {number} NEXT_HOP_ROUTER_APPLIANCE=11 NEXT_HOP_ROUTER_APPLIANCE value
+                         * @property {number} NEXT_HOP_NCC_HUB=12 NEXT_HOP_NCC_HUB value
                          */
                         RouteInfo.NextHopType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6610,6 +6891,23 @@
                             values[valuesById[9] = "NEXT_HOP_BLACKHOLE"] = 9;
                             values[valuesById[10] = "NEXT_HOP_ILB"] = 10;
                             values[valuesById[11] = "NEXT_HOP_ROUTER_APPLIANCE"] = 11;
+                            values[valuesById[12] = "NEXT_HOP_NCC_HUB"] = 12;
+                            return values;
+                        })();
+    
+                        /**
+                         * RouteScope enum.
+                         * @name google.cloud.networkmanagement.v1.RouteInfo.RouteScope
+                         * @enum {number}
+                         * @property {number} ROUTE_SCOPE_UNSPECIFIED=0 ROUTE_SCOPE_UNSPECIFIED value
+                         * @property {number} NETWORK=1 NETWORK value
+                         * @property {number} NCC_HUB=2 NCC_HUB value
+                         */
+                        RouteInfo.RouteScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROUTE_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK"] = 1;
+                            values[valuesById[2] = "NCC_HUB"] = 2;
                             return values;
                         })();
     
@@ -9347,6 +9645,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -9405,6 +9704,10 @@
                             case "ANOTHER_PROJECT":
                             case 7:
                                 message.target = 7;
+                                break;
+                            case "NCC_HUB":
+                            case 8:
+                                message.target = 8;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -9474,6 +9777,7 @@
                          * @property {number} IMPORTED_CUSTOM_ROUTE_NEXT_HOP=5 IMPORTED_CUSTOM_ROUTE_NEXT_HOP value
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
                          * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
+                         * @property {number} NCC_HUB=8 NCC_HUB value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9485,6 +9789,7 @@
                             values[valuesById[5] = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"] = 5;
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
                             values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
+                            values[valuesById[8] = "NCC_HUB"] = 8;
                             return values;
                         })();
     
@@ -20428,6 +20733,7 @@
                          * @interface IRouteInfo
                          * @property {google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType|null} [routeType] RouteInfo routeType
                          * @property {google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType|null} [nextHopType] RouteInfo nextHopType
+                         * @property {google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope|null} [routeScope] RouteInfo routeScope
                          * @property {string|null} [displayName] RouteInfo displayName
                          * @property {string|null} [uri] RouteInfo uri
                          * @property {string|null} [destIpRange] RouteInfo destIpRange
@@ -20435,6 +20741,12 @@
                          * @property {string|null} [networkUri] RouteInfo networkUri
                          * @property {number|null} [priority] RouteInfo priority
                          * @property {Array.<string>|null} [instanceTags] RouteInfo instanceTags
+                         * @property {string|null} [srcIpRange] RouteInfo srcIpRange
+                         * @property {Array.<string>|null} [destPortRanges] RouteInfo destPortRanges
+                         * @property {Array.<string>|null} [srcPortRanges] RouteInfo srcPortRanges
+                         * @property {Array.<string>|null} [protocols] RouteInfo protocols
+                         * @property {string|null} [nccHubUri] RouteInfo nccHubUri
+                         * @property {string|null} [nccSpokeUri] RouteInfo nccSpokeUri
                          */
     
                         /**
@@ -20447,6 +20759,9 @@
                          */
                         function RouteInfo(properties) {
                             this.instanceTags = [];
+                            this.destPortRanges = [];
+                            this.srcPortRanges = [];
+                            this.protocols = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -20468,6 +20783,14 @@
                          * @instance
                          */
                         RouteInfo.prototype.nextHopType = 0;
+    
+                        /**
+                         * RouteInfo routeScope.
+                         * @member {google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope} routeScope
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.routeScope = 0;
     
                         /**
                          * RouteInfo displayName.
@@ -20526,6 +20849,79 @@
                         RouteInfo.prototype.instanceTags = $util.emptyArray;
     
                         /**
+                         * RouteInfo srcIpRange.
+                         * @member {string} srcIpRange
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcIpRange = "";
+    
+                        /**
+                         * RouteInfo destPortRanges.
+                         * @member {Array.<string>} destPortRanges
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.destPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo srcPortRanges.
+                         * @member {Array.<string>} srcPortRanges
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.srcPortRanges = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo protocols.
+                         * @member {Array.<string>} protocols
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.protocols = $util.emptyArray;
+    
+                        /**
+                         * RouteInfo nccHubUri.
+                         * @member {string|null|undefined} nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccHubUri = null;
+    
+                        /**
+                         * RouteInfo nccSpokeUri.
+                         * @member {string|null|undefined} nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccSpokeUri = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RouteInfo _nccHubUri.
+                         * @member {"nccHubUri"|undefined} _nccHubUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccHubUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccHubUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RouteInfo _nccSpokeUri.
+                         * @member {"nccSpokeUri"|undefined} _nccSpokeUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RouteInfo.prototype, "_nccSpokeUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["nccSpokeUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RouteInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
@@ -20568,6 +20964,23 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.routeType);
                             if (message.nextHopType != null && Object.hasOwnProperty.call(message, "nextHopType"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.nextHopType);
+                            if (message.srcIpRange != null && Object.hasOwnProperty.call(message, "srcIpRange"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.srcIpRange);
+                            if (message.destPortRanges != null && message.destPortRanges.length)
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.destPortRanges[i]);
+                            if (message.srcPortRanges != null && message.srcPortRanges.length)
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.srcPortRanges[i]);
+                            if (message.protocols != null && message.protocols.length)
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.protocols[i]);
+                            if (message.routeScope != null && Object.hasOwnProperty.call(message, "routeScope"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.routeScope);
+                            if (message.nccHubUri != null && Object.hasOwnProperty.call(message, "nccHubUri"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.nccHubUri);
+                            if (message.nccSpokeUri != null && Object.hasOwnProperty.call(message, "nccSpokeUri"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.nccSpokeUri);
                             return writer;
                         };
     
@@ -20610,6 +21023,10 @@
                                         message.nextHopType = reader.int32();
                                         break;
                                     }
+                                case 14: {
+                                        message.routeScope = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.displayName = reader.string();
                                         break;
@@ -20638,6 +21055,36 @@
                                         if (!(message.instanceTags && message.instanceTags.length))
                                             message.instanceTags = [];
                                         message.instanceTags.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.srcIpRange = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.destPortRanges && message.destPortRanges.length))
+                                            message.destPortRanges = [];
+                                        message.destPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.srcPortRanges && message.srcPortRanges.length))
+                                            message.srcPortRanges = [];
+                                        message.srcPortRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.protocols && message.protocols.length))
+                                            message.protocols = [];
+                                        message.protocols.push(reader.string());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.nccHubUri = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.nccSpokeUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -20675,6 +21122,7 @@
                         RouteInfo.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.routeType != null && message.hasOwnProperty("routeType"))
                                 switch (message.routeType) {
                                 default:
@@ -20686,6 +21134,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
@@ -20704,6 +21153,16 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
+                                    break;
+                                }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                switch (message.routeScope) {
+                                default:
+                                    return "routeScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
@@ -20730,6 +21189,40 @@
                                 for (var i = 0; i < message.instanceTags.length; ++i)
                                     if (!$util.isString(message.instanceTags[i]))
                                         return "instanceTags: string[] expected";
+                            }
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                if (!$util.isString(message.srcIpRange))
+                                    return "srcIpRange: string expected";
+                            if (message.destPortRanges != null && message.hasOwnProperty("destPortRanges")) {
+                                if (!Array.isArray(message.destPortRanges))
+                                    return "destPortRanges: array expected";
+                                for (var i = 0; i < message.destPortRanges.length; ++i)
+                                    if (!$util.isString(message.destPortRanges[i]))
+                                        return "destPortRanges: string[] expected";
+                            }
+                            if (message.srcPortRanges != null && message.hasOwnProperty("srcPortRanges")) {
+                                if (!Array.isArray(message.srcPortRanges))
+                                    return "srcPortRanges: array expected";
+                                for (var i = 0; i < message.srcPortRanges.length; ++i)
+                                    if (!$util.isString(message.srcPortRanges[i]))
+                                        return "srcPortRanges: string[] expected";
+                            }
+                            if (message.protocols != null && message.hasOwnProperty("protocols")) {
+                                if (!Array.isArray(message.protocols))
+                                    return "protocols: array expected";
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    if (!$util.isString(message.protocols[i]))
+                                        return "protocols: string[] expected";
+                            }
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                properties._nccHubUri = 1;
+                                if (!$util.isString(message.nccHubUri))
+                                    return "nccHubUri: string expected";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                properties._nccSpokeUri = 1;
+                                if (!$util.isString(message.nccSpokeUri))
+                                    return "nccSpokeUri: string expected";
                             }
                             return null;
                         };
@@ -20780,6 +21273,10 @@
                             case "PEERING_DYNAMIC":
                             case 6:
                                 message.routeType = 6;
+                                break;
+                            case "POLICY_BASED":
+                            case 7:
+                                message.routeType = 7;
                                 break;
                             }
                             switch (object.nextHopType) {
@@ -20837,6 +21334,30 @@
                             case 11:
                                 message.nextHopType = 11;
                                 break;
+                            case "NEXT_HOP_NCC_HUB":
+                            case 12:
+                                message.nextHopType = 12;
+                                break;
+                            }
+                            switch (object.routeScope) {
+                            default:
+                                if (typeof object.routeScope === "number") {
+                                    message.routeScope = object.routeScope;
+                                    break;
+                                }
+                                break;
+                            case "ROUTE_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.routeScope = 0;
+                                break;
+                            case "NETWORK":
+                            case 1:
+                                message.routeScope = 1;
+                                break;
+                            case "NCC_HUB":
+                            case 2:
+                                message.routeScope = 2;
+                                break;
                             }
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
@@ -20857,6 +21378,33 @@
                                 for (var i = 0; i < object.instanceTags.length; ++i)
                                     message.instanceTags[i] = String(object.instanceTags[i]);
                             }
+                            if (object.srcIpRange != null)
+                                message.srcIpRange = String(object.srcIpRange);
+                            if (object.destPortRanges) {
+                                if (!Array.isArray(object.destPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.RouteInfo.destPortRanges: array expected");
+                                message.destPortRanges = [];
+                                for (var i = 0; i < object.destPortRanges.length; ++i)
+                                    message.destPortRanges[i] = String(object.destPortRanges[i]);
+                            }
+                            if (object.srcPortRanges) {
+                                if (!Array.isArray(object.srcPortRanges))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.RouteInfo.srcPortRanges: array expected");
+                                message.srcPortRanges = [];
+                                for (var i = 0; i < object.srcPortRanges.length; ++i)
+                                    message.srcPortRanges[i] = String(object.srcPortRanges[i]);
+                            }
+                            if (object.protocols) {
+                                if (!Array.isArray(object.protocols))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.RouteInfo.protocols: array expected");
+                                message.protocols = [];
+                                for (var i = 0; i < object.protocols.length; ++i)
+                                    message.protocols[i] = String(object.protocols[i]);
+                            }
+                            if (object.nccHubUri != null)
+                                message.nccHubUri = String(object.nccHubUri);
+                            if (object.nccSpokeUri != null)
+                                message.nccSpokeUri = String(object.nccSpokeUri);
                             return message;
                         };
     
@@ -20873,8 +21421,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.instanceTags = [];
+                                object.destPortRanges = [];
+                                object.srcPortRanges = [];
+                                object.protocols = [];
+                            }
                             if (options.defaults) {
                                 object.displayName = "";
                                 object.uri = "";
@@ -20884,6 +21436,8 @@
                                 object.priority = 0;
                                 object.routeType = options.enums === String ? "ROUTE_TYPE_UNSPECIFIED" : 0;
                                 object.nextHopType = options.enums === String ? "NEXT_HOP_TYPE_UNSPECIFIED" : 0;
+                                object.srcIpRange = "";
+                                object.routeScope = options.enums === String ? "ROUTE_SCOPE_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -20906,6 +21460,35 @@
                                 object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] === undefined ? message.routeType : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] : message.routeType;
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
                                 object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] === undefined ? message.nextHopType : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
+                            if (message.srcIpRange != null && message.hasOwnProperty("srcIpRange"))
+                                object.srcIpRange = message.srcIpRange;
+                            if (message.destPortRanges && message.destPortRanges.length) {
+                                object.destPortRanges = [];
+                                for (var j = 0; j < message.destPortRanges.length; ++j)
+                                    object.destPortRanges[j] = message.destPortRanges[j];
+                            }
+                            if (message.srcPortRanges && message.srcPortRanges.length) {
+                                object.srcPortRanges = [];
+                                for (var j = 0; j < message.srcPortRanges.length; ++j)
+                                    object.srcPortRanges[j] = message.srcPortRanges[j];
+                            }
+                            if (message.protocols && message.protocols.length) {
+                                object.protocols = [];
+                                for (var j = 0; j < message.protocols.length; ++j)
+                                    object.protocols[j] = message.protocols[j];
+                            }
+                            if (message.routeScope != null && message.hasOwnProperty("routeScope"))
+                                object.routeScope = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope[message.routeScope] === undefined ? message.routeScope : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope[message.routeScope] : message.routeScope;
+                            if (message.nccHubUri != null && message.hasOwnProperty("nccHubUri")) {
+                                object.nccHubUri = message.nccHubUri;
+                                if (options.oneofs)
+                                    object._nccHubUri = "nccHubUri";
+                            }
+                            if (message.nccSpokeUri != null && message.hasOwnProperty("nccSpokeUri")) {
+                                object.nccSpokeUri = message.nccSpokeUri;
+                                if (options.oneofs)
+                                    object._nccSpokeUri = "nccSpokeUri";
+                            }
                             return object;
                         };
     
@@ -20946,6 +21529,7 @@
                          * @property {number} PEERING_SUBNET=4 PEERING_SUBNET value
                          * @property {number} PEERING_STATIC=5 PEERING_STATIC value
                          * @property {number} PEERING_DYNAMIC=6 PEERING_DYNAMIC value
+                         * @property {number} POLICY_BASED=7 POLICY_BASED value
                          */
                         RouteInfo.RouteType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -20956,6 +21540,7 @@
                             values[valuesById[4] = "PEERING_SUBNET"] = 4;
                             values[valuesById[5] = "PEERING_STATIC"] = 5;
                             values[valuesById[6] = "PEERING_DYNAMIC"] = 6;
+                            values[valuesById[7] = "POLICY_BASED"] = 7;
                             return values;
                         })();
     
@@ -20975,6 +21560,7 @@
                          * @property {number} NEXT_HOP_BLACKHOLE=9 NEXT_HOP_BLACKHOLE value
                          * @property {number} NEXT_HOP_ILB=10 NEXT_HOP_ILB value
                          * @property {number} NEXT_HOP_ROUTER_APPLIANCE=11 NEXT_HOP_ROUTER_APPLIANCE value
+                         * @property {number} NEXT_HOP_NCC_HUB=12 NEXT_HOP_NCC_HUB value
                          */
                         RouteInfo.NextHopType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -20990,6 +21576,23 @@
                             values[valuesById[9] = "NEXT_HOP_BLACKHOLE"] = 9;
                             values[valuesById[10] = "NEXT_HOP_ILB"] = 10;
                             values[valuesById[11] = "NEXT_HOP_ROUTER_APPLIANCE"] = 11;
+                            values[valuesById[12] = "NEXT_HOP_NCC_HUB"] = 12;
+                            return values;
+                        })();
+    
+                        /**
+                         * RouteScope enum.
+                         * @name google.cloud.networkmanagement.v1beta1.RouteInfo.RouteScope
+                         * @enum {number}
+                         * @property {number} ROUTE_SCOPE_UNSPECIFIED=0 ROUTE_SCOPE_UNSPECIFIED value
+                         * @property {number} NETWORK=1 NETWORK value
+                         * @property {number} NCC_HUB=2 NCC_HUB value
+                         */
+                        RouteInfo.RouteScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROUTE_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK"] = 1;
+                            values[valuesById[2] = "NCC_HUB"] = 2;
                             return values;
                         })();
     
@@ -23727,6 +24330,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -23785,6 +24389,10 @@
                             case "ANOTHER_PROJECT":
                             case 7:
                                 message.target = 7;
+                                break;
+                            case "NCC_HUB":
+                            case 8:
+                                message.target = 8;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -23854,6 +24462,7 @@
                          * @property {number} IMPORTED_CUSTOM_ROUTE_NEXT_HOP=5 IMPORTED_CUSTOM_ROUTE_NEXT_HOP value
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
                          * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
+                         * @property {number} NCC_HUB=8 NCC_HUB value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -23865,6 +24474,7 @@
                             values[valuesById[5] = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"] = 5;
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
                             values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
+                            values[valuesById[8] = "NCC_HUB"] = 8;
                             return values;
                         })();
     
