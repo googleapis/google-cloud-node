@@ -52,6 +52,11 @@ function main(parent) {
    *  Flow import mode. If not specified, `KEEP` is assumed.
    */
   // const importOption = {}
+  /**
+   *  Optional. Specifies the import strategy used when resolving resource
+   *  conflicts.
+   */
+  // const flowImportStrategy = {}
 
   // Imports the Cx library
   const {FlowsClient} = require('@google-cloud/dialogflow-cx').v3beta1;

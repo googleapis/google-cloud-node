@@ -240,9 +240,17 @@ export class SecuritySettingsServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectLocationAgentFlowTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
+        ),
       projectLocationAgentSessionEntityTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
         ),
       projectLocationDeidentifyTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -260,9 +268,6 @@ export class SecuritySettingsServiceClient {
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
-      ),
-      transitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -2293,6 +2298,109 @@ export class SecuritySettingsServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationAgentFlowTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} flow
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentFlowTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        flow: flow,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the flow from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the flow.
+   */
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).flow;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).transition_route_group;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAgentSessionEntityType resource name string.
    *
    * @param {string} project
@@ -2393,6 +2501,91 @@ export class SecuritySettingsServiceClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).transition_route_group;
   }
 
   /**
@@ -2745,99 +2938,6 @@ export class SecuritySettingsServiceClient {
     return this.pathTemplates.testCaseResultPathTemplate.match(
       testCaseResultName
     ).result;
-  }
-
-  /**
-   * Return a fully-qualified transitionRouteGroup resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} agent
-   * @param {string} flow
-   * @param {string} transition_route_group
-   * @returns {string} Resource name string.
-   */
-  transitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      flow: flow,
-      transition_route_group: transitionRouteGroup,
-    });
-  }
-
-  /**
-   * Parse the project from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).location;
-  }
-
-  /**
-   * Parse the agent from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the agent.
-   */
-  matchAgentFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).agent;
-  }
-
-  /**
-   * Parse the flow from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the flow.
-   */
-  matchFlowFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).flow;
-  }
-
-  /**
-   * Parse the transition_route_group from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the transition_route_group.
-   */
-  matchTransitionRouteGroupFromTransitionRouteGroupName(
-    transitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).transition_route_group;
   }
 
   /**
